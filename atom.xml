@@ -43,6 +43,92 @@
   </entry>
   
   <entry>
+    <title>mousehover（25）</title>
+    <link href="http://XueCat.github.io/2014/08/28/25/"/>
+    <id>http://XueCat.github.io/2014/08/28/25/</id>
+    <published>2014-08-27T19:31:58.000Z</published>
+    <updated>2016-08-27T07:17:34.281Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天为程序添加mousehover函数，发现不能响应，很气人。</p>
+<p>要仔细去看下官方，翻看msdn：</p>
+<p>   msdn它只会在图像重绘地方响应<br>Posted to a window when the cursor hovers over the client area of the window for the period of time specified in a prior call to TrackMouseEvent.</p>
+<p>如果在onpaint函数使用cclientdc绘图的话，就会被判定非客户区。<br>所以，必须在onpaint里面用cpaintdc绘图，才会响应mousehover。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天为程序添加mousehover函数，发现不能响应，很气人。&lt;/p&gt;
+&lt;p&gt;要仔细去看下官方，翻看msdn：&lt;/p&gt;
+&lt;p&gt;   msdn它只会在图像重绘地方响应&lt;br&gt;Posted to a window when the cursor hovers over the 
+    
+    </summary>
+    
+      <category term="Windows" scheme="http://XueCat.github.io/categories/Windows/"/>
+    
+    
+      <category term="mfc" scheme="http://XueCat.github.io/tags/mfc/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>窗口风格（22）</title>
+    <link href="http://XueCat.github.io/2014/08/26/22/"/>
+    <id>http://XueCat.github.io/2014/08/26/22/</id>
+    <published>2014-08-25T19:31:58.000Z</published>
+    <updated>2016-08-27T07:20:57.989Z</updated>
+    
+    <content type="html"><![CDATA[<p>首先，对WS_EX_LAYERED  /WS_EX_TRANSPARENT(这个前面讲过)<br>对子窗口无效。</p>
+<p>如不设置WS_CHILD就从屏幕坐标开始计算。<br>只要是子窗口就不能设置WS_POPUP</p>
+<p>所以WS_POPUP窗口都具有CLIPDRENW属性（记得貌似还有vscroll似的）。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;首先，对WS_EX_LAYERED  /WS_EX_TRANSPARENT(这个前面讲过)&lt;br&gt;对子窗口无效。&lt;/p&gt;
+&lt;p&gt;如不设置WS_CHILD就从屏幕坐标开始计算。&lt;br&gt;只要是子窗口就不能设置WS_POPUP&lt;/p&gt;
+&lt;p&gt;所以WS_POPUP窗口都具有CLIP
+    
+    </summary>
+    
+      <category term="Windows" scheme="http://XueCat.github.io/categories/Windows/"/>
+    
+    
+      <category term="mfc" scheme="http://XueCat.github.io/tags/mfc/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>more effective c++对象产生于head（23）</title>
+    <link href="http://XueCat.github.io/2014/08/26/23/"/>
+    <id>http://XueCat.github.io/2014/08/26/23/</id>
+    <published>2014-08-25T19:31:58.000Z</published>
+    <updated>2016-08-27T07:23:13.108Z</updated>
+    
+    <content type="html"><![CDATA[<p>作者安排了一个基类和派生类的调用方式</p>
+<p>1、基类先封装 destroy函数提供外部调用</p>
+<pre><code>void destroy() const {delete this;}
+</code></pre><p>2、基类析构函数他说要限制为protected，我不懂。<br>我想应该是让外部调用必须使用destroy来销毁对象吧！</p>
+ <figure class="highlight c"><figcaption><span>来看下调用和派生++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> UPNumber </div><div class="line">	&#123;</div><div class="line"> <span class="keyword">public</span>:</div><div class="line"> 	UPNumber(arguments);</div><div class="line"> <span class="keyword">protected</span>:</div><div class="line"> 	~UPNumber();</div><div class="line"> </div><div class="line"> 	<span class="comment">/* data */</span></div><div class="line"> &#125;;</div><div class="line"></div><div class="line"> <span class="keyword">class</span> Asset</div><div class="line"> &#123;</div><div class="line"> <span class="keyword">public</span>:</div><div class="line"> 	Asset(arguments);</div><div class="line"> 	~Asset();</div><div class="line"></div><div class="line"> <span class="keyword">private</span>:</div><div class="line"> 	UPNumber* value;</div><div class="line"> </div><div class="line"> 	<span class="comment">/* data */</span></div><div class="line"> &#125;;</div><div class="line"></div><div class="line"> Asset::Asset(arguments)</div><div class="line"> 	: value(<span class="keyword">new</span> UPNumber(arguments)) &#123;</div><div class="line"> 		...</div><div class="line"> 	&#125;</div><div class="line"> Asset::~Asset()</div><div class="line"> &#123;</div><div class="line"> 	value-&gt;destroy();</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>派生类产生基类数据于头，设置基类数据对象来调用函数。<br>析构使用基类自释放性！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;作者安排了一个基类和派生类的调用方式&lt;/p&gt;
+&lt;p&gt;1、基类先封装 destroy函数提供外部调用&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;void destroy() const {delete this;}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;2、基类析构函数他说要限制为protec
+    
+    </summary>
+    
+      <category term="书籍" scheme="http://XueCat.github.io/categories/%E4%B9%A6%E7%B1%8D/"/>
+    
+    
+      <category term="c++" scheme="http://XueCat.github.io/tags/c/"/>
+    
+  </entry>
+  
+  <entry>
     <title>小诗</title>
     <link href="http://XueCat.github.io/2014/08/26/20/"/>
     <id>http://XueCat.github.io/2014/08/26/20/</id>
@@ -99,6 +185,36 @@
     
     
       <category term="life" scheme="http://XueCat.github.io/tags/life/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>more effective c++计算限制对象个数(21)</title>
+    <link href="http://XueCat.github.io/2014/08/25/21/"/>
+    <id>http://XueCat.github.io/2014/08/25/21/</id>
+    <published>2014-08-24T19:31:58.000Z</published>
+    <updated>2016-08-27T07:24:08.540Z</updated>
+    
+    <content type="html"><![CDATA[ <figure class="highlight c"><figcaption><span>封装的基类很好++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">   	<span class="keyword">template</span>&lt;calss BeingCounted&gt;</div><div class="line"></div><div class="line">	<span class="keyword">class</span> Counted &#123;</div><div class="line">		<span class="keyword">public</span>:</div><div class="line">		<span class="keyword">class</span> TooManyObjects&#123;&#125;;</div><div class="line">		<span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">objectcount</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> numObjects;&#125;</div><div class="line">		protect:</div><div class="line">		Counted();</div><div class="line">		Counted(<span class="keyword">const</span> Counted&amp; rhs);</div><div class="line">		~Counted() &#123;--numObjects;&#125;</div><div class="line">		<span class="keyword">private</span>:</div><div class="line">		<span class="keyword">static</span> <span class="keyword">int</span> numObjects;</div><div class="line">		<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">size_t</span> maxobjects;</div><div class="line">		<span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>;</div><div class="line">	&#125;;</div><div class="line"></div><div class="line">	<span class="keyword">template</span>&lt;<span class="keyword">class</span> BeingCounted&gt;</div><div class="line">	Counted&lt;BeingCounted&gt;::Counted()</div><div class="line">	&#123;init();&#125;</div><div class="line"></div><div class="line">	<span class="keyword">template</span>&lt;<span class="keyword">class</span> BeingCounted&gt;</div><div class="line">	Counted&lt;BeingCounted&gt;::Counted(<span class="keyword">const</span> Counted&lt;BeingCounted&gt;&amp;)</div><div class="line">	&#123;init();&#125;</div><div class="line"></div><div class="line">	<span class="keyword">template</span>&lt;<span class="keyword">class</span> BeingCounted&gt;</div><div class="line">	<span class="keyword">void</span> Counted&lt;BeingCOunted&gt;::init()</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span> (numObjects &gt;= maxObjects) <span class="keyword">throw</span> TooManyObjects();</div><div class="line">		++numobjects;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">派生类很好：</div><div class="line"></div><div class="line">	<span class="keyword">class</span> Printer: Private Counted&lt;Printer&gt; &#123;</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">static</span> Printer* <span class="title">MakePrinter</span><span class="params">()</span></span>;</div><div class="line">	<span class="function"><span class="keyword">static</span> Pritner* <span class="title">makePrinter</span><span class="params">(<span class="keyword">const</span> Printer&amp; rhs)</span></span>;</div><div class="line">	~Printer</div><div class="line">	..............</div><div class="line">	..........</div><div class="line"></div><div class="line">	<span class="keyword">using</span> Counted&lt;Printer&gt;::objectCount;</div><div class="line">	<span class="keyword">using</span> Counted&lt;Printer&gt;::TooManyObjects;</div><div class="line"></div><div class="line">	<span class="keyword">private</span>:</div><div class="line">	Printer();</div><div class="line">	Printer(<span class="keyword">const</span> Printer&amp; rhs);</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div></pre></td></tr></table></figure>
+<p>方法一： 它用基类的两个成员，用静态成员，来避免了无法继承问题。（因为就是是私有，静态变量也能继承，毕竟同一块内存区）</p>
+<p>也为后来的TooManyOBjects()和objectCount()函数调用做铺垫。</p>
+<p>方法二：在头文件const只能初始化int size_t等类型</p>
+<p>方法三：昨天一样，生成对象函数和复制函数用static，并返回。</p>
+<p>方法四：私有继承也是继承，只要是继承，派生类就会拥有基类所有对象，只存在访问权限而已。<br>private权限导致派生类无法直接访问。<br>但是，派生类构造/析构函数默认是加入了基类的构造/析构函数的。Printer的调用，必定会导致Counted的调用，init便存在间接访问权限。</p>
+<p>所以Printer可以只管用，计数功能完全基类代替。</p>
+<p>不得不感叹作者写的太好了！</p>
+]]></content>
+    
+    <summary type="html">
+    
+       &lt;figure class=&quot;highlight c&quot;&gt;&lt;figcaption&gt;&lt;span&gt;封装的基类很好++&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div
+    
+    </summary>
+    
+      <category term="书籍" scheme="http://XueCat.github.io/categories/%E4%B9%A6%E7%B1%8D/"/>
+    
+    
+      <category term="c++" scheme="http://XueCat.github.io/tags/c/"/>
     
   </entry>
   
@@ -344,6 +460,37 @@
     
     
       <category term="代码编写" scheme="http://XueCat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>消息自定义（24）</title>
+    <link href="http://XueCat.github.io/2014/06/25/24/"/>
+    <id>http://XueCat.github.io/2014/06/25/24/</id>
+    <published>2014-06-24T19:31:58.000Z</published>
+    <updated>2016-08-27T07:18:29.297Z</updated>
+    
+    <content type="html"><![CDATA[<p>严格要求：</p>
+<pre><code>afx_msg LRESULT DisplayResult(WPARAM wParam,LPARAM lParam);
+ON_MESSAGE(WM_RESULT,CDemo4View::DisplayResult)
+return 0;
+</code></pre><p>SetWindowPos会强制产生重绘，容易闪图。</p>
+<p>WM_ERASEBKGND以及WS_EX_TRANSPARENT虽然获取了父窗口dc，<br>来先绘制背景图，再绘制透明图实现的子窗口透明，<br>有闪图出现。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;严格要求：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;afx_msg LRESULT DisplayResult(WPARAM wParam,LPARAM lParam);
+ON_MESSAGE(WM_RESULT,CDemo4View::DisplayResult)
+return 0
+    
+    </summary>
+    
+      <category term="Windows" scheme="http://XueCat.github.io/categories/Windows/"/>
+    
+    
+      <category term="mfc" scheme="http://XueCat.github.io/tags/mfc/"/>
     
   </entry>
   
