@@ -1,0 +1,766 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="编译器和VC," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="XueCat" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/picture/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="自从在153文章的认识后，自己要好好熟悉下那个工具
+调试篇
+1、运行中，就直接调试改变（以前一直用的是悬浮时看值，都不敢改值）
+2、黄色箭头的使用（首先可以上拉和下拉）上拉：假如我有一句看漏了想在看一遍，直接上拉，拉回到某个地方，再继续F10，编译器又会继续走的；下拉：假如我中间有一句不想执行，想直接跳过，下拉超过那一句便好！！！
+3、编辑后继续执行这个的话，vs2008我试了下是会重新编译的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="调试技巧(154)">
+<meta property="og:url" content="https://xuecat.github.io/2016/01/14/154/index.html">
+<meta property="og:site_name" content="XueCat">
+<meta property="og:description" content="自从在153文章的认识后，自己要好好熟悉下那个工具
+调试篇
+1、运行中，就直接调试改变（以前一直用的是悬浮时看值，都不敢改值）
+2、黄色箭头的使用（首先可以上拉和下拉）上拉：假如我有一句看漏了想在看一遍，直接上拉，拉回到某个地方，再继续F10，编译器又会继续走的；下拉：假如我中间有一句不想执行，想直接跳过，下拉超过那一句便好！！！
+3、编辑后继续执行这个的话，vs2008我试了下是会重新编译的">
+<meta property="og:image" content="https://xuecat.github.io/picture/img/1541.png">
+<meta property="og:image" content="https://xuecat.github.io/picture/img/1542.png">
+<meta property="og:image" content="https://xuecat.github.io/picture/img/1543.png">
+<meta property="og:image" content="https://xuecat.github.io/picture/img/1544.png">
+<meta property="og:image" content="https://xuecat.github.io/picture/img/1545.jpg">
+<meta property="og:image" content="https://xuecat.github.io/picture/img/1546.jpg">
+<meta property="og:image" content="https://xuecat.github.io/picture/img/154a.png">
+<meta property="og:image" content="https://xuecat.github.io/picture/img/154b.png">
+<meta property="og:image" content="https://xuecat.github.io/picture/img/1547.jpg">
+<meta property="og:image" content="https://xuecat.github.io/picture/img/1548.jpg">
+<meta property="og:image" content="https://xuecat.github.io/picture/img/1549.png">
+<meta property="og:updated_time" content="2016-08-28T05:42:49.967Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="调试技巧(154)">
+<meta name="twitter:description" content="自从在153文章的认识后，自己要好好熟悉下那个工具
+调试篇
+1、运行中，就直接调试改变（以前一直用的是悬浮时看值，都不敢改值）
+2、黄色箭头的使用（首先可以上拉和下拉）上拉：假如我有一句看漏了想在看一遍，直接上拉，拉回到某个地方，再继续F10，编译器又会继续走的；下拉：假如我中间有一句不想执行，想直接跳过，下拉超过那一句便好！！！
+3、编辑后继续执行这个的话，vs2008我试了下是会重新编译的">
+<meta name="twitter:image" content="https://xuecat.github.io/picture/img/1541.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <title> 调试技巧(154) | XueCat </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8aa9f2526a323bf7a14e6fe9de652df7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">XueCat</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">用代码创造世界</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '7WpzrTDzC5PtPGxA1yqM','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                调试技巧(154)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-01-14T03:33:58+08:00" content="2016-01-14">
+              2016-01-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Windows/" itemprop="url" rel="index">
+                    <span itemprop="name">Windows</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>  自从在153文章的认识后，自己要好好熟悉下那个工具<br></p>
+<h2 id="调试篇"><a href="#调试篇" class="headerlink" title="调试篇"></a>调试篇</h2><blockquote>
+<p><strong>1、运行中，就直接调试改变</strong>（以前一直用的是悬浮时看值，都不敢改值）<br><img src="/picture/img/1541.png" alt=""></p>
+<p><strong>2、黄色箭头的使用</strong>（首先可以上拉和下拉）<br><strong>上拉</strong>：假如我有一句看漏了想在看一遍，直接上拉，拉回到某个地方，再继续F10，编译器又会继续走的；<br><strong>下拉</strong>：假如我中间有一句不想执行，想直接跳过，下拉超过那一句便好！！！<br><img src="/picture/img/1542.png" alt=""></p>
+<p><strong>3、编辑后继续执行</strong><br>这个的话，vs2008我试了下是会重新编译的；vs2013也分情况，但是这个功能依旧要自己使用。</p>
+<p><strong>4、监听窗口伪变量；如：当前error的值</strong>。一般窗口运行错误的时候，我以前的做法是用getlasterror来赋值。然而监视窗口却有个值可以直接获取到的<br><img src="/picture/img/1543.png" alt=""></p>
+<p>最后提下：<br><br>$tid—–当前线程的线程ID<br><br>$pid——进程ID<br><br>$cmdline———-启动程序的命令行字符串<br><br>$user———-正在运行程序的账户信息<br><br>$registername—–显示寄存器registername 的内容<br><br>不管怎么样，关于最后一个错误的伪变量是非常有用的：<br><br><br><br>$err——–显示最后一个错误的错误码<br><br>$err,hr—显示最后一个错误的错误信息<br><br><br><br><strong>5、多线程调试</strong>，这个暂时不说，我那点贫瘠的多线程调试也写不多，希望以后能补充上<br><a href="http://blog.jobbole.com/45447/" target="_blank" rel="external">http://blog.jobbole.com/45447/</a></p>
+<p><strong>6、条件断点</strong> 我暂时也就只会一些简单的条件语法<br><img src="/picture/img/1544.png" alt=""><br><br><br></p>
+<p><strong>7、使用命令窗口来测试函数有效性</strong><br><img src="/picture/img/1545.jpg" alt=""></p>
+<p><strong>比如，有个time_t的变量（它当然是个int），要看它的时间格式，就可以用这个来</strong><br><img src="/picture/img/1546.jpg" alt=""></p>
+<p><strong>8、自定义中断，这个我感觉还用不上，跳过了</strong></p>
+<p><strong>9、远程调试</strong><br>先去IDE的 Common7\IDE\Remote Debugger，找到合适的64位或32位工具。直接复制到远程机器上；远程机器运行后设置允许任何人连接。如此，本地通过附加进程的方式可以远程调试。</p>
+<p><strong>10、调试时数据信息格式化</strong><br><br>想要改变显示类型可在变量前加以下前缀：<br></p>
+<p>by –unsigned char (又称为unsigned byte)<br><br>wo – unsigned shot(又称为 unsigned word)<br><br>dw – unsigned long（又称为 unsigned double word）<br><br>要改变显示的进制数在变量前加下列前缀：<br></p>
+<p>d 或者 i– 有符号十进制数<br><br>u – 无符号十进制数<br><br>o -  无符号八进制数<br><br>x – 小写十六进制数<br><br>X – 大写十六进制数<br><br><img src="/picture/img/154a.png" alt=""></p>
+<blockquote>
+<p>字符串的格式化<br><br>mb 或者 m – 十六进制显示的16字节数据，后跟16个ASCII 字符<br><br>mw – 8 words<br><br>md – 4 double words<br><br>mq -  2 quad-words<br><br>ma – 64个ASCII字符<br><br>mu – 2字节的UNICODE字符<br><br><img src="/picture/img/154b.png" alt=""></p>
+</blockquote>
+</blockquote>
+<h2 id="有趣的快捷键"><a href="#有趣的快捷键" class="headerlink" title="有趣的快捷键"></a>有趣的快捷键</h2><blockquote>
+<p><strong>1、同名跳转</strong><br>vs对双击的变量和函数等，会高亮当前文档的所有；以前我一般用 ctrl + f来一个一个跳转翻看。今天发现可以ctrl +　shift + 上箭头/下箭头来跳转翻看。<br><img src="/picture/img/1547.jpg" alt=""><br><br><br><br><br><strong>2、自动生成类</strong> 当然，你写个clas +名 vs会自动给你生成类。我说的是没有声明的情况下。<br>当写到某句时，我想新建一个类，又不想跳过去一个一个新建说明；<br>直接 ctrl+shirft+c就新建好了<br><img src="/picture/img/1548.jpg" alt=""></p>
+</blockquote>
+<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><blockquote>
+<blockquote>
+<p>1、有一段时间我的vs全是16进制的，解决方法：随便弄个调试窗口出来，右键调试窗口，把选中的16进制显示 取消掉<br><br><br></p>
+<p>2、实时监控的时候，可以把某个变量某个值 的监控钉在编辑框上<br><img src="/picture/img/1549.png" alt=""><br><br><br></p>
+<p>3、查看某个函数被哪些函数调用过，选中，右键.查看调用层次结构（view call Hierarchy）</p>
+<p>::OutputDebugString(_T(“debug information!”));</p>
+</blockquote>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/编译器和VC/" rel="tag">#编译器和VC</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/11/153/" rel="next" title="vs调试(153)">
+                <i class="fa fa-chevron-left"></i> vs调试(153)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/14/155/" rel="prev" title="python 等问题解决(155)">
+                python 等问题解决(155) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/picture/head.jpg"
+               alt="XueCat" />
+          <p class="site-author-name" itemprop="name">XueCat</p>
+          <p class="site-description motion-element" itemprop="description">XueCat Blog</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">170</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.v2ex.com/" target="_blank" title="V2EX">
+                  
+                    <i class="fa fa-fw fa-pinterest"></i>
+                  
+                  V2EX
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.weibo.com/" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://baidu.com/" title="Bidu" target="_blank">Bidu</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://ggso.in/" title="Google1" target="_blank">Google1</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://guge.suanfazu.com/" title="Google2" target="_blank">Google2</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#调试篇"><span class="nav-number">1.</span> <span class="nav-text">调试篇</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有趣的快捷键"><span class="nav-number">2.</span> <span class="nav-text">有趣的快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它"><span class="nav-number">3.</span> <span class="nav-text">其它</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XueCat</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,767 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="c函数,c++,代码编写," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="XueCat" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/picture/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="最近懈怠了STL，弄得都要翻资料了，赶紧弄点笔记：
+建议
+
+vector，等容器指针，真心是坑；要写就一定要保证，所有复制，赋值，创建，删除，自己写，所有的stl函数要留意点，比如remove这种移动函数。不然，用默认函数就特么操作指针，后面简直叫妈妈！！！
+
+vector比deque多了capacity（能容纳的元素数量，就是开辟内存），reserve。可以看出vector的虚拟预定义分配。ve">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STL实用(146)">
+<meta property="og:url" content="https://xuecat.github.io/2015/11/12/146/index.html">
+<meta property="og:site_name" content="XueCat">
+<meta property="og:description" content="最近懈怠了STL，弄得都要翻资料了，赶紧弄点笔记：
+建议
+
+vector，等容器指针，真心是坑；要写就一定要保证，所有复制，赋值，创建，删除，自己写，所有的stl函数要留意点，比如remove这种移动函数。不然，用默认函数就特么操作指针，后面简直叫妈妈！！！
+
+vector比deque多了capacity（能容纳的元素数量，就是开辟内存），reserve。可以看出vector的虚拟预定义分配。ve">
+<meta property="og:updated_time" content="2016-08-27T21:54:42.770Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="STL实用(146)">
+<meta name="twitter:description" content="最近懈怠了STL，弄得都要翻资料了，赶紧弄点笔记：
+建议
+
+vector，等容器指针，真心是坑；要写就一定要保证，所有复制，赋值，创建，删除，自己写，所有的stl函数要留意点，比如remove这种移动函数。不然，用默认函数就特么操作指针，后面简直叫妈妈！！！
+
+vector比deque多了capacity（能容纳的元素数量，就是开辟内存），reserve。可以看出vector的虚拟预定义分配。ve">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <title> STL实用(146) | XueCat </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8aa9f2526a323bf7a14e6fe9de652df7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">XueCat</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">用代码创造世界</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '7WpzrTDzC5PtPGxA1yqM','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                STL实用(146)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-11-12T03:33:58+08:00" content="2015-11-12">
+              2015-11-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/STL/" itemprop="url" rel="index">
+                    <span itemprop="name">STL</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="最近懈怠了STL，弄得都要翻资料了，赶紧弄点笔记："><a href="#最近懈怠了STL，弄得都要翻资料了，赶紧弄点笔记：" class="headerlink" title="最近懈怠了STL，弄得都要翻资料了，赶紧弄点笔记："></a>最近懈怠了STL，弄得都要翻资料了，赶紧弄点笔记：</h3><hr>
+<p><strong>建议</strong></p>
+<ul>
+<li><p>vector，等容器指针，真心是坑；要写就一定要保证，所有复制，赋值，创建，删除，自己写，所有的stl函数要留意点，比如remove这种移动函数。不然，用默认函数就特么操作指针，后面简直叫妈妈！！！</p>
+</li>
+<li><p>vector比deque多了capacity（能容纳的元素数量，就是开辟内存），reserve。可以看出vector的虚拟预定义分配。<br>vector对内存的处理是开辟后，clear并不释放，而是在析构函数上释放；所以要动态回收大多内存就要用swap来。vec.swap(vector<int>());注意这段代码只能和clear连用，因为它同样能清空容器数据。</int></p>
+</li>
+</ul>
+<ul>
+<li>容器指针，老是需要自己写新函数，并自己调用它。所以STL提供智能指针来解决问题.<br><br>Effective stl指出了几个问题：<br><br>1、auto_ptr不能共享所有权<br><br>2、auto_ptr不能用数组初始化<br><br>3、auto_ptr不能作为容器成员<br><br>4、不能通过赋值操作来初始化auto_ptr<br><br>5、不要把auto_ptr放入容器。<br><br>shared_ptr就解决了1个问题而已。</li>
+</ul>
+<figure class="highlight c"><figcaption><span>代码演示++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>*&gt; v_pint;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;v_pint&gt; auto_p(<span class="keyword">new</span> v_pint<span class="comment">/*, 这里可以指定析构函数*/</span>);</div><div class="line">auto_p-&gt;push_back(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">1</span>));</div><div class="line">auto_p-&gt;push_back(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">2</span>));</div><div class="line">auto_p-&gt;push_back(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">3</span>));</div><div class="line">auto_p-&gt;push_back(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">4</span>));</div><div class="line"></div><div class="line">v_pint auto_pt;</div><div class="line">auto_pt.push_back(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">5</span>));</div><div class="line">auto_pt.push_back(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">6</span>));</div><div class="line">auto_pt.push_back(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">7</span>));</div><div class="line"></div><div class="line"><span class="keyword">bool</span> bequal = <span class="built_in">std</span>::equal(auto_pt.begin(), auto_pt.end(), auto_p-&gt;begin());<span class="comment">//这里比较的是指针，注意。永远是错误</span></div><div class="line">pair&lt;v_pint::iterator, v_pint::iterator&gt; it = <span class="built_in">std</span>::mismatch(auto_pt.begin(), auto_pt.end(), auto_p-&gt;begin());<span class="comment">//第一个是auto_pt第二个是auto_p</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//干脆下面开写各种函数</span></div><div class="line"><span class="keyword">struct</span> dd</div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> d_;</div><div class="line">	<span class="keyword">int</span> a_;</div><div class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>==(<span class="keyword">const</span> dd&amp; d) &#123; </div><div class="line">		<span class="keyword">if</span> (d.a_ == a_ &amp;&amp; d.d_ == d_) &#123;</div><div class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>; </div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">bequal</span><span class="params">(dd*&amp; d1, dd*&amp; d2)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (d1-&gt;a_==d2-&gt;a_&amp;&amp;d1-&gt;d_==d2-&gt;d_) &#123;</div><div class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">static</span> dd* <span class="title">copydata</span><span class="params">(dd* p)</span> </span>&#123;</div><div class="line">		dd* rp = <span class="keyword">new</span> dd;</div><div class="line">		rp-&gt;a_ = p-&gt;a_;</div><div class="line">		rp-&gt;d_ = p-&gt;d_;</div><div class="line">		<span class="keyword">return</span> rp;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">struct</span> RemoveTranData :</div><div class="line">	<span class="keyword">public</span> <span class="built_in">std</span>::binary_function&lt;T*&amp;, T* , <span class="keyword">void</span>&gt;</div><div class="line">&#123;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">operator</span> <span class="params">()</span><span class="params">(T*&amp; p, T*)</span> <span class="keyword">const</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (*T == *p) &#123;</div><div class="line">			DEL_P(p);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">struct</span> RemoveAllTranData :</div><div class="line">	<span class="keyword">public</span> <span class="built_in">std</span>::unary_function&lt;T*, <span class="keyword">void</span>&gt;</div><div class="line">&#123;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">operator</span> <span class="params">()</span><span class="params">(T* p)</span> <span class="keyword">const</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (p != <span class="literal">NULL</span>) &#123;</div><div class="line">			<span class="keyword">delete</span> p;</div><div class="line">			p = <span class="literal">NULL</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">int</span> <span class="number">_</span>tmain(<span class="keyword">int</span> argc, <span class="number">_</span>TCHAR* argv[])</div><div class="line">&#123;</div><div class="line">	<span class="keyword">typedef</span> <span class="built_in">vector</span>&lt;dd*&gt; v_pint;</div><div class="line">	v_pint v_int;</div><div class="line">	v_int.push_back(<span class="keyword">new</span> dd&#123;<span class="number">2</span>,<span class="number">3</span>&#125;);</div><div class="line">	v_int.push_back(<span class="keyword">new</span> dd&#123;<span class="number">3</span>,<span class="number">4</span>&#125;);</div><div class="line">	v_int.push_back(<span class="keyword">new</span> dd&#123;<span class="number">4</span>,<span class="number">5</span>&#125;);</div><div class="line">	v_int.push_back(<span class="keyword">new</span> dd&#123;<span class="number">6</span>,<span class="number">7</span>&#125;);</div><div class="line"></div><div class="line">	dd* pt = <span class="keyword">new</span> dd&#123; <span class="number">6</span>, <span class="number">7</span> &#125;;</div><div class="line">	v_pint::iterator i = find_if(v_int.begin(), v_int.end(), bind2nd(mem_fun(&amp;dd::<span class="keyword">operator</span>==), *pt));<span class="comment">//指针的find</span></div><div class="line">	<span class="keyword">bool</span> b = <span class="built_in">std</span>::equal(v_int.begin(), v_int.end(), v_int2.begin(), (&amp;dd::bequal));<span class="comment">//指针的比较equl，最好更新成成员函数，待修改吧</span></div><div class="line">	</div><div class="line">	v_int3.resize(v_int2.size());<span class="comment">//注意这里哟</span></div><div class="line">	<span class="built_in">std</span>::transform(v_int2.begin(), v_int2.end(), v_int3.begin(), (&amp;dd::copydata));<span class="comment">//指针的复制， 想用上面find那种类型来着，发现复制错误了！！！&lt;/br&gt;</span></div><div class="line">	<span class="comment">//值得一提的是stl虽然有copy，但是却对容器指针依旧只是指针的赋值；而且使用前必须用resize来分配大小后再使用。</span></div><div class="line">	<span class="comment">//copy_if却是c++11的东西了要配合lamda了；copy_if(arr.begin(), arr.end(), back_inserter(res)//res.begin(),[](const int i) &#123; return i == 5 || i == 7; &#125;);</span></div><div class="line">	<span class="comment">//copy_backward是copy的逆向复制</span></div><div class="line"></div><div class="line">	for_each(<span class="number">_</span>doorVec.begin(), <span class="number">_</span>doorVec.end(), mem_fun_ref(&amp;Door::open));<span class="comment">//留个思想,以后封装用</span></div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
+<p><strong>2</strong></p>
+<figure class="highlight c"><figcaption><span>后面就给点有用的东东++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> forwardItr,<span class="keyword">class</span> Type&gt;  </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">replace</span><span class="params">(forwardItr first, forwardItr last,<span class="keyword">const</span> Type&amp; oldValue <span class="keyword">const</span> Type&amp; newValue)</span></span>;  </div><div class="line">  </div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> forwardItr, <span class="keyword">class</span> unaryPredicate,<span class="keyword">class</span> Type&gt;  </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">replace_if</span><span class="params">(forwardItr first, forwardItr last, unaryPredicate op,<span class="keyword">const</span> Type&amp; newValue)</span></span>;  </div><div class="line">  </div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> inputItr,<span class="keyword">class</span> outputItr,<span class="keyword">class</span> Type&gt;  </div><div class="line"><span class="function">outputItr <span class="title">replace_copy</span><span class="params">(inputItr first1, inputItr last1, outputItr destFirst,<span class="keyword">const</span> Type&amp; oldValue, <span class="keyword">const</span> Type&amp; newValue)</span></span>;  </div><div class="line">  </div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> inputItr,<span class="keyword">class</span> outputItr, <span class="keyword">class</span> unaryPredicate&gt;  </div><div class="line"><span class="function">outputItr <span class="title">replace_copy_if</span><span class="params">(inputItr first1, inputItr last1, outputItr destFirst, unaryPredicate op,<span class="keyword">const</span> Type&amp; newValue)</span></span>;  </div><div class="line"></div></pre></td></tr></table></figure>
+<p><strong>3</strong></p>
+<blockquote>
+<p>首先可供查找的算法大致有count,find,binary_search,lower_bound,upper_bound,equal_range。带有判别式的如count_if,find_if或者binary_search的派别式版本，其用法大致相同</p>
+</blockquote>
+<p><strong>4</strong></p>
+<p>参考：<a href="http://blog.csdn.net/sdhongjun/article/details/4517325/" target="_blank" rel="external">http://blog.csdn.net/sdhongjun/article/details/4517325/</a></p>
+<figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//stdext::hash_map等都比map高效多了</span></div><div class="line"><span class="keyword">struct</span> less: <span class="keyword">public</span> binary_funtion&lt;<span class="keyword">const</span> <span class="keyword">char</span>, <span class="keyword">const</span> <span class="keyword">char</span>*, <span class="keyword">bool</span>&gt;</div><div class="line">&#123;</div><div class="line">	<span class="function">result_type <span class="title">opeator</span><span class="params">()</span><span class="params">(<span class="keyword">const</span> first_argument_type&amp; <span class="number">_l</span>eft, <span class="keyword">const</span> second_argument_type <span class="number">_</span>right)</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> (<span class="number">_</span>wcsicmp(left, right) &lt; <span class="number">0</span> ? <span class="literal">true</span> : <span class="literal">false</span>);</div><div class="line">	&#125;</div><div class="line">&#125;<span class="comment">//简直太装逼了，result_type first_argument_type second_argument_type。悬浮一看，就特么是前面 const char* bool，只是被内部转换了一些。。。。真装逼。。。。</span></div><div class="line"><span class="comment">//这个是hash_map的比较，因为键不能默认字符，必须自己写比较。</span></div><div class="line">stdext::hash_map&lt;cstring, TDATA1, stdext::hash_compare&lt;<span class="keyword">const</span> <span class="keyword">whcar_t</span>*, less&gt;&gt;</div><div class="line"><span class="comment">//参考 </span></div><div class="line"></div></pre></td></tr></table></figure>
+<p><strong>5</strong></p>
+<blockquote>
+<p>参考来自：stackoverflow :c++ unordered_map using a custom class type as the key</p>
+</blockquote>
+<pre><code>//std::tr1::unordered_map无序的高效map，貌似虐爆hash_map和map
+//boost却要写个hash_value
+struct KeyHasher
+{
+    std::size_t operator()(const CString&amp; k) const
+    {
+        retrun (hash&lt;wstring&gt;()(k.GetString()));
+    }
+}
+</code></pre><p><strong>6</strong></p>
+<p>151对stl所有map和mfc的map做了比较，请看链接</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c函数/" rel="tag">#c函数</a>
+          
+            <a href="/tags/c/" rel="tag">#c++</a>
+          
+            <a href="/tags/代码编写/" rel="tag">#代码编写</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/11/05/145/" rel="next" title="java学习(145)">
+                <i class="fa fa-chevron-left"></i> java学习(145)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/11/16/147/" rel="prev" title="日记1">
+                日记1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/picture/head.jpg"
+               alt="XueCat" />
+          <p class="site-author-name" itemprop="name">XueCat</p>
+          <p class="site-description motion-element" itemprop="description">XueCat Blog</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">170</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.v2ex.com/" target="_blank" title="V2EX">
+                  
+                    <i class="fa fa-fw fa-pinterest"></i>
+                  
+                  V2EX
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.weibo.com/" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://baidu.com/" title="Bidu" target="_blank">Bidu</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://ggso.in/" title="Google1" target="_blank">Google1</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://guge.suanfazu.com/" title="Google2" target="_blank">Google2</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#最近懈怠了STL，弄得都要翻资料了，赶紧弄点笔记："><span class="nav-number">1.</span> <span class="nav-text">最近懈怠了STL，弄得都要翻资料了，赶紧弄点笔记：</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XueCat</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
