@@ -27,9 +27,7 @@
 
 
 
-  
-  
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
@@ -51,14 +49,18 @@
   
 
   
+    
+      
+    
+
+    
+  
 
   
     
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Galdeano:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
-
-
 
 
 
@@ -102,7 +104,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post"},
+    sidebar: {"position":"right","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -111,9 +113,6 @@
     }
   };
 </script>
-
-
-
 
   <title> XueCat </title>
 </head>
@@ -146,7 +145,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
+  <div class="container one-collumn sidebar-position-right 
    page-home 
  ">
     <div class="headband"></div>
@@ -167,23 +166,23 @@
 
 <div class="site-nav-toggle">
   <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
   </button>
 </div>
 
+
 <nav class="site-nav">
+  
   
 
   
-    <ul id="menu" class="menu">
+    <ul id="menu" class="menu menu-left">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -193,29 +192,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
             分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
           </a>
         </li>
       
@@ -223,34 +200,27 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
             标签
           </a>
         </li>
       
         
-        <li class="menu-item menu-item-commonweal">
-          <a href="/404.html" rel="section">
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
             
-            公益404
+            关于
           </a>
         </li>
       
 
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="st-search-show-outputs">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
       
     </ul>
   
@@ -258,19 +228,18 @@
   
     <div class="site-search">
       
-  <form class="site-search-form">
-  <input type="text" id="st-search-input" />
+  <form class="site-search-form" >
+  <span class="search-icon fa fa-search"></span>
+  <input type="text" id="search-input">
+  <div id="search-result"><ul class="search-result-list"><li><a href="//www.baidu.com/s?wd=XXX%20site%3Ahttps://xuecat.github.io" class="search-result">百度搜索 <i class="search-keyword">XXX</i></a></li><li><a href="//www.google.com/search?q=XXX%20site%3Ahttps://xuecat.github.io" class="search-result">谷歌搜索 <i class="search-keyword">XXX</i></a></li><li><a href="#" class="popup-trigger search-result">本地搜索</a></li></ul>
+  </div>
 </form>
-
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install', 'sY4NkQ6QrfXfy5hqxV9S','2.0.0');
-</script>
-
+ <div class="popup">
+  <span class="search-icon fa fa-search"></span>
+  <input type="text" id="local-search-input">
+  <div id="local-search-result"></div>
+  <span class="popup-btn-close">close</span>
+ </div>
 
 
     </div>
@@ -308,8 +277,8 @@
             
               
                 
-                <a class="post-title-link" href="/2014/10/24/85/" itemprop="url">
-                  c++正则(85)
+                <a class="post-title-link" href="/2014/11/04/86/" itemprop="url">
+                  openssl、libcurl
                 </a>
               
             
@@ -322,8 +291,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-10-24T03:32:58+08:00" content="2014-10-24">
-              2014-10-24
+            <time itemprop="dateCreated" datetime="2014-11-04T03:32:58+08:00" content="2014-11-04">
+              2014-11-04
             </time>
           </span>
 
@@ -336,8 +305,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
+                  <a href="/categories/第三方库/" itemprop="url" rel="index">
+                    <span itemprop="name">第三方库</span>
                   </a>
                 </span>
 
@@ -348,8 +317,6 @@
             </span>
           
 
-          
-            
           
 
           
@@ -371,21 +338,21 @@
       
         
           
-          支持宽字符，（有w_函数）
-(“(\w+)(\.|_)?(\w*)@(\w+)(\.(\w+))+”);
- 首先注意‘()’表示将正则表达式分成子表达式，每个‘()’之间的内容表示一个子表达式；
-‘\’是一个转义字符，‘\’表示扔掉第二个‘\’的转义特性，‘\w+’表示匹配一个或多个单词，‘+’表示
+            今天晚上做了啥，我想想都可怕。
+第一个错误：Linux的OpenSSL编译，无法找到库。我当时用cmake设置了库目录的，还是无法。
+  最后发现的原因：Linux下默认的静态库是以lib开头的，我去！这个居然忘了，伤心。
+第二个错误：我想编译libcurl来更新东西，找了尼玛半天都没找到。。。
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/10/24/85/#more" rel="contents">
+            <a class="btn" href="/2014/11/04/86/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
         
       
     </div>
-
+    
     <div>
       
     </div>
@@ -470,8 +437,6 @@
           
 
           
-            
-          
 
           
 
@@ -509,7 +474,7 @@
         
       
     </div>
-
+    
     <div>
       
     </div>
@@ -553,8 +518,8 @@
             
               
                 
-                <a class="post-title-link" href="/2014/10/23/83/" itemprop="url">
-                  减少编译依赖2(83)
+                <a class="post-title-link" href="/2014/10/24/85/" itemprop="url">
+                  c++正则(85)
                 </a>
               
             
@@ -567,8 +532,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-10-23T03:31:58+08:00" content="2014-10-23">
-              2014-10-23
+            <time itemprop="dateCreated" datetime="2014-10-24T03:32:58+08:00" content="2014-10-24">
+              2014-10-24
             </time>
           </span>
 
@@ -594,8 +559,6 @@
           
 
           
-            
-          
 
           
 
@@ -616,27 +579,21 @@
       
         
           
-             今天看书，有这句：
-#include &lt;a.h&gt;
-class b;
-class c;
-b fun();
-c demo();
-
-main() {}
-思想：头文件用class进行前置声明，比包含相关头文件，要依赖小。
-这个对.h文件的申明是没问题的，对.cpp文件的定义就必须要包含头文
+          支持宽字符，（有w_函数）
+(“(\w+)(\.|_)?(\w*)@(\w+)(\.(\w+))+”);
+ 首先注意‘()’表示将正则表达式分成子表达式，每个‘()’之间的内容表示一个子表达式；
+‘\’是一个转义字符，‘\’表示扔掉第二个‘\’的转义特性，‘\w+’表示匹配一个或多个单词，‘+’表示
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/10/23/83/#more" rel="contents">
+            <a class="btn" href="/2014/10/24/85/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
         
       
     </div>
-
+    
     <div>
       
     </div>
@@ -721,8 +678,6 @@ main() {}
           
 
           
-            
-          
 
           
 
@@ -744,7 +699,7 @@ main() {}
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/g.jpg" rel="gallery_cisg6vjam00e5mkcxawfankf5"
+                 href="/picture/g.jpg" rel="gallery_cismn9sns00e00wcx84hxh45l"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="/picture/g.jpg" itemprop="contentUrl"/>
               </a>
@@ -752,7 +707,7 @@ main() {}
           
             
               <a class="post-gallery-img fancybox"
-                 href="/picture/h.jpg" rel="gallery_cisg6vjam00e5mkcxawfankf5"
+                 href="/picture/h.jpg" rel="gallery_cismn9sns00e00wcx84hxh45l"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="/picture/h.jpg" itemprop="contentUrl"/>
               </a>
@@ -782,7 +737,132 @@ main() {}
         
       
     </div>
+    
+    <div>
+      
+    </div>
 
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/10/23/83/" itemprop="url">
+                  减少编译依赖2(83)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-10-23T03:31:58+08:00" content="2014-10-23">
+              2014-10-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+             今天看书，有这句：
+#include &lt;a.h&gt;
+class b;
+class c;
+b fun();
+c demo();
+
+main() {}
+思想：头文件用class进行前置声明，比包含相关头文件，要依赖小。
+这个对.h文件的申明是没问题的，对.cpp文件的定义就必须要包含头文
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/10/23/83/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
     <div>
       
     </div>
@@ -867,8 +947,6 @@ main() {}
           
 
           
-            
-          
 
           
 
@@ -890,7 +968,7 @@ main() {}
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/j.jpg" rel="gallery_cisg6vjam00e2mkcxu2rtojck"
+                 href="/picture/j.jpg" rel="gallery_cismn9snu00e30wcxma2xijls"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="/picture/j.jpg" itemprop="contentUrl"/>
               </a>
@@ -924,7 +1002,7 @@ U盘安装最好用2.0接口，3.0接口要驱动
         
       
     </div>
-
+    
     <div>
       
     </div>
@@ -1009,8 +1087,6 @@ U盘安装最好用2.0接口，3.0接口要驱动
           
 
           
-            
-          
 
           
 
@@ -1045,127 +1121,7 @@ U盘安装最好用2.0接口，3.0接口要驱动
         
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/10/14/79/" itemprop="url">
-                  王道
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-10-14T03:31:58+08:00" content="2014-10-14">
-              2014-10-14
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/生活/" itemprop="url" rel="index">
-                    <span itemprop="name">生活</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          
-   Rider生前东征西讨，从西亚到北非，征服了波斯与印度，他与他的军团却不是为了权利或是财富，只是为了希望能到达“世界的尽头”亲眼看一看传说中的“无垠之海（Oceanus）”。他崇尚的是王应该被自己的子民所崇拜。
-（“身为王，就必须比任何人拥有强烈的欲望，比任何人都豪放，比任何人都易怒。他应该
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/10/14/79/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
     <div>
       
     </div>
@@ -1250,8 +1206,6 @@ U盘安装最好用2.0接口，3.0接口要驱动
           
 
           
-            
-          
 
           
 
@@ -1288,7 +1242,125 @@ U盘安装最好用2.0接口，3.0接口要驱动
         
       
     </div>
+    
+    <div>
+      
+    </div>
 
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/10/14/79/" itemprop="url">
+                  王道
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-10-14T03:31:58+08:00" content="2014-10-14">
+              2014-10-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/生活/" itemprop="url" rel="index">
+                    <span itemprop="name">生活</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          
+   Rider生前东征西讨，从西亚到北非，征服了波斯与印度，他与他的军团却不是为了权利或是财富，只是为了希望能到达“世界的尽头”亲眼看一看传说中的“无垠之海（Oceanus）”。他崇尚的是王应该被自己的子民所崇拜。
+（“身为王，就必须比任何人拥有强烈的欲望，比任何人都豪放，比任何人都易怒。他应该
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/10/14/79/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
     <div>
       
     </div>
@@ -1373,8 +1445,6 @@ U盘安装最好用2.0接口，3.0接口要驱动
           
 
           
-            
-          
 
           
 
@@ -1396,7 +1466,7 @@ U盘安装最好用2.0接口，3.0接口要驱动
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/460.gif" rel="gallery_cisg6vja600dlmkcxri20y6ew"
+                 href="/picture/460.gif" rel="gallery_cismn9snb00dd0wcxek92jaqa"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="/picture/460.gif" itemprop="contentUrl"/>
               </a>
@@ -1424,134 +1494,7 @@ U盘安装最好用2.0接口，3.0接口要驱动
         
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/10/10/75/" itemprop="url">
-                  c字符串比较函数(75)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-10-10T03:31:58+08:00" content="2014-10-10">
-              2014-10-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          char *strchr(const char *string, int c);
-
-查找字符c字符串string首现位置, NULL结束符包含查找.
-
-返指针, 指向字符c字符串string首现位置, 没找, 则返NULL.
-
-
-
-
-char *strrchr(const char *string,
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/10/10/75/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
     <div>
       
     </div>
@@ -1619,7 +1562,7 @@ char *strrchr(const char *string,
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">171</span>
+              <span class="site-state-item-count">172</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1627,7 +1570,7 @@ char *strrchr(const char *string,
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1659,7 +1602,7 @@ char *strrchr(const char *string,
               <span class="links-of-author-item">
                 <a href="https://github.com/" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-fw fa-github"></i>
+                    <i class="fa fa-github"></i>
                   
                   GitHub
                 </a>
@@ -1668,7 +1611,7 @@ char *strrchr(const char *string,
               <span class="links-of-author-item">
                 <a href="http://www.v2ex.com/" target="_blank" title="V2EX">
                   
-                    <i class="fa fa-fw fa-pinterest"></i>
+                    <i class="fa fa-globe"></i>
                   
                   V2EX
                 </a>
@@ -1677,9 +1620,18 @@ char *strrchr(const char *string,
               <span class="links-of-author-item">
                 <a href="http://www.weibo.com/" target="_blank" title="Weibo">
                   
-                    <i class="fa fa-fw fa-weibo"></i>
+                    <i class="fa fa-weibo"></i>
                   
                   Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:1446969391@qq.com" target="_blank" title="E-mail">
+                  
+                    <i class="fa fa-envelope"></i>
+                  
+                  E-mail
                 </a>
               </span>
             
@@ -1688,14 +1640,17 @@ char *strrchr(const char *string,
 
         
         
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
 
         
         
-          <div class="links-of-blogroll motion-element links-of-blogroll-block">
-            <div class="links-of-blogroll-title">
-              <i class="fa  fa-fw fa-globe"></i>
-              友情链接
-            </div>
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">友情链接</div>
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
@@ -1734,16 +1689,26 @@ char *strrchr(const char *string,
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
+  &copy;  2015 - 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">XueCat</span>
+  <span class="author" itemprop="copyrightHolder">XueCat&emsp;</span>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span id="busuanzi_container_page_pv" style='display:none'>
+    <span id="busuanzi_value_page_pv"></span>
+  </span>
+  <span>
+    <a href="http://service.ibruce.info" target="_blank" class="sl fa fa-globe fa-spin"></a>
+  </span>
+  <span id="busuanzi_container_site_uv" style='display:none'>
+    <span id="busuanzi_value_site_uv"></span>
+  </span>
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
@@ -1779,16 +1744,12 @@ char *strrchr(const char *string,
 
 
 
-
   
 
 
 
   
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
   
   <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
@@ -1802,6 +1763,8 @@ char *strrchr(const char *string,
   
   <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
+
+  
 
   
 
@@ -1825,16 +1788,180 @@ char *strrchr(const char *string,
 
 
   
-
-
-
-  
-
-
-
-
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var scrollTop = '';
+    var newHeight = '100';
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+    $('#search-input').on('input', function() {
+    if ($(this).val().length <= 0) {
+      $('#search-result').hide();
+      return;
+    }
+    $('i.search-keyword').text($(this).val());
+    $('a.search-result[href!="#"]').each(function(){
+      this.href = this.href.replace(/\=(.*?)(?=%20site)/,'='+$('#search-input').val())
+    });
+    $('#search-result').show();
+    });
+
+    function proceedsearch() {
+      $('#local-search-input').val($('#search-input').val());
+      document.getElementById('local-search-input').dispatchEvent(new Event('input'));
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        beforeSend: function (){
+            $('.site-search-form>span').toggleClass('fa-spin');
+            $('#search-input').prop('disabled', function(i, v) { return !v; });
+        },
+        complete: function (){
+            $('.site-search-form>span').toggleClass('fa-spin');
+            $('#search-input').prop('disabled', function(i, v) { return !v; });
+        },
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $(window).bind('scroll', function() {
+      scrollTop = $( window ).scrollTop();
+      newHeight = scrollTop + 100;
+    });
+    $('#search-result a').mousedown(function(e) {
+        window.location.href = this.href;
+      });
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('#search-input').focus(function() {
+      if(jQuery(window).width() < 750) {
+        $('body').animate({
+          scrollTop: $('.site-search').offset().top
+        }, 500);
+      };
+      if ($(this).val().length > 0) {
+        $('#search-result').show();
+      }
+    });
+    $('#search-input').blur(function() {
+      $('#search-result').hide();
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
 
   
 
