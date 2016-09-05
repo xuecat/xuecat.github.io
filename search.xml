@@ -35,6 +35,10 @@
 <td style="text-align:center">时间计算</td>
 </tr>
 <tr>
+<td><a href="#SBT_MPEGBufferEncode">SBT_MPEGBufferEncode</a></td>
+<td style="text-align:center">MPEG编码，视频和音频基带数据编码，只用过YUV、RGB基带数据视频编码其它未尝试<code>待更新</code></td>
+</tr>
+<tr>
 <td><a href="#SBT_MPGABufferDecode">SBT_MPGABufferDecode</a></td>
 <td style="text-align:center">MPGE(mpga)音频的解码,支持mp1/mp2/mp3解码（帧解码）,对应SBT_MPABufferEncode</td>
 </tr>
@@ -42,29 +46,41 @@
 <td><a href="#SBT_CutlistV2">SBT_CutlistV2</a></td>
 <td style="text-align:center">万能代码，把文件名给传给cutlist，让cutlist播，自己去取缓存</td>
 </tr>
+<tr>
+<td><a href="#SBT_MediaDetect">SBT_MediaDetect</a></td>
+<td style="text-align:center">万能媒体文件读取，读取视音频文件信息，GetClipSampleIcon不知道何用<code>待更新</code></td>
+</tr>
+<tr>
+<td><a href="#SBT_MediaDetect2">SBT_MediaDetect2</a></td>
+<td style="text-align:center">同上，增加可读性的文件读取，测试代码见<a href="#SBT_CutlistV2">SBT_CutlistV2</a></td>
+</tr>
 </tbody>
 </table>
 <hr>
 <p></p><h2 id="SBT_WAVFileReadWrite"> SBT_WAVFileReadWrite <h2><p></p>
 <ol>
 <li>writer是自带重采样的（采样率或通道转换）</li>
-<li>readerex才带有重采样功能</li>
+<li>readerex才带有重采样功能<figure class="highlight c"><figcaption><span>测试代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">   BYTE* bybuffer = <span class="literal">NULL</span>;</div><div class="line"><span class="keyword">int</span> len = <span class="number">0</span>;</div><div class="line">BOOL end;</div><div class="line">WAVEFORMATEX wavef, *pwave;</div><div class="line">Init_StanderWave(wavef);</div><div class="line"></div><div class="line">pwave = &amp;wavef;</div><div class="line">SBT_WAVFileReaderEx read;</div><div class="line">read.Initialize();</div><div class="line">read.SetInputFile(<span class="number">_</span>T(<span class="string">"D:\\tebig.wav"</span>));</div><div class="line">read.GetOutputWAVEFormat(&amp;pwave);</div><div class="line">wavef.nChannels = pwave-&gt;nChannels;</div><div class="line">wavef.wBitsPerSample = pwave-&gt;wBitsPerSample;</div><div class="line">Calcute_Block_SamplesPer(wavef);</div><div class="line">read.SetOutputWAVEFormat(&amp;wavef);</div><div class="line">read.SetPCMFrameSize(BY_BYTE, wavef.nAvgBytesPerSec/<span class="number">25</span>);<span class="comment">//</span></div><div class="line">read.EnableInternalBuffer();</div><div class="line">read.StartRead();</div><div class="line"></div><div class="line">SBT_WAVFileWriter wavwrite;</div><div class="line"><span class="keyword">int</span> ar = wavwrite.Initialize();</div><div class="line">ar = wavwrite.SetOutputFile(<span class="number">_</span>T(<span class="string">"D:\\wwaw.wav"</span>));</div><div class="line">ar = wavwrite.SetInputWAVEFormat(&amp;wavef);</div><div class="line">ar = wavwrite.SetOutputWAVEFormat(&amp;wavef);</div><div class="line">ar = wavwrite.StartWrite();</div><div class="line"></div><div class="line"><span class="keyword">while</span> (<span class="number">1</span>)</div><div class="line">&#123;</div><div class="line">	read.ReadEx(BY_BYTE, wavef.nAvgBytesPerSec/<span class="number">25</span>, &amp;bybuffer, &amp;len, &amp;pwave, &amp;end);<span class="comment">//输出长度依旧不定长不知为何,BY_FRAME我没成功过</span></div><div class="line">	<span class="keyword">if</span> (end)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	&#125;</div><div class="line">	ar = wavwrite.SetInputBuffer(bybuffer, len);<span class="comment">//这个函数很挑剔，SBT_PCMBasicProcess2的从采样数据输入就不行（不知为何）。</span></div><div class="line">&#125;</div><div class="line">wavwrite.StopWrite();</div><div class="line">   </div></pre></td></tr></table></figure>
+</li>
 </ol>
-<figure class="highlight c"><figcaption><span>测试代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">   BYTE* bybuffer = <span class="literal">NULL</span>;</div><div class="line"><span class="keyword">int</span> len = <span class="number">0</span>;</div><div class="line">BOOL end;</div><div class="line">WAVEFORMATEX wavef, *pwave;</div><div class="line">Init_StanderWave(wavef);</div><div class="line"></div><div class="line">pwave = &amp;wavef;</div><div class="line">SBT_WAVFileReaderEx read;</div><div class="line">read.Initialize();</div><div class="line">read.SetInputFile(<span class="number">_</span>T(<span class="string">"D:\\tebig.wav"</span>));</div><div class="line">read.GetOutputWAVEFormat(&amp;pwave);</div><div class="line">wavef.nChannels = pwave-&gt;nChannels;</div><div class="line">wavef.wBitsPerSample = pwave-&gt;wBitsPerSample;</div><div class="line">Calcute_Block_SamplesPer(wavef);</div><div class="line">read.SetOutputWAVEFormat(&amp;wavef);</div><div class="line">read.SetPCMFrameSize(BY_BYTE, wavef.nAvgBytesPerSec/<span class="number">25</span>);<span class="comment">//</span></div><div class="line">read.EnableInternalBuffer();</div><div class="line">read.StartRead();</div><div class="line"></div><div class="line">SBT_WAVFileWriter wavwrite;</div><div class="line"><span class="keyword">int</span> ar = wavwrite.Initialize();</div><div class="line">ar = wavwrite.SetOutputFile(<span class="number">_</span>T(<span class="string">"D:\\wwaw.wav"</span>));</div><div class="line">ar = wavwrite.SetInputWAVEFormat(&amp;wavef);</div><div class="line">ar = wavwrite.SetOutputWAVEFormat(&amp;wavef);</div><div class="line">ar = wavwrite.StartWrite();</div><div class="line"></div><div class="line"><span class="keyword">while</span> (<span class="number">1</span>)</div><div class="line">&#123;</div><div class="line">	read.ReadEx(BY_BYTE, wavef.nAvgBytesPerSec/<span class="number">25</span>, &amp;bybuffer, &amp;len, &amp;pwave, &amp;end);<span class="comment">//输出长度依旧不定长不知为何,BY_FRAME我没成功过</span></div><div class="line">	<span class="keyword">if</span> (end)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	&#125;</div><div class="line">	ar = wavwrite.SetInputBuffer(bybuffer, len);<span class="comment">//这个函数很挑剔，SBT_PCMBasicProcess2的从采样数据输入就不行（不知为何）。</span></div><div class="line">&#125;</div><div class="line">wavwrite.StopWrite();</div><div class="line">   </div></pre></td></tr></table></figure>
 <hr>
-<p></p><h2 id="SBT_PCMAdvProcess"> SBT_PCMBasicProcess <h2><p></p>
-<p></p><h2 id="SBT_PCMAdvProcess2"> SBT_PCMBasicProcess2 <h2><p></p>
-<h2 id="1-这个是通过名和void指针调用"><a href="#1-这个是通过名和void指针调用" class="headerlink" title="1. 这个是通过名和void指针调用"></a>1. 这个是通过名和void指针调用</h2><p></p><h2 id="SBT_PCMBasicProcess"> SBT_PCMBasicProcess <h2><p></p>
+<p></p><h2 id="SBT_PCMAdvProcess"> SBT_PCMAdvProcess <h2><p></p>
+<p></p><h2 id="SBT_PCMAdvProcess2"> SBT_PCMAdvProcess2 <h2><p></p>
+<ol>
+<li>这个是通过名和void指针调用</li>
+</ol>
+<hr>
+<p></p><h2 id="SBT_PCMBasicProcess"> SBT_PCMBasicProcess <h2><p></p>
 <p></p><h2 id="SBT_PCMBasicProcess2"> SBT_PCMBasicProcess2 <h2><p></p>
 <ol>
 <li>CalResampleParam参数未知，待研究</li>
-<li>ReformatLPCM在按照帧做转换时会出现输出数据不定长（连续写入也有问题），ReformatLPCM2按帧转换输出长度比较正常，但是对WAVEFORMATEX要计算好。</li>
+<li>ReformatLPCM在按照帧做转换时会出现输出数据不定长（连续写入也有问题），ReformatLPCM2按帧转换输出长度比较正常，但是对WAVEFORMATEX要计算好。<figure class="highlight c"><figcaption><span>测试代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">m_SBPcmProcess.ReformatLPCM2(*m_pSrcWave, m_pReadData, inlen, *m_pDstWave, &amp;pOut1, &amp;outlen1);</div><div class="line"></div></pre></td></tr></table></figure>
+</li>
 </ol>
-<figure class="highlight c"><figcaption><span>测试代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">m_SBPcmProcess.ReformatLPCM2(*m_pSrcWave, m_pReadData, inlen, *m_pDstWave, &amp;pOut1, &amp;outlen1);</div><div class="line"></div></pre></td></tr></table></figure>
 <hr>
-<p></p><h2 id="SBT_PCMBasicProcess2"> SBT_PCMBasicProcess2 <h2><br><figure class="highlight c"><figcaption><span>测试代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">SBT_MPEGBufferEncode*	m_pBufferEncode;</div><div class="line">DO(m_pBufferEncode-&gt;SetEncodeOperationMode(XH_MPEG_ESBUF_OUT));</div><div class="line">    </div><div class="line">XH_MPEG_ENCODE_PARAM paramIn;</div><div class="line">paramIn.GetDefaultParam(m_nVideoType == SD_TYPE ? XH_MPEG2_422PML : XH_MPEG2_422PHL);</div><div class="line">paramIn.chroma_format = <span class="number">1</span>;</div><div class="line">paramIn.group_I_frame_count = <span class="number">1</span>;</div><div class="line">paramIn.group_B_frame_count = <span class="number">0</span>;</div><div class="line">paramIn.group_P_frame_count = <span class="number">0</span>;</div><div class="line"></div><div class="line">DO(m_pBufferEncode-&gt;SetEncodeParam(&amp;paramIn));</div><div class="line">DO(m_pBufferEncode-&gt;SetEncodeOutputCB(XH_VIDEO_OUTPUT_CB, EncodeOutCB, <span class="keyword">this</span>));</div><div class="line"></div><div class="line">m_bitInfoHead.biCompression = BI_RGB;</div><div class="line">DO(m_pBufferEncode-&gt;SetVideoInputBufferFormat(&amp;m_bitInfoHead));</div><div class="line">DO(m_pBufferEncode-&gt;StartEncode());</div><div class="line">DO(m_pBufferEncode-&gt;SetVideoInputBuffer(m_pBmpDataBuf, m_dwBmpSize));</div><div class="line"></div></pre></td></tr></table></figure><p></p>
+<p></p><h2 id="SBT_MPEGBufferEncode"> SBT_MPEGBufferEncode <h2><br><figure class="highlight c"><figcaption><span>测试代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">SBT_MPEGBufferEncode*	m_pBufferEncode;</div><div class="line">DO(m_pBufferEncode-&gt;SetEncodeOperationMode(XH_MPEG_ESBUF_OUT));</div><div class="line">    </div><div class="line">XH_MPEG_ENCODE_PARAM paramIn;</div><div class="line">paramIn.GetDefaultParam(m_nVideoType == SD_TYPE ? XH_MPEG2_422PML : XH_MPEG2_422PHL);</div><div class="line">paramIn.chroma_format = <span class="number">1</span>;</div><div class="line">paramIn.group_I_frame_count = <span class="number">1</span>;</div><div class="line">paramIn.group_B_frame_count = <span class="number">0</span>;</div><div class="line">paramIn.group_P_frame_count = <span class="number">0</span>;</div><div class="line"></div><div class="line">DO(m_pBufferEncode-&gt;SetEncodeParam(&amp;paramIn));</div><div class="line">DO(m_pBufferEncode-&gt;SetEncodeOutputCB(XH_VIDEO_OUTPUT_CB, EncodeOutCB, <span class="keyword">this</span>));</div><div class="line"></div><div class="line">m_bitInfoHead.biCompression = BI_RGB;</div><div class="line">DO(m_pBufferEncode-&gt;SetVideoInputBufferFormat(&amp;m_bitInfoHead));</div><div class="line">DO(m_pBufferEncode-&gt;StartEncode());</div><div class="line">DO(m_pBufferEncode-&gt;SetVideoInputBuffer(m_pBmpDataBuf, m_dwBmpSize));</div><div class="line"></div></pre></td></tr></table></figure><p></p>
 <hr>
-<p></p><h2 id="SBT_MPGABufferDecode"> SBT_MPGABufferDecode <h2><br><figure class="highlight"><figcaption><span>测试代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div></pre></td><td class="code"><pre><div class="line">//这是mp3解码测试，从MP3里一个个读取帧数据，再放入解码。</div><div class="line">//对pcm文件写入，要用SBT_WAVFileReadWrite。</div><div class="line">//自写的pcm文件写入老是有点问题，也没调试；代码不易，暂时放入记录以后修改。</div><div class="line">#define Calcute_Block_SamplesPer(outhead) outhead.nBlockAlign = (outhead.nChannels * outhead.wBitsPerSample) / 8;\</div><div class="line">outhead.nAvgBytesPerSec = outhead.nSamplesPerSec * outhead.nBlockAlign;</div><div class="line"></div><div class="line">#define Create_DstWave(outhead, inhead) \</div><div class="line">	outhead.wFormatTag = 1;\</div><div class="line">	outhead.nSamplesPerSec = 48000;\</div><div class="line">	outhead.nAvgBytesPerSec = 1152000;\</div><div class="line">	outhead.nChannels = 8;\</div><div class="line">	outhead.nBlockAlign = 24;\</div><div class="line">	outhead.wBitsPerSample = inhead.wBitsPerSample;\</div><div class="line">	Calcute_Block_SamplesPer(outhead);</div><div class="line"></div><div class="line">#define GetID3V2Size(header) (header.Size[0] &amp; 0x7F)&lt;&lt; 21 | (header.Size[1] &amp; 0x7F) &lt;&lt; 14 | (header.Size[2] &amp; 0x7F) &lt;&lt; 7 | (header.Size[3] &amp; 0x7F); </div><div class="line"></div><div class="line">#define BITRATEFREE 0xfffe</div><div class="line">#define BITRATEBAD  0xffff</div><div class="line"></div><div class="line">//// MP3FRAMEHEADER structure</div><div class="line">//struct MP3FRAMEHEADER //4byte</div><div class="line">//&#123;</div><div class="line">//	unsigned framesync   :11;    //同步信息</div><div class="line">//	unsigned MPEGID      : 2;    //版本</div><div class="line">//	unsigned layer       : 2;    //层</div><div class="line">//	unsigned protectbit  : 1;    //CRC 校验</div><div class="line">//	unsigned bitrateindx : 4;    //位率</div><div class="line">//	unsigned samplefreq  : 2;    //采样率</div><div class="line">//	unsigned paddingbit  : 1;    //帧长调节</div><div class="line">//	unsigned privatebit  : 1;    //保留字</div><div class="line">//	unsigned channel     : 2;    //声道模式</div><div class="line">//	unsigned modeext     : 2;    //扩充模型</div><div class="line">//	unsigned copyright   : 1;    //Copyright</div><div class="line">//	unsigned original    : 1;    //原版标志</div><div class="line">//	unsigned emphasis    : 2;    //强调模式</div><div class="line">//&#125;;</div><div class="line"></div><div class="line">// MP3FRAMEHEADER structure</div><div class="line">struct MP3FRAMEHEADER</div><div class="line">&#123;</div><div class="line">	unsigned emphasis : 2;			// M</div><div class="line">	unsigned original : 1;			// L</div><div class="line">	unsigned copyright : 1;			// K</div><div class="line">	unsigned modeext : 2;			// J</div><div class="line">	unsigned channel : 2;			// I</div><div class="line">	unsigned privatebit : 1;			// H</div><div class="line">	unsigned paddingbit : 1;			// G</div><div class="line">	unsigned samplefreq : 2;		// F</div><div class="line">	unsigned bitrateindx : 4;			// E</div><div class="line">	unsigned protectbit : 1;			// D</div><div class="line">	unsigned layer : 2;			// C</div><div class="line">	unsigned MPEGID : 2;			// B</div><div class="line">	unsigned framesync : 11;		// A</div><div class="line">&#125;;</div><div class="line"></div><div class="line">struct MP3ID3V2TAG //10byte</div><div class="line">&#123;</div><div class="line">	char Header[3];//ID3</div><div class="line">	char Ver;//3</div><div class="line">	char Revision;</div><div class="line">	char Flag;</div><div class="line">	char Size[4];</div><div class="line">&#125;;</div><div class="line"></div><div class="line">// MP3ID3V1TAG structure</div><div class="line">struct MP3ID3V1TAG//128byte</div><div class="line">&#123;</div><div class="line">	char ident[3]; // TAG</div><div class="line">	char title[30];</div><div class="line">	char artist[30];</div><div class="line">	char album[30];</div><div class="line">	char year[4];</div><div class="line">	char comment[28];</div><div class="line">	BYTE reserved;</div><div class="line">	BYTE tracknum;</div><div class="line">	BYTE genre;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line">int g_BitRates[] = &#123;</div><div class="line">	BITRATEFREE, BITRATEFREE, BITRATEFREE, BITRATEFREE, BITRATEFREE, </div><div class="line">	32,  32,  32,  32,    8,</div><div class="line">	64,  48,  40,  48,   16,</div><div class="line">	96,  56,  48,  56,  24,</div><div class="line">	128,  64,  56,  64,  32,</div><div class="line">	160,  80,  64,  80,  40,</div><div class="line">	192,  96,  80,  96,  48,</div><div class="line">	224, 112,  96, 112,  56,</div><div class="line">	256, 128, 112, 128,  64,</div><div class="line">	288, 160, 128, 144,  80,</div><div class="line">	320, 192, 160, 160,  96,</div><div class="line">	352, 224, 192, 176, 112,</div><div class="line">	384, 256, 224, 192, 128,</div><div class="line">	416, 320, 256, 224, 144,</div><div class="line">	448, 384, 320, 256, 160,</div><div class="line">	BITRATEBAD, BITRATEBAD, BITRATEBAD, BITRATEBAD, BITRATEBAD</div><div class="line">&#125;;</div><div class="line"></div><div class="line">int g_SampleCountMap[4][4] = &#123;</div><div class="line">	0,    0,    0,    0,</div><div class="line">	576,  0,  576, 1152, //l3</div><div class="line">	1152, 0, 1152, 1152, //l2</div><div class="line">	384,  0,  384,  384, //l1</div><div class="line">&#125;;</div><div class="line"></div><div class="line">int g_SampleRate[4][4] = &#123;</div><div class="line">	11025, 0, 22050, 44100,//0</div><div class="line">	0,		0,		0,	0,</div><div class="line">	12000,     0,    24000,   48000,//1</div><div class="line">	8000,		0,	  16000,   32000,//2</div><div class="line">	</div><div class="line">&#125;;</div><div class="line"></div><div class="line">int GetBitRate(INT nlayer, INT nversion, int nbitindex)</div><div class="line">&#123;</div><div class="line">	if (nversion == 3)</div><div class="line">	&#123;</div><div class="line">		return g_BitRates[nbitindex * 5 + (3 - nlayer)];</div><div class="line">	&#125;</div><div class="line">	else if (nversion == 2)//</div><div class="line">	&#123;</div><div class="line">		if (nlayer == 3)</div><div class="line">			return g_BitRates[nbitindex * 5 + 3];</div><div class="line">		else</div><div class="line">			return g_BitRates[nbitindex * 5 + 4];</div><div class="line">	&#125;</div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">bool Is_Mp3FrameHead(const unsigned char * pHead) </div><div class="line">&#123;</div><div class="line">	if (pHead[0] == 0xff &amp;&amp; (pHead[1] &amp; 0xe0) == 0xe0)</div><div class="line">	&#123;</div><div class="line">		if (((pHead[1] &amp; 0x06) &gt;&gt; 1) == 0) return 0; /* no layer 4 */</div><div class="line">		if (((pHead[2] &amp; 0xf0) &gt;&gt; 4) == 15) return 0; /* bitrate can't be 1111 */</div><div class="line">		if (((pHead[2] &amp; 0x0c) &gt;&gt; 2) == 3) return 0; /* samplerate can't be 11 */</div><div class="line">		return 1;</div><div class="line">	&#125;</div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">bool Is_Mp3V1Head(const unsigned char* pHead)</div><div class="line">&#123;</div><div class="line">	if (pHead[0] == 0x00 &amp;&amp; pHead[1] == 0x00 &amp;&amp; pHead[2] == 0x01 &amp;&amp; pHead[3] == 0xba) &#123;</div><div class="line">		return 1;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void ChangeEndian(void* pBuffer, int nBufSize)</div><div class="line">&#123;</div><div class="line">	if (!pBuffer || !nBufSize)</div><div class="line">		return;</div><div class="line"></div><div class="line">	char temp;</div><div class="line">	for (int i = 0; i &lt; nBufSize / 2; i++)</div><div class="line">	&#123;</div><div class="line">		temp = ((char*)pBuffer)[i];</div><div class="line">		((char*)pBuffer)[i] = ((char*)pBuffer)[nBufSize - i - 1];</div><div class="line">		((char*)pBuffer)[nBufSize - i - 1] = temp;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">void writefilehead(WAVEFORMATEX&amp; head, int sz, FILE* pwrite)</div><div class="line">&#123;</div><div class="line">	int bits = head.wBitsPerSample;</div><div class="line">	char *data = (char*)"RIFF";</div><div class="line">	short short_temp;</div><div class="line">	int long_temp;</div><div class="line">	int fileSize;</div><div class="line">	int size = sz;</div><div class="line"></div><div class="line">	fileSize = size + 36;</div><div class="line"></div><div class="line">	data = (char*)"RIFF";</div><div class="line">	fwrite(data, sizeof(char), 4, pwrite);</div><div class="line">	fwrite(&amp;fileSize, sizeof(int), 1, pwrite);</div><div class="line">	data = (char*)"WAVE";</div><div class="line">	fwrite(data,sizeof(char),4,pwrite);</div><div class="line">	data = (char*)"fmt ";</div><div class="line">	fwrite(data,sizeof(char),4,pwrite);</div><div class="line">	long_temp = 16;</div><div class="line">	fwrite(&amp;long_temp, sizeof(int), 1, pwrite);</div><div class="line">	short_temp = 0x01;</div><div class="line">	fwrite(&amp;short_temp,sizeof(int),1,pwrite);</div><div class="line"></div><div class="line">	short_temp = (head.nChannels);</div><div class="line">	fwrite(&amp;short_temp, sizeof(short), 1,pwrite);</div><div class="line">	long_temp=(head.nSamplesPerSec);</div><div class="line">	fwrite(&amp;long_temp,sizeof(int),1,pwrite);</div><div class="line">	long_temp=(bits/8)*(head.nChannels)*(head.nSamplesPerSec);</div><div class="line">	fwrite(&amp;long_temp,sizeof(int),1,pwrite);</div><div class="line">	short_temp=(bits/8)*(head.nChannels);</div><div class="line">	fwrite(&amp;short_temp,sizeof(short),1,pwrite);</div><div class="line">	short_temp=(bits);</div><div class="line">	fwrite(&amp;short_temp,sizeof(short),1,pwrite);</div><div class="line"></div><div class="line">	data=(char*)"data";</div><div class="line">	fwrite(data,sizeof(char),4,pwrite);</div><div class="line">	fwrite(&amp;size,sizeof(int),1,pwrite);</div><div class="line">	fseek(pwrite,44,SEEK_SET);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int CBmp2Video::ReadMP3(int lengh)</div><div class="line">&#123;</div><div class="line">#define Release_And_Return() &#123; fclose(m_pAudioInfo-&gt;pFile);\</div><div class="line">	delete m_pAudioInfo;\</div><div class="line">	m_pAudioInfo = NULL;\</div><div class="line">	return 0;&#125;\</div><div class="line"></div><div class="line">	if (m_pAudioInfo-&gt;pFile == NULL)</div><div class="line">		return 0;</div><div class="line">	lengh -= 128;</div><div class="line"></div><div class="line">	int nReadPos = 0;</div><div class="line">	int v2headsz = 0;</div><div class="line">	MP3ID3V2TAG v2tag = &#123;0&#125;;</div><div class="line"></div><div class="line">	int rd = fread_s(&amp;v2tag, sizeof(MP3ID3V2TAG), sizeof(MP3ID3V2TAG), 1, m_pAudioInfo-&gt;pFile);</div><div class="line">	if (rd &lt; 1)</div><div class="line">		Release_And_Return();</div><div class="line"></div><div class="line">	if (v2tag.Header[0] != 'I' ||</div><div class="line">		v2tag.Header[1] != 'D' ||</div><div class="line">		v2tag.Header[2] != '3')</div><div class="line">		Release_And_Return();</div><div class="line"></div><div class="line">	if (v2tag.Ver != 3)</div><div class="line">		Release_And_Return();</div><div class="line"></div><div class="line">	v2headsz = GetID3V2Size(v2tag);</div><div class="line"></div><div class="line">	rd = fseek(m_pAudioInfo-&gt;pFile, v2headsz, SEEK_CUR);</div><div class="line"></div><div class="line">	nReadPos += v2headsz;</div><div class="line">	if (rd == 0)</div><div class="line">	&#123;</div><div class="line">		m_pAudioInfo-&gt;nDataType = MP3_TYPE;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	SBT_MPGABufferDecode decode;</div><div class="line"></div><div class="line">	FILE* writewave = NULL;</div><div class="line">	int allsize = 0;</div><div class="line">	int nsamplerate = 0;</div><div class="line">	int outlen = 0;</div><div class="line">	int nbitrate = 0;</div><div class="line">	int nframebyte = 0;</div><div class="line">	bool bhavehead = false;</div><div class="line">	WAVEFORMATEX writeformat = &#123;0&#125;;</div><div class="line">	MP3FRAMEHEADER frameHead = &#123;0&#125;;</div><div class="line"></div><div class="line">	decode.Initialize();</div><div class="line">	decode.StartDecode();</div><div class="line"></div><div class="line">	fopen_s(&amp;writewave, "www.wav", "wb");</div><div class="line"></div><div class="line">	rd = fread_s(&amp;frameHead, sizeof(MP3FRAMEHEADER), sizeof(MP3FRAMEHEADER), 1, m_pAudioInfo-&gt;pFile);</div><div class="line"></div><div class="line">	while (rd &gt; 0)</div><div class="line">	&#123;</div><div class="line">		if (rd &lt; 1)</div><div class="line">			return -1;</div><div class="line">		else if (Is_Mp3FrameHead((const unsigned char*)&amp;frameHead))</div><div class="line">		&#123;</div><div class="line">			fseek(m_pAudioInfo-&gt;pFile, 0-sizeof(MP3FRAMEHEADER), SEEK_CUR);</div><div class="line"></div><div class="line">			ChangeEndian(&amp;frameHead, 4);</div><div class="line"></div><div class="line">			nsamplerate = g_SampleRate[frameHead.samplefreq][frameHead.MPEGID];</div><div class="line">			nbitrate	= GetBitRate(frameHead.layer, frameHead.MPEGID, frameHead.bitrateindx);</div><div class="line"></div><div class="line">			if (frameHead.layer == 3)</div><div class="line">				nframebyte = (12000 * nbitrate / nsamplerate + frameHead.paddingbit) * 4;</div><div class="line">			else</div><div class="line">				nframebyte = 144000 * nbitrate / nsamplerate + frameHead.paddingbit;</div><div class="line"></div><div class="line">			int noutDecodelen = 0;</div><div class="line">			BYTE* poutDecodebuffer = NULL;</div><div class="line">			BYTE* pReadbuffer = new BYTE[nframebyte];</div><div class="line">			rd = fread_s(pReadbuffer, nframebyte, nframebyte, 1, m_pAudioInfo-&gt;pFile);</div><div class="line">			</div><div class="line">			//解码</div><div class="line">			nReadPos += nframebyte;</div><div class="line">			MPEG_AUDIO_FRAME_INFO mpginfo = &#123;0&#125;;</div><div class="line">			decode.GetAudioFrameInfo(pReadbuffer, nframebyte, mpginfo);</div><div class="line">			rd = decode.SetInputBuffer(pReadbuffer, nframebyte);</div><div class="line">			rd = decode.GetOutputBufferFormat(&amp;noutDecodelen, &amp;writeformat);</div><div class="line">			rd = decode.GetOutputBuffer(&amp;poutDecodebuffer, &amp;noutDecodelen);</div><div class="line"></div><div class="line">			allsize += noutDecodelen;</div><div class="line">			if (!bhavehead)</div><div class="line">			&#123;</div><div class="line">				bhavehead = true;</div><div class="line">				writefilehead(writeformat, noutDecodelen, writewave);</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			fwrite(poutDecodebuffer, noutDecodelen, 1, writewave);</div><div class="line"></div><div class="line">			delete pReadbuffer;</div><div class="line"></div><div class="line">			if (nReadPos &gt;= lengh)</div><div class="line">			&#123;</div><div class="line">				break;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		else if (Is_Mp3V1Head((const unsigned char*)&amp;frameHead))</div><div class="line">		&#123;</div><div class="line">			return -1;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		rd = fread_s(&amp;frameHead, sizeof(MP3FRAMEHEADER), sizeof(MP3FRAMEHEADER), 1, m_pAudioInfo-&gt;pFile);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	fseek(writewave, 40, SEEK_SET);</div><div class="line">	fwrite(&amp;allsize, 1, sizeof(int), writewave);</div><div class="line">	allsize += 36;</div><div class="line">	fseek(writewave, 4, SEEK_SET);</div><div class="line">	fwrite(&amp;allsize, 1, sizeof(int), writewave);</div><div class="line">	fclose(writewave);</div><div class="line"></div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure><p></p>
+<p></p><h2 id="SBT_MPGABufferDecode"> SBT_MPGABufferDecode <h2><br><figure class="highlight"><figcaption><span>测试代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">//这是mp3解码测试，从MP3里一个个读取帧数据，再放入解码。</div><div class="line">//对pcm文件写入，要用SBT_WAVFileReadWrite。</div><div class="line">//自写的pcm文件写入老是有点问题，也没调试；代码不易，暂时放入记录以后修改。</div><div class="line">#define Calcute_Block_SamplesPer(outhead) outhead.nBlockAlign = (outhead.nChannels * outhead.wBitsPerSample) / 8;\</div><div class="line">outhead.nAvgBytesPerSec = outhead.nSamplesPerSec * outhead.nBlockAlign;</div><div class="line"></div><div class="line">#define Create_DstWave(outhead, inhead) \</div><div class="line">	outhead.wFormatTag = 1;\</div><div class="line">	outhead.nSamplesPerSec = 48000;\</div><div class="line">	outhead.nAvgBytesPerSec = 1152000;\</div><div class="line">	outhead.nChannels = 8;\</div><div class="line">	outhead.nBlockAlign = 24;\</div><div class="line">	outhead.wBitsPerSample = inhead.wBitsPerSample;\</div><div class="line">	Calcute_Block_SamplesPer(outhead);</div><div class="line"></div><div class="line">#define GetID3V2Size(header) (header.Size[0] &amp; 0x7F)&lt;&lt; 21 | (header.Size[1] &amp; 0x7F) &lt;&lt; 14 | (header.Size[2] &amp; 0x7F) &lt;&lt; 7 | (header.Size[3] &amp; 0x7F); </div><div class="line"></div><div class="line">#define BITRATEFREE 0xfffe</div><div class="line">#define BITRATEBAD  0xffff</div><div class="line"></div><div class="line">//// MP3FRAMEHEADER structure</div><div class="line">//struct MP3FRAMEHEADER //4byte</div><div class="line">//&#123;</div><div class="line">//	unsigned framesync   :11;    //同步信息</div><div class="line">//	unsigned MPEGID      : 2;    //版本</div><div class="line">//	unsigned layer       : 2;    //层</div><div class="line">//	unsigned protectbit  : 1;    //CRC 校验</div><div class="line">//	unsigned bitrateindx : 4;    //位率</div><div class="line">//	unsigned samplefreq  : 2;    //采样率</div><div class="line">//	unsigned paddingbit  : 1;    //帧长调节</div><div class="line">//	unsigned privatebit  : 1;    //保留字</div><div class="line">//	unsigned channel     : 2;    //声道模式</div><div class="line">//	unsigned modeext     : 2;    //扩充模型</div><div class="line">//	unsigned copyright   : 1;    //Copyright</div><div class="line">//	unsigned original    : 1;    //原版标志</div><div class="line">//	unsigned emphasis    : 2;    //强调模式</div><div class="line">//&#125;;</div><div class="line"></div><div class="line">// MP3FRAMEHEADER structure</div><div class="line">struct MP3FRAMEHEADER</div><div class="line">&#123;</div><div class="line">	unsigned emphasis : 2;			// M</div><div class="line">	unsigned original : 1;			// L</div><div class="line">	unsigned copyright : 1;			// K</div><div class="line">	unsigned modeext : 2;			// J</div><div class="line">	unsigned channel : 2;			// I</div><div class="line">	unsigned privatebit : 1;			// H</div><div class="line">	unsigned paddingbit : 1;			// G</div><div class="line">	unsigned samplefreq : 2;		// F</div><div class="line">	unsigned bitrateindx : 4;			// E</div><div class="line">	unsigned protectbit : 1;			// D</div><div class="line">	unsigned layer : 2;			// C</div><div class="line">	unsigned MPEGID : 2;			// B</div><div class="line">	unsigned framesync : 11;		// A</div><div class="line">&#125;;</div><div class="line"></div><div class="line">struct MP3ID3V2TAG //10byte</div><div class="line">&#123;</div><div class="line">	char Header[3];//ID3</div><div class="line">	char Ver;//3</div><div class="line">	char Revision;</div><div class="line">	char Flag;</div><div class="line">	char Size[4];</div><div class="line">&#125;;</div><div class="line"></div><div class="line">// MP3ID3V1TAG structure</div><div class="line">struct MP3ID3V1TAG//128byte</div><div class="line">&#123;</div><div class="line">	char ident[3]; // TAG</div><div class="line">	char title[30];</div><div class="line">	char artist[30];</div><div class="line">	char album[30];</div><div class="line">	char year[4];</div><div class="line">	char comment[28];</div><div class="line">	BYTE reserved;</div><div class="line">	BYTE tracknum;</div><div class="line">	BYTE genre;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line">int g_BitRates[] = &#123;</div><div class="line">	BITRATEFREE, BITRATEFREE, BITRATEFREE, BITRATEFREE, BITRATEFREE, </div><div class="line">	32,  32,  32,  32,    8,</div><div class="line">	64,  48,  40,  48,   16,</div><div class="line">	96,  56,  48,  56,  24,</div><div class="line">	128,  64,  56,  64,  32,</div><div class="line">	160,  80,  64,  80,  40,</div><div class="line">	192,  96,  80,  96,  48,</div><div class="line">	224, 112,  96, 112,  56,</div><div class="line">	256, 128, 112, 128,  64,</div><div class="line">	288, 160, 128, 144,  80,</div><div class="line">	320, 192, 160, 160,  96,</div><div class="line">	352, 224, 192, 176, 112,</div><div class="line">	384, 256, 224, 192, 128,</div><div class="line">	416, 320, 256, 224, 144,</div><div class="line">	448, 384, 320, 256, 160,</div><div class="line">	BITRATEBAD, BITRATEBAD, BITRATEBAD, BITRATEBAD, BITRATEBAD</div><div class="line">&#125;;</div><div class="line"></div><div class="line">int g_SampleCountMap[4][4] = &#123;</div><div class="line">	0,    0,    0,    0,</div><div class="line">	576,  0,  576, 1152, //l3</div><div class="line">	1152, 0, 1152, 1152, //l2</div><div class="line">	384,  0,  384,  384, //l1</div><div class="line">&#125;;</div><div class="line"></div><div class="line">int g_SampleRate[4][4] = &#123;</div><div class="line">	11025, 0, 22050, 44100,//0</div><div class="line">	0,		0,		0,	0,</div><div class="line">	12000,     0,    24000,   48000,//1</div><div class="line">	8000,		0,	  16000,   32000,//2</div><div class="line">	</div><div class="line">&#125;;</div><div class="line"></div><div class="line">int GetBitRate(INT nlayer, INT nversion, int nbitindex)</div><div class="line">&#123;</div><div class="line">	if (nversion == 3)</div><div class="line">	&#123;</div><div class="line">		return g_BitRates[nbitindex * 5 + (3 - nlayer)];</div><div class="line">	&#125;</div><div class="line">	else if (nversion == 2)//</div><div class="line">	&#123;</div><div class="line">		if (nlayer == 3)</div><div class="line">			return g_BitRates[nbitindex * 5 + 3];</div><div class="line">		else</div><div class="line">			return g_BitRates[nbitindex * 5 + 4];</div><div class="line">	&#125;</div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">bool Is_Mp3FrameHead(const unsigned char * pHead) </div><div class="line">&#123;</div><div class="line">	if (pHead[0] == 0xff &amp;&amp; (pHead[1] &amp; 0xe0) == 0xe0)</div><div class="line">	&#123;</div><div class="line">		if (((pHead[1] &amp; 0x06) &gt;&gt; 1) == 0) return 0; /* no layer 4 */</div><div class="line">		if (((pHead[2] &amp; 0xf0) &gt;&gt; 4) == 15) return 0; /* bitrate can't be 1111 */</div><div class="line">		if (((pHead[2] &amp; 0x0c) &gt;&gt; 2) == 3) return 0; /* samplerate can't be 11 */</div><div class="line">		return 1;</div><div class="line">	&#125;</div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">bool Is_Mp3V1Head(const unsigned char* pHead)</div><div class="line">&#123;</div><div class="line">	if (pHead[0] == 0x00 &amp;&amp; pHead[1] == 0x00 &amp;&amp; pHead[2] == 0x01 &amp;&amp; pHead[3] == 0xba) &#123;</div><div class="line">		return 1;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void ChangeEndian(void* pBuffer, int nBufSize)</div><div class="line">&#123;</div><div class="line">	if (!pBuffer || !nBufSize)</div><div class="line">		return;</div><div class="line"></div><div class="line">	char temp;</div><div class="line">	for (int i = 0; i &lt; nBufSize / 2; i++)</div><div class="line">	&#123;</div><div class="line">		temp = ((char*)pBuffer)[i];</div><div class="line">		((char*)pBuffer)[i] = ((char*)pBuffer)[nBufSize - i - 1];</div><div class="line">		((char*)pBuffer)[nBufSize - i - 1] = temp;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">void writefilehead(WAVEFORMATEX&amp; head, int sz, FILE* pwrite)</div><div class="line">&#123;</div><div class="line">	int bits = head.wBitsPerSample;</div><div class="line">	char *data = (char*)"RIFF";</div><div class="line">	short short_temp;</div><div class="line">	int long_temp;</div><div class="line">	int fileSize;</div><div class="line">	int size = sz;</div><div class="line"></div><div class="line">	fileSize = size + 36;</div><div class="line"></div><div class="line">	data = (char*)"RIFF";</div><div class="line">	fwrite(data, sizeof(char), 4, pwrite);</div><div class="line">	fwrite(&amp;fileSize, sizeof(int), 1, pwrite);</div><div class="line">	data = (char*)"WAVE";</div><div class="line">	fwrite(data,sizeof(char),4,pwrite);</div><div class="line">	data = (char*)"fmt ";</div><div class="line">	fwrite(data,sizeof(char),4,pwrite);</div><div class="line">	long_temp = 16;</div><div class="line">	fwrite(&amp;long_temp, sizeof(int), 1, pwrite);</div><div class="line">	short_temp = 0x01;</div><div class="line">	fwrite(&amp;short_temp,sizeof(int),1,pwrite);</div><div class="line"></div><div class="line">	short_temp = (head.nChannels);</div><div class="line">	fwrite(&amp;short_temp, sizeof(short), 1,pwrite);</div><div class="line">	long_temp=(head.nSamplesPerSec);</div><div class="line">	fwrite(&amp;long_temp,sizeof(int),1,pwrite);</div><div class="line">	long_temp=(bits/8)*(head.nChannels)*(head.nSamplesPerSec);</div><div class="line">	fwrite(&amp;long_temp,sizeof(int),1,pwrite);</div><div class="line">	short_temp=(bits/8)*(head.nChannels);</div><div class="line">	fwrite(&amp;short_temp,sizeof(short),1,pwrite);</div><div class="line">	short_temp=(bits);</div><div class="line">	fwrite(&amp;short_temp,sizeof(short),1,pwrite);</div><div class="line"></div><div class="line">	data=(char*)"data";</div><div class="line">	fwrite(data,sizeof(char),4,pwrite);</div><div class="line">	fwrite(&amp;size,sizeof(int),1,pwrite);</div><div class="line">	fseek(pwrite,44,SEEK_SET);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int CBmp2Video::ReadMP3(int lengh)</div><div class="line">&#123;</div><div class="line">#define Release_And_Return() &#123; fclose(m_pAudioInfo-&gt;pFile);\</div><div class="line">	delete m_pAudioInfo;\</div><div class="line">	m_pAudioInfo = NULL;\</div><div class="line">	return 0;&#125;\</div><div class="line"></div><div class="line">	if (m_pAudioInfo-&gt;pFile == NULL)</div><div class="line">		return 0;</div><div class="line">	lengh -= 128;</div><div class="line"></div><div class="line">	int nReadPos = 0;</div><div class="line">	int v2headsz = 0;</div><div class="line">	MP3ID3V2TAG v2tag = &#123;0&#125;;</div><div class="line"></div><div class="line">	int rd = fread_s(&amp;v2tag, sizeof(MP3ID3V2TAG), sizeof(MP3ID3V2TAG), 1, m_pAudioInfo-&gt;pFile);</div><div class="line">	if (rd &lt; 1)</div><div class="line">		Release_And_Return();</div><div class="line"></div><div class="line">	if (v2tag.Header[0] != 'I' ||</div><div class="line">		v2tag.Header[1] != 'D' ||</div><div class="line">		v2tag.Header[2] != '3')</div><div class="line">		Release_And_Return();</div><div class="line"></div><div class="line">	if (v2tag.Ver != 3)</div><div class="line">		Release_And_Return();</div><div class="line"></div><div class="line">	v2headsz = GetID3V2Size(v2tag);</div><div class="line"></div><div class="line">	rd = fseek(m_pAudioInfo-&gt;pFile, v2headsz, SEEK_CUR);</div><div class="line"></div><div class="line">	nReadPos += v2headsz;</div><div class="line">	if (rd == 0)</div><div class="line">	&#123;</div><div class="line">		m_pAudioInfo-&gt;nDataType = MP3_TYPE;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	SBT_MPGABufferDecode decode;</div><div class="line"></div><div class="line">	FILE* writewave = NULL;</div><div class="line">	int allsize = 0;</div><div class="line">	int nsamplerate = 0;</div><div class="line">	int outlen = 0;</div><div class="line">	int nbitrate = 0;</div><div class="line">	int nframebyte = 0;</div><div class="line">	bool bhavehead = false;</div><div class="line">	WAVEFORMATEX writeformat = &#123;0&#125;;</div><div class="line">	MP3FRAMEHEADER frameHead = &#123;0&#125;;</div><div class="line"></div><div class="line">	decode.Initialize();</div><div class="line">	decode.StartDecode();</div><div class="line"></div><div class="line">	fopen_s(&amp;writewave, "www.wav", "wb");</div><div class="line"></div><div class="line">	rd = fread_s(&amp;frameHead, sizeof(MP3FRAMEHEADER), sizeof(MP3FRAMEHEADER), 1, m_pAudioInfo-&gt;pFile);</div><div class="line"></div><div class="line">	while (rd &gt; 0)</div><div class="line">	&#123;</div><div class="line">		if (rd &lt; 1)</div><div class="line">			return -1;</div><div class="line">		else if (Is_Mp3FrameHead((const unsigned char*)&amp;frameHead))</div><div class="line">		&#123;</div><div class="line">			fseek(m_pAudioInfo-&gt;pFile, 0-sizeof(MP3FRAMEHEADER), SEEK_CUR);</div><div class="line"></div><div class="line">			ChangeEndian(&amp;frameHead, 4);</div><div class="line"></div><div class="line">			nsamplerate = g_SampleRate[frameHead.samplefreq][frameHead.MPEGID];</div><div class="line">			nbitrate	= GetBitRate(frameHead.layer, frameHead.MPEGID, frameHead.bitrateindx);</div><div class="line"></div><div class="line">			if (frameHead.layer == 3)</div><div class="line">				nframebyte = (12000 * nbitrate / nsamplerate + frameHead.paddingbit) * 4;</div><div class="line">			else</div><div class="line">				nframebyte = 144000 * nbitrate / nsamplerate + frameHead.paddingbit;</div><div class="line"></div><div class="line">			int noutDecodelen = 0;</div><div class="line">			BYTE* poutDecodebuffer = NULL;</div><div class="line">			BYTE* pReadbuffer = new BYTE[nframebyte];</div><div class="line">			rd = fread_s(pReadbuffer, nframebyte, nframebyte, 1, m_pAudioInfo-&gt;pFile);</div><div class="line">			</div><div class="line">			//解码</div><div class="line">			nReadPos += nframebyte;</div><div class="line">			MPEG_AUDIO_FRAME_INFO mpginfo = &#123;0&#125;;</div><div class="line">			decode.GetAudioFrameInfo(pReadbuffer, nframebyte, mpginfo);</div><div class="line">			rd = decode.SetInputBuffer(pReadbuffer, nframebyte);</div><div class="line">			rd = decode.GetOutputBufferFormat(&amp;noutDecodelen, &amp;writeformat);</div><div class="line">			rd = decode.GetOutputBuffer(&amp;poutDecodebuffer, &amp;noutDecodelen);</div><div class="line"></div><div class="line">			allsize += noutDecodelen;</div><div class="line">			if (!bhavehead)</div><div class="line">			&#123;</div><div class="line">				bhavehead = true;</div><div class="line">				writefilehead(writeformat, noutDecodelen, writewave);</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			fwrite(poutDecodebuffer, noutDecodelen, 1, writewave);</div><div class="line"></div><div class="line">			delete pReadbuffer;</div><div class="line"></div><div class="line">			if (nReadPos &gt;= lengh)</div><div class="line">			&#123;</div><div class="line">				break;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		else if (Is_Mp3V1Head((const unsigned char*)&amp;frameHead))</div><div class="line">		&#123;</div><div class="line">			return -1;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		rd = fread_s(&amp;frameHead, sizeof(MP3FRAMEHEADER), sizeof(MP3FRAMEHEADER), 1, m_pAudioInfo-&gt;pFile);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	fseek(writewave, 40, SEEK_SET);</div><div class="line">	fwrite(&amp;allsize, 1, sizeof(int), writewave);</div><div class="line">	allsize += 36;</div><div class="line">	fseek(writewave, 4, SEEK_SET);</div><div class="line">	fwrite(&amp;allsize, 1, sizeof(int), writewave);</div><div class="line">	fclose(writewave);</div><div class="line"></div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure><p></p>
 <hr>
 <p></p><h2 id="SBT_CutlistV2"> SBT_CutlistV2 <h2><br><figure class="highlight c"><figcaption><span>测试代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">////////////////////////////////////////////////////////////////////////////////////</span></div><div class="line"><span class="keyword">int</span> allsize = <span class="number">0</span>;</div><div class="line">*FILE* writewave = <span class="literal">NULL</span>;</div><div class="line">fopen_s(&amp;writewave, <span class="string">"D:\\wwq.wav"</span>, <span class="string">"wb"</span>);*/</div><div class="line">SBT_WAVFileWriter wavewrite;</div><div class="line">SBT_MEDIA_INFO2 info2;</div><div class="line">SBT_MediaDetect2 detect2;</div><div class="line">detect2.SetInputFile(lpPath);</div><div class="line">detect2.GetMediaInfo2(&amp;info2);</div><div class="line"></div><div class="line">WAVEFORMATEX outhead = info2.AudioInfo(<span class="number">0</span>).stWavFormat;</div><div class="line">outhead.nSamplesPerSec = <span class="number">48000</span>;</div><div class="line">Calcute_Block_SamplesPer(outhead);</div><div class="line"></div><div class="line">AM_MEDIA_TYPE meditype = &#123;<span class="number">0</span>&#125;;</div><div class="line">meditype.majortype = MEDIATYPE_Audio;</div><div class="line">meditype.formattype = FORMAT_WaveFormatEx;</div><div class="line">meditype.cbFormat = <span class="keyword">sizeof</span>(WAVEFORMATEX);</div><div class="line">meditype.pbFormat = <span class="keyword">new</span> BYTE[meditype.cbFormat];</div><div class="line">memcpy_s(meditype.pbFormat, <span class="keyword">sizeof</span>(WAVEFORMATEX), &amp;outhead, <span class="keyword">sizeof</span>(WAVEFORMATEX));</div><div class="line"></div><div class="line">ST_CUTLIST_ITEM* pItemList = <span class="keyword">new</span> ST_CUTLIST_ITEM[<span class="number">1</span>];</div><div class="line"><span class="keyword">int</span> nFrameNum = (<span class="keyword">int</span>)((info2.AudioInfo(<span class="number">0</span>).llDuration*<span class="number">25</span>/(<span class="number">1000</span>*<span class="number">10</span>*<span class="number">1000</span>))+<span class="number">0.001</span>);</div><div class="line">pItemList[<span class="number">0</span>].llMediaOut = nFrameNum;</div><div class="line">pItemList[<span class="number">0</span>].llTimelineIn = <span class="number">0</span>;</div><div class="line">pItemList[<span class="number">0</span>].llTimelineOut = pItemList[<span class="number">0</span>].llMediaOut;</div><div class="line">pItemList[<span class="number">0</span>].bstrFileName = strPath;</div><div class="line">pItemList[<span class="number">0</span>].dwFileFormatID = info2.FileFormatID();</div><div class="line">pItemList[<span class="number">0</span>].dwMediaTypeID = info2.AudioInfo(<span class="number">0</span>).nMediaID;</div><div class="line">pItemList[<span class="number">0</span>].dwItemType = SBT_CUTLIST_ITEM_AUDIO;</div><div class="line">pItemList[<span class="number">0</span>].dwReserved1 = pItemList[<span class="number">0</span>].dwReserved2 = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="comment">//////////////////函数执行</span></div><div class="line"><span class="comment">//////////////////设置参数</span></div><div class="line">wavewrite.Initialize();</div><div class="line">wavewrite.SetOutputFile(<span class="number">_</span>T(<span class="string">"D:\\qqw.wav"</span>));</div><div class="line">wavewrite.SetInputWAVEFormat(&amp;outhead);</div><div class="line">wavewrite.SetOutputWAVEFormat(&amp;outhead);</div><div class="line">wavewrite.StartWrite();</div><div class="line"></div><div class="line"><span class="comment">//writefilehead(outhead, 22, writewave);</span></div><div class="line"></div><div class="line"><span class="keyword">int</span> rd = m_pSbCutList-&gt;Initialize(SBT_CUTLIST_ITEM_AUDIO);</div><div class="line">rd = m_pSbCutList-&gt;SetBufferingMode(TRUE);</div><div class="line">rd = m_pSbCutList-&gt;SetBufferPoolSize(<span class="number">25</span>, <span class="number">100</span>);</div><div class="line">rd = m_pSbCutList-&gt;SetFPS(<span class="number">0L</span>);</div><div class="line">rd = m_pSbCutList-&gt;SetOutputFormat(SBT_CUTLIST_ITEM_AUDIO, &amp;meditype);</div><div class="line">rd = m_pSbCutList-&gt;SetItemList(pItemList, <span class="number">1</span>);</div><div class="line">rd = m_pSbCutList-&gt;SetStatus(SBT_CUTLIST_STATUS_PLAY);</div><div class="line"></div><div class="line"><span class="comment">/////////////////////获取数据</span></div><div class="line">ST_CUTLISTV2_DECODE_OUT stDecout;</div><div class="line">ST_CUTLISTV2_DECODE_IN stDecIn;</div><div class="line"></div><div class="line">stDecIn.llTimelinePos = <span class="number">0</span>;</div><div class="line">stDecIn.pUserBuffer = <span class="literal">NULL</span>;</div><div class="line">stDecIn.pUserBuffer2 = <span class="literal">NULL</span>;</div><div class="line">stDecIn.nUserBufSize = <span class="number">0</span>;</div><div class="line">stDecIn.nUserBufStride =  <span class="number">0</span>;</div><div class="line">stDecIn.dwMask = <span class="number">0xFFFF</span>;</div><div class="line">stDecIn.dwReserved  = <span class="number">0x00</span>;</div><div class="line">stDecIn.dwParameter  = <span class="number">0x01</span>;</div><div class="line"></div><div class="line">ErrorInfo errinfo;</div><div class="line">ST_CUTLIST_PROCESS_INFO proinfo;</div><div class="line"><span class="keyword">while</span> ((rd = m_pSbCutList-&gt;GetOutputBuffer(&amp;stDecIn, stDecout)) &gt; <span class="number">0</span>)</div><div class="line">&#123;</div><div class="line">	rd = m_pSbCutList-&gt;GetCutlistProInfo(proinfo);</div><div class="line">	rd = m_pSbCutList-&gt;GerLastErrorCodeInfo(errinfo);</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (proinfo.nDecodedBufferNum == <span class="number">0</span>)</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">if</span> (stDecout.pDestBuffer == <span class="literal">NULL</span>)</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">if</span> (stDecIn.llTimelinePos == nFrameNum)</div><div class="line">		<span class="keyword">break</span>;</div><div class="line"></div><div class="line">	stDecIn.llTimelinePos++;</div><div class="line"></div><div class="line">	allsize += stDecout.nActualDataSize;</div><div class="line">	wavewrite.SetInputBuffer(stDecout.pDestBuffer, stDecout.nActualDataSize);</div><div class="line">	<span class="comment">//fwrite(stDecout.pDestBuffer, stDecout.nActualDataSize, 1, writewave);</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">wavewrite.StopWrite();</div><div class="line">fseek(writewave, <span class="number">40</span>, SEEK_SET);</div><div class="line">fwrite(&amp;allsize, <span class="number">1</span>, <span class="keyword">sizeof</span>(<span class="keyword">int</span>), writewave);</div><div class="line">allsize += <span class="number">36</span>;</div><div class="line">fseek(writewave, <span class="number">4</span>, SEEK_SET);</div><div class="line">fwrite(&amp;allsize, <span class="number">1</span>, <span class="keyword">sizeof</span>(<span class="keyword">int</span>), writewave);</div><div class="line">fclose(writewave);</div><div class="line"></div><div class="line"><span class="keyword">delete</span> meditype.pbFormat;</div><div class="line"><span class="comment">//delete pItemList;</span></div><div class="line"><span class="comment">////////////////////////////////////////////////////////////////////////////////////</span></div><div class="line"></div></pre></td></tr></table></figure><p></p>
 </h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2>]]></content>
@@ -785,6 +801,21 @@ typedef unsigned short      WORD;
     </entry>
     
     <entry>
+      <title><![CDATA[python 等问题解决(155)]]></title>
+      <url>https://xuecat.github.io/2016/01/14/155/</url>
+      <content type="html"><![CDATA[<p>python安装某些模块的时候，老是出错（当然错误是Unicode和ascii字符的问题）</p>
+<p><strong>1、安装模块字符错误</strong><br><br>在python的Lib\site-packages文件夹下新建一个sitecustomize.py，内容为：</p>
+<pre><code> # encoding=utf8  
+import sys  
+
+reload(sys)  
+sys.setdefaultencoding(&apos;utf8&apos;)
+</code></pre><p>此时重启python解释器，可以解决了。</p>
+<p><strong>pip的国内源</strong><br><br>这里，我只说下指令，其它百度吧。感觉这个华中科大的源最快；<br><br>pip install ** -i <a href="http://pypi.mirrors.ustc.edu.cn/simple" target="_blank" rel="external">http://pypi.mirrors.ustc.edu.cn/simple</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[调试技巧(154)]]></title>
       <url>https://xuecat.github.io/2016/01/14/154/</url>
       <content type="html"><![CDATA[<p>  自从在153文章的认识后，自己要好好熟悉下那个工具<br></p>
@@ -817,21 +848,6 @@ typedef unsigned short      WORD;
 <p>::OutputDebugString(_T(“debug information!”));</p>
 </blockquote>
 </blockquote>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[python 等问题解决(155)]]></title>
-      <url>https://xuecat.github.io/2016/01/14/155/</url>
-      <content type="html"><![CDATA[<p>python安装某些模块的时候，老是出错（当然错误是Unicode和ascii字符的问题）</p>
-<p><strong>1、安装模块字符错误</strong><br><br>在python的Lib\site-packages文件夹下新建一个sitecustomize.py，内容为：</p>
-<pre><code> # encoding=utf8  
-import sys  
-
-reload(sys)  
-sys.setdefaultencoding(&apos;utf8&apos;)
-</code></pre><p>此时重启python解释器，可以解决了。</p>
-<p><strong>pip的国内源</strong><br><br>这里，我只说下指令，其它百度吧。感觉这个华中科大的源最快；<br><br>pip install ** -i <a href="http://pypi.mirrors.ustc.edu.cn/simple" target="_blank" rel="external">http://pypi.mirrors.ustc.edu.cn/simple</a></p>
 ]]></content>
     </entry>
     
@@ -1004,6 +1020,15 @@ struct KeyHasher
     </entry>
     
     <entry>
+      <title><![CDATA[GOOGLE LOG学习(140)]]></title>
+      <url>https://xuecat.github.io/2015/11/03/140/</url>
+      <content type="html"><![CDATA[<figure class="highlight"><figcaption><span>今日空闲，却也看了下protocolbuffer的代码，发现一个google log模块很有意思，记录下来++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">DECLARE_STREAM_OPERATOR(char         , "%c" )</div><div class="line">DECLARE_STREAM_OPERATOR(int          , "%d" )</div><div class="line">DECLARE_STREAM_OPERATOR(uint         , "%u" )</div><div class="line">DECLARE_STREAM_OPERATOR(long         , "%ld")</div><div class="line">DECLARE_STREAM_OPERATOR(unsigned long, "%lu")</div><div class="line">DECLARE_STREAM_OPERATOR(double       , "%g" )</div><div class="line">common.cc 173</div><div class="line"></div><div class="line">#define GOOGLE_LOG(LEVEL)                                                 \有等级，警告，错误，严重等</div><div class="line">  ::google::protobuf::internal::LogFinisher() =                           \</div><div class="line">    ::google::protobuf::internal::LogMessage(                             \</div><div class="line">      ::google::protobuf::LOGLEVEL_##LEVEL, __FILE__, __LINE__)</div><div class="line">#define GOOGLE_LOG_IF(LEVEL, CONDITION) \</div><div class="line">  !(CONDITION) ? (void)0 : GOOGLE_LOG(LEVEL)</div><div class="line"></div><div class="line">#define GOOGLE_CHECK(EXPRESSION) \</div><div class="line">  GOOGLE_LOG_IF(FATAL, !(EXPRESSION)) &lt;&lt; "CHECK failed: " #EXPRESSION ": "</div><div class="line">//////////////////////////////////在下的示例代码///////////////////////////</div><div class="line">	struct dd</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">	dd(string a)&#123;</div><div class="line">		m_ = a;</div><div class="line">		cout &lt;&lt; a&lt;&lt;endl;</div><div class="line">	&#125;;~dd()&#123;</div><div class="line">		cout&lt;&lt; "is end:,,,,,,,,,,"&lt;&lt;endl;</div><div class="line">		cout &lt;&lt; m_&lt;&lt;endl&lt;&lt;d_&lt;&lt;endl;</div><div class="line">	&#125;;</div><div class="line">	dd&amp;	operator&lt;&lt; (string d)&#123;</div><div class="line">		d_ = d;</div><div class="line">		cout &lt;&lt;m_&lt;&lt;endl&lt;&lt; d&lt;&lt;endl;</div><div class="line">		return *this;</div><div class="line">	&#125;</div><div class="line">protected:</div><div class="line">	string m_;</div><div class="line">	string d_;</div><div class="line">private:</div><div class="line">&#125;;</div><div class="line">#define LEVEL_ERROR "error"</div><div class="line">#define ERROR</div><div class="line">#define HP(a) dd(LEVEL_##b)</div><div class="line">#define AH(a, b) a ? (void)0:dd(LEVEL_##b) //只是这里若再取一遍宏，便出错了；确实宏嵌套太多了。</div><div class="line">#define A(c) AH(c&gt;0, ERROR) &lt;&lt; "hehe"</div><div class="line"></div></pre></td></tr></table></figure>
+<p>如此log，在函数中使用，当然google封装了更多的东西，比如checklog呀。在构造上记录基本信息，operator上记录tips，析构里进行log文件写入。很好</p>
+<pre><code>#define DO(STATEMENT) if (STATEMENT) {} else return false   这个宏。。。差点忘了，这个宏也是非常优秀的
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[C++内存区域分配和段寄存器的理解（143）]]></title>
       <url>https://xuecat.github.io/2015/11/03/143/</url>
       <content type="html"><![CDATA[<p>  <em>些许没玩却也遗忘些了，有空就归纳下吧。</em></p>
@@ -1027,15 +1052,6 @@ struct KeyHasher
 <p><strong>预定义段</strong>：windows NT有9个段，一些程序当然不需要这么多，有的还有特殊段等，所以定义上，表示可用。</p>
 <p><strong>可执行代码段</strong>：.text<br><br><strong>数据段</strong><br>.bss程序未初始化数据，包括所有函数或源模块中声明为static的变量<br>.rdata段表示只读数据，比如字符串文字量、常量和调试目录信息。<br>.data其它变量，出现在栈上的自动变量，和全局变量。<br><strong>资源段</strong></p>
 ]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[GOOGLE LOG学习(140)]]></title>
-      <url>https://xuecat.github.io/2015/11/03/140/</url>
-      <content type="html"><![CDATA[<figure class="highlight"><figcaption><span>今日空闲，却也看了下protocolbuffer的代码，发现一个google log模块很有意思，记录下来++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">DECLARE_STREAM_OPERATOR(char         , "%c" )</div><div class="line">DECLARE_STREAM_OPERATOR(int          , "%d" )</div><div class="line">DECLARE_STREAM_OPERATOR(uint         , "%u" )</div><div class="line">DECLARE_STREAM_OPERATOR(long         , "%ld")</div><div class="line">DECLARE_STREAM_OPERATOR(unsigned long, "%lu")</div><div class="line">DECLARE_STREAM_OPERATOR(double       , "%g" )</div><div class="line">common.cc 173</div><div class="line"></div><div class="line">#define GOOGLE_LOG(LEVEL)                                                 \有等级，警告，错误，严重等</div><div class="line">  ::google::protobuf::internal::LogFinisher() =                           \</div><div class="line">    ::google::protobuf::internal::LogMessage(                             \</div><div class="line">      ::google::protobuf::LOGLEVEL_##LEVEL, __FILE__, __LINE__)</div><div class="line">#define GOOGLE_LOG_IF(LEVEL, CONDITION) \</div><div class="line">  !(CONDITION) ? (void)0 : GOOGLE_LOG(LEVEL)</div><div class="line"></div><div class="line">#define GOOGLE_CHECK(EXPRESSION) \</div><div class="line">  GOOGLE_LOG_IF(FATAL, !(EXPRESSION)) &lt;&lt; "CHECK failed: " #EXPRESSION ": "</div><div class="line">//////////////////////////////////在下的示例代码///////////////////////////</div><div class="line">	struct dd</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">	dd(string a)&#123;</div><div class="line">		m_ = a;</div><div class="line">		cout &lt;&lt; a&lt;&lt;endl;</div><div class="line">	&#125;;~dd()&#123;</div><div class="line">		cout&lt;&lt; "is end:,,,,,,,,,,"&lt;&lt;endl;</div><div class="line">		cout &lt;&lt; m_&lt;&lt;endl&lt;&lt;d_&lt;&lt;endl;</div><div class="line">	&#125;;</div><div class="line">	dd&amp;	operator&lt;&lt; (string d)&#123;</div><div class="line">		d_ = d;</div><div class="line">		cout &lt;&lt;m_&lt;&lt;endl&lt;&lt; d&lt;&lt;endl;</div><div class="line">		return *this;</div><div class="line">	&#125;</div><div class="line">protected:</div><div class="line">	string m_;</div><div class="line">	string d_;</div><div class="line">private:</div><div class="line">&#125;;</div><div class="line">#define LEVEL_ERROR "error"</div><div class="line">#define ERROR</div><div class="line">#define HP(a) dd(LEVEL_##b)</div><div class="line">#define AH(a, b) a ? (void)0:dd(LEVEL_##b) //只是这里若再取一遍宏，便出错了；确实宏嵌套太多了。</div><div class="line">#define A(c) AH(c&gt;0, ERROR) &lt;&lt; "hehe"</div><div class="line"></div></pre></td></tr></table></figure>
-<p>如此log，在函数中使用，当然google封装了更多的东西，比如checklog呀。在构造上记录基本信息，operator上记录tips，析构里进行log文件写入。很好</p>
-<pre><code>#define DO(STATEMENT) if (STATEMENT) {} else return false   这个宏。。。差点忘了，这个宏也是非常优秀的
-</code></pre>]]></content>
     </entry>
     
     <entry>
@@ -2057,15 +2073,9 @@ return count;
     </entry>
     
     <entry>
-      <title><![CDATA[字符内存越界(98)]]></title>
-      <url>https://xuecat.github.io/2015/01/01/98/</url>
-      <content type="html"><![CDATA[<blockquote>
-<p>第一个越界：     我用变长参数函数的时候<code>va_arg(t_args, char*)</code> 又把参数强制转换成int后发现，内存越界。</p>
-<blockquote>
-<p>分析原因：char<em>的内存界是char</em>指向的一个字节字符界。int<em>的内存界是int</em>指向的4个字节（32）字符界。    强制转换会根据类型偏移量进行数据转换，所以出现错误。</p>
-</blockquote>
-<p>第二个：我自己的失误，字符数组内存开辟小了（没有结尾的空字符），导致char*把后面的数据以前读了。</p>
-</blockquote>
+      <title><![CDATA[项目(142)]]></title>
+      <url>https://xuecat.github.io/2015/01/01/142/</url>
+      <content type="html"><![CDATA[<p> <a href="http://www.epweike.com/soft/task/page2.html" target="_blank" rel="external">http://www.epweike.com/soft/task/page2.html</a></p>
 ]]></content>
     </entry>
     
@@ -2083,9 +2093,15 @@ return count;
     </entry>
     
     <entry>
-      <title><![CDATA[项目(142)]]></title>
-      <url>https://xuecat.github.io/2015/01/01/142/</url>
-      <content type="html"><![CDATA[<p> <a href="http://www.epweike.com/soft/task/page2.html" target="_blank" rel="external">http://www.epweike.com/soft/task/page2.html</a></p>
+      <title><![CDATA[字符内存越界(98)]]></title>
+      <url>https://xuecat.github.io/2015/01/01/98/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>第一个越界：     我用变长参数函数的时候<code>va_arg(t_args, char*)</code> 又把参数强制转换成int后发现，内存越界。</p>
+<blockquote>
+<p>分析原因：char<em>的内存界是char</em>指向的一个字节字符界。int<em>的内存界是int</em>指向的4个字节（32）字符界。    强制转换会根据类型偏移量进行数据转换，所以出现错误。</p>
+</blockquote>
+<p>第二个：我自己的失误，字符数组内存开辟小了（没有结尾的空字符），导致char*把后面的数据以前读了。</p>
+</blockquote>
 ]]></content>
     </entry>
     
@@ -2360,17 +2376,6 @@ main() {}
     </entry>
     
     <entry>
-      <title><![CDATA[程序软件(77)]]></title>
-      <url>https://xuecat.github.io/2014/10/14/77/</url>
-      <content type="html"><![CDATA[<pre><code>//quicksilver mac下面的软件。
-//alfred mac下的软件
-//caffeine mac下的软件
-//eudic mac下的软件
-//Parallels Desktop mac下软件
-</code></pre>]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[王道]]></title>
       <url>https://xuecat.github.io/2014/10/14/79/</url>
       <content type="html"><![CDATA[<p><img src="/picture/f.jpg" alt=""></p>
@@ -2385,6 +2390,17 @@ main() {}
 <p>但是在Archer和Rider的质疑与嘲弄之下Saber怀疑了自己作为王的道路，兰斯洛斯对自己的仇恨，义子对自己的叛乱，国家的最终分崩离析使得Saber怀疑起自己的选择，变得迷茫起来（那时好萌啊…萌啊…萌）</p>
 <p><strong>其实王没有绝对正确的道路，绝对的正确本来就不存在于世上，真正应该做的是像Rider所说的那样（“如果我的决断以及我的臣子们导致了这样的结果，那么毁灭是必然的。我会哀悼，也会流泪，但我绝不后悔。”）</strong></p>
 ]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[程序软件(77)]]></title>
+      <url>https://xuecat.github.io/2014/10/14/77/</url>
+      <content type="html"><![CDATA[<pre><code>//quicksilver mac下面的软件。
+//alfred mac下的软件
+//caffeine mac下的软件
+//eudic mac下的软件
+//Parallels Desktop mac下软件
+</code></pre>]]></content>
     </entry>
     
     <entry>
@@ -2541,16 +2557,6 @@ while (line &gt;&gt; word) {
     </entry>
     
     <entry>
-      <title><![CDATA[static作用(73)]]></title>
-      <url>https://xuecat.github.io/2014/10/01/73/</url>
-      <content type="html"><![CDATA[<p>static作用（修饰函数、局部变量、全局变量）</p>
-<p>当我们同时编译多个文件时，所有未加static前缀的全局变量和函数都具有全局可见性</p>
-<p>如果加了static，就会对其它源文件隐藏。例如在a和msg的定义前加上static，main.c就看不到它们了。</p>
-<p>利用这一特性可以在不同的文件中定义同名函数和同名变量，而不必担心命名冲突。Static可以用作函数和变量的前缀，对于函数来讲，static的作用仅限于隐藏，而对于变量，static还有下面两个作用。</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[dulib里面的头文件包含(74)]]></title>
       <url>https://xuecat.github.io/2014/10/01/74/</url>
       <content type="html"><![CDATA[<p>他头文件用namespace包括。</p>
@@ -2559,6 +2565,16 @@ while (line &gt;&gt; word) {
 <p>stadx.h文件包含duilib.h文件</p>
 <p>所有的东西写在duilib.h文件里面</p>
 <p>亮点在cpp文件包括，然后包含。导致头文件不用包含。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[static作用(73)]]></title>
+      <url>https://xuecat.github.io/2014/10/01/73/</url>
+      <content type="html"><![CDATA[<p>static作用（修饰函数、局部变量、全局变量）</p>
+<p>当我们同时编译多个文件时，所有未加static前缀的全局变量和函数都具有全局可见性</p>
+<p>如果加了static，就会对其它源文件隐藏。例如在a和msg的定义前加上static，main.c就看不到它们了。</p>
+<p>利用这一特性可以在不同的文件中定义同名函数和同名变量，而不必担心命名冲突。Static可以用作函数和变量的前缀，对于函数来讲，static的作用仅限于隐藏，而对于变量，static还有下面两个作用。</p>
 ]]></content>
     </entry>
     
@@ -2581,15 +2597,6 @@ while (line &gt;&gt; word) {
     </entry>
     
     <entry>
-      <title><![CDATA[already defined in *.obj(70)]]></title>
-      <url>https://xuecat.github.io/2014/09/28/70/</url>
-      <content type="html"><![CDATA[<p>首先注意不能在.h头文件中定义全局变量，否则只要其他文件包括了该头文件，就会出现already defined in *.obj的错误。</p>
-<p>应该把全局变量放在.cpp文件中定义，然后在其他文件中用到该变量时用extern声明一下。</p>
-<p>即使在.h中定义全局变量，用extern可以避免。</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[自定义消息，多个函数响应：宏(71)]]></title>
       <url>https://xuecat.github.io/2014/09/28/71/</url>
       <content type="html"><![CDATA[<p>ON_COMMAND 以及 ON_COMMAND_RANGE 是用于处理菜单项或工具栏按钮的命令消息的<br>对于复选框这样的控件，请使用ON_CONTROL_RANGE</p>
@@ -2605,6 +2612,15 @@ while (line &gt;&gt; word) {
 <li><p>在函数内判断 uID，来确定用户单击了哪项复选框，并作相应处理。</p>
 </li>
 </ol>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[already defined in *.obj(70)]]></title>
+      <url>https://xuecat.github.io/2014/09/28/70/</url>
+      <content type="html"><![CDATA[<p>首先注意不能在.h头文件中定义全局变量，否则只要其他文件包括了该头文件，就会出现already defined in *.obj的错误。</p>
+<p>应该把全局变量放在.cpp文件中定义，然后在其他文件中用到该变量时用extern声明一下。</p>
+<p>即使在.h中定义全局变量，用extern可以避免。</p>
 ]]></content>
     </entry>
     
@@ -2673,20 +2689,29 @@ while (line &gt;&gt; word) {
     </entry>
     
     <entry>
-      <title><![CDATA[SIGPIPE信号(55)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/55/</url>
-      <content type="html"><![CDATA[<p>使用libevent编写websocket服务端时遇到了一个问题：</p>
-<p>浏览器与服务端建立连接后，若刷新或关闭浏览器窗口（未监听相应事件并处理），服务端无法得知连接断开，按理说，这种情况属于client异常终止，跟拔网线的情况类似。这种情况下，服务端不知情，仍保留此连接，仍按照既定逻辑向client写数据，写了两次后，服务端程序终止（多次测试，均是第2次后终止），不是崩溃，是异常终止，非常不解。</p>
-<p> ，得知是SIGPIPE信号导致程序终止。</p>
-<p>查了相关资料，大致明白：连接建立，若某一端关闭连接，而另一端仍然向它写数据，第一次写数据后会收到RST响应，此后再写数据，内核将向进程发出SIGPIPE信号，通知进程此连接已经断开。而SIGPIPE信号的默认处理是终止程序，导致上述问题的发生。</p>
-<p>为避免这种情况，可以选择忽略SIGPIPE信号，不执行任何动作。</p>
-<pre><code>#include &lt;signal.h&gt;
-//SIGPIPE ignore
-struct sigaction act;
-act.sa_handler = SIG_IGN;
-if (sigaction(SIGPIPE, &amp;act, NULL) == 0) {
-    LOG(&quot;SIGPIPE ignore&quot;);
-}
+      <title><![CDATA[string和wstring(62)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/62/</url>
+      <content type="html"><![CDATA[<p>今天用string来find一个中文符号，首先返回符号位置正确。然后符号为界，截取字符串出现问题；</p>
+<p>分析原因：中文符号在string中是占用两个字节的。而string对所有的字符串是一个字符一个字节的</p>
+<p>，所以按位取时，夺取了一个字节，导致数据获取失败。</p>
+<p>用wstring进行存取，可以完全避免。</p>
+<p><strong>学到：或许第三方库和一些协议对unicode字符集支持不是很好，导致数据传输要使用ANSI字符串。<br>但程序之间的通信为了保证中文字符，必须使用unicode。     最多在数据传输时做一次编码转换！</strong></p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[多层窗口(54)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/54/</url>
+      <content type="html"><![CDATA[<p>总于过期了，把上面的东西搬过来</p>
+<p> 我已经被这个多层窗口弄晕了，快死了。<br>首先，要使用透明窗口函数：</p>
+<pre><code>SetLayeredWindowAttributes， updataLayeredWindowAttributes，
+//就必须设置窗口属性为WS_EX_LAYERED。
+//然后，这两个函数完全可以混合使用，
+</code></pre><p>  updataLayeredWindowAttributes会拦截wm_paint消息，窗口上的所有东西，重绘，必需自己处理。前一个函数则不会这样。</p>
+<p>WS_EX_TRANSPARENT这个属性，会让窗体透明，真正的透明，不响应任何消息的透明。就只能自己去处理画图的那种。</p>
+<p>窗体透明控件不透明：</p>
+<pre><code>this-&gt;SetBackgroundColor(RGB(255, 255, 255), TRUE);
+SetLayeredWindowAttributes(RGB(255, 255, 255), 200, LWA_ALPHA | LWA_COLORKEY);
 </code></pre>]]></content>
     </entry>
     
@@ -2707,83 +2732,11 @@ cout &lt;&lt; data;
     </entry>
     
     <entry>
-      <title><![CDATA[++和++ 入栈顺序(65)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/65/</url>
-      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>直接上代码++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">minuus</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">return</span> a-b;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> cc = <span class="number">4</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; minuus(cc++, cc++) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	</div><div class="line">	<span class="keyword">while</span> (cc--)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"a"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
-<p>vc6编译环境：</p>
-<p>minuus（cc, cc++）；while(–cc) 输出：4,4,0 aaaa</p>
-<p>minuus（++cc, ++cc）；while(–cc) 输出：6,5,0 aaaaa</p>
-<p>minuus（cc++, ++cc）；while(–cc) 输出：5,5,0 aaaaa</p>
-<p><strong>分析：首先vc6对参数入栈默认是从右到左的，然后入栈参数必定存在赋值临时参数(意思就是先拷贝了数据值再进行操作，不然第一个示例中：cc++确实执行了，却没有传入值)。</strong></p>
-<p>vs2012编译环境：</p>
-<p>minuus（cc, cc++）；while(–cc) 输出：5 4 1 5(和想象中的一样)</p>
-<p>minuus（++cc, ++cc）；while(–cc) 输出：6 6 0 6(不同了)</p>
-<p>minuus（cc++, ++cc）；while(–cc) 输出：5 6 -1 6(不同了)</p>
-<p>minuus（cc++, cc++）；while(–cc) 输出：5 4 1 6(不同)</p>
-<p>minuus(cc, ++cc) :5 5 0 5</p>
-<p>minuus(++cc, cc++) 6 4 2 6</p>
-<p>minuus(++cc, cc) 5 5 0 5</p>
-<p><strong>分析：首先它会对++c进行预先处理， 所以cc会自加，玩了后它才开始参数从右到左进行入栈处理。<br>有cc++就处理。</strong></p>
-<p>相比vc6对数据的自加进行了修改，但是对++c的处理并不是很好。</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[内存对齐偏移量(56)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/56/</url>
-      <content type="html"><![CDATA[<p> 编译器对变量存储的一个特殊处理。为了提高CPU的存储速度，编译器对一些变量的起始地址做了“对齐”处理</p>
-<p>。在默认情况下，规定各成员变量存放的起始地址相对于结构的起始地址的偏移量必须为该变量的类型所占用的字节数的倍数。<br>类型</p>
-<p>对齐方式（变量存放的起始地址相对于结构的起始地址的偏移量）</p>
-<p>Char 偏移量必须为sizeof(char)即1的倍数</p>
-<p>int 偏移量必须为sizeof(int)即4的倍数</p>
-<p>float 偏移量必须为sizeof(float)即4的倍数</p>
-<p>double 偏移量必须为sizeof(double)即8的倍数</p>
-<p>Short 偏移量必须为sizeof(short)即2的倍数</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[string和wstring(62)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/62/</url>
-      <content type="html"><![CDATA[<p>今天用string来find一个中文符号，首先返回符号位置正确。然后符号为界，截取字符串出现问题；</p>
-<p>分析原因：中文符号在string中是占用两个字节的。而string对所有的字符串是一个字符一个字节的</p>
-<p>，所以按位取时，夺取了一个字节，导致数据获取失败。</p>
-<p>用wstring进行存取，可以完全避免。</p>
-<p><strong>学到：或许第三方库和一些协议对unicode字符集支持不是很好，导致数据传输要使用ANSI字符串。<br>但程序之间的通信为了保证中文字符，必须使用unicode。     最多在数据传输时做一次编码转换！</strong></p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[杂项]]></title>
-      <url>https://xuecat.github.io/2014/09/20/61/</url>
-      <content type="html"><![CDATA[<p>   变长参数的纠正，绑定第一参数时，直接赋值貌似不成功。要绑定临近的参数才成功。(好像它是临近取值的)</p>
-<p><strong>我擦，居然用错绘图dc。onpaintdc和cclientdc，前者只能在onpaint函数用才有效，如果传入或者其他函数调用是无效的。后者随意用。</strong></p>
-<p>  <strong> 发现当设计后，封装的类有三个完成时必须要调试跑一边，不然后期有些许不合理的地方不能及时修改。</strong></p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[指针内存长度和大小(64)]]></title>
       <url>https://xuecat.github.io/2014/09/20/64/</url>
       <content type="html"><![CDATA[<p> 今天字符处理遇见这个问题：我new了一块内存，然后sizeof()；strlen()；都正常（一个返回4，一个返回分配大小）</p>
 <p>之后我用了ZeroMemory来分配，发现有异议了。<br>sizeof(); strlen(); 一个返回4，一个返回0；     原来用了这个函数会置空内存。</p>
 ]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[多层窗口(54)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/54/</url>
-      <content type="html"><![CDATA[<p>总于过期了，把上面的东西搬过来</p>
-<p> 我已经被这个多层窗口弄晕了，快死了。<br>首先，要使用透明窗口函数：</p>
-<pre><code>SetLayeredWindowAttributes， updataLayeredWindowAttributes，
-//就必须设置窗口属性为WS_EX_LAYERED。
-//然后，这两个函数完全可以混合使用，
-</code></pre><p>  updataLayeredWindowAttributes会拦截wm_paint消息，窗口上的所有东西，重绘，必需自己处理。前一个函数则不会这样。</p>
-<p>WS_EX_TRANSPARENT这个属性，会让窗体透明，真正的透明，不响应任何消息的透明。就只能自己去处理画图的那种。</p>
-<p>窗体透明控件不透明：</p>
-<pre><code>this-&gt;SetBackgroundColor(RGB(255, 255, 255), TRUE);
-SetLayeredWindowAttributes(RGB(255, 255, 255), 200, LWA_ALPHA | LWA_COLORKEY);
-</code></pre>]]></content>
     </entry>
     
     <entry>
@@ -2809,10 +2762,11 @@ static_cast&lt;window&amp;&gt;(*this).onResize();//这个也是
     </entry>
     
     <entry>
-      <title><![CDATA[设计流程(57)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/57/</url>
-      <content type="html"><![CDATA[<p> 想出的设计流程：</p>
-<p> 先画出程序运行功能的基本流程-&gt;确定类的个数和作用-&gt;设计模式-&gt;按照先想好的类功能模块把设计模式搭建出来-&gt;最后按照功能流程图再写一遍。</p>
+      <title><![CDATA[杂项]]></title>
+      <url>https://xuecat.github.io/2014/09/20/61/</url>
+      <content type="html"><![CDATA[<p>   变长参数的纠正，绑定第一参数时，直接赋值貌似不成功。要绑定临近的参数才成功。(好像它是临近取值的)</p>
+<p><strong>我擦，居然用错绘图dc。onpaintdc和cclientdc，前者只能在onpaint函数用才有效，如果传入或者其他函数调用是无效的。后者随意用。</strong></p>
+<p>  <strong> 发现当设计后，封装的类有三个完成时必须要调试跑一边，不然后期有些许不合理的地方不能及时修改。</strong></p>
 ]]></content>
     </entry>
     
@@ -2849,6 +2803,68 @@ static_cast&lt;window&amp;&gt;(*this).onResize();//这个也是
     </entry>
     
     <entry>
+      <title><![CDATA[内存对齐偏移量(56)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/56/</url>
+      <content type="html"><![CDATA[<p> 编译器对变量存储的一个特殊处理。为了提高CPU的存储速度，编译器对一些变量的起始地址做了“对齐”处理</p>
+<p>。在默认情况下，规定各成员变量存放的起始地址相对于结构的起始地址的偏移量必须为该变量的类型所占用的字节数的倍数。<br>类型</p>
+<p>对齐方式（变量存放的起始地址相对于结构的起始地址的偏移量）</p>
+<p>Char 偏移量必须为sizeof(char)即1的倍数</p>
+<p>int 偏移量必须为sizeof(int)即4的倍数</p>
+<p>float 偏移量必须为sizeof(float)即4的倍数</p>
+<p>double 偏移量必须为sizeof(double)即8的倍数</p>
+<p>Short 偏移量必须为sizeof(short)即2的倍数</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[SIGPIPE信号(55)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/55/</url>
+      <content type="html"><![CDATA[<p>使用libevent编写websocket服务端时遇到了一个问题：</p>
+<p>浏览器与服务端建立连接后，若刷新或关闭浏览器窗口（未监听相应事件并处理），服务端无法得知连接断开，按理说，这种情况属于client异常终止，跟拔网线的情况类似。这种情况下，服务端不知情，仍保留此连接，仍按照既定逻辑向client写数据，写了两次后，服务端程序终止（多次测试，均是第2次后终止），不是崩溃，是异常终止，非常不解。</p>
+<p> ，得知是SIGPIPE信号导致程序终止。</p>
+<p>查了相关资料，大致明白：连接建立，若某一端关闭连接，而另一端仍然向它写数据，第一次写数据后会收到RST响应，此后再写数据，内核将向进程发出SIGPIPE信号，通知进程此连接已经断开。而SIGPIPE信号的默认处理是终止程序，导致上述问题的发生。</p>
+<p>为避免这种情况，可以选择忽略SIGPIPE信号，不执行任何动作。</p>
+<pre><code>#include &lt;signal.h&gt;
+//SIGPIPE ignore
+struct sigaction act;
+act.sa_handler = SIG_IGN;
+if (sigaction(SIGPIPE, &amp;act, NULL) == 0) {
+    LOG(&quot;SIGPIPE ignore&quot;);
+}
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[++和++ 入栈顺序(65)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/65/</url>
+      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>直接上代码++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">minuus</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">return</span> a-b;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> cc = <span class="number">4</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; minuus(cc++, cc++) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	</div><div class="line">	<span class="keyword">while</span> (cc--)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"a"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
+<p>vc6编译环境：</p>
+<p>minuus（cc, cc++）；while(–cc) 输出：4,4,0 aaaa</p>
+<p>minuus（++cc, ++cc）；while(–cc) 输出：6,5,0 aaaaa</p>
+<p>minuus（cc++, ++cc）；while(–cc) 输出：5,5,0 aaaaa</p>
+<p><strong>分析：首先vc6对参数入栈默认是从右到左的，然后入栈参数必定存在赋值临时参数(意思就是先拷贝了数据值再进行操作，不然第一个示例中：cc++确实执行了，却没有传入值)。</strong></p>
+<p>vs2012编译环境：</p>
+<p>minuus（cc, cc++）；while(–cc) 输出：5 4 1 5(和想象中的一样)</p>
+<p>minuus（++cc, ++cc）；while(–cc) 输出：6 6 0 6(不同了)</p>
+<p>minuus（cc++, ++cc）；while(–cc) 输出：5 6 -1 6(不同了)</p>
+<p>minuus（cc++, cc++）；while(–cc) 输出：5 4 1 6(不同)</p>
+<p>minuus(cc, ++cc) :5 5 0 5</p>
+<p>minuus(++cc, cc++) 6 4 2 6</p>
+<p>minuus(++cc, cc) 5 5 0 5</p>
+<p><strong>分析：首先它会对++c进行预先处理， 所以cc会自加，玩了后它才开始参数从右到左进行入栈处理。<br>有cc++就处理。</strong></p>
+<p>相比vc6对数据的自加进行了修改，但是对++c的处理并不是很好。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[设计流程(57)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/57/</url>
+      <content type="html"><![CDATA[<p> 想出的设计流程：</p>
+<p> 先画出程序运行功能的基本流程-&gt;确定类的个数和作用-&gt;设计模式-&gt;按照先想好的类功能模块把设计模式搭建出来-&gt;最后按照功能流程图再写一遍。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[duilib 动态tab(53)]]></title>
       <url>https://xuecat.github.io/2014/09/19/53/</url>
       <content type="html"><![CDATA[<p>尼玛的，差点哭了。弄了这么久，调试都没法。</p>
@@ -2868,18 +2884,18 @@ static_cast&lt;window&amp;&gt;(*this).onResize();//这个也是
     </entry>
     
     <entry>
+      <title><![CDATA[模板和虚函数(50)]]></title>
+      <url>https://xuecat.github.io/2014/09/17/50/</url>
+      <content type="html"><![CDATA[<p><strong>模板编程不允许虚函数的出现。为了使用基类函数，我们只能用转交函数</strong><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> SquareMatrixBase &#123;</div><div class="line"><span class="keyword">protected</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">invert</span><span class="params">(<span class="built_in">std</span>::<span class="keyword">size_t</span> matrixsize)</span></span>;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="built_in">std</span>::<span class="keyword">size_t</span> n&gt;</div><div class="line"><span class="keyword">class</span> SquareMatrix : <span class="keyword">private</span> SquareMatrixBase&lt;T&gt; &#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">using</span> SquareMatrixBase&lt;T&gt;::invert;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">invert</span><span class="params">()</span> </span>&#123;<span class="keyword">this</span>-&gt;invert(n);&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[勿忘初心(51)]]></title>
       <url>https://xuecat.github.io/2014/09/17/51/</url>
       <content type="html"><![CDATA[<p>  不忘初心，方得始终</p>
 <p>  这几天自己也有点想多了，因为本来就进入大三了，该考虑的也多了起来。<br>反而烦恼了自己。</p>
 <p>  写下日记，提醒自己，大三上的时间还是很充足的，不要被迷惑。做好自己！</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[模板和虚函数(50)]]></title>
-      <url>https://xuecat.github.io/2014/09/17/50/</url>
-      <content type="html"><![CDATA[<p><strong>模板编程不允许虚函数的出现。为了使用基类函数，我们只能用转交函数</strong><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> SquareMatrixBase &#123;</div><div class="line"><span class="keyword">protected</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">invert</span><span class="params">(<span class="built_in">std</span>::<span class="keyword">size_t</span> matrixsize)</span></span>;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="built_in">std</span>::<span class="keyword">size_t</span> n&gt;</div><div class="line"><span class="keyword">class</span> SquareMatrix : <span class="keyword">private</span> SquareMatrixBase&lt;T&gt; &#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">using</span> SquareMatrixBase&lt;T&gt;::invert;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">invert</span><span class="params">()</span> </span>&#123;<span class="keyword">this</span>-&gt;invert(n);&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 ]]></content>
     </entry>
     
@@ -2953,17 +2969,6 @@ class A : public B {virtual void f();}
     </entry>
     
     <entry>
-      <title><![CDATA[返回对象(46)]]></title>
-      <url>https://xuecat.github.io/2014/09/11/46/</url>
-      <content type="html"><![CDATA[<p>作者对返回对象觉得：</p>
-<pre><code>1、拒绝用new 指针来返回引用对象（栈空间返回就省略了）。销毁问题
-2、拒绝用静态，全局空间来返回。多次调用问题。
-
-作者觉得该返回一个新的对象，调用构造函数。（具体情况而定，当是上一个栈空间的时候，返回也是很好的）
-</code></pre>]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[pass by reference to const replace pass by value(45)]]></title>
       <url>https://xuecat.github.io/2014/09/11/45/</url>
       <content type="html"><![CDATA[<p>当用类去传递的时候遇见这么一个编译消耗。</p>
@@ -2980,9 +2985,14 @@ validateStudent(const Student&amp; s);一次不需要
     </entry>
     
     <entry>
-      <title><![CDATA[effectivec++ 设计接口正确使用(44)]]></title>
-      <url>https://xuecat.github.io/2014/09/10/44/</url>
-      <content type="html"><![CDATA[<figure class="highlight"><figcaption><span>看代码:++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class Date &#123;</div><div class="line">public:</div><div class="line">	Date(int moth, int day, int year);</div><div class="line">&#125;</div><div class="line">//存在的问题，由于都是int，调用会出现顺序错误。</div><div class="line">修改</div><div class="line">struct Day &#123;explicit Day(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line">struct Month &#123;explicit Month(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line">struct Year &#123;explicit Year(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line"></div><div class="line">class Date &#123;</div><div class="line">public:</div><div class="line">	Date(const Month&amp; m, const Day&amp; d, const Year&amp; y);</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+      <title><![CDATA[返回对象(46)]]></title>
+      <url>https://xuecat.github.io/2014/09/11/46/</url>
+      <content type="html"><![CDATA[<p>作者对返回对象觉得：</p>
+<pre><code>1、拒绝用new 指针来返回引用对象（栈空间返回就省略了）。销毁问题
+2、拒绝用静态，全局空间来返回。多次调用问题。
+
+作者觉得该返回一个新的对象，调用构造函数。（具体情况而定，当是上一个栈空间的时候，返回也是很好的）
+</code></pre>]]></content>
     </entry>
     
     <entry>
@@ -2994,6 +3004,12 @@ validateStudent(const Student&amp; s);一次不需要
 用delete p；会出现内存错误。
 所以对于数组指针，拒绝使用typedef（typdedef string ADD[4];） 避免销毁异常。
 </code></pre>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[effectivec++ 设计接口正确使用(44)]]></title>
+      <url>https://xuecat.github.io/2014/09/10/44/</url>
+      <content type="html"><![CDATA[<figure class="highlight"><figcaption><span>看代码:++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class Date &#123;</div><div class="line">public:</div><div class="line">	Date(int moth, int day, int year);</div><div class="line">&#125;</div><div class="line">//存在的问题，由于都是int，调用会出现顺序错误。</div><div class="line">修改</div><div class="line">struct Day &#123;explicit Day(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line">struct Month &#123;explicit Month(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line">struct Year &#123;explicit Year(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line"></div><div class="line">class Date &#123;</div><div class="line">public:</div><div class="line">	Date(const Month&amp; m, const Day&amp; d, const Year&amp; y);</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
     </entry>
     
     <entry>
@@ -3038,6 +3054,15 @@ long double f; //12字节
     </entry>
     
     <entry>
+      <title><![CDATA[非成员函数(38)]]></title>
+      <url>https://xuecat.github.io/2014/09/05/38/</url>
+      <content type="html"><![CDATA[<p>more effective c++作者在封装全局函数时，对当前有效的所有全局函数都使用了“匿名空间”</p>
+<p>函数的定义和声明都要在匿名空间才能被识别。</p>
+<p>多个namespace，是没问题的，会在一个匿名空间。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[more effective c++根据类型决定虚化(40)]]></title>
       <url>https://xuecat.github.io/2014/09/05/40/</url>
       <content type="html"><![CDATA[<p>第31条了，这一跳一下就解决了我最近的疑惑！</p>
@@ -3050,15 +3075,6 @@ long double f; //12字节
 <p>作者对函数指针的使用，对c++的rtti技术体现的</p>
 <p>最后要提下的是，作者在后面添加了一个注册函数指针的接口。我感觉他写的并不是很好。</p>
 <p>如果是我的话，我重写一个类让他继承这些类，重写initializeCollisionMap函数不就好了吗？</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[非成员函数(38)]]></title>
-      <url>https://xuecat.github.io/2014/09/05/38/</url>
-      <content type="html"><![CDATA[<p>more effective c++作者在封装全局函数时，对当前有效的所有全局函数都使用了“匿名空间”</p>
-<p>函数的定义和声明都要在匿名空间才能被识别。</p>
-<p>多个namespace，是没问题的，会在一个匿名空间。</p>
 ]]></content>
     </entry>
     
@@ -3099,18 +3115,27 @@ long double f; //12字节
     </entry>
     
     <entry>
-      <title><![CDATA[more effective c++智能指针继承传递(35)]]></title>
-      <url>https://xuecat.github.io/2014/09/02/35/</url>
-      <content type="html"><![CDATA[<figure class="highlight"><figcaption><span>先看示例：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">class MusicProduct;</div><div class="line">class Cassette : public MusicProduct;</div><div class="line">class CD : public MusicProduct;</div><div class="line"></div><div class="line">void DisplayAndPlay(const SmartPtr&lt;MusicProduct&gt;&amp; pmp, int times)</div><div class="line">SmartPtr&lt;Cassette&gt; f(new );</div><div class="line">SmartPtr&lt;CD&gt; fd(new );</div><div class="line">DisplayAndPlay(f, 10)</div><div class="line">DisplayAndPlay(fd, 10);</div><div class="line">这样是无法通过的，</div><div class="line">解决方法是使用智能隐式转换。为SmartPtr添加转换函数</div><div class="line"></div><div class="line">templatee&lt;class newType&gt;</div><div class="line">operator SmartPtr&lt;newType&gt;()</div><div class="line">&#123;</div><div class="line">   	  return SmartPtr&lt;newType&gt;(pointee);</div><div class="line">&#125;</div><div class="line"></div><div class="line">分析：编译器总是会企图找到一种方式使成功。</div><div class="line">所以函数赋值时，它就会解析为：</div><div class="line"></div><div class="line">SmartPtr&lt;Cassette&gt;::operator SmartPtr&lt;MusicProduct&gt; () &#123;</div><div class="line">   	    return Smart&lt;MusicProduct&gt;(pointee);</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[常量区进阶(34)]]></title>
       <url>https://xuecat.github.io/2014/09/02/34/</url>
       <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">char</span> *<span class="title">strA</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">   	<span class="keyword">char</span> str[]=<span class="string">"hello world"</span>;</div><div class="line">   	<span class="keyword">return</span> str;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">char</span> *<span class="title">strA</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">   	<span class="keyword">char</span> *str=<span class="string">"hello world"</span>;</div><div class="line">   	<span class="keyword">return</span> str;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>首先，指针只有四个字节，无法保持数据，所以定义后会在常量区开辟空间赋值。<br>所以return str返回的是常量区空间（在程序结束后才会被释放）</p>
 <p>这也解释了第一个为什么返回乱码了。</p>
 <figure class="highlight c"><figcaption><span>然后继续再来看这一句：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span>* <span class="title">strr</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> a = <span class="number">3</span>;</div><div class="line">	<span class="keyword">int</span> *d = &amp;a;</div><div class="line">	<span class="keyword">return</span> d;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></div><div class="line">&#123; </div><div class="line">	<span class="keyword">int</span>* d =  strr();</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; *d &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">int</span>* q1 = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">1</span>);</div><div class="line">	<span class="keyword">int</span>* q2 = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">2</span>);</div><div class="line">	<span class="keyword">int</span>* q3 = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">3</span>);</div><div class="line">	<span class="keyword">int</span>* q4 = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">4</span>);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; *d;</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[more effective c++智能指针继承传递(35)]]></title>
+      <url>https://xuecat.github.io/2014/09/02/35/</url>
+      <content type="html"><![CDATA[<figure class="highlight"><figcaption><span>先看示例：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">class MusicProduct;</div><div class="line">class Cassette : public MusicProduct;</div><div class="line">class CD : public MusicProduct;</div><div class="line"></div><div class="line">void DisplayAndPlay(const SmartPtr&lt;MusicProduct&gt;&amp; pmp, int times)</div><div class="line">SmartPtr&lt;Cassette&gt; f(new );</div><div class="line">SmartPtr&lt;CD&gt; fd(new );</div><div class="line">DisplayAndPlay(f, 10)</div><div class="line">DisplayAndPlay(fd, 10);</div><div class="line">这样是无法通过的，</div><div class="line">解决方法是使用智能隐式转换。为SmartPtr添加转换函数</div><div class="line"></div><div class="line">templatee&lt;class newType&gt;</div><div class="line">operator SmartPtr&lt;newType&gt;()</div><div class="line">&#123;</div><div class="line">   	  return SmartPtr&lt;newType&gt;(pointee);</div><div class="line">&#125;</div><div class="line"></div><div class="line">分析：编译器总是会企图找到一种方式使成功。</div><div class="line">所以函数赋值时，它就会解析为：</div><div class="line"></div><div class="line">SmartPtr&lt;Cassette&gt;::operator SmartPtr&lt;MusicProduct&gt; () &#123;</div><div class="line">   	    return Smart&lt;MusicProduct&gt;(pointee);</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[libcurl源码学习(37)]]></title>
+      <url>https://xuecat.github.io/2014/09/01/37/</url>
+      <content type="html"><![CDATA[<p>libcurl：预编译头文件，就是放置工具的地方。<br>其它文件要使用工具直接#define一下就好了。</p>
+<p>把va_list当值传入。</p>
+<p>回调函数的使用typedf  获取函数指针。指针的指针，执行就好了。</p>
+]]></content>
     </entry>
     
     <entry>
@@ -3132,21 +3157,6 @@ If (ptn)
 <pre><code>operator T*() {return pointee;}
 </code></pre><p>但是智能指针的隐式转换有臭虫漏洞！<br>注意，详细看172.<br>最好去掉隐式转换。自己封装函数来获取。</p>
 ]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[libcurl源码学习(37)]]></title>
-      <url>https://xuecat.github.io/2014/09/01/37/</url>
-      <content type="html"><![CDATA[<p>libcurl：预编译头文件，就是放置工具的地方。<br>其它文件要使用工具直接#define一下就好了。</p>
-<p>把va_list当值传入。</p>
-<p>回调函数的使用typedf  获取函数指针。指针的指针，执行就好了。</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[more effective c++智能指针(28)]]></title>
-      <url>https://xuecat.github.io/2014/08/29/29/</url>
-      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>智能指针了：构造、赋值、析构:++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">class</span> <span class="built_in">auto_ptr</span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="built_in">auto_ptr</span>(T* ptr = <span class="number">0</span>) : pointee(ptr) &#123;&#125;</div><div class="line">	<span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs); <span class="comment">//复制</span></div><div class="line">	<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; operate= (<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs);</div><div class="line">	~<span class="built_in">auto_ptr</span>() &#123;<span class="keyword">delete</span> pointee;&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	T* pointee;</div><div class="line">	<span class="comment">/* data */</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//可以看出，使用时用f</span></div><div class="line"><span class="comment">//auto_ptr&lt;TreeNode&gt; ptnq(new TreeNode);便可以了。</span></div><div class="line"><span class="comment">///</span></div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;T&gt;:::<span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs)</div><div class="line">&#123;</div><div class="line">	pointee = rhs.pointee;</div><div class="line">	rhs.pointee = <span class="number">0</span>;<span class="comment">//因为实现的是auto，被复制后拒绝前一个变量访问</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;T&gt;&amp; <span class="built_in">auto_ptr</span>&lt;T&gt;::operate= (<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span> (<span class="keyword">this</span> == &amp;rhs)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> *<span class="keyword">this</span>; <span class="comment">//这个赋值函数处理的很好，以后赋值函数添加上</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">delete</span> pointee;</div><div class="line">	。。。。</div><div class="line">	。。。。</div><div class="line">	<span class="keyword">return</span> *<span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure> ]]></content>
     </entry>
     
     <entry>
@@ -3185,6 +3195,12 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
 
 信号量：不说了，经常用。
 </code></pre>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[more effective c++智能指针(28)]]></title>
+      <url>https://xuecat.github.io/2014/08/29/29/</url>
+      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>智能指针了：构造、赋值、析构:++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">class</span> <span class="built_in">auto_ptr</span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="built_in">auto_ptr</span>(T* ptr = <span class="number">0</span>) : pointee(ptr) &#123;&#125;</div><div class="line">	<span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs); <span class="comment">//复制</span></div><div class="line">	<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; operate= (<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs);</div><div class="line">	~<span class="built_in">auto_ptr</span>() &#123;<span class="keyword">delete</span> pointee;&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	T* pointee;</div><div class="line">	<span class="comment">/* data */</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//可以看出，使用时用f</span></div><div class="line"><span class="comment">//auto_ptr&lt;TreeNode&gt; ptnq(new TreeNode);便可以了。</span></div><div class="line"><span class="comment">///</span></div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;T&gt;:::<span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs)</div><div class="line">&#123;</div><div class="line">	pointee = rhs.pointee;</div><div class="line">	rhs.pointee = <span class="number">0</span>;<span class="comment">//因为实现的是auto，被复制后拒绝前一个变量访问</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;T&gt;&amp; <span class="built_in">auto_ptr</span>&lt;T&gt;::operate= (<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span> (<span class="keyword">this</span> == &amp;rhs)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> *<span class="keyword">this</span>; <span class="comment">//这个赋值函数处理的很好，以后赋值函数添加上</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">delete</span> pointee;</div><div class="line">	。。。。</div><div class="line">	。。。。</div><div class="line">	<span class="keyword">return</span> *<span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure> ]]></content>
     </entry>
     
     <entry>
@@ -3234,15 +3250,6 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
     </entry>
     
     <entry>
-      <title><![CDATA[窗口风格（22）]]></title>
-      <url>https://xuecat.github.io/2014/08/26/22/</url>
-      <content type="html"><![CDATA[<p>首先，对WS_EX_LAYERED  /WS_EX_TRANSPARENT(这个前面讲过)<br>对子窗口无效。</p>
-<p>如不设置WS_CHILD就从屏幕坐标开始计算。<br>只要是子窗口就不能设置WS_POPUP</p>
-<p>所以WS_POPUP窗口都具有CLIPDRENW属性（记得貌似还有vscroll似的）。</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[more effective c++对象产生于head（23）]]></title>
       <url>https://xuecat.github.io/2014/08/26/23/</url>
       <content type="html"><![CDATA[<p>作者安排了一个基类和派生类的调用方式</p>
@@ -3251,6 +3258,15 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
 </code></pre><p>2、基类析构函数他说要限制为protected，我不懂。<br>我想应该是让外部调用必须使用destroy来销毁对象吧！</p>
  <figure class="highlight c"><figcaption><span>来看下调用和派生++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> UPNumber </div><div class="line">	&#123;</div><div class="line"> <span class="keyword">public</span>:</div><div class="line"> 	UPNumber(arguments);</div><div class="line"> <span class="keyword">protected</span>:</div><div class="line"> 	~UPNumber();</div><div class="line"> </div><div class="line"> 	<span class="comment">/* data */</span></div><div class="line"> &#125;;</div><div class="line"></div><div class="line"> <span class="keyword">class</span> Asset</div><div class="line"> &#123;</div><div class="line"> <span class="keyword">public</span>:</div><div class="line"> 	Asset(arguments);</div><div class="line"> 	~Asset();</div><div class="line"></div><div class="line"> <span class="keyword">private</span>:</div><div class="line"> 	UPNumber* value;</div><div class="line"> </div><div class="line"> 	<span class="comment">/* data */</span></div><div class="line"> &#125;;</div><div class="line"></div><div class="line"> Asset::Asset(arguments)</div><div class="line"> 	: value(<span class="keyword">new</span> UPNumber(arguments)) &#123;</div><div class="line"> 		...</div><div class="line"> 	&#125;</div><div class="line"> Asset::~Asset()</div><div class="line"> &#123;</div><div class="line"> 	value-&gt;destroy();</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
 <p>派生类产生基类数据于头，设置基类数据对象来调用函数。<br>析构使用基类自释放性！</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[窗口风格（22）]]></title>
+      <url>https://xuecat.github.io/2014/08/26/22/</url>
+      <content type="html"><![CDATA[<p>首先，对WS_EX_LAYERED  /WS_EX_TRANSPARENT(这个前面讲过)<br>对子窗口无效。</p>
+<p>如不设置WS_CHILD就从屏幕坐标开始计算。<br>只要是子窗口就不能设置WS_POPUP</p>
+<p>所以WS_POPUP窗口都具有CLIPDRENW属性（记得貌似还有vscroll似的）。</p>
 ]]></content>
     </entry>
     

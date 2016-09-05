@@ -184,6 +184,8 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
             首页
           </a>
         </li>
@@ -191,6 +193,8 @@
         
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
             
             分类
           </a>
@@ -200,6 +204,8 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
             标签
           </a>
         </li>
@@ -208,6 +214,8 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
             归档
           </a>
         </li>
@@ -215,6 +223,8 @@
         
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
             关于
           </a>
@@ -277,8 +287,8 @@
             
               
                 
-                <a class="post-title-link" href="/2014/09/11/45/" itemprop="url">
-                  pass by reference to const replace pass by value(45)
+                <a class="post-title-link" href="/2014/09/11/46/" itemprop="url">
+                  返回对象(46)
                 </a>
               
             
@@ -338,131 +348,16 @@
       
         
           
-          当用类去传递的时候遇见这么一个编译消耗。
-Class Person {std::string str1, std::string str2;};
-Class Student : public Person {std::string str1, std::string str2;};
+          作者对返回对象觉得：
+1、拒绝用new 指针来返回引用对象（栈空间返回就省略了）。销毁问题
+2、拒绝用静态，全局空间来返回。多次调用问题。
 
-//函数 va
-          ...
+作者觉得该返回一个新的对象，调用构造函数。（具体情况而定，当是上一个栈空间的时候，返回也是很好的）
+
+          
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/11/45/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/10/44/" itemprop="url">
-                  effectivec++ 设计接口正确使用(44)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-10T03:31:58+08:00" content="2014-09-10">
-              2014-09-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          看代码:++1234567891011121314class Date &#123;public:	Date(int moth, int day, int year);&#125;//存在的问题，由于都是int，调用会出现顺序错误。修改struct Day &#123;explicit Day(in
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/10/44/#more" rel="contents">
+            <a class="btn" href="/2014/09/11/46/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -584,6 +479,122 @@ std::string* p = new std::string[100];
 
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/09/10/43/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/09/10/44/" itemprop="url">
+                  effectivec++ 设计接口正确使用(44)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-09-10T03:31:58+08:00" content="2014-09-10">
+              2014-09-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          看代码:++1234567891011121314class Date &#123;public:	Date(int moth, int day, int year);&#125;//存在的问题，由于都是int，调用会出现顺序错误。修改struct Day &#123;explicit Day(in
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/10/44/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -988,6 +999,125 @@ a=2=(00000010);  ~a=(11111101)=-3
             
               
                 
+                <a class="post-title-link" href="/2014/09/05/38/" itemprop="url">
+                  非成员函数(38)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-09-05T03:31:58+08:00" content="2014-09-05">
+              2014-09-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          more effective c++作者在封装全局函数时，对当前有效的所有全局函数都使用了“匿名空间”
+函数的定义和声明都要在匿名空间才能被识别。
+多个namespace，是没问题的，会在一个匿名空间。
+
+          
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/05/38/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2014/09/05/40/" itemprop="url">
                   more effective c++根据类型决定虚化(40)
                 </a>
@@ -1059,125 +1189,6 @@ a=2=(00000010);  ~a=(11111101)=-3
 
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/09/05/40/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/05/38/" itemprop="url">
-                  非成员函数(38)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-05T03:31:58+08:00" content="2014-09-05">
-              2014-09-05
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          more effective c++作者在封装全局函数时，对当前有效的所有全局函数都使用了“匿名空间”
-函数的定义和声明都要在匿名空间才能被识别。
-多个namespace，是没问题的，会在一个匿名空间。
-
-          
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/05/38/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1894,4 +1905,8 @@ a=2=(00000010);  ~a=(11111101)=-3
   
 
 </body>
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
 </html>
