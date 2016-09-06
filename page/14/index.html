@@ -184,8 +184,6 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
-            
             首页
           </a>
         </li>
@@ -193,8 +191,6 @@
         
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
             
             分类
           </a>
@@ -204,8 +200,6 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
-            
             标签
           </a>
         </li>
@@ -214,8 +208,6 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
-            
             归档
           </a>
         </li>
@@ -223,8 +215,6 @@
         
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
             关于
           </a>
@@ -265,6 +255,126 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/09/11/45/" itemprop="url">
+                  pass by reference to const replace pass by value(45)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-09-11T03:31:58+08:00" content="2014-09-11">
+              2014-09-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          当用类去传递的时候遇见这么一个编译消耗。
+Class Person {std::string str1, std::string str2;};
+Class Student : public Person {std::string str1, std::string str2;};
+
+//函数 va
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/11/45/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -881,8 +991,8 @@ a=2=(00000010);  ~a=(11111101)=-3
             
               
                 
-                <a class="post-title-link" href="/2014/09/05/39/" itemprop="url">
-                  static_cast dynamic_cast再进一步
+                <a class="post-title-link" href="/2014/09/05/40/" itemprop="url">
+                  more effective c++根据类型决定虚化(40)
                 </a>
               
             
@@ -909,8 +1019,8 @@ a=2=(00000010);  ~a=(11111101)=-3
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
+                  <a href="/categories/书籍/" itemprop="url" rel="index">
+                    <span itemprop="name">书籍</span>
                   </a>
                 </span>
 
@@ -942,13 +1052,16 @@ a=2=(00000010);  ~a=(11111101)=-3
       
         
           
-          string a = typeid(dynamic_cast(this)).name();
-发现dynamic_cast确实能把父子类的类型做转换，但是对于虚函数，还是无法，应该是内存覆盖了就无法修改了。
-只有int selfprice = static_cast(*this).GetPrice()
+          第31条了，这一跳一下就解决了我最近的疑惑！
+先看游戏规则:
+1、有的类型，宇宙飞船、太空站、小行星、
+2、他们互相碰撞，任意两两进行碰撞。
+3、具有主被动性！且不同的主被动，不同的类型进行碰撞，产生的结果也不一样。
+分析，需要运行时动态识别，所包含的对象，所以设计c++RTTI计数。（过程代码不列
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/05/39/#more" rel="contents">
+            <a class="btn" href="/2014/09/05/40/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1118,8 +1231,8 @@ a=2=(00000010);  ~a=(11111101)=-3
             
               
                 
-                <a class="post-title-link" href="/2014/09/05/40/" itemprop="url">
-                  more effective c++根据类型决定虚化(40)
+                <a class="post-title-link" href="/2014/09/05/39/" itemprop="url">
+                  static_cast dynamic_cast再进一步
                 </a>
               
             
@@ -1146,8 +1259,8 @@ a=2=(00000010);  ~a=(11111101)=-3
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/书籍/" itemprop="url" rel="index">
-                    <span itemprop="name">书籍</span>
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
                   </a>
                 </span>
 
@@ -1179,16 +1292,13 @@ a=2=(00000010);  ~a=(11111101)=-3
       
         
           
-          第31条了，这一跳一下就解决了我最近的疑惑！
-先看游戏规则:
-1、有的类型，宇宙飞船、太空站、小行星、
-2、他们互相碰撞，任意两两进行碰撞。
-3、具有主被动性！且不同的主被动，不同的类型进行碰撞，产生的结果也不一样。
-分析，需要运行时动态识别，所包含的对象，所以设计c++RTTI计数。（过程代码不列
+          string a = typeid(dynamic_cast(this)).name();
+发现dynamic_cast确实能把父子类的类型做转换，但是对于虚函数，还是无法，应该是内存覆盖了就无法修改了。
+只有int selfprice = static_cast(*this).GetPrice()
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/05/40/#more" rel="contents">
+            <a class="btn" href="/2014/09/05/39/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1336,122 +1446,6 @@ a=2=(00000010);  ~a=(11111101)=-3
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/03/33/" itemprop="url">
-                  指针函数与函数指针(33)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-03T03:31:58+08:00" content="2014-09-03">
-              2014-09-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          先看一段代码：++123456789101112131415161718192021	typedef int(*outhead)(int a);		int a(int d) &#123;		cout &lt;&lt; "this is A" &lt;&lt; endl;		cout &lt;&lt;
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/03/33/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1497,7 +1491,7 @@ a=2=(00000010);  ~a=(11111101)=-3
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">172</span>
+              <span class="site-state-item-count">173</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1505,7 +1499,7 @@ a=2=(00000010);  ~a=(11111101)=-3
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1907,6 +1901,4 @@ a=2=(00000010);  ~a=(11111101)=-3
 </body>
 <!-- 背景动画 -->
 <script type="text/javascript" src="/js/src/particle.js"></script>
-<!-- 页面点击小红心 -->
-<script type="text/javascript" src="/js/src/love.js"></script>
 </html>
