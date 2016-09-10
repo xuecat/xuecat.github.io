@@ -70,7 +70,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="c函数,c++,stl," />
+  <meta name="keywords" content="c++,c函数,stl," />
 
 
 
@@ -176,7 +176,7 @@ find_end
 
 
 copy_bac">
-<meta property="og:updated_time" content="2016-08-30T15:52:26.531Z">
+<meta property="og:updated_time" content="2016-09-08T15:10:10.199Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="STL算法函数(175)">
 <meta name="twitter:description" content="算法记录算法
@@ -306,6 +306,8 @@ copy_bac">
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
             首页
           </a>
         </li>
@@ -313,6 +315,8 @@ copy_bac">
         
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
             
             分类
           </a>
@@ -322,6 +326,8 @@ copy_bac">
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
             标签
           </a>
         </li>
@@ -330,6 +336,8 @@ copy_bac">
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
             归档
           </a>
         </li>
@@ -337,6 +345,8 @@ copy_bac">
         
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
             关于
           </a>
@@ -631,30 +641,170 @@ copy_bac">
 <td style="text-align:center"><a href="#unique">unique</a></td>
 <td style="text-align:center">将重复的元素折叠缩编，使成唯一</td>
 </tr>
+<tr>
+<td><a href="#rotate">rotate</a></td>
+<td style="text-align:center">从middle俩端分开，进行交换</td>
+<td style="text-align:center"><a href="#rotate_copy">rotate_copy</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><a href="#search">search</a></td>
+<td style="text-align:center">从序列一中寻找序列二首次出现点</td>
+<td style="text-align:center"><a href="#search_n">search_n</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><a href="#swap_ranges">swap_ranges</a></td>
+<td style="text-align:center">区间互换</td>
+<td style="text-align:center"></td>
+</tr>
 </tbody>
 </table>
-<h5 id="xfunctional文件里面实现了大多数的一般算法结构"><a href="#xfunctional文件里面实现了大多数的一般算法结构" class="headerlink" title="xfunctional文件里面实现了大多数的一般算法结构"></a>xfunctional文件里面实现了大多数的一般算法结构</h5><p></p><h2 id="accumulate"> accumulate <h2><p></p>
+<h2 id="xfunctional文件里面实现了大多数的一般算法结构"><a href="#xfunctional文件里面实现了大多数的一般算法结构" class="headerlink" title="xfunctional文件里面实现了大多数的一般算法结构"></a>xfunctional文件里面实现了大多数的一般算法结构</h2><hr>
+<p></p><h2 id="accumulate"> accumulate <h2><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">std</span>::accumulate(iv.begin(), iv.end(), da, plus&lt;<span class="keyword">int</span>&gt;()) == <span class="built_in">std</span>::accumulate(iv.begin(), iv.end(), da);</div><div class="line"><span class="keyword">return</span>值为da + <span class="number">1</span> + <span class="number">2</span> + <span class="number">3</span> + <span class="number">4</span> + <span class="number">5</span>;</div><div class="line"><span class="built_in">std</span>::accumulate(iv.begin(), iv.end(), da, minus&lt;<span class="keyword">int</span>&gt;());</div><div class="line"><span class="keyword">return</span>值为da - <span class="number">1</span> - <span class="number">2</span> - <span class="number">3</span> - <span class="number">4</span> - <span class="number">5</span>;&lt;br/&gt;&lt;</div><div class="line"><span class="comment">//把da作为第一个左值，一个一个获取右值。运算后再返回为下一个左值</span></div><div class="line"></div></pre></td></tr></table></figure><p></p>
+<hr>
+<p></p><h2 id="equal"> equal <h2><p></p>
 <blockquote>
-<p>std::accumulate(iv.begin(), iv.end(), da, plus<int>()) == std::accumulate(iv.begin(), iv.end(), da);<br><br>return值为da + 1 + 2 + 3 + 4 + 5;<br><br><br>std::accumulate(iv.begin(), iv.end(), da, minus<int>());<br><br>return值为da - 1 - 2 - 3 - 4 - 5;<br><br></int></int></p>
-<h2 id="把da作为第一个左值，一个一个获取右值。运算后再返回为下一个左值"><a href="#把da作为第一个左值，一个一个获取右值。运算后再返回为下一个左值" class="headerlink" title="把da作为第一个左值，一个一个获取右值。运算后再返回为下一个左值"></a>把da作为第一个左值，一个一个获取右值。运算后再返回为下一个左值</h2><p></p><h2 id="equal"> equal <h2><br>判断之前最好先比较元素个数是否相等。<p></p>
-<h2 id="判断原作就是-if-first1-first2-return-false"><a href="#判断原作就是-if-first1-first2-return-false" class="headerlink" title="判断原作就是 if (first1 != first2) return false;"></a>判断原作就是 if (<em>first1 != </em>first2) return false;</h2><p></p><h2 id="fill"> fill <h2><p></p>
-<p></p><h2 id="fill_n"> fill_n <h2><p></p>
-<h2 id="这俩个真没啥说的。"><a href="#这俩个真没啥说的。" class="headerlink" title="这俩个真没啥说的。"></a>这俩个真没啥说的。</h2><p></p><h2 id="iter_swap"> iter_swap <h2><p></p>
-<h2 id="这个调用要重写-operator-函数"><a href="#这个调用要重写-operator-函数" class="headerlink" title="这个调用要重写 operator= 函数"></a>这个调用要重写 operator= 函数</h2><p></p><h2 id="mismatch"> mismatch <h2><br>while(first1 != last1 &amp;&amp; <em>first1 == </em>first2) { ++first1; ++first2; }<br><br>return pair<inputiterator1, inputiterator2=""><first1, first2="">;<br><p></p>
-<h2 id="返回值很有意思可以探究。"><a href="#返回值很有意思可以探究。" class="headerlink" title="返回值很有意思可以探究。"></a>返回值很有意思可以探究。<br></h2><p></p><h2 id="copy"> copy <h2><p></p>
-<p></p><h2 id="copy_backward"> copy_backward <h2><br>后者是逆向复制。<br><br>copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。<br>但是有注意点：<p></p>
-<blockquote>
-<p>1、对第三个参数是没有边界判断的，如果小了，会崩溃。</p>
-<h2 id="2、对deque无效，会全部变成第一参数的值；只vector才行。-具体原因没细究"><a href="#2、对deque无效，会全部变成第一参数的值；只vector才行。-具体原因没细究" class="headerlink" title="2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)"></a>2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)</h2><h1 id="SET"><a href="#SET" class="headerlink" title="SET"></a>SET</h1><p><strong>这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以<br><br>s1由于只是访问，可以set、vector等；s2同；<br><br>s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。</strong></p>
+<p>判断之前最好先比较元素个数是否相等。<br>判断原作就是 if (<em>first1 != </em>first2) return false;</p>
 </blockquote>
-</h2></h2></h2></h2></first1,></inputiterator1,></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></blockquote>
+<hr>
+<p></p><h2 id="fill"> fill <h2><p></p>
+<p></p><h2 id="fill_n"> fill_n <h2><p></p>
+<blockquote>
+<p>这俩个真没啥说的。</p>
+</blockquote>
+<hr>
+<p></p><h2 id="iter_swap"> iter_swap <h2><p></p>
+<blockquote>
+<p>这个调用要重写 operator= 函数</p>
+</blockquote>
+<hr>
+<p></p><h2 id="mismatch"> mismatch <h2><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">while</span>(first1 != last1 &amp;&amp; *first1 == *first2) &#123; ++first1; ++first2; &#125;</div><div class="line"><span class="keyword">return</span> pair&lt;InputIterator1, InputIterator2&gt;&lt;first1, first2&gt;;</div><div class="line">返回值很有意思可以探究</div><div class="line"></div></pre></td></tr></table></figure><p></p>
+<hr>
+<p></p><h2 id="copy"> copy <h2><p></p>
+<p></p><h2 id="copy_backward"> copy_backward <h2><p></p>
+<blockquote>
+<p>后者是逆向复制。<br><br>copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。<br>但是有注意点：</p>
+<blockquote>
+<p>1、对第三个参数是没有边界判断的，如果小了，会崩溃。<br>2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)</p>
+</blockquote>
+</blockquote>
+<hr>
+<h1 id="SET"><a href="#SET" class="headerlink" title="SET"></a>SET</h1><p><strong>这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以<br><br>s1由于只是访问，可以set、vector等；s2同；<br><br>s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。</strong></p>
 <p></p><h2 id="set_union"> set_union </h2><p></p>
 <blockquote>
-<p>它是set的操作</p>
-<h2 id="合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。"><a href="#合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。" class="headerlink" title="合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。"></a>合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。</h2><p></p><h2 id="set_intersection"> set_intersection </h2><br>它是set的操作<p></p>
-<h2 id="它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。"><a href="#它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。" class="headerlink" title="它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。"></a>它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。</h2><p></p><h2 id="set_difference"> set_difference </h2><br>它是set的操作<br>它是求两个set的不同，出现于s1但不出现于s2的元素，赋值到s3。s3依旧需要空间。<p></p>
+<p>它是set的操作<br>合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。</p>
 </blockquote>
-</h2></h2>
+<hr>
+<p></p><h2 id="set_intersection"> set_intersection </h2><p></p>
+<blockquote>
+<p>它是set的操作<br>它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。</p>
+</blockquote>
+<hr>
+<p></p><h2 id="set_difference"> set_difference </h2><p></p>
+<blockquote>
+<p>它是set的操作<br>它是求两个set的不同，出现于s1但不出现于s2的元素，赋值到s3。s3依旧需要空间。</p>
+</blockquote>
+<hr>
+<p></p><h2 id="adjacent_find"> adjacent_find </h2><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">cout</span> &lt;&lt; *adjacent_find(iv.begin(), iv.end());<span class="comment">//这个默认是找iv中相邻元素值相等的第一个元素</span></div><div class="line"><span class="built_in">cout</span> &lt;&lt; *adjacent_find(iv.begin(), iv.end(), equal_to&lt;<span class="keyword">int</span>&gt;());<span class="comment">//第三个是自定义，比较函数，会把相邻元素传入，自己函数比较返回bool</span></div><div class="line"></div></pre></td></tr></table></figure><p></p>
+<hr>
+<p></p><h2 id="count"> count </h2><p></p>
+<p></p><h2 id="count_if"> count_if </h2><p></p>
+<ol>
+<li>依旧使用的是 if (*first == value),operator ==</li>
+<li>count_if第三个参数是函数，也就循环传入元素进函数，自己判断bool，函数再++</li>
+<li><code>bind2nd(less&lt;int&gt;(), 7)</code>， <code>bind2nd(greater&lt;int&gt;(), 2)</code></li>
+</ol>
+<hr>
+<p></p><h2 id="find"> find </h2><p></p>
+<p></p><h2 id="find_if"> find_if </h2><p></p>
+<p></p><h2 id="find_end"> find_end </h2><p></p>
+<p></p><h2 id="find_first_of"> find_first_of </h2><p></p>
+<ol>
+<li>not1(bind2nd(modulus<int>(),3))。//<code>vector_finder(13,1003)</code>，类型要有有构造函数和bool operator ()( value_type &amp;value)就好</int></li>
+<li>find_end查找first1到last1中最后一次出现first2到last2区间的元素，返回first2在first1区间中最后一次出现元素。</li>
+<li>find_end支持自定义仿函数如<code>equal_to&lt;int&gt; ()</code></li>
+<li>find_first_of则相反</li>
+</ol>
+<hr>
+<p></p><h2 id="generate"> generate </h2><p></p>
+<p></p><h2 id="generate_n"> generate_n </h2><p></p>
+<ol>
+<li>将仿函数运算结果填写在first到last中，仿函数是无参数传入</li>
+</ol>
+<hr>
+<p></p><h2 id="max_element"> max_element </h2><br>返回区间中的最大值<p></p>
+<hr>
+<p></p><h2 id="min_element"> min_element </h2><br>返回区间中的最小值<p></p>
+<hr>
+<p></p><h2 id="merge"> merge </h2><p></p>
+<ol>
+<li>将两个有序集合，合并放入另一段空间</li>
+<li>第5个参数result作为放入空间，必须resize足够大</li>
+<li>支持第6个参数，自定义比较函数来排序摆放</li>
+</ol>
+<hr>
+<p></p><h2 id="partition"> partition </h2><p></p>
+<ol>
+<li>所有被第三个参数pred判断为true元素会被放在区间的前段，被判断为false的元素会被仿在后段。</li>
+<li>没有排序功能，无返回</li>
+</ol>
+<hr>
+<p></p><h2 id="remove"> remove </h2><p></p>
+<p></p><h2 id="remove_if"> remove_if </h2><p></p>
+<p></p><h2 id="remove_copy"> remove_copy </h2><p></p>
+<p></p><h2 id="remove_copy_if"> remove_copy_if </h2><p></p>
+<ol>
+<li>remove老特性，不说了，remove调用的是remove_copy,它只管赋值到新目标，不管保护数据</li>
+<li>remove_copy如果不等第四个参数，就赋值给第三个参数。所以第三个参数要保证能++,能有足够多的空间去容纳</li>
+<li>remove_if调用的是<code>remove_copy_if</code>,把前面的value值全替换成了pred仿函数</li>
+</ol>
+<hr>
+<p></p><h2 id="replace"> replace </h2><p></p>
+<p></p><h2 id="replace_copy"> replace_copy </h2><p></p>
+<p></p><h2 id="replace_if"> replace_if </h2><p></p>
+<p></p><h2 id="replace_copy_if"> replace_copy_if </h2><p></p>
+<ol>
+<li>replace 从区间中寻找第三个参数，用第四个参数替换了。</li>
+<li>replace_copy 与上相比多个把寻找结果放入result中</li>
+<li>replace_if 自定义仿函数</li>
+<li>需要resize</li>
+</ol>
+<hr>
+<p></p><h2 id="reverse"> reverse </h2><p></p>
+<p></p><h2 id="reverse_copy"> reverse_copy </h2><p></p>
+<ol>
+<li>颠倒重排</li>
+<li>新序列结果放入result，同样需要resize</li>
+</ol>
+<hr>
+<p></p><h2 id="rotate"> reverse </h2><p></p>
+<p></p><h2 id="rotate_copy"> reverse_copy </h2><p></p>
+<ol>
+<li>[first, middle), [middle, last)，对这俩个数组进行互换。</li>
+</ol>
+<hr>
+<p></p><h2 id="search"> search </h2><p></p>
+<p></p><h2 id="search_n"> search_n </h2><p></p>
+<ol>
+<li>如果未找到要返回，last1</li>
+<li>search_n查找连续n个符合条件的元素(他只能找元素不能找区间)，如果找不到就返回last1</li>
+</ol>
+<hr>
+<p></p><h2 id="swap_ranges"> swap_ranges </h2><br>将[first1, last1)区间内的元素与”从first2开始、个数相同”的元素互换。这两个序列可位于同一容器中，也可位于不同容器（长度不好说）<p></p>
+<hr>
+<p></p><h2 id="transform"> transform </h2><p></p>
+<ol>
+<li>第一个版本，把first到last区间执行op，结果放入result;返回result最后被赋值元素（result需要resize）</li>
+<li>第二个版本，把俩个区间执行op（op，第一个参数是f1区间里的，第二个参数f2区间的），放入result里</li>
+</ol>
+<hr>
+<p></p><h2 id="unique"> unique </h2><p></p>
+<ol>
+<li>移除重复的元素</li>
+<li>它只能移除相邻元素的重复元素，所以要想移除所有的，必须先排序。</li>
+</ol>
+</h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2>
       
     </div>
     
@@ -674,9 +824,9 @@ copy_bac">
       
         <div class="post-tags">
           
-            <a href="/tags/c函数/" rel="tag">#c函数</a>
-          
             <a href="/tags/c/" rel="tag">#c++</a>
+          
+            <a href="/tags/c函数/" rel="tag">#c函数</a>
           
             <a href="/tags/stl/" rel="tag">#stl</a>
           
@@ -770,7 +920,7 @@ copy_bac">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">173</span>
+              <span class="site-state-item-count">175</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -778,7 +928,7 @@ copy_bac">
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -890,161 +1040,2117 @@ copy_bac">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法记录"><span class="nav-number">1.</span> <span class="nav-text">算法记录</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法"><span class="nav-number"></span> <span class="nav-text">算法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#xfunctional文件里面实现了大多数的一般算法结构"><span class="nav-number">0.1.</span> <span class="nav-text">xfunctional文件里面实现了大多数的一般算法结构</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#accumulate"><span class="nav-number"></span> <span class="nav-text"> accumulate 
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法记录"><span class="nav-number">1.</span> <span class="nav-text">算法记录</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法"><span class="nav-number"></span> <span class="nav-text">算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#xfunctional文件里面实现了大多数的一般算法结构"><span class="nav-number"></span> <span class="nav-text">xfunctional文件里面实现了大多数的一般算法结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#accumulate"><span class="nav-number"></span> <span class="nav-text"> accumulate ++1234567std::accumulate(iv.begin(), iv.end(), da, plus<int>()) == std::accumulate(iv.begin(), iv.end(), da);return值为da + 1 + 2 + 3 + 4 + 5;std::accumulate(iv.begin(), iv.end(), da, minus<int>());return值为da - 1 - 2 - 3 - 4 - 5;<br/><//把da作为第一个左值，一个一个获取右值。运算后再返回为下一个左值
 
-std::accumulate(iv.begin(), iv.end(), da, plus()) == std::accumulate(iv.begin(), iv.end(), da);return值为da + 1 + 2 + 3 + 4 + 5;std::accumulate(iv.begin(), iv.end(), da, minus());return值为da - 1 - 2 - 3 - 4 - 5;
-把da作为第一个左值，一个一个获取右值。运算后再返回为下一个左值 equal 判断之前最好先比较元素个数是否相等。
-判断原作就是 if (first1 != first2) return false; fill 
+ equal 
+
+判断之前最好先比较元素个数是否相等。判断原作就是 if (first1 != first2) return false;
+
+
+ fill 
  fill_n 
-这俩个真没啥说的。 iter_swap 
-这个调用要重写 operator= 函数 mismatch while(first1 != last1 && first1 == first2) { ++first1; ++first2; }return pair;
-返回值很有意思可以探究。 copy 
- copy_backward 后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
 
-1、对第三个参数是没有边界判断的，如果小了，会崩溃。
-2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+这俩个真没啥说的。
 
 
+ iter_swap 
+
+这个调用要重写 operator= 函数
+
+
+ mismatch ++12345while(first1 != last1 && *first1 == *first2) { ++first1; ++first2; }return pair<InputIterator1, InputIterator2><first1, first2>;返回值很有意思可以探究
+
+ copy 
+ copy_backward 
+
+后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
+
+1、对第三个参数是没有边界判断的，如果小了，会崩溃。2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)
+
+
+
+SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
  set_union 
 
-它是set的操作
-合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。 set_intersection 它是set的操作
-它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。 set_difference 它是set的操作它是求两个set的不同，出现于s1但不出现于s2的元素，赋值到s3。s3依旧需要空间。
+它是set的操作合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_intersection 
+
+它是set的操作它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_difference 
+
+它是set的操作它是求两个set的不同，出现于s1但不出现于s2的元素，赋值到s3。s3依旧需要空间。
+
+
+ adjacent_find ++1234cout << *adjacent_find(iv.begin(), iv.end());//这个默认是找iv中相邻元素值相等的第一个元素cout << *adjacent_find(iv.begin(), iv.end(), equal_to<int>());//第三个是自定义，比较函数，会把相邻元素传入，自己函数比较返回bool
+
+ count 
+ count_if 
+
+依旧使用的是 if (*first == value),operator ==
+count_if第三个参数是函数，也就循环传入元素进函数，自己判断bool，函数再++
+bind2nd(less<int>(), 7)， bind2nd(greater<int>(), 2)
+
+
+ find 
+ find_if 
+ find_end 
+ find_first_of 
+
+not1(bind2nd(modulus(),3))。//vector_finder(13,1003)，类型要有有构造函数和bool operator ()( value_type &value)就好
+find_end查找first1到last1中最后一次出现first2到last2区间的元素，返回first2在first1区间中最后一次出现元素。
+find_end支持自定义仿函数如equal_to<int> ()
+find_first_of则相反
+
+
+ generate 
+ generate_n 
+
+将仿函数运算结果填写在first到last中，仿函数是无参数传入
+
+
+ max_element 返回区间中的最大值
+
+ min_element 返回区间中的最小值
+
+ merge 
+
+将两个有序集合，合并放入另一段空间
+第5个参数result作为放入空间，必须resize足够大
+支持第6个参数，自定义比较函数来排序摆放
+
+
+ partition 
+
+所有被第三个参数pred判断为true元素会被放在区间的前段，被判断为false的元素会被仿在后段。
+没有排序功能，无返回
+
+
+ remove 
+ remove_if 
+ remove_copy 
+ remove_copy_if 
+
+remove老特性，不说了，remove调用的是remove_copy,它只管赋值到新目标，不管保护数据
+remove_copy如果不等第四个参数，就赋值给第三个参数。所以第三个参数要保证能++,能有足够多的空间去容纳
+remove_if调用的是remove_copy_if,把前面的value值全替换成了pred仿函数
+
+
+ replace 
+ replace_copy 
+ replace_if 
+ replace_copy_if 
+
+replace 从区间中寻找第三个参数，用第四个参数替换了。
+replace_copy 与上相比多个把寻找结果放入result中
+replace_if 自定义仿函数
+需要resize
+
+
+ reverse 
+ reverse_copy 
+
+颠倒重排
+新序列结果放入result，同样需要resize
+
+
+ reverse 
+ reverse_copy 
+
+[first, middle), [middle, last)，对这俩个数组进行互换。
+
+
+ search 
+ search_n 
+
+如果未找到要返回，last1
+search_n查找连续n个符合条件的元素(他只能找元素不能找区间)，如果找不到就返回last1
+
+
+ swap_ranges 将[first1, last1)区间内的元素与”从first2开始、个数相同”的元素互换。这两个序列可位于同一容器中，也可位于不同容器（长度不好说）
+
+ transform 
+
+第一个版本，把first到last区间执行op，结果放入result;返回result最后被赋值元素（result需要resize）
+第二个版本，把俩个区间执行op（op，第一个参数是f1区间里的，第二个参数f2区间的），放入result里
+
+
+ unique 
+
+移除重复的元素
+它只能移除相邻元素的重复元素，所以要想移除所有的，必须先排序。
+
+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">++1234567std::accumulate(iv.begin(), iv.end(), da, plus<int>()) == std::accumulate(iv.begin(), iv.end(), da);return值为da + 1 + 2 + 3 + 4 + 5;std::accumulate(iv.begin(), iv.end(), da, minus<int>());return值为da - 1 - 2 - 3 - 4 - 5;<br/><//把da作为第一个左值，一个一个获取右值。运算后再返回为下一个左值
+
+ equal 
+
+判断之前最好先比较元素个数是否相等。判断原作就是 if (first1 != first2) return false;
+
+
+ fill 
+ fill_n 
+
+这俩个真没啥说的。
+
+
+ iter_swap 
+
+这个调用要重写 operator= 函数
+
+
+ mismatch ++12345while(first1 != last1 && *first1 == *first2) { ++first1; ++first2; }return pair<InputIterator1, InputIterator2><first1, first2>;返回值很有意思可以探究
+
+ copy 
+ copy_backward 
+
+后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
+
+1、对第三个参数是没有边界判断的，如果小了，会崩溃。2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)
+
+
+
+SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+ set_union 
+
+它是set的操作合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_intersection 
+
+它是set的操作它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_difference 
+
+它是set的操作它是求两个set的不同，出现于s1但不出现于s2的元素，赋值到s3。s3依旧需要空间。
+
+
+ adjacent_find ++1234cout << *adjacent_find(iv.begin(), iv.end());//这个默认是找iv中相邻元素值相等的第一个元素cout << *adjacent_find(iv.begin(), iv.end(), equal_to<int>());//第三个是自定义，比较函数，会把相邻元素传入，自己函数比较返回bool
+
+ count 
+ count_if 
+
+依旧使用的是 if (*first == value),operator ==
+count_if第三个参数是函数，也就循环传入元素进函数，自己判断bool，函数再++
+bind2nd(less<int>(), 7)， bind2nd(greater<int>(), 2)
+
+
+ find 
+ find_if 
+ find_end 
+ find_first_of 
+
+not1(bind2nd(modulus(),3))。//vector_finder(13,1003)，类型要有有构造函数和bool operator ()( value_type &value)就好
+find_end查找first1到last1中最后一次出现first2到last2区间的元素，返回first2在first1区间中最后一次出现元素。
+find_end支持自定义仿函数如equal_to<int> ()
+find_first_of则相反
+
+
+ generate 
+ generate_n 
+
+将仿函数运算结果填写在first到last中，仿函数是无参数传入
+
+
+ max_element 返回区间中的最大值
+
+ min_element 返回区间中的最小值
+
+ merge 
+
+将两个有序集合，合并放入另一段空间
+第5个参数result作为放入空间，必须resize足够大
+支持第6个参数，自定义比较函数来排序摆放
+
+
+ partition 
+
+所有被第三个参数pred判断为true元素会被放在区间的前段，被判断为false的元素会被仿在后段。
+没有排序功能，无返回
+
+
+ remove 
+ remove_if 
+ remove_copy 
+ remove_copy_if 
+
+remove老特性，不说了，remove调用的是remove_copy,它只管赋值到新目标，不管保护数据
+remove_copy如果不等第四个参数，就赋值给第三个参数。所以第三个参数要保证能++,能有足够多的空间去容纳
+remove_if调用的是remove_copy_if,把前面的value值全替换成了pred仿函数
+
+
+ replace 
+ replace_copy 
+ replace_if 
+ replace_copy_if 
+
+replace 从区间中寻找第三个参数，用第四个参数替换了。
+replace_copy 与上相比多个把寻找结果放入result中
+replace_if 自定义仿函数
+需要resize
+
+
+ reverse 
+ reverse_copy 
+
+颠倒重排
+新序列结果放入result，同样需要resize
+
+
+ reverse 
+ reverse_copy 
+
+[first, middle), [middle, last)，对这俩个数组进行互换。
+
+
+ search 
+ search_n 
+
+如果未找到要返回，last1
+search_n查找连续n个符合条件的元素(他只能找元素不能找区间)，如果找不到就返回last1
+
+
+ swap_ranges 将[first1, last1)区间内的元素与”从first2开始、个数相同”的元素互换。这两个序列可位于同一容器中，也可位于不同容器（长度不好说）
+
+ transform 
+
+第一个版本，把first到last区间执行op，结果放入result;返回result最后被赋值元素（result需要resize）
+第二个版本，把俩个区间执行op（op，第一个参数是f1区间里的，第二个参数f2区间的），放入result里
+
+
+ unique 
+
+移除重复的元素
+它只能移除相邻元素的重复元素，所以要想移除所有的，必须先排序。
+
+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#equal"><span class="nav-number"></span> <span class="nav-text"> equal 
+
+判断之前最好先比较元素个数是否相等。判断原作就是 if (first1 != first2) return false;
+
+
+ fill 
+ fill_n 
+
+这俩个真没啥说的。
+
+
+ iter_swap 
+
+这个调用要重写 operator= 函数
+
+
+ mismatch ++12345while(first1 != last1 && *first1 == *first2) { ++first1; ++first2; }return pair<InputIterator1, InputIterator2><first1, first2>;返回值很有意思可以探究
+
+ copy 
+ copy_backward 
+
+后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
+
+1、对第三个参数是没有边界判断的，如果小了，会崩溃。2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)
+
+
+
+SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+ set_union 
+
+它是set的操作合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_intersection 
+
+它是set的操作它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_difference 
+
+它是set的操作它是求两个set的不同，出现于s1但不出现于s2的元素，赋值到s3。s3依旧需要空间。
+
+
+ adjacent_find ++1234cout << *adjacent_find(iv.begin(), iv.end());//这个默认是找iv中相邻元素值相等的第一个元素cout << *adjacent_find(iv.begin(), iv.end(), equal_to<int>());//第三个是自定义，比较函数，会把相邻元素传入，自己函数比较返回bool
+
+ count 
+ count_if 
+
+依旧使用的是 if (*first == value),operator ==
+count_if第三个参数是函数，也就循环传入元素进函数，自己判断bool，函数再++
+bind2nd(less<int>(), 7)， bind2nd(greater<int>(), 2)
+
+
+ find 
+ find_if 
+ find_end 
+ find_first_of 
+
+not1(bind2nd(modulus(),3))。//vector_finder(13,1003)，类型要有有构造函数和bool operator ()( value_type &value)就好
+find_end查找first1到last1中最后一次出现first2到last2区间的元素，返回first2在first1区间中最后一次出现元素。
+find_end支持自定义仿函数如equal_to<int> ()
+find_first_of则相反
+
+
+ generate 
+ generate_n 
+
+将仿函数运算结果填写在first到last中，仿函数是无参数传入
+
+
+ max_element 返回区间中的最大值
+
+ min_element 返回区间中的最小值
+
+ merge 
+
+将两个有序集合，合并放入另一段空间
+第5个参数result作为放入空间，必须resize足够大
+支持第6个参数，自定义比较函数来排序摆放
+
+
+ partition 
+
+所有被第三个参数pred判断为true元素会被放在区间的前段，被判断为false的元素会被仿在后段。
+没有排序功能，无返回
+
+
+ remove 
+ remove_if 
+ remove_copy 
+ remove_copy_if 
+
+remove老特性，不说了，remove调用的是remove_copy,它只管赋值到新目标，不管保护数据
+remove_copy如果不等第四个参数，就赋值给第三个参数。所以第三个参数要保证能++,能有足够多的空间去容纳
+remove_if调用的是remove_copy_if,把前面的value值全替换成了pred仿函数
+
+
+ replace 
+ replace_copy 
+ replace_if 
+ replace_copy_if 
+
+replace 从区间中寻找第三个参数，用第四个参数替换了。
+replace_copy 与上相比多个把寻找结果放入result中
+replace_if 自定义仿函数
+需要resize
+
+
+ reverse 
+ reverse_copy 
+
+颠倒重排
+新序列结果放入result，同样需要resize
+
+
+ reverse 
+ reverse_copy 
+
+[first, middle), [middle, last)，对这俩个数组进行互换。
+
+
+ search 
+ search_n 
+
+如果未找到要返回，last1
+search_n查找连续n个符合条件的元素(他只能找元素不能找区间)，如果找不到就返回last1
+
+
+ swap_ranges 将[first1, last1)区间内的元素与”从first2开始、个数相同”的元素互换。这两个序列可位于同一容器中，也可位于不同容器（长度不好说）
+
+ transform 
+
+第一个版本，把first到last区间执行op，结果放入result;返回result最后被赋值元素（result需要resize）
+第二个版本，把俩个区间执行op（op，第一个参数是f1区间里的，第二个参数f2区间的），放入result里
+
+
+ unique 
+
+移除重复的元素
+它只能移除相邻元素的重复元素，所以要想移除所有的，必须先排序。
 
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">
 
-std::accumulate(iv.begin(), iv.end(), da, plus()) == std::accumulate(iv.begin(), iv.end(), da);return值为da + 1 + 2 + 3 + 4 + 5;std::accumulate(iv.begin(), iv.end(), da, minus());return值为da - 1 - 2 - 3 - 4 - 5;
-把da作为第一个左值，一个一个获取右值。运算后再返回为下一个左值 equal 判断之前最好先比较元素个数是否相等。
-判断原作就是 if (first1 != first2) return false; fill 
+判断之前最好先比较元素个数是否相等。判断原作就是 if (first1 != first2) return false;
+
+
+ fill 
  fill_n 
-这俩个真没啥说的。 iter_swap 
-这个调用要重写 operator= 函数 mismatch while(first1 != last1 && first1 == first2) { ++first1; ++first2; }return pair;
-返回值很有意思可以探究。 copy 
- copy_backward 后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
 
-1、对第三个参数是没有边界判断的，如果小了，会崩溃。
-2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+这俩个真没啥说的。
 
 
+ iter_swap 
+
+这个调用要重写 operator= 函数
+
+
+ mismatch ++12345while(first1 != last1 && *first1 == *first2) { ++first1; ++first2; }return pair<InputIterator1, InputIterator2><first1, first2>;返回值很有意思可以探究
+
+ copy 
+ copy_backward 
+
+后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
+
+1、对第三个参数是没有边界判断的，如果小了，会崩溃。2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)
+
+
+
+SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
  set_union 
 
-它是set的操作
-合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。 set_intersection 它是set的操作
-它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。 set_difference 它是set的操作它是求两个set的不同，出现于s1但不出现于s2的元素，赋值到s3。s3依旧需要空间。
+它是set的操作合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。
 
-</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#把da作为第一个左值，一个一个获取右值。运算后再返回为下一个左值"><span class="nav-number"></span> <span class="nav-text">把da作为第一个左值，一个一个获取右值。运算后再返回为下一个左值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#equal"><span class="nav-number"></span> <span class="nav-text"> equal 判断之前最好先比较元素个数是否相等。
-判断原作就是 if (first1 != first2) return false; fill 
+
+ set_intersection 
+
+它是set的操作它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_difference 
+
+它是set的操作它是求两个set的不同，出现于s1但不出现于s2的元素，赋值到s3。s3依旧需要空间。
+
+
+ adjacent_find ++1234cout << *adjacent_find(iv.begin(), iv.end());//这个默认是找iv中相邻元素值相等的第一个元素cout << *adjacent_find(iv.begin(), iv.end(), equal_to<int>());//第三个是自定义，比较函数，会把相邻元素传入，自己函数比较返回bool
+
+ count 
+ count_if 
+
+依旧使用的是 if (*first == value),operator ==
+count_if第三个参数是函数，也就循环传入元素进函数，自己判断bool，函数再++
+bind2nd(less<int>(), 7)， bind2nd(greater<int>(), 2)
+
+
+ find 
+ find_if 
+ find_end 
+ find_first_of 
+
+not1(bind2nd(modulus(),3))。//vector_finder(13,1003)，类型要有有构造函数和bool operator ()( value_type &value)就好
+find_end查找first1到last1中最后一次出现first2到last2区间的元素，返回first2在first1区间中最后一次出现元素。
+find_end支持自定义仿函数如equal_to<int> ()
+find_first_of则相反
+
+
+ generate 
+ generate_n 
+
+将仿函数运算结果填写在first到last中，仿函数是无参数传入
+
+
+ max_element 返回区间中的最大值
+
+ min_element 返回区间中的最小值
+
+ merge 
+
+将两个有序集合，合并放入另一段空间
+第5个参数result作为放入空间，必须resize足够大
+支持第6个参数，自定义比较函数来排序摆放
+
+
+ partition 
+
+所有被第三个参数pred判断为true元素会被放在区间的前段，被判断为false的元素会被仿在后段。
+没有排序功能，无返回
+
+
+ remove 
+ remove_if 
+ remove_copy 
+ remove_copy_if 
+
+remove老特性，不说了，remove调用的是remove_copy,它只管赋值到新目标，不管保护数据
+remove_copy如果不等第四个参数，就赋值给第三个参数。所以第三个参数要保证能++,能有足够多的空间去容纳
+remove_if调用的是remove_copy_if,把前面的value值全替换成了pred仿函数
+
+
+ replace 
+ replace_copy 
+ replace_if 
+ replace_copy_if 
+
+replace 从区间中寻找第三个参数，用第四个参数替换了。
+replace_copy 与上相比多个把寻找结果放入result中
+replace_if 自定义仿函数
+需要resize
+
+
+ reverse 
+ reverse_copy 
+
+颠倒重排
+新序列结果放入result，同样需要resize
+
+
+ reverse 
+ reverse_copy 
+
+[first, middle), [middle, last)，对这俩个数组进行互换。
+
+
+ search 
+ search_n 
+
+如果未找到要返回，last1
+search_n查找连续n个符合条件的元素(他只能找元素不能找区间)，如果找不到就返回last1
+
+
+ swap_ranges 将[first1, last1)区间内的元素与”从first2开始、个数相同”的元素互换。这两个序列可位于同一容器中，也可位于不同容器（长度不好说）
+
+ transform 
+
+第一个版本，把first到last区间执行op，结果放入result;返回result最后被赋值元素（result需要resize）
+第二个版本，把俩个区间执行op（op，第一个参数是f1区间里的，第二个参数f2区间的），放入result里
+
+
+ unique 
+
+移除重复的元素
+它只能移除相邻元素的重复元素，所以要想移除所有的，必须先排序。
+
+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fill"><span class="nav-number"></span> <span class="nav-text"> fill 
  fill_n 
-这俩个真没啥说的。 iter_swap 
-这个调用要重写 operator= 函数 mismatch while(first1 != last1 && first1 == first2) { ++first1; ++first2; }return pair;
-返回值很有意思可以探究。 copy 
- copy_backward 后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
 
-1、对第三个参数是没有边界判断的，如果小了，会崩溃。
-2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+这俩个真没啥说的。
 
-</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">判断之前最好先比较元素个数是否相等。
-判断原作就是 if (first1 != first2) return false; fill 
- fill_n 
-这俩个真没啥说的。 iter_swap 
-这个调用要重写 operator= 函数 mismatch while(first1 != last1 && first1 == first2) { ++first1; ++first2; }return pair;
-返回值很有意思可以探究。 copy 
- copy_backward 后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
 
-1、对第三个参数是没有边界判断的，如果小了，会崩溃。
-2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+ iter_swap 
 
-</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断原作就是-if-first1-first2-return-false"><span class="nav-number"></span> <span class="nav-text">判断原作就是 if (first1 != first2) return false;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fill"><span class="nav-number"></span> <span class="nav-text"> fill 
- fill_n 
-这俩个真没啥说的。 iter_swap 
-这个调用要重写 operator= 函数 mismatch while(first1 != last1 && first1 == first2) { ++first1; ++first2; }return pair;
-返回值很有意思可以探究。 copy 
- copy_backward 后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
+这个调用要重写 operator= 函数
 
-1、对第三个参数是没有边界判断的，如果小了，会崩溃。
-2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+
+ mismatch ++12345while(first1 != last1 && *first1 == *first2) { ++first1; ++first2; }return pair<InputIterator1, InputIterator2><first1, first2>;返回值很有意思可以探究
+
+ copy 
+ copy_backward 
+
+后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
+
+1、对第三个参数是没有边界判断的，如果小了，会崩溃。2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)
+
+
+
+SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+ set_union 
+
+它是set的操作合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_intersection 
+
+它是set的操作它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_difference 
+
+它是set的操作它是求两个set的不同，出现于s1但不出现于s2的元素，赋值到s3。s3依旧需要空间。
+
+
+ adjacent_find ++1234cout << *adjacent_find(iv.begin(), iv.end());//这个默认是找iv中相邻元素值相等的第一个元素cout << *adjacent_find(iv.begin(), iv.end(), equal_to<int>());//第三个是自定义，比较函数，会把相邻元素传入，自己函数比较返回bool
+
+ count 
+ count_if 
+
+依旧使用的是 if (*first == value),operator ==
+count_if第三个参数是函数，也就循环传入元素进函数，自己判断bool，函数再++
+bind2nd(less<int>(), 7)， bind2nd(greater<int>(), 2)
+
+
+ find 
+ find_if 
+ find_end 
+ find_first_of 
+
+not1(bind2nd(modulus(),3))。//vector_finder(13,1003)，类型要有有构造函数和bool operator ()( value_type &value)就好
+find_end查找first1到last1中最后一次出现first2到last2区间的元素，返回first2在first1区间中最后一次出现元素。
+find_end支持自定义仿函数如equal_to<int> ()
+find_first_of则相反
+
+
+ generate 
+ generate_n 
+
+将仿函数运算结果填写在first到last中，仿函数是无参数传入
+
+
+ max_element 返回区间中的最大值
+
+ min_element 返回区间中的最小值
+
+ merge 
+
+将两个有序集合，合并放入另一段空间
+第5个参数result作为放入空间，必须resize足够大
+支持第6个参数，自定义比较函数来排序摆放
+
+
+ partition 
+
+所有被第三个参数pred判断为true元素会被放在区间的前段，被判断为false的元素会被仿在后段。
+没有排序功能，无返回
+
+
+ remove 
+ remove_if 
+ remove_copy 
+ remove_copy_if 
+
+remove老特性，不说了，remove调用的是remove_copy,它只管赋值到新目标，不管保护数据
+remove_copy如果不等第四个参数，就赋值给第三个参数。所以第三个参数要保证能++,能有足够多的空间去容纳
+remove_if调用的是remove_copy_if,把前面的value值全替换成了pred仿函数
+
+
+ replace 
+ replace_copy 
+ replace_if 
+ replace_copy_if 
+
+replace 从区间中寻找第三个参数，用第四个参数替换了。
+replace_copy 与上相比多个把寻找结果放入result中
+replace_if 自定义仿函数
+需要resize
+
+
+ reverse 
+ reverse_copy 
+
+颠倒重排
+新序列结果放入result，同样需要resize
+
+
+ reverse 
+ reverse_copy 
+
+[first, middle), [middle, last)，对这俩个数组进行互换。
+
+
+ search 
+ search_n 
+
+如果未找到要返回，last1
+search_n查找连续n个符合条件的元素(他只能找元素不能找区间)，如果找不到就返回last1
+
+
+ swap_ranges 将[first1, last1)区间内的元素与”从first2开始、个数相同”的元素互换。这两个序列可位于同一容器中，也可位于不同容器（长度不好说）
+
+ transform 
+
+第一个版本，把first到last区间执行op，结果放入result;返回result最后被赋值元素（result需要resize）
+第二个版本，把俩个区间执行op（op，第一个参数是f1区间里的，第二个参数f2区间的），放入result里
+
+
+ unique 
+
+移除重复的元素
+它只能移除相邻元素的重复元素，所以要想移除所有的，必须先排序。
 
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">
  fill_n 
-这俩个真没啥说的。 iter_swap 
-这个调用要重写 operator= 函数 mismatch while(first1 != last1 && first1 == first2) { ++first1; ++first2; }return pair;
-返回值很有意思可以探究。 copy 
- copy_backward 后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
 
-1、对第三个参数是没有边界判断的，如果小了，会崩溃。
-2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+这俩个真没啥说的。
+
+
+ iter_swap 
+
+这个调用要重写 operator= 函数
+
+
+ mismatch ++12345while(first1 != last1 && *first1 == *first2) { ++first1; ++first2; }return pair<InputIterator1, InputIterator2><first1, first2>;返回值很有意思可以探究
+
+ copy 
+ copy_backward 
+
+后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
+
+1、对第三个参数是没有边界判断的，如果小了，会崩溃。2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)
+
+
+
+SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+ set_union 
+
+它是set的操作合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_intersection 
+
+它是set的操作它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_difference 
+
+它是set的操作它是求两个set的不同，出现于s1但不出现于s2的元素，赋值到s3。s3依旧需要空间。
+
+
+ adjacent_find ++1234cout << *adjacent_find(iv.begin(), iv.end());//这个默认是找iv中相邻元素值相等的第一个元素cout << *adjacent_find(iv.begin(), iv.end(), equal_to<int>());//第三个是自定义，比较函数，会把相邻元素传入，自己函数比较返回bool
+
+ count 
+ count_if 
+
+依旧使用的是 if (*first == value),operator ==
+count_if第三个参数是函数，也就循环传入元素进函数，自己判断bool，函数再++
+bind2nd(less<int>(), 7)， bind2nd(greater<int>(), 2)
+
+
+ find 
+ find_if 
+ find_end 
+ find_first_of 
+
+not1(bind2nd(modulus(),3))。//vector_finder(13,1003)，类型要有有构造函数和bool operator ()( value_type &value)就好
+find_end查找first1到last1中最后一次出现first2到last2区间的元素，返回first2在first1区间中最后一次出现元素。
+find_end支持自定义仿函数如equal_to<int> ()
+find_first_of则相反
+
+
+ generate 
+ generate_n 
+
+将仿函数运算结果填写在first到last中，仿函数是无参数传入
+
+
+ max_element 返回区间中的最大值
+
+ min_element 返回区间中的最小值
+
+ merge 
+
+将两个有序集合，合并放入另一段空间
+第5个参数result作为放入空间，必须resize足够大
+支持第6个参数，自定义比较函数来排序摆放
+
+
+ partition 
+
+所有被第三个参数pred判断为true元素会被放在区间的前段，被判断为false的元素会被仿在后段。
+没有排序功能，无返回
+
+
+ remove 
+ remove_if 
+ remove_copy 
+ remove_copy_if 
+
+remove老特性，不说了，remove调用的是remove_copy,它只管赋值到新目标，不管保护数据
+remove_copy如果不等第四个参数，就赋值给第三个参数。所以第三个参数要保证能++,能有足够多的空间去容纳
+remove_if调用的是remove_copy_if,把前面的value值全替换成了pred仿函数
+
+
+ replace 
+ replace_copy 
+ replace_if 
+ replace_copy_if 
+
+replace 从区间中寻找第三个参数，用第四个参数替换了。
+replace_copy 与上相比多个把寻找结果放入result中
+replace_if 自定义仿函数
+需要resize
+
+
+ reverse 
+ reverse_copy 
+
+颠倒重排
+新序列结果放入result，同样需要resize
+
+
+ reverse 
+ reverse_copy 
+
+[first, middle), [middle, last)，对这俩个数组进行互换。
+
+
+ search 
+ search_n 
+
+如果未找到要返回，last1
+search_n查找连续n个符合条件的元素(他只能找元素不能找区间)，如果找不到就返回last1
+
+
+ swap_ranges 将[first1, last1)区间内的元素与”从first2开始、个数相同”的元素互换。这两个序列可位于同一容器中，也可位于不同容器（长度不好说）
+
+ transform 
+
+第一个版本，把first到last区间执行op，结果放入result;返回result最后被赋值元素（result需要resize）
+第二个版本，把俩个区间执行op（op，第一个参数是f1区间里的，第二个参数f2区间的），放入result里
+
+
+ unique 
+
+移除重复的元素
+它只能移除相邻元素的重复元素，所以要想移除所有的，必须先排序。
 
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fill_n"><span class="nav-number"></span> <span class="nav-text"> fill_n 
-这俩个真没啥说的。 iter_swap 
-这个调用要重写 operator= 函数 mismatch while(first1 != last1 && first1 == first2) { ++first1; ++first2; }return pair;
-返回值很有意思可以探究。 copy 
- copy_backward 后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
 
-1、对第三个参数是没有边界判断的，如果小了，会崩溃。
-2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+这俩个真没啥说的。
+
+
+ iter_swap 
+
+这个调用要重写 operator= 函数
+
+
+ mismatch ++12345while(first1 != last1 && *first1 == *first2) { ++first1; ++first2; }return pair<InputIterator1, InputIterator2><first1, first2>;返回值很有意思可以探究
+
+ copy 
+ copy_backward 
+
+后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
+
+1、对第三个参数是没有边界判断的，如果小了，会崩溃。2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)
+
+
+
+SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+ set_union 
+
+它是set的操作合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_intersection 
+
+它是set的操作它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_difference 
+
+它是set的操作它是求两个set的不同，出现于s1但不出现于s2的元素，赋值到s3。s3依旧需要空间。
+
+
+ adjacent_find ++1234cout << *adjacent_find(iv.begin(), iv.end());//这个默认是找iv中相邻元素值相等的第一个元素cout << *adjacent_find(iv.begin(), iv.end(), equal_to<int>());//第三个是自定义，比较函数，会把相邻元素传入，自己函数比较返回bool
+
+ count 
+ count_if 
+
+依旧使用的是 if (*first == value),operator ==
+count_if第三个参数是函数，也就循环传入元素进函数，自己判断bool，函数再++
+bind2nd(less<int>(), 7)， bind2nd(greater<int>(), 2)
+
+
+ find 
+ find_if 
+ find_end 
+ find_first_of 
+
+not1(bind2nd(modulus(),3))。//vector_finder(13,1003)，类型要有有构造函数和bool operator ()( value_type &value)就好
+find_end查找first1到last1中最后一次出现first2到last2区间的元素，返回first2在first1区间中最后一次出现元素。
+find_end支持自定义仿函数如equal_to<int> ()
+find_first_of则相反
+
+
+ generate 
+ generate_n 
+
+将仿函数运算结果填写在first到last中，仿函数是无参数传入
+
+
+ max_element 返回区间中的最大值
+
+ min_element 返回区间中的最小值
+
+ merge 
+
+将两个有序集合，合并放入另一段空间
+第5个参数result作为放入空间，必须resize足够大
+支持第6个参数，自定义比较函数来排序摆放
+
+
+ partition 
+
+所有被第三个参数pred判断为true元素会被放在区间的前段，被判断为false的元素会被仿在后段。
+没有排序功能，无返回
+
+
+ remove 
+ remove_if 
+ remove_copy 
+ remove_copy_if 
+
+remove老特性，不说了，remove调用的是remove_copy,它只管赋值到新目标，不管保护数据
+remove_copy如果不等第四个参数，就赋值给第三个参数。所以第三个参数要保证能++,能有足够多的空间去容纳
+remove_if调用的是remove_copy_if,把前面的value值全替换成了pred仿函数
+
+
+ replace 
+ replace_copy 
+ replace_if 
+ replace_copy_if 
+
+replace 从区间中寻找第三个参数，用第四个参数替换了。
+replace_copy 与上相比多个把寻找结果放入result中
+replace_if 自定义仿函数
+需要resize
+
+
+ reverse 
+ reverse_copy 
+
+颠倒重排
+新序列结果放入result，同样需要resize
+
+
+ reverse 
+ reverse_copy 
+
+[first, middle), [middle, last)，对这俩个数组进行互换。
+
+
+ search 
+ search_n 
+
+如果未找到要返回，last1
+search_n查找连续n个符合条件的元素(他只能找元素不能找区间)，如果找不到就返回last1
+
+
+ swap_ranges 将[first1, last1)区间内的元素与”从first2开始、个数相同”的元素互换。这两个序列可位于同一容器中，也可位于不同容器（长度不好说）
+
+ transform 
+
+第一个版本，把first到last区间执行op，结果放入result;返回result最后被赋值元素（result需要resize）
+第二个版本，把俩个区间执行op（op，第一个参数是f1区间里的，第二个参数f2区间的），放入result里
+
+
+ unique 
+
+移除重复的元素
+它只能移除相邻元素的重复元素，所以要想移除所有的，必须先排序。
 
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">
-这俩个真没啥说的。 iter_swap 
-这个调用要重写 operator= 函数 mismatch while(first1 != last1 && first1 == first2) { ++first1; ++first2; }return pair;
-返回值很有意思可以探究。 copy 
- copy_backward 后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
 
-1、对第三个参数是没有边界判断的，如果小了，会崩溃。
-2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+这俩个真没啥说的。
 
-</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#这俩个真没啥说的。"><span class="nav-number"></span> <span class="nav-text">这俩个真没啥说的。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iter_swap"><span class="nav-number"></span> <span class="nav-text"> iter_swap 
-这个调用要重写 operator= 函数 mismatch while(first1 != last1 && first1 == first2) { ++first1; ++first2; }return pair;
-返回值很有意思可以探究。 copy 
- copy_backward 后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
 
-1、对第三个参数是没有边界判断的，如果小了，会崩溃。
-2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+ iter_swap 
+
+这个调用要重写 operator= 函数
+
+
+ mismatch ++12345while(first1 != last1 && *first1 == *first2) { ++first1; ++first2; }return pair<InputIterator1, InputIterator2><first1, first2>;返回值很有意思可以探究
+
+ copy 
+ copy_backward 
+
+后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
+
+1、对第三个参数是没有边界判断的，如果小了，会崩溃。2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)
+
+
+
+SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+ set_union 
+
+它是set的操作合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_intersection 
+
+它是set的操作它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_difference 
+
+它是set的操作它是求两个set的不同，出现于s1但不出现于s2的元素，赋值到s3。s3依旧需要空间。
+
+
+ adjacent_find ++1234cout << *adjacent_find(iv.begin(), iv.end());//这个默认是找iv中相邻元素值相等的第一个元素cout << *adjacent_find(iv.begin(), iv.end(), equal_to<int>());//第三个是自定义，比较函数，会把相邻元素传入，自己函数比较返回bool
+
+ count 
+ count_if 
+
+依旧使用的是 if (*first == value),operator ==
+count_if第三个参数是函数，也就循环传入元素进函数，自己判断bool，函数再++
+bind2nd(less<int>(), 7)， bind2nd(greater<int>(), 2)
+
+
+ find 
+ find_if 
+ find_end 
+ find_first_of 
+
+not1(bind2nd(modulus(),3))。//vector_finder(13,1003)，类型要有有构造函数和bool operator ()( value_type &value)就好
+find_end查找first1到last1中最后一次出现first2到last2区间的元素，返回first2在first1区间中最后一次出现元素。
+find_end支持自定义仿函数如equal_to<int> ()
+find_first_of则相反
+
+
+ generate 
+ generate_n 
+
+将仿函数运算结果填写在first到last中，仿函数是无参数传入
+
+
+ max_element 返回区间中的最大值
+
+ min_element 返回区间中的最小值
+
+ merge 
+
+将两个有序集合，合并放入另一段空间
+第5个参数result作为放入空间，必须resize足够大
+支持第6个参数，自定义比较函数来排序摆放
+
+
+ partition 
+
+所有被第三个参数pred判断为true元素会被放在区间的前段，被判断为false的元素会被仿在后段。
+没有排序功能，无返回
+
+
+ remove 
+ remove_if 
+ remove_copy 
+ remove_copy_if 
+
+remove老特性，不说了，remove调用的是remove_copy,它只管赋值到新目标，不管保护数据
+remove_copy如果不等第四个参数，就赋值给第三个参数。所以第三个参数要保证能++,能有足够多的空间去容纳
+remove_if调用的是remove_copy_if,把前面的value值全替换成了pred仿函数
+
+
+ replace 
+ replace_copy 
+ replace_if 
+ replace_copy_if 
+
+replace 从区间中寻找第三个参数，用第四个参数替换了。
+replace_copy 与上相比多个把寻找结果放入result中
+replace_if 自定义仿函数
+需要resize
+
+
+ reverse 
+ reverse_copy 
+
+颠倒重排
+新序列结果放入result，同样需要resize
+
+
+ reverse 
+ reverse_copy 
+
+[first, middle), [middle, last)，对这俩个数组进行互换。
+
+
+ search 
+ search_n 
+
+如果未找到要返回，last1
+search_n查找连续n个符合条件的元素(他只能找元素不能找区间)，如果找不到就返回last1
+
+
+ swap_ranges 将[first1, last1)区间内的元素与”从first2开始、个数相同”的元素互换。这两个序列可位于同一容器中，也可位于不同容器（长度不好说）
+
+ transform 
+
+第一个版本，把first到last区间执行op，结果放入result;返回result最后被赋值元素（result需要resize）
+第二个版本，把俩个区间执行op（op，第一个参数是f1区间里的，第二个参数f2区间的），放入result里
+
+
+ unique 
+
+移除重复的元素
+它只能移除相邻元素的重复元素，所以要想移除所有的，必须先排序。
+
+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iter_swap"><span class="nav-number"></span> <span class="nav-text"> iter_swap 
+
+这个调用要重写 operator= 函数
+
+
+ mismatch ++12345while(first1 != last1 && *first1 == *first2) { ++first1; ++first2; }return pair<InputIterator1, InputIterator2><first1, first2>;返回值很有意思可以探究
+
+ copy 
+ copy_backward 
+
+后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
+
+1、对第三个参数是没有边界判断的，如果小了，会崩溃。2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)
+
+
+
+SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+ set_union 
+
+它是set的操作合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_intersection 
+
+它是set的操作它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_difference 
+
+它是set的操作它是求两个set的不同，出现于s1但不出现于s2的元素，赋值到s3。s3依旧需要空间。
+
+
+ adjacent_find ++1234cout << *adjacent_find(iv.begin(), iv.end());//这个默认是找iv中相邻元素值相等的第一个元素cout << *adjacent_find(iv.begin(), iv.end(), equal_to<int>());//第三个是自定义，比较函数，会把相邻元素传入，自己函数比较返回bool
+
+ count 
+ count_if 
+
+依旧使用的是 if (*first == value),operator ==
+count_if第三个参数是函数，也就循环传入元素进函数，自己判断bool，函数再++
+bind2nd(less<int>(), 7)， bind2nd(greater<int>(), 2)
+
+
+ find 
+ find_if 
+ find_end 
+ find_first_of 
+
+not1(bind2nd(modulus(),3))。//vector_finder(13,1003)，类型要有有构造函数和bool operator ()( value_type &value)就好
+find_end查找first1到last1中最后一次出现first2到last2区间的元素，返回first2在first1区间中最后一次出现元素。
+find_end支持自定义仿函数如equal_to<int> ()
+find_first_of则相反
+
+
+ generate 
+ generate_n 
+
+将仿函数运算结果填写在first到last中，仿函数是无参数传入
+
+
+ max_element 返回区间中的最大值
+
+ min_element 返回区间中的最小值
+
+ merge 
+
+将两个有序集合，合并放入另一段空间
+第5个参数result作为放入空间，必须resize足够大
+支持第6个参数，自定义比较函数来排序摆放
+
+
+ partition 
+
+所有被第三个参数pred判断为true元素会被放在区间的前段，被判断为false的元素会被仿在后段。
+没有排序功能，无返回
+
+
+ remove 
+ remove_if 
+ remove_copy 
+ remove_copy_if 
+
+remove老特性，不说了，remove调用的是remove_copy,它只管赋值到新目标，不管保护数据
+remove_copy如果不等第四个参数，就赋值给第三个参数。所以第三个参数要保证能++,能有足够多的空间去容纳
+remove_if调用的是remove_copy_if,把前面的value值全替换成了pred仿函数
+
+
+ replace 
+ replace_copy 
+ replace_if 
+ replace_copy_if 
+
+replace 从区间中寻找第三个参数，用第四个参数替换了。
+replace_copy 与上相比多个把寻找结果放入result中
+replace_if 自定义仿函数
+需要resize
+
+
+ reverse 
+ reverse_copy 
+
+颠倒重排
+新序列结果放入result，同样需要resize
+
+
+ reverse 
+ reverse_copy 
+
+[first, middle), [middle, last)，对这俩个数组进行互换。
+
+
+ search 
+ search_n 
+
+如果未找到要返回，last1
+search_n查找连续n个符合条件的元素(他只能找元素不能找区间)，如果找不到就返回last1
+
+
+ swap_ranges 将[first1, last1)区间内的元素与”从first2开始、个数相同”的元素互换。这两个序列可位于同一容器中，也可位于不同容器（长度不好说）
+
+ transform 
+
+第一个版本，把first到last区间执行op，结果放入result;返回result最后被赋值元素（result需要resize）
+第二个版本，把俩个区间执行op（op，第一个参数是f1区间里的，第二个参数f2区间的），放入result里
+
+
+ unique 
+
+移除重复的元素
+它只能移除相邻元素的重复元素，所以要想移除所有的，必须先排序。
 
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">
-这个调用要重写 operator= 函数 mismatch while(first1 != last1 && first1 == first2) { ++first1; ++first2; }return pair;
-返回值很有意思可以探究。 copy 
- copy_backward 后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
 
-1、对第三个参数是没有边界判断的，如果小了，会崩溃。
-2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+这个调用要重写 operator= 函数
 
-</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#这个调用要重写-operator-函数"><span class="nav-number"></span> <span class="nav-text">这个调用要重写 operator= 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mismatch"><span class="nav-number"></span> <span class="nav-text"> mismatch while(first1 != last1 && first1 == first2) { ++first1; ++first2; }return pair;
-返回值很有意思可以探究。 copy 
- copy_backward 后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
 
-1、对第三个参数是没有边界判断的，如果小了，会崩溃。
-2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+ mismatch ++12345while(first1 != last1 && *first1 == *first2) { ++first1; ++first2; }return pair<InputIterator1, InputIterator2><first1, first2>;返回值很有意思可以探究
 
-</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">while(first1 != last1 && first1 == first2) { ++first1; ++first2; }return pair;
-返回值很有意思可以探究。 copy 
- copy_backward 后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
+ copy 
+ copy_backward 
 
-1、对第三个参数是没有边界判断的，如果小了，会崩溃。
-2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
 
-</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#返回值很有意思可以探究。"><span class="nav-number"></span> <span class="nav-text">返回值很有意思可以探究。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#copy"><span class="nav-number"></span> <span class="nav-text"> copy 
- copy_backward 后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
+1、对第三个参数是没有边界判断的，如果小了，会崩溃。2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)
 
-1、对第三个参数是没有边界判断的，如果小了，会崩溃。
-2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+
+
+SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+ set_union 
+
+它是set的操作合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_intersection 
+
+它是set的操作它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_difference 
+
+它是set的操作它是求两个set的不同，出现于s1但不出现于s2的元素，赋值到s3。s3依旧需要空间。
+
+
+ adjacent_find ++1234cout << *adjacent_find(iv.begin(), iv.end());//这个默认是找iv中相邻元素值相等的第一个元素cout << *adjacent_find(iv.begin(), iv.end(), equal_to<int>());//第三个是自定义，比较函数，会把相邻元素传入，自己函数比较返回bool
+
+ count 
+ count_if 
+
+依旧使用的是 if (*first == value),operator ==
+count_if第三个参数是函数，也就循环传入元素进函数，自己判断bool，函数再++
+bind2nd(less<int>(), 7)， bind2nd(greater<int>(), 2)
+
+
+ find 
+ find_if 
+ find_end 
+ find_first_of 
+
+not1(bind2nd(modulus(),3))。//vector_finder(13,1003)，类型要有有构造函数和bool operator ()( value_type &value)就好
+find_end查找first1到last1中最后一次出现first2到last2区间的元素，返回first2在first1区间中最后一次出现元素。
+find_end支持自定义仿函数如equal_to<int> ()
+find_first_of则相反
+
+
+ generate 
+ generate_n 
+
+将仿函数运算结果填写在first到last中，仿函数是无参数传入
+
+
+ max_element 返回区间中的最大值
+
+ min_element 返回区间中的最小值
+
+ merge 
+
+将两个有序集合，合并放入另一段空间
+第5个参数result作为放入空间，必须resize足够大
+支持第6个参数，自定义比较函数来排序摆放
+
+
+ partition 
+
+所有被第三个参数pred判断为true元素会被放在区间的前段，被判断为false的元素会被仿在后段。
+没有排序功能，无返回
+
+
+ remove 
+ remove_if 
+ remove_copy 
+ remove_copy_if 
+
+remove老特性，不说了，remove调用的是remove_copy,它只管赋值到新目标，不管保护数据
+remove_copy如果不等第四个参数，就赋值给第三个参数。所以第三个参数要保证能++,能有足够多的空间去容纳
+remove_if调用的是remove_copy_if,把前面的value值全替换成了pred仿函数
+
+
+ replace 
+ replace_copy 
+ replace_if 
+ replace_copy_if 
+
+replace 从区间中寻找第三个参数，用第四个参数替换了。
+replace_copy 与上相比多个把寻找结果放入result中
+replace_if 自定义仿函数
+需要resize
+
+
+ reverse 
+ reverse_copy 
+
+颠倒重排
+新序列结果放入result，同样需要resize
+
+
+ reverse 
+ reverse_copy 
+
+[first, middle), [middle, last)，对这俩个数组进行互换。
+
+
+ search 
+ search_n 
+
+如果未找到要返回，last1
+search_n查找连续n个符合条件的元素(他只能找元素不能找区间)，如果找不到就返回last1
+
+
+ swap_ranges 将[first1, last1)区间内的元素与”从first2开始、个数相同”的元素互换。这两个序列可位于同一容器中，也可位于不同容器（长度不好说）
+
+ transform 
+
+第一个版本，把first到last区间执行op，结果放入result;返回result最后被赋值元素（result需要resize）
+第二个版本，把俩个区间执行op（op，第一个参数是f1区间里的，第二个参数f2区间的），放入result里
+
+
+ unique 
+
+移除重复的元素
+它只能移除相邻元素的重复元素，所以要想移除所有的，必须先排序。
+
+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mismatch"><span class="nav-number"></span> <span class="nav-text"> mismatch ++12345while(first1 != last1 && *first1 == *first2) { ++first1; ++first2; }return pair<InputIterator1, InputIterator2><first1, first2>;返回值很有意思可以探究
+
+ copy 
+ copy_backward 
+
+后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
+
+1、对第三个参数是没有边界判断的，如果小了，会崩溃。2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)
+
+
+
+SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+ set_union 
+
+它是set的操作合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_intersection 
+
+它是set的操作它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_difference 
+
+它是set的操作它是求两个set的不同，出现于s1但不出现于s2的元素，赋值到s3。s3依旧需要空间。
+
+
+ adjacent_find ++1234cout << *adjacent_find(iv.begin(), iv.end());//这个默认是找iv中相邻元素值相等的第一个元素cout << *adjacent_find(iv.begin(), iv.end(), equal_to<int>());//第三个是自定义，比较函数，会把相邻元素传入，自己函数比较返回bool
+
+ count 
+ count_if 
+
+依旧使用的是 if (*first == value),operator ==
+count_if第三个参数是函数，也就循环传入元素进函数，自己判断bool，函数再++
+bind2nd(less<int>(), 7)， bind2nd(greater<int>(), 2)
+
+
+ find 
+ find_if 
+ find_end 
+ find_first_of 
+
+not1(bind2nd(modulus(),3))。//vector_finder(13,1003)，类型要有有构造函数和bool operator ()( value_type &value)就好
+find_end查找first1到last1中最后一次出现first2到last2区间的元素，返回first2在first1区间中最后一次出现元素。
+find_end支持自定义仿函数如equal_to<int> ()
+find_first_of则相反
+
+
+ generate 
+ generate_n 
+
+将仿函数运算结果填写在first到last中，仿函数是无参数传入
+
+
+ max_element 返回区间中的最大值
+
+ min_element 返回区间中的最小值
+
+ merge 
+
+将两个有序集合，合并放入另一段空间
+第5个参数result作为放入空间，必须resize足够大
+支持第6个参数，自定义比较函数来排序摆放
+
+
+ partition 
+
+所有被第三个参数pred判断为true元素会被放在区间的前段，被判断为false的元素会被仿在后段。
+没有排序功能，无返回
+
+
+ remove 
+ remove_if 
+ remove_copy 
+ remove_copy_if 
+
+remove老特性，不说了，remove调用的是remove_copy,它只管赋值到新目标，不管保护数据
+remove_copy如果不等第四个参数，就赋值给第三个参数。所以第三个参数要保证能++,能有足够多的空间去容纳
+remove_if调用的是remove_copy_if,把前面的value值全替换成了pred仿函数
+
+
+ replace 
+ replace_copy 
+ replace_if 
+ replace_copy_if 
+
+replace 从区间中寻找第三个参数，用第四个参数替换了。
+replace_copy 与上相比多个把寻找结果放入result中
+replace_if 自定义仿函数
+需要resize
+
+
+ reverse 
+ reverse_copy 
+
+颠倒重排
+新序列结果放入result，同样需要resize
+
+
+ reverse 
+ reverse_copy 
+
+[first, middle), [middle, last)，对这俩个数组进行互换。
+
+
+ search 
+ search_n 
+
+如果未找到要返回，last1
+search_n查找连续n个符合条件的元素(他只能找元素不能找区间)，如果找不到就返回last1
+
+
+ swap_ranges 将[first1, last1)区间内的元素与”从first2开始、个数相同”的元素互换。这两个序列可位于同一容器中，也可位于不同容器（长度不好说）
+
+ transform 
+
+第一个版本，把first到last区间执行op，结果放入result;返回result最后被赋值元素（result需要resize）
+第二个版本，把俩个区间执行op（op，第一个参数是f1区间里的，第二个参数f2区间的），放入result里
+
+
+ unique 
+
+移除重复的元素
+它只能移除相邻元素的重复元素，所以要想移除所有的，必须先排序。
+
+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">++12345while(first1 != last1 && *first1 == *first2) { ++first1; ++first2; }return pair<InputIterator1, InputIterator2><first1, first2>;返回值很有意思可以探究
+
+ copy 
+ copy_backward 
+
+后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
+
+1、对第三个参数是没有边界判断的，如果小了，会崩溃。2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)
+
+
+
+SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+ set_union 
+
+它是set的操作合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_intersection 
+
+它是set的操作它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_difference 
+
+它是set的操作它是求两个set的不同，出现于s1但不出现于s2的元素，赋值到s3。s3依旧需要空间。
+
+
+ adjacent_find ++1234cout << *adjacent_find(iv.begin(), iv.end());//这个默认是找iv中相邻元素值相等的第一个元素cout << *adjacent_find(iv.begin(), iv.end(), equal_to<int>());//第三个是自定义，比较函数，会把相邻元素传入，自己函数比较返回bool
+
+ count 
+ count_if 
+
+依旧使用的是 if (*first == value),operator ==
+count_if第三个参数是函数，也就循环传入元素进函数，自己判断bool，函数再++
+bind2nd(less<int>(), 7)， bind2nd(greater<int>(), 2)
+
+
+ find 
+ find_if 
+ find_end 
+ find_first_of 
+
+not1(bind2nd(modulus(),3))。//vector_finder(13,1003)，类型要有有构造函数和bool operator ()( value_type &value)就好
+find_end查找first1到last1中最后一次出现first2到last2区间的元素，返回first2在first1区间中最后一次出现元素。
+find_end支持自定义仿函数如equal_to<int> ()
+find_first_of则相反
+
+
+ generate 
+ generate_n 
+
+将仿函数运算结果填写在first到last中，仿函数是无参数传入
+
+
+ max_element 返回区间中的最大值
+
+ min_element 返回区间中的最小值
+
+ merge 
+
+将两个有序集合，合并放入另一段空间
+第5个参数result作为放入空间，必须resize足够大
+支持第6个参数，自定义比较函数来排序摆放
+
+
+ partition 
+
+所有被第三个参数pred判断为true元素会被放在区间的前段，被判断为false的元素会被仿在后段。
+没有排序功能，无返回
+
+
+ remove 
+ remove_if 
+ remove_copy 
+ remove_copy_if 
+
+remove老特性，不说了，remove调用的是remove_copy,它只管赋值到新目标，不管保护数据
+remove_copy如果不等第四个参数，就赋值给第三个参数。所以第三个参数要保证能++,能有足够多的空间去容纳
+remove_if调用的是remove_copy_if,把前面的value值全替换成了pred仿函数
+
+
+ replace 
+ replace_copy 
+ replace_if 
+ replace_copy_if 
+
+replace 从区间中寻找第三个参数，用第四个参数替换了。
+replace_copy 与上相比多个把寻找结果放入result中
+replace_if 自定义仿函数
+需要resize
+
+
+ reverse 
+ reverse_copy 
+
+颠倒重排
+新序列结果放入result，同样需要resize
+
+
+ reverse 
+ reverse_copy 
+
+[first, middle), [middle, last)，对这俩个数组进行互换。
+
+
+ search 
+ search_n 
+
+如果未找到要返回，last1
+search_n查找连续n个符合条件的元素(他只能找元素不能找区间)，如果找不到就返回last1
+
+
+ swap_ranges 将[first1, last1)区间内的元素与”从first2开始、个数相同”的元素互换。这两个序列可位于同一容器中，也可位于不同容器（长度不好说）
+
+ transform 
+
+第一个版本，把first到last区间执行op，结果放入result;返回result最后被赋值元素（result需要resize）
+第二个版本，把俩个区间执行op（op，第一个参数是f1区间里的，第二个参数f2区间的），放入result里
+
+
+ unique 
+
+移除重复的元素
+它只能移除相邻元素的重复元素，所以要想移除所有的，必须先排序。
+
+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#copy"><span class="nav-number"></span> <span class="nav-text"> copy 
+ copy_backward 
+
+后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
+
+1、对第三个参数是没有边界判断的，如果小了，会崩溃。2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)
+
+
+
+SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+ set_union 
+
+它是set的操作合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_intersection 
+
+它是set的操作它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_difference 
+
+它是set的操作它是求两个set的不同，出现于s1但不出现于s2的元素，赋值到s3。s3依旧需要空间。
+
+
+ adjacent_find ++1234cout << *adjacent_find(iv.begin(), iv.end());//这个默认是找iv中相邻元素值相等的第一个元素cout << *adjacent_find(iv.begin(), iv.end(), equal_to<int>());//第三个是自定义，比较函数，会把相邻元素传入，自己函数比较返回bool
+
+ count 
+ count_if 
+
+依旧使用的是 if (*first == value),operator ==
+count_if第三个参数是函数，也就循环传入元素进函数，自己判断bool，函数再++
+bind2nd(less<int>(), 7)， bind2nd(greater<int>(), 2)
+
+
+ find 
+ find_if 
+ find_end 
+ find_first_of 
+
+not1(bind2nd(modulus(),3))。//vector_finder(13,1003)，类型要有有构造函数和bool operator ()( value_type &value)就好
+find_end查找first1到last1中最后一次出现first2到last2区间的元素，返回first2在first1区间中最后一次出现元素。
+find_end支持自定义仿函数如equal_to<int> ()
+find_first_of则相反
+
+
+ generate 
+ generate_n 
+
+将仿函数运算结果填写在first到last中，仿函数是无参数传入
+
+
+ max_element 返回区间中的最大值
+
+ min_element 返回区间中的最小值
+
+ merge 
+
+将两个有序集合，合并放入另一段空间
+第5个参数result作为放入空间，必须resize足够大
+支持第6个参数，自定义比较函数来排序摆放
+
+
+ partition 
+
+所有被第三个参数pred判断为true元素会被放在区间的前段，被判断为false的元素会被仿在后段。
+没有排序功能，无返回
+
+
+ remove 
+ remove_if 
+ remove_copy 
+ remove_copy_if 
+
+remove老特性，不说了，remove调用的是remove_copy,它只管赋值到新目标，不管保护数据
+remove_copy如果不等第四个参数，就赋值给第三个参数。所以第三个参数要保证能++,能有足够多的空间去容纳
+remove_if调用的是remove_copy_if,把前面的value值全替换成了pred仿函数
+
+
+ replace 
+ replace_copy 
+ replace_if 
+ replace_copy_if 
+
+replace 从区间中寻找第三个参数，用第四个参数替换了。
+replace_copy 与上相比多个把寻找结果放入result中
+replace_if 自定义仿函数
+需要resize
+
+
+ reverse 
+ reverse_copy 
+
+颠倒重排
+新序列结果放入result，同样需要resize
+
+
+ reverse 
+ reverse_copy 
+
+[first, middle), [middle, last)，对这俩个数组进行互换。
+
+
+ search 
+ search_n 
+
+如果未找到要返回，last1
+search_n查找连续n个符合条件的元素(他只能找元素不能找区间)，如果找不到就返回last1
+
+
+ swap_ranges 将[first1, last1)区间内的元素与”从first2开始、个数相同”的元素互换。这两个序列可位于同一容器中，也可位于不同容器（长度不好说）
+
+ transform 
+
+第一个版本，把first到last区间执行op，结果放入result;返回result最后被赋值元素（result需要resize）
+第二个版本，把俩个区间执行op（op，第一个参数是f1区间里的，第二个参数f2区间的），放入result里
+
+
+ unique 
+
+移除重复的元素
+它只能移除相邻元素的重复元素，所以要想移除所有的，必须先排序。
 
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">
- copy_backward 后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
+ copy_backward 
 
-1、对第三个参数是没有边界判断的，如果小了，会崩溃。
-2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
 
-</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#copy_backward"><span class="nav-number"></span> <span class="nav-text"> copy_backward 后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
+1、对第三个参数是没有边界判断的，如果小了，会崩溃。2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)
 
-1、对第三个参数是没有边界判断的，如果小了，会崩溃。
-2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
 
-</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
 
-1、对第三个参数是没有边界判断的，如果小了，会崩溃。
-2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+ set_union 
 
-</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、对deque无效，会全部变成第一参数的值；只vector才行。-具体原因没细究"><span class="nav-number"></span> <span class="nav-text">2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SET"><span class="nav-number"></span> <span class="nav-text">SET</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#set_union"><span class="nav-number"></span> <span class="nav-text"> set_union </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。"><span class="nav-number"></span> <span class="nav-text">合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set_intersection"><span class="nav-number"></span> <span class="nav-text"> set_intersection </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。"><span class="nav-number"></span> <span class="nav-text">它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set_difference"><span class="nav-number"></span> <span class="nav-text"> set_difference </span></a></div>
+它是set的操作合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_intersection 
+
+它是set的操作它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_difference 
+
+它是set的操作它是求两个set的不同，出现于s1但不出现于s2的元素，赋值到s3。s3依旧需要空间。
+
+
+ adjacent_find ++1234cout << *adjacent_find(iv.begin(), iv.end());//这个默认是找iv中相邻元素值相等的第一个元素cout << *adjacent_find(iv.begin(), iv.end(), equal_to<int>());//第三个是自定义，比较函数，会把相邻元素传入，自己函数比较返回bool
+
+ count 
+ count_if 
+
+依旧使用的是 if (*first == value),operator ==
+count_if第三个参数是函数，也就循环传入元素进函数，自己判断bool，函数再++
+bind2nd(less<int>(), 7)， bind2nd(greater<int>(), 2)
+
+
+ find 
+ find_if 
+ find_end 
+ find_first_of 
+
+not1(bind2nd(modulus(),3))。//vector_finder(13,1003)，类型要有有构造函数和bool operator ()( value_type &value)就好
+find_end查找first1到last1中最后一次出现first2到last2区间的元素，返回first2在first1区间中最后一次出现元素。
+find_end支持自定义仿函数如equal_to<int> ()
+find_first_of则相反
+
+
+ generate 
+ generate_n 
+
+将仿函数运算结果填写在first到last中，仿函数是无参数传入
+
+
+ max_element 返回区间中的最大值
+
+ min_element 返回区间中的最小值
+
+ merge 
+
+将两个有序集合，合并放入另一段空间
+第5个参数result作为放入空间，必须resize足够大
+支持第6个参数，自定义比较函数来排序摆放
+
+
+ partition 
+
+所有被第三个参数pred判断为true元素会被放在区间的前段，被判断为false的元素会被仿在后段。
+没有排序功能，无返回
+
+
+ remove 
+ remove_if 
+ remove_copy 
+ remove_copy_if 
+
+remove老特性，不说了，remove调用的是remove_copy,它只管赋值到新目标，不管保护数据
+remove_copy如果不等第四个参数，就赋值给第三个参数。所以第三个参数要保证能++,能有足够多的空间去容纳
+remove_if调用的是remove_copy_if,把前面的value值全替换成了pred仿函数
+
+
+ replace 
+ replace_copy 
+ replace_if 
+ replace_copy_if 
+
+replace 从区间中寻找第三个参数，用第四个参数替换了。
+replace_copy 与上相比多个把寻找结果放入result中
+replace_if 自定义仿函数
+需要resize
+
+
+ reverse 
+ reverse_copy 
+
+颠倒重排
+新序列结果放入result，同样需要resize
+
+
+ reverse 
+ reverse_copy 
+
+[first, middle), [middle, last)，对这俩个数组进行互换。
+
+
+ search 
+ search_n 
+
+如果未找到要返回，last1
+search_n查找连续n个符合条件的元素(他只能找元素不能找区间)，如果找不到就返回last1
+
+
+ swap_ranges 将[first1, last1)区间内的元素与”从first2开始、个数相同”的元素互换。这两个序列可位于同一容器中，也可位于不同容器（长度不好说）
+
+ transform 
+
+第一个版本，把first到last区间执行op，结果放入result;返回result最后被赋值元素（result需要resize）
+第二个版本，把俩个区间执行op（op，第一个参数是f1区间里的，第二个参数f2区间的），放入result里
+
+
+ unique 
+
+移除重复的元素
+它只能移除相邻元素的重复元素，所以要想移除所有的，必须先排序。
+
+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#copy_backward"><span class="nav-number"></span> <span class="nav-text"> copy_backward 
+
+后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
+
+1、对第三个参数是没有边界判断的，如果小了，会崩溃。2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)
+
+
+
+SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+ set_union 
+
+它是set的操作合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_intersection 
+
+它是set的操作它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_difference 
+
+它是set的操作它是求两个set的不同，出现于s1但不出现于s2的元素，赋值到s3。s3依旧需要空间。
+
+
+ adjacent_find ++1234cout << *adjacent_find(iv.begin(), iv.end());//这个默认是找iv中相邻元素值相等的第一个元素cout << *adjacent_find(iv.begin(), iv.end(), equal_to<int>());//第三个是自定义，比较函数，会把相邻元素传入，自己函数比较返回bool
+
+ count 
+ count_if 
+
+依旧使用的是 if (*first == value),operator ==
+count_if第三个参数是函数，也就循环传入元素进函数，自己判断bool，函数再++
+bind2nd(less<int>(), 7)， bind2nd(greater<int>(), 2)
+
+
+ find 
+ find_if 
+ find_end 
+ find_first_of 
+
+not1(bind2nd(modulus(),3))。//vector_finder(13,1003)，类型要有有构造函数和bool operator ()( value_type &value)就好
+find_end查找first1到last1中最后一次出现first2到last2区间的元素，返回first2在first1区间中最后一次出现元素。
+find_end支持自定义仿函数如equal_to<int> ()
+find_first_of则相反
+
+
+ generate 
+ generate_n 
+
+将仿函数运算结果填写在first到last中，仿函数是无参数传入
+
+
+ max_element 返回区间中的最大值
+
+ min_element 返回区间中的最小值
+
+ merge 
+
+将两个有序集合，合并放入另一段空间
+第5个参数result作为放入空间，必须resize足够大
+支持第6个参数，自定义比较函数来排序摆放
+
+
+ partition 
+
+所有被第三个参数pred判断为true元素会被放在区间的前段，被判断为false的元素会被仿在后段。
+没有排序功能，无返回
+
+
+ remove 
+ remove_if 
+ remove_copy 
+ remove_copy_if 
+
+remove老特性，不说了，remove调用的是remove_copy,它只管赋值到新目标，不管保护数据
+remove_copy如果不等第四个参数，就赋值给第三个参数。所以第三个参数要保证能++,能有足够多的空间去容纳
+remove_if调用的是remove_copy_if,把前面的value值全替换成了pred仿函数
+
+
+ replace 
+ replace_copy 
+ replace_if 
+ replace_copy_if 
+
+replace 从区间中寻找第三个参数，用第四个参数替换了。
+replace_copy 与上相比多个把寻找结果放入result中
+replace_if 自定义仿函数
+需要resize
+
+
+ reverse 
+ reverse_copy 
+
+颠倒重排
+新序列结果放入result，同样需要resize
+
+
+ reverse 
+ reverse_copy 
+
+[first, middle), [middle, last)，对这俩个数组进行互换。
+
+
+ search 
+ search_n 
+
+如果未找到要返回，last1
+search_n查找连续n个符合条件的元素(他只能找元素不能找区间)，如果找不到就返回last1
+
+
+ swap_ranges 将[first1, last1)区间内的元素与”从first2开始、个数相同”的元素互换。这两个序列可位于同一容器中，也可位于不同容器（长度不好说）
+
+ transform 
+
+第一个版本，把first到last区间执行op，结果放入result;返回result最后被赋值元素（result需要resize）
+第二个版本，把俩个区间执行op（op，第一个参数是f1区间里的，第二个参数f2区间的），放入result里
+
+
+ unique 
+
+移除重复的元素
+它只能移除相邻元素的重复元素，所以要想移除所有的，必须先排序。
+
+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">
+
+后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
+
+1、对第三个参数是没有边界判断的，如果小了，会崩溃。2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)
+
+
+
+SET这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以s1由于只是访问，可以set、vector等；s2同；s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。
+ set_union 
+
+它是set的操作合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_intersection 
+
+它是set的操作它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。
+
+
+ set_difference 
+
+它是set的操作它是求两个set的不同，出现于s1但不出现于s2的元素，赋值到s3。s3依旧需要空间。
+
+
+ adjacent_find ++1234cout << *adjacent_find(iv.begin(), iv.end());//这个默认是找iv中相邻元素值相等的第一个元素cout << *adjacent_find(iv.begin(), iv.end(), equal_to<int>());//第三个是自定义，比较函数，会把相邻元素传入，自己函数比较返回bool
+
+ count 
+ count_if 
+
+依旧使用的是 if (*first == value),operator ==
+count_if第三个参数是函数，也就循环传入元素进函数，自己判断bool，函数再++
+bind2nd(less<int>(), 7)， bind2nd(greater<int>(), 2)
+
+
+ find 
+ find_if 
+ find_end 
+ find_first_of 
+
+not1(bind2nd(modulus(),3))。//vector_finder(13,1003)，类型要有有构造函数和bool operator ()( value_type &value)就好
+find_end查找first1到last1中最后一次出现first2到last2区间的元素，返回first2在first1区间中最后一次出现元素。
+find_end支持自定义仿函数如equal_to<int> ()
+find_first_of则相反
+
+
+ generate 
+ generate_n 
+
+将仿函数运算结果填写在first到last中，仿函数是无参数传入
+
+
+ max_element 返回区间中的最大值
+
+ min_element 返回区间中的最小值
+
+ merge 
+
+将两个有序集合，合并放入另一段空间
+第5个参数result作为放入空间，必须resize足够大
+支持第6个参数，自定义比较函数来排序摆放
+
+
+ partition 
+
+所有被第三个参数pred判断为true元素会被放在区间的前段，被判断为false的元素会被仿在后段。
+没有排序功能，无返回
+
+
+ remove 
+ remove_if 
+ remove_copy 
+ remove_copy_if 
+
+remove老特性，不说了，remove调用的是remove_copy,它只管赋值到新目标，不管保护数据
+remove_copy如果不等第四个参数，就赋值给第三个参数。所以第三个参数要保证能++,能有足够多的空间去容纳
+remove_if调用的是remove_copy_if,把前面的value值全替换成了pred仿函数
+
+
+ replace 
+ replace_copy 
+ replace_if 
+ replace_copy_if 
+
+replace 从区间中寻找第三个参数，用第四个参数替换了。
+replace_copy 与上相比多个把寻找结果放入result中
+replace_if 自定义仿函数
+需要resize
+
+
+ reverse 
+ reverse_copy 
+
+颠倒重排
+新序列结果放入result，同样需要resize
+
+
+ reverse 
+ reverse_copy 
+
+[first, middle), [middle, last)，对这俩个数组进行互换。
+
+
+ search 
+ search_n 
+
+如果未找到要返回，last1
+search_n查找连续n个符合条件的元素(他只能找元素不能找区间)，如果找不到就返回last1
+
+
+ swap_ranges 将[first1, last1)区间内的元素与”从first2开始、个数相同”的元素互换。这两个序列可位于同一容器中，也可位于不同容器（长度不好说）
+
+ transform 
+
+第一个版本，把first到last区间执行op，结果放入result;返回result最后被赋值元素（result需要resize）
+第二个版本，把俩个区间执行op（op，第一个参数是f1区间里的，第二个参数f2区间的），放入result里
+
+
+ unique 
+
+移除重复的元素
+它只能移除相邻元素的重复元素，所以要想移除所有的，必须先排序。
+
+</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SET"><span class="nav-number"></span> <span class="nav-text">SET</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#set_union"><span class="nav-number"></span> <span class="nav-text"> set_union </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set_intersection"><span class="nav-number"></span> <span class="nav-text"> set_intersection </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set_difference"><span class="nav-number"></span> <span class="nav-text"> set_difference </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#adjacent_find"><span class="nav-number"></span> <span class="nav-text"> adjacent_find </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#count"><span class="nav-number"></span> <span class="nav-text"> count </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#count_if"><span class="nav-number"></span> <span class="nav-text"> count_if </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find"><span class="nav-number"></span> <span class="nav-text"> find </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find_if"><span class="nav-number"></span> <span class="nav-text"> find_if </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find_end"><span class="nav-number"></span> <span class="nav-text"> find_end </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find_first_of"><span class="nav-number"></span> <span class="nav-text"> find_first_of </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#generate"><span class="nav-number"></span> <span class="nav-text"> generate </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#generate_n"><span class="nav-number"></span> <span class="nav-text"> generate_n </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#max_element"><span class="nav-number"></span> <span class="nav-text"> max_element </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#min_element"><span class="nav-number"></span> <span class="nav-text"> min_element </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#merge"><span class="nav-number"></span> <span class="nav-text"> merge </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#partition"><span class="nav-number"></span> <span class="nav-text"> partition </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove"><span class="nav-number"></span> <span class="nav-text"> remove </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove_if"><span class="nav-number"></span> <span class="nav-text"> remove_if </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove_copy"><span class="nav-number"></span> <span class="nav-text"> remove_copy </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove_copy_if"><span class="nav-number"></span> <span class="nav-text"> remove_copy_if </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#replace"><span class="nav-number"></span> <span class="nav-text"> replace </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#replace_copy"><span class="nav-number"></span> <span class="nav-text"> replace_copy </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#replace_if"><span class="nav-number"></span> <span class="nav-text"> replace_if </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#replace_copy_if"><span class="nav-number"></span> <span class="nav-text"> replace_copy_if </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reverse"><span class="nav-number"></span> <span class="nav-text"> reverse </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reverse_copy"><span class="nav-number"></span> <span class="nav-text"> reverse_copy </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rotate"><span class="nav-number"></span> <span class="nav-text"> reverse </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rotate_copy"><span class="nav-number"></span> <span class="nav-text"> reverse_copy </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#search"><span class="nav-number"></span> <span class="nav-text"> search </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#search_n"><span class="nav-number"></span> <span class="nav-text"> search_n </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#swap_ranges"><span class="nav-number"></span> <span class="nav-text"> swap_ranges </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transform"><span class="nav-number"></span> <span class="nav-text"> transform </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unique"><span class="nav-number"></span> <span class="nav-text"> unique </span></a></div>
             
           </div>
         </section>

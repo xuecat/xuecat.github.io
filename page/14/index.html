@@ -184,6 +184,8 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
             首页
           </a>
         </li>
@@ -191,6 +193,8 @@
         
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
             
             分类
           </a>
@@ -200,6 +204,8 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
             标签
           </a>
         </li>
@@ -208,6 +214,8 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
             归档
           </a>
         </li>
@@ -215,6 +223,8 @@
         
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
             关于
           </a>
@@ -277,8 +287,8 @@
             
               
                 
-                <a class="post-title-link" href="/2014/09/11/45/" itemprop="url">
-                  pass by reference to const replace pass by value(45)
+                <a class="post-title-link" href="/2014/09/14/48/" itemprop="url">
+                  大三的开学(48)
                 </a>
               
             
@@ -291,8 +301,143 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-11T03:31:58+08:00" content="2014-09-11">
-              2014-09-11
+            <time itemprop="dateCreated" datetime="2014-09-14T03:31:58+08:00" content="2014-09-14">
+              2014-09-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/生活/" itemprop="url" rel="index">
+                    <span itemprop="name">生活</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="/picture/p.jpg" rel="gallery_ciswk6d1z00bi38cxcnzst7e5"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="/picture/p.jpg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        
+          
+          不知不觉我也大三了，这几天我又没有天天去试验室。现在感觉一天不去实验室就有点罪恶感了！然后就愈来愈不敢去。
+我还有梦想没实现，我还这么弱小，我这样的颓废生活真心烦死了！现在的交际圈也越来越小了，连已有的我都不知道能不能把握到！
+写下日记，告诉自己还没有实现的东西，大学别留遗憾！
+
+          
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/14/48/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/09/12/47/" itemprop="url">
+                  降低文件依赖，减少编译时间(47)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-09-12T03:31:58+08:00" content="2014-09-12">
+              2014-09-12
             </time>
           </span>
 
@@ -338,15 +483,17 @@
       
         
           
-          当用类去传递的时候遇见这么一个编译消耗。
-Class Person {std::string str1, std::string str2;};
-Class Student : public Person {std::string str1, std::string str2;};
+          首先是第二次做这种题了。大概分析下吧：
+1、无前置声明，直接包含头文件调用。（当包含的头文件出现变化时，编译器就必须重新对包含文件重新编译）
 
-//函数 va
+2、我来说明下前置声明后的情况
+    分析对象：
+        前置的意义不大，编译器编译的时候首先对声明的对象分配大小内存，即使有了前置声明，
+   
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/11/45/#more" rel="contents">
+            <a class="btn" href="/2014/09/12/47/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -518,8 +665,8 @@ Class Student : public Person {std::string str1, std::string str2;};
             
               
                 
-                <a class="post-title-link" href="/2014/09/10/43/" itemprop="url">
-                  effective c++数组指针销毁(43)
+                <a class="post-title-link" href="/2014/09/11/45/" itemprop="url">
+                  pass by reference to const replace pass by value(45)
                 </a>
               
             
@@ -532,8 +679,8 @@ Class Student : public Person {std::string str1, std::string str2;};
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-10T03:31:58+08:00" content="2014-09-10">
-              2014-09-10
+            <time itemprop="dateCreated" datetime="2014-09-11T03:31:58+08:00" content="2014-09-11">
+              2014-09-11
             </time>
           </span>
 
@@ -579,16 +726,15 @@ Class Student : public Person {std::string str1, std::string str2;};
       
         
           
-          遇见：
-std::string* p = new std::string[100];
-请用:     delete[] p;
-用delete p；会出现内存错误。
-所以对于数组指针，拒绝使用typedef（typdedef string ADD[4];） 避免销毁异常。
+          当用类去传递的时候遇见这么一个编译消耗。
+Class Person {std::string str1, std::string str2;};
+Class Student : public Person {std::string str1, std::string str2;};
 
-          
+//函数 va
+          ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/10/43/#more" rel="contents">
+            <a class="btn" href="/2014/09/11/45/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -705,6 +851,127 @@ std::string* p = new std::string[100];
 
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/09/10/44/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/09/10/43/" itemprop="url">
+                  effective c++数组指针销毁(43)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-09-10T03:31:58+08:00" content="2014-09-10">
+              2014-09-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          遇见：
+std::string* p = new std::string[100];
+请用:     delete[] p;
+用delete p；会出现内存错误。
+所以对于数组指针，拒绝使用typedef（typdedef string ADD[4];） 避免销毁异常。
+
+          
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/10/43/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -991,246 +1258,6 @@ a=2=(00000010);  ~a=(11111101)=-3
             
               
                 
-                <a class="post-title-link" href="/2014/09/05/40/" itemprop="url">
-                  more effective c++根据类型决定虚化(40)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-05T03:31:58+08:00" content="2014-09-05">
-              2014-09-05
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/书籍/" itemprop="url" rel="index">
-                    <span itemprop="name">书籍</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          第31条了，这一跳一下就解决了我最近的疑惑！
-先看游戏规则:
-1、有的类型，宇宙飞船、太空站、小行星、
-2、他们互相碰撞，任意两两进行碰撞。
-3、具有主被动性！且不同的主被动，不同的类型进行碰撞，产生的结果也不一样。
-分析，需要运行时动态识别，所包含的对象，所以设计c++RTTI计数。（过程代码不列
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/05/40/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/05/38/" itemprop="url">
-                  非成员函数(38)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-05T03:31:58+08:00" content="2014-09-05">
-              2014-09-05
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          more effective c++作者在封装全局函数时，对当前有效的所有全局函数都使用了“匿名空间”
-函数的定义和声明都要在匿名空间才能被识别。
-多个namespace，是没问题的，会在一个匿名空间。
-
-          
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/05/38/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2014/09/05/39/" itemprop="url">
                   static_cast dynamic_cast再进一步
                 </a>
@@ -1349,8 +1376,8 @@ a=2=(00000010);  ~a=(11111101)=-3
             
               
                 
-                <a class="post-title-link" href="/2014/09/04/31/" itemprop="url">
-                  内存对齐(31)
+                <a class="post-title-link" href="/2014/09/05/40/" itemprop="url">
+                  more effective c++根据类型决定虚化(40)
                 </a>
               
             
@@ -1363,8 +1390,8 @@ a=2=(00000010);  ~a=(11111101)=-3
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-04T03:31:58+08:00" content="2014-09-04">
-              2014-09-04
+            <time itemprop="dateCreated" datetime="2014-09-05T03:31:58+08:00" content="2014-09-05">
+              2014-09-05
             </time>
           </span>
 
@@ -1377,8 +1404,8 @@ a=2=(00000010);  ~a=(11111101)=-3
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
+                  <a href="/categories/书籍/" itemprop="url" rel="index">
+                    <span itemprop="name">书籍</span>
                   </a>
                 </span>
 
@@ -1410,13 +1437,16 @@ a=2=(00000010);  ~a=(11111101)=-3
       
         
           
-          无论是类还是结构体，对于数据对其都遵循按照最高字节数，进行对齐。
-注意一点就是，当无数据时候是占一个字节，只有一个char时，也只占一个字节
-
-          
+          第31条了，这一跳一下就解决了我最近的疑惑！
+先看游戏规则:
+1、有的类型，宇宙飞船、太空站、小行星、
+2、他们互相碰撞，任意两两进行碰撞。
+3、具有主被动性！且不同的主被动，不同的类型进行碰撞，产生的结果也不一样。
+分析，需要运行时动态识别，所包含的对象，所以设计c++RTTI计数。（过程代码不列
+          ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/04/31/#more" rel="contents">
+            <a class="btn" href="/2014/09/05/40/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1491,7 +1521,7 @@ a=2=(00000010);  ~a=(11111101)=-3
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">173</span>
+              <span class="site-state-item-count">175</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1499,7 +1529,7 @@ a=2=(00000010);  ~a=(11111101)=-3
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

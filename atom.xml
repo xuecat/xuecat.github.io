@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2016-09-05T16:17:21.680Z</updated>
+  <updated>2016-09-08T13:35:16.610Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -16,11 +16,70 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>MP3解码过程小知识181</title>
+    <link href="https://xuecat.github.io/2016/09/08/181/"/>
+    <id>https://xuecat.github.io/2016/09/08/181/</id>
+    <published>2016-09-08T13:27:43.000Z</published>
+    <updated>2016-09-08T13:35:16.610Z</updated>
+    
+    <content type="html"><![CDATA[<p>代码暂时不提供了，直接去<code>179</code>的sobey库寻。说明MP3音频过程遇见。</p>
+<ol>
+<li>帧头是大端字节，所以要转换下</li>
+<li>判断是否是帧头，看第一个字节是否是FF，同步信息第一个字节必须是FF（qq音乐喜欢用ff fe，网络音乐喜欢用ff fb）</li>
+<li>vbr的xing头并不影响解码，照常使用，只是在标签帧中多些信息而已</li>
+<li>有些MP3没有TAG ID3V2头只有ID3V1头，文件起点直接开始第一帧帧头，数据。。。</li>
+<li>有些MP3的TAG ID3V2头算出来的大小不准确，并不能找到第一帧位置。<br>这时，多半是它在第一帧和标签头之间又填充了很多无用信息<br>此时只能一个个字节去找FF帧头了</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;代码暂时不提供了，直接去&lt;code&gt;179&lt;/code&gt;的sobey库寻。说明MP3音频过程遇见。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;帧头是大端字节，所以要转换下&lt;/li&gt;
+&lt;li&gt;判断是否是帧头，看第一个字节是否是FF，同步信息第一个字节必须是FF（qq音乐喜欢用ff fe，网络
+    
+    </summary>
+    
+      <category term="音视频" scheme="https://xuecat.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/"/>
+    
+    
+      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
+    
+      <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
+    
+      <category term="错误认识" scheme="https://xuecat.github.io/tags/%E9%94%99%E8%AF%AF%E8%AE%A4%E8%AF%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>180</title>
+    <link href="https://xuecat.github.io/2016/09/08/180/"/>
+    <id>https://xuecat.github.io/2016/09/08/180/</id>
+    <published>2016-09-08T13:25:50.000Z</published>
+    <updated>2016-09-10T01:32:27.976Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center"><h5 id="“梦里相逢人不见，若知是梦何须醒。纵然梦里常幽会，怎比真如见一回。”"><a href="#“梦里相逢人不见，若知是梦何须醒。纵然梦里常幽会，怎比真如见一回。”" class="headerlink" title="“梦里相逢人不见，若知是梦何须醒。纵然梦里常幽会，怎比真如见一回。”"></a>“梦里相逢人不见，若知是梦何须醒。纵然梦里常幽会，怎比真如见一回。”</h5></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;h5 id=&quot;“梦里相逢人不见，若知是梦何须醒。纵然梦里常幽会，怎比真如见一回。”&quot;&gt;&lt;a href=&quot;#“梦里相逢人不见，若知是梦何须醒。纵然梦里常幽会，怎比真如见一回。”&quot; class=&quot;heade
+    
+    </summary>
+    
+      <category term="生活" scheme="https://xuecat.github.io/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="life" scheme="https://xuecat.github.io/tags/life/"/>
+    
+  </entry>
+  
+  <entry>
     <title>bmp的颜色存储179</title>
     <link href="https://xuecat.github.io/2016/09/06/179/"/>
     <id>https://xuecat.github.io/2016/09/06/179/</id>
     <published>2016-09-05T16:11:51.000Z</published>
-    <updated>2016-09-05T16:17:21.680Z</updated>
+    <updated>2016-09-08T13:11:31.360Z</updated>
     
     <content type="html"><![CDATA[<p><strong>BGR与Bit-Fields</strong><br>当图像中引用的色彩超过256种时，我们就需要16bpp或更高bpp的位图。调色板不适合bpp较大的位图，因此16bpp以上的位图都不使用调 色板。<br>不使用调色板的位图图像有两种编码格式：RGB和Bit-Fields（下称BF）。<br></p>
 <p>RGB编码格式是一种均分的思想，使Red、Green、Blue三个颜色分量所包含的信息容量尽可能一样大。<br>16bpp-RGB：在每个像素所占的16bits中，低5位表示Blue分量；中5为表示Green分量；高5位表示Red分量；最高1位无意义 （后来有些应用程序将其视为透明度Alpha分量，但这并不是标准）。<br>所以从低到高的顺序实际上是B-G-R，这也是我在BMP简介的表格里，把RGB的 编码方式都写成BGR的原因。<br><br>24bpp-RGB：24bpp的位图又称为真彩位图，它通常只有这一种编码格式，在24bits中，低8位表示Blue分量；中8为表示 Green分量；高8位表示Red分量。BGR<br><br>32bpp-RGB：在32bits中，低24位的编码方式与24bpp位图相同，最高8位用来表示透明度Alpha分量。<br>32bpp的位图尺寸太 大，一般只有在图像处理的中间过程中使用。对于需要半透过效果的图像，更好的选择是PNG格式。<br></p>
@@ -32,7 +91,7 @@
     
     </summary>
     
-      <category term="视音频" scheme="https://xuecat.github.io/categories/%E8%A7%86%E9%9F%B3%E9%A2%91/"/>
+      <category term="音视频" scheme="https://xuecat.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/"/>
     
     
       <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
@@ -145,9 +204,9 @@
       <category term="音视频" scheme="https://xuecat.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/"/>
     
     
-      <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
-    
       <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
+    
+      <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
     
       <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
     
@@ -215,7 +274,7 @@
     <link href="https://xuecat.github.io/2016/08/20/175/"/>
     <id>https://xuecat.github.io/2016/08/20/175/</id>
     <published>2016-08-19T19:33:58.000Z</published>
-    <updated>2016-08-30T15:52:26.531Z</updated>
+    <updated>2016-09-08T15:10:10.199Z</updated>
     
     <content type="html"><![CDATA[<h4 id="算法记录"><a href="#算法记录" class="headerlink" title="算法记录"></a>算法记录</h4><h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><table>
 <thead>
@@ -393,30 +452,170 @@
 <td style="text-align:center"><a href="#unique">unique</a></td>
 <td style="text-align:center">将重复的元素折叠缩编，使成唯一</td>
 </tr>
+<tr>
+<td><a href="#rotate">rotate</a></td>
+<td style="text-align:center">从middle俩端分开，进行交换</td>
+<td style="text-align:center"><a href="#rotate_copy">rotate_copy</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><a href="#search">search</a></td>
+<td style="text-align:center">从序列一中寻找序列二首次出现点</td>
+<td style="text-align:center"><a href="#search_n">search_n</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><a href="#swap_ranges">swap_ranges</a></td>
+<td style="text-align:center">区间互换</td>
+<td style="text-align:center"></td>
+</tr>
 </tbody>
 </table>
-<h5 id="xfunctional文件里面实现了大多数的一般算法结构"><a href="#xfunctional文件里面实现了大多数的一般算法结构" class="headerlink" title="xfunctional文件里面实现了大多数的一般算法结构"></a>xfunctional文件里面实现了大多数的一般算法结构</h5><p></p><h2 id="accumulate"> accumulate <h2><p></p>
+<h2 id="xfunctional文件里面实现了大多数的一般算法结构"><a href="#xfunctional文件里面实现了大多数的一般算法结构" class="headerlink" title="xfunctional文件里面实现了大多数的一般算法结构"></a>xfunctional文件里面实现了大多数的一般算法结构</h2><hr>
+<p></p><h2 id="accumulate"> accumulate <h2><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">std</span>::accumulate(iv.begin(), iv.end(), da, plus&lt;<span class="keyword">int</span>&gt;()) == <span class="built_in">std</span>::accumulate(iv.begin(), iv.end(), da);</div><div class="line"><span class="keyword">return</span>值为da + <span class="number">1</span> + <span class="number">2</span> + <span class="number">3</span> + <span class="number">4</span> + <span class="number">5</span>;</div><div class="line"><span class="built_in">std</span>::accumulate(iv.begin(), iv.end(), da, minus&lt;<span class="keyword">int</span>&gt;());</div><div class="line"><span class="keyword">return</span>值为da - <span class="number">1</span> - <span class="number">2</span> - <span class="number">3</span> - <span class="number">4</span> - <span class="number">5</span>;&lt;br/&gt;&lt;</div><div class="line"><span class="comment">//把da作为第一个左值，一个一个获取右值。运算后再返回为下一个左值</span></div><div class="line"></div></pre></td></tr></table></figure><p></p>
+<hr>
+<p></p><h2 id="equal"> equal <h2><p></p>
 <blockquote>
-<p>std::accumulate(iv.begin(), iv.end(), da, plus<int>()) == std::accumulate(iv.begin(), iv.end(), da);<br><br>return值为da + 1 + 2 + 3 + 4 + 5;<br><br><br>std::accumulate(iv.begin(), iv.end(), da, minus<int>());<br><br>return值为da - 1 - 2 - 3 - 4 - 5;<br><br></int></int></p>
-<h2 id="把da作为第一个左值，一个一个获取右值。运算后再返回为下一个左值"><a href="#把da作为第一个左值，一个一个获取右值。运算后再返回为下一个左值" class="headerlink" title="把da作为第一个左值，一个一个获取右值。运算后再返回为下一个左值"></a>把da作为第一个左值，一个一个获取右值。运算后再返回为下一个左值</h2><p></p><h2 id="equal"> equal <h2><br>判断之前最好先比较元素个数是否相等。<p></p>
-<h2 id="判断原作就是-if-first1-first2-return-false"><a href="#判断原作就是-if-first1-first2-return-false" class="headerlink" title="判断原作就是 if (first1 != first2) return false;"></a>判断原作就是 if (<em>first1 != </em>first2) return false;</h2><p></p><h2 id="fill"> fill <h2><p></p>
-<p></p><h2 id="fill_n"> fill_n <h2><p></p>
-<h2 id="这俩个真没啥说的。"><a href="#这俩个真没啥说的。" class="headerlink" title="这俩个真没啥说的。"></a>这俩个真没啥说的。</h2><p></p><h2 id="iter_swap"> iter_swap <h2><p></p>
-<h2 id="这个调用要重写-operator-函数"><a href="#这个调用要重写-operator-函数" class="headerlink" title="这个调用要重写 operator= 函数"></a>这个调用要重写 operator= 函数</h2><p></p><h2 id="mismatch"> mismatch <h2><br>while(first1 != last1 &amp;&amp; <em>first1 == </em>first2) { ++first1; ++first2; }<br><br>return pair<inputiterator1, inputiterator2=""><first1, first2="">;<br><p></p>
-<h2 id="返回值很有意思可以探究。"><a href="#返回值很有意思可以探究。" class="headerlink" title="返回值很有意思可以探究。"></a>返回值很有意思可以探究。<br></h2><p></p><h2 id="copy"> copy <h2><p></p>
-<p></p><h2 id="copy_backward"> copy_backward <h2><br>后者是逆向复制。<br><br>copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。<br>但是有注意点：<p></p>
-<blockquote>
-<p>1、对第三个参数是没有边界判断的，如果小了，会崩溃。</p>
-<h2 id="2、对deque无效，会全部变成第一参数的值；只vector才行。-具体原因没细究"><a href="#2、对deque无效，会全部变成第一参数的值；只vector才行。-具体原因没细究" class="headerlink" title="2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)"></a>2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)</h2><h1 id="SET"><a href="#SET" class="headerlink" title="SET"></a>SET</h1><p><strong>这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以<br><br>s1由于只是访问，可以set、vector等；s2同；<br><br>s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。</strong></p>
+<p>判断之前最好先比较元素个数是否相等。<br>判断原作就是 if (<em>first1 != </em>first2) return false;</p>
 </blockquote>
-</h2></h2></h2></h2></first1,></inputiterator1,></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></blockquote>
+<hr>
+<p></p><h2 id="fill"> fill <h2><p></p>
+<p></p><h2 id="fill_n"> fill_n <h2><p></p>
+<blockquote>
+<p>这俩个真没啥说的。</p>
+</blockquote>
+<hr>
+<p></p><h2 id="iter_swap"> iter_swap <h2><p></p>
+<blockquote>
+<p>这个调用要重写 operator= 函数</p>
+</blockquote>
+<hr>
+<p></p><h2 id="mismatch"> mismatch <h2><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">while</span>(first1 != last1 &amp;&amp; *first1 == *first2) &#123; ++first1; ++first2; &#125;</div><div class="line"><span class="keyword">return</span> pair&lt;InputIterator1, InputIterator2&gt;&lt;first1, first2&gt;;</div><div class="line">返回值很有意思可以探究</div><div class="line"></div></pre></td></tr></table></figure><p></p>
+<hr>
+<p></p><h2 id="copy"> copy <h2><p></p>
+<p></p><h2 id="copy_backward"> copy_backward <h2><p></p>
+<blockquote>
+<p>后者是逆向复制。<br><br>copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。<br>但是有注意点：</p>
+<blockquote>
+<p>1、对第三个参数是没有边界判断的，如果小了，会崩溃。<br>2、对deque无效，会全部变成第一参数的值；只vector才行。 (具体原因没细究)</p>
+</blockquote>
+</blockquote>
+<hr>
+<h1 id="SET"><a href="#SET" class="headerlink" title="SET"></a>SET</h1><p><strong>这些函数有set，表面看上去像给set用的，然而不止这么简单。只要有序，就都可以<br><br>s1由于只是访问，可以set、vector等；s2同；<br><br>s3由于需要被赋值，vector等可以，但set是不行的。s3还有个限制，如果没有resize的空间，赋值会错误。</strong></p>
 <p></p><h2 id="set_union"> set_union </h2><p></p>
 <blockquote>
-<p>它是set的操作</p>
-<h2 id="合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。"><a href="#合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。" class="headerlink" title="合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。"></a>合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。</h2><p></p><h2 id="set_intersection"> set_intersection </h2><br>它是set的操作<p></p>
-<h2 id="它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。"><a href="#它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。" class="headerlink" title="它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。"></a>它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。</h2><p></p><h2 id="set_difference"> set_difference </h2><br>它是set的操作<br>它是求两个set的不同，出现于s1但不出现于s2的元素，赋值到s3。s3依旧需要空间。<p></p>
+<p>它是set的操作<br>合并俩个set为一个set，第三个set依旧需要给与足够空间，不然也会运行错误。</p>
 </blockquote>
-</h2></h2>]]></content>
+<hr>
+<p></p><h2 id="set_intersection"> set_intersection </h2><p></p>
+<blockquote>
+<p>它是set的操作<br>它求俩个set的交集，第三个set依旧需要给与足够空间，不然也会运行错误。</p>
+</blockquote>
+<hr>
+<p></p><h2 id="set_difference"> set_difference </h2><p></p>
+<blockquote>
+<p>它是set的操作<br>它是求两个set的不同，出现于s1但不出现于s2的元素，赋值到s3。s3依旧需要空间。</p>
+</blockquote>
+<hr>
+<p></p><h2 id="adjacent_find"> adjacent_find </h2><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">cout</span> &lt;&lt; *adjacent_find(iv.begin(), iv.end());<span class="comment">//这个默认是找iv中相邻元素值相等的第一个元素</span></div><div class="line"><span class="built_in">cout</span> &lt;&lt; *adjacent_find(iv.begin(), iv.end(), equal_to&lt;<span class="keyword">int</span>&gt;());<span class="comment">//第三个是自定义，比较函数，会把相邻元素传入，自己函数比较返回bool</span></div><div class="line"></div></pre></td></tr></table></figure><p></p>
+<hr>
+<p></p><h2 id="count"> count </h2><p></p>
+<p></p><h2 id="count_if"> count_if </h2><p></p>
+<ol>
+<li>依旧使用的是 if (*first == value),operator ==</li>
+<li>count_if第三个参数是函数，也就循环传入元素进函数，自己判断bool，函数再++</li>
+<li><code>bind2nd(less&lt;int&gt;(), 7)</code>， <code>bind2nd(greater&lt;int&gt;(), 2)</code></li>
+</ol>
+<hr>
+<p></p><h2 id="find"> find </h2><p></p>
+<p></p><h2 id="find_if"> find_if </h2><p></p>
+<p></p><h2 id="find_end"> find_end </h2><p></p>
+<p></p><h2 id="find_first_of"> find_first_of </h2><p></p>
+<ol>
+<li>not1(bind2nd(modulus<int>(),3))。//<code>vector_finder(13,1003)</code>，类型要有有构造函数和bool operator ()( value_type &amp;value)就好</int></li>
+<li>find_end查找first1到last1中最后一次出现first2到last2区间的元素，返回first2在first1区间中最后一次出现元素。</li>
+<li>find_end支持自定义仿函数如<code>equal_to&lt;int&gt; ()</code></li>
+<li>find_first_of则相反</li>
+</ol>
+<hr>
+<p></p><h2 id="generate"> generate </h2><p></p>
+<p></p><h2 id="generate_n"> generate_n </h2><p></p>
+<ol>
+<li>将仿函数运算结果填写在first到last中，仿函数是无参数传入</li>
+</ol>
+<hr>
+<p></p><h2 id="max_element"> max_element </h2><br>返回区间中的最大值<p></p>
+<hr>
+<p></p><h2 id="min_element"> min_element </h2><br>返回区间中的最小值<p></p>
+<hr>
+<p></p><h2 id="merge"> merge </h2><p></p>
+<ol>
+<li>将两个有序集合，合并放入另一段空间</li>
+<li>第5个参数result作为放入空间，必须resize足够大</li>
+<li>支持第6个参数，自定义比较函数来排序摆放</li>
+</ol>
+<hr>
+<p></p><h2 id="partition"> partition </h2><p></p>
+<ol>
+<li>所有被第三个参数pred判断为true元素会被放在区间的前段，被判断为false的元素会被仿在后段。</li>
+<li>没有排序功能，无返回</li>
+</ol>
+<hr>
+<p></p><h2 id="remove"> remove </h2><p></p>
+<p></p><h2 id="remove_if"> remove_if </h2><p></p>
+<p></p><h2 id="remove_copy"> remove_copy </h2><p></p>
+<p></p><h2 id="remove_copy_if"> remove_copy_if </h2><p></p>
+<ol>
+<li>remove老特性，不说了，remove调用的是remove_copy,它只管赋值到新目标，不管保护数据</li>
+<li>remove_copy如果不等第四个参数，就赋值给第三个参数。所以第三个参数要保证能++,能有足够多的空间去容纳</li>
+<li>remove_if调用的是<code>remove_copy_if</code>,把前面的value值全替换成了pred仿函数</li>
+</ol>
+<hr>
+<p></p><h2 id="replace"> replace </h2><p></p>
+<p></p><h2 id="replace_copy"> replace_copy </h2><p></p>
+<p></p><h2 id="replace_if"> replace_if </h2><p></p>
+<p></p><h2 id="replace_copy_if"> replace_copy_if </h2><p></p>
+<ol>
+<li>replace 从区间中寻找第三个参数，用第四个参数替换了。</li>
+<li>replace_copy 与上相比多个把寻找结果放入result中</li>
+<li>replace_if 自定义仿函数</li>
+<li>需要resize</li>
+</ol>
+<hr>
+<p></p><h2 id="reverse"> reverse </h2><p></p>
+<p></p><h2 id="reverse_copy"> reverse_copy </h2><p></p>
+<ol>
+<li>颠倒重排</li>
+<li>新序列结果放入result，同样需要resize</li>
+</ol>
+<hr>
+<p></p><h2 id="rotate"> reverse </h2><p></p>
+<p></p><h2 id="rotate_copy"> reverse_copy </h2><p></p>
+<ol>
+<li>[first, middle), [middle, last)，对这俩个数组进行互换。</li>
+</ol>
+<hr>
+<p></p><h2 id="search"> search </h2><p></p>
+<p></p><h2 id="search_n"> search_n </h2><p></p>
+<ol>
+<li>如果未找到要返回，last1</li>
+<li>search_n查找连续n个符合条件的元素(他只能找元素不能找区间)，如果找不到就返回last1</li>
+</ol>
+<hr>
+<p></p><h2 id="swap_ranges"> swap_ranges </h2><br>将[first1, last1)区间内的元素与”从first2开始、个数相同”的元素互换。这两个序列可位于同一容器中，也可位于不同容器（长度不好说）<p></p>
+<hr>
+<p></p><h2 id="transform"> transform </h2><p></p>
+<ol>
+<li>第一个版本，把first到last区间执行op，结果放入result;返回result最后被赋值元素（result需要resize）</li>
+<li>第二个版本，把俩个区间执行op（op，第一个参数是f1区间里的，第二个参数f2区间的），放入result里</li>
+</ol>
+<hr>
+<p></p><h2 id="unique"> unique </h2><p></p>
+<ol>
+<li>移除重复的元素</li>
+<li>它只能移除相邻元素的重复元素，所以要想移除所有的，必须先排序。</li>
+</ol>
+</h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2>]]></content>
     
     <summary type="html">
     
@@ -427,9 +626,9 @@
       <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
     
     
-      <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
-    
       <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
+    
+      <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
     
       <category term="stl" scheme="https://xuecat.github.io/tags/stl/"/>
     
@@ -626,9 +825,9 @@ hash&lt;char&gt; d;//is char
       <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
     
     
-      <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
-    
       <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
+    
+      <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
     
       <category term="stl" scheme="https://xuecat.github.io/tags/stl/"/>
     
@@ -674,9 +873,9 @@ bool operator !=(const MyClass&lt;T&gt;&amp; item, T n)
       <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
     
     
-      <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
-    
       <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
+    
+      <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
     
       <category term="stl" scheme="https://xuecat.github.io/tags/stl/"/>
     
@@ -823,9 +1022,9 @@ U&quot;asdf&quot;//utf32字符;
       <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
     
     
-      <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
-    
       <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
+    
+      <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
     
       <category term="stl" scheme="https://xuecat.github.io/tags/stl/"/>
     
@@ -1041,6 +1240,35 @@ var ob = {
   </entry>
   
   <entry>
+    <title>Electron学习(164)</title>
+    <link href="https://xuecat.github.io/2016/02/27/164/"/>
+    <id>https://xuecat.github.io/2016/02/27/164/</id>
+    <published>2016-02-26T19:33:58.000Z</published>
+    <updated>2016-08-28T16:54:42.508Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="process-platform"><a href="#process-platform" class="headerlink" title="process.platform"></a>process.platform</h1><p>The variable to use would be process.platform</p>
+<p>On Mac the variable returns darwin. On Windows, it returns win32 (even on 64 bit).</p>
+<p>Possible values are: ‘darwin’, ‘freebsd’, ‘linux’, ‘sunos’ or ‘win32’</p>
+<p>I just set this at the top of my jakeFile:</p>
+<p>var isWin = /^win/.test(process.platform);</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;process-platform&quot;&gt;&lt;a href=&quot;#process-platform&quot; class=&quot;headerlink&quot; title=&quot;process.platform&quot;&gt;&lt;/a&gt;process.platform&lt;/h1&gt;&lt;p&gt;The variable t
+    
+    </summary>
+    
+      <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
+    
+    
+      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="错误认识" scheme="https://xuecat.github.io/tags/%E9%94%99%E8%AF%AF%E8%AE%A4%E8%AF%86/"/>
+    
+  </entry>
+  
+  <entry>
     <title>React Native CSS(162)</title>
     <link href="https://xuecat.github.io/2016/02/27/162/"/>
     <id>https://xuecat.github.io/2016/02/27/162/</id>
@@ -1080,97 +1308,6 @@ var ob = {
       <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
     
       <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Electron学习(164)</title>
-    <link href="https://xuecat.github.io/2016/02/27/164/"/>
-    <id>https://xuecat.github.io/2016/02/27/164/</id>
-    <published>2016-02-26T19:33:58.000Z</published>
-    <updated>2016-08-28T16:54:42.508Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="process-platform"><a href="#process-platform" class="headerlink" title="process.platform"></a>process.platform</h1><p>The variable to use would be process.platform</p>
-<p>On Mac the variable returns darwin. On Windows, it returns win32 (even on 64 bit).</p>
-<p>Possible values are: ‘darwin’, ‘freebsd’, ‘linux’, ‘sunos’ or ‘win32’</p>
-<p>I just set this at the top of my jakeFile:</p>
-<p>var isWin = /^win/.test(process.platform);</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;process-platform&quot;&gt;&lt;a href=&quot;#process-platform&quot; class=&quot;headerlink&quot; title=&quot;process.platform&quot;&gt;&lt;/a&gt;process.platform&lt;/h1&gt;&lt;p&gt;The variable t
-    
-    </summary>
-    
-      <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
-    
-    
-      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
-    
-      <category term="错误认识" scheme="https://xuecat.github.io/tags/%E9%94%99%E8%AF%AF%E8%AE%A4%E8%AF%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>React active(161)</title>
-    <link href="https://xuecat.github.io/2016/02/23/161/"/>
-    <id>https://xuecat.github.io/2016/02/23/161/</id>
-    <published>2016-02-22T19:33:58.000Z</published>
-    <updated>2016-08-28T06:06:54.431Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="http://www.lcode.org/react-native%E7%96%91%E9%9A%BE%E7%82%B9%E9%97%AE%E9%A2%98%E6%B7%B1%E5%9D%91%E6%9C%80%E5%BC%BA%E6%80%BB%E7%BB%93%E5%B8%96%E4%B8%8D%E6%96%AD%E6%9B%B4%E6%96%B0%E4%B8%AD/" target="_blank" rel="external">大部分的错误，辅助页面</a></p>
-<h2 id="我遇到的错误"><a href="#我遇到的错误" class="headerlink" title="我遇到的错误"></a>我遇到的错误</h2><p>   npm版本不对，升级。</p>
-<p>gredle本地安装，zip包要是all，且放在当前目录。</p>
-<pre><code>distributionBase=GRADLE_USER_HOME
-distributionPath=wrapper/dists
-zipStoreBase=GRADLE_USER_HOME
-zipStorePath=wrapper/dists
-#distributionUrl=https\://services.gradle.org/distributions/gradle-2.4-all.zip
-distributionUrl=gradle-2.4-all.zip
-</code></pre><p>别用git bash页面，最好用cmd，别用户权限</p>
-<p>先开虚拟机，再start服务器。</p>
-<p>一直红色，就删除配置文件，再重启。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;http://www.lcode.org/react-native%E7%96%91%E9%9A%BE%E7%82%B9%E9%97%AE%E9%A2%98%E6%B7%B1%E5%9D%91%E6%9C%80%E5%BC%BA%E6%80%BB%E7%B
-    
-    </summary>
-    
-      <category term="第三方库" scheme="https://xuecat.github.io/categories/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
-    
-    
-      <category term="React-active" scheme="https://xuecat.github.io/tags/React-active/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>windows使用js库(160)</title>
-    <link href="https://xuecat.github.io/2016/02/18/160/"/>
-    <id>https://xuecat.github.io/2016/02/18/160/</id>
-    <published>2016-02-17T19:33:58.000Z</published>
-    <updated>2016-08-27T22:20:58.615Z</updated>
-    
-    <content type="html"><![CDATA[<p>主流有：hex cef nw（node-webkit）Electron</p>
-<p>Atom、Visual Studio Code用的是Electron<br></p>
-<p>倘若你的桌面版应用没有跟底层挂钩，也就是没有使用到消息推送、版本升级、打印功能之类的东西，那么没关系。但是一旦使用到这些功能，你就彻底调到坑里了，nw有个致命的缺陷在于所有的非javascript编写的模块都需要重新用nw-gyp重新编译一下，这个编译的过程会出现各种各样的问题。而Electron几乎可以使用所有的node模块，只需要node-gyp编译的即可。主要深坑就在这！！！<br></p>
-<p>有道自己有个项目叫 heX 。这是其官网的介绍：<br>heX 项目于 2012 年启动，基于开源项目 CEF，它内部整合了开源项目 Chromium 及 Node.JS，将两者的 V8 引擎和消息循环合并，从而达到了在 Chromium 所展现的 Web 页面内可以直接使用 Node.JS 原生和及第三方扩展的 API 以及 Node.JS 最大的特色——异步回调与事件循环。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;主流有：hex cef nw（node-webkit）Electron&lt;/p&gt;
-&lt;p&gt;Atom、Visual Studio Code用的是Electron&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;倘若你的桌面版应用没有跟底层挂钩，也就是没有使用到消息推送、版本升级、打印功能之类的东西，那么没
-    
-    </summary>
-    
-      <category term="第三方库" scheme="https://xuecat.github.io/categories/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
-    
-    
-      <category term="mfc" scheme="https://xuecat.github.io/tags/mfc/"/>
     
   </entry>
   
