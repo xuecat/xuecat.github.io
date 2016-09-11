@@ -204,9 +204,9 @@
       <category term="音视频" scheme="https://xuecat.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/"/>
     
     
-      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
-    
       <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
+    
+      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
     
       <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
     
@@ -274,7 +274,7 @@
     <link href="https://xuecat.github.io/2016/08/20/175/"/>
     <id>https://xuecat.github.io/2016/08/20/175/</id>
     <published>2016-08-19T19:33:58.000Z</published>
-    <updated>2016-09-08T15:10:10.199Z</updated>
+    <updated>2016-09-11T12:28:39.934Z</updated>
     
     <content type="html"><![CDATA[<h4 id="算法记录"><a href="#算法记录" class="headerlink" title="算法记录"></a>算法记录</h4><h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><table>
 <thead>
@@ -468,6 +468,19 @@
 <td><a href="#swap_ranges">swap_ranges</a></td>
 <td style="text-align:center">区间互换</td>
 <td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><a href="#next_permutation">next_permutation</a></td>
+<td style="text-align:center">下一个排序序列</td>
+<td style="text-align:center"><a href="#prev_permutation">prev_permutation</a></td>
+<td style="text-align:center">上一个排序序列</td>
+</tr>
+<tr>
+<td><a href="#random_shuffle">random_shuffle</a></td>
+<td style="text-align:center">将区间元素次序随机重排</td>
+<td style="text-align:center"><a href="#nth_element">nth_element</a></td>
+<td style="text-align:center">以middle为中线，op返回false放middle右边，true放左边,比sort快</td>
 </tr>
 </tbody>
 </table>
@@ -615,6 +628,45 @@
 <li>移除重复的元素</li>
 <li>它只能移除相邻元素的重复元素，所以要想移除所有的，必须先排序。</li>
 </ol>
+<hr>
+<p></p><h2 id="lower_bound"> lower_bound </h2><p></p>
+<ol>
+<li>试图在已排序的[first, last)中找value</li>
+<li>如果有就返回第一个指向元素，如果没有便返回指向第一个“不小于value”的元素<br>这就意味着总是要返回值的。</li>
+</ol>
+<hr>
+<p></p><h2 id="upper_bound"> upper_bound </h2><p></p>
+<ol>
+<li>返回可插入value的最后一个合适位置<br>也就是说，如果value存在，返回的是指向value的下一个位置，而不是value。不存在则和上同理。</li>
+</ol>
+<hr>
+<p></p><h2 id="binary_search"> binary_search </h2><p></p>
+<ol>
+<li>这个函数本质是调用<code>lower_bound</code>,但是它返回的是true和false，</li>
+<li>第二个版本，允许自己指定comp比较函数。</li>
+</ol>
+<hr>
+<p></p><h2 id="next_permutation"> next_permutation </h2><p></p>
+<p></p><h2 id="prev_permutation"> prev_permutation </h2><p></p>
+<ol>
+<li>获取下一个排序序列。</li>
+<li>允许op自定义函数，官方解释说：返回的值表示第一个参数是否被认为是在特定的严格弱排序它定义的第二个之前</li>
+</ol>
+<hr>
+<p></p><h2 id="partial_sort"> partial_sort </h2><p></p>
+<p></p><h2 id="partial_sort_copy"> partial_sort_copy </h2><p></p>
+<ol>
+<li>从first到last找middle-first个最小元素，进行排序(默认递增<code>less&lt;int&gt;()</code> 可用<code>greater&lt;int&gt;()</code>等自定义)。</li>
+<li>只能保证[first, middle)是递增排序，不能保证[middle, last)是排序序列</li>
+<li>当用sort对整个排序，再取前middle-first; 能达到同等效果，但是效率没有此函数高。</li>
+<li>允许自定义比较函数</li>
+<li><code>partial_sort_copy</code>复制到result.begin(),result.end();</li>
+</ol>
+<hr>
+<p></p><h2 id="equal_range"> equal_range </h2><p></p>
+<ol>
+<li><code>lower_bound</code>和<code>upper_bound</code>的结合，返回一个pair，pair记录的就是前俩函数的结果</li>
+</ol>
 </h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2>]]></content>
     
     <summary type="html">
@@ -626,9 +678,9 @@
       <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
     
     
-      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
-    
       <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
+    
+      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
     
       <category term="stl" scheme="https://xuecat.github.io/tags/stl/"/>
     
@@ -725,7 +777,7 @@ int _tmain(int argc, _TCHAR* argv[])
     <link href="https://xuecat.github.io/2016/08/10/172/"/>
     <id>https://xuecat.github.io/2016/08/10/172/</id>
     <published>2016-08-09T19:33:58.000Z</published>
-    <updated>2016-08-29T13:28:57.946Z</updated>
+    <updated>2016-09-11T06:57:07.927Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>最近被git上一个项目打击了；想想自己c++书籍都看了十多本了，以为可以睥睨了。唉！！虽然公司编程不允许模板，但是身为程序员还是有学的必要。这本书一定要看完。</p>
@@ -791,8 +843,9 @@ hash&lt;char&gt; d;//is char
 </li>
 <li>multiset、multimap都允许键值重复现象。</li>
 </ul>
-<h4 id="8、hash"><a href="#8、hash" class="headerlink" title="8、hash"></a>8、hash</h4><h4 id="普及下hash表知识"><a href="#普及下hash表知识" class="headerlink" title="普及下hash表知识"></a>普及下hash表知识</h4><p>迭代器多用于数据的存储，添加，删除，操作等；（而关联器set，map等）大多以红黑树为基础；<br> 但是当对存储数据希望以常数时间来搜寻时，<br>特别是大量的数据，使用hash表的时间优势便有了。</p>
+<h4 id="8、hash"><a href="#8、hash" class="headerlink" title="8、hash"></a>8、hash</h4><h4 id="普及下hash表知识"><a href="#普及下hash表知识" class="headerlink" title="普及下hash表知识"></a>普及下hash表知识</h4><p>迭代器多用于数据的存储，添加，删除，操作等；（而关联器set，map等）大多以红黑树为基础；<br> 但是当对存储数据希望以常数时间来搜寻时，<br>特别是大量的无序数据，使用hash表的时间优势便有了。</p>
 <p><br>hash表是通过数组记录的方式来存储，之后又有一次探测、二次探测来对同一位置记录成一链表（具体可以看stl源码）</p>
+<h5 id="简单表述"><a href="#简单表述" class="headerlink" title="简单表述"></a>简单表述</h5><p><br>一个a数组有10个元素，这些元素个个是100以内的数。如果要快速记录和查询方式是：开辟一个100大小的b数组，从a数组中遍历，执行b[a[i]]++操作<br><br>这些无论什么操作都在b中执行，统计、查找等。因为b那边是常数级的。b便是hash表<br><br>当对b大小进行限制为50的时候，每个b就必须存俩个记录了，这便是探测算法需要的。</p>
 <ul>
 <li>hash_set　<ul>
 <li>template <class value,="" class="" hashfcn="hash<Value">, class EqualKey = equal_to<value>, class Alloc = alloc&gt;<br><br>class hash_set {…};</value></class></li>
@@ -811,6 +864,7 @@ hash&lt;char&gt; d;//is char
 </ul>
 </li>
 </ul>
+<h4 id="9、组合序列"><a href="#9、组合序列" class="headerlink" title="9、组合序列"></a>9、组合序列</h4><p>vector分别push: {a, b, c}; 那“abc”就是它的组合序列<br><br>当根据less-than(<code>less&lt;T&gt;()</code>)的字典排序后，它的下一序列便是：acb、bac、bca<br>如175的next<code>_permutation和prev_permutation</code>；</p>
 ]]></content>
     
     <summary type="html">
@@ -825,9 +879,9 @@ hash&lt;char&gt; d;//is char
       <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
     
     
-      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
-    
       <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
+    
+      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
     
       <category term="stl" scheme="https://xuecat.github.io/tags/stl/"/>
     
@@ -838,9 +892,9 @@ hash&lt;char&gt; d;//is char
     <link href="https://xuecat.github.io/2016/08/10/173/"/>
     <id>https://xuecat.github.io/2016/08/10/173/</id>
     <published>2016-08-09T19:33:58.000Z</published>
-    <updated>2016-08-29T13:28:52.240Z</updated>
+    <updated>2016-09-11T03:59:32.402Z</updated>
     
-    <content type="html"><![CDATA[<h4 id="std-enable-if"><a href="#std-enable-if" class="headerlink" title="std::enable_if"></a>std::enable_if</h4><p>源代码：</p>
+    <content type="html"><![CDATA[<h2 id="更多函数讲解在175，这里只放置大众，让人注意的函数。"><a href="#更多函数讲解在175，这里只放置大众，让人注意的函数。" class="headerlink" title="更多函数讲解在175，这里只放置大众，让人注意的函数。"></a>更多函数讲解在175，这里只放置大众，让人注意的函数。</h2><h4 id="std-enable-if"><a href="#std-enable-if" class="headerlink" title="std::enable_if"></a>std::enable_if</h4><p>源代码：</p>
 <pre><code>template&lt;class _Ty&gt;
 struct enable_if&lt;true, _Ty&gt;
 {    // type is _Ty for _Test
@@ -865,19 +919,40 @@ bool operator !=(const MyClass&lt;T&gt;&amp; item, T n)
     
     <summary type="html">
     
-      &lt;h4 id=&quot;std-enable-if&quot;&gt;&lt;a href=&quot;#std-enable-if&quot; class=&quot;headerlink&quot; title=&quot;std::enable_if&quot;&gt;&lt;/a&gt;std::enable_if&lt;/h4&gt;&lt;p&gt;源代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;temp
+      &lt;h2 id=&quot;更多函数讲解在175，这里只放置大众，让人注意的函数。&quot;&gt;&lt;a href=&quot;#更多函数讲解在175，这里只放置大众，让人注意的函数。&quot; class=&quot;headerlink&quot; title=&quot;更多函数讲解在175，这里只放置大众，让人注意的函数。&quot;&gt;&lt;/a&gt;更多函数讲
     
     </summary>
     
       <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
     
     
-      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
-    
       <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
     
+      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
+    
       <category term="stl" scheme="https://xuecat.github.io/tags/stl/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>工具代码(170)</title>
+    <link href="https://xuecat.github.io/2016/08/04/170/"/>
+    <id>https://xuecat.github.io/2016/08/04/170/</id>
+    <published>2016-08-03T19:33:58.000Z</published>
+    <updated>2016-08-27T22:33:56.310Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">	<span class="meta">#<span class="meta-keyword">pragma</span> once</span></div><div class="line">	<span class="keyword">class</span> CSeparaString</div><div class="line">	&#123;</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">		CSeparaString() &#123; m_strBuffer.Empty(); &#125;</div><div class="line">		~CSeparaString() &#123;&#125;</div><div class="line">	</div><div class="line">		<span class="function">VOID	<span class="title">SetBuffer</span><span class="params">(LPCTSTR lpsz)</span> </span>&#123; m_strBuffer = lpsz; &#125;</div><div class="line">		<span class="function">CString <span class="title">GetBuffer</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_strBuffer; &#125;</div><div class="line">	</div><div class="line">		<span class="function">VOID	<span class="title">SetSepara</span><span class="params">(TCHAR ch)</span> </span>&#123; m_chSepara = ch; &#125;</div><div class="line">		</div><div class="line">		<span class="function">VOID	<span class="title">AppendElement</span><span class="params">(<span class="keyword">int</span> ne)</span> </span>&#123;</div><div class="line">			TCHAR buffer[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</div><div class="line">			<span class="number">_</span>itot_s(ne, buffer, <span class="number">4</span>, <span class="number">10</span>);</div><div class="line">			m_strBuffer.Append(CString(m_chSepara)); </div><div class="line">			m_strBuffer.Append(buffer);</div><div class="line">		&#125;</div><div class="line">		<span class="function">VOID	<span class="title">AppendElement</span><span class="params">(LPCTSTR lpsz)</span> </span>&#123; m_strBuffer.Append(CString(m_chSepara)); m_strBuffer.Append(lpsz); &#125;</div><div class="line">		<span class="function">VOID	<span class="title">GetElement</span><span class="params">(CStringArray &amp;arry)</span> </span>&#123;</div><div class="line">			<span class="keyword">int</span> npos = m_strBuffer.Find(m_chSepara);</div><div class="line">			<span class="keyword">while</span> (npos != m_strBuffer.GetLength())</div><div class="line">			&#123;</div><div class="line">				<span class="keyword">int</span> epos = m_strBuffer.Find(m_chSepara, npos + <span class="number">1</span>);</div><div class="line">				(epos == <span class="number">-1</span>) &amp;&amp; (epos = m_strBuffer.GetLength());</div><div class="line">				arry.Add(m_strBuffer.Mid(npos + <span class="number">1</span>, epos - npos - <span class="number">1</span>));</div><div class="line">				npos = epos;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="function">CString <span class="title">GetElement</span><span class="params">(<span class="keyword">int</span> nelement)</span> </span>&#123;</div><div class="line">			<span class="keyword">int</span> npos = <span class="number">-1</span>;</div><div class="line">			<span class="keyword">int</span> epos = m_strBuffer.Find(m_chSepara);</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nelement; i++)</div><div class="line">			&#123;</div><div class="line">				npos = epos;</div><div class="line">				epos = m_strBuffer.Find(m_chSepara, npos + <span class="number">1</span>);</div><div class="line">			&#125;</div><div class="line">			(epos == <span class="number">-1</span>) &amp;&amp; (epos = m_strBuffer.GetLength());</div><div class="line">			<span class="keyword">return</span> m_strBuffer.Mid(npos + <span class="number">1</span>, epos - npos - <span class="number">1</span>);</div><div class="line">		&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span>:</div><div class="line">		TCHAR	m_chSepara;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">		CString m_strBuffer;</div><div class="line">	&#125;;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">	CRect CDlgImportPicture::CalculateMaxRect(<span class="keyword">const</span> CRect *prect, <span class="keyword">int</span> numerator, <span class="keyword">int</span> denominator)</div><div class="line">	&#123;</div><div class="line">		CRect rtRE;</div><div class="line">		<span class="keyword">if</span> (prect)</div><div class="line">		&#123;</div><div class="line">			rtRE = prect;</div><div class="line">	</div><div class="line">			<span class="comment">//先算宽高度基准</span></div><div class="line">			<span class="keyword">if</span> (prect-&gt;Width() * denominator &gt; numerator * prect-&gt;Height())<span class="comment">//宽过多,高基准</span></div><div class="line">			&#123;</div><div class="line">				<span class="keyword">int</span> offset = prect-&gt;Width() - ((prect-&gt;Height() * numerator)/denominator);</div><div class="line">				rtRE.left += offset/<span class="number">2</span>;</div><div class="line">				rtRE.right -= offset/<span class="number">2</span>;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">else</span><span class="comment">//高过多,宽基准</span></div><div class="line">			&#123;</div><div class="line">				<span class="keyword">int</span> offset = prect-&gt;Height() - ((prect-&gt;Width() * denominator)/numerator);</div><div class="line">				rtRE.top += offset/<span class="number">2</span>;</div><div class="line">				rtRE.bottom -= offset/<span class="number">2</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> rtRE;</div><div class="line">	&#125;</div><div class="line"></div><div class="line"></div><div class="line"># 时间</div><div class="line">	<span class="meta">#<span class="meta-keyword">define</span> TickStart() DWORD dwstart = GetTickCount(), dwend = 0;\</span></div><div class="line">		TCHAR buffer[1024] = &#123;0&#125;;\</div><div class="line">		TCHAR thisname[1024] = &#123;0&#125;;\</div><div class="line">		_ltot_s(int(this), thisname, 1024, 10);\</div><div class="line">	</div><div class="line">	<span class="meta">#<span class="meta-keyword">define</span> TickOutName(str) OutputDebugString(CString(thisname) + _T(<span class="meta-string">" :"</span>) + str);\</span></div><div class="line">		OutputDebugString(_T(<span class="meta-string">"\n"</span>));\</div><div class="line">	</div><div class="line">	<span class="meta">#<span class="meta-keyword">define</span> TickOutPut(str) dwend = GetTickCount();\</span></div><div class="line">		_ltot_s(dwend - dwstart, buffer, 1024, 10);\</div><div class="line">		OutputDebugString(CString(thisname) + _T(<span class="meta-string">" :"</span>) + str);\</div><div class="line">		OutputDebugString(buffer);\</div><div class="line">		OutputDebugString(_T(<span class="meta-string">"\n"</span>));\</div><div class="line">		dwstart = dwend;\</div><div class="line"></div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;figure class=&quot;highlight c&quot;&gt;&lt;figcaption&gt;&lt;span&gt;++&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;
+    
+    </summary>
+    
+      <category term="配置" scheme="https://xuecat.github.io/categories/%E9%85%8D%E7%BD%AE/"/>
+    
+    
+      <category term="工具" scheme="https://xuecat.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
@@ -914,28 +989,6 @@ bool operator !=(const MyClass&lt;T&gt;&amp; item, T n)
       <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
     
       <category term="mfc" scheme="https://xuecat.github.io/tags/mfc/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>工具代码(170)</title>
-    <link href="https://xuecat.github.io/2016/08/04/170/"/>
-    <id>https://xuecat.github.io/2016/08/04/170/</id>
-    <published>2016-08-03T19:33:58.000Z</published>
-    <updated>2016-08-27T22:33:56.310Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">	<span class="meta">#<span class="meta-keyword">pragma</span> once</span></div><div class="line">	<span class="keyword">class</span> CSeparaString</div><div class="line">	&#123;</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">		CSeparaString() &#123; m_strBuffer.Empty(); &#125;</div><div class="line">		~CSeparaString() &#123;&#125;</div><div class="line">	</div><div class="line">		<span class="function">VOID	<span class="title">SetBuffer</span><span class="params">(LPCTSTR lpsz)</span> </span>&#123; m_strBuffer = lpsz; &#125;</div><div class="line">		<span class="function">CString <span class="title">GetBuffer</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_strBuffer; &#125;</div><div class="line">	</div><div class="line">		<span class="function">VOID	<span class="title">SetSepara</span><span class="params">(TCHAR ch)</span> </span>&#123; m_chSepara = ch; &#125;</div><div class="line">		</div><div class="line">		<span class="function">VOID	<span class="title">AppendElement</span><span class="params">(<span class="keyword">int</span> ne)</span> </span>&#123;</div><div class="line">			TCHAR buffer[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</div><div class="line">			<span class="number">_</span>itot_s(ne, buffer, <span class="number">4</span>, <span class="number">10</span>);</div><div class="line">			m_strBuffer.Append(CString(m_chSepara)); </div><div class="line">			m_strBuffer.Append(buffer);</div><div class="line">		&#125;</div><div class="line">		<span class="function">VOID	<span class="title">AppendElement</span><span class="params">(LPCTSTR lpsz)</span> </span>&#123; m_strBuffer.Append(CString(m_chSepara)); m_strBuffer.Append(lpsz); &#125;</div><div class="line">		<span class="function">VOID	<span class="title">GetElement</span><span class="params">(CStringArray &amp;arry)</span> </span>&#123;</div><div class="line">			<span class="keyword">int</span> npos = m_strBuffer.Find(m_chSepara);</div><div class="line">			<span class="keyword">while</span> (npos != m_strBuffer.GetLength())</div><div class="line">			&#123;</div><div class="line">				<span class="keyword">int</span> epos = m_strBuffer.Find(m_chSepara, npos + <span class="number">1</span>);</div><div class="line">				(epos == <span class="number">-1</span>) &amp;&amp; (epos = m_strBuffer.GetLength());</div><div class="line">				arry.Add(m_strBuffer.Mid(npos + <span class="number">1</span>, epos - npos - <span class="number">1</span>));</div><div class="line">				npos = epos;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="function">CString <span class="title">GetElement</span><span class="params">(<span class="keyword">int</span> nelement)</span> </span>&#123;</div><div class="line">			<span class="keyword">int</span> npos = <span class="number">-1</span>;</div><div class="line">			<span class="keyword">int</span> epos = m_strBuffer.Find(m_chSepara);</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nelement; i++)</div><div class="line">			&#123;</div><div class="line">				npos = epos;</div><div class="line">				epos = m_strBuffer.Find(m_chSepara, npos + <span class="number">1</span>);</div><div class="line">			&#125;</div><div class="line">			(epos == <span class="number">-1</span>) &amp;&amp; (epos = m_strBuffer.GetLength());</div><div class="line">			<span class="keyword">return</span> m_strBuffer.Mid(npos + <span class="number">1</span>, epos - npos - <span class="number">1</span>);</div><div class="line">		&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span>:</div><div class="line">		TCHAR	m_chSepara;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">		CString m_strBuffer;</div><div class="line">	&#125;;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">	CRect CDlgImportPicture::CalculateMaxRect(<span class="keyword">const</span> CRect *prect, <span class="keyword">int</span> numerator, <span class="keyword">int</span> denominator)</div><div class="line">	&#123;</div><div class="line">		CRect rtRE;</div><div class="line">		<span class="keyword">if</span> (prect)</div><div class="line">		&#123;</div><div class="line">			rtRE = prect;</div><div class="line">	</div><div class="line">			<span class="comment">//先算宽高度基准</span></div><div class="line">			<span class="keyword">if</span> (prect-&gt;Width() * denominator &gt; numerator * prect-&gt;Height())<span class="comment">//宽过多,高基准</span></div><div class="line">			&#123;</div><div class="line">				<span class="keyword">int</span> offset = prect-&gt;Width() - ((prect-&gt;Height() * numerator)/denominator);</div><div class="line">				rtRE.left += offset/<span class="number">2</span>;</div><div class="line">				rtRE.right -= offset/<span class="number">2</span>;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">else</span><span class="comment">//高过多,宽基准</span></div><div class="line">			&#123;</div><div class="line">				<span class="keyword">int</span> offset = prect-&gt;Height() - ((prect-&gt;Width() * denominator)/numerator);</div><div class="line">				rtRE.top += offset/<span class="number">2</span>;</div><div class="line">				rtRE.bottom -= offset/<span class="number">2</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> rtRE;</div><div class="line">	&#125;</div><div class="line"></div><div class="line"></div><div class="line"># 时间</div><div class="line">	<span class="meta">#<span class="meta-keyword">define</span> TickStart() DWORD dwstart = GetTickCount(), dwend = 0;\</span></div><div class="line">		TCHAR buffer[1024] = &#123;0&#125;;\</div><div class="line">		TCHAR thisname[1024] = &#123;0&#125;;\</div><div class="line">		_ltot_s(int(this), thisname, 1024, 10);\</div><div class="line">	</div><div class="line">	<span class="meta">#<span class="meta-keyword">define</span> TickOutName(str) OutputDebugString(CString(thisname) + _T(<span class="meta-string">" :"</span>) + str);\</span></div><div class="line">		OutputDebugString(_T(<span class="meta-string">"\n"</span>));\</div><div class="line">	</div><div class="line">	<span class="meta">#<span class="meta-keyword">define</span> TickOutPut(str) dwend = GetTickCount();\</span></div><div class="line">		_ltot_s(dwend - dwstart, buffer, 1024, 10);\</div><div class="line">		OutputDebugString(CString(thisname) + _T(<span class="meta-string">" :"</span>) + str);\</div><div class="line">		OutputDebugString(buffer);\</div><div class="line">		OutputDebugString(_T(<span class="meta-string">"\n"</span>));\</div><div class="line">		dwstart = dwend;\</div><div class="line"></div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;figure class=&quot;highlight c&quot;&gt;&lt;figcaption&gt;&lt;span&gt;++&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;
-    
-    </summary>
-    
-      <category term="配置" scheme="https://xuecat.github.io/categories/%E9%85%8D%E7%BD%AE/"/>
-    
-    
-      <category term="工具" scheme="https://xuecat.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
@@ -1022,9 +1075,9 @@ U&quot;asdf&quot;//utf32字符;
       <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
     
     
-      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
-    
       <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
+    
+      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
     
       <category term="stl" scheme="https://xuecat.github.io/tags/stl/"/>
     
@@ -1240,35 +1293,6 @@ var ob = {
   </entry>
   
   <entry>
-    <title>Electron学习(164)</title>
-    <link href="https://xuecat.github.io/2016/02/27/164/"/>
-    <id>https://xuecat.github.io/2016/02/27/164/</id>
-    <published>2016-02-26T19:33:58.000Z</published>
-    <updated>2016-08-28T16:54:42.508Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="process-platform"><a href="#process-platform" class="headerlink" title="process.platform"></a>process.platform</h1><p>The variable to use would be process.platform</p>
-<p>On Mac the variable returns darwin. On Windows, it returns win32 (even on 64 bit).</p>
-<p>Possible values are: ‘darwin’, ‘freebsd’, ‘linux’, ‘sunos’ or ‘win32’</p>
-<p>I just set this at the top of my jakeFile:</p>
-<p>var isWin = /^win/.test(process.platform);</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;process-platform&quot;&gt;&lt;a href=&quot;#process-platform&quot; class=&quot;headerlink&quot; title=&quot;process.platform&quot;&gt;&lt;/a&gt;process.platform&lt;/h1&gt;&lt;p&gt;The variable t
-    
-    </summary>
-    
-      <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
-    
-    
-      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
-    
-      <category term="错误认识" scheme="https://xuecat.github.io/tags/%E9%94%99%E8%AF%AF%E8%AE%A4%E8%AF%86/"/>
-    
-  </entry>
-  
-  <entry>
     <title>React Native CSS(162)</title>
     <link href="https://xuecat.github.io/2016/02/27/162/"/>
     <id>https://xuecat.github.io/2016/02/27/162/</id>
@@ -1308,6 +1332,35 @@ var ob = {
       <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
     
       <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Electron学习(164)</title>
+    <link href="https://xuecat.github.io/2016/02/27/164/"/>
+    <id>https://xuecat.github.io/2016/02/27/164/</id>
+    <published>2016-02-26T19:33:58.000Z</published>
+    <updated>2016-08-28T16:54:42.508Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="process-platform"><a href="#process-platform" class="headerlink" title="process.platform"></a>process.platform</h1><p>The variable to use would be process.platform</p>
+<p>On Mac the variable returns darwin. On Windows, it returns win32 (even on 64 bit).</p>
+<p>Possible values are: ‘darwin’, ‘freebsd’, ‘linux’, ‘sunos’ or ‘win32’</p>
+<p>I just set this at the top of my jakeFile:</p>
+<p>var isWin = /^win/.test(process.platform);</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;process-platform&quot;&gt;&lt;a href=&quot;#process-platform&quot; class=&quot;headerlink&quot; title=&quot;process.platform&quot;&gt;&lt;/a&gt;process.platform&lt;/h1&gt;&lt;p&gt;The variable t
+    
+    </summary>
+    
+      <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
+    
+    
+      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="错误认识" scheme="https://xuecat.github.io/tags/%E9%94%99%E8%AF%AF%E8%AE%A4%E8%AF%86/"/>
     
   </entry>
   

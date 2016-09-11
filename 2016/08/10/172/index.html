@@ -70,7 +70,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="c++,c函数,stl," />
+  <meta name="keywords" content="c函数,c++,stl," />
 
 
 
@@ -98,7 +98,7 @@
 <meta property="og:description" content="最近被git上一个项目打击了；想想自己c++书籍都看了十多本了，以为可以睥睨了。唉！！虽然公司编程不允许模板，但是身为程序员还是有学的必要。这本书一定要看完。
 
 1、STL版本众多stl版本众多，但是有些头文件有很大一长串的版权注释（以前在codeproject也发现的）。这些都是参照HP版本的。允许任何人免费使用、拷贝、修改、传播、贩卖这份文件，唯一需要遵守的是必须在所有文件加上HP版本声明。">
-<meta property="og:updated_time" content="2016-08-29T13:28:57.946Z">
+<meta property="og:updated_time" content="2016-09-11T06:57:07.927Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="STL源码剖析(172)">
 <meta name="twitter:description" content="最近被git上一个项目打击了；想想自己c++书籍都看了十多本了，以为可以睥睨了。唉！！虽然公司编程不允许模板，但是身为程序员还是有学的必要。这本书一定要看完。
@@ -412,8 +412,9 @@ hash&lt;char&gt; d;//is char
 </li>
 <li>multiset、multimap都允许键值重复现象。</li>
 </ul>
-<h4 id="8、hash"><a href="#8、hash" class="headerlink" title="8、hash"></a>8、hash</h4><h4 id="普及下hash表知识"><a href="#普及下hash表知识" class="headerlink" title="普及下hash表知识"></a>普及下hash表知识</h4><p>迭代器多用于数据的存储，添加，删除，操作等；（而关联器set，map等）大多以红黑树为基础；<br> 但是当对存储数据希望以常数时间来搜寻时，<br>特别是大量的数据，使用hash表的时间优势便有了。</p>
+<h4 id="8、hash"><a href="#8、hash" class="headerlink" title="8、hash"></a>8、hash</h4><h4 id="普及下hash表知识"><a href="#普及下hash表知识" class="headerlink" title="普及下hash表知识"></a>普及下hash表知识</h4><p>迭代器多用于数据的存储，添加，删除，操作等；（而关联器set，map等）大多以红黑树为基础；<br> 但是当对存储数据希望以常数时间来搜寻时，<br>特别是大量的无序数据，使用hash表的时间优势便有了。</p>
 <p><br>hash表是通过数组记录的方式来存储，之后又有一次探测、二次探测来对同一位置记录成一链表（具体可以看stl源码）</p>
+<h5 id="简单表述"><a href="#简单表述" class="headerlink" title="简单表述"></a>简单表述</h5><p><br>一个a数组有10个元素，这些元素个个是100以内的数。如果要快速记录和查询方式是：开辟一个100大小的b数组，从a数组中遍历，执行b[a[i]]++操作<br><br>这些无论什么操作都在b中执行，统计、查找等。因为b那边是常数级的。b便是hash表<br><br>当对b大小进行限制为50的时候，每个b就必须存俩个记录了，这便是探测算法需要的。</p>
 <ul>
 <li>hash_set　<ul>
 <li>template <class value,="" class="" hashfcn="hash<Value">, class EqualKey = equal_to<value>, class Alloc = alloc&gt;<br><br>class hash_set {…};</value></class></li>
@@ -432,6 +433,7 @@ hash&lt;char&gt; d;//is char
 </ul>
 </li>
 </ul>
+<h4 id="9、组合序列"><a href="#9、组合序列" class="headerlink" title="9、组合序列"></a>9、组合序列</h4><p>vector分别push: {a, b, c}; 那“abc”就是它的组合序列<br><br>当根据less-than(<code>less&lt;T&gt;()</code>)的字典排序后，它的下一序列便是：acb、bac、bca<br>如175的next<code>_permutation和prev_permutation</code>；</p>
 
       
     </div>
@@ -452,9 +454,9 @@ hash&lt;char&gt; d;//is char
       
         <div class="post-tags">
           
-            <a href="/tags/c/" rel="tag">#c++</a>
-          
             <a href="/tags/c函数/" rel="tag">#c函数</a>
+          
+            <a href="/tags/c/" rel="tag">#c++</a>
           
             <a href="/tags/stl/" rel="tag">#stl</a>
           
@@ -668,7 +670,7 @@ hash&lt;char&gt; d;//is char
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、STL版本众多"><span class="nav-number">1.</span> <span class="nav-text">1、STL版本众多</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、模板中的静态变量"><span class="nav-number">2.</span> <span class="nav-text">2、模板中的静态变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、模板中的特殊设计"><span class="nav-number">3.</span> <span class="nav-text">3、模板中的特殊设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、模板类型可赋值"><span class="nav-number">4.</span> <span class="nav-text">4、模板类型可赋值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、模板操作函数"><span class="nav-number">5.</span> <span class="nav-text">5、模板操作函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、构造函数特例化"><span class="nav-number">6.</span> <span class="nav-text">6、构造函数特例化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7、迭代器"><span class="nav-number">7.</span> <span class="nav-text">7、迭代器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8、hash"><span class="nav-number">8.</span> <span class="nav-text">8、hash</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#普及下hash表知识"><span class="nav-number">9.</span> <span class="nav-text">普及下hash表知识</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、STL版本众多"><span class="nav-number">1.</span> <span class="nav-text">1、STL版本众多</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、模板中的静态变量"><span class="nav-number">2.</span> <span class="nav-text">2、模板中的静态变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、模板中的特殊设计"><span class="nav-number">3.</span> <span class="nav-text">3、模板中的特殊设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、模板类型可赋值"><span class="nav-number">4.</span> <span class="nav-text">4、模板类型可赋值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、模板操作函数"><span class="nav-number">5.</span> <span class="nav-text">5、模板操作函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、构造函数特例化"><span class="nav-number">6.</span> <span class="nav-text">6、构造函数特例化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7、迭代器"><span class="nav-number">7.</span> <span class="nav-text">7、迭代器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8、hash"><span class="nav-number">8.</span> <span class="nav-text">8、hash</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#普及下hash表知识"><span class="nav-number">9.</span> <span class="nav-text">普及下hash表知识</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#简单表述"><span class="nav-number">9.1.</span> <span class="nav-text">简单表述</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9、组合序列"><span class="nav-number">10.</span> <span class="nav-text">9、组合序列</span></a></li></ol></div>
             
           </div>
         </section>
