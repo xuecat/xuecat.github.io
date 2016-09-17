@@ -82,7 +82,7 @@
 <meta property="og:url" content="https://xuecat.github.io/2016/08/16/174/index.html">
 <meta property="og:site_name" content="XueCat">
 <meta property="og:description" content="Placement new先看一段代码：++1234567891011121314151617181920template&amp;lt;class T1,class T2&amp;gt;inline void _construct(T1* p,const T2&amp;amp; value)&amp;#123;    new(p) T1(value);&amp;#125;int _tmain(int argc, _TCHAR* arg">
-<meta property="og:updated_time" content="2016-08-28T05:43:58.842Z">
+<meta property="og:updated_time" content="2016-09-14T13:27:59.375Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Placement new(174)">
 <meta name="twitter:description" content="Placement new先看一段代码：++1234567891011121314151617181920template&amp;lt;class T1,class T2&amp;gt;inline void _construct(T1* p,const T2&amp;amp; value)&amp;#123;    new(p) T1(value);&amp;#125;int _tmain(int argc, _TCHAR* arg">
@@ -353,47 +353,8 @@
 <li><p>内存的释放<br> 如果缓冲区在堆中，那么调用delete[] buf 进行内存的释放。如果在栈中，那么在其作用域内有效，跳出作用域，内存自动释放。</p>
 </li>
 </ol>
-<pre><code>template&lt;class T1,class T2&gt;
-inline void _construct(T1* p,const T2&amp; value)
-{
-    new(p) T1(value);
-}
-
-template&lt;class T1,class T2&gt;
-inline T1* _constructs(T1* p,const T2&amp; value)
-{
-    return new(p) T1[3];
-}
-
-class MemT {
-public:
-    int m_a;
-
-    MemT(size_t a) { m_a = a; cout &lt;&lt; a &lt;&lt; endl;}
-    ~MemT() {}
-    void * (operator new) (size_t t, void *location)
-    {
-        return location;
-    }
-};
-
-int _tmain(int argc, _TCHAR* argv[])
-{
-    int p = 0;
-    int d[3] = {0};
-    MemT* da = new (&amp;p) MemT(2);//先走操作符，再走构造 别忘了析构
-
-    _construct(&amp;p, 3);
-    _constructs(&amp;d, 2);
-
-    system(&quot;pause&quot;);
-    return 0;
-}
-//类的那块，本来就没啥代码，最多给个分配内存的判断和内存的再开辟吧。
-//数组那块_constructs，有个遗憾，无法像第一个那样给参数进去。
-//能用的场景：1、基本数据配子（给基类数据都开辟大小，通过这个来构造析构）也就STL敢用！
-//2、节约内存，对已经使用了的内存，再次使用。感觉并无多大用
-</code></pre><p>原作：<br><a href="http://www.cnblogs.com/younes/archive/2010/04/26/1721528.html" target="_blank" rel="external">http://www.cnblogs.com/younes/archive/2010/04/26/1721528.html</a></p>
+<figure class="highlight c"><figcaption><span>先看一段代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T1,<span class="keyword">class</span> T2&gt;</div><div class="line"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="number">_</span>construct(T1* p,<span class="keyword">const</span> T2&amp; value)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">new</span>(p) T1(value);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T1,<span class="keyword">class</span> T2&gt;</div><div class="line"><span class="keyword">inline</span> T1* <span class="number">_</span>constructs(T1* p,<span class="keyword">const</span> T2&amp; value)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span>(p) T1[<span class="number">3</span>];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">class</span> MemT &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> m_a;</div><div class="line"></div><div class="line">    MemT(<span class="keyword">size_t</span> a) &#123; m_a = a; <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;&#125;</div><div class="line">    ~MemT() &#123;&#125;</div><div class="line">    <span class="keyword">void</span> * (<span class="keyword">operator</span> <span class="keyword">new</span>) (<span class="keyword">size_t</span> t, <span class="keyword">void</span> *location)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> location;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">int</span> <span class="number">_</span>tmain(<span class="keyword">int</span> argc, <span class="number">_</span>TCHAR* argv[])</div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> p = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> d[<span class="number">3</span>] = &#123;<span class="number">0</span>&#125;;</div><div class="line">    MemT* da = <span class="keyword">new</span> (&amp;p) MemT(<span class="number">2</span>);<span class="comment">//先走操作符，再走构造 别忘了析构</span></div><div class="line"></div><div class="line">    <span class="number">_</span>construct(&amp;p, <span class="number">3</span>);</div><div class="line">    <span class="number">_</span>constructs(&amp;d, <span class="number">2</span>);</div><div class="line"></div><div class="line">    system(<span class="string">"pause"</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//类的那块，本来就没啥代码，最多给个分配内存的判断和内存的再开辟吧。</span></div><div class="line"><span class="comment">//数组那块_constructs，有个遗憾，无法像第一个那样给参数进去。</span></div><div class="line"><span class="comment">//能用的场景：1、基本数据配子（给基类数据都开辟大小，通过这个来构造析构）也就STL敢用！</span></div><div class="line"><span class="comment">//2、节约内存，对已经使用了的内存，再次使用。感觉并无多大用</span></div><div class="line"></div></pre></td></tr></table></figure>
+<p>原作：<br><a href="http://www.cnblogs.com/younes/archive/2010/04/26/1721528.html" target="_blank" rel="external">http://www.cnblogs.com/younes/archive/2010/04/26/1721528.html</a></p>
 
       
     </div>
@@ -423,8 +384,8 @@ int _tmain(int argc, _TCHAR* argv[])
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/10/172/" rel="next" title="STL源码剖析(172)">
-                <i class="fa fa-chevron-left"></i> STL源码剖析(172)
+              <a href="/2016/08/10/173/" rel="next" title="STL函数学习(173)">
+                <i class="fa fa-chevron-left"></i> STL函数学习(173)
               </a>
             
           </div>
@@ -506,7 +467,7 @@ int _tmain(int argc, _TCHAR* argv[])
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">175</span>
+              <span class="site-state-item-count">176</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -523,7 +484,7 @@ int _tmain(int argc, _TCHAR* argv[])
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

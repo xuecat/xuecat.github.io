@@ -58,7 +58,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="c函数,c++,stl," />
+  <meta name="keywords" content="c++,c函数,stl," />
 
 
 
@@ -94,7 +94,7 @@ struct enable_if&amp;lt;true, _Ty&amp;gt;
 typedef _Ty type;
 };
 其实它和static_assert一样，都是为了编译期间检查。常用使用在函数前，表面上">
-<meta property="og:updated_time" content="2016-09-11T03:59:32.402Z">
+<meta property="og:updated_time" content="2016-09-17T14:37:32.428Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="STL函数学习(173)">
 <meta name="twitter:description" content="更多函数讲解在175，这里只放置大众，让人注意的函数。std::enable_if源代码：
@@ -368,8 +368,7 @@ bool operator !=(const MyClass&lt;T&gt;&amp; item, T n)
 <h4 id="reserve、resize、capacity、size"><a href="#reserve、resize、capacity、size" class="headerlink" title="reserve、resize、capacity、size"></a>reserve、resize、capacity、size</h4><blockquote>
 <p>内容就不讲了，一一对应的！！！点下就好，vector和string都是一样的，只增长，2*n。</p>
 </blockquote>
-<p>####</p>
-
+<h4 id="unary-function-一元函数，binary-function-二元函数"><a href="#unary-function-一元函数，binary-function-二元函数" class="headerlink" title="unary_function 一元函数，binary_function 二元函数"></a>unary_function 一元函数，binary_function 二元函数</h4><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> t&gt;</div><div class="line"><span class="keyword">struct</span> negate : <span class="keyword">public</span> unary_function&lt;t, t&gt; &#123;</div><div class="line">	<span class="function">t <span class="title">operator</span><span class="params">()</span> <span class="params">(<span class="keyword">const</span> t&amp; x)</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> -x;&#125;<span class="comment">//此const是必须的</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> t&gt;</div><div class="line"><span class="keyword">struct</span> plus : <span class="keyword">public</span> binary_funcion&lt;t, t, t&gt; &#123;</div><div class="line">	<span class="function">t <span class="title">operator</span><span class="params">()</span> <span class="params">(constt t&amp; x, <span class="keyword">const</span> t&amp; y)</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> x + y;&#125;<span class="comment">//此const是必须的</span></div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
       
     </div>
     
@@ -389,9 +388,9 @@ bool operator !=(const MyClass&lt;T&gt;&amp; item, T n)
       
         <div class="post-tags">
           
-            <a href="/tags/c函数/" rel="tag">#c函数</a>
-          
             <a href="/tags/c/" rel="tag">#c++</a>
+          
+            <a href="/tags/c函数/" rel="tag">#c函数</a>
           
             <a href="/tags/stl/" rel="tag">#stl</a>
           
@@ -402,16 +401,16 @@ bool operator !=(const MyClass&lt;T&gt;&amp; item, T n)
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/04/171/" rel="next" title="微软的莫名好用的类(171)">
-                <i class="fa fa-chevron-left"></i> 微软的莫名好用的类(171)
+              <a href="/2016/08/10/172/" rel="next" title="STL源码剖析(172)">
+                <i class="fa fa-chevron-left"></i> STL源码剖析(172)
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/08/10/172/" rel="prev" title="STL源码剖析(172)">
-                STL源码剖析(172) <i class="fa fa-chevron-right"></i>
+              <a href="/2016/08/16/174/" rel="prev" title="Placement new(174)">
+                Placement new(174) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -485,7 +484,7 @@ bool operator !=(const MyClass&lt;T&gt;&amp; item, T n)
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">175</span>
+              <span class="site-state-item-count">176</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -502,7 +501,7 @@ bool operator !=(const MyClass&lt;T&gt;&amp; item, T n)
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -596,7 +595,7 @@ bool operator !=(const MyClass&lt;T&gt;&amp; item, T n)
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#更多函数讲解在175，这里只放置大众，让人注意的函数。"><span class="nav-number">1.</span> <span class="nav-text">更多函数讲解在175，这里只放置大众，让人注意的函数。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#std-enable-if"><span class="nav-number">1.0.1.</span> <span class="nav-text">std::enable_if</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#std-find"><span class="nav-number">1.0.2.</span> <span class="nav-text">std::find</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#traits编程法"><span class="nav-number">1.0.3.</span> <span class="nav-text">traits编程法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#typename"><span class="nav-number">1.0.4.</span> <span class="nav-text">typename</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#std-bind"><span class="nav-number">1.0.5.</span> <span class="nav-text">std::bind</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#std-function"><span class="nav-number">1.0.6.</span> <span class="nav-text">std::function</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#reserve、resize、capacity、size"><span class="nav-number">1.0.7.</span> <span class="nav-text">reserve、resize、capacity、size</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#更多函数讲解在175，这里只放置大众，让人注意的函数。"><span class="nav-number">1.</span> <span class="nav-text">更多函数讲解在175，这里只放置大众，让人注意的函数。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#std-enable-if"><span class="nav-number">1.0.1.</span> <span class="nav-text">std::enable_if</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#std-find"><span class="nav-number">1.0.2.</span> <span class="nav-text">std::find</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#traits编程法"><span class="nav-number">1.0.3.</span> <span class="nav-text">traits编程法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#typename"><span class="nav-number">1.0.4.</span> <span class="nav-text">typename</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#std-bind"><span class="nav-number">1.0.5.</span> <span class="nav-text">std::bind</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#std-function"><span class="nav-number">1.0.6.</span> <span class="nav-text">std::function</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#reserve、resize、capacity、size"><span class="nav-number">1.0.7.</span> <span class="nav-text">reserve、resize、capacity、size</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#unary-function-一元函数，binary-function-二元函数"><span class="nav-number">1.0.8.</span> <span class="nav-text">unary_function 一元函数，binary_function 二元函数</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>

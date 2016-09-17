@@ -76,19 +76,16 @@
 
 
 
-<meta name="description" content="#define MAKEWORD(a, b)      ((WORD)(((BYTE)((DWORD_PTR)(a) &amp;amp; 0xff)) | ((WORD)((BYTE)((DWORD_PTR)(b) &amp;amp; 0xff))) &amp;lt;&amp;lt; 8))
-#define MAKELONG(a, b)      ((LONG)(((WORD)((DWORD_PTR)(a) &amp;amp; 0xff">
+<meta name="description" content="++12345678#define MAKEWORD(a, b)      ((WORD)(((BYTE)((DWORD_PTR)(a) &amp;amp; 0xff)) | ((WORD)((BYTE)((DWORD_PTR)(b) &amp;amp; 0xff))) &amp;lt;&amp;lt; 8))#define MAKELONG(a, b)      ((LONG)(((WORD)((DWORD_PTR)(a) &amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="高低字节宏(157)">
 <meta property="og:url" content="https://xuecat.github.io/2016/01/25/157/index.html">
 <meta property="og:site_name" content="XueCat">
-<meta property="og:description" content="#define MAKEWORD(a, b)      ((WORD)(((BYTE)((DWORD_PTR)(a) &amp;amp; 0xff)) | ((WORD)((BYTE)((DWORD_PTR)(b) &amp;amp; 0xff))) &amp;lt;&amp;lt; 8))
-#define MAKELONG(a, b)      ((LONG)(((WORD)((DWORD_PTR)(a) &amp;amp; 0xff">
-<meta property="og:updated_time" content="2016-09-13T13:26:25.012Z">
+<meta property="og:description" content="++12345678#define MAKEWORD(a, b)      ((WORD)(((BYTE)((DWORD_PTR)(a) &amp;amp; 0xff)) | ((WORD)((BYTE)((DWORD_PTR)(b) &amp;amp; 0xff))) &amp;lt;&amp;lt; 8))#define MAKELONG(a, b)      ((LONG)(((WORD)((DWORD_PTR)(a) &amp;">
+<meta property="og:updated_time" content="2016-09-14T13:27:19.656Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高低字节宏(157)">
-<meta name="twitter:description" content="#define MAKEWORD(a, b)      ((WORD)(((BYTE)((DWORD_PTR)(a) &amp;amp; 0xff)) | ((WORD)((BYTE)((DWORD_PTR)(b) &amp;amp; 0xff))) &amp;lt;&amp;lt; 8))
-#define MAKELONG(a, b)      ((LONG)(((WORD)((DWORD_PTR)(a) &amp;amp; 0xff">
+<meta name="twitter:description" content="++12345678#define MAKEWORD(a, b)      ((WORD)(((BYTE)((DWORD_PTR)(a) &amp;amp; 0xff)) | ((WORD)((BYTE)((DWORD_PTR)(b) &amp;amp; 0xff))) &amp;lt;&amp;lt; 8))#define MAKELONG(a, b)      ((LONG)(((WORD)((DWORD_PTR)(a) &amp;">
 
 
 
@@ -333,22 +330,10 @@
       
 
       
-        <pre><code>#define MAKEWORD(a, b)      ((WORD)(((BYTE)((DWORD_PTR)(a) &amp; 0xff)) | ((WORD)((BYTE)((DWORD_PTR)(b) &amp; 0xff))) &lt;&lt; 8))
-#define MAKELONG(a, b)      ((LONG)(((WORD)((DWORD_PTR)(a) &amp; 0xffff)) | ((DWORD)((WORD)((DWORD_PTR)(b) &amp; 0xffff))) &lt;&lt; 16))
-#define LOWORD(l)           ((WORD)((DWORD_PTR)(l) &amp; 0xffff))
-#define HIWORD(l)           ((WORD)((DWORD_PTR)(l) &gt;&gt; 16))
-#define LOBYTE(w)           ((BYTE)((DWORD_PTR)(w) &amp; 0xff))
-#define HIBYTE(w)           ((BYTE)((DWORD_PTR)(w) &gt;&gt; 8))
-</code></pre><p>/<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>*</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>/</p>
+        <figure class="highlight"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#define MAKEWORD(a, b)      ((WORD)(((BYTE)((DWORD_PTR)(a) &amp; 0xff)) | ((WORD)((BYTE)((DWORD_PTR)(b) &amp; 0xff))) &lt;&lt; 8))</div><div class="line">#define MAKELONG(a, b)      ((LONG)(((WORD)((DWORD_PTR)(a) &amp; 0xffff)) | ((DWORD)((WORD)((DWORD_PTR)(b) &amp; 0xffff))) &lt;&lt; 16))</div><div class="line">#define LOWORD(l)           ((WORD)((DWORD_PTR)(l) &amp; 0xffff))</div><div class="line">#define HIWORD(l)           ((WORD)((DWORD_PTR)(l) &gt;&gt; 16))</div><div class="line">#define LOBYTE(w)           ((BYTE)((DWORD_PTR)(w) &amp; 0xff))</div><div class="line">#define HIBYTE(w)           ((BYTE)((DWORD_PTR)(w) &gt;&gt; 8))</div><div class="line"></div></pre></td></tr></table></figure>
+<p>/<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>*</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>/</p>
 <p>从上面加粗部分可以看出 LOWORD 和 HIWORD 返回值是WORD型，即unsigned short，因此不能表示负数，在使用的时候可能就要注意了。<br><br>对于一般情况，用它们是没有问题的，但有一个特例，就是利用它们取当前鼠标的坐标时，因为鼠标有时候会移出窗口，因此我们得到的值本应该是负数，但是利用这两个宏得出的值始终是正值。我们可以用以下的宏来代替。</p>
-<pre><code>#define GET_X_LPARAM(lp)                        ((int)(short)LOWORD(lp))
-#define GET_Y_LPARAM(lp)                        ((int)(short)HIWORD(lp))
-
-
-typedef unsigned long       DWORD;
-typedef unsigned char       BYTE;
-typedef unsigned short      WORD;
-</code></pre>
+ <figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> GET_X_LPARAM(lp)                        ((int)(short)LOWORD(lp))</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> GET_Y_LPARAM(lp)                        ((int)(short)HIWORD(lp))</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span>       DWORD;</div><div class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">char</span>       BYTE;</div><div class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">short</span>      WORD;</div><div class="line"></div></pre></td></tr></table></figure>
       
     </div>
     
@@ -377,8 +362,8 @@ typedef unsigned short      WORD;
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/01/14/154/" rel="next" title="调试技巧(154)">
-                <i class="fa fa-chevron-left"></i> 调试技巧(154)
+              <a href="/2016/01/14/155/" rel="next" title="python 等问题解决(155)">
+                <i class="fa fa-chevron-left"></i> python 等问题解决(155)
               </a>
             
           </div>
@@ -460,7 +445,7 @@ typedef unsigned short      WORD;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">175</span>
+              <span class="site-state-item-count">176</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -477,7 +462,7 @@ typedef unsigned short      WORD;
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
