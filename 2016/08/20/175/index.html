@@ -164,7 +164,7 @@ find_end
 
 
 copy_bac">
-<meta property="og:updated_time" content="2016-09-11T12:28:39.934Z">
+<meta property="og:updated_time" content="2016-09-19T08:20:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="STL算法函数(175)">
 <meta name="twitter:description" content="算法记录算法
@@ -659,9 +659,20 @@ copy_bac">
 <td style="text-align:center"><a href="#nth_element">nth_element</a></td>
 <td style="text-align:center">以middle为中线，op返回false放middle右边，true放左边,比sort快</td>
 </tr>
+<tr>
+<td><a href="#front_inserter">front_inserter</a></td>
+<td style="text-align:center">头插入(迭代器必须支持push_front (“vector无”))</td>
+<td style="text-align:center"><a href="#back_inserter">back_inserter</a></td>
+<td style="text-align:center">尾插入（迭代器必须支持push_back）</td>
+</tr>
+<tr>
+<td><a href="#inserter">inserter</a></td>
+<td style="text-align:center">指定位置插入（迭代器必须支持insert）</td>
+<td style="text-align:center"></td>
+</tr>
 </tbody>
 </table>
-<h2 id="xfunctional文件里面实现了大多数的一般算法结构"><a href="#xfunctional文件里面实现了大多数的一般算法结构" class="headerlink" title="xfunctional文件里面实现了大多数的一般算法结构"></a>xfunctional文件里面实现了大多数的一般算法结构</h2><hr>
+<h4 id="xfunctional文件里面实现了为大多数的一般算法提供的仿函数"><a href="#xfunctional文件里面实现了为大多数的一般算法提供的仿函数" class="headerlink" title="xfunctional文件里面实现了为大多数的一般算法提供的仿函数"></a>xfunctional文件里面实现了为大多数的一般算法提供的仿函数</h4><hr>
 <p></p><h2 id="accumulate"> accumulate <h2><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">std</span>::accumulate(iv.begin(), iv.end(), da, plus&lt;<span class="keyword">int</span>&gt;()) == <span class="built_in">std</span>::accumulate(iv.begin(), iv.end(), da);</div><div class="line"><span class="keyword">return</span>值为da + <span class="number">1</span> + <span class="number">2</span> + <span class="number">3</span> + <span class="number">4</span> + <span class="number">5</span>;</div><div class="line"><span class="built_in">std</span>::accumulate(iv.begin(), iv.end(), da, minus&lt;<span class="keyword">int</span>&gt;());</div><div class="line"><span class="keyword">return</span>值为da - <span class="number">1</span> - <span class="number">2</span> - <span class="number">3</span> - <span class="number">4</span> - <span class="number">5</span>;&lt;br/&gt;&lt;</div><div class="line"><span class="comment">//把da作为第一个左值，一个一个获取右值。运算后再返回为下一个左值</span></div><div class="line"></div></pre></td></tr></table></figure><p></p>
 <hr>
 <p></p><h2 id="equal"> equal <h2><p></p>
@@ -843,6 +854,15 @@ copy_bac">
 <p></p><h2 id="equal_range"> equal_range </h2><p></p>
 <ol>
 <li><code>lower_bound</code>和<code>upper_bound</code>的结合，返回一个pair，pair记录的就是前俩函数的结果</li>
+</ol>
+<hr>
+<p></p><h2 id="front_inserter"> front_inserter </h2><p></p>
+<p></p><h2 id="back_inserter"> back_inserter </h2><p></p>
+<p></p><h2 id="inserter"> inserter </h2><p></p>
+<ol>
+<li>正如标题所说的那样，如果相关迭代器没有对应的函数，执行会错误。</li>
+<li>如果单独使用 <code>std::back_inserter(numbers) = 6;</code> <code>std::inserter(numbers, numbers.begin()+1) = 6</code>这样，numbers的size会增加，并且最后的值被赋值为6</li>
+<li>一般无单独使用，多是配合copy; <code>copy(ia, ia + 3, back_inserter(id))</code>这样id后面就插入了ia到ia+3的数据</li>
 </ol>
 </h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2>
       
@@ -1071,7 +1091,7 @@ copy_bac">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法记录"><span class="nav-number">1.</span> <span class="nav-text">算法记录</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法"><span class="nav-number"></span> <span class="nav-text">算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#xfunctional文件里面实现了大多数的一般算法结构"><span class="nav-number"></span> <span class="nav-text">xfunctional文件里面实现了大多数的一般算法结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#accumulate"><span class="nav-number"></span> <span class="nav-text"> accumulate ++1234567std::accumulate(iv.begin(), iv.end(), da, plus<int>()) == std::accumulate(iv.begin(), iv.end(), da);return值为da + 1 + 2 + 3 + 4 + 5;std::accumulate(iv.begin(), iv.end(), da, minus<int>());return值为da - 1 - 2 - 3 - 4 - 5;<br/><//把da作为第一个左值，一个一个获取右值。运算后再返回为下一个左值
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法记录"><span class="nav-number">1.</span> <span class="nav-text">算法记录</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法"><span class="nav-number"></span> <span class="nav-text">算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#xfunctional文件里面实现了为大多数的一般算法提供的仿函数"><span class="nav-number">1.</span> <span class="nav-text">xfunctional文件里面实现了为大多数的一般算法提供的仿函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#accumulate"><span class="nav-number"></span> <span class="nav-text"> accumulate ++1234567std::accumulate(iv.begin(), iv.end(), da, plus<int>()) == std::accumulate(iv.begin(), iv.end(), da);return值为da + 1 + 2 + 3 + 4 + 5;std::accumulate(iv.begin(), iv.end(), da, minus<int>());return值为da - 1 - 2 - 3 - 4 - 5;<br/><//把da作为第一个左值，一个一个获取右值。运算后再返回为下一个左值
 
  equal 
 
@@ -1252,6 +1272,15 @@ partial_sort_copy复制到result.begin(),result.end();
  equal_range 
 
 lower_bound和upper_bound的结合，返回一个pair，pair记录的就是前俩函数的结果
+
+
+ front_inserter 
+ back_inserter 
+ inserter 
+
+正如标题所说的那样，如果相关迭代器没有对应的函数，执行会错误。
+如果单独使用 std::back_inserter(numbers) = 6; std::inserter(numbers, numbers.begin()+1) = 6这样，numbers的size会增加，并且最后的值被赋值为6
+一般无单独使用，多是配合copy; copy(ia, ia + 3, back_inserter(id))这样id后面就插入了ia到ia+3的数据
 
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">++1234567std::accumulate(iv.begin(), iv.end(), da, plus<int>()) == std::accumulate(iv.begin(), iv.end(), da);return值为da + 1 + 2 + 3 + 4 + 5;std::accumulate(iv.begin(), iv.end(), da, minus<int>());return值为da - 1 - 2 - 3 - 4 - 5;<br/><//把da作为第一个左值，一个一个获取右值。运算后再返回为下一个左值
 
@@ -1435,6 +1464,15 @@ partial_sort_copy复制到result.begin(),result.end();
 
 lower_bound和upper_bound的结合，返回一个pair，pair记录的就是前俩函数的结果
 
+
+ front_inserter 
+ back_inserter 
+ inserter 
+
+正如标题所说的那样，如果相关迭代器没有对应的函数，执行会错误。
+如果单独使用 std::back_inserter(numbers) = 6; std::inserter(numbers, numbers.begin()+1) = 6这样，numbers的size会增加，并且最后的值被赋值为6
+一般无单独使用，多是配合copy; copy(ia, ia + 3, back_inserter(id))这样id后面就插入了ia到ia+3的数据
+
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#equal"><span class="nav-number"></span> <span class="nav-text"> equal 
 
 判断之前最好先比较元素个数是否相等。判断原作就是 if (first1 != first2) return false;
@@ -1615,6 +1653,15 @@ partial_sort_copy复制到result.begin(),result.end();
 
 lower_bound和upper_bound的结合，返回一个pair，pair记录的就是前俩函数的结果
 
+
+ front_inserter 
+ back_inserter 
+ inserter 
+
+正如标题所说的那样，如果相关迭代器没有对应的函数，执行会错误。
+如果单独使用 std::back_inserter(numbers) = 6; std::inserter(numbers, numbers.begin()+1) = 6这样，numbers的size会增加，并且最后的值被赋值为6
+一般无单独使用，多是配合copy; copy(ia, ia + 3, back_inserter(id))这样id后面就插入了ia到ia+3的数据
+
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">
 
 判断之前最好先比较元素个数是否相等。判断原作就是 if (first1 != first2) return false;
@@ -1795,6 +1842,15 @@ partial_sort_copy复制到result.begin(),result.end();
 
 lower_bound和upper_bound的结合，返回一个pair，pair记录的就是前俩函数的结果
 
+
+ front_inserter 
+ back_inserter 
+ inserter 
+
+正如标题所说的那样，如果相关迭代器没有对应的函数，执行会错误。
+如果单独使用 std::back_inserter(numbers) = 6; std::inserter(numbers, numbers.begin()+1) = 6这样，numbers的size会增加，并且最后的值被赋值为6
+一般无单独使用，多是配合copy; copy(ia, ia + 3, back_inserter(id))这样id后面就插入了ia到ia+3的数据
+
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fill"><span class="nav-number"></span> <span class="nav-text"> fill 
  fill_n 
 
@@ -1970,6 +2026,15 @@ partial_sort_copy复制到result.begin(),result.end();
 
 lower_bound和upper_bound的结合，返回一个pair，pair记录的就是前俩函数的结果
 
+
+ front_inserter 
+ back_inserter 
+ inserter 
+
+正如标题所说的那样，如果相关迭代器没有对应的函数，执行会错误。
+如果单独使用 std::back_inserter(numbers) = 6; std::inserter(numbers, numbers.begin()+1) = 6这样，numbers的size会增加，并且最后的值被赋值为6
+一般无单独使用，多是配合copy; copy(ia, ia + 3, back_inserter(id))这样id后面就插入了ia到ia+3的数据
+
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">
  fill_n 
 
@@ -2145,6 +2210,15 @@ partial_sort_copy复制到result.begin(),result.end();
 
 lower_bound和upper_bound的结合，返回一个pair，pair记录的就是前俩函数的结果
 
+
+ front_inserter 
+ back_inserter 
+ inserter 
+
+正如标题所说的那样，如果相关迭代器没有对应的函数，执行会错误。
+如果单独使用 std::back_inserter(numbers) = 6; std::inserter(numbers, numbers.begin()+1) = 6这样，numbers的size会增加，并且最后的值被赋值为6
+一般无单独使用，多是配合copy; copy(ia, ia + 3, back_inserter(id))这样id后面就插入了ia到ia+3的数据
+
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fill_n"><span class="nav-number"></span> <span class="nav-text"> fill_n 
 
 这俩个真没啥说的。
@@ -2319,6 +2393,15 @@ partial_sort_copy复制到result.begin(),result.end();
 
 lower_bound和upper_bound的结合，返回一个pair，pair记录的就是前俩函数的结果
 
+
+ front_inserter 
+ back_inserter 
+ inserter 
+
+正如标题所说的那样，如果相关迭代器没有对应的函数，执行会错误。
+如果单独使用 std::back_inserter(numbers) = 6; std::inserter(numbers, numbers.begin()+1) = 6这样，numbers的size会增加，并且最后的值被赋值为6
+一般无单独使用，多是配合copy; copy(ia, ia + 3, back_inserter(id))这样id后面就插入了ia到ia+3的数据
+
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">
 
 这俩个真没啥说的。
@@ -2493,6 +2576,15 @@ partial_sort_copy复制到result.begin(),result.end();
 
 lower_bound和upper_bound的结合，返回一个pair，pair记录的就是前俩函数的结果
 
+
+ front_inserter 
+ back_inserter 
+ inserter 
+
+正如标题所说的那样，如果相关迭代器没有对应的函数，执行会错误。
+如果单独使用 std::back_inserter(numbers) = 6; std::inserter(numbers, numbers.begin()+1) = 6这样，numbers的size会增加，并且最后的值被赋值为6
+一般无单独使用，多是配合copy; copy(ia, ia + 3, back_inserter(id))这样id后面就插入了ia到ia+3的数据
+
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iter_swap"><span class="nav-number"></span> <span class="nav-text"> iter_swap 
 
 这个调用要重写 operator= 函数
@@ -2662,6 +2754,15 @@ partial_sort_copy复制到result.begin(),result.end();
 
 lower_bound和upper_bound的结合，返回一个pair，pair记录的就是前俩函数的结果
 
+
+ front_inserter 
+ back_inserter 
+ inserter 
+
+正如标题所说的那样，如果相关迭代器没有对应的函数，执行会错误。
+如果单独使用 std::back_inserter(numbers) = 6; std::inserter(numbers, numbers.begin()+1) = 6这样，numbers的size会增加，并且最后的值被赋值为6
+一般无单独使用，多是配合copy; copy(ia, ia + 3, back_inserter(id))这样id后面就插入了ia到ia+3的数据
+
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">
 
 这个调用要重写 operator= 函数
@@ -2831,6 +2932,15 @@ partial_sort_copy复制到result.begin(),result.end();
 
 lower_bound和upper_bound的结合，返回一个pair，pair记录的就是前俩函数的结果
 
+
+ front_inserter 
+ back_inserter 
+ inserter 
+
+正如标题所说的那样，如果相关迭代器没有对应的函数，执行会错误。
+如果单独使用 std::back_inserter(numbers) = 6; std::inserter(numbers, numbers.begin()+1) = 6这样，numbers的size会增加，并且最后的值被赋值为6
+一般无单独使用，多是配合copy; copy(ia, ia + 3, back_inserter(id))这样id后面就插入了ia到ia+3的数据
+
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mismatch"><span class="nav-number"></span> <span class="nav-text"> mismatch ++12345while(first1 != last1 && *first1 == *first2) { ++first1; ++first2; }return pair<InputIterator1, InputIterator2><first1, first2>;返回值很有意思可以探究
 
  copy 
@@ -2994,6 +3104,15 @@ partial_sort_copy复制到result.begin(),result.end();
  equal_range 
 
 lower_bound和upper_bound的结合，返回一个pair，pair记录的就是前俩函数的结果
+
+
+ front_inserter 
+ back_inserter 
+ inserter 
+
+正如标题所说的那样，如果相关迭代器没有对应的函数，执行会错误。
+如果单独使用 std::back_inserter(numbers) = 6; std::inserter(numbers, numbers.begin()+1) = 6这样，numbers的size会增加，并且最后的值被赋值为6
+一般无单独使用，多是配合copy; copy(ia, ia + 3, back_inserter(id))这样id后面就插入了ia到ia+3的数据
 
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">++12345while(first1 != last1 && *first1 == *first2) { ++first1; ++first2; }return pair<InputIterator1, InputIterator2><first1, first2>;返回值很有意思可以探究
 
@@ -3159,6 +3278,15 @@ partial_sort_copy复制到result.begin(),result.end();
 
 lower_bound和upper_bound的结合，返回一个pair，pair记录的就是前俩函数的结果
 
+
+ front_inserter 
+ back_inserter 
+ inserter 
+
+正如标题所说的那样，如果相关迭代器没有对应的函数，执行会错误。
+如果单独使用 std::back_inserter(numbers) = 6; std::inserter(numbers, numbers.begin()+1) = 6这样，numbers的size会增加，并且最后的值被赋值为6
+一般无单独使用，多是配合copy; copy(ia, ia + 3, back_inserter(id))这样id后面就插入了ia到ia+3的数据
+
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#copy"><span class="nav-number"></span> <span class="nav-text"> copy 
  copy_backward 
 
@@ -3321,6 +3449,15 @@ partial_sort_copy复制到result.begin(),result.end();
 
 lower_bound和upper_bound的结合，返回一个pair，pair记录的就是前俩函数的结果
 
+
+ front_inserter 
+ back_inserter 
+ inserter 
+
+正如标题所说的那样，如果相关迭代器没有对应的函数，执行会错误。
+如果单独使用 std::back_inserter(numbers) = 6; std::inserter(numbers, numbers.begin()+1) = 6这样，numbers的size会增加，并且最后的值被赋值为6
+一般无单独使用，多是配合copy; copy(ia, ia + 3, back_inserter(id))这样id后面就插入了ia到ia+3的数据
+
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">
  copy_backward 
 
@@ -3483,6 +3620,15 @@ partial_sort_copy复制到result.begin(),result.end();
 
 lower_bound和upper_bound的结合，返回一个pair，pair记录的就是前俩函数的结果
 
+
+ front_inserter 
+ back_inserter 
+ inserter 
+
+正如标题所说的那样，如果相关迭代器没有对应的函数，执行会错误。
+如果单独使用 std::back_inserter(numbers) = 6; std::inserter(numbers, numbers.begin()+1) = 6这样，numbers的size会增加，并且最后的值被赋值为6
+一般无单独使用，多是配合copy; copy(ia, ia + 3, back_inserter(id))这样id后面就插入了ia到ia+3的数据
+
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#copy_backward"><span class="nav-number"></span> <span class="nav-text"> copy_backward 
 
 后者是逆向复制。copy是允许覆盖的即copy(p.begin(), p.end() - 1, p.begin() + 1);这种形式。但是有注意点：
@@ -3643,6 +3789,15 @@ partial_sort_copy复制到result.begin(),result.end();
  equal_range 
 
 lower_bound和upper_bound的结合，返回一个pair，pair记录的就是前俩函数的结果
+
+
+ front_inserter 
+ back_inserter 
+ inserter 
+
+正如标题所说的那样，如果相关迭代器没有对应的函数，执行会错误。
+如果单独使用 std::back_inserter(numbers) = 6; std::inserter(numbers, numbers.begin()+1) = 6这样，numbers的size会增加，并且最后的值被赋值为6
+一般无单独使用，多是配合copy; copy(ia, ia + 3, back_inserter(id))这样id后面就插入了ia到ia+3的数据
 
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">
 
@@ -3805,7 +3960,16 @@ partial_sort_copy复制到result.begin(),result.end();
 
 lower_bound和upper_bound的结合，返回一个pair，pair记录的就是前俩函数的结果
 
-</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SET"><span class="nav-number"></span> <span class="nav-text">SET</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#set_union"><span class="nav-number"></span> <span class="nav-text"> set_union </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set_intersection"><span class="nav-number"></span> <span class="nav-text"> set_intersection </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set_difference"><span class="nav-number"></span> <span class="nav-text"> set_difference </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#adjacent_find"><span class="nav-number"></span> <span class="nav-text"> adjacent_find </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#count"><span class="nav-number"></span> <span class="nav-text"> count </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#count_if"><span class="nav-number"></span> <span class="nav-text"> count_if </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find"><span class="nav-number"></span> <span class="nav-text"> find </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find_if"><span class="nav-number"></span> <span class="nav-text"> find_if </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find_end"><span class="nav-number"></span> <span class="nav-text"> find_end </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find_first_of"><span class="nav-number"></span> <span class="nav-text"> find_first_of </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#generate"><span class="nav-number"></span> <span class="nav-text"> generate </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#generate_n"><span class="nav-number"></span> <span class="nav-text"> generate_n </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#max_element"><span class="nav-number"></span> <span class="nav-text"> max_element </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#min_element"><span class="nav-number"></span> <span class="nav-text"> min_element </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#merge"><span class="nav-number"></span> <span class="nav-text"> merge </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#partition"><span class="nav-number"></span> <span class="nav-text"> partition </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove"><span class="nav-number"></span> <span class="nav-text"> remove </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove_if"><span class="nav-number"></span> <span class="nav-text"> remove_if </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove_copy"><span class="nav-number"></span> <span class="nav-text"> remove_copy </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove_copy_if"><span class="nav-number"></span> <span class="nav-text"> remove_copy_if </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#replace"><span class="nav-number"></span> <span class="nav-text"> replace </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#replace_copy"><span class="nav-number"></span> <span class="nav-text"> replace_copy </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#replace_if"><span class="nav-number"></span> <span class="nav-text"> replace_if </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#replace_copy_if"><span class="nav-number"></span> <span class="nav-text"> replace_copy_if </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reverse"><span class="nav-number"></span> <span class="nav-text"> reverse </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reverse_copy"><span class="nav-number"></span> <span class="nav-text"> reverse_copy </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rotate"><span class="nav-number"></span> <span class="nav-text"> reverse </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rotate_copy"><span class="nav-number"></span> <span class="nav-text"> reverse_copy </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#search"><span class="nav-number"></span> <span class="nav-text"> search </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#search_n"><span class="nav-number"></span> <span class="nav-text"> search_n </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#swap_ranges"><span class="nav-number"></span> <span class="nav-text"> swap_ranges </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transform"><span class="nav-number"></span> <span class="nav-text"> transform </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unique"><span class="nav-number"></span> <span class="nav-text"> unique </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lower_bound"><span class="nav-number"></span> <span class="nav-text"> lower_bound </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#upper_bound"><span class="nav-number"></span> <span class="nav-text"> upper_bound </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#binary_search"><span class="nav-number"></span> <span class="nav-text"> binary_search </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next_permutation"><span class="nav-number"></span> <span class="nav-text"> next_permutation </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#prev_permutation"><span class="nav-number"></span> <span class="nav-text"> prev_permutation </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#partial_sort"><span class="nav-number"></span> <span class="nav-text"> partial_sort </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#partial_sort_copy"><span class="nav-number"></span> <span class="nav-text"> partial_sort_copy </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#equal_range"><span class="nav-number"></span> <span class="nav-text"> equal_range </span></a></div>
+
+ front_inserter 
+ back_inserter 
+ inserter 
+
+正如标题所说的那样，如果相关迭代器没有对应的函数，执行会错误。
+如果单独使用 std::back_inserter(numbers) = 6; std::inserter(numbers, numbers.begin()+1) = 6这样，numbers的size会增加，并且最后的值被赋值为6
+一般无单独使用，多是配合copy; copy(ia, ia + 3, back_inserter(id))这样id后面就插入了ia到ia+3的数据
+
+</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SET"><span class="nav-number"></span> <span class="nav-text">SET</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#set_union"><span class="nav-number"></span> <span class="nav-text"> set_union </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set_intersection"><span class="nav-number"></span> <span class="nav-text"> set_intersection </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set_difference"><span class="nav-number"></span> <span class="nav-text"> set_difference </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#adjacent_find"><span class="nav-number"></span> <span class="nav-text"> adjacent_find </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#count"><span class="nav-number"></span> <span class="nav-text"> count </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#count_if"><span class="nav-number"></span> <span class="nav-text"> count_if </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find"><span class="nav-number"></span> <span class="nav-text"> find </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find_if"><span class="nav-number"></span> <span class="nav-text"> find_if </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find_end"><span class="nav-number"></span> <span class="nav-text"> find_end </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find_first_of"><span class="nav-number"></span> <span class="nav-text"> find_first_of </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#generate"><span class="nav-number"></span> <span class="nav-text"> generate </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#generate_n"><span class="nav-number"></span> <span class="nav-text"> generate_n </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#max_element"><span class="nav-number"></span> <span class="nav-text"> max_element </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#min_element"><span class="nav-number"></span> <span class="nav-text"> min_element </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#merge"><span class="nav-number"></span> <span class="nav-text"> merge </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#partition"><span class="nav-number"></span> <span class="nav-text"> partition </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove"><span class="nav-number"></span> <span class="nav-text"> remove </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove_if"><span class="nav-number"></span> <span class="nav-text"> remove_if </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove_copy"><span class="nav-number"></span> <span class="nav-text"> remove_copy </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove_copy_if"><span class="nav-number"></span> <span class="nav-text"> remove_copy_if </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#replace"><span class="nav-number"></span> <span class="nav-text"> replace </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#replace_copy"><span class="nav-number"></span> <span class="nav-text"> replace_copy </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#replace_if"><span class="nav-number"></span> <span class="nav-text"> replace_if </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#replace_copy_if"><span class="nav-number"></span> <span class="nav-text"> replace_copy_if </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reverse"><span class="nav-number"></span> <span class="nav-text"> reverse </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reverse_copy"><span class="nav-number"></span> <span class="nav-text"> reverse_copy </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rotate"><span class="nav-number"></span> <span class="nav-text"> reverse </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rotate_copy"><span class="nav-number"></span> <span class="nav-text"> reverse_copy </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#search"><span class="nav-number"></span> <span class="nav-text"> search </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#search_n"><span class="nav-number"></span> <span class="nav-text"> search_n </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#swap_ranges"><span class="nav-number"></span> <span class="nav-text"> swap_ranges </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transform"><span class="nav-number"></span> <span class="nav-text"> transform </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unique"><span class="nav-number"></span> <span class="nav-text"> unique </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lower_bound"><span class="nav-number"></span> <span class="nav-text"> lower_bound </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#upper_bound"><span class="nav-number"></span> <span class="nav-text"> upper_bound </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#binary_search"><span class="nav-number"></span> <span class="nav-text"> binary_search </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next_permutation"><span class="nav-number"></span> <span class="nav-text"> next_permutation </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#prev_permutation"><span class="nav-number"></span> <span class="nav-text"> prev_permutation </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#partial_sort"><span class="nav-number"></span> <span class="nav-text"> partial_sort </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#partial_sort_copy"><span class="nav-number"></span> <span class="nav-text"> partial_sort_copy </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#equal_range"><span class="nav-number"></span> <span class="nav-text"> equal_range </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#front_inserter"><span class="nav-number"></span> <span class="nav-text"> front_inserter </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#back_inserter"><span class="nav-number"></span> <span class="nav-text"> back_inserter </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inserter"><span class="nav-number"></span> <span class="nav-text"> inserter </span></a></div>
             
           </div>
         </section>
