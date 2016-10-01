@@ -58,7 +58,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="c++,c函数,stl," />
+  <meta name="keywords" content="c函数,c++,stl," />
 
 
 
@@ -86,7 +86,7 @@
 <meta property="og:description" content="要想使用stl配接器算法，unary_function、binary_function的仿函数就必须使用.
 先来看STL已经提供的仿函数—算法类仿函数加法： plus&amp;lt;T&amp;gt; 减法：minus&amp;lt;T&amp;gt;乘法：multiplies&amp;lt;T&amp;gt;除法：divides&amp;lt;T&amp;gt; 模取：modulus&amp;lt;T&amp;gt;否定：negate&amp;lt;T&amp;gt;(一元)
 关系仿函数等">
-<meta property="og:updated_time" content="2016-09-19T07:47:08.000Z">
+<meta property="og:updated_time" content="2016-09-29T01:25:57.762Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="仿函数和配接器的使用182">
 <meta name="twitter:description" content="要想使用stl配接器算法，unary_function、binary_function的仿函数就必须使用.
@@ -443,7 +443,7 @@
 </tbody>
 </table>
 <hr>
-<p></p><h2 id="bind"> bind <h2><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">my_divide</span> <span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span> </span>&#123;<span class="keyword">return</span> x/y;&#125;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> MyPair &#123;</div><div class="line"><span class="keyword">double</span> a,b;</div><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">multiply</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> a*b;&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>::placeholders;    <span class="comment">//这里注意 adds visibility of _1, _2, _3,...</span></div><div class="line"></div><div class="line"><span class="comment">// binding functions:</span></div><div class="line"><span class="keyword">auto</span> fn_five = <span class="built_in">std</span>::bind (my_divide,<span class="number">10</span>,<span class="number">2</span>);               <span class="comment">// returns 10/2</span></div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; fn_five() &lt;&lt; <span class="string">'\n'</span>;                          <span class="comment">// 5</span></div><div class="line"></div><div class="line"><span class="keyword">auto</span> fn_half = <span class="built_in">std</span>::bind (my_divide,<span class="number">_1</span>,<span class="number">2</span>);               <span class="comment">// returns x/2</span></div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; fn_half(<span class="number">10</span>) &lt;&lt; <span class="string">'\n'</span>;                        <span class="comment">// 5</span></div><div class="line"></div><div class="line"><span class="keyword">auto</span> fn_invert = <span class="built_in">std</span>::bind (my_divide,<span class="number">_2</span>,<span class="number">_1</span>);            <span class="comment">// returns y/x</span></div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; fn_invert(<span class="number">10</span>,<span class="number">2</span>) &lt;&lt; <span class="string">'\n'</span>;                    <span class="comment">// 0.2</span></div><div class="line"></div><div class="line"><span class="keyword">auto</span> fn_rounding = <span class="built_in">std</span>::bind&lt;<span class="keyword">int</span>&gt; (my_divide,<span class="number">_1</span>,<span class="number">_2</span>);     <span class="comment">// returns int(x/y)</span></div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; fn_rounding(<span class="number">10</span>,<span class="number">3</span>) &lt;&lt; <span class="string">'\n'</span>;                  <span class="comment">// 3</span></div><div class="line"></div><div class="line">MyPair ten_two &#123;<span class="number">10</span>,<span class="number">2</span>&#125;;</div><div class="line"></div><div class="line"><span class="comment">// binding members:</span></div><div class="line"><span class="keyword">auto</span> bound_member_fn = <span class="built_in">std</span>::bind (&amp;MyPair::multiply,<span class="number">_1</span>); <span class="comment">// returns x.multiply()</span></div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; bound_member_fn(ten_two) &lt;&lt; <span class="string">'\n'</span>;           <span class="comment">// 20</span></div><div class="line"></div><div class="line"><span class="keyword">auto</span> bound_member_data = <span class="built_in">std</span>::bind (&amp;MyPair::a,ten_two); <span class="comment">// returns ten_two.a</span></div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; bound_member_data() &lt;&lt; <span class="string">'\n'</span>; </div><div class="line"></div></pre></td></tr></table></figure><p></p>
+<p></p><h2 id="bind"> bind <h2><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">my_divide</span> <span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span> </span>&#123;<span class="keyword">return</span> x/y;&#125;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> MyPair &#123;</div><div class="line"><span class="keyword">double</span> a,b;</div><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">multiply</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> a*b;&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> Foo &#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print_sum</span><span class="params">(<span class="keyword">int</span> n1, <span class="keyword">int</span> n2)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; n1+n2 &lt;&lt; <span class="string">'\n'</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> data = <span class="number">10</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>::placeholders;    <span class="comment">//这里注意 adds visibility of _1, _2, _3,...</span></div><div class="line"></div><div class="line"><span class="comment">// binding functions:</span></div><div class="line"><span class="keyword">auto</span> fn_five = <span class="built_in">std</span>::bind (my_divide,<span class="number">10</span>,<span class="number">2</span>);               <span class="comment">// returns 10/2</span></div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; fn_five() &lt;&lt; <span class="string">'\n'</span>;                          <span class="comment">// 5</span></div><div class="line"></div><div class="line"><span class="keyword">auto</span> fn_half = <span class="built_in">std</span>::bind (my_divide,<span class="number">_1</span>,<span class="number">2</span>);               <span class="comment">// returns x/2</span></div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; fn_half(<span class="number">10</span>) &lt;&lt; <span class="string">'\n'</span>;                        <span class="comment">// 5</span></div><div class="line"></div><div class="line"><span class="keyword">auto</span> fn_invert = <span class="built_in">std</span>::bind (my_divide,<span class="number">_2</span>,<span class="number">_1</span>);            <span class="comment">// returns y/x</span></div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; fn_invert(<span class="number">10</span>,<span class="number">2</span>) &lt;&lt; <span class="string">'\n'</span>;                    <span class="comment">// 0.2</span></div><div class="line"></div><div class="line"><span class="keyword">auto</span> fn_rounding = <span class="built_in">std</span>::bind&lt;<span class="keyword">int</span>&gt; (my_divide,<span class="number">_1</span>,<span class="number">_2</span>);     <span class="comment">// returns int(x/y)</span></div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; fn_rounding(<span class="number">10</span>,<span class="number">3</span>) &lt;&lt; <span class="string">'\n'</span>;                  <span class="comment">// 3</span></div><div class="line"></div><div class="line">MyPair ten_two &#123;<span class="number">10</span>,<span class="number">2</span>&#125;;</div><div class="line"></div><div class="line"><span class="comment">// binding members:</span></div><div class="line"><span class="keyword">auto</span> bound_member_fn = <span class="built_in">std</span>::bind (&amp;MyPair::multiply,<span class="number">_1</span>); <span class="comment">// returns x.multiply()</span></div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; bound_member_fn(ten_two) &lt;&lt; <span class="string">'\n'</span>;           <span class="comment">// 20</span></div><div class="line"></div><div class="line"><span class="keyword">auto</span> bound_member_data = <span class="built_in">std</span>::bind (&amp;MyPair::a,ten_two); <span class="comment">// returns ten_two.a</span></div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; bound_member_data() &lt;&lt; <span class="string">'\n'</span>; </div><div class="line"></div><div class="line">Foo foo;</div><div class="line"><span class="keyword">auto</span> f3 = <span class="built_in">std</span>::bind(&amp;Foo::print_sum, foo, <span class="number">95</span>, <span class="number">_1</span>);</div><div class="line">f3(<span class="number">5</span>);</div><div class="line"></div></pre></td></tr></table></figure><p></p>
 <hr>
 <p></p><h2 id="bind1st"> bind1st <h2><p></p>
 <p></p><h2 id="bind2nd"> bind2nd <h2><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; a - b &lt;&lt; <span class="built_in">endl</span>;;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">int</span> <span class="number">_</span>tmain(<span class="keyword">int</span> argc, <span class="number">_</span>TCHAR* argv[])</div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> a[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;;</div><div class="line">    for_each(a, a+<span class="number">4</span>, bind1st(ptr_fun(fun), <span class="number">2</span>));<span class="comment">//此处由于，bind1st要传入适配器，所以要么fun继承前面的多元函数，要么如此处理</span></div><div class="line">    for_each(a, a+<span class="number">4</span>, bind2nd(ptr_fun(fun), <span class="number">2</span>));</div><div class="line">    system(<span class="string">"pause"</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure><p></p>
@@ -464,14 +464,14 @@
 <hr>
 <p></p><h2 id="mem_fun1"> mem_fun1 <h2><p></p>
 <blockquote>
-<p>这个函数并不像<code>实际效果</code>那样，它应该是俩个参数，且各个绑定不同。</p>
+<p>这个函数并不像<code>实际效果</code>那样，它应该是俩个参数，且各个绑定不同。<br>此函数11之后被淘汰</p>
 </blockquote>
 <figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">   numbers.push_back ( <span class="keyword">new</span> dd );</div><div class="line">numbers.push_back ( <span class="keyword">new</span> dd );</div><div class="line"></div><div class="line">   <span class="keyword">class</span> dd &#123;</div><div class="line">   <span class="keyword">public</span>:</div><div class="line">       dd() &#123;&#125;</div><div class="line">       ~dd() &#123;&#125;</div><div class="line">       <span class="function"><span class="keyword">int</span> <span class="title">aa</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</div><div class="line">           <span class="built_in">cout</span> &lt;&lt; a - <span class="number">1</span>  &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">           <span class="keyword">return</span> a - <span class="number">1</span>;</div><div class="line">       &#125;</div><div class="line">   &#125;;</div><div class="line">   for_each (numbers.begin(), numbers.end(), bind2nd(mem_fun1(&amp;dd::aa), <span class="number">2</span>));<span class="comment">//如此便是循环执行：iterator-&gt;aa(2);</span></div><div class="line"></div><div class="line">   <span class="comment">////////////////////////////</span></div><div class="line">   numbers.push_back ( <span class="keyword">new</span> dd );</div><div class="line">numbers.push_back ( <span class="keyword">new</span> dd );</div><div class="line"></div><div class="line">   <span class="keyword">class</span> aa &#123;</div><div class="line">   <span class="keyword">public</span>:</div><div class="line">       aa() &#123;&#125;</div><div class="line">       ~aa() &#123;&#125;</div><div class="line">       <span class="function"><span class="keyword">int</span> <span class="title">dd</span><span class="params">(dd* a)</span> </span>&#123;</div><div class="line">           <span class="built_in">cout</span> &lt;&lt; <span class="number">33</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">           <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">       &#125;</div><div class="line">   &#125;;</div><div class="line">   aa s;</div><div class="line">   for_each (numbers.begin(), numbers.end(), bind1st(mem_fun1(&amp;aa::dd), &amp;s));<span class="comment">//如此便是循环执行：(&amp;s)-&gt;dd(iterator);</span></div><div class="line"></div></pre></td></tr></table></figure>
 <hr>
 <p></p><h2 id="mem_fun_ref"> mem_fun_ref <h2><p></p>
 <p></p><h2 id="mem_fun1_ref"> mem_fun1_ref <h2><p></p>
 <blockquote>
-<p>它们和<code>mem_fun</code>区别在于，iterator是对象，而不是指针。</p>
+<p>它们和<code>mem_fun</code>区别在于，iterator是对象，而不是指针。<br>mem_fun1_ref此函数11之后被淘汰</p>
 </blockquote>
 <hr>
 <p></p><h2 id="mem_fn"> mem_fn <h2><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">   dd a;</div><div class="line"><span class="keyword">auto</span> triple = <span class="built_in">std</span>::mem_fn(&amp;dd::aa);</div><div class="line"><span class="built_in">cout</span> &lt;&lt; triple(a, <span class="number">2</span>) &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//以a为调用对象，传入2</span></div><div class="line"></div></pre></td></tr></table></figure><p></p>
@@ -495,9 +495,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/c/" rel="tag">#c++</a>
-          
             <a href="/tags/c函数/" rel="tag">#c函数</a>
+          
+            <a href="/tags/c/" rel="tag">#c++</a>
           
             <a href="/tags/stl/" rel="tag">#stl</a>
           
@@ -702,7 +702,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#先来看STL已经提供的仿函数"><span class="nav-number">1.</span> <span class="nav-text">先来看STL已经提供的仿函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#—"><span class="nav-number"></span> <span class="nav-text">—</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法类仿函数"><span class="nav-number">0.1.</span> <span class="nav-text">算法类仿函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关系仿函数"><span class="nav-number">0.2.</span> <span class="nav-text">关系仿函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑运算仿函数"><span class="nav-number">0.3.</span> <span class="nav-text">逻辑运算仿函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选择和投射"><span class="nav-number">0.4.</span> <span class="nav-text">选择和投射</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#—-1"><span class="nav-number"></span> <span class="nav-text">—</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#再看配接器"><span class="nav-number">1.</span> <span class="nav-text">再看配接器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bind"><span class="nav-number"></span> <span class="nav-text"> bind ++123456789101112131415161718192021222324252627282930313233double my_divide (double x, double y) {return x/y;}struct MyPair {double a,b;double multiply() {return a*b;}};int main () {using namespace std::placeholders;    //这里注意 adds visibility of _1, _2, _3,...// binding functions:auto fn_five = std::bind (my_divide,10,2);               // returns 10/2std::cout << fn_five() << '\n';                          // 5auto fn_half = std::bind (my_divide,_1,2);               // returns x/2std::cout << fn_half(10) << '\n';                        // 5auto fn_invert = std::bind (my_divide,_2,_1);            // returns y/xstd::cout << fn_invert(10,2) << '\n';                    // 0.2auto fn_rounding = std::bind<int> (my_divide,_1,_2);     // returns int(x/y)std::cout << fn_rounding(10,3) << '\n';                  // 3MyPair ten_two {10,2};// binding members:auto bound_member_fn = std::bind (&MyPair::multiply,_1); // returns x.multiply()std::cout << bound_member_fn(ten_two) << '\n';           // 20auto bound_member_data = std::bind (&MyPair::a,ten_two); // returns ten_two.astd::cout << bound_member_data() << '\n'; 
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#先来看STL已经提供的仿函数"><span class="nav-number">1.</span> <span class="nav-text">先来看STL已经提供的仿函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#—"><span class="nav-number"></span> <span class="nav-text">—</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法类仿函数"><span class="nav-number">0.1.</span> <span class="nav-text">算法类仿函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关系仿函数"><span class="nav-number">0.2.</span> <span class="nav-text">关系仿函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑运算仿函数"><span class="nav-number">0.3.</span> <span class="nav-text">逻辑运算仿函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选择和投射"><span class="nav-number">0.4.</span> <span class="nav-text">选择和投射</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#—-1"><span class="nav-number"></span> <span class="nav-text">—</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#再看配接器"><span class="nav-number">1.</span> <span class="nav-text">再看配接器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bind"><span class="nav-number"></span> <span class="nav-text"> bind ++123456789101112131415161718192021222324252627282930313233343536373839404142434445double my_divide (double x, double y) {return x/y;}struct MyPair {double a,b;double multiply() {return a*b;}};struct Foo {    void print_sum(int n1, int n2)    {        std::cout << n1+n2 << '\n';    }    int data = 10;};int main () {using namespace std::placeholders;    //这里注意 adds visibility of _1, _2, _3,...// binding functions:auto fn_five = std::bind (my_divide,10,2);               // returns 10/2std::cout << fn_five() << '\n';                          // 5auto fn_half = std::bind (my_divide,_1,2);               // returns x/2std::cout << fn_half(10) << '\n';                        // 5auto fn_invert = std::bind (my_divide,_2,_1);            // returns y/xstd::cout << fn_invert(10,2) << '\n';                    // 0.2auto fn_rounding = std::bind<int> (my_divide,_1,_2);     // returns int(x/y)std::cout << fn_rounding(10,3) << '\n';                  // 3MyPair ten_two {10,2};// binding members:auto bound_member_fn = std::bind (&MyPair::multiply,_1); // returns x.multiply()std::cout << bound_member_fn(ten_two) << '\n';           // 20auto bound_member_data = std::bind (&MyPair::a,ten_two); // returns ten_two.astd::cout << bound_member_data() << '\n'; Foo foo;auto f3 = std::bind(&Foo::print_sum, foo, 95, _1);f3(5);
 
  bind1st 
  bind2nd ++123456789101112131415int fun(int a, int b){    cout << a - b << endl;;    return 0;}int _tmain(int argc, _TCHAR* argv[]){    int a[] = {1, 2, 3, 4};    for_each(a, a+4, bind1st(ptr_fun(fun), 2));//此处由于，bind1st要传入适配器，所以要么fun继承前面的多元函数，要么如此处理    for_each(a, a+4, bind2nd(ptr_fun(fun), 2));    system("pause");    return 0;}
@@ -723,18 +723,18 @@
 
  mem_fun1 
 
-这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。
+这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。此函数11之后被淘汰
 
 ++12345678910111213141516171819202122232425262728293031   numbers.push_back ( new dd );numbers.push_back ( new dd );   class dd {   public:       dd() {}       ~dd() {}       int aa(int a) {           cout << a - 1  << endl;           return a - 1;       }   };   for_each (numbers.begin(), numbers.end(), bind2nd(mem_fun1(&dd::aa), 2));//如此便是循环执行：iterator->aa(2);   ////////////////////////////   numbers.push_back ( new dd );numbers.push_back ( new dd );   class aa {   public:       aa() {}       ~aa() {}       int dd(dd* a) {           cout << 33 << endl;           return 0;       }   };   aa s;   for_each (numbers.begin(), numbers.end(), bind1st(mem_fun1(&aa::dd), &s));//如此便是循环执行：(&s)->dd(iterator);
 
  mem_fun_ref 
  mem_fun1_ref 
 
-它们和mem_fun区别在于，iterator是对象，而不是指针。
+它们和mem_fun区别在于，iterator是对象，而不是指针。mem_fun1_ref此函数11之后被淘汰
 
 
  mem_fn ++12345   dd a;auto triple = std::mem_fn(&dd::aa);cout << triple(a, 2) << endl;//以a为调用对象，传入2
-</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">++123456789101112131415161718192021222324252627282930313233double my_divide (double x, double y) {return x/y;}struct MyPair {double a,b;double multiply() {return a*b;}};int main () {using namespace std::placeholders;    //这里注意 adds visibility of _1, _2, _3,...// binding functions:auto fn_five = std::bind (my_divide,10,2);               // returns 10/2std::cout << fn_five() << '\n';                          // 5auto fn_half = std::bind (my_divide,_1,2);               // returns x/2std::cout << fn_half(10) << '\n';                        // 5auto fn_invert = std::bind (my_divide,_2,_1);            // returns y/xstd::cout << fn_invert(10,2) << '\n';                    // 0.2auto fn_rounding = std::bind<int> (my_divide,_1,_2);     // returns int(x/y)std::cout << fn_rounding(10,3) << '\n';                  // 3MyPair ten_two {10,2};// binding members:auto bound_member_fn = std::bind (&MyPair::multiply,_1); // returns x.multiply()std::cout << bound_member_fn(ten_two) << '\n';           // 20auto bound_member_data = std::bind (&MyPair::a,ten_two); // returns ten_two.astd::cout << bound_member_data() << '\n'; 
+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">++123456789101112131415161718192021222324252627282930313233343536373839404142434445double my_divide (double x, double y) {return x/y;}struct MyPair {double a,b;double multiply() {return a*b;}};struct Foo {    void print_sum(int n1, int n2)    {        std::cout << n1+n2 << '\n';    }    int data = 10;};int main () {using namespace std::placeholders;    //这里注意 adds visibility of _1, _2, _3,...// binding functions:auto fn_five = std::bind (my_divide,10,2);               // returns 10/2std::cout << fn_five() << '\n';                          // 5auto fn_half = std::bind (my_divide,_1,2);               // returns x/2std::cout << fn_half(10) << '\n';                        // 5auto fn_invert = std::bind (my_divide,_2,_1);            // returns y/xstd::cout << fn_invert(10,2) << '\n';                    // 0.2auto fn_rounding = std::bind<int> (my_divide,_1,_2);     // returns int(x/y)std::cout << fn_rounding(10,3) << '\n';                  // 3MyPair ten_two {10,2};// binding members:auto bound_member_fn = std::bind (&MyPair::multiply,_1); // returns x.multiply()std::cout << bound_member_fn(ten_two) << '\n';           // 20auto bound_member_data = std::bind (&MyPair::a,ten_two); // returns ten_two.astd::cout << bound_member_data() << '\n'; Foo foo;auto f3 = std::bind(&Foo::print_sum, foo, 95, _1);f3(5);
 
  bind1st 
  bind2nd ++123456789101112131415int fun(int a, int b){    cout << a - b << endl;;    return 0;}int _tmain(int argc, _TCHAR* argv[]){    int a[] = {1, 2, 3, 4};    for_each(a, a+4, bind1st(ptr_fun(fun), 2));//此处由于，bind1st要传入适配器，所以要么fun继承前面的多元函数，要么如此处理    for_each(a, a+4, bind2nd(ptr_fun(fun), 2));    system("pause");    return 0;}
@@ -755,14 +755,14 @@
 
  mem_fun1 
 
-这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。
+这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。此函数11之后被淘汰
 
 ++12345678910111213141516171819202122232425262728293031   numbers.push_back ( new dd );numbers.push_back ( new dd );   class dd {   public:       dd() {}       ~dd() {}       int aa(int a) {           cout << a - 1  << endl;           return a - 1;       }   };   for_each (numbers.begin(), numbers.end(), bind2nd(mem_fun1(&dd::aa), 2));//如此便是循环执行：iterator->aa(2);   ////////////////////////////   numbers.push_back ( new dd );numbers.push_back ( new dd );   class aa {   public:       aa() {}       ~aa() {}       int dd(dd* a) {           cout << 33 << endl;           return 0;       }   };   aa s;   for_each (numbers.begin(), numbers.end(), bind1st(mem_fun1(&aa::dd), &s));//如此便是循环执行：(&s)->dd(iterator);
 
  mem_fun_ref 
  mem_fun1_ref 
 
-它们和mem_fun区别在于，iterator是对象，而不是指针。
+它们和mem_fun区别在于，iterator是对象，而不是指针。mem_fun1_ref此函数11之后被淘汰
 
 
  mem_fn ++12345   dd a;auto triple = std::mem_fn(&dd::aa);cout << triple(a, 2) << endl;//以a为调用对象，传入2
@@ -785,14 +785,14 @@
 
  mem_fun1 
 
-这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。
+这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。此函数11之后被淘汰
 
 ++12345678910111213141516171819202122232425262728293031   numbers.push_back ( new dd );numbers.push_back ( new dd );   class dd {   public:       dd() {}       ~dd() {}       int aa(int a) {           cout << a - 1  << endl;           return a - 1;       }   };   for_each (numbers.begin(), numbers.end(), bind2nd(mem_fun1(&dd::aa), 2));//如此便是循环执行：iterator->aa(2);   ////////////////////////////   numbers.push_back ( new dd );numbers.push_back ( new dd );   class aa {   public:       aa() {}       ~aa() {}       int dd(dd* a) {           cout << 33 << endl;           return 0;       }   };   aa s;   for_each (numbers.begin(), numbers.end(), bind1st(mem_fun1(&aa::dd), &s));//如此便是循环执行：(&s)->dd(iterator);
 
  mem_fun_ref 
  mem_fun1_ref 
 
-它们和mem_fun区别在于，iterator是对象，而不是指针。
+它们和mem_fun区别在于，iterator是对象，而不是指针。mem_fun1_ref此函数11之后被淘汰
 
 
  mem_fn ++12345   dd a;auto triple = std::mem_fn(&dd::aa);cout << triple(a, 2) << endl;//以a为调用对象，传入2
@@ -815,14 +815,14 @@
 
  mem_fun1 
 
-这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。
+这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。此函数11之后被淘汰
 
 ++12345678910111213141516171819202122232425262728293031   numbers.push_back ( new dd );numbers.push_back ( new dd );   class dd {   public:       dd() {}       ~dd() {}       int aa(int a) {           cout << a - 1  << endl;           return a - 1;       }   };   for_each (numbers.begin(), numbers.end(), bind2nd(mem_fun1(&dd::aa), 2));//如此便是循环执行：iterator->aa(2);   ////////////////////////////   numbers.push_back ( new dd );numbers.push_back ( new dd );   class aa {   public:       aa() {}       ~aa() {}       int dd(dd* a) {           cout << 33 << endl;           return 0;       }   };   aa s;   for_each (numbers.begin(), numbers.end(), bind1st(mem_fun1(&aa::dd), &s));//如此便是循环执行：(&s)->dd(iterator);
 
  mem_fun_ref 
  mem_fun1_ref 
 
-它们和mem_fun区别在于，iterator是对象，而不是指针。
+它们和mem_fun区别在于，iterator是对象，而不是指针。mem_fun1_ref此函数11之后被淘汰
 
 
  mem_fn ++12345   dd a;auto triple = std::mem_fn(&dd::aa);cout << triple(a, 2) << endl;//以a为调用对象，传入2
@@ -844,14 +844,14 @@
 
  mem_fun1 
 
-这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。
+这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。此函数11之后被淘汰
 
 ++12345678910111213141516171819202122232425262728293031   numbers.push_back ( new dd );numbers.push_back ( new dd );   class dd {   public:       dd() {}       ~dd() {}       int aa(int a) {           cout << a - 1  << endl;           return a - 1;       }   };   for_each (numbers.begin(), numbers.end(), bind2nd(mem_fun1(&dd::aa), 2));//如此便是循环执行：iterator->aa(2);   ////////////////////////////   numbers.push_back ( new dd );numbers.push_back ( new dd );   class aa {   public:       aa() {}       ~aa() {}       int dd(dd* a) {           cout << 33 << endl;           return 0;       }   };   aa s;   for_each (numbers.begin(), numbers.end(), bind1st(mem_fun1(&aa::dd), &s));//如此便是循环执行：(&s)->dd(iterator);
 
  mem_fun_ref 
  mem_fun1_ref 
 
-它们和mem_fun区别在于，iterator是对象，而不是指针。
+它们和mem_fun区别在于，iterator是对象，而不是指针。mem_fun1_ref此函数11之后被淘汰
 
 
  mem_fn ++12345   dd a;auto triple = std::mem_fn(&dd::aa);cout << triple(a, 2) << endl;//以a为调用对象，传入2
@@ -873,14 +873,14 @@
 
  mem_fun1 
 
-这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。
+这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。此函数11之后被淘汰
 
 ++12345678910111213141516171819202122232425262728293031   numbers.push_back ( new dd );numbers.push_back ( new dd );   class dd {   public:       dd() {}       ~dd() {}       int aa(int a) {           cout << a - 1  << endl;           return a - 1;       }   };   for_each (numbers.begin(), numbers.end(), bind2nd(mem_fun1(&dd::aa), 2));//如此便是循环执行：iterator->aa(2);   ////////////////////////////   numbers.push_back ( new dd );numbers.push_back ( new dd );   class aa {   public:       aa() {}       ~aa() {}       int dd(dd* a) {           cout << 33 << endl;           return 0;       }   };   aa s;   for_each (numbers.begin(), numbers.end(), bind1st(mem_fun1(&aa::dd), &s));//如此便是循环执行：(&s)->dd(iterator);
 
  mem_fun_ref 
  mem_fun1_ref 
 
-它们和mem_fun区别在于，iterator是对象，而不是指针。
+它们和mem_fun区别在于，iterator是对象，而不是指针。mem_fun1_ref此函数11之后被淘汰
 
 
  mem_fn ++12345   dd a;auto triple = std::mem_fn(&dd::aa);cout << triple(a, 2) << endl;//以a为调用对象，传入2
@@ -900,14 +900,14 @@
 
  mem_fun1 
 
-这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。
+这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。此函数11之后被淘汰
 
 ++12345678910111213141516171819202122232425262728293031   numbers.push_back ( new dd );numbers.push_back ( new dd );   class dd {   public:       dd() {}       ~dd() {}       int aa(int a) {           cout << a - 1  << endl;           return a - 1;       }   };   for_each (numbers.begin(), numbers.end(), bind2nd(mem_fun1(&dd::aa), 2));//如此便是循环执行：iterator->aa(2);   ////////////////////////////   numbers.push_back ( new dd );numbers.push_back ( new dd );   class aa {   public:       aa() {}       ~aa() {}       int dd(dd* a) {           cout << 33 << endl;           return 0;       }   };   aa s;   for_each (numbers.begin(), numbers.end(), bind1st(mem_fun1(&aa::dd), &s));//如此便是循环执行：(&s)->dd(iterator);
 
  mem_fun_ref 
  mem_fun1_ref 
 
-它们和mem_fun区别在于，iterator是对象，而不是指针。
+它们和mem_fun区别在于，iterator是对象，而不是指针。mem_fun1_ref此函数11之后被淘汰
 
 
  mem_fn ++12345   dd a;auto triple = std::mem_fn(&dd::aa);cout << triple(a, 2) << endl;//以a为调用对象，传入2
@@ -927,14 +927,14 @@
 
  mem_fun1 
 
-这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。
+这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。此函数11之后被淘汰
 
 ++12345678910111213141516171819202122232425262728293031   numbers.push_back ( new dd );numbers.push_back ( new dd );   class dd {   public:       dd() {}       ~dd() {}       int aa(int a) {           cout << a - 1  << endl;           return a - 1;       }   };   for_each (numbers.begin(), numbers.end(), bind2nd(mem_fun1(&dd::aa), 2));//如此便是循环执行：iterator->aa(2);   ////////////////////////////   numbers.push_back ( new dd );numbers.push_back ( new dd );   class aa {   public:       aa() {}       ~aa() {}       int dd(dd* a) {           cout << 33 << endl;           return 0;       }   };   aa s;   for_each (numbers.begin(), numbers.end(), bind1st(mem_fun1(&aa::dd), &s));//如此便是循环执行：(&s)->dd(iterator);
 
  mem_fun_ref 
  mem_fun1_ref 
 
-它们和mem_fun区别在于，iterator是对象，而不是指针。
+它们和mem_fun区别在于，iterator是对象，而不是指针。mem_fun1_ref此函数11之后被淘汰
 
 
  mem_fn ++12345   dd a;auto triple = std::mem_fn(&dd::aa);cout << triple(a, 2) << endl;//以a为调用对象，传入2
@@ -952,14 +952,14 @@
 
  mem_fun1 
 
-这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。
+这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。此函数11之后被淘汰
 
 ++12345678910111213141516171819202122232425262728293031   numbers.push_back ( new dd );numbers.push_back ( new dd );   class dd {   public:       dd() {}       ~dd() {}       int aa(int a) {           cout << a - 1  << endl;           return a - 1;       }   };   for_each (numbers.begin(), numbers.end(), bind2nd(mem_fun1(&dd::aa), 2));//如此便是循环执行：iterator->aa(2);   ////////////////////////////   numbers.push_back ( new dd );numbers.push_back ( new dd );   class aa {   public:       aa() {}       ~aa() {}       int dd(dd* a) {           cout << 33 << endl;           return 0;       }   };   aa s;   for_each (numbers.begin(), numbers.end(), bind1st(mem_fun1(&aa::dd), &s));//如此便是循环执行：(&s)->dd(iterator);
 
  mem_fun_ref 
  mem_fun1_ref 
 
-它们和mem_fun区别在于，iterator是对象，而不是指针。
+它们和mem_fun区别在于，iterator是对象，而不是指针。mem_fun1_ref此函数11之后被淘汰
 
 
  mem_fn ++12345   dd a;auto triple = std::mem_fn(&dd::aa);cout << triple(a, 2) << endl;//以a为调用对象，传入2
@@ -977,14 +977,14 @@
 
  mem_fun1 
 
-这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。
+这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。此函数11之后被淘汰
 
 ++12345678910111213141516171819202122232425262728293031   numbers.push_back ( new dd );numbers.push_back ( new dd );   class dd {   public:       dd() {}       ~dd() {}       int aa(int a) {           cout << a - 1  << endl;           return a - 1;       }   };   for_each (numbers.begin(), numbers.end(), bind2nd(mem_fun1(&dd::aa), 2));//如此便是循环执行：iterator->aa(2);   ////////////////////////////   numbers.push_back ( new dd );numbers.push_back ( new dd );   class aa {   public:       aa() {}       ~aa() {}       int dd(dd* a) {           cout << 33 << endl;           return 0;       }   };   aa s;   for_each (numbers.begin(), numbers.end(), bind1st(mem_fun1(&aa::dd), &s));//如此便是循环执行：(&s)->dd(iterator);
 
  mem_fun_ref 
  mem_fun1_ref 
 
-它们和mem_fun区别在于，iterator是对象，而不是指针。
+它们和mem_fun区别在于，iterator是对象，而不是指针。mem_fun1_ref此函数11之后被淘汰
 
 
  mem_fn ++12345   dd a;auto triple = std::mem_fn(&dd::aa);cout << triple(a, 2) << endl;//以a为调用对象，传入2
@@ -1000,14 +1000,14 @@
 
  mem_fun1 
 
-这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。
+这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。此函数11之后被淘汰
 
 ++12345678910111213141516171819202122232425262728293031   numbers.push_back ( new dd );numbers.push_back ( new dd );   class dd {   public:       dd() {}       ~dd() {}       int aa(int a) {           cout << a - 1  << endl;           return a - 1;       }   };   for_each (numbers.begin(), numbers.end(), bind2nd(mem_fun1(&dd::aa), 2));//如此便是循环执行：iterator->aa(2);   ////////////////////////////   numbers.push_back ( new dd );numbers.push_back ( new dd );   class aa {   public:       aa() {}       ~aa() {}       int dd(dd* a) {           cout << 33 << endl;           return 0;       }   };   aa s;   for_each (numbers.begin(), numbers.end(), bind1st(mem_fun1(&aa::dd), &s));//如此便是循环执行：(&s)->dd(iterator);
 
  mem_fun_ref 
  mem_fun1_ref 
 
-它们和mem_fun区别在于，iterator是对象，而不是指针。
+它们和mem_fun区别在于，iterator是对象，而不是指针。mem_fun1_ref此函数11之后被淘汰
 
 
  mem_fn ++12345   dd a;auto triple = std::mem_fn(&dd::aa);cout << triple(a, 2) << endl;//以a为调用对象，传入2
@@ -1023,14 +1023,14 @@
 
  mem_fun1 
 
-这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。
+这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。此函数11之后被淘汰
 
 ++12345678910111213141516171819202122232425262728293031   numbers.push_back ( new dd );numbers.push_back ( new dd );   class dd {   public:       dd() {}       ~dd() {}       int aa(int a) {           cout << a - 1  << endl;           return a - 1;       }   };   for_each (numbers.begin(), numbers.end(), bind2nd(mem_fun1(&dd::aa), 2));//如此便是循环执行：iterator->aa(2);   ////////////////////////////   numbers.push_back ( new dd );numbers.push_back ( new dd );   class aa {   public:       aa() {}       ~aa() {}       int dd(dd* a) {           cout << 33 << endl;           return 0;       }   };   aa s;   for_each (numbers.begin(), numbers.end(), bind1st(mem_fun1(&aa::dd), &s));//如此便是循环执行：(&s)->dd(iterator);
 
  mem_fun_ref 
  mem_fun1_ref 
 
-它们和mem_fun区别在于，iterator是对象，而不是指针。
+它们和mem_fun区别在于，iterator是对象，而不是指针。mem_fun1_ref此函数11之后被淘汰
 
 
  mem_fn ++12345   dd a;auto triple = std::mem_fn(&dd::aa);cout << triple(a, 2) << endl;//以a为调用对象，传入2
@@ -1045,14 +1045,14 @@
 
  mem_fun1 
 
-这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。
+这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。此函数11之后被淘汰
 
 ++12345678910111213141516171819202122232425262728293031   numbers.push_back ( new dd );numbers.push_back ( new dd );   class dd {   public:       dd() {}       ~dd() {}       int aa(int a) {           cout << a - 1  << endl;           return a - 1;       }   };   for_each (numbers.begin(), numbers.end(), bind2nd(mem_fun1(&dd::aa), 2));//如此便是循环执行：iterator->aa(2);   ////////////////////////////   numbers.push_back ( new dd );numbers.push_back ( new dd );   class aa {   public:       aa() {}       ~aa() {}       int dd(dd* a) {           cout << 33 << endl;           return 0;       }   };   aa s;   for_each (numbers.begin(), numbers.end(), bind1st(mem_fun1(&aa::dd), &s));//如此便是循环执行：(&s)->dd(iterator);
 
  mem_fun_ref 
  mem_fun1_ref 
 
-它们和mem_fun区别在于，iterator是对象，而不是指针。
+它们和mem_fun区别在于，iterator是对象，而不是指针。mem_fun1_ref此函数11之后被淘汰
 
 
  mem_fn ++12345   dd a;auto triple = std::mem_fn(&dd::aa);cout << triple(a, 2) << endl;//以a为调用对象，传入2
@@ -1067,14 +1067,14 @@
 
  mem_fun1 
 
-这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。
+这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。此函数11之后被淘汰
 
 ++12345678910111213141516171819202122232425262728293031   numbers.push_back ( new dd );numbers.push_back ( new dd );   class dd {   public:       dd() {}       ~dd() {}       int aa(int a) {           cout << a - 1  << endl;           return a - 1;       }   };   for_each (numbers.begin(), numbers.end(), bind2nd(mem_fun1(&dd::aa), 2));//如此便是循环执行：iterator->aa(2);   ////////////////////////////   numbers.push_back ( new dd );numbers.push_back ( new dd );   class aa {   public:       aa() {}       ~aa() {}       int dd(dd* a) {           cout << 33 << endl;           return 0;       }   };   aa s;   for_each (numbers.begin(), numbers.end(), bind1st(mem_fun1(&aa::dd), &s));//如此便是循环执行：(&s)->dd(iterator);
 
  mem_fun_ref 
  mem_fun1_ref 
 
-它们和mem_fun区别在于，iterator是对象，而不是指针。
+它们和mem_fun区别在于，iterator是对象，而不是指针。mem_fun1_ref此函数11之后被淘汰
 
 
  mem_fn ++12345   dd a;auto triple = std::mem_fn(&dd::aa);cout << triple(a, 2) << endl;//以a为调用对象，传入2
@@ -1087,14 +1087,14 @@
 
  mem_fun1 
 
-这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。
+这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。此函数11之后被淘汰
 
 ++12345678910111213141516171819202122232425262728293031   numbers.push_back ( new dd );numbers.push_back ( new dd );   class dd {   public:       dd() {}       ~dd() {}       int aa(int a) {           cout << a - 1  << endl;           return a - 1;       }   };   for_each (numbers.begin(), numbers.end(), bind2nd(mem_fun1(&dd::aa), 2));//如此便是循环执行：iterator->aa(2);   ////////////////////////////   numbers.push_back ( new dd );numbers.push_back ( new dd );   class aa {   public:       aa() {}       ~aa() {}       int dd(dd* a) {           cout << 33 << endl;           return 0;       }   };   aa s;   for_each (numbers.begin(), numbers.end(), bind1st(mem_fun1(&aa::dd), &s));//如此便是循环执行：(&s)->dd(iterator);
 
  mem_fun_ref 
  mem_fun1_ref 
 
-它们和mem_fun区别在于，iterator是对象，而不是指针。
+它们和mem_fun区别在于，iterator是对象，而不是指针。mem_fun1_ref此函数11之后被淘汰
 
 
  mem_fn ++12345   dd a;auto triple = std::mem_fn(&dd::aa);cout << triple(a, 2) << endl;//以a为调用对象，传入2
@@ -1107,14 +1107,14 @@
 
  mem_fun1 
 
-这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。
+这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。此函数11之后被淘汰
 
 ++12345678910111213141516171819202122232425262728293031   numbers.push_back ( new dd );numbers.push_back ( new dd );   class dd {   public:       dd() {}       ~dd() {}       int aa(int a) {           cout << a - 1  << endl;           return a - 1;       }   };   for_each (numbers.begin(), numbers.end(), bind2nd(mem_fun1(&dd::aa), 2));//如此便是循环执行：iterator->aa(2);   ////////////////////////////   numbers.push_back ( new dd );numbers.push_back ( new dd );   class aa {   public:       aa() {}       ~aa() {}       int dd(dd* a) {           cout << 33 << endl;           return 0;       }   };   aa s;   for_each (numbers.begin(), numbers.end(), bind1st(mem_fun1(&aa::dd), &s));//如此便是循环执行：(&s)->dd(iterator);
 
  mem_fun_ref 
  mem_fun1_ref 
 
-它们和mem_fun区别在于，iterator是对象，而不是指针。
+它们和mem_fun区别在于，iterator是对象，而不是指针。mem_fun1_ref此函数11之后被淘汰
 
 
  mem_fn ++12345   dd a;auto triple = std::mem_fn(&dd::aa);cout << triple(a, 2) << endl;//以a为调用对象，传入2
@@ -1122,14 +1122,14 @@
 
  mem_fun1 
 
-这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。
+这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。此函数11之后被淘汰
 
 ++12345678910111213141516171819202122232425262728293031   numbers.push_back ( new dd );numbers.push_back ( new dd );   class dd {   public:       dd() {}       ~dd() {}       int aa(int a) {           cout << a - 1  << endl;           return a - 1;       }   };   for_each (numbers.begin(), numbers.end(), bind2nd(mem_fun1(&dd::aa), 2));//如此便是循环执行：iterator->aa(2);   ////////////////////////////   numbers.push_back ( new dd );numbers.push_back ( new dd );   class aa {   public:       aa() {}       ~aa() {}       int dd(dd* a) {           cout << 33 << endl;           return 0;       }   };   aa s;   for_each (numbers.begin(), numbers.end(), bind1st(mem_fun1(&aa::dd), &s));//如此便是循环执行：(&s)->dd(iterator);
 
  mem_fun_ref 
  mem_fun1_ref 
 
-它们和mem_fun区别在于，iterator是对象，而不是指针。
+它们和mem_fun区别在于，iterator是对象，而不是指针。mem_fun1_ref此函数11之后被淘汰
 
 
  mem_fn ++12345   dd a;auto triple = std::mem_fn(&dd::aa);cout << triple(a, 2) << endl;//以a为调用对象，传入2
@@ -1137,66 +1137,66 @@
 
  mem_fun1 
 
-这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。
+这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。此函数11之后被淘汰
 
 ++12345678910111213141516171819202122232425262728293031   numbers.push_back ( new dd );numbers.push_back ( new dd );   class dd {   public:       dd() {}       ~dd() {}       int aa(int a) {           cout << a - 1  << endl;           return a - 1;       }   };   for_each (numbers.begin(), numbers.end(), bind2nd(mem_fun1(&dd::aa), 2));//如此便是循环执行：iterator->aa(2);   ////////////////////////////   numbers.push_back ( new dd );numbers.push_back ( new dd );   class aa {   public:       aa() {}       ~aa() {}       int dd(dd* a) {           cout << 33 << endl;           return 0;       }   };   aa s;   for_each (numbers.begin(), numbers.end(), bind1st(mem_fun1(&aa::dd), &s));//如此便是循环执行：(&s)->dd(iterator);
 
  mem_fun_ref 
  mem_fun1_ref 
 
-它们和mem_fun区别在于，iterator是对象，而不是指针。
+它们和mem_fun区别在于，iterator是对象，而不是指针。mem_fun1_ref此函数11之后被淘汰
 
 
  mem_fn ++12345   dd a;auto triple = std::mem_fn(&dd::aa);cout << triple(a, 2) << endl;//以a为调用对象，传入2
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mem_fun1"><span class="nav-number"></span> <span class="nav-text"> mem_fun1 
 
-这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。
+这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。此函数11之后被淘汰
 
 ++12345678910111213141516171819202122232425262728293031   numbers.push_back ( new dd );numbers.push_back ( new dd );   class dd {   public:       dd() {}       ~dd() {}       int aa(int a) {           cout << a - 1  << endl;           return a - 1;       }   };   for_each (numbers.begin(), numbers.end(), bind2nd(mem_fun1(&dd::aa), 2));//如此便是循环执行：iterator->aa(2);   ////////////////////////////   numbers.push_back ( new dd );numbers.push_back ( new dd );   class aa {   public:       aa() {}       ~aa() {}       int dd(dd* a) {           cout << 33 << endl;           return 0;       }   };   aa s;   for_each (numbers.begin(), numbers.end(), bind1st(mem_fun1(&aa::dd), &s));//如此便是循环执行：(&s)->dd(iterator);
 
  mem_fun_ref 
  mem_fun1_ref 
 
-它们和mem_fun区别在于，iterator是对象，而不是指针。
+它们和mem_fun区别在于，iterator是对象，而不是指针。mem_fun1_ref此函数11之后被淘汰
 
 
  mem_fn ++12345   dd a;auto triple = std::mem_fn(&dd::aa);cout << triple(a, 2) << endl;//以a为调用对象，传入2
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">
 
-这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。
+这个函数并不像实际效果那样，它应该是俩个参数，且各个绑定不同。此函数11之后被淘汰
 
 ++12345678910111213141516171819202122232425262728293031   numbers.push_back ( new dd );numbers.push_back ( new dd );   class dd {   public:       dd() {}       ~dd() {}       int aa(int a) {           cout << a - 1  << endl;           return a - 1;       }   };   for_each (numbers.begin(), numbers.end(), bind2nd(mem_fun1(&dd::aa), 2));//如此便是循环执行：iterator->aa(2);   ////////////////////////////   numbers.push_back ( new dd );numbers.push_back ( new dd );   class aa {   public:       aa() {}       ~aa() {}       int dd(dd* a) {           cout << 33 << endl;           return 0;       }   };   aa s;   for_each (numbers.begin(), numbers.end(), bind1st(mem_fun1(&aa::dd), &s));//如此便是循环执行：(&s)->dd(iterator);
 
  mem_fun_ref 
  mem_fun1_ref 
 
-它们和mem_fun区别在于，iterator是对象，而不是指针。
+它们和mem_fun区别在于，iterator是对象，而不是指针。mem_fun1_ref此函数11之后被淘汰
 
 
  mem_fn ++12345   dd a;auto triple = std::mem_fn(&dd::aa);cout << triple(a, 2) << endl;//以a为调用对象，传入2
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mem_fun_ref"><span class="nav-number"></span> <span class="nav-text"> mem_fun_ref 
  mem_fun1_ref 
 
-它们和mem_fun区别在于，iterator是对象，而不是指针。
+它们和mem_fun区别在于，iterator是对象，而不是指针。mem_fun1_ref此函数11之后被淘汰
 
 
  mem_fn ++12345   dd a;auto triple = std::mem_fn(&dd::aa);cout << triple(a, 2) << endl;//以a为调用对象，传入2
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">
  mem_fun1_ref 
 
-它们和mem_fun区别在于，iterator是对象，而不是指针。
+它们和mem_fun区别在于，iterator是对象，而不是指针。mem_fun1_ref此函数11之后被淘汰
 
 
  mem_fn ++12345   dd a;auto triple = std::mem_fn(&dd::aa);cout << triple(a, 2) << endl;//以a为调用对象，传入2
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mem_fun1_ref"><span class="nav-number"></span> <span class="nav-text"> mem_fun1_ref 
 
-它们和mem_fun区别在于，iterator是对象，而不是指针。
+它们和mem_fun区别在于，iterator是对象，而不是指针。mem_fun1_ref此函数11之后被淘汰
 
 
  mem_fn ++12345   dd a;auto triple = std::mem_fn(&dd::aa);cout << triple(a, 2) << endl;//以a为调用对象，传入2
 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">
 
-它们和mem_fun区别在于，iterator是对象，而不是指针。
+它们和mem_fun区别在于，iterator是对象，而不是指针。mem_fun1_ref此函数11之后被淘汰
 
 
  mem_fn ++12345   dd a;auto triple = std::mem_fn(&dd::aa);cout << triple(a, 2) << endl;//以a为调用对象，传入2
