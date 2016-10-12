@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2016-09-27T14:39:50.818Z</updated>
+  <updated>2016-10-12T16:18:49.484Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -14,6 +14,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>换系统时要保存的文件189</title>
+    <link href="https://xuecat.github.io/2016/10/12/189/"/>
+    <id>https://xuecat.github.io/2016/10/12/189/</id>
+    <published>2016-10-12T15:32:07.000Z</published>
+    <updated>2016-10-12T16:18:49.484Z</updated>
+    
+    <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/e1.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
+<ul>
+<li>vscode 插件项</li>
+<li>桌面的<code>笔记.txt</code></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;div class=&quot;group-picture&quot;&gt;&lt;div class=&quot;group-picture-container&quot;&gt;&lt;div class=&quot;group-picture-row&quot;&gt;&lt;div class=&quot;group-picture-column&quot; style=&quot;widt
+    
+    </summary>
+    
+      <category term="配置" scheme="https://xuecat.github.io/categories/%E9%85%8D%E7%BD%AE/"/>
+    
+    
+      <category term="工具" scheme="https://xuecat.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
+    
+  </entry>
   
   <entry>
     <title>CFile各属性笔记188</title>
@@ -80,10 +109,12 @@
     <link href="https://xuecat.github.io/2016/09/25/186/"/>
     <id>https://xuecat.github.io/2016/09/25/186/</id>
     <published>2016-09-25T09:01:40.000Z</published>
-    <updated>2016-09-26T15:37:12.436Z</updated>
+    <updated>2016-10-12T15:52:08.996Z</updated>
     
     <content type="html"><![CDATA[<p>今天死活断点不了，google了好久；发现有个<code>debugger</code>放入代码中就好了，可以看堆栈了。<br><br>断点不了的问题至今没找到，气死人了。！</p>
 <p>好吧v2ex果然大神多，jsx需要编译产生sourcemap后才能被调试，所以webpack是标配。另外react-hot-loader（js库）和react-devtools（google插件）不错</p>
+<p><code>Create React App</code>和<code>generator-react-webpack</code>会自动生成react项目，使用webpack自动打包，但是<code>dev-source-map</code>模式下无法调试。<br><br>其它模式参考：<a href="https://segmentfault.com/a/1190000004280859" target="_blank" rel="external">https://segmentfault.com/a/1190000004280859</a></p>
+<p>调试的jsx，一般都是被打包成js的，很好看，也方便调试（就google-&gt;source 那里找源码有点不好找，打包多了）。</p>
 ]]></content>
     
     <summary type="html">
@@ -196,18 +227,26 @@ var btnOk2=document.createElement(&quot;&lt;input type=&apos;button&apos; value=
   </entry>
   
   <entry>
-    <title>js使用VSCode为IDE183</title>
+    <title>在VSCode开发react环境过程IDE183</title>
     <link href="https://xuecat.github.io/2016/09/21/183/"/>
     <id>https://xuecat.github.io/2016/09/21/183/</id>
     <published>2016-09-21T15:54:37.000Z</published>
-    <updated>2016-09-21T16:19:45.618Z</updated>
+    <updated>2016-10-12T16:18:52.172Z</updated>
     
-    <content type="html"><![CDATA[<ol>
-<li>智能提速用typings，tsd真心不好使<br><br><a href="http://www.cnblogs.com/IPrograming/p/VsCodeTypings.html" target="_blank" rel="external">http://www.cnblogs.com/IPrograming/p/VsCodeTypings.html</a></li>
-</ol>
-<p>记得requre和加提示reference</p>
+    <content type="html"><![CDATA[<p>###过程多了186也有，这里这说下开发环境，有利工具</p>
 <ol>
-<li></li>
+<li><p>代码语法提示，插件ESLint；它对写的代码进行语法错误提示，特别是配置了react的插件后，对react属性、状态等书写有全面提示。</p>
+</li>
+<li><p>代码自动补全，node插件Typings和vsc插件Typings suto installer，前者全局安装，后者会自动把package.jason的TS（微软的TypingScript）包全下全</p>
+</li>
+<li><p>Debugger for Chrome,这个很好就是配置不好弄，用google远程调试协议来达到vsc本地调试，它的example可以直接下在本地使用。<br><br>example项目确实让人见识了很多东西；</p>
+</li>
+<li><p>Reactjs code snippets,这个很好专门的react的自动补全。</p>
+</li>
+<li><p>emment（内置，它简直为前端而生，语法很好使）；它默认是不支持js的，jsx倒是可以。<br><br>我google和官网了很久都没找到提示，最后没法，去git看看（原来git官网的doc是实时更新的，比官网的doc更新都勤快，以后只去git去看doc了）<br><br>在<code>.vscode</code>目录新建一个setting.json，加上<code>{&quot;emmet.syntaxProfiles&quot;: { &quot;javascript&quot;: &quot;html&quot; }}</code>便好了</p>
+</li>
+<li><p>调试和堆栈过程放186吧。</p>
+</li>
 </ol>
 <ul>
 <li><p>单个js调试，launch.json的配置  <a href="https://segmentfault.com/a/1190000004136202" target="_blank" rel="external">https://segmentfault.com/a/1190000004136202</a></p>
@@ -218,8 +257,11 @@ var btnOk2=document.createElement(&quot;&lt;input type=&apos;button&apos; value=
     
     <summary type="html">
     
-      &lt;ol&gt;
-&lt;li&gt;智能提速用typings，tsd真心不好使&lt;br&gt;&lt;br&gt;&lt;a href=&quot;http://www.cnblogs.com/IPrograming/p/VsCodeTypings.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http:
+      &lt;p&gt;###过程多了186也有，这里这说下开发环境，有利工具&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;代码语法提示，插件ESLint；它对写的代码进行语法错误提示，特别是配置了react的插件后，对react属性、状态等书写有全面提示。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;代码自动补全，n
     
     </summary>
     
@@ -403,9 +445,9 @@ var btnOk2=document.createElement(&quot;&lt;input type=&apos;button&apos; value=
     <link href="https://xuecat.github.io/2016/09/08/181/"/>
     <id>https://xuecat.github.io/2016/09/08/181/</id>
     <published>2016-09-08T13:27:43.000Z</published>
-    <updated>2016-09-22T13:56:08.908Z</updated>
+    <updated>2016-10-02T01:28:18.754Z</updated>
     
-    <content type="html"><![CDATA[<p>代码暂时不提供了，直接去<code>179</code>的sobey库寻。说明MP3音频过程遇见。</p>
+    <content type="html"><![CDATA[<p>代码暂时不提供了，直接去<code>178</code>的sobey库寻。说明MP3音频过程遇见。</p>
 <ol>
 <li>帧头是大端字节，所以要转换下</li>
 <li>判断是否是帧头，看第一个字节是否是FF，同步信息第一个字节必须是FF（qq音乐喜欢用ff fe，网络音乐喜欢用ff fb）</li>
@@ -420,7 +462,7 @@ var btnOk2=document.createElement(&quot;&lt;input type=&apos;button&apos; value=
     
     <summary type="html">
     
-      &lt;p&gt;代码暂时不提供了，直接去&lt;code&gt;179&lt;/code&gt;的sobey库寻。说明MP3音频过程遇见。&lt;/p&gt;
+      &lt;p&gt;代码暂时不提供了，直接去&lt;code&gt;178&lt;/code&gt;的sobey库寻。说明MP3音频过程遇见。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;帧头是大端字节，所以要转换下&lt;/li&gt;
 &lt;li&gt;判断是否是帧头，看第一个字节是否是FF，同步信息第一个字节必须是FF（qq音乐喜欢用ff fe，网络
@@ -1141,6 +1183,55 @@ var btnOk2=document.createElement(&quot;&lt;input type=&apos;button&apos; value=
   </entry>
   
   <entry>
+    <title>STL函数学习(173)</title>
+    <link href="https://xuecat.github.io/2016/08/10/173/"/>
+    <id>https://xuecat.github.io/2016/08/10/173/</id>
+    <published>2016-08-09T19:33:58.000Z</published>
+    <updated>2016-09-18T13:42:34.500Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="更多函数讲解在175，这里只放置大众，让人注意的函数。"><a href="#更多函数讲解在175，这里只放置大众，让人注意的函数。" class="headerlink" title="更多函数讲解在175，这里只放置大众，让人注意的函数。"></a>更多函数讲解在175，这里只放置大众，让人注意的函数。</h2><h4 id="std-enable-if"><a href="#std-enable-if" class="headerlink" title="std::enable_if"></a>std::enable_if</h4><p>源代码：</p>
+<pre><code>template&lt;class _Ty&gt;
+struct enable_if&lt;true, _Ty&gt;
+{    // type is _Ty for _Test
+typedef _Ty type;
+};
+</code></pre><p>其实它和static_assert一样，都是为了编译期间检查。常用使用在函数前，表面上给个函数返回值，但之前要进行判断。</p>
+<h4 id="std-find"><a href="#std-find" class="headerlink" title="std::find"></a>std::find</h4><p>find第三个参数是value，如果要找自定义的类，只有重载函数</p>
+<pre><code>template &lt;typename T&gt;
+bool operator !=(const MyClass&lt;T&gt;&amp; item, T n)
+{return ;}
+</code></pre><h4 id="traits编程法"><a href="#traits编程法" class="headerlink" title="traits编程法"></a>traits编程法</h4><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">	<span class="number">1</span>：<span class="keyword">template</span> &lt;<span class="keyword">class</span> numT&gt;</div><div class="line">   <span class="number">2</span>: <span class="keyword">struct</span> float_traits &#123; &#125;;</div><div class="line">   <span class="number">3</span>:  </div><div class="line">   <span class="number">4</span>: <span class="keyword">struct</span> float_traits&lt;<span class="keyword">float</span>&gt; &#123;</div><div class="line">   <span class="number">5</span>:     <span class="keyword">typedef</span> <span class="keyword">float</span> float_type;</div><div class="line">   <span class="number">6</span>:     <span class="keyword">enum</span> &#123; max_exponent = FLT_MAX_EXP &#125;;</div><div class="line">   <span class="number">7</span>:     <span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> float_type <span class="title">epsilon</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> FLT_EPSILON; &#125;</div><div class="line">   <span class="number">8</span>:     ...</div><div class="line">   <span class="number">9</span>: &#125;;</div><div class="line">  <span class="number">10</span>:  </div><div class="line">  <span class="number">11</span>: <span class="keyword">struct</span> float_traits&lt;<span class="keyword">double</span>&gt; &#123;</div><div class="line">  <span class="number">12</span>:     <span class="keyword">typedef</span> <span class="keyword">double</span> float_type;</div><div class="line">  <span class="number">13</span>:     <span class="keyword">enum</span> &#123; max_exponent = DBL_MAX_EXP &#125;;</div><div class="line">  <span class="number">14</span>:     <span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> float_type <span class="title">epsilon</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> DBL_EPSILON; &#125;</div><div class="line">  <span class="number">15</span>:     ...</div><div class="line">  <span class="number">16</span>: &#125;;</div><div class="line">现在不管啥类型，模板的使用者都可以无差别使用max_exponent了。比如这儿有个矩阵类模板：</div><div class="line"></div><div class="line">   <span class="number">1</span>: <span class="keyword">template</span> &lt;<span class="keyword">class</span> numT&gt;</div><div class="line">   <span class="number">2</span>: <span class="keyword">class</span> matrix &#123;</div><div class="line">   <span class="number">3</span>:     <span class="keyword">public</span>:</div><div class="line">   <span class="number">4</span>:       <span class="keyword">typedef</span> numT num_type;</div><div class="line">   <span class="number">5</span>:       <span class="keyword">typedef</span> float_traits&lt;num_type&gt; traits_type;</div><div class="line">   <span class="number">6</span>:       <span class="function"><span class="keyword">inline</span> num_type <span class="title">epsilon</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> traits_type::epsilon(); &#125;</div><div class="line">   <span class="number">7</span>:       ...</div><div class="line">   <span class="number">8</span>: &#125;;</div></pre></td></tr></table></figure>
+<h4 id="typename"><a href="#typename" class="headerlink" title="typename"></a>typename</h4><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="number">_</span>InputIter, <span class="keyword">class</span> <span class="number">_</span>Tp&gt;</div><div class="line"><span class="keyword">typename</span> iterator_traits&lt;<span class="number">_</span>InputIter&gt;::<span class="function">difference_type</span></div><div class="line"><span class="title">count</span><span class="params">(<span class="number">_</span>InputIter <span class="number">__f</span>irst, <span class="number">_</span>InputIter <span class="number">__l</span>ast, <span class="keyword">const</span> <span class="number">_</span>Tp&amp; <span class="number">__</span>value)</span> &#123;</div><div class="line">  <span class="number">__</span>STL_REQUIRES(<span class="number">_</span>InputIter, <span class="number">_</span>InputIterator);</div><div class="line">  <span class="number">__</span>STL_REQUIRES(<span class="keyword">typename</span> iterator_traits&lt;<span class="number">_</span>InputIter&gt;::value_type,</div><div class="line">                 <span class="number">_</span>EqualityComparable);</div><div class="line">  <span class="number">__</span>STL_REQUIRES(<span class="number">_</span>Tp, <span class="number">_</span>EqualityComparable);</div><div class="line">  <span class="keyword">typename</span> iterator_traits&lt;<span class="number">_</span>InputIter&gt;::difference_type <span class="number">__</span>n = <span class="number">0</span>;</div><div class="line">  <span class="keyword">for</span> ( ; <span class="number">__f</span>irst != <span class="number">__l</span>ast; ++<span class="number">__f</span>irst)</div><div class="line">    <span class="keyword">if</span> (*<span class="number">__f</span>irst == <span class="number">__</span>value)</div><div class="line">      ++<span class="number">__</span>n;</div><div class="line">  <span class="keyword">return</span> <span class="number">__</span>n;</div><div class="line">&#125;</div><div class="line"><span class="comment">//1、用在模板中，来声明是类型</span></div><div class="line"><span class="comment">//2、用在类型声明，表示下面的是个类型。不然typename T::iterator *iter就会被解析为俩数相乘。</span></div><div class="line"></div></pre></td></tr></table></figure>
+<h4 id="std-bind"><a href="#std-bind" class="headerlink" title="std::bind"></a>std::bind</h4><p>这个函数是必须和function一起讲的，但是多个绑定情况就有点特殊，先列出来：</p>
+<figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">TestFunc</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">char</span> c, <span class="keyword">float</span> f)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; c &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; f &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> a;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">auto</span> bindFunc1 = bind(TestFunc, <span class="built_in">std</span>::placeholders::<span class="number">_1</span>, <span class="string">'A'</span>, <span class="number">100.1</span>);</div><div class="line">    bindFunc1(<span class="number">10</span>);</div><div class="line"></div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"=================================\n"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">auto</span> bindFunc2 = bind(TestFunc, <span class="built_in">std</span>::placeholders::<span class="number">_2</span>, <span class="built_in">std</span>::placeholders::<span class="number">_1</span>, <span class="number">100.1</span>);</div><div class="line">    bindFunc2(<span class="string">'B'</span>, <span class="number">10</span>);</div><div class="line"></div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"=================================\n"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">auto</span> bindFunc3 = bind(TestFunc, <span class="built_in">std</span>::placeholders::<span class="number">_2</span>, <span class="built_in">std</span>::placeholders::<span class="number">_1</span>, <span class="built_in">std</span>::placeholders::<span class="number">_3</span>);</div><div class="line">    bindFunc3(<span class="string">'C'</span>, <span class="number">30</span>, <span class="number">100.1</span>);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;<span class="comment">//绑定第几个placeholders就按照参数顺序输入第几个。</span></div><div class="line"></div></pre></td></tr></table></figure>
+<h4 id="std-function"><a href="#std-function" class="headerlink" title="std::function"></a>std::function</h4><p>看到这个函数（表明是函数其实是对象），我只想说叼到没朋友！！！！！！<br><br>代码伺候：</p>
+<figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">std</span>::function&lt; <span class="keyword">int</span>(<span class="keyword">int</span>)&gt; Functional;</div><div class="line"></div><div class="line"><span class="comment">// 普通函数</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">TestFunc</span><span class="params">(<span class="keyword">int</span> a)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> a;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Lambda表达式</span></div><div class="line"><span class="keyword">auto</span> lambda = [](<span class="keyword">int</span> a)-&gt;<span class="keyword">int</span>&#123; <span class="keyword">return</span> a; &#125;;</div><div class="line"></div><div class="line"><span class="comment">// 仿函数(functor)</span></div><div class="line"><span class="keyword">class</span> Functor</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">int</span> a)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> a;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 1.类成员函数</span></div><div class="line"><span class="comment">// 2.类静态函数</span></div><div class="line"><span class="keyword">class</span> TestClass</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">int</span> <span class="title">VirtualMember</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123; <span class="keyword">return</span> a; &#125;</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">ClassMember</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123; <span class="keyword">return</span> a; &#125;</div><div class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">StaticMember</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123; <span class="keyword">return</span> a; &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//多态</span></div><div class="line"><span class="keyword">class</span> DemoClass : <span class="keyword">public</span> TestClass &#123;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">int</span> <span class="title">VirtualMember</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123; <span class="keyword">return</span> a + <span class="number">1</span>; &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">// 普通函数</span></div><div class="line">    Functional = TestFunc;</div><div class="line">    <span class="keyword">int</span> result = Functional(<span class="number">10</span>);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"普通函数："</span>&lt;&lt; result &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">    <span class="comment">// Lambda表达式</span></div><div class="line">    Functional = lambda;</div><div class="line">    result = Functional(<span class="number">20</span>);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Lambda表达式："</span>&lt;&lt; result &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">    <span class="comment">// 仿函数</span></div><div class="line">    Functor testFunctor;</div><div class="line">    Functional = testFunctor;</div><div class="line">    result = Functional(<span class="number">30</span>);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"仿函数："</span>&lt;&lt; result &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">    <span class="comment">// 类成员函数</span></div><div class="line">    TestClass testObj;</div><div class="line">    Functional = <span class="built_in">std</span>::bind(&amp;TestClass::ClassMember, testObj, <span class="built_in">std</span>::placeholders::<span class="number">_1</span>);</div><div class="line">    result = Functional(<span class="number">40</span>);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"类成员函数："</span>&lt;&lt; result &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">    <span class="comment">// 类静态函数</span></div><div class="line">    Functional = TestClass::StaticMember;</div><div class="line">    result = Functional(<span class="number">50</span>);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"类静态函数："</span>&lt;&lt; result &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">	<span class="comment">//多态</span></div><div class="line">	TestClass* p = <span class="keyword">new</span> DemoClass;</div><div class="line">	Functional = <span class="built_in">std</span>::bind(&amp;TestClass::VirtualMember, p, <span class="number">2</span>);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt;Functional(<span class="number">5</span>);<span class="comment">//3</span></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//又一个灵活用法</span></div><div class="line"><span class="built_in">map</span>&lt;<span class="keyword">char</span>, function&lt;<span class="keyword">int</span>(<span class="keyword">int</span>, <span class="keyword">int</span>)&gt;&gt; binops = </div><div class="line">&#123;</div><div class="line">	&#123; <span class="string">'+'</span>, add &#125;,</div><div class="line">	&#123; <span class="string">'-'</span>, minus&lt;<span class="keyword">int</span>&gt;() &#125;,</div><div class="line">	&#123; <span class="string">'*'</span>, [](<span class="keyword">int</span> i, <span class="keyword">int</span> j)&#123;<span class="keyword">return</span> i - j; &#125; &#125;,</div><div class="line">	&#123; <span class="string">'/'</span>, divide() &#125;,</div><div class="line">	&#123; <span class="string">'%'</span>, mod &#125;,</div><div class="line">&#125;;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; binops[<span class="string">'+'</span>](<span class="number">10</span>, <span class="number">5</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; binops[<span class="string">'-'</span>](<span class="number">10</span>, <span class="number">5</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; binops[<span class="string">'*'</span>](<span class="number">10</span>, <span class="number">5</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; binops[<span class="string">'/'</span>](<span class="number">10</span>, <span class="number">5</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; binops[<span class="string">'%'</span>](<span class="number">10</span>, <span class="number">5</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div></pre></td></tr></table></figure>
+<h4 id="reserve、resize、capacity、size"><a href="#reserve、resize、capacity、size" class="headerlink" title="reserve、resize、capacity、size"></a>reserve、resize、capacity、size</h4><blockquote>
+<p>内容就不讲了，一一对应的！！！点下就好，vector和string都是一样的，只增长，2*n。</p>
+</blockquote>
+<h4 id="unary-function-一元函数，binary-function-二元函数"><a href="#unary-function-一元函数，binary-function-二元函数" class="headerlink" title="unary_function 一元函数，binary_function 二元函数"></a>unary_function 一元函数，binary_function 二元函数</h4><blockquote>
+<p>binder2nd和函数适配器是必须要他们的<br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> t&gt;</div><div class="line"><span class="keyword">struct</span> negate : <span class="keyword">public</span> unary_function&lt;t, t&gt; &#123;</div><div class="line">	<span class="function">t <span class="title">operator</span><span class="params">()</span> <span class="params">(<span class="keyword">const</span> t&amp; x)</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> -x;&#125;<span class="comment">//此const是必须的</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> t&gt;</div><div class="line"><span class="keyword">struct</span> plus : <span class="keyword">public</span> binary_funcion&lt;t, t, t&gt; &#123;</div><div class="line">	<span class="function">t <span class="title">operator</span><span class="params">()</span> <span class="params">(constt t&amp; x, <span class="keyword">const</span> t&amp; y)</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> x + y;&#125;<span class="comment">//此const是必须的</span></div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure></p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;更多函数讲解在175，这里只放置大众，让人注意的函数。&quot;&gt;&lt;a href=&quot;#更多函数讲解在175，这里只放置大众，让人注意的函数。&quot; class=&quot;headerlink&quot; title=&quot;更多函数讲解在175，这里只放置大众，让人注意的函数。&quot;&gt;&lt;/a&gt;更多函数讲
+    
+    </summary>
+    
+      <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
+    
+    
+      <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
+    
+      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
+    
+      <category term="stl" scheme="https://xuecat.github.io/tags/stl/"/>
+    
+  </entry>
+  
+  <entry>
     <title>STL源码剖析(172)</title>
     <link href="https://xuecat.github.io/2016/08/10/172/"/>
     <id>https://xuecat.github.io/2016/08/10/172/</id>
@@ -1256,55 +1347,6 @@ hash&lt;char&gt; d;//is char
   </entry>
   
   <entry>
-    <title>STL函数学习(173)</title>
-    <link href="https://xuecat.github.io/2016/08/10/173/"/>
-    <id>https://xuecat.github.io/2016/08/10/173/</id>
-    <published>2016-08-09T19:33:58.000Z</published>
-    <updated>2016-09-18T13:42:34.500Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="更多函数讲解在175，这里只放置大众，让人注意的函数。"><a href="#更多函数讲解在175，这里只放置大众，让人注意的函数。" class="headerlink" title="更多函数讲解在175，这里只放置大众，让人注意的函数。"></a>更多函数讲解在175，这里只放置大众，让人注意的函数。</h2><h4 id="std-enable-if"><a href="#std-enable-if" class="headerlink" title="std::enable_if"></a>std::enable_if</h4><p>源代码：</p>
-<pre><code>template&lt;class _Ty&gt;
-struct enable_if&lt;true, _Ty&gt;
-{    // type is _Ty for _Test
-typedef _Ty type;
-};
-</code></pre><p>其实它和static_assert一样，都是为了编译期间检查。常用使用在函数前，表面上给个函数返回值，但之前要进行判断。</p>
-<h4 id="std-find"><a href="#std-find" class="headerlink" title="std::find"></a>std::find</h4><p>find第三个参数是value，如果要找自定义的类，只有重载函数</p>
-<pre><code>template &lt;typename T&gt;
-bool operator !=(const MyClass&lt;T&gt;&amp; item, T n)
-{return ;}
-</code></pre><h4 id="traits编程法"><a href="#traits编程法" class="headerlink" title="traits编程法"></a>traits编程法</h4><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">	<span class="number">1</span>：<span class="keyword">template</span> &lt;<span class="keyword">class</span> numT&gt;</div><div class="line">   <span class="number">2</span>: <span class="keyword">struct</span> float_traits &#123; &#125;;</div><div class="line">   <span class="number">3</span>:  </div><div class="line">   <span class="number">4</span>: <span class="keyword">struct</span> float_traits&lt;<span class="keyword">float</span>&gt; &#123;</div><div class="line">   <span class="number">5</span>:     <span class="keyword">typedef</span> <span class="keyword">float</span> float_type;</div><div class="line">   <span class="number">6</span>:     <span class="keyword">enum</span> &#123; max_exponent = FLT_MAX_EXP &#125;;</div><div class="line">   <span class="number">7</span>:     <span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> float_type <span class="title">epsilon</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> FLT_EPSILON; &#125;</div><div class="line">   <span class="number">8</span>:     ...</div><div class="line">   <span class="number">9</span>: &#125;;</div><div class="line">  <span class="number">10</span>:  </div><div class="line">  <span class="number">11</span>: <span class="keyword">struct</span> float_traits&lt;<span class="keyword">double</span>&gt; &#123;</div><div class="line">  <span class="number">12</span>:     <span class="keyword">typedef</span> <span class="keyword">double</span> float_type;</div><div class="line">  <span class="number">13</span>:     <span class="keyword">enum</span> &#123; max_exponent = DBL_MAX_EXP &#125;;</div><div class="line">  <span class="number">14</span>:     <span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> float_type <span class="title">epsilon</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> DBL_EPSILON; &#125;</div><div class="line">  <span class="number">15</span>:     ...</div><div class="line">  <span class="number">16</span>: &#125;;</div><div class="line">现在不管啥类型，模板的使用者都可以无差别使用max_exponent了。比如这儿有个矩阵类模板：</div><div class="line"></div><div class="line">   <span class="number">1</span>: <span class="keyword">template</span> &lt;<span class="keyword">class</span> numT&gt;</div><div class="line">   <span class="number">2</span>: <span class="keyword">class</span> matrix &#123;</div><div class="line">   <span class="number">3</span>:     <span class="keyword">public</span>:</div><div class="line">   <span class="number">4</span>:       <span class="keyword">typedef</span> numT num_type;</div><div class="line">   <span class="number">5</span>:       <span class="keyword">typedef</span> float_traits&lt;num_type&gt; traits_type;</div><div class="line">   <span class="number">6</span>:       <span class="function"><span class="keyword">inline</span> num_type <span class="title">epsilon</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> traits_type::epsilon(); &#125;</div><div class="line">   <span class="number">7</span>:       ...</div><div class="line">   <span class="number">8</span>: &#125;;</div></pre></td></tr></table></figure>
-<h4 id="typename"><a href="#typename" class="headerlink" title="typename"></a>typename</h4><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="number">_</span>InputIter, <span class="keyword">class</span> <span class="number">_</span>Tp&gt;</div><div class="line"><span class="keyword">typename</span> iterator_traits&lt;<span class="number">_</span>InputIter&gt;::<span class="function">difference_type</span></div><div class="line"><span class="title">count</span><span class="params">(<span class="number">_</span>InputIter <span class="number">__f</span>irst, <span class="number">_</span>InputIter <span class="number">__l</span>ast, <span class="keyword">const</span> <span class="number">_</span>Tp&amp; <span class="number">__</span>value)</span> &#123;</div><div class="line">  <span class="number">__</span>STL_REQUIRES(<span class="number">_</span>InputIter, <span class="number">_</span>InputIterator);</div><div class="line">  <span class="number">__</span>STL_REQUIRES(<span class="keyword">typename</span> iterator_traits&lt;<span class="number">_</span>InputIter&gt;::value_type,</div><div class="line">                 <span class="number">_</span>EqualityComparable);</div><div class="line">  <span class="number">__</span>STL_REQUIRES(<span class="number">_</span>Tp, <span class="number">_</span>EqualityComparable);</div><div class="line">  <span class="keyword">typename</span> iterator_traits&lt;<span class="number">_</span>InputIter&gt;::difference_type <span class="number">__</span>n = <span class="number">0</span>;</div><div class="line">  <span class="keyword">for</span> ( ; <span class="number">__f</span>irst != <span class="number">__l</span>ast; ++<span class="number">__f</span>irst)</div><div class="line">    <span class="keyword">if</span> (*<span class="number">__f</span>irst == <span class="number">__</span>value)</div><div class="line">      ++<span class="number">__</span>n;</div><div class="line">  <span class="keyword">return</span> <span class="number">__</span>n;</div><div class="line">&#125;</div><div class="line"><span class="comment">//1、用在模板中，来声明是类型</span></div><div class="line"><span class="comment">//2、用在类型声明，表示下面的是个类型。不然typename T::iterator *iter就会被解析为俩数相乘。</span></div><div class="line"></div></pre></td></tr></table></figure>
-<h4 id="std-bind"><a href="#std-bind" class="headerlink" title="std::bind"></a>std::bind</h4><p>这个函数是必须和function一起讲的，但是多个绑定情况就有点特殊，先列出来：</p>
-<figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">TestFunc</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">char</span> c, <span class="keyword">float</span> f)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; c &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; f &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> a;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">auto</span> bindFunc1 = bind(TestFunc, <span class="built_in">std</span>::placeholders::<span class="number">_1</span>, <span class="string">'A'</span>, <span class="number">100.1</span>);</div><div class="line">    bindFunc1(<span class="number">10</span>);</div><div class="line"></div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"=================================\n"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">auto</span> bindFunc2 = bind(TestFunc, <span class="built_in">std</span>::placeholders::<span class="number">_2</span>, <span class="built_in">std</span>::placeholders::<span class="number">_1</span>, <span class="number">100.1</span>);</div><div class="line">    bindFunc2(<span class="string">'B'</span>, <span class="number">10</span>);</div><div class="line"></div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"=================================\n"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">auto</span> bindFunc3 = bind(TestFunc, <span class="built_in">std</span>::placeholders::<span class="number">_2</span>, <span class="built_in">std</span>::placeholders::<span class="number">_1</span>, <span class="built_in">std</span>::placeholders::<span class="number">_3</span>);</div><div class="line">    bindFunc3(<span class="string">'C'</span>, <span class="number">30</span>, <span class="number">100.1</span>);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;<span class="comment">//绑定第几个placeholders就按照参数顺序输入第几个。</span></div><div class="line"></div></pre></td></tr></table></figure>
-<h4 id="std-function"><a href="#std-function" class="headerlink" title="std::function"></a>std::function</h4><p>看到这个函数（表明是函数其实是对象），我只想说叼到没朋友！！！！！！<br><br>代码伺候：</p>
-<figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">std</span>::function&lt; <span class="keyword">int</span>(<span class="keyword">int</span>)&gt; Functional;</div><div class="line"></div><div class="line"><span class="comment">// 普通函数</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">TestFunc</span><span class="params">(<span class="keyword">int</span> a)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> a;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Lambda表达式</span></div><div class="line"><span class="keyword">auto</span> lambda = [](<span class="keyword">int</span> a)-&gt;<span class="keyword">int</span>&#123; <span class="keyword">return</span> a; &#125;;</div><div class="line"></div><div class="line"><span class="comment">// 仿函数(functor)</span></div><div class="line"><span class="keyword">class</span> Functor</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">int</span> a)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> a;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 1.类成员函数</span></div><div class="line"><span class="comment">// 2.类静态函数</span></div><div class="line"><span class="keyword">class</span> TestClass</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">int</span> <span class="title">VirtualMember</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123; <span class="keyword">return</span> a; &#125;</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">ClassMember</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123; <span class="keyword">return</span> a; &#125;</div><div class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">StaticMember</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123; <span class="keyword">return</span> a; &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//多态</span></div><div class="line"><span class="keyword">class</span> DemoClass : <span class="keyword">public</span> TestClass &#123;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">int</span> <span class="title">VirtualMember</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123; <span class="keyword">return</span> a + <span class="number">1</span>; &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">// 普通函数</span></div><div class="line">    Functional = TestFunc;</div><div class="line">    <span class="keyword">int</span> result = Functional(<span class="number">10</span>);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"普通函数："</span>&lt;&lt; result &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">    <span class="comment">// Lambda表达式</span></div><div class="line">    Functional = lambda;</div><div class="line">    result = Functional(<span class="number">20</span>);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Lambda表达式："</span>&lt;&lt; result &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">    <span class="comment">// 仿函数</span></div><div class="line">    Functor testFunctor;</div><div class="line">    Functional = testFunctor;</div><div class="line">    result = Functional(<span class="number">30</span>);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"仿函数："</span>&lt;&lt; result &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">    <span class="comment">// 类成员函数</span></div><div class="line">    TestClass testObj;</div><div class="line">    Functional = <span class="built_in">std</span>::bind(&amp;TestClass::ClassMember, testObj, <span class="built_in">std</span>::placeholders::<span class="number">_1</span>);</div><div class="line">    result = Functional(<span class="number">40</span>);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"类成员函数："</span>&lt;&lt; result &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">    <span class="comment">// 类静态函数</span></div><div class="line">    Functional = TestClass::StaticMember;</div><div class="line">    result = Functional(<span class="number">50</span>);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"类静态函数："</span>&lt;&lt; result &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">	<span class="comment">//多态</span></div><div class="line">	TestClass* p = <span class="keyword">new</span> DemoClass;</div><div class="line">	Functional = <span class="built_in">std</span>::bind(&amp;TestClass::VirtualMember, p, <span class="number">2</span>);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt;Functional(<span class="number">5</span>);<span class="comment">//3</span></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//又一个灵活用法</span></div><div class="line"><span class="built_in">map</span>&lt;<span class="keyword">char</span>, function&lt;<span class="keyword">int</span>(<span class="keyword">int</span>, <span class="keyword">int</span>)&gt;&gt; binops = </div><div class="line">&#123;</div><div class="line">	&#123; <span class="string">'+'</span>, add &#125;,</div><div class="line">	&#123; <span class="string">'-'</span>, minus&lt;<span class="keyword">int</span>&gt;() &#125;,</div><div class="line">	&#123; <span class="string">'*'</span>, [](<span class="keyword">int</span> i, <span class="keyword">int</span> j)&#123;<span class="keyword">return</span> i - j; &#125; &#125;,</div><div class="line">	&#123; <span class="string">'/'</span>, divide() &#125;,</div><div class="line">	&#123; <span class="string">'%'</span>, mod &#125;,</div><div class="line">&#125;;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; binops[<span class="string">'+'</span>](<span class="number">10</span>, <span class="number">5</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; binops[<span class="string">'-'</span>](<span class="number">10</span>, <span class="number">5</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; binops[<span class="string">'*'</span>](<span class="number">10</span>, <span class="number">5</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; binops[<span class="string">'/'</span>](<span class="number">10</span>, <span class="number">5</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; binops[<span class="string">'%'</span>](<span class="number">10</span>, <span class="number">5</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div></pre></td></tr></table></figure>
-<h4 id="reserve、resize、capacity、size"><a href="#reserve、resize、capacity、size" class="headerlink" title="reserve、resize、capacity、size"></a>reserve、resize、capacity、size</h4><blockquote>
-<p>内容就不讲了，一一对应的！！！点下就好，vector和string都是一样的，只增长，2*n。</p>
-</blockquote>
-<h4 id="unary-function-一元函数，binary-function-二元函数"><a href="#unary-function-一元函数，binary-function-二元函数" class="headerlink" title="unary_function 一元函数，binary_function 二元函数"></a>unary_function 一元函数，binary_function 二元函数</h4><blockquote>
-<p>binder2nd和函数适配器是必须要他们的<br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> t&gt;</div><div class="line"><span class="keyword">struct</span> negate : <span class="keyword">public</span> unary_function&lt;t, t&gt; &#123;</div><div class="line">	<span class="function">t <span class="title">operator</span><span class="params">()</span> <span class="params">(<span class="keyword">const</span> t&amp; x)</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> -x;&#125;<span class="comment">//此const是必须的</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> t&gt;</div><div class="line"><span class="keyword">struct</span> plus : <span class="keyword">public</span> binary_funcion&lt;t, t, t&gt; &#123;</div><div class="line">	<span class="function">t <span class="title">operator</span><span class="params">()</span> <span class="params">(constt t&amp; x, <span class="keyword">const</span> t&amp; y)</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> x + y;&#125;<span class="comment">//此const是必须的</span></div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure></p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;更多函数讲解在175，这里只放置大众，让人注意的函数。&quot;&gt;&lt;a href=&quot;#更多函数讲解在175，这里只放置大众，让人注意的函数。&quot; class=&quot;headerlink&quot; title=&quot;更多函数讲解在175，这里只放置大众，让人注意的函数。&quot;&gt;&lt;/a&gt;更多函数讲
-    
-    </summary>
-    
-      <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
-    
-    
-      <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
-    
-      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
-    
-      <category term="stl" scheme="https://xuecat.github.io/tags/stl/"/>
-    
-  </entry>
-  
-  <entry>
     <title>工具代码(170)</title>
     <link href="https://xuecat.github.io/2016/08/04/170/"/>
     <id>https://xuecat.github.io/2016/08/04/170/</id>
@@ -1359,97 +1401,6 @@ bool operator !=(const MyClass&lt;T&gt;&amp; item, T n)
       <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
     
       <category term="mfc" scheme="https://xuecat.github.io/tags/mfc/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++11再次陪读(169)</title>
-    <link href="https://xuecat.github.io/2016/07/16/169/"/>
-    <id>https://xuecat.github.io/2016/07/16/169/</id>
-    <published>2016-07-15T19:33:58.000Z</published>
-    <updated>2016-09-12T15:20:41.045Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="最近无聊，读下c-11发现有些东西都忘了。开个页面，来和书同步更新"><a href="#最近无聊，读下c-11发现有些东西都忘了。开个页面，来和书同步更新" class="headerlink" title="最近无聊，读下c++11发现有些东西都忘了。开个页面，来和书同步更新"></a>最近无聊，读下c++11发现有些东西都忘了。开个页面，来和书同步更新</h3><h4 id="1、static-assert-条件，提示字符-这个函数会在编译期间执行。"><a href="#1、static-assert-条件，提示字符-这个函数会在编译期间执行。" class="headerlink" title="1、static_assert(条件，提示字符); 这个函数会在编译期间执行。"></a>1、static_assert(条件，提示字符); 这个函数会在编译期间执行。</h4><p><img src="/picture/img/169.jpg" alt=""><br><br>如上图；<br><br>编译器在预编译期间就会报错，无法编译下去。所以里面的条件无法是动态的变量之类的。</p>
-<h4 id="2、noexcept和throw-，这个是11和98两个不同的表示方式而已。都一样，如果在函数里面抛的话都会导致程序强制中断。（vs2013无法识别noexcept）"><a href="#2、noexcept和throw-，这个是11和98两个不同的表示方式而已。都一样，如果在函数里面抛的话都会导致程序强制中断。（vs2013无法识别noexcept）" class="headerlink" title="2、noexcept和throw()，这个是11和98两个不同的表示方式而已。都一样，如果在函数里面抛的话都会导致程序强制中断。（vs2013无法识别noexcept）"></a>2、noexcept和throw()，这个是11和98两个不同的表示方式而已。都一样，如果在函数里面抛的话都会导致程序强制中断。（vs2013无法识别noexcept）</h4><h4 id="3、final、override、-declspec-novtable"><a href="#3、final、override、-declspec-novtable" class="headerlink" title="3、final、override、__declspec(novtable)."></a>3、final、override、__declspec(novtable).</h4><ul>
-<li>这个是11的，基类使用。专门放声明虚函数后面（定义放不下）；基类对虚函数使用这个修饰符后，子类就无法继承重写那个函数（连同名函数都不允许）</li>
-<li>这个是11的，派生类使用。专门放声明虚函数后面；派生类对虚函数使用这个修饰符后，编译器会从基类去找此函数是否是要继承的虚函数（就是和编译器一个君子协定而已），不是就报错。</li>
-<li>这个是Microsoft c++。作为接口的基类虽然有纯虚函数声明，但是被继承过后依旧会被分配虚函数表的空间。由于接口基类本来就是可以完全忽略的，所以用这个限定符来把那个表去掉。 <strong>但是使用的时候，最好和纯虚函数一起使用（网上说编译器会默认把函数全变成纯虚，但是试了下vs2013，完全不是的。发现它的作用只在去表，没其他的。）</strong></li>
-</ul>
-<h4 id="4、using构造特性"><a href="#4、using构造特性" class="headerlink" title="4、using构造特性"></a>4、using构造特性</h4><p>struct A {A(int i){} A(int d, double j)}；<br><br>struct B :　Ａ{using A::A}；<br><br>派生类的构造函数要和基类一样（包括内容），为了方便书写而使用的语法。</p>
-<h4 id="5、构造函数委派"><a href="#5、构造函数委派" class="headerlink" title="5、构造函数委派"></a>5、构造函数委派</h4><p>个人十分赞扬这种思维：</p>
-<pre><code>class Info {
-    public:
-        Info() : Info(1) {}
-        Info(int i):Info(i, &apos;a&apos;) {}
-        Info(char e):Info(1, e){}
-    private:
-        Info(int i, char e):type(i), name(e) {}
-        int type;
-        char name;
-}
-//暴漏的接口全委托给private的构造函数了。唉，这个模板好合适哟！！！
-</code></pre><h4 id="6、右值和左值"><a href="#6、右值和左值" class="headerlink" title="6、右值和左值"></a>6、右值和左值</h4><figure class="highlight"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">class testto</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">	testto(int n):m_p(new int(n)) &#123;</div><div class="line">		int d = 5;</div><div class="line">	&#125;</div><div class="line">	~testto() &#123; </div><div class="line">		delete m_p; </div><div class="line">	&#125;</div><div class="line">	testto(testto&amp; d)&#123;</div><div class="line">		int a = 32;</div><div class="line">	&#125;</div><div class="line">	testto(testto&amp;&amp; e) :m_p(e.m_p) &#123;</div><div class="line">		e.m_p = NULL;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">public:</div><div class="line">	int * m_p;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">class sudtest</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">	sudtest() :p(new int(3)), h(2)&#123;</div><div class="line">		int da = 45;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	~sudtest()&#123; </div><div class="line">		delete p; </div><div class="line">	&#125;</div><div class="line">	sudtest&amp; operator = (sudtest&amp; d) &#123;</div><div class="line">		int a = 2;</div><div class="line">	&#125;</div><div class="line">	sudtest(sudtest &amp;&amp; e) : p(e.p), h(std::move(e.h))&#123;</div><div class="line">		e.p = NULL; </div><div class="line">	&#125;</div><div class="line"></div><div class="line">public:</div><div class="line">	testto h;</div><div class="line">	int *p;</div><div class="line">&#125;;</div><div class="line">sudtest gettem() &#123; </div><div class="line">	sudtest t = sudtest(); </div><div class="line">	return t; &#125;</div><div class="line"></div><div class="line">int _tmain(int argc, _TCHAR* argv[])</div><div class="line">&#123;</div><div class="line">	</div><div class="line">	sudtest a(gettem());</div><div class="line"></div><div class="line">	cout &lt;&lt; *a.p &lt;&lt; endl;</div><div class="line">	system("pause");</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>《C++ 0x 之左值与右值》文中提到 std::forward() 和 std::move()。本文开头对之补充一句：</p>
-<pre><code>在操作函数返回值或函数参数时，匿名左值仍然为左值，左值可以具名；匿名右值仍然为右值，右值一旦具名成功，立即转变为左值
-</code></pre><ul>
-<li>先谈move吧，为了节约拷贝函数的空间，要使它走移动构造函数；</li>
-<li>1、e由于被命名了所以是左值，必须用move把e.h从左值转化成右值才能调用到testto的移动构造函数。</li>
-<li>2、本身传进来的e和t是一样的都是0x71f48a。临时变量就是指源。</li>
-<li>3、gettem（）函数本身返回的就是临时变量，因为没有移动函数才会去寻复制函数。所以sudtest的移动函数是理所当然的，testto的移动函数是move使之。</li>
-</ul>
-<blockquote>
-<p>在看c++折叠规则：总是优先为左值引用，再右值。int&amp; &amp;&amp;t -&gt; int&amp; t, int&amp;&amp; &amp;&amp;t -&gt; int&amp;&amp; t </p>
-</blockquote>
-<pre><code>fun(int &amp;&amp;m)
-fun(int &amp; m)
-
-template&lt;typename T&gt;
-fun1(T&amp;&amp; t) {fun(forward&lt;T&gt;(t);)}
-
-int a = 4;
-fun1(a)//a此时是左值，调用和fun(t);无区别。
-fun1(move(a))//要使用右值了，fun1中对t命名了所以是左值，所以要用forward来转换一下。这就是完美转发。
-</code></pre><h4 id="7、隐式转换"><a href="#7、隐式转换" class="headerlink" title="7、隐式转换"></a>7、隐式转换</h4><p>对类进行</p>
-<pre><code>operator bool() const {
-    return ;
-}
-
-//如果对这个隐式转化加个explicit，那么只有构造函数才会传递了。
-</code></pre><h4 id="8、POD模型"><a href="#8、POD模型" class="headerlink" title="8、POD模型"></a>8、POD模型</h4><p>1、不定义基本默认函数（构造、析构、移动、复制等）。<br>2、没有虚函数、<br>3、父类和成员是POD类型。</p>
-<h4 id="9、智能指针"><a href="#9、智能指针" class="headerlink" title="9、智能指针"></a>9、智能指针</h4><p>太多了，就说下：</p>
-<pre><code>auto_ptr、unique_ptr、shared_ptr、
-</code></pre><h4 id="10、For"><a href="#10、For" class="headerlink" title="10、For"></a>10、For</h4><pre><code>for(int &amp;e : a) {}//引用;&apos;/[
-for(int e: a){}
-</code></pre><h4 id="11、多线程"><a href="#11、多线程" class="headerlink" title="11、多线程"></a>11、多线程</h4><p>c++11是支持多线程编程的。专门使用它的c++函数，这样就可以在多平台使用了。</p>
-<h4 id="12、NULL"><a href="#12、NULL" class="headerlink" title="12、NULL"></a>12、NULL</h4><p>不同编译器会对NULL不同解释，gcc就是__null，mfc就是0。所以c++11用nullptr来统一。</p>
-<h4 id="13、类与默认函数"><a href="#13、类与默认函数" class="headerlink" title="13、类与默认函数"></a>13、类与默认函数</h4><p>6个基本函数（移动多了构造和拷贝）、8个默认操作符函数。</p>
-<h4 id="14、内存对齐描述符alignas、alignof"><a href="#14、内存对齐描述符alignas、alignof" class="headerlink" title="14、内存对齐描述符alignas、alignof"></a>14、内存对齐描述符alignas、alignof</h4><pre><code>struct alignas(32) T {
-    int r;
-    int g;
-    int b;
-};
-alignof(T)；//32;前者是设置对齐字节大小，后者是获取对齐字节大小。
-</code></pre><h4 id="15、Unicode支持"><a href="#15、Unicode支持" class="headerlink" title="15、Unicode支持"></a>15、Unicode支持</h4><pre><code>u8&quot;asdf&quot;//utf8字符;
-u&quot;asdf&quot;//utf16字符；
-U&quot;asdf&quot;//utf32字符;
-
-11说c++支持各种字符的互相转换了，使用codecvt；但是相关资料和代码却一直没看到，只好先放放吧。
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;最近无聊，读下c-11发现有些东西都忘了。开个页面，来和书同步更新&quot;&gt;&lt;a href=&quot;#最近无聊，读下c-11发现有些东西都忘了。开个页面，来和书同步更新&quot; class=&quot;headerlink&quot; title=&quot;最近无聊，读下c++11发现有些东西都忘了。开个页面
-    
-    </summary>
-    
-      <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
-    
-    
-      <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
-    
-      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
-    
-      <category term="stl" scheme="https://xuecat.github.io/tags/stl/"/>
     
   </entry>
   
