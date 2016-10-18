@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2016-10-12T16:18:49.484Z</updated>
+  <updated>2016-10-18T15:17:32.371Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -14,6 +14,167 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JS-Google语法191</title>
+    <link href="https://xuecat.github.io/2016/10/17/191/"/>
+    <id>https://xuecat.github.io/2016/10/17/191/</id>
+    <published>2016-10-17T13:09:30.000Z</published>
+    <updated>2016-10-18T15:17:32.371Z</updated>
+    
+    <content type="html"><![CDATA[<ol>
+<li>如果一个值是恒定的，它命名中的字母要全部大写（如 <code>CONSTANT_VALUE_CASE</code> ）</li>
+<li><p>一定要分号，js是弱语言，很多时候不要分号也能执行。但是容易出错。</p>
+<p> //函数表达式后面要分号结束，但是函数声明就不需要<br> var foo = function() {</p>
+<pre><code>return true;
+</code></pre><p> };  // 这里要分号</p>
+<p> function foo() {</p>
+<pre><code>return true;
+</code></pre><p> }  // 这里不用分号</p>
+</li>
+<li><p>不要在块内函数声明，应该使用一个变量初始化函数表达式在块内定义一个函数块</p>
+</li>
+<li>为了最大的可移植性和兼容性，总是使用标准功能而不是非标准功能（例如，采用 string.charAt(3) 而非 string[3] ，用DOM的功能访问元素而不是使用特定于一个具体应用的简写）。</li>
+<li><p>原始类型的包装对象，</p>
+<p> var x = new Boolean(false);<br> if (x) {//这是错误的，因为x是个object，而不是bool，正确该是var x = Boolean(0);</p>
+<pre><code>alert(&apos;hi&apos;);  //显示“hi”。
+</code></pre><p> }</p>
+</li>
+<li><p>方法和属性定义</p>
+</li>
+</ol>
+<p>虽然有多种使用“new”关键词来创建对象方法和属性的途径，首选的创建方法的途径是：</p>
+<pre><code>Foo.prototype.bar = function() {
+    /* ... */
+};//好像这样能提供性能
+</code></pre><p>其他特性的首选创建方式是在构造函数中初始化字段：</p>
+<pre><code>/** @constructor */
+function Foo() {
+    this.bar = value;
+}
+</code></pre><ol>
+<li>删除，使用this.foo == null,而不是delete</li>
+<li>遍历数组使用for循环 而不是for-in</li>
+<li>多行字符不要使用连接行符，直接’+’</li>
+<li><p>构建数组对象用字面量，而不是构造函数。</p>
+<p>//问题在构造只有一个元素的函数时<br>var a = new Array(x); //它表示的是开辟一个x大小的数组，内部赋值undifinew；而不是开辟一个数组，内部赋值x；<br>var a = [x1, x2];<br>var a = [x1];<br>var a = [];</p>
+<p>对象构造函数，为了一致性：<br>var o = new Object();</p>
+<p>var o2 = new Object();<br>o2.a = 0;<br>o2.b = 1;<br>o2.c = 2;<br>o2[‘strange key’] = 3;<br>改为：<br>var o = {};</p>
+<p>var o2 = {</p>
+<pre><code>a: 0,
+b: 1,
+c: 2,
+&apos;strange key&apos;: 3
+</code></pre><p>};</p>
+</li>
+<li><p>强烈禁止修改如 Object.prototype 和 Array.prototype 等对象的原型。</p>
+</li>
+<li>不要使用条件注释；条件注释会在运行时改变JavaScript语法树，阻碍自动化工具。</li>
+<li>私有 属性和方法应该以下划线开头命名</li>
+<li>保护 属性和方法应该以无下划线开头命名（像公共属性和方法一样）。</li>
+<li>可选函数参数以 opt_ 开头。</li>
+<li>参数数目可变的函数应该具有以 var_args 命名的最后一个参数。</li>
+<li>为了避免在大小写敏感的平台上引起混淆，文件名应该小写。文件名应该以 .js 结尾，并且应该不包含除了 - 或 <em> （相比较 </em> 更推荐 - ）以外的其它标点</li>
+<li><p>括号书写：</p>
+<p>if (something) {<br>} else {<br>}</p>
+</li>
+<li><p>多行，对象和数组初始化</p>
+<p>var arr = [1, 2, 3];  //之后无空格[或之前]<br>var obj = {a: 1, b: 2, c: 3};  //之后无空格[或之前]</p>
+<p>//不要像这样：<br>WRONG_Object.prototype = {</p>
+<pre><code>a          : 0,
+b          : 1,
+lengthyName: 2
+</code></pre><p>};</p>
+</li>
+<li><p>匿名函数传递</p>
+<p>prefix.something.reallyLongFunctionName(‘whatever’, function(a1, a2) {</p>
+<pre><code>if (a1.equals(a2)) {
+    someOtherLongFunctionName(a1);
+} else {
+    andNowForSomethingCompletelyDifferent(a2.parrot);
+}
+</code></pre><p>});</p>
+<p>var names = prefix.something.myExcellentMapFunction(</p>
+<pre><code>verboselyNamedCollectionOfItems,
+function(item) {
+    return item.name;
+});
+</code></pre></li>
+<li><p>字符串使用单引号，虽然js不区分单引号和双引号。<br><br>但是一般html的属性用的是双引号。所以当js字符串为了区分html和转义，最好使用单引号。</p>
+</li>
+<li>注释可以参考jsdoc的做法</li>
+<li><p>布尔类型</p>
+<p>下边的布尔表达式都返回false：<br>//@<br>null<br>undefined<br>‘’空字符串<br>数字0<br>//但是要小心，因为以下这些返回true：<br>字符串”0”<br>[]空数组<br>{}空对象</p>
+<p>//@所以 while (x != null) {}这样不好， 该是 while(x) {}<br>//if (y != null &amp;&amp; y != ‘’) {} 也改成 if (y) {}</p>
+<p>//@二元布尔操作符是可短路的,所以<br>var win;<br>if (opt_win) {</p>
+<pre><code>win = opt_win;
+</code></pre><p>} else {</p>
+<pre><code>win = window;
+</code></pre><p>}<br>//可以改成：<br>function foo(opt_win) {</p>
+<pre><code>var win = opt_win || window;
+</code></pre><p>}</p>
+<p>if (node) {</p>
+<pre><code>if (node.kids) {
+    if (node.kids[index]) {
+        foo(node.kids[index]);
+    }
+}
+</code></pre><p>}<br>//可以改成：<br>var kid = node &amp;&amp; node.kids &amp;&amp; node.kids[index];<br>if (kid) {</p>
+<pre><code>foo(kid);
+</code></pre><p>}</p>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ol&gt;
+&lt;li&gt;如果一个值是恒定的，它命名中的字母要全部大写（如 &lt;code&gt;CONSTANT_VALUE_CASE&lt;/code&gt; ）&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;一定要分号，js是弱语言，很多时候不要分号也能执行。但是容易出错。&lt;/p&gt;
+&lt;p&gt; //函数表达式后面要分号结束，但是
+    
+    </summary>
+    
+      <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
+    
+    
+      <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
+    
+      <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>React记录190</title>
+    <link href="https://xuecat.github.io/2016/10/16/190/"/>
+    <id>https://xuecat.github.io/2016/10/16/190/</id>
+    <published>2016-10-16T08:57:00.000Z</published>
+    <updated>2016-10-18T16:28:14.572Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>1. this.props.children</strong><br>它是链表没错(当只有一个时，是string之类元素)</p>
+<pre><code>React.Children.map(this.props.children, function (child) {
+        return &lt;li&gt;{child}&lt;/li&gt;;
+        })
+//每个child是一个ReactElement的object，可能ReactElement有默认的隐式处理吧_shadowChildren之类吧！
+</code></pre><p>此句，一直不明白为何object能当字符处理。</p>
+<p><strong>2. markdown显示</strong><br>使用remarkable库，可以支持markdown格式显示语句。<br><br>但是不能直接render解析（虽然表面看是对的），好像react做了XSS 攻击的保护。<br><br>解析后的语句只能放入节点属性中：dangerouslySetInnerHTML={ __html: md.render(this.props.children.toString()) }</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;1. this.props.children&lt;/strong&gt;&lt;br&gt;它是链表没错(当只有一个时，是string之类元素)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;React.Children.map(this.props.children, function (ch
+    
+    </summary>
+    
+      <category term="第三方库" scheme="https://xuecat.github.io/categories/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
+    
+    
+      <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
+    
+      <category term="react" scheme="https://xuecat.github.io/tags/react/"/>
+    
+  </entry>
   
   <entry>
     <title>换系统时要保存的文件189</title>
@@ -105,11 +266,11 @@
   </entry>
   
   <entry>
-    <title>google调试186</title>
+    <title>google调试react186</title>
     <link href="https://xuecat.github.io/2016/09/25/186/"/>
     <id>https://xuecat.github.io/2016/09/25/186/</id>
     <published>2016-09-25T09:01:40.000Z</published>
-    <updated>2016-10-12T15:52:08.996Z</updated>
+    <updated>2016-10-18T16:36:11.529Z</updated>
     
     <content type="html"><![CDATA[<p>今天死活断点不了，google了好久；发现有个<code>debugger</code>放入代码中就好了，可以看堆栈了。<br><br>断点不了的问题至今没找到，气死人了。！</p>
 <p>好吧v2ex果然大神多，jsx需要编译产生sourcemap后才能被调试，所以webpack是标配。另外react-hot-loader（js库）和react-devtools（google插件）不错</p>
@@ -130,8 +291,6 @@
       <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
     
       <category term="错误认识" scheme="https://xuecat.github.io/tags/%E9%94%99%E8%AF%AF%E8%AE%A4%E8%AF%86/"/>
-    
-      <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
     
       <category term="google-chrome" scheme="https://xuecat.github.io/tags/google-chrome/"/>
     
@@ -645,7 +804,7 @@ var btnOk2=document.createElement(&quot;&lt;input type=&apos;button&apos; value=
     <link href="https://xuecat.github.io/2016/08/29/177/"/>
     <id>https://xuecat.github.io/2016/08/29/177/</id>
     <published>2016-08-28T16:23:34.000Z</published>
-    <updated>2016-09-12T15:53:07.529Z</updated>
+    <updated>2016-10-18T16:47:11.209Z</updated>
     
     <content type="html"><![CDATA[<h1 id="搭建坑"><a href="#搭建坑" class="headerlink" title="搭建坑"></a>搭建坑</h1><p><strong><em>1. favior坑</em></strong><br>和配置文件里面说的不一样，必须要给个路径，不然简直呵呵。</p>
 <p><strong><em>2. about页面坑</em></strong><br>我想用photos对about页面进行修饰，我去。NexT对所有属性页面都处理了不支持photos；<br><br>气死人。只有两种方式：1、改布局，头上写layout:post；2、加本地图片<code>&lt;img&gt;</code>属性，但是有个坑就是无法水平布局（只能求他们看看了）</p>
@@ -656,6 +815,14 @@ var btnOk2=document.createElement(&quot;&lt;input type=&apos;button&apos; value=
     {% endcodeblock %}
 </code></pre><p><strong><em>5. swiftype坑</em></strong><br>我想把按钮改成编辑框，晕了没法,还好有好人写的博客 <a href="http://www.wuxubj.cn/2016/05/Hexo-build-personal-blog-advance/#%E6%B7%BB%E5%8A%A0swiftype%E6%90%9C%E7%B4%A2%E5%B9%B6%E8%87%AA%E5%AE%9A%E4%B9%89%E6%90%9C%E7%B4%A2%E6%A1%86" target="_blank" rel="external">http://www.wuxubj.cn/2016/05/Hexo-build-personal-blog-advance/#%E6%B7%BB%E5%8A%A0swiftype%E6%90%9C%E7%B4%A2%E5%B9%B6%E8%87%AA%E5%AE%9A%E4%B9%89%E6%90%9C%E7%B4%A2%E6%A1%86</a><br><br>居然没法用<a href="https://github.com/iissnan/hexo-theme-next/pull/721/files" target="_blank" rel="external">https://github.com/iissnan/hexo-theme-next/pull/721/files</a></p>
 <p><strong><em>6. 加载缓慢</em></strong><br>这个坑也是害我不浅，最后没法去<code>layout\_partials\head</code>里面把最后一块关于font_families删除了，才好点。<br><br>坏处就是，字体不好看了。</p>
+<p><strong><em>7. 多图模式坑</em></strong></p>
+<ol>
+<li><p>多图模式下：</p>
+<p> ‘% gp 5-3 %’ //这里去掉了大括号改成引号，因为hexo老是去解析它<br> //这句里，图片数必须超过2，不然就显示错误。就算只有俩个图源，也没关系，可以正常显示。</p>
+</li>
+<li><p>正文图片显示布局永远是竖直布局，只有在<code>归档</code>里的缩略里才按照正常布局显示。<br><br><em>可能是我版本不对吧，我暂时也不想弄了，以后再看看吧！！</em></p>
+</li>
+</ol>
 ]]></content>
     
     <summary type="html">
@@ -1343,64 +1510,6 @@ hash&lt;char&gt; d;//is char
       <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
     
       <category term="stl" scheme="https://xuecat.github.io/tags/stl/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>工具代码(170)</title>
-    <link href="https://xuecat.github.io/2016/08/04/170/"/>
-    <id>https://xuecat.github.io/2016/08/04/170/</id>
-    <published>2016-08-03T19:33:58.000Z</published>
-    <updated>2016-08-27T22:33:56.310Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">	<span class="meta">#<span class="meta-keyword">pragma</span> once</span></div><div class="line">	<span class="keyword">class</span> CSeparaString</div><div class="line">	&#123;</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">		CSeparaString() &#123; m_strBuffer.Empty(); &#125;</div><div class="line">		~CSeparaString() &#123;&#125;</div><div class="line">	</div><div class="line">		<span class="function">VOID	<span class="title">SetBuffer</span><span class="params">(LPCTSTR lpsz)</span> </span>&#123; m_strBuffer = lpsz; &#125;</div><div class="line">		<span class="function">CString <span class="title">GetBuffer</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_strBuffer; &#125;</div><div class="line">	</div><div class="line">		<span class="function">VOID	<span class="title">SetSepara</span><span class="params">(TCHAR ch)</span> </span>&#123; m_chSepara = ch; &#125;</div><div class="line">		</div><div class="line">		<span class="function">VOID	<span class="title">AppendElement</span><span class="params">(<span class="keyword">int</span> ne)</span> </span>&#123;</div><div class="line">			TCHAR buffer[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</div><div class="line">			<span class="number">_</span>itot_s(ne, buffer, <span class="number">4</span>, <span class="number">10</span>);</div><div class="line">			m_strBuffer.Append(CString(m_chSepara)); </div><div class="line">			m_strBuffer.Append(buffer);</div><div class="line">		&#125;</div><div class="line">		<span class="function">VOID	<span class="title">AppendElement</span><span class="params">(LPCTSTR lpsz)</span> </span>&#123; m_strBuffer.Append(CString(m_chSepara)); m_strBuffer.Append(lpsz); &#125;</div><div class="line">		<span class="function">VOID	<span class="title">GetElement</span><span class="params">(CStringArray &amp;arry)</span> </span>&#123;</div><div class="line">			<span class="keyword">int</span> npos = m_strBuffer.Find(m_chSepara);</div><div class="line">			<span class="keyword">while</span> (npos != m_strBuffer.GetLength())</div><div class="line">			&#123;</div><div class="line">				<span class="keyword">int</span> epos = m_strBuffer.Find(m_chSepara, npos + <span class="number">1</span>);</div><div class="line">				(epos == <span class="number">-1</span>) &amp;&amp; (epos = m_strBuffer.GetLength());</div><div class="line">				arry.Add(m_strBuffer.Mid(npos + <span class="number">1</span>, epos - npos - <span class="number">1</span>));</div><div class="line">				npos = epos;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="function">CString <span class="title">GetElement</span><span class="params">(<span class="keyword">int</span> nelement)</span> </span>&#123;</div><div class="line">			<span class="keyword">int</span> npos = <span class="number">-1</span>;</div><div class="line">			<span class="keyword">int</span> epos = m_strBuffer.Find(m_chSepara);</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nelement; i++)</div><div class="line">			&#123;</div><div class="line">				npos = epos;</div><div class="line">				epos = m_strBuffer.Find(m_chSepara, npos + <span class="number">1</span>);</div><div class="line">			&#125;</div><div class="line">			(epos == <span class="number">-1</span>) &amp;&amp; (epos = m_strBuffer.GetLength());</div><div class="line">			<span class="keyword">return</span> m_strBuffer.Mid(npos + <span class="number">1</span>, epos - npos - <span class="number">1</span>);</div><div class="line">		&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span>:</div><div class="line">		TCHAR	m_chSepara;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">		CString m_strBuffer;</div><div class="line">	&#125;;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">	CRect CDlgImportPicture::CalculateMaxRect(<span class="keyword">const</span> CRect *prect, <span class="keyword">int</span> numerator, <span class="keyword">int</span> denominator)</div><div class="line">	&#123;</div><div class="line">		CRect rtRE;</div><div class="line">		<span class="keyword">if</span> (prect)</div><div class="line">		&#123;</div><div class="line">			rtRE = prect;</div><div class="line">	</div><div class="line">			<span class="comment">//先算宽高度基准</span></div><div class="line">			<span class="keyword">if</span> (prect-&gt;Width() * denominator &gt; numerator * prect-&gt;Height())<span class="comment">//宽过多,高基准</span></div><div class="line">			&#123;</div><div class="line">				<span class="keyword">int</span> offset = prect-&gt;Width() - ((prect-&gt;Height() * numerator)/denominator);</div><div class="line">				rtRE.left += offset/<span class="number">2</span>;</div><div class="line">				rtRE.right -= offset/<span class="number">2</span>;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">else</span><span class="comment">//高过多,宽基准</span></div><div class="line">			&#123;</div><div class="line">				<span class="keyword">int</span> offset = prect-&gt;Height() - ((prect-&gt;Width() * denominator)/numerator);</div><div class="line">				rtRE.top += offset/<span class="number">2</span>;</div><div class="line">				rtRE.bottom -= offset/<span class="number">2</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> rtRE;</div><div class="line">	&#125;</div><div class="line"></div><div class="line"></div><div class="line"># 时间</div><div class="line">	<span class="meta">#<span class="meta-keyword">define</span> TickStart() DWORD dwstart = GetTickCount(), dwend = 0;\</span></div><div class="line">		TCHAR buffer[1024] = &#123;0&#125;;\</div><div class="line">		TCHAR thisname[1024] = &#123;0&#125;;\</div><div class="line">		_ltot_s(int(this), thisname, 1024, 10);\</div><div class="line">	</div><div class="line">	<span class="meta">#<span class="meta-keyword">define</span> TickOutName(str) OutputDebugString(CString(thisname) + _T(<span class="meta-string">" :"</span>) + str);\</span></div><div class="line">		OutputDebugString(_T(<span class="meta-string">"\n"</span>));\</div><div class="line">	</div><div class="line">	<span class="meta">#<span class="meta-keyword">define</span> TickOutPut(str) dwend = GetTickCount();\</span></div><div class="line">		_ltot_s(dwend - dwstart, buffer, 1024, 10);\</div><div class="line">		OutputDebugString(CString(thisname) + _T(<span class="meta-string">" :"</span>) + str);\</div><div class="line">		OutputDebugString(buffer);\</div><div class="line">		OutputDebugString(_T(<span class="meta-string">"\n"</span>));\</div><div class="line">		dwstart = dwend;\</div><div class="line"></div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;figure class=&quot;highlight c&quot;&gt;&lt;figcaption&gt;&lt;span&gt;++&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;
-    
-    </summary>
-    
-      <category term="配置" scheme="https://xuecat.github.io/categories/%E9%85%8D%E7%BD%AE/"/>
-    
-    
-      <category term="工具" scheme="https://xuecat.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>微软的莫名好用的类(171)</title>
-    <link href="https://xuecat.github.io/2016/08/04/171/"/>
-    <id>https://xuecat.github.io/2016/08/04/171/</id>
-    <published>2016-08-03T19:33:58.000Z</published>
-    <updated>2016-08-27T22:34:43.037Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote>
-<p>最近要写个控件，要运行时动态改变。我去！！发现微软有个莫名好用的类，完全可以达到。<br><br>Crecttracker这个类。只是注意它的可能有以下问题：<br></p>
-<ul>
-<li><p>1、SetCursor无果，这个版本不对，要自己添加鼠标资源，并把资源ID改成以下<br>AFX_IDC_TRACK4WAY<br><br>AFX_IDC_TRACKNESW    <br><br>AFX_IDC_TRACKNS<br><br>AFX_IDC_TRACKNWSE<br><br>AFX_IDC_TRACKWE<br></p>
-</li>
-<li><p>2、只能响应Lbuttondown，因为Track是个阻塞函数。哈哈！剩下的自己百度了。。</p>
-</li>
-</ul>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;最近要写个控件，要运行时动态改变。我去！！发现微软有个莫名好用的类，完全可以达到。&lt;br&gt;&lt;br&gt;Crecttracker这个类。只是注意它的可能有以下问题：&lt;br&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;1、SetCursor无果，这个版本不对，要自己
-    
-    </summary>
-    
-      <category term="Windows" scheme="https://xuecat.github.io/categories/Windows/"/>
-    
-    
-      <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
-    
-      <category term="mfc" scheme="https://xuecat.github.io/tags/mfc/"/>
     
   </entry>
   
