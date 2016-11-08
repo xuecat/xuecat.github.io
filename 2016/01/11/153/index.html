@@ -27,7 +27,9 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -49,6 +51,14 @@
   
 
   
+
+  
+    
+    
+    <link href="//fonts.useso.com/css?family=Galdeano:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
 
 
 
@@ -76,22 +86,34 @@
 
 
 
-<meta name="description" content="今天虽然熬夜，但是学了个新东西！！！！！！以前，release和release项目工程；有个缺点就是没法调试到mfc的动态库，只能自己调试自己的代码。步骤调试-&amp;gt;窗口-&amp;gt;模块-&amp;gt;有很多的dll-&amp;gt;windows的库就右键加载服务器的库，自己的库就找到pdb文件，链接上！！！
+<meta name="description" content="今天虽然熬夜，但是学了个新东西！！！！！！以前，release和release项目工程；有个缺点就是没法调试到mfc的动态库，只能自己调试自己的代码。
 
-注意有个大前提，一定要设置 c/c++-&amp;gt;优化-&amp;gt;优化 设置禁止  c/c++-&amp;g">
+调试mfc库代码
+
+调试-&amp;gt;窗口-&amp;gt;模块-&amp;gt;有很多的dll-&amp;gt;windows的库就右键加载服务器的库，自己的库就找到pdb文件，链接上！！！
+
+注意有个大前提，一定要设置 c/c++-&amp;gt;优化-&amp;gt;优化 设置禁止">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vs调试(153)">
 <meta property="og:url" content="https://xuecat.github.io/2016/01/11/153/index.html">
 <meta property="og:site_name" content="XueCat">
-<meta property="og:description" content="今天虽然熬夜，但是学了个新东西！！！！！！以前，release和release项目工程；有个缺点就是没法调试到mfc的动态库，只能自己调试自己的代码。步骤调试-&amp;gt;窗口-&amp;gt;模块-&amp;gt;有很多的dll-&amp;gt;windows的库就右键加载服务器的库，自己的库就找到pdb文件，链接上！！！
+<meta property="og:description" content="今天虽然熬夜，但是学了个新东西！！！！！！以前，release和release项目工程；有个缺点就是没法调试到mfc的动态库，只能自己调试自己的代码。
 
-注意有个大前提，一定要设置 c/c++-&amp;gt;优化-&amp;gt;优化 设置禁止  c/c++-&amp;g">
-<meta property="og:updated_time" content="2016-09-13T13:28:26.342Z">
+调试mfc库代码
+
+调试-&amp;gt;窗口-&amp;gt;模块-&amp;gt;有很多的dll-&amp;gt;windows的库就右键加载服务器的库，自己的库就找到pdb文件，链接上！！！
+
+注意有个大前提，一定要设置 c/c++-&amp;gt;优化-&amp;gt;优化 设置禁止">
+<meta property="og:updated_time" content="2016-10-27T15:06:17.655Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vs调试(153)">
-<meta name="twitter:description" content="今天虽然熬夜，但是学了个新东西！！！！！！以前，release和release项目工程；有个缺点就是没法调试到mfc的动态库，只能自己调试自己的代码。步骤调试-&amp;gt;窗口-&amp;gt;模块-&amp;gt;有很多的dll-&amp;gt;windows的库就右键加载服务器的库，自己的库就找到pdb文件，链接上！！！
+<meta name="twitter:description" content="今天虽然熬夜，但是学了个新东西！！！！！！以前，release和release项目工程；有个缺点就是没法调试到mfc的动态库，只能自己调试自己的代码。
 
-注意有个大前提，一定要设置 c/c++-&amp;gt;优化-&amp;gt;优化 设置禁止  c/c++-&amp;g">
+调试mfc库代码
+
+调试-&amp;gt;窗口-&amp;gt;模块-&amp;gt;有很多的dll-&amp;gt;windows的库就右键加载服务器的库，自己的库就找到pdb文件，链接上！！！
+
+注意有个大前提，一定要设置 c/c++-&amp;gt;优化-&amp;gt;优化 设置禁止">
 
 
 
@@ -108,6 +130,9 @@
     }
   };
 </script>
+
+
+
 
   <title> vs调试(153) | XueCat </title>
 </head>
@@ -337,10 +362,21 @@
 
       
         <blockquote>
-<p>今天虽然熬夜，但是学了个新东西！！！！！！<br><br>以前，release和release项目工程；有个缺点就是没法调试到mfc的动态库，只能自己调试自己的代码。<br><br><strong>步骤</strong><br>调试-&gt;窗口-&gt;模块-&gt;有很多的dll-&gt;windows的库就右键加载服务器的库，自己的库就找到pdb文件，链接上！！！</p>
+<p>今天虽然熬夜，但是学了个新东西！！！！！！<br><br>以前，release和release项目工程；有个缺点就是没法调试到mfc的动态库，只能自己调试自己的代码。<br></p>
 </blockquote>
-<p><strong>注意有个大前提，一定要设置 c/c++-&gt;优化-&gt;优化 设置禁止  c/c++-&gt;常规-&gt;调试信息格式 设置程序数据库 才行</strong></p>
-<p>如此可调试</p>
+<p><strong>调试mfc库代码</strong></p>
+<blockquote>
+<p>调试-&gt;窗口-&gt;模块-&gt;有很多的dll-&gt;windows的库就右键加载服务器的库，自己的库就找到pdb文件，链接上！！！</p>
+</blockquote>
+<p><strong><em>注意有个大前提，一定要设置 c/c++-&gt;优化-&gt;优化 设置禁止  c/c++-&gt;常规-&gt;调试信息格式 设置程序数据库 才行</em></strong></p>
+<p><strong>调试发行版</strong></p>
+<ul>
+<li>配置C/C++ &gt;General&gt;Debug Information Format 应该为 “Program Database(/Zi)”</li>
+<li>配置C/C++ &gt;Optimization&gt;Optimization 应该为”Disabld(/Od)”</li>
+<li>配置Linker&gt;Debugging&gt;Generate Debug Info 应该为”Yes/(DEBUG)”</li>
+</ul>
+<p><strong>远程调试</strong></p>
+<p>算了以上俩个用了太多了，直接上别人写的：<a href="http://blog.jobbole.com/45249/" target="_blank" rel="external">http://blog.jobbole.com/45249/</a></p>
 
       
     </div>
@@ -380,8 +416,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/01/14/155/" rel="prev" title="python 等问题解决(155)">
-                python 等问题解决(155) <i class="fa fa-chevron-right"></i>
+              <a href="/2016/01/14/154/" rel="prev" title="调试技巧(154)">
+                调试技巧(154) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -455,7 +491,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">185</span>
+              <span class="site-state-item-count">189</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -472,7 +508,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
