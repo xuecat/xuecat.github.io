@@ -29,7 +29,7 @@
 
   
   
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -55,7 +55,7 @@
   
     
     
-    <link href="//fonts.useso.com/css?family=Galdeano:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -63,9 +63,9 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="XueCat, NexT, Blog" />
@@ -79,7 +79,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/picture/favicon.ico?v=5.0.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/picture/favicon.ico?v=5.0.2" />
 
 
 
@@ -102,11 +102,11 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: {"position":"right","display":"post"},
+    sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
     }
   };
@@ -115,24 +115,17 @@
 
 
 
+  <link rel="canonical" href="https://xuecat.github.io/page/2/"/>
+
+
   <title> XueCat </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
   
 
 
-
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?8aa9f2526a323bf7a14e6fe9de652df7";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
 
 
 
@@ -146,12 +139,12 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right 
+  <div class="container one-collumn sidebar-position-left 
    page-home 
  ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
@@ -167,25 +160,23 @@
 
 <div class="site-nav-toggle">
   <button>
-    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
   </button>
 </div>
 
-
 <nav class="site-nav">
   
-  
 
   
-    <ul id="menu" class="menu menu-left">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -195,7 +186,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -205,7 +196,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             标签
           </a>
@@ -215,7 +206,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -225,7 +216,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             关于
           </a>
@@ -233,24 +224,29 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
   
     <div class="site-search">
       
-  <form class="site-search-form" >
-  <span class="search-icon fa fa-search"></span>
-  <input type="text" id="search-input">
-  <div id="search-result"><ul class="search-result-list"><li><a href="//www.baidu.com/s?wd=XXX%20site%3Ahttps://xuecat.github.io" class="search-result">百度搜索 <i class="search-keyword">XXX</i></a></li><li><a href="//www.google.com/search?q=XXX%20site%3Ahttps://xuecat.github.io" class="search-result">谷歌搜索 <i class="search-keyword">XXX</i></a></li><li><a href="#" class="popup-trigger search-result">本地搜索</a></li></ul>
-  </div>
-</form>
- <div class="popup">
-  <span class="search-icon fa fa-search"></span>
-  <input type="text" id="local-search-input">
-  <div id="local-search-result"></div>
-  <span class="popup-btn-close">close</span>
- </div>
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
 
 
     </div>
@@ -276,7 +272,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -329,6 +325,8 @@
           
 
           
+            
+          
 
           
 
@@ -349,21 +347,46 @@
       
         
           
-          一般Javascript资料里面，很少区分单引号(‘)和双引号(“)，认为它们作用相同，今天发现有一处不同点，举例如下：
-在一段JS语句中，希望通过编程在网页中动态添加一个命令按钮， 则基本实现语句如下所示 
+            <p>一般Javascript资料里面，很少区分单引号(‘)和双引号(“)，认为它们作用相同，今天发现有一处不同点，举例如下：</p>
+<pre><code>在一段JS语句中，希望通过编程在网页中动态添加一个命令按钮， 则基本实现语句如下所示 
 
-      var btnOk2=document.createElement(&quo
-          ...
+      var btnOk2=document.createElement(&quot;&lt;input type=&apos;button&apos; value=&apos;确定/&gt;&quot;);
+      document.body.appendChild(btnOk2);
+若要在点击按钮后显示一个提示信息，则要对其onclick事件编程，此时有多种方法可以实现。
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/25/185/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+1. 添加函数
+
+      onclick=clickOK();//clickOK()为单独定义的函数
+
+      function clickOK(){
+
+         alert(&quot;确定&quot;);
+
+      }
+
+2. 使用匿名函数
+
+      onclick=function(){alert(&apos;确定&apos;)};//注意，此处alert内的提示信息应使用单引号，若使用双引号则放入整个input 时语法不正确
+
+3. 直接使用javascript语句，单引号
+
+      onclick=&apos;javascript:{alert(&apos;确定&apos;)&apos;;//注意，此语句语法没问题，但却不能正常执行，点击按钮时无结果，具体原因不详，也未深究
+
+4. 直接使用javascript语句，双引号
+
+      由于要放入input语句中，因此alert不能直接使用双引号，使用转义符/完成
+
+      onclick=&apos;javascript:alert(/&quot;确定/&quot;)&apos;;//注意，此语句语法没问题，也能够正常执行
+
+使用第4中方法的完整实例语句如下：
+
+var btnOk2=document.createElement(&quot;&lt;input type=&apos;button&apos; value=&apos;确定 onclick=&apos;javascript:alert(/&quot;确定/&quot;)&apos;/&gt;&quot;);
+</code></pre>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -395,7 +418,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -448,6 +471,8 @@
           
 
           
+            
+          
 
           
 
@@ -468,21 +493,16 @@
       
         
           
-          EnterCriticalSection作为临界区
-critical_section效率要高一些，因为是针对同一个进程的。mutex是针对整个操作系统的。
-//1.测试同一线程两次EnterCriticalSection会不会阻塞//答案:不会/*
-//2.测试同一线程两次EnterCritical
-          ...
+            <p>EnterCriticalSection作为临界区</p>
+<p>critical_section效率要高一些，因为是针对同一个进程的。<br>mutex是针对整个操作系统的。</p>
+<p>//1.测试同一线程两次EnterCriticalSection会不会阻塞<br>//答案:不会<br>/*</p>
+<p>//2.测试同一线程两次EnterCriticalSection，调用一次LeaveCriticalSection 另一个线程是否可以以EnterCriticalSection<br>//答案:不可以 两次EnterCriticalSection 必须调用 LeaveCriticalSection两次</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/22/184/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -514,7 +534,7 @@ critical_section效率要高一些，因为是针对同一个进程的。mutex�
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -567,6 +587,8 @@ critical_section效率要高一些，因为是针对同一个进程的。mutex�
           
 
           
+            
+          
 
           
 
@@ -587,22 +609,32 @@ critical_section效率要高一些，因为是针对同一个进程的。mutex�
       
         
           
-          ###过程多了186也有，这里这说下开发环境，有利工具
+            <p>###过程多了186也有，这里这说下开发环境，有利工具</p>
+<ol>
+<li><p>代码语法提示，插件ESLint；它对写的代码进行语法错误提示，特别是配置了react的插件后，对react属性、状态等书写有全面提示。</p>
+</li>
+<li><p>代码自动补全，node插件Typings和vsc插件Typings suto installer，前者全局安装，后者会自动把package.jason的TS（微软的TypingScript）包全下全</p>
+</li>
+<li><p>Debugger for Chrome,这个很好就是配置不好弄，用google远程调试协议来达到vsc本地调试，它的example可以直接下在本地使用。<br><br>example项目确实让人见识了很多东西；</p>
+</li>
+<li><p>Reactjs code snippets,这个很好专门的react的自动补全。</p>
+</li>
+<li><p>emment（内置，它简直为前端而生，语法很好使）；它默认是不支持js的，jsx倒是可以。<br><br>我google和官网了很久都没找到提示，最后没法，去git看看（原来git官网的doc是实时更新的，比官网的doc更新都勤快，以后只去git去看doc了）<br><br>在<code>.vscode</code>目录新建一个setting.json，加上<code>{&quot;emmet.syntaxProfiles&quot;: { &quot;javascript&quot;: &quot;html&quot; }}</code>便好了</p>
+</li>
+<li><p>调试和堆栈过程放186吧。</p>
+</li>
+</ol>
+<ul>
+<li><p>单个js调试，launch.json的配置  <a href="https://segmentfault.com/a/1190000004136202" target="_blank" rel="external">https://segmentfault.com/a/1190000004136202</a></p>
+<p>  “name”: “启动”,<br>  “type”: “node”,<br>  “request”: “launch”,<br>  “program”: “${workspaceRoot}/demo01/tt.js”,</p>
+</li>
+</ul>
 
-代码语法提示，插件ESLint；它对写的代码进行语法错误提示，特别是配置了react的插件后，对react属性、状态等书写有全面提示。
-
-代码自动补全，node插件Typings和vsc插件Typings suto installer，前者全
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/21/183/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -634,7 +666,7 @@ critical_section效率要高一些，因为是针对同一个进程的。mutex�
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -687,6 +719,8 @@ critical_section效率要高一些，因为是针对同一个进程的。mutex�
           
 
           
+            
+          
 
           
 
@@ -707,19 +741,151 @@ critical_section效率要高一些，因为是针对同一个进程的。mutex�
       
         
           
-          要想使用stl配接器算法，unary_function、binary_function的仿函数就必须使用.
-先来看STL已经提供的仿函数—算法类仿函数加法： plus&lt;T&gt; 减法：minus&lt;T&gt;乘法：multiplies&lt;T&gt;除法：divides&lt;T&gt
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/17/182/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <p>要想使用stl配接器算法，unary_function、binary_function的仿函数就必须使用.</p>
+<h3 id="先来看STL已经提供的仿函数"><a href="#先来看STL已经提供的仿函数" class="headerlink" title="先来看STL已经提供的仿函数"></a>先来看STL已经提供的仿函数</h3><h2 id="—"><a href="#—" class="headerlink" title="—"></a>—</h2><h4 id="算法类仿函数"><a href="#算法类仿函数" class="headerlink" title="算法类仿函数"></a>算法类仿函数</h4><p>加法： <code>plus&lt;T&gt;</code> <br><br>减法：<code>minus&lt;T&gt;</code><br><br>乘法：<code>multiplies&lt;T&gt;</code><br><br>除法：<code>divides&lt;T&gt;</code> <br><br>模取：<code>modulus&lt;T&gt;</code><br><br>否定：<code>negate&lt;T&gt;</code>(一元)<br></p>
+<h4 id="关系仿函数"><a href="#关系仿函数" class="headerlink" title="关系仿函数"></a>关系仿函数</h4><p>等于：<code>equal_to&lt;T&gt;</code><br><br>不等于：<code>not_equal_to&lt;T&gt;</code><br><br>大于：<code>greater&lt;T&gt;</code><br><br>大于或等于：<code>greater_equal&lt;T&gt;</code><br><br>小于：<code>less&lt;T&gt;</code><br><br>小于或等于:<code>less_equal&lt;T&gt;</code><br></p>
+<h4 id="逻辑运算仿函数"><a href="#逻辑运算仿函数" class="headerlink" title="逻辑运算仿函数"></a>逻辑运算仿函数</h4><p>and: <code>logical_and&lt;T&gt;</code><br><br>or: <code>logical_or&lt;T&gt;</code><br><br>not: <code>logical_not&lt;T&gt;</code><br></p>
+<h4 id="选择和投射"><a href="#选择和投射" class="headerlink" title="选择和投射"></a>选择和投射</h4><p><code>select1st&lt;T&gt;</code> <code>select2nd&lt;T&gt;</code> 对于此类，是针对pair的，传入pair，并返回第一个元素或第二个元素<br><br><code>project1st&lt;T&gt;</code> <code>project2nd&lt;T&gt;</code> 对于此类，是针对多参数的，传入俩个参数，只返回第一个元素或第二个元素<br></p>
+<h2 id="—-1"><a href="#—-1" class="headerlink" title="—"></a>—</h2><h3 id="再看配接器"><a href="#再看配接器" class="headerlink" title="再看配接器"></a>再看配接器</h3><table>
+<thead>
+<tr>
+<th>函数名</th>
+<th style="text-align:center">实际效果</th>
+<th style="text-align:center">实际对象</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#bind">bind(_Farg0::* const _Pmd, _Arg0&amp;&amp; _A0)</a></td>
+<td style="text-align:center">11的新特性，auto配合万能绑定，参数能支持到20个参数，对成员函数绑定时第一个参数默认为传入<code>对象</code></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><a href="#bind1st">bind1st(const op&amp; op, const T&amp; x)</a></td>
+<td style="text-align:center">op(x, param)</td>
+<td style="text-align:center">binder1st<op>(op, arg1_type(x))</op></td>
+</tr>
+<tr>
+<td><a href="#bind2nd">bind2nd(const op&amp; op, const T&amp; x)</a></td>
+<td style="text-align:center">op(param, x)</td>
+<td style="text-align:center">binder2nd<op>(op, arg2_type(x))</op></td>
+</tr>
+<tr>
+<td><a href="#not1">not1(const Pred&amp; pred)</a></td>
+<td style="text-align:center">!pred(param)</td>
+<td style="text-align:center">unary_negate<pred>(pred)</pred></td>
+</tr>
+<tr>
+<td><a href="#not2">not2(const Pred&amp; pred)</a></td>
+<td style="text-align:center">!pred(param1, param2)</td>
+<td style="text-align:center">binary_negate<pred>(pred)</pred></td>
+</tr>
+<tr>
+<td><a href="#compose1">compose1(const Op1&amp; op1, const Op2&amp; op2)</a></td>
+<td style="text-align:center">op1(op2(param))</td>
+<td style="text-align:center">unary_compose<op1, op2="">(op1, op2)</op1,></td>
+</tr>
+<tr>
+<td><a href="#compose2">compose2(<br>const Op1&amp; op1,<br> const Op2&amp; op2,<br> const Op3&amp; op3)</a></td>
+<td style="text-align:center">op1(op2(param),<br> op3(param))</td>
+<td style="text-align:center">binary_compose<op1, op2,="" op3=""><br>(op1, op2, op3)</op1,></td>
+</tr>
+<tr>
+<td><a href="#ptr_fun">ptr_fun(Result(*fp)(Arg))</a></td>
+<td style="text-align:center">fp(param)</td>
+<td style="text-align:center">pointer_to_unary_function<arg, result="">(fp)</arg,></td>
+</tr>
+<tr>
+<td><a href="#ptr_fun">ptr_fun(Result(*fp)(Arg1, Arg2))</a></td>
+<td style="text-align:center">fp(param1, param2)</td>
+<td style="text-align:center">pointer_to_binary_function<arg1, arg2,="" result="">(fp)</arg1,></td>
+</tr>
+<tr>
+<td><a href="#mem_fn">mem_fn()</a></td>
+<td style="text-align:center">11的新特性，auto配合，和bind绑定成员函数块差别不大，第一个参数默认为传入<code>对象</code></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><a href="#mem_fun">mem_fun(S (T::*f)())</a></td>
+<td style="text-align:center">(param-&gt;*f)()</td>
+<td style="text-align:center">mem_fun_t<s, t="">(f)</s,></td>
+</tr>
+<tr>
+<td><a href="#mem_fun">mem_fun(S (T::*f)() const)</a></td>
+<td style="text-align:center">(param-&gt;*f)()</td>
+<td style="text-align:center">const_mem_fun_t<s, t="">(f)</s,></td>
+</tr>
+<tr>
+<td><a href="#mem_fun_ref">mem_fun_ref(S (T::*f)())</a></td>
+<td style="text-align:center">(param.*f)()</td>
+<td style="text-align:center">mem_fun_ref_t<s, t="">(f)</s,></td>
+</tr>
+<tr>
+<td><a href="#mem_fun_ref">mem_fun_ref(S (T::*f)() const)</a></td>
+<td style="text-align:center">(param.*f)()</td>
+<td style="text-align:center">const_mem_fun_ref_t<s, t="">(f)</s,></td>
+</tr>
+<tr>
+<td><a href="#mem_fun1">mem_fun1(S (T::*f)(A))</a></td>
+<td style="text-align:center">(param-&gt;*f)(x)</td>
+<td style="text-align:center">mem_fun1_t<s, t,="" a="">(f)</s,></td>
+</tr>
+<tr>
+<td><a href="#mem_fun1">mem_fun1(S (T::*f)(A) const)</a></td>
+<td style="text-align:center">(param-&gt;*f)(x)</td>
+<td style="text-align:center">const_mem_fun1_t<s, t,="" a="">(f)</s,></td>
+</tr>
+<tr>
+<td><a href="#mem_fun1_ref">mem_fun1_ref(S (T::*f)(A))</a></td>
+<td style="text-align:center">(param.*f)(x)</td>
+<td style="text-align:center">mem_fun1_ref_t<s, t,="" a="">(f)</s,></td>
+</tr>
+<tr>
+<td><a href="#mem_fun1_ref">mem_fun1_ref(S (T::*f)(A) const)</a></td>
+<td style="text-align:center">(param.*f)(x)</td>
+<td style="text-align:center">const_mem_fun1_ref_t<s, t,="" a="">(f)</s,></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p></p><h2 id="bind"> bind <h2><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">my_divide</span> <span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span> </span>&#123;<span class="keyword">return</span> x/y;&#125;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> MyPair &#123;</div><div class="line"><span class="keyword">double</span> a,b;</div><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">multiply</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> a*b;&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> Foo &#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print_sum</span><span class="params">(<span class="keyword">int</span> n1, <span class="keyword">int</span> n2)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; n1+n2 &lt;&lt; <span class="string">'\n'</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> data = <span class="number">10</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>::placeholders;    <span class="comment">//这里注意 adds visibility of _1, _2, _3,...</span></div><div class="line"></div><div class="line"><span class="comment">// binding functions:</span></div><div class="line"><span class="keyword">auto</span> fn_five = <span class="built_in">std</span>::bind (my_divide,<span class="number">10</span>,<span class="number">2</span>);               <span class="comment">// returns 10/2</span></div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; fn_five() &lt;&lt; <span class="string">'\n'</span>;                          <span class="comment">// 5</span></div><div class="line"></div><div class="line"><span class="keyword">auto</span> fn_half = <span class="built_in">std</span>::bind (my_divide,<span class="number">_1</span>,<span class="number">2</span>);               <span class="comment">// returns x/2</span></div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; fn_half(<span class="number">10</span>) &lt;&lt; <span class="string">'\n'</span>;                        <span class="comment">// 5</span></div><div class="line"></div><div class="line"><span class="keyword">auto</span> fn_invert = <span class="built_in">std</span>::bind (my_divide,<span class="number">_2</span>,<span class="number">_1</span>);            <span class="comment">// returns y/x</span></div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; fn_invert(<span class="number">10</span>,<span class="number">2</span>) &lt;&lt; <span class="string">'\n'</span>;                    <span class="comment">// 0.2</span></div><div class="line"></div><div class="line"><span class="keyword">auto</span> fn_rounding = <span class="built_in">std</span>::bind&lt;<span class="keyword">int</span>&gt; (my_divide,<span class="number">_1</span>,<span class="number">_2</span>);     <span class="comment">// returns int(x/y)</span></div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; fn_rounding(<span class="number">10</span>,<span class="number">3</span>) &lt;&lt; <span class="string">'\n'</span>;                  <span class="comment">// 3</span></div><div class="line"></div><div class="line">MyPair ten_two &#123;<span class="number">10</span>,<span class="number">2</span>&#125;;</div><div class="line"></div><div class="line"><span class="comment">// binding members:</span></div><div class="line"><span class="keyword">auto</span> bound_member_fn = <span class="built_in">std</span>::bind (&amp;MyPair::multiply,<span class="number">_1</span>); <span class="comment">// returns x.multiply()</span></div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; bound_member_fn(ten_two) &lt;&lt; <span class="string">'\n'</span>;           <span class="comment">// 20</span></div><div class="line"></div><div class="line"><span class="keyword">auto</span> bound_member_data = <span class="built_in">std</span>::bind (&amp;MyPair::a,ten_two); <span class="comment">// returns ten_two.a</span></div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; bound_member_data() &lt;&lt; <span class="string">'\n'</span>; </div><div class="line"></div><div class="line">Foo foo;</div><div class="line"><span class="keyword">auto</span> f3 = <span class="built_in">std</span>::bind(&amp;Foo::print_sum, foo, <span class="number">95</span>, <span class="number">_1</span>);</div><div class="line">f3(<span class="number">5</span>);</div><div class="line"></div></pre></td></tr></table></figure><p></p>
+<hr>
+<p></p><h2 id="bind1st"> bind1st <h2><p></p>
+<p></p><h2 id="bind2nd"> bind2nd <h2><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; a - b &lt;&lt; <span class="built_in">endl</span>;;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">int</span> <span class="number">_</span>tmain(<span class="keyword">int</span> argc, <span class="number">_</span>TCHAR* argv[])</div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> a[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;;</div><div class="line">    for_each(a, a+<span class="number">4</span>, bind1st(ptr_fun(fun), <span class="number">2</span>));<span class="comment">//此处由于，bind1st要传入适配器，所以要么fun继承前面的多元函数，要么如此处理</span></div><div class="line">    for_each(a, a+<span class="number">4</span>, bind2nd(ptr_fun(fun), <span class="number">2</span>));</div><div class="line">    system(<span class="string">"pause"</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure><p></p>
+<hr>
+<p></p><h2 id="not1"> not1 <h2><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">count_if(a, a+<span class="number">5</span>, not1(bind2nd(less&lt;<span class="keyword">int</span>&gt;(), <span class="number">4</span>)))<span class="comment">//统计大于等于4的个数</span></div><div class="line"></div></pre></td></tr></table></figure><p></p>
+<hr>
+<p></p><h2 id="not2"> not2 <h2><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">int</span> h = accumulate(a, a+<span class="number">5</span>, <span class="number">4</span>, not2(ptr_fun(fun)));<span class="comment">//此中的not2然并卵作用，主要是自己无法想到好的二元算法了</span></div><div class="line"></div></pre></td></tr></table></figure><p></p>
+<hr>
+<p></p><h2 id="compose1"> compose1 <h2><p></p>
+<p></p><h2 id="compose2"> compose2 <h2><br><figure class="highlight c"><figcaption><span>它是GNU的所以vs STL没有，有源码如下++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="number">_F</span>n1, <span class="keyword">class</span> <span class="number">_F</span>n2&gt;</div><div class="line"><span class="keyword">class</span> unary_compose</div><div class="line">    : <span class="keyword">public</span> unary_function&lt;<span class="keyword">typename</span> <span class="number">_F</span>n2::argument_type,</div><div class="line">        <span class="keyword">typename</span> <span class="number">_F</span>n1::result_type&gt;</div><div class="line">&#123;    <span class="comment">// functor adapter _Func(stored, right)</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">typedef</span> unary_function&lt;<span class="keyword">typename</span> <span class="number">_F</span>n2::argument_type,</div><div class="line">        <span class="keyword">typename</span> <span class="number">_F</span>n1::result_type&gt; <span class="number">_B</span>ase;</div><div class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="number">_B</span>ase::argument_type argument_type;</div><div class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="number">_B</span>ase::result_type result_type;</div><div class="line"></div><div class="line">    unary_compose(<span class="keyword">const</span> <span class="number">_F</span>n1&amp; <span class="number">_F</span>unc1,</div><div class="line">        <span class="keyword">const</span> <span class="number">_F</span>n2&amp; <span class="number">_F</span>unc2)</div><div class="line">        : op1(<span class="number">_F</span>unc1), op2(<span class="number">_F</span>unc2)</div><div class="line">        &#123;    <span class="comment">// construct from functor and left operand</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">    <span class="function">result_type <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">const</span> argument_type&amp; <span class="number">_</span>Value)</span> <span class="keyword">const</span></span></div><div class="line">        &#123;    <span class="comment">// apply functor to operands</span></div><div class="line">        <span class="keyword">return</span> (op1(op2(<span class="number">_</span>Value)));</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    <span class="function">result_type <span class="title">operator</span><span class="params">()</span><span class="params">(argument_type&amp; <span class="number">_</span>Value)</span> <span class="keyword">const</span></span></div><div class="line">        &#123;    <span class="comment">// apply functor to operands</span></div><div class="line">        <span class="keyword">return</span> (op1(op2(<span class="number">_</span>Value)));</div><div class="line">        &#125;</div><div class="line"></div><div class="line"><span class="keyword">protected</span>:</div><div class="line">    <span class="number">_F</span>n1 op1;    <span class="comment">// the functor to apply</span></div><div class="line">    <span class="number">_F</span>n2 op2;    <span class="comment">// the functor to apply</span></div><div class="line">&#125;;</div><div class="line"> </div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="number">_F</span>n1,</div><div class="line"><span class="keyword">class</span> <span class="number">_F</span>n2&gt; <span class="keyword">inline</span></div><div class="line">unary_compose&lt;<span class="number">_F</span>n1, <span class="number">_F</span>n2&gt; compose1(<span class="keyword">const</span> <span class="number">_F</span>n1&amp; <span class="number">_F</span>unc1, <span class="keyword">const</span> <span class="number">_F</span>n2&amp; <span class="number">_F</span>unc2)</div><div class="line">&#123;    <span class="comment">// return a unary_compose functor adapter</span></div><div class="line">    <span class="keyword">return</span> (unary_compose&lt;<span class="number">_F</span>n1, <span class="number">_F</span>n2&gt;(<span class="number">_F</span>unc1, <span class="number">_F</span>unc2));</div><div class="line">&#125;</div><div class="line"></div><div class="line">for_each(a, a+<span class="number">5</span>, compose1(bind2nd(multiplies&lt;<span class="keyword">int</span>&gt;(), <span class="number">2</span>), bind2nd(plus&lt;<span class="keyword">int</span>&gt;(), <span class="number">2</span>))); </div><div class="line"></div></pre></td></tr></table></figure><p></p>
+<hr>
+<p></p><h2 id="ptr_fun"> ptr_fun <h2><p></p>
+<blockquote>
+<p>上面已经有代码演示，无需</p>
+</blockquote>
+<hr>
+<p></p><h2 id="mem_fun"> mem_fun <h2><br><figure class="highlight c"><figcaption><span>成员对象必须是指针++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"> <span class="built_in">vector</span> &lt;<span class="built_in">string</span>*&gt; numbers;</div><div class="line"></div><div class="line"><span class="comment">// populate vector of pointers:</span></div><div class="line">numbers.push_back ( <span class="keyword">new</span> <span class="built_in">string</span> (<span class="string">"one"</span>) );</div><div class="line">numbers.push_back ( <span class="keyword">new</span> <span class="built_in">string</span> (<span class="string">"two"</span>) );</div><div class="line">numbers.push_back ( <span class="keyword">new</span> <span class="built_in">string</span> (<span class="string">"three"</span>) );</div><div class="line">numbers.push_back ( <span class="keyword">new</span> <span class="built_in">string</span> (<span class="string">"four"</span>) );</div><div class="line">numbers.push_back ( <span class="keyword">new</span> <span class="built_in">string</span> (<span class="string">"five"</span>) );</div><div class="line"></div><div class="line"><span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt; lengths ( numbers.size() );</div><div class="line"></div><div class="line">transform (numbers.begin(), numbers.end(), lengths.begin(), mem_fun(&amp;<span class="built_in">string</span>::length));</div><div class="line">    </div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++) &#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; *numbers[i] &lt;&lt; <span class="string">" has "</span> &lt;&lt; lengths[i] &lt;&lt; <span class="string">" letters.\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// deallocate strings:</span></div><div class="line"><span class="keyword">for</span> (<span class="built_in">vector</span>&lt;<span class="built_in">string</span>*&gt;::iterator it = numbers.begin(); it!=numbers.end(); ++it)</div><div class="line">    <span class="keyword">delete</span> *it;</div><div class="line"></div></pre></td></tr></table></figure><p></p>
+<hr>
+<p></p><h2 id="mem_fun1"> mem_fun1 <h2><p></p>
+<blockquote>
+<p>这个函数并不像<code>实际效果</code>那样，它应该是俩个参数，且各个绑定不同。<br>此函数11之后被淘汰</p>
+</blockquote>
+<figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">   numbers.push_back ( <span class="keyword">new</span> dd );</div><div class="line">numbers.push_back ( <span class="keyword">new</span> dd );</div><div class="line"></div><div class="line">   <span class="keyword">class</span> dd &#123;</div><div class="line">   <span class="keyword">public</span>:</div><div class="line">       dd() &#123;&#125;</div><div class="line">       ~dd() &#123;&#125;</div><div class="line">       <span class="function"><span class="keyword">int</span> <span class="title">aa</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</div><div class="line">           <span class="built_in">cout</span> &lt;&lt; a - <span class="number">1</span>  &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">           <span class="keyword">return</span> a - <span class="number">1</span>;</div><div class="line">       &#125;</div><div class="line">   &#125;;</div><div class="line">   for_each (numbers.begin(), numbers.end(), bind2nd(mem_fun1(&amp;dd::aa), <span class="number">2</span>));<span class="comment">//如此便是循环执行：iterator-&gt;aa(2);</span></div><div class="line"></div><div class="line">   <span class="comment">////////////////////////////</span></div><div class="line">   numbers.push_back ( <span class="keyword">new</span> dd );</div><div class="line">numbers.push_back ( <span class="keyword">new</span> dd );</div><div class="line"></div><div class="line">   <span class="keyword">class</span> aa &#123;</div><div class="line">   <span class="keyword">public</span>:</div><div class="line">       aa() &#123;&#125;</div><div class="line">       ~aa() &#123;&#125;</div><div class="line">       <span class="function"><span class="keyword">int</span> <span class="title">dd</span><span class="params">(dd* a)</span> </span>&#123;</div><div class="line">           <span class="built_in">cout</span> &lt;&lt; <span class="number">33</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">           <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">       &#125;</div><div class="line">   &#125;;</div><div class="line">   aa s;</div><div class="line">   for_each (numbers.begin(), numbers.end(), bind1st(mem_fun1(&amp;aa::dd), &amp;s));<span class="comment">//如此便是循环执行：(&amp;s)-&gt;dd(iterator);</span></div><div class="line"></div></pre></td></tr></table></figure>
+<hr>
+<p></p><h2 id="mem_fun_ref"> mem_fun_ref <h2><p></p>
+<p></p><h2 id="mem_fun1_ref"> mem_fun1_ref <h2><p></p>
+<blockquote>
+<p>它们和<code>mem_fun</code>区别在于，iterator是对象，而不是指针。<br>mem_fun1_ref此函数11之后被淘汰</p>
+</blockquote>
+<hr>
+<p></p><h2 id="mem_fn"> mem_fn <h2><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">   dd a;</div><div class="line"><span class="keyword">auto</span> triple = <span class="built_in">std</span>::mem_fn(&amp;dd::aa);</div><div class="line"><span class="built_in">cout</span> &lt;&lt; triple(a, <span class="number">2</span>) &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//以a为调用对象，传入2</span></div><div class="line"></div></pre></td></tr></table></figure><p></p>
+</h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -751,7 +917,7 @@ critical_section效率要高一些，因为是针对同一个进程的。mutex�
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -804,6 +970,8 @@ critical_section效率要高一些，因为是针对同一个进程的。mutex�
           
 
           
+            
+          
 
           
 
@@ -824,23 +992,23 @@ critical_section效率要高一些，因为是针对同一个进程的。mutex�
       
         
           
-          代码暂时不提供了，直接去178的sobey库寻。说明MP3音频过程遇见。
+            <p>代码暂时不提供了，直接去<code>178</code>的sobey库寻。说明MP3音频过程遇见。</p>
+<ol>
+<li>帧头是大端字节，所以要转换下</li>
+<li>判断是否是帧头，看第一个字节是否是FF，同步信息第一个字节必须是FF（qq音乐喜欢用ff fe，网络音乐喜欢用ff fb）</li>
+<li>vbr的xing头并不影响解码，照常使用，只是在标签帧中多些信息而已</li>
+<li>有些MP3没有TAG ID3V2头只有ID3V1头，文件起点直接开始第一帧帧头，数据。。。</li>
+<li><p>有些MP3的TAG ID3V2头算出来的大小不准确，并不能找到第一帧位置。<br>这时，多半是它在第一帧和标签头之间又填充了很多无用信息<br>此时只能一个个字节去找FF帧头了</p>
+</li>
+<li><p>MP3标签帧对图片有保存：<a href="http://blog.csdn.net/studywithallofyou/article/details/7738785" target="_blank" rel="external">http://blog.csdn.net/studywithallofyou/article/details/7738785</a>  但是我在用ue去解析qq的MP3文件，却发现无APIC，虽没用代码检测，<code>先标记吧</code></p>
+</li>
+</ol>
 
-帧头是大端字节，所以要转换下
-判断是否是帧头，看第一个字节是否是FF，同步信息第一个字节必须是FF（qq音乐喜欢用ff fe，网络音乐喜欢用ff fb）
-vbr的xing头并不影响解码，照常使用，只是在标签帧中多些信息而已
-
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/08/181/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -872,7 +1040,7 @@ vbr的xing头并不影响解码，照常使用，只是在标签帧中多些信�
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -925,6 +1093,8 @@ vbr的xing头并不影响解码，照常使用，只是在标签帧中多些信�
           
 
           
+            
+          
 
           
 
@@ -941,13 +1111,13 @@ vbr的xing头并不影响解码，照常使用，只是在标签帧中多些信�
 
       
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+        <div class="post-gallery" itemscope itemtype="//schema.org/ImageGallery">
           
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/w1.png" rel="gallery_civ9jycnj008izwcxj5f2arwl"
-                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                 href="/picture/w1.png" rel="gallery_civ9lgkd0008l90cxx2weypau"
+                 itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/w1.png" itemprop="contentUrl"/>
               </a>
             
@@ -961,18 +1131,12 @@ vbr的xing头并不影响解码，照常使用，只是在标签帧中多些信�
       
         
           
-          “梦里相逢人不见，若知是梦何须醒。纵然梦里常幽会，怎比真如见一回。”
+            <blockquote class="blockquote-center"><h5 id="“梦里相逢人不见，若知是梦何须醒。纵然梦里常幽会，怎比真如见一回。”"><a href="#“梦里相逢人不见，若知是梦何须醒。纵然梦里常幽会，怎比真如见一回。”" class="headerlink" title="“梦里相逢人不见，若知是梦何须醒。纵然梦里常幽会，怎比真如见一回。”"></a>“梦里相逢人不见，若知是梦何须醒。纵然梦里常幽会，怎比真如见一回。”</h5></blockquote>
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/08/180/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1004,7 +1168,7 @@ vbr的xing头并不影响解码，照常使用，只是在标签帧中多些信�
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1057,6 +1221,8 @@ vbr的xing头并不影响解码，照常使用，只是在标签帧中多些信�
           
 
           
+            
+          
 
           
 
@@ -1077,19 +1243,14 @@ vbr的xing头并不影响解码，照常使用，只是在标签帧中多些信�
       
         
           
-          BGR与Bit-Fields当图像中引用的色彩超过256种时，我们就需要16bpp或更高bpp的位图。调色板不适合bpp较大的位图，因此16bpp以上的位图都不使用调 色板。不使用调色板的位图图像有两种编码格式：RGB和Bit-Fields（下称BF）。
-RGB编码格式是一种均分的思想，使Red、G
-          ...
+            <p><strong>BGR与Bit-Fields</strong><br>当图像中引用的色彩超过256种时，我们就需要16bpp或更高bpp的位图。调色板不适合bpp较大的位图，因此16bpp以上的位图都不使用调 色板。<br>不使用调色板的位图图像有两种编码格式：RGB和Bit-Fields（下称BF）。<br></p>
+<p>RGB编码格式是一种均分的思想，使Red、Green、Blue三个颜色分量所包含的信息容量尽可能一样大。<br>16bpp-RGB：在每个像素所占的16bits中，低5位表示Blue分量；中5为表示Green分量；高5位表示Red分量；最高1位无意义 （后来有些应用程序将其视为透明度Alpha分量，但这并不是标准）。<br>所以从低到高的顺序实际上是B-G-R，这也是我在BMP简介的表格里，把RGB的 编码方式都写成BGR的原因。<br><br>24bpp-RGB：24bpp的位图又称为真彩位图，它通常只有这一种编码格式，在24bits中，低8位表示Blue分量；中8为表示 Green分量；高8位表示Red分量。BGR<br><br>32bpp-RGB：在32bits中，低24位的编码方式与24bpp位图相同，最高8位用来表示透明度Alpha分量。<br>32bpp的位图尺寸太 大，一般只有在图像处理的中间过程中使用。对于需要半透过效果的图像，更好的选择是PNG格式。<br></p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/06/179/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1121,7 +1282,7 @@ RGB编码格式是一种均分的思想，使Red、G
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1174,6 +1335,8 @@ RGB编码格式是一种均分的思想，使Red、G
           
 
           
+            
+          
 
           
 
@@ -1194,36 +1357,89 @@ RGB编码格式是一种均分的思想，使Red、G
       
         
           
+            <table>
+<thead>
+<tr>
+<th>头文件</th>
+<th style="text-align:center">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#SBT_WAVFileReadWrite">SBT_WAVFileReadWrite</a></td>
+<td style="text-align:center">Wave文件读写（附重采样转换）</td>
+</tr>
+<tr>
+<td><a href="#SBT_PCMAdvProcess">SBT_PCMAdvProcess</a></td>
+<td style="text-align:center">PCM数据操作：重采样转换、WAV数据大小计算（整个音频数据长度）、(跳下)</td>
+</tr>
+<tr>
+<td><a href="#SBT_PCMAdvProcess2">SBT_PCMAdvProcess2</a></td>
+<td style="text-align:center">SBT_AudioMIX_Param_ST,没用过，从解释感觉是通道增益 <code>待更新</code></td>
+</tr>
+<tr>
+<td><a href="#SBT_PCMBasicProcess">SBT_PCMBasicProcess</a></td>
+<td style="text-align:center">PCM数据操作：重采样、调节音量、声道分离、声道合并、降噪、采样率过滤、（跳下）</td>
+</tr>
+<tr>
+<td><a href="#SBT_PCMBasicProcess2">SBT_PCMBasicProcess2</a></td>
+<td style="text-align:center">时间计算</td>
+</tr>
+<tr>
+<td><a href="#SBT_MPEGBufferEncode">SBT_MPEGBufferEncode</a></td>
+<td style="text-align:center">MPEG编码，视频和音频基带数据编码，只用过YUV、RGB基带数据视频编码其它未尝试<code>待更新</code></td>
+</tr>
+<tr>
+<td><a href="#SBT_MPGABufferDecode">SBT_MPGABufferDecode</a></td>
+<td style="text-align:center">MPGE(mpga)音频的解码,支持mp1/mp2/mp3解码（帧解码）,对应SBT_MPABufferEncode</td>
+</tr>
+<tr>
+<td><a href="#SBT_CutlistV2">SBT_CutlistV2</a></td>
+<td style="text-align:center">万能代码，把文件名给传给cutlist，让cutlist播，自己去取缓存</td>
+</tr>
+<tr>
+<td><a href="#SBT_MediaDetect">SBT_MediaDetect</a></td>
+<td style="text-align:center">万能媒体文件读取，读取视音频文件信息，GetClipSampleIcon不知道何用<code>待更新</code></td>
+</tr>
+<tr>
+<td><a href="#SBT_MediaDetect2">SBT_MediaDetect2</a></td>
+<td style="text-align:center">同上，增加可读性的文件读取，测试代码见<a href="#SBT_CutlistV2">SBT_CutlistV2</a></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p></p><h2 id="SBT_WAVFileReadWrite"> SBT_WAVFileReadWrite <h2><p></p>
+<ol>
+<li>writer是自带重采样的（采样率或通道转换）</li>
+<li>readerex才带有重采样功能<figure class="highlight c"><figcaption><span>测试代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">   BYTE* bybuffer = <span class="literal">NULL</span>;</div><div class="line"><span class="keyword">int</span> len = <span class="number">0</span>;</div><div class="line">BOOL end;</div><div class="line">WAVEFORMATEX wavef, *pwave;</div><div class="line">Init_StanderWave(wavef);</div><div class="line"></div><div class="line">pwave = &amp;wavef;</div><div class="line">SBT_WAVFileReaderEx read;</div><div class="line">read.Initialize();</div><div class="line">read.SetInputFile(<span class="number">_</span>T(<span class="string">"D:\\tebig.wav"</span>));</div><div class="line">read.GetOutputWAVEFormat(&amp;pwave);</div><div class="line">wavef.nChannels = pwave-&gt;nChannels;</div><div class="line">wavef.wBitsPerSample = pwave-&gt;wBitsPerSample;</div><div class="line">Calcute_Block_SamplesPer(wavef);</div><div class="line">read.SetOutputWAVEFormat(&amp;wavef);</div><div class="line">read.SetPCMFrameSize(BY_BYTE, wavef.nAvgBytesPerSec/<span class="number">25</span>);<span class="comment">//</span></div><div class="line">read.EnableInternalBuffer();</div><div class="line">read.StartRead();</div><div class="line"></div><div class="line">SBT_WAVFileWriter wavwrite;</div><div class="line"><span class="keyword">int</span> ar = wavwrite.Initialize();</div><div class="line">ar = wavwrite.SetOutputFile(<span class="number">_</span>T(<span class="string">"D:\\wwaw.wav"</span>));</div><div class="line">ar = wavwrite.SetInputWAVEFormat(&amp;wavef);</div><div class="line">ar = wavwrite.SetOutputWAVEFormat(&amp;wavef);</div><div class="line">ar = wavwrite.StartWrite();</div><div class="line"></div><div class="line"><span class="keyword">while</span> (<span class="number">1</span>)</div><div class="line">&#123;</div><div class="line">	read.ReadEx(BY_BYTE, wavef.nAvgBytesPerSec/<span class="number">25</span>, &amp;bybuffer, &amp;len, &amp;pwave, &amp;end);<span class="comment">//输出长度依旧不定长不知为何,BY_FRAME我没成功过</span></div><div class="line">	<span class="keyword">if</span> (end)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	&#125;</div><div class="line">	ar = wavwrite.SetInputBuffer(bybuffer, len);<span class="comment">//这个函数很挑剔，SBT_PCMBasicProcess2的从采样数据输入就不行（不知为何）。</span></div><div class="line">&#125;</div><div class="line">wavwrite.StopWrite();</div><div class="line">   </div></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<p></p><h2 id="SBT_PCMAdvProcess"> SBT_PCMAdvProcess <h2><p></p>
+<p></p><h2 id="SBT_PCMAdvProcess2"> SBT_PCMAdvProcess2 <h2><p></p>
+<ol>
+<li>这个是通过名和void指针调用</li>
+</ol>
+<hr>
+<p></p><h2 id="SBT_PCMBasicProcess"> SBT_PCMBasicProcess <h2><p></p>
+<p></p><h2 id="SBT_PCMBasicProcess2"> SBT_PCMBasicProcess2 <h2><p></p>
+<ol>
+<li>CalResampleParam参数未知，待研究</li>
+<li>ReformatLPCM在按照帧做转换时会出现输出数据不定长（连续写入也有问题），ReformatLPCM2按帧转换输出长度比较正常，但是对WAVEFORMATEX要计算好。<figure class="highlight c"><figcaption><span>测试代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">m_SBPcmProcess.ReformatLPCM2(*m_pSrcWave, m_pReadData, inlen, *m_pDstWave, &amp;pOut1, &amp;outlen1);</div><div class="line"></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<p></p><h2 id="SBT_MPEGBufferEncode"> SBT_MPEGBufferEncode <h2><br><figure class="highlight c"><figcaption><span>测试代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">SBT_MPEGBufferEncode*	m_pBufferEncode;</div><div class="line">DO(m_pBufferEncode-&gt;SetEncodeOperationMode(XH_MPEG_ESBUF_OUT));</div><div class="line">    </div><div class="line">XH_MPEG_ENCODE_PARAM paramIn;</div><div class="line">paramIn.GetDefaultParam(m_nVideoType == SD_TYPE ? XH_MPEG2_422PML : XH_MPEG2_422PHL);</div><div class="line">paramIn.chroma_format = <span class="number">1</span>;</div><div class="line">paramIn.group_I_frame_count = <span class="number">1</span>;</div><div class="line">paramIn.group_B_frame_count = <span class="number">0</span>;</div><div class="line">paramIn.group_P_frame_count = <span class="number">0</span>;</div><div class="line"></div><div class="line">DO(m_pBufferEncode-&gt;SetEncodeParam(&amp;paramIn));</div><div class="line">DO(m_pBufferEncode-&gt;SetEncodeOutputCB(XH_VIDEO_OUTPUT_CB, EncodeOutCB, <span class="keyword">this</span>));</div><div class="line"></div><div class="line">m_bitInfoHead.biCompression = BI_RGB;</div><div class="line">DO(m_pBufferEncode-&gt;SetVideoInputBufferFormat(&amp;m_bitInfoHead));</div><div class="line">DO(m_pBufferEncode-&gt;StartEncode());</div><div class="line">DO(m_pBufferEncode-&gt;SetVideoInputBuffer(m_pBmpDataBuf, m_dwBmpSize));</div><div class="line"></div></pre></td></tr></table></figure><p></p>
+<hr>
+<p></p><h2 id="SBT_MPGABufferDecode"> SBT_MPGABufferDecode <h2><br><figure class="highlight"><figcaption><span>测试代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">//这是mp3解码测试，从MP3里一个个读取帧数据，再放入解码。</div><div class="line">//对pcm文件写入，要用SBT_WAVFileReadWrite。</div><div class="line">//自写的pcm文件写入老是有点问题，也没调试；代码不易，暂时放入记录以后修改。</div><div class="line">#define Calcute_Block_SamplesPer(outhead) outhead.nBlockAlign = (outhead.nChannels * outhead.wBitsPerSample) / 8;\</div><div class="line">outhead.nAvgBytesPerSec = outhead.nSamplesPerSec * outhead.nBlockAlign;</div><div class="line"></div><div class="line">#define Create_DstWave(outhead, inhead) \</div><div class="line">	outhead.wFormatTag = 1;\</div><div class="line">	outhead.nSamplesPerSec = 48000;\</div><div class="line">	outhead.nAvgBytesPerSec = 1152000;\</div><div class="line">	outhead.nChannels = 8;\</div><div class="line">	outhead.nBlockAlign = 24;\</div><div class="line">	outhead.wBitsPerSample = inhead.wBitsPerSample;\</div><div class="line">	Calcute_Block_SamplesPer(outhead);</div><div class="line"></div><div class="line">#define GetID3V2Size(header) (header.Size[0] &amp; 0x7F)&lt;&lt; 21 | (header.Size[1] &amp; 0x7F) &lt;&lt; 14 | (header.Size[2] &amp; 0x7F) &lt;&lt; 7 | (header.Size[3] &amp; 0x7F); </div><div class="line"></div><div class="line">#define BITRATEFREE 0xfffe</div><div class="line">#define BITRATEBAD  0xffff</div><div class="line"></div><div class="line">//// MP3FRAMEHEADER structure</div><div class="line">//struct MP3FRAMEHEADER //4byte</div><div class="line">//&#123;</div><div class="line">//	unsigned framesync   :11;    //同步信息</div><div class="line">//	unsigned MPEGID      : 2;    //版本</div><div class="line">//	unsigned layer       : 2;    //层</div><div class="line">//	unsigned protectbit  : 1;    //CRC 校验</div><div class="line">//	unsigned bitrateindx : 4;    //位率</div><div class="line">//	unsigned samplefreq  : 2;    //采样率</div><div class="line">//	unsigned paddingbit  : 1;    //帧长调节</div><div class="line">//	unsigned privatebit  : 1;    //保留字</div><div class="line">//	unsigned channel     : 2;    //声道模式</div><div class="line">//	unsigned modeext     : 2;    //扩充模型</div><div class="line">//	unsigned copyright   : 1;    //Copyright</div><div class="line">//	unsigned original    : 1;    //原版标志</div><div class="line">//	unsigned emphasis    : 2;    //强调模式</div><div class="line">//&#125;;</div><div class="line"></div><div class="line">// MP3FRAMEHEADER structure</div><div class="line">struct MP3FRAMEHEADER</div><div class="line">&#123;</div><div class="line">	unsigned emphasis : 2;			// M</div><div class="line">	unsigned original : 1;			// L</div><div class="line">	unsigned copyright : 1;			// K</div><div class="line">	unsigned modeext : 2;			// J</div><div class="line">	unsigned channel : 2;			// I</div><div class="line">	unsigned privatebit : 1;			// H</div><div class="line">	unsigned paddingbit : 1;			// G</div><div class="line">	unsigned samplefreq : 2;		// F</div><div class="line">	unsigned bitrateindx : 4;			// E</div><div class="line">	unsigned protectbit : 1;			// D</div><div class="line">	unsigned layer : 2;			// C</div><div class="line">	unsigned MPEGID : 2;			// B</div><div class="line">	unsigned framesync : 11;		// A</div><div class="line">&#125;;</div><div class="line"></div><div class="line">struct MP3ID3V2TAG //10byte</div><div class="line">&#123;</div><div class="line">	char Header[3];//ID3</div><div class="line">	char Ver;//3</div><div class="line">	char Revision;</div><div class="line">	char Flag;</div><div class="line">	char Size[4];</div><div class="line">&#125;;</div><div class="line"></div><div class="line">// MP3ID3V1TAG structure</div><div class="line">struct MP3ID3V1TAG//128byte</div><div class="line">&#123;</div><div class="line">	char ident[3]; // TAG</div><div class="line">	char title[30];</div><div class="line">	char artist[30];</div><div class="line">	char album[30];</div><div class="line">	char year[4];</div><div class="line">	char comment[28];</div><div class="line">	BYTE reserved;</div><div class="line">	BYTE tracknum;</div><div class="line">	BYTE genre;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line">int g_BitRates[] = &#123;</div><div class="line">	BITRATEFREE, BITRATEFREE, BITRATEFREE, BITRATEFREE, BITRATEFREE, </div><div class="line">	32,  32,  32,  32,    8,</div><div class="line">	64,  48,  40,  48,   16,</div><div class="line">	96,  56,  48,  56,  24,</div><div class="line">	128,  64,  56,  64,  32,</div><div class="line">	160,  80,  64,  80,  40,</div><div class="line">	192,  96,  80,  96,  48,</div><div class="line">	224, 112,  96, 112,  56,</div><div class="line">	256, 128, 112, 128,  64,</div><div class="line">	288, 160, 128, 144,  80,</div><div class="line">	320, 192, 160, 160,  96,</div><div class="line">	352, 224, 192, 176, 112,</div><div class="line">	384, 256, 224, 192, 128,</div><div class="line">	416, 320, 256, 224, 144,</div><div class="line">	448, 384, 320, 256, 160,</div><div class="line">	BITRATEBAD, BITRATEBAD, BITRATEBAD, BITRATEBAD, BITRATEBAD</div><div class="line">&#125;;</div><div class="line"></div><div class="line">int g_SampleCountMap[4][4] = &#123;</div><div class="line">	0,    0,    0,    0,</div><div class="line">	576,  0,  576, 1152, //l3</div><div class="line">	1152, 0, 1152, 1152, //l2</div><div class="line">	384,  0,  384,  384, //l1</div><div class="line">&#125;;</div><div class="line"></div><div class="line">int g_SampleRate[4][4] = &#123;</div><div class="line">	11025, 0, 22050, 44100,//0</div><div class="line">	12000,     0,    24000,   48000,//1</div><div class="line">	8000,		0,	  16000,   32000,//2</div><div class="line">	0,		0,		0,	0,</div><div class="line">&#125;;</div><div class="line"></div><div class="line">int GetBitRate(INT nlayer, INT nversion, int nbitindex)</div><div class="line">&#123;</div><div class="line">	if (nversion == 3)</div><div class="line">	&#123;</div><div class="line">		return g_BitRates[nbitindex * 5 + (3 - nlayer)];</div><div class="line">	&#125;</div><div class="line">	else if (nversion == 2)//</div><div class="line">	&#123;</div><div class="line">		if (nlayer == 3)</div><div class="line">			return g_BitRates[nbitindex * 5 + 3];</div><div class="line">		else</div><div class="line">			return g_BitRates[nbitindex * 5 + 4];</div><div class="line">	&#125;</div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">bool Is_Mp3FrameHead(const unsigned char * pHead) </div><div class="line">&#123;</div><div class="line">	if (pHead[0] == 0xff &amp;&amp; (pHead[1] &amp; 0xe0) == 0xe0)</div><div class="line">	&#123;</div><div class="line">		if (((pHead[1] &amp; 0x06) &gt;&gt; 1) == 0) return 0; /* no layer 4 */</div><div class="line">		if (((pHead[2] &amp; 0xf0) &gt;&gt; 4) == 15) return 0; /* bitrate can't be 1111 */</div><div class="line">		if (((pHead[2] &amp; 0x0c) &gt;&gt; 2) == 3) return 0; /* samplerate can't be 11 */</div><div class="line">		return 1;</div><div class="line">	&#125;</div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">bool Is_Mp3V1Head(const unsigned char* pHead)</div><div class="line">&#123;</div><div class="line">	if (pHead[0] == 0x00 &amp;&amp; pHead[1] == 0x00 &amp;&amp; pHead[2] == 0x01 &amp;&amp; pHead[3] == 0xba) &#123;</div><div class="line">		return 1;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void ChangeEndian(void* pBuffer, int nBufSize)</div><div class="line">&#123;</div><div class="line">	if (!pBuffer || !nBufSize)</div><div class="line">		return;</div><div class="line"></div><div class="line">	char temp;</div><div class="line">	for (int i = 0; i &lt; nBufSize / 2; i++)</div><div class="line">	&#123;</div><div class="line">		temp = ((char*)pBuffer)[i];</div><div class="line">		((char*)pBuffer)[i] = ((char*)pBuffer)[nBufSize - i - 1];</div><div class="line">		((char*)pBuffer)[nBufSize - i - 1] = temp;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">void writefilehead(WAVEFORMATEX&amp; head, int sz, FILE* pwrite)</div><div class="line">&#123;</div><div class="line">	int bits = head.wBitsPerSample;</div><div class="line">	char *data = (char*)"RIFF";</div><div class="line">	short short_temp;</div><div class="line">	int long_temp;</div><div class="line">	int fileSize;</div><div class="line">	int size = sz;</div><div class="line"></div><div class="line">	fileSize = size + 36;</div><div class="line"></div><div class="line">	data = (char*)"RIFF";</div><div class="line">	fwrite(data, sizeof(char), 4, pwrite);</div><div class="line">	fwrite(&amp;fileSize, sizeof(int), 1, pwrite);</div><div class="line">	data = (char*)"WAVE";</div><div class="line">	fwrite(data,sizeof(char),4,pwrite);</div><div class="line">	data = (char*)"fmt ";</div><div class="line">	fwrite(data,sizeof(char),4,pwrite);</div><div class="line">	long_temp = 16;</div><div class="line">	fwrite(&amp;long_temp, sizeof(int), 1, pwrite);</div><div class="line">	short_temp = 0x01;</div><div class="line">	fwrite(&amp;short_temp,sizeof(int),1,pwrite);</div><div class="line"></div><div class="line">	short_temp = (head.nChannels);</div><div class="line">	fwrite(&amp;short_temp, sizeof(short), 1,pwrite);</div><div class="line">	long_temp=(head.nSamplesPerSec);</div><div class="line">	fwrite(&amp;long_temp,sizeof(int),1,pwrite);</div><div class="line">	long_temp=(bits/8)*(head.nChannels)*(head.nSamplesPerSec);</div><div class="line">	fwrite(&amp;long_temp,sizeof(int),1,pwrite);</div><div class="line">	short_temp=(bits/8)*(head.nChannels);</div><div class="line">	fwrite(&amp;short_temp,sizeof(short),1,pwrite);</div><div class="line">	short_temp=(bits);</div><div class="line">	fwrite(&amp;short_temp,sizeof(short),1,pwrite);</div><div class="line"></div><div class="line">	data=(char*)"data";</div><div class="line">	fwrite(data,sizeof(char),4,pwrite);</div><div class="line">	fwrite(&amp;size,sizeof(int),1,pwrite);</div><div class="line">	fseek(pwrite,44,SEEK_SET);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int CBmp2Video::ReadMP3(int lengh)</div><div class="line">&#123;</div><div class="line">	#define Release_And_Return() &#123; fclose(m_pAudioInfo-&gt;pFile);\</div><div class="line">	delete m_pAudioInfo;\</div><div class="line">	m_pAudioInfo = NULL;\</div><div class="line">	return 0;&#125;\</div><div class="line"></div><div class="line">	if (m_pAudioInfo-&gt;pFile == NULL)</div><div class="line">		return 0;</div><div class="line"></div><div class="line">	int nReadPos = 0;</div><div class="line">	int v2headsz = 0;</div><div class="line">	SBT_MPGABufferDecode decode;</div><div class="line">	MP3FRAMEHEADER frameHead = &#123;0&#125;;</div><div class="line">	MP3ID3V2TAG v2tag = &#123;0&#125;;</div><div class="line"></div><div class="line">	int rd = fread_s(&amp;v2tag, sizeof(MP3ID3V2TAG), sizeof(MP3ID3V2TAG), 1, m_pAudioInfo-&gt;pFile);</div><div class="line">	if (rd &lt; 1)</div><div class="line">		Release_And_Return();</div><div class="line"></div><div class="line">	if (v2tag.Header[0] == 'I' &amp;&amp;//</div><div class="line">		v2tag.Header[1] == 'D' &amp;&amp;</div><div class="line">		v2tag.Header[2] == '3')</div><div class="line">	&#123;</div><div class="line">		if (v2tag.Ver != 3)</div><div class="line">			Release_And_Return();</div><div class="line"></div><div class="line">		v2headsz = GetID3V2Size(v2tag);</div><div class="line"></div><div class="line">		rd = fseek(m_pAudioInfo-&gt;pFile, v2headsz, SEEK_CUR);</div><div class="line">		</div><div class="line">		bool bfind = false;</div><div class="line">		int nBlockPos = 0;</div><div class="line">		BYTE headbuffer[10] = &#123;0&#125;;</div><div class="line">		while (true)//部分MP3，会对标签到第一帧进行多余填充，此时长度无法定位第一帧，只能一个一个读取寻找</div><div class="line">		&#123;</div><div class="line">			if (bfind)</div><div class="line">				break;</div><div class="line"></div><div class="line">			rd = fread_s(&amp;headbuffer, sizeof(headbuffer) * sizeof(BYTE), sizeof(headbuffer) * sizeof(BYTE), 1, m_pAudioInfo-&gt;pFile);</div><div class="line">			for (int i = 0; i &lt; 10; i++)</div><div class="line">			&#123;</div><div class="line">				if (headbuffer[i] == 255)</div><div class="line">				&#123;</div><div class="line">					bfind = true;</div><div class="line">					break;</div><div class="line">				&#125;</div><div class="line">				nBlockPos++;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		nReadPos = v2headsz + nBlockPos + 10;</div><div class="line">		rd = fseek(m_pAudioInfo-&gt;pFile, nReadPos, SEEK_SET);</div><div class="line">	&#125;</div><div class="line">	else//当没有标签头时</div><div class="line">	&#123;</div><div class="line">		rd = fseek(m_pAudioInfo-&gt;pFile, 0-sizeof(MP3ID3V2TAG), SEEK_CUR);</div><div class="line">		nReadPos = 0;</div><div class="line">	&#125;</div><div class="line">	if (rd == 0)</div><div class="line">	&#123;</div><div class="line">		m_pAudioInfo-&gt;nDataType = MP3_TYPE;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	SBT_MPGABufferDecode decode;</div><div class="line"></div><div class="line">	FILE* writewave = NULL;</div><div class="line">	int allsize = 0;</div><div class="line">	int nsamplerate = 0;</div><div class="line">	int outlen = 0;</div><div class="line">	int nbitrate = 0;</div><div class="line">	int nframebyte = 0;</div><div class="line">	bool bhavehead = false;</div><div class="line">	WAVEFORMATEX writeformat = &#123;0&#125;;</div><div class="line">	MP3FRAMEHEADER frameHead = &#123;0&#125;;</div><div class="line"></div><div class="line">	decode.Initialize();</div><div class="line">	decode.StartDecode();</div><div class="line"></div><div class="line">	fopen_s(&amp;writewave, "www.wav", "wb");</div><div class="line"></div><div class="line">	rd = fread_s(&amp;frameHead, sizeof(MP3FRAMEHEADER), sizeof(MP3FRAMEHEADER), 1, m_pAudioInfo-&gt;pFile);</div><div class="line"></div><div class="line">	while (rd &gt; 0)</div><div class="line">	&#123;</div><div class="line">		if (rd &lt; 1)</div><div class="line">			return -1;</div><div class="line">		else if (Is_Mp3FrameHead((const unsigned char*)&amp;frameHead))</div><div class="line">		&#123;</div><div class="line">			fseek(m_pAudioInfo-&gt;pFile, 0-sizeof(MP3FRAMEHEADER), SEEK_CUR);</div><div class="line"></div><div class="line">			ChangeEndian(&amp;frameHead, 4);</div><div class="line"></div><div class="line">			nsamplerate = g_SampleRate[frameHead.samplefreq][frameHead.MPEGID];</div><div class="line">			nbitrate	= GetBitRate(frameHead.layer, frameHead.MPEGID, frameHead.bitrateindx);</div><div class="line"></div><div class="line">			if (frameHead.layer == 3)</div><div class="line">				nframebyte = (12000 * nbitrate / nsamplerate + frameHead.paddingbit) * 4;</div><div class="line">			else</div><div class="line">				nframebyte = 144000 * nbitrate / nsamplerate + frameHead.paddingbit;</div><div class="line"></div><div class="line">			int noutDecodelen = 0;</div><div class="line">			BYTE* poutDecodebuffer = NULL;</div><div class="line">			BYTE* pReadbuffer = new BYTE[nframebyte];</div><div class="line">			rd = fread_s(pReadbuffer, nframebyte, nframebyte, 1, m_pAudioInfo-&gt;pFile);</div><div class="line">			</div><div class="line">			//解码</div><div class="line">			nReadPos += nframebyte;</div><div class="line">			MPEG_AUDIO_FRAME_INFO mpginfo = &#123;0&#125;;</div><div class="line">			decode.GetAudioFrameInfo(pReadbuffer, nframebyte, mpginfo);</div><div class="line">			rd = decode.SetInputBuffer(pReadbuffer, nframebyte);</div><div class="line">			rd = decode.GetOutputBufferFormat(&amp;noutDecodelen, &amp;writeformat);</div><div class="line">			rd = decode.GetOutputBuffer(&amp;poutDecodebuffer, &amp;noutDecodelen);</div><div class="line"></div><div class="line">			allsize += noutDecodelen;</div><div class="line">			if (!bhavehead)</div><div class="line">			&#123;</div><div class="line">				bhavehead = true;</div><div class="line">				writefilehead(writeformat, noutDecodelen, writewave);</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			fwrite(poutDecodebuffer, noutDecodelen, 1, writewave);</div><div class="line"></div><div class="line">			delete pReadbuffer;</div><div class="line"></div><div class="line">			if (nReadPos &gt;= lengh)</div><div class="line">			&#123;</div><div class="line">				break;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		else if (Is_Mp3V1Head((const unsigned char*)&amp;frameHead))</div><div class="line">		&#123;</div><div class="line">			return -1;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		rd = fread_s(&amp;frameHead, sizeof(MP3FRAMEHEADER), sizeof(MP3FRAMEHEADER), 1, m_pAudioInfo-&gt;pFile);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	fseek(writewave, 40, SEEK_SET);</div><div class="line">	fwrite(&amp;allsize, 1, sizeof(int), writewave);</div><div class="line">	allsize += 36;</div><div class="line">	fseek(writewave, 4, SEEK_SET);</div><div class="line">	fwrite(&amp;allsize, 1, sizeof(int), writewave);</div><div class="line">	fclose(writewave);</div><div class="line"></div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure><p></p>
+<hr>
+<p></p><h2 id="SBT_CutlistV2"> SBT_CutlistV2 <h2><br><figure class="highlight c"><figcaption><span>测试代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">////////////////////////////////////////////////////////////////////////////////////</span></div><div class="line"><span class="keyword">int</span> allsize = <span class="number">0</span>;</div><div class="line">*FILE* writewave = <span class="literal">NULL</span>;</div><div class="line">fopen_s(&amp;writewave, <span class="string">"D:\\wwq.wav"</span>, <span class="string">"wb"</span>);*/</div><div class="line">SBT_WAVFileWriter wavewrite;</div><div class="line">SBT_MEDIA_INFO2 info2;</div><div class="line">SBT_MediaDetect2 detect2;</div><div class="line">detect2.SetInputFile(lpPath);</div><div class="line">detect2.GetMediaInfo2(&amp;info2);</div><div class="line"></div><div class="line">WAVEFORMATEX outhead = info2.AudioInfo(<span class="number">0</span>).stWavFormat;</div><div class="line">outhead.nSamplesPerSec = <span class="number">48000</span>;</div><div class="line">Calcute_Block_SamplesPer(outhead);</div><div class="line"></div><div class="line">AM_MEDIA_TYPE meditype = &#123;<span class="number">0</span>&#125;;</div><div class="line">meditype.majortype = MEDIATYPE_Audio;</div><div class="line">meditype.formattype = FORMAT_WaveFormatEx;</div><div class="line">meditype.cbFormat = <span class="keyword">sizeof</span>(WAVEFORMATEX);</div><div class="line">meditype.pbFormat = <span class="keyword">new</span> BYTE[meditype.cbFormat];</div><div class="line">memcpy_s(meditype.pbFormat, <span class="keyword">sizeof</span>(WAVEFORMATEX), &amp;outhead, <span class="keyword">sizeof</span>(WAVEFORMATEX));</div><div class="line"></div><div class="line">ST_CUTLIST_ITEM* pItemList = <span class="keyword">new</span> ST_CUTLIST_ITEM[<span class="number">1</span>];</div><div class="line"><span class="keyword">int</span> nFrameNum = (<span class="keyword">int</span>)((info2.AudioInfo(<span class="number">0</span>).llDuration*<span class="number">25</span>/(<span class="number">1000</span>*<span class="number">10</span>*<span class="number">1000</span>))+<span class="number">0.001</span>);</div><div class="line">pItemList[<span class="number">0</span>].llMediaOut = nFrameNum;</div><div class="line">pItemList[<span class="number">0</span>].llTimelineIn = <span class="number">0</span>;</div><div class="line">pItemList[<span class="number">0</span>].llTimelineOut = pItemList[<span class="number">0</span>].llMediaOut;</div><div class="line">pItemList[<span class="number">0</span>].bstrFileName = strPath;</div><div class="line">pItemList[<span class="number">0</span>].dwFileFormatID = info2.FileFormatID();</div><div class="line">pItemList[<span class="number">0</span>].dwMediaTypeID = info2.AudioInfo(<span class="number">0</span>).nMediaID;</div><div class="line">pItemList[<span class="number">0</span>].dwItemType = SBT_CUTLIST_ITEM_AUDIO;</div><div class="line">pItemList[<span class="number">0</span>].dwReserved1 = pItemList[<span class="number">0</span>].dwReserved2 = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="comment">//////////////////函数执行</span></div><div class="line"><span class="comment">//////////////////设置参数</span></div><div class="line">wavewrite.Initialize();</div><div class="line">wavewrite.SetOutputFile(<span class="number">_</span>T(<span class="string">"D:\\qqw.wav"</span>));</div><div class="line">wavewrite.SetInputWAVEFormat(&amp;outhead);</div><div class="line">wavewrite.SetOutputWAVEFormat(&amp;outhead);</div><div class="line">wavewrite.StartWrite();</div><div class="line"></div><div class="line"><span class="comment">//writefilehead(outhead, 22, writewave);</span></div><div class="line"></div><div class="line"><span class="keyword">int</span> rd = m_pSbCutList-&gt;Initialize(SBT_CUTLIST_ITEM_AUDIO);</div><div class="line">rd = m_pSbCutList-&gt;SetBufferingMode(TRUE);</div><div class="line">rd = m_pSbCutList-&gt;SetBufferPoolSize(<span class="number">25</span>, <span class="number">100</span>);</div><div class="line">rd = m_pSbCutList-&gt;SetFPS(<span class="number">0L</span>);</div><div class="line">rd = m_pSbCutList-&gt;SetOutputFormat(SBT_CUTLIST_ITEM_AUDIO, &amp;meditype);</div><div class="line">rd = m_pSbCutList-&gt;SetItemList(pItemList, <span class="number">1</span>);</div><div class="line">rd = m_pSbCutList-&gt;SetStatus(SBT_CUTLIST_STATUS_PLAY);</div><div class="line"></div><div class="line"><span class="comment">/////////////////////获取数据</span></div><div class="line">ST_CUTLISTV2_DECODE_OUT stDecout;</div><div class="line">ST_CUTLISTV2_DECODE_IN stDecIn;</div><div class="line"></div><div class="line">stDecIn.llTimelinePos = <span class="number">0</span>;</div><div class="line">stDecIn.pUserBuffer = <span class="literal">NULL</span>;</div><div class="line">stDecIn.pUserBuffer2 = <span class="literal">NULL</span>;</div><div class="line">stDecIn.nUserBufSize = <span class="number">0</span>;</div><div class="line">stDecIn.nUserBufStride =  <span class="number">0</span>;</div><div class="line">stDecIn.dwMask = <span class="number">0xFFFF</span>;</div><div class="line">stDecIn.dwReserved  = <span class="number">0x00</span>;</div><div class="line">stDecIn.dwParameter  = <span class="number">0x01</span>;</div><div class="line"></div><div class="line">ErrorInfo errinfo;</div><div class="line">ST_CUTLIST_PROCESS_INFO proinfo;</div><div class="line"><span class="keyword">while</span> ((rd = m_pSbCutList-&gt;GetOutputBuffer(&amp;stDecIn, stDecout)) &gt; <span class="number">0</span>)</div><div class="line">&#123;</div><div class="line">	rd = m_pSbCutList-&gt;GetCutlistProInfo(proinfo);</div><div class="line">	rd = m_pSbCutList-&gt;GerLastErrorCodeInfo(errinfo);</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (proinfo.nDecodedBufferNum == <span class="number">0</span>)</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">if</span> (stDecout.pDestBuffer == <span class="literal">NULL</span>)</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">if</span> (stDecIn.llTimelinePos == nFrameNum)</div><div class="line">		<span class="keyword">break</span>;</div><div class="line"></div><div class="line">	stDecIn.llTimelinePos++;</div><div class="line"></div><div class="line">	allsize += stDecout.nActualDataSize;</div><div class="line">	wavewrite.SetInputBuffer(stDecout.pDestBuffer, stDecout.nActualDataSize);</div><div class="line">	<span class="comment">//fwrite(stDecout.pDestBuffer, stDecout.nActualDataSize, 1, writewave);</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">wavewrite.StopWrite();</div><div class="line">fseek(writewave, <span class="number">40</span>, SEEK_SET);</div><div class="line">fwrite(&amp;allsize, <span class="number">1</span>, <span class="keyword">sizeof</span>(<span class="keyword">int</span>), writewave);</div><div class="line">allsize += <span class="number">36</span>;</div><div class="line">fseek(writewave, <span class="number">4</span>, SEEK_SET);</div><div class="line">fwrite(&amp;allsize, <span class="number">1</span>, <span class="keyword">sizeof</span>(<span class="keyword">int</span>), writewave);</div><div class="line">fclose(writewave);</div><div class="line"></div><div class="line"><span class="keyword">delete</span> meditype.pbFormat;</div><div class="line"><span class="comment">//delete pItemList;</span></div><div class="line"><span class="comment">////////////////////////////////////////////////////////////////////////////////////</span></div><div class="line"></div></pre></td></tr></table></figure><p></p>
+</h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2>
           
-
-
-头文件
-用途
-
-
-
-
-SBT_WAVFileReadWrite
-Wave文件读写（附重采样转换）
-
-
-SBT_PCMAdvProcess
-PCM数据操作：重采样转换、WAV数据大小计算（整个音频数据长度）、(跳下)
-
-
-SBT_PCMAdvProcess2
-SBT_AudioMIX_Param
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/30/178/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1255,7 +1471,7 @@ SBT_AudioMIX_Param
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1308,6 +1524,8 @@ SBT_AudioMIX_Param
           
 
           
+            
+          
 
           
 
@@ -1324,13 +1542,13 @@ SBT_AudioMIX_Param
 
       
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+        <div class="post-gallery" itemscope itemtype="//schema.org/ImageGallery">
           
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/v.jpg" rel="gallery_civ9jycn80082zwcxxtducy5h"
-                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                 href="/picture/v.jpg" rel="gallery_civ9lgkck008190cx61ood2p9"
+                 itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/v.jpg" itemprop="contentUrl"/>
               </a>
             
@@ -1344,19 +1562,29 @@ SBT_AudioMIX_Param
       
         
           
-          搭建坑1. favior坑和配置文件里面说的不一样，必须要给个路径，不然简直呵呵。
-2. about页面坑我想用photos对about页面进行修饰，我去。NexT对所有属性页面都处理了不支持photos；气死人。只有两种方式：1、改布局，头上写layout:post；2、加本地图片&lt;img&
-          ...
+            <h1 id="搭建坑"><a href="#搭建坑" class="headerlink" title="搭建坑"></a>搭建坑</h1><p><strong><em>1. favior坑</em></strong><br>和配置文件里面说的不一样，必须要给个路径，不然简直呵呵。</p>
+<p><strong><em>2. about页面坑</em></strong><br>我想用photos对about页面进行修饰，我去。NexT对所有属性页面都处理了不支持photos；<br><br>气死人。只有两种方式：1、改布局，头上写layout:post；2、加本地图片<code>&lt;img&gt;</code>属性，但是有个坑就是无法水平布局（只能求他们看看了）</p>
+<p><strong><em>3. 最强之坑</em></strong><br>url问题，对于几个menu的访问，我一直访问不到。<br><br>一直以为是其他问题(本来该访问<code>https:\\</code>的，它直接访问了站点，所以找不到网页) <br><br>搞了一天，我了个去！！。最后发现长城这坑货做了访问缓存的。。。。。。。。<br><br>它对国外所有站都做了缓存，，，也就是说发现要耗资源，要么从以前的post取一个随便发，要么用以前的页面来展示。</p>
+<p><strong><em>4. 代码高亮坑</em></strong><br>普通makedown的tab识别有问题，只能加上标注了<br></p>
+<pre><code>{% codeblock [title] [lang:language] [url] [link text] %}  
+    code snippet  
+    {% endcodeblock %}
+</code></pre><p><strong><em>5. swiftype坑</em></strong><br>我想把按钮改成编辑框，晕了没法,还好有好人写的博客 <a href="http://www.wuxubj.cn/2016/05/Hexo-build-personal-blog-advance/#%E6%B7%BB%E5%8A%A0swiftype%E6%90%9C%E7%B4%A2%E5%B9%B6%E8%87%AA%E5%AE%9A%E4%B9%89%E6%90%9C%E7%B4%A2%E6%A1%86" target="_blank" rel="external">http://www.wuxubj.cn/2016/05/Hexo-build-personal-blog-advance/#%E6%B7%BB%E5%8A%A0swiftype%E6%90%9C%E7%B4%A2%E5%B9%B6%E8%87%AA%E5%AE%9A%E4%B9%89%E6%90%9C%E7%B4%A2%E6%A1%86</a><br><br>居然没法用<a href="https://github.com/iissnan/hexo-theme-next/pull/721/files" target="_blank" rel="external">https://github.com/iissnan/hexo-theme-next/pull/721/files</a></p>
+<p><strong><em>6. 加载缓慢</em></strong><br>这个坑也是害我不浅，最后没法去<code>layout\_partials\head</code>里面把最后一块关于font_families删除了，才好点。<br><br>坏处就是，字体不好看了。</p>
+<p><strong><em>7. 多图模式坑</em></strong></p>
+<ol>
+<li><p>多图模式下：</p>
+<p> ‘% gp 5-3 %’ //这里去掉了大括号改成引号，因为hexo老是去解析它<br> //这句里，图片数必须超过2，不然就显示错误。就算只有俩个图源，也没关系，可以正常显示。</p>
+</li>
+<li><p>正文图片显示布局永远是竖直布局，只有在<code>归档</code>里的缩略里才按照正常布局显示。<br><br><em>可能是我版本不对吧，我暂时也不想弄了，以后再看看吧！！</em></p>
+</li>
+</ol>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/29/177/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1388,7 +1616,7 @@ SBT_AudioMIX_Param
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1441,6 +1669,8 @@ SBT_AudioMIX_Param
           
 
           
+            
+          
 
           
 
@@ -1461,19 +1691,15 @@ SBT_AudioMIX_Param
       
         
           
-          WAV文件解析：wBitsPerSample 样本位深（每次采样样本大小，bit单位）nBlockAlig 字节单位设置块对齐。即最小数据的原子大小。当为pcm时 此值为（nchaaneelswbitspersample）/8可以看出这是以byte为单位所以码率就是字节块采样率
-AMFS中对音频的放
-          ...
+            <h4 id="WAV文件解析："><a href="#WAV文件解析：" class="headerlink" title="WAV文件解析："></a>WAV文件解析：<br></h4><p>wBitsPerSample 样本位深（每次采样样本大小，bit单位）<br><br>nBlockAlig 字节单位设置块对齐。即最小数据的原子大小。当为pcm时 此值为（nchaaneels<em>wbitspersample）/8可以看出这是以byte为单位<br>所以码率就是字节块</em>采样率</p>
+<p>AMFS中对音频的放置是按帧放置平面pcm数据的。且帧数也是参照视频P、N制来的。<br>也就是说，每帧大小就是码率/视频帧数     P制25帧、N制29.5帧</p>
+<p><strong>链接：</strong> <a href="http://blog.sina.com.cn/s/blog_68fea30801017fzx.html" target="_blank" rel="external">音频码率和采样率解析</a><br><strong>链接：</strong> <a href="http://infiniteccq.blog.163.com/blog/static/208214034201301743627217/" target="_blank" rel="external">wave代码头解析</a></p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/27/176/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1531,7 +1757,7 @@ AMFS中对音频的放
       
 
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/picture/head.jpg"
                alt="XueCat" />
@@ -1581,7 +1807,7 @@ AMFS中对音频的放
               <span class="links-of-author-item">
                 <a href="https://github.com/" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-github"></i>
+                    <i class="fa fa-fw fa-github"></i>
                   
                   GitHub
                 </a>
@@ -1590,7 +1816,7 @@ AMFS中对音频的放
               <span class="links-of-author-item">
                 <a href="http://www.v2ex.com/" target="_blank" title="V2EX">
                   
-                    <i class="fa fa-globe"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   V2EX
                 </a>
@@ -1599,7 +1825,7 @@ AMFS中对音频的放
               <span class="links-of-author-item">
                 <a href="mailto:1446969391@qq.com" target="_blank" title="E-mail">
                   
-                    <i class="fa fa-envelope"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   E-mail
                 </a>
@@ -1611,7 +1837,7 @@ AMFS中对音频的放
         
         
           <div class="cc-license motion-element" itemprop="license">
-            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
               <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
             </a>
           </div>
@@ -1619,8 +1845,11 @@ AMFS中对音频的放
 
         
         
-          <div class="links-of-blogroll motion-element">
-            <div class="links-of-blogroll-title">友情链接</div>
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
@@ -1664,21 +1893,11 @@ AMFS中对音频的放
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">XueCat&emsp;</span>
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  <span id="busuanzi_container_page_pv" style='display:none'>
-    <span id="busuanzi_value_page_pv"></span>
-  </span>
-  <span>
-    <a href="http://service.ibruce.info" target="_blank" class="sl fa fa-globe fa-spin"></a>
-  </span>
-  <span id="busuanzi_container_site_uv" style='display:none'>
-    <span id="busuanzi_value_site_uv"></span>
-  </span>
+  <span class="author" itemprop="copyrightHolder">XueCat</span>
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
@@ -1714,56 +1933,64 @@ AMFS中对音频的放
 
 
 
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
   
 
 
 
   
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
 
 
 
-  
-  
 
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
-
-
-
-  
   
   
   <script type="text/javascript">
     // Popup Window;
-    var scrollTop = '';
-    var newHeight = '100';
     var isfetched = false;
     // Search DB path;
     var search_path = "search.xml";
@@ -1772,21 +1999,8 @@ AMFS中对音频的放
     }
     var path = "/" + search_path;
     // monitor main search box;
-    $('#search-input').on('input', function() {
-    if ($(this).val().length <= 0) {
-      $('#search-result').hide();
-      return;
-    }
-    $('i.search-keyword').text($(this).val());
-    $('a.search-result[href!="#"]').each(function(){
-      this.href = this.href.replace(/\=(.*?)(?=%20site)/,'='+$('#search-input').val())
-    });
-    $('#search-result').show();
-    });
 
     function proceedsearch() {
-      $('#local-search-input').val($('#search-input').val());
-      document.getElementById('local-search-input').dispatchEvent(new Event('input'));
       $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
       $('.popup').toggle();
 
@@ -1798,14 +2012,6 @@ AMFS中对音频的放
         url: path,
         dataType: "xml",
         async: true,
-        beforeSend: function (){
-            $('.site-search-form>span').toggleClass('fa-spin');
-            $('#search-input').prop('disabled', function(i, v) { return !v; });
-        },
-        complete: function (){
-            $('.site-search-form>span').toggleClass('fa-spin');
-            $('#search-input').prop('disabled', function(i, v) { return !v; });
-        },
         success: function( xmlResponse ) {
             // get the contents from search data
             isfetched = true;
@@ -1821,35 +2027,32 @@ AMFS中对音频的放
             var $resultContent = document.getElementById(content_id);
             $input.addEventListener('input', function(){
                 var matchcounts = 0;
-                var str='<ul class=\"search-result-list\">';                
+                var str='<ul class=\"search-result-list\">';
                 var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
                 $resultContent.innerHTML = "";
                 if (this.value.trim().length > 1) {
                 // perform local searching
                 datas.forEach(function(data) {
-                    var isMatch = true;
+                    var isMatch = false;
                     var content_index = [];
                     var data_title = data.title.trim().toLowerCase();
                     var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = data.url;
+                    var data_url = decodeURIComponent(data.url);
                     var index_title = -1;
                     var index_content = -1;
                     var first_occur = -1;
                     // only match artiles with not empty titles and contents
-                    if(data_title != '' && data_content != '') {
+                    if(data_title != '') {
                         keywords.forEach(function(keyword, i) {
                             index_title = data_title.indexOf(keyword);
                             index_content = data_content.indexOf(keyword);
-                            if( index_title < 0 && index_content < 0 ){
-                                isMatch = false;
-                            } else {
-                                if (index_content < 0) {
-                                    index_content = 0;
-                                }
-                                if (i == 0) {
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
                                     first_occur = index_content;
                                 }
-                            }
+                            } 
+							
                         });
                     }
                     // show search results
@@ -1876,7 +2079,7 @@ AMFS中对音频的放
                                 var regS = new RegExp(keyword, "gi");
                                 match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
                             });
-                            
+
                             str += "<p class=\"search-result\">" + match_content +"...</p>"
                         }
                         str += "</li>";
@@ -1892,14 +2095,7 @@ AMFS中对音频的放
     });}
 
     // handle and trigger popup window;
-    $(window).bind('scroll', function() {
-      scrollTop = $( window ).scrollTop();
-      newHeight = scrollTop + 100;
-    });
-    $('#search-result a').mousedown(function(e) {
-        window.location.href = this.href;
-      });
-    $('.popup-trigger').mousedown(function(e) {
+    $('.popup-trigger').click(function(e) {
       e.stopPropagation();
       if (isfetched == false) {
         searchFunc(path, 'local-search-input', 'local-search-result');
@@ -1907,20 +2103,6 @@ AMFS中对音频的放
         proceedsearch();
       };
 
-    });
-
-    $('#search-input').focus(function() {
-      if(jQuery(window).width() < 750) {
-        $('body').animate({
-          scrollTop: $('.site-search').offset().top
-        }, 500);
-      };
-      if ($(this).val().length > 0) {
-        $('#search-result').show();
-      }
-    });
-    $('#search-input').blur(function() {
-      $('#search-result').hide();
     });
 
     $('.popup-btn-close').click(function(e){
@@ -1933,13 +2115,15 @@ AMFS中对音频的放
     });
   </script>
 
+
+  
+
   
 
   
 
   
+
 
 </body>
-<!-- 背景动画 -->
-<script type="text/javascript" src="/js/src/particle.js"></script>
 </html>

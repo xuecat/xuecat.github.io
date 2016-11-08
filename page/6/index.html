@@ -29,7 +29,7 @@
 
   
   
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -55,7 +55,7 @@
   
     
     
-    <link href="//fonts.useso.com/css?family=Galdeano:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -63,9 +63,9 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="XueCat, NexT, Blog" />
@@ -79,7 +79,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/picture/favicon.ico?v=5.0.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/picture/favicon.ico?v=5.0.2" />
 
 
 
@@ -102,11 +102,11 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: {"position":"right","display":"post"},
+    sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
     }
   };
@@ -115,24 +115,17 @@
 
 
 
+  <link rel="canonical" href="https://xuecat.github.io/page/6/"/>
+
+
   <title> XueCat </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
   
 
 
-
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?8aa9f2526a323bf7a14e6fe9de652df7";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
 
 
 
@@ -146,12 +139,12 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right 
+  <div class="container one-collumn sidebar-position-left 
    page-home 
  ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
@@ -167,25 +160,23 @@
 
 <div class="site-nav-toggle">
   <button>
-    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
   </button>
 </div>
 
-
 <nav class="site-nav">
   
-  
 
   
-    <ul id="menu" class="menu menu-left">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -195,7 +186,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -205,7 +196,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             标签
           </a>
@@ -215,7 +206,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -225,7 +216,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             关于
           </a>
@@ -233,24 +224,29 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
   
     <div class="site-search">
       
-  <form class="site-search-form" >
-  <span class="search-icon fa fa-search"></span>
-  <input type="text" id="search-input">
-  <div id="search-result"><ul class="search-result-list"><li><a href="//www.baidu.com/s?wd=XXX%20site%3Ahttps://xuecat.github.io" class="search-result">百度搜索 <i class="search-keyword">XXX</i></a></li><li><a href="//www.google.com/search?q=XXX%20site%3Ahttps://xuecat.github.io" class="search-result">谷歌搜索 <i class="search-keyword">XXX</i></a></li><li><a href="#" class="popup-trigger search-result">本地搜索</a></li></ul>
-  </div>
-</form>
- <div class="popup">
-  <span class="search-icon fa fa-search"></span>
-  <input type="text" id="local-search-input">
-  <div id="local-search-result"></div>
-  <span class="popup-btn-close">close</span>
- </div>
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
 
 
     </div>
@@ -276,7 +272,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -329,6 +325,8 @@
           
 
           
+            
+          
 
           
 
@@ -349,22 +347,32 @@
       
         
           
-            些许没玩却也遗忘些了，有空就归纳下吧。
-寄存器附加段ES extra segment
-数据段DS data segment-&gt;普遍说法是和ES 偏移量配合使用，来对数据的读取进行操作
-代码段CS code segment-&gt;IP下一指令偏移量配合使用
-堆栈段SS stack segm
-          ...
+            <p>  <em>些许没玩却也遗忘些了，有空就归纳下吧。</em></p>
+<h2 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h2><p><strong>附加段ES extra segment</strong></p>
+<p><strong>数据段DS data segment</strong>-&gt;普遍说法是和ES 偏移量配合使用，来对数据的读取进行操作</p>
+<p><strong>代码段CS code segment</strong>-&gt;IP下一指令偏移量配合使用</p>
+<p><strong>堆栈段SS stack segment</strong>-&gt;SP BP；SS记录段通过SP BP来具体压栈;压人SP，压入参数SP随之移动,压人返回值，压入常用寄存器（以上便是堆栈段的压入）;压入BP，SP对其MOV,压入局部变量SP动,SP返回，BP POP(以上便是二进制代码)。 SP为了永远在栈顶只要有压入它就减去相应，BP访问用的</p>
+<p><strong>全局段GS global segment</strong></p>
+<p><strong>标志段FS flag segment</strong> 这两个stackoverflower给的解释是：多线程TLS等用的，就是系统级的全局结构体</p>
+<h2 id="c-程序内存"><a href="#c-程序内存" class="headerlink" title="c++程序内存"></a>c++程序内存</h2><p>也是那些自以的规划罢了，PE文件也确实有描述。实际的访问和执行却要依靠上面的寄存器。</p>
+<p>1、栈区（stack）— 由编译器自动分配释放 ，存放函数的参数值，局部变量的值等。其操作方式类似于<br>数据结构中的栈。</p>
+<p>2、堆区（heap） — 一般由程序员分配释放， 若程序员不释放，程序结束时可能由OS回收 。注意它与<br>数据结构中的堆是两回事，分配方式倒是类似于链表，</p>
+<p>3、全局区（静态区）（static）—，全局变量和静态变量的存储是放在一块的，初始化的全局变量和静<br>态变量在一块区域， 未初始化的全局变量和未初始化的静态变量在相邻的另一块区域。 - 程序结束后有<br>系统释放</p>
+<p>4、文字常量区 —常量字符串就是放在这里的。 程序结束后由系统释放</p>
+<p>5、程序代码区—存放函数体的二进制代码。</p>
+<h2 id="PE文件"><a href="#PE文件" class="headerlink" title="PE文件"></a>PE文件</h2><p><strong>dos头</strong>，看的迷迷糊糊的，倒是第一个结构如果是MZ表示所以dos可执行并兼容</p>
+<p><strong>PE头</strong> 通过dos头最后一个域用NTSIGNATURE来得到目标系统标志（MZ NE ：win 16； LE win 32）</p>
+<p>IMAGE_SIZEOF_FILE_HEADER<br>第一个域：目标机器，表示程序被构建的机器种类<br>是否调试版本<br>段实体和大小，方便提前文件大小。</p>
+<p><strong>PE可选段</strong><br>初始堆栈大小，程序入口位置，操作系统版本，段对齐等。<br>SizeOfCode可执行代码大小<br>SizeOfInitializedData已初始化数据大小<br>SizeOfUninitializedData未初始化数据大小<br>AddressOfEntryPoint程序入口地址</p>
+<p><strong>可选段和段体</strong></p>
+<p><strong>预定义段</strong>：windows NT有9个段，一些程序当然不需要这么多，有的还有特殊段等，所以定义上，表示可用。</p>
+<p><strong>可执行代码段</strong>：.text<br><br><strong>数据段</strong><br>.bss程序未初始化数据，包括所有函数或源模块中声明为static的变量<br>.rdata段表示只读数据，比如字符串文字量、常量和调试目录信息。<br>.data其它变量，出现在栈上的自动变量，和全局变量。<br><strong>资源段</strong></p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/03/143/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -396,7 +404,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -449,6 +457,8 @@
           
 
           
+            
+          
 
           
 
@@ -469,18 +479,15 @@
       
         
           
-          今日空闲，却也看了下protocolbuffer的代码，发现一个google log模块很有意思，记录下来++123456789101112131415161718192021222324252627282930313233343536373839404142434445DECLARE_STREAM
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/03/140/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <figure class="highlight"><figcaption><span>今日空闲，却也看了下protocolbuffer的代码，发现一个google log模块很有意思，记录下来++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">DECLARE_STREAM_OPERATOR(char         , "%c" )</div><div class="line">DECLARE_STREAM_OPERATOR(int          , "%d" )</div><div class="line">DECLARE_STREAM_OPERATOR(uint         , "%u" )</div><div class="line">DECLARE_STREAM_OPERATOR(long         , "%ld")</div><div class="line">DECLARE_STREAM_OPERATOR(unsigned long, "%lu")</div><div class="line">DECLARE_STREAM_OPERATOR(double       , "%g" )</div><div class="line">common.cc 173</div><div class="line"></div><div class="line">#define GOOGLE_LOG(LEVEL)                                                 \有等级，警告，错误，严重等</div><div class="line">  ::google::protobuf::internal::LogFinisher() =                           \</div><div class="line">    ::google::protobuf::internal::LogMessage(                             \</div><div class="line">      ::google::protobuf::LOGLEVEL_##LEVEL, __FILE__, __LINE__)</div><div class="line">#define GOOGLE_LOG_IF(LEVEL, CONDITION) \</div><div class="line">  !(CONDITION) ? (void)0 : GOOGLE_LOG(LEVEL)</div><div class="line"></div><div class="line">#define GOOGLE_CHECK(EXPRESSION) \</div><div class="line">  GOOGLE_LOG_IF(FATAL, !(EXPRESSION)) &lt;&lt; "CHECK failed: " #EXPRESSION ": "</div><div class="line">//////////////////////////////////在下的示例代码///////////////////////////</div><div class="line">	struct dd</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">	dd(string a)&#123;</div><div class="line">		m_ = a;</div><div class="line">		cout &lt;&lt; a&lt;&lt;endl;</div><div class="line">	&#125;;~dd()&#123;</div><div class="line">		cout&lt;&lt; "is end:,,,,,,,,,,"&lt;&lt;endl;</div><div class="line">		cout &lt;&lt; m_&lt;&lt;endl&lt;&lt;d_&lt;&lt;endl;</div><div class="line">	&#125;;</div><div class="line">	dd&amp;	operator&lt;&lt; (string d)&#123;</div><div class="line">		d_ = d;</div><div class="line">		cout &lt;&lt;m_&lt;&lt;endl&lt;&lt; d&lt;&lt;endl;</div><div class="line">		return *this;</div><div class="line">	&#125;</div><div class="line">protected:</div><div class="line">	string m_;</div><div class="line">	string d_;</div><div class="line">private:</div><div class="line">&#125;;</div><div class="line">#define LEVEL_ERROR "error"</div><div class="line">#define ERROR</div><div class="line">#define HP(a) dd(LEVEL_##b)</div><div class="line">#define AH(a, b) a ? (void)0:dd(LEVEL_##b) //只是这里若再取一遍宏，便出错了；确实宏嵌套太多了。</div><div class="line">#define A(c) AH(c&gt;0, ERROR) &lt;&lt; "hehe"</div><div class="line"></div></pre></td></tr></table></figure>
+<p>如此log，在函数中使用，当然google封装了更多的东西，比如checklog呀。在构造上记录基本信息，operator上记录tips，析构里进行log文件写入。很好</p>
+<pre><code>#define DO(STATEMENT) if (STATEMENT) {} else return false   这个宏。。。差点忘了，这个宏也是非常优秀的
+</code></pre>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -512,7 +519,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -565,6 +572,8 @@
           
 
           
+            
+          
 
           
 
@@ -585,19 +594,13 @@
       
         
           
-            win7编程 http://blog.csdn.net/ntwilford/article/category/691694
+            <p>  win7编程 <a href="http://blog.csdn.net/ntwilford/article/category/691694" target="_blank" rel="external">http://blog.csdn.net/ntwilford/article/category/691694</a></p>
 
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/01/141/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -629,7 +632,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -682,6 +685,8 @@
           
 
           
+            
+          
 
           
 
@@ -702,21 +707,92 @@
       
         
           
-             不解释，已经*到这种地步了，天天让我写mfc。。。。。想的心都有了。。。。。下面说下过程中的事吧
-listctrl：
-感觉是坑货，要是duilib我特么早就自己写了，不用它的。
-1、添加LVS_EX_CHECKBOXES属性，居然默认只能是第一列才能有。。我去。。。用下面代码，把内部的链表换了
-          ...
+            <p>   不解释，已经<em>*到这种地步了，天天让我写mfc。。。。。想</em>的心都有了。。。。。<br><br>下面说下过程中的事吧</p>
+<p>listctrl：</p>
+<p>感觉是坑货，要是duilib我特么早就自己写了，不用它的。</p>
+<p>1、添加LVS_EX_CHECKBOXES属性，居然默认只能是第一列才能有。。我去。。。<br><br>用下面代码，把内部的链表换了，第一行后最后二行对换来达到其他列显示的效果。</p>
+<pre><code>CHeaderCtrl* pHeaderCtrl = m_lt_ShowProgram.GetHeaderCtrl();
+INT nCount = pHeaderCtrl-&gt;GetItemCount();
+LPINT pOder = (LPINT)malloc(nCount*sizeof(int));
+pHeaderCtrl-&gt;GetOrderArray(pOder, nCount);
+int nTemp = 0;
+nTemp = pOder[0], pOder[0] = pOder[nCount - 2], pOder[nCount - 2] = nTemp;
+pHeaderCtrl-&gt;SetOrderArray(nCount, pOder);
+free(pOder);
+</code></pre><p>2、还是问题，添加图片，你妹第一列老是默认必须添加图片。要想添加到其他列，还必须先添加第一列。晕！！！</p>
+<pre><code>ncount = m_lt_ShowProgram.InsertItem(ncount, _T(&quot;&quot;), -1);//后来发现-1就插入空的图片。还行效果。\
+</code></pre><p>3、遇见这个问题，反正愁死我了，winhand.cpp 218，，以后记住Object的操作，create要delete，get要release</p>
+<p>4、enumwindow这个函数会一直循环遍历，唉！！ 后来发现直接return false后，msdn说这是一个错误返回，好吧，弄成错误返回就立马结束了。</p>
+<p>5、一直在纠结变长参数传递，居然用参数va_list 宏用<strong>va_args</strong></p>
+<p>6、容器指针简直是个坑，操作一切全是指针；写着写着就忘了，不解释。太坑了</p>
+<p>7、switch case可以用tab缩进来达到效果，更本不用括号来。感觉这样倒是美观了。</p>
+<p>8、#pragma component(browser, off, references, “ASSERT”)</p>
+<p>9、</p>
+<pre><code>class property {
+public:
+    int m_a;
+public:
+    __declspec(property(get = GetA, put = SetA)) int x;
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/19/139/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+    int SetA(int x) {
+        m_a = x;
+        return x;
+    }
+    int GetA() {
+        return m_a;
+    }
+};
+//如此会导致property多拥有一个x的成员属性。
+//这种就是把 x 和那俩个函数关联，关联方式就是get、put
+//int a = property_class.x,就是get方式，调用GetA，property_class.x=a；就是put方式，调用SetA。
+</code></pre><p>10、__declspec(novtable) 只能修饰类等结构。无法修饰函数，表示此类，不用产生虚函数列表，声明的函数却全是虚函数。意思就是，我就是专门为了继承的虚基类，我不用产生多余的空间容纳虚列表，因为实现全在子类。</p>
+<p>11、MSVC的关键字__super  和java一样表示父类。</p>
+<p>12、今天发现listctrl有个 LVN_BEGINDRAG的一个消息。。也就是说在消息映射里<br>ON_NOTIFY(LVN_BEGINDRAG, IDC_LIST, OnBegindragFilelist)就会自动响应拖拽的事件。以前居然还自己写。。亏了。。。。。</p>
+<p>13、以前写MFC的DLL的时候，总会在自动生成的代码框架里看到提示，需要在每一个输出的函数开始添加上AFX_MANAGE_STATE(AfxGetStaticModuleState())<br>切换，今天就遇见了，天的，公司老员工写的皮肤库太坑了。</p>
+<p>14、</p>
+<pre><code>HBITMAP hbit;
+BITMAP bit;
+::GetObject(hbit, sizeof(BITMAP), &amp;bit);//如此可以得到bitmap的图片大小
+
+//CImageList需要先create在add，最后俩个参数，是开辟容纳大小，空间增长系数（不够了，扩容开辟多少个）
+</code></pre><p>15、<br>基类虚函数，真心里面的成员变量要保证是protected，；<br>不然别人一拿来用，一下就呵呵了。</p>
+<p>16、 SetMargins这个edit的控件，嘿嘿，设置左上角用的，加其他图片用的。</p>
+<p>17、</p>
+<p>我也是醉了，cedit控件必须设置顶层。不然上面16，你设置后重绘就没得玩。还有多行要设置<br>wndBottom：设置为底层窗口；<br>wndTop：设置顶层窗口；<br>wndTopMost：设置为最顶层窗口；<br>wndNoTopMost：设置为仅次于最顶层窗口</p>
+<p>18、</p>
+<p>来自：<a href="http://blog.csdn.net/lishuhuakai/article/details/18467255" target="_blank" rel="external">http://blog.csdn.net/lishuhuakai/article/details/18467255</a></p>
+<p>(1)<br>CRect rect(0, 0, 200, 200);<br>dc.rectangle(rect);<br>上面的语句在屏幕的最左上角绘制一个正方形;(因为此时逻辑坐标与设备坐标没有偏移)</p>
+<p>(2)<br>dc.SetViewportOrg(100, 100);<br>CRect rect(0, 0, 200, 200);<br>dc.rectangle(rect);<br>将设备坐标的原点设置到(100, 100)；即设备坐标的原点不在(0, 0)处，而是在(100, 100)处；此时若执行映射的话，逻辑坐标的原点(0, 0)需要与设备坐标的原点(100, 100)重合(参考前提5)；那么此时绘制的矩形(0, 0, 200, 200)的坐标(为逻辑坐标，参考前提1)在设备坐标中就会映射为(100, 100, 300, 300)，最终我们在显示器上看到的会是一个向右下方偏移(100, 100)的一个边长为200的正方形(用户看到的点是在设备坐标中的，参考前提2)</p>
+<p>(3)<br>dc.SetWindowOrg(100, 100);<br>CRect rect(0, 0, 200, 200);<br>dc.rectangle(rect);<br>将逻辑坐标的原点设置到(100, 100)；即逻辑坐标的原点不在(0, 0)处，而是在(100, 100)处；此时若执行映射的话，设备坐标的原点(0, 0)需要与逻辑坐标的原点(100, 100)重合(参考前提5)；那么此时绘制的矩形(0, 0, 200, 200)的坐标(为逻辑坐标，参考前提1)在设备坐标中就会映射为(-100, -100, 100, 100)，最终我们在显示器上看到的会是一个只有1/4个大小的矩形的一部分(事实上相当于向左上方偏移(100, 100)的一个边长为200的正方形。</p>
+<p>19、<br>CImageList要先Create再add才能成功<br>pImgeList -&gt;Create(rtItem.Width(), rtItem.Height(),ILC_COLORDDB|ILC_MASK,0,1);个数，递增个数<br>    pImgeList-&gt;Add(pbitmapt, TP_GetSysColor(COLOR_MODULE_LISTCTRL_ICONEDGE));</p>
+<p>20、</p>
+<p>给个拖拽的网址：</p>
+<p><a href="http://blog.csdn.net/xianglitian/article/details/6023656" target="_blank" rel="external">http://blog.csdn.net/xianglitian/article/details/6023656</a></p>
+<p><a href="http://www.codeguru.com/cpp/controls/treeview/dragdrop/article.php/c707/Drag-and-drop.htm" target="_blank" rel="external">http://www.codeguru.com/cpp/controls/treeview/dragdrop/article.php/c707/Drag-and-drop.htm</a></p>
+<p>21、</p>
+<p>CDockablePane和CPaneFrameWnd和CMFCCaptionButton，对了，这些是有源码的哟！！！嘿嘿</p>
+<p>可以做出很多风格界面来。别忘了SetMiniFrameRTC(自定义::GetThisClass);</p>
+<pre><code>afxvisualmanagerofficexp.cpp 147动态获取颜色，创建brush
+LOGBRUSH br
+pBrush-&gt;GetLogBrush(&amp;br);
+CDrawingManager dm(*pDC);
+dm.DrawRect(rect, br.lbColor, (COLORREF)-1);//这个是微软的caption按钮默认覆盖后图，因为很好看，保存了,
+</code></pre><p>22、</p>
+<p>3个消息分别是：WM_SIZE、WM_SIZING、WM_GETMINMAXINFO；分别对应相应的处理函数：OnSize、OnSizing、OnGetMinMaxInfo。</p>
+<p>当窗口大小发生变化时，响应的顺序依次是：WM_GETMINMAXINFO–&gt;WM_SIZING–&gt;WM_SIZE</p>
+<p>口初始化的时候会被调用一次-&gt;窗口大小发生变化时被调用-&gt;窗口大小改变结束后被调用，通常会在这个函数里重新摆放各个控件的位置及大小</p>
+<p>23、</p>
+<p>单文档和多文档。中间的view不同，dockpane窗口级别不同。具体细节很多，讲不清，今天代码可是坑苦了。</p>
+<p>24、重新生成的项目老是清理其它项目的文件，看了下是中间文件目录的问题，改了就好</p>
+<p>25、WM_MENUCHAR消息。在menu进行热键时，这个消息专门给父窗口来传递给menu（从返回值）。</p>
+<p>26、CreateProcess，用来开辟新进程的时候。新进程的资源目录会优先寻找父目录（就是代码程序的目录）。为了避免这个情况倒数第三个参数可以专门用来设置。</p>
+<p>27、pretranslatemessage这个是消息预处理函数。对于dll来说它的消息是依赖exe的，所以dll是没有这个函数的响应。这个函数的返回值0是消息下发，1是消息不下发。</p>
+
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -748,7 +824,7 @@ listctrl：
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -801,6 +877,8 @@ listctrl：
           
 
           
+            
+          
 
           
 
@@ -821,19 +899,13 @@ listctrl：
       
         
           
-            CreateProcessTaken 创建其他用户进程，好像可以创建管理员的进程  CreateProcessAsUser 创建指定用户进程  CreateProcess 创建默认用户进程，好像默认是当前进程用户。  DuplicateHandle 
+            <p>  CreateProcessTaken 创建其他用户进程，好像可以创建管理员的进程<br><br>  CreateProcessAsUser 创建指定用户进程<br><br>  CreateProcess 创建默认用户进程，好像默认是当前进程用户。<br><br><br><br>  DuplicateHandle </p>
 
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/15/138/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -865,7 +937,7 @@ listctrl：
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -918,6 +990,8 @@ listctrl：
           
 
           
+            
+          
 
           
 
@@ -934,13 +1008,13 @@ listctrl：
 
       
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+        <div class="post-gallery" itemscope itemtype="//schema.org/ImageGallery">
           
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/b.jpg" rel="gallery_civ9jycjw003mzwcxp9xc2268"
-                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                 href="/picture/b.jpg" rel="gallery_civ9lgk8n003q90cx05on4hso"
+                 itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/b.jpg" itemprop="contentUrl"/>
               </a>
             
@@ -954,26 +1028,20 @@ listctrl：
       
         
           
-             for循环千万不要
-for (int i = 0; i &lt; a.size(); i++)
+            <p>   for循环千万不要</p>
+<pre><code>for (int i = 0; i &lt; a.size(); i++)
 {
     a.erase();
 }
 //每次for就减少一次，妈的。是个错误的表示方式。
 
 //应该先赋值n = a.size()；再来for循环。以后一定要当习惯。。。
-
+</code></pre>
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/14/137/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1005,7 +1073,7 @@ for (int i = 0; i &lt; a.size(); i++)
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1058,6 +1126,8 @@ for (int i = 0; i &lt; a.size(); i++)
           
 
           
+            
+          
 
           
 
@@ -1078,20 +1148,18 @@ for (int i = 0; i &lt; a.size(); i++)
       
         
           
-            无语了，编译webkit简直无语了。
-  先说cygwin的编译方式。最好用库自带的cygwin-download来下载安装cygwin（Python执行）。
-  再说perl的问题，老是加载错误模块（郁闷死了）。perl -MCPAN -e’install “LWP::Simple”‘可以解决
-          ...
+            <p>  无语了，编译webkit简直无语了。</p>
+<p>  先说cygwin的编译方式。最好用库自带的cygwin-download来下载安装cygwin（Python执行）。</p>
+<p>  再说perl的问题，老是加载错误模块（郁闷死了）。perl -MCPAN -e’install “LWP::Simple”‘可以解决。</p>
+<p>   还有个常识，，哎呀。。。4之后的版本编译基本都很好了，只是Windows的编译是非常依赖编译器的版本。所以必须要下vs编译器能跑的webkit版本才可以。</p>
+<p>   在安装perl和配合版的cygwin的时候，对webkit版本很是严格。所以，你安装了某个版本后，想安装另一个版本的很是困难，后面update简直没法进行。<br><br>   所以建议，虚拟机上跑，编译。给个快照后又可以跑其它版本的webkit了。</p>
+<p>   最后一个建议吧，update后。现在项目已经可以找到windows下能需要的所以库了。但是，如果用vs直接去编译的话，依旧是错误不断。<br>所以建议用控制台敲指令来编译。</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/10/136/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1123,7 +1191,7 @@ for (int i = 0; i &lt; a.size(); i++)
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1176,6 +1244,8 @@ for (int i = 0; i &lt; a.size(); i++)
           
 
           
+            
+          
 
           
 
@@ -1196,22 +1266,20 @@ for (int i = 0; i &lt; a.size(); i++)
       
         
           
-          //今天看了下定时内核对象
+            <pre><code>//今天看了下定时内核对象
 
 //先创建内核对象（未触发状态）
 HANDLE hTimer = CreateWaitableTimer(NULL, TRUE, NULL);
-BOOL WINAPI SetWaitableTimer(htimer, pduetime,lperiod, pfncompl
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/09/135/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+BOOL WINAPI SetWaitableTimer(htimer, pduetime,lperiod, pfncompletionroutine, lpargtocompletionroutine, fresume);
+//使用APC回调来处理定时器对象触发事件
+//我想这就是原始的api函数吧。
+//不能用WaitForSingleObjectEx来设置等待
+</code></pre>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1243,7 +1311,7 @@ BOOL WINAPI SetWaitableTimer(htimer, pduetime,lperiod, pfncompl
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1296,6 +1364,8 @@ BOOL WINAPI SetWaitableTimer(htimer, pduetime,lperiod, pfncompl
           
 
           
+            
+          
 
           
 
@@ -1316,18 +1386,12 @@ BOOL WINAPI SetWaitableTimer(htimer, pduetime,lperiod, pfncompl
       
         
           
-          结构填充++12345678910111213141516171819202122232425262728293031323334struct &#123;int a; int b; int c;&#125; d&#123;1,2&#125;;int b[10] = &#123;1,2&#125;;
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/09/23/134/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <figure class="highlight c"><figcaption><span>结构填充++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">struct</span> &#123;<span class="keyword">int</span> a; <span class="keyword">int</span> b; <span class="keyword">int</span> c;&#125; d&#123;<span class="number">1</span>,<span class="number">2</span>&#125;;</div><div class="line"><span class="keyword">int</span> b[<span class="number">10</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>&#125;;</div><div class="line"><span class="comment">//默认填充用的是0，所以剩下的全是0；</span></div><div class="line"></div><div class="line">**<span class="keyword">sizeof</span>数组**</div><div class="line"></div><div class="line"><span class="keyword">char</span> p[] = <span class="string">"asdf"</span>;<span class="keyword">sizeof</span>(p);结果是<span class="number">5</span>，要多个空的结尾符号。</div><div class="line"></div><div class="line">**<span class="keyword">static</span>重复**</div><div class="line"></div><div class="line"><span class="keyword">static</span> <span class="keyword">int</span> d = <span class="number">1</span>;</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</div><div class="line">	<span class="keyword">static</span> <span class="keyword">int</span> d = <span class="number">12</span>;</div><div class="line">	d += i;</div><div class="line">&#125;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; d;</div><div class="line"><span class="comment">//	d的结果是1，可以看出和限定域有关。。。</span></div><div class="line"></div><div class="line"><span class="keyword">static</span> <span class="keyword">int</span> d = <span class="number">4</span>;</div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> d = <span class="number">3</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; d;</div><div class="line">&#125;</div><div class="line"><span class="built_in">cout</span>  &lt;&lt;d;<span class="comment">//一样的道理， 限定域的限制，结果不同；</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">static</span> <span class="keyword">int</span> number = <span class="number">0</span>;</div><div class="line">	<span class="keyword">if</span> (<span class="number">0</span> == number++) &#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"ok"</span>;</div><div class="line">	&#125;</div><div class="line">&#125;<span class="comment">//一样和限定域有关，number虽是个static，但只能让fun访问。也正因为是static，所以每次遍历一定会++number值。做个唯一的东东。。</span></div><div class="line"></div><div class="line">	</div></pre></td></tr></table></figure>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1359,7 +1423,7 @@ BOOL WINAPI SetWaitableTimer(htimer, pduetime,lperiod, pfncompl
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1412,6 +1476,8 @@ BOOL WINAPI SetWaitableTimer(htimer, pduetime,lperiod, pfncompl
           
 
           
+            
+          
 
           
 
@@ -1432,25 +1498,27 @@ BOOL WINAPI SetWaitableTimer(htimer, pduetime,lperiod, pfncompl
       
         
           
+            <blockquote>
+<blockquote>
+<p>心血来潮，想了个问题，并测试了下。</p>
+</blockquote>
+</blockquote>
+<p><em>预备知识</em></p>
+<p>Unicode是字符集合ascii相对，，编码指的是utf8 utf16 utf32 gb3121（历史等相关都了解了，就不说了）。操作系统中windows是utf16，Linux mac是utf8</p>
+<p><strong>说明</strong><br><br>第一，，我认为wchar_t只是指字符集，指的是这种字符串是用Unicode的字符集。在编译的时候再按照编码翻译。</p>
+<p>第二，，问题描述，先说个沾边的情况Linux和Windows的换行符问题，这个也引出到了git里面的知识，李纳斯的自动换行符转换是个坑。<br>由于编码的不同导致传输中文字符的出错，一般网络传输用unsigned char或者char（wchar大了） ，数据传输过去如果两个的源文件不是同一种编码格式，必定出现乱码（中文情况）</p>
+<pre><code>mbrtowc//msvc貌似只有这个函数支持
+std::codecvt&lt;char, char, std::mbstate_t&gt;
+std::codecvt&lt;char16_t, char, std::mbstate_t&gt;
+std::codecvt&lt;char32_t, char, std::mbstate_t&gt;
+std::codecvt&lt;wchar_t, char, std::mbstate_t&gt;
+codecvt_utf8   codecvt_utf16  codecvt_utf8_utf16  wstring_convert配合转换    
+</code></pre>
           
-
-心血来潮，想了个问题，并测试了下。
-
-
-预备知识
-Unicode是字符集合ascii相对，，编码指的是utf8 utf16 utf32 gb3121（历史等相关都了解了，就不说了）。操作系统中windows是utf16，Linux mac是utf8
-说明第一，，我认为wchar_t只是指字符集，
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/09/02/133/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1508,7 +1576,7 @@ Unicode是字符集合ascii相对，，编码指的是utf8 utf16 utf32 gb3121（
       
 
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/picture/head.jpg"
                alt="XueCat" />
@@ -1558,7 +1626,7 @@ Unicode是字符集合ascii相对，，编码指的是utf8 utf16 utf32 gb3121（
               <span class="links-of-author-item">
                 <a href="https://github.com/" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-github"></i>
+                    <i class="fa fa-fw fa-github"></i>
                   
                   GitHub
                 </a>
@@ -1567,7 +1635,7 @@ Unicode是字符集合ascii相对，，编码指的是utf8 utf16 utf32 gb3121（
               <span class="links-of-author-item">
                 <a href="http://www.v2ex.com/" target="_blank" title="V2EX">
                   
-                    <i class="fa fa-globe"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   V2EX
                 </a>
@@ -1576,7 +1644,7 @@ Unicode是字符集合ascii相对，，编码指的是utf8 utf16 utf32 gb3121（
               <span class="links-of-author-item">
                 <a href="mailto:1446969391@qq.com" target="_blank" title="E-mail">
                   
-                    <i class="fa fa-envelope"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   E-mail
                 </a>
@@ -1588,7 +1656,7 @@ Unicode是字符集合ascii相对，，编码指的是utf8 utf16 utf32 gb3121（
         
         
           <div class="cc-license motion-element" itemprop="license">
-            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
               <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
             </a>
           </div>
@@ -1596,8 +1664,11 @@ Unicode是字符集合ascii相对，，编码指的是utf8 utf16 utf32 gb3121（
 
         
         
-          <div class="links-of-blogroll motion-element">
-            <div class="links-of-blogroll-title">友情链接</div>
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
@@ -1641,21 +1712,11 @@ Unicode是字符集合ascii相对，，编码指的是utf8 utf16 utf32 gb3121（
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">XueCat&emsp;</span>
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  <span id="busuanzi_container_page_pv" style='display:none'>
-    <span id="busuanzi_value_page_pv"></span>
-  </span>
-  <span>
-    <a href="http://service.ibruce.info" target="_blank" class="sl fa fa-globe fa-spin"></a>
-  </span>
-  <span id="busuanzi_container_site_uv" style='display:none'>
-    <span id="busuanzi_value_site_uv"></span>
-  </span>
+  <span class="author" itemprop="copyrightHolder">XueCat</span>
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
@@ -1691,56 +1752,64 @@ Unicode是字符集合ascii相对，，编码指的是utf8 utf16 utf32 gb3121（
 
 
 
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
   
 
 
 
   
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
 
 
 
-  
-  
 
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
-
-
-
-  
   
   
   <script type="text/javascript">
     // Popup Window;
-    var scrollTop = '';
-    var newHeight = '100';
     var isfetched = false;
     // Search DB path;
     var search_path = "search.xml";
@@ -1749,21 +1818,8 @@ Unicode是字符集合ascii相对，，编码指的是utf8 utf16 utf32 gb3121（
     }
     var path = "/" + search_path;
     // monitor main search box;
-    $('#search-input').on('input', function() {
-    if ($(this).val().length <= 0) {
-      $('#search-result').hide();
-      return;
-    }
-    $('i.search-keyword').text($(this).val());
-    $('a.search-result[href!="#"]').each(function(){
-      this.href = this.href.replace(/\=(.*?)(?=%20site)/,'='+$('#search-input').val())
-    });
-    $('#search-result').show();
-    });
 
     function proceedsearch() {
-      $('#local-search-input').val($('#search-input').val());
-      document.getElementById('local-search-input').dispatchEvent(new Event('input'));
       $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
       $('.popup').toggle();
 
@@ -1775,14 +1831,6 @@ Unicode是字符集合ascii相对，，编码指的是utf8 utf16 utf32 gb3121（
         url: path,
         dataType: "xml",
         async: true,
-        beforeSend: function (){
-            $('.site-search-form>span').toggleClass('fa-spin');
-            $('#search-input').prop('disabled', function(i, v) { return !v; });
-        },
-        complete: function (){
-            $('.site-search-form>span').toggleClass('fa-spin');
-            $('#search-input').prop('disabled', function(i, v) { return !v; });
-        },
         success: function( xmlResponse ) {
             // get the contents from search data
             isfetched = true;
@@ -1798,35 +1846,32 @@ Unicode是字符集合ascii相对，，编码指的是utf8 utf16 utf32 gb3121（
             var $resultContent = document.getElementById(content_id);
             $input.addEventListener('input', function(){
                 var matchcounts = 0;
-                var str='<ul class=\"search-result-list\">';                
+                var str='<ul class=\"search-result-list\">';
                 var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
                 $resultContent.innerHTML = "";
                 if (this.value.trim().length > 1) {
                 // perform local searching
                 datas.forEach(function(data) {
-                    var isMatch = true;
+                    var isMatch = false;
                     var content_index = [];
                     var data_title = data.title.trim().toLowerCase();
                     var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = data.url;
+                    var data_url = decodeURIComponent(data.url);
                     var index_title = -1;
                     var index_content = -1;
                     var first_occur = -1;
                     // only match artiles with not empty titles and contents
-                    if(data_title != '' && data_content != '') {
+                    if(data_title != '') {
                         keywords.forEach(function(keyword, i) {
                             index_title = data_title.indexOf(keyword);
                             index_content = data_content.indexOf(keyword);
-                            if( index_title < 0 && index_content < 0 ){
-                                isMatch = false;
-                            } else {
-                                if (index_content < 0) {
-                                    index_content = 0;
-                                }
-                                if (i == 0) {
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
                                     first_occur = index_content;
                                 }
-                            }
+                            } 
+							
                         });
                     }
                     // show search results
@@ -1853,7 +1898,7 @@ Unicode是字符集合ascii相对，，编码指的是utf8 utf16 utf32 gb3121（
                                 var regS = new RegExp(keyword, "gi");
                                 match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
                             });
-                            
+
                             str += "<p class=\"search-result\">" + match_content +"...</p>"
                         }
                         str += "</li>";
@@ -1869,14 +1914,7 @@ Unicode是字符集合ascii相对，，编码指的是utf8 utf16 utf32 gb3121（
     });}
 
     // handle and trigger popup window;
-    $(window).bind('scroll', function() {
-      scrollTop = $( window ).scrollTop();
-      newHeight = scrollTop + 100;
-    });
-    $('#search-result a').mousedown(function(e) {
-        window.location.href = this.href;
-      });
-    $('.popup-trigger').mousedown(function(e) {
+    $('.popup-trigger').click(function(e) {
       e.stopPropagation();
       if (isfetched == false) {
         searchFunc(path, 'local-search-input', 'local-search-result');
@@ -1884,20 +1922,6 @@ Unicode是字符集合ascii相对，，编码指的是utf8 utf16 utf32 gb3121（
         proceedsearch();
       };
 
-    });
-
-    $('#search-input').focus(function() {
-      if(jQuery(window).width() < 750) {
-        $('body').animate({
-          scrollTop: $('.site-search').offset().top
-        }, 500);
-      };
-      if ($(this).val().length > 0) {
-        $('#search-result').show();
-      }
-    });
-    $('#search-input').blur(function() {
-      $('#search-result').hide();
     });
 
     $('.popup-btn-close').click(function(e){
@@ -1910,13 +1934,15 @@ Unicode是字符集合ascii相对，，编码指的是utf8 utf16 utf32 gb3121（
     });
   </script>
 
+
+  
+
   
 
   
 
   
+
 
 </body>
-<!-- 背景动画 -->
-<script type="text/javascript" src="/js/src/particle.js"></script>
 </html>

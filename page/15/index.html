@@ -29,7 +29,7 @@
 
   
   
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -55,7 +55,7 @@
   
     
     
-    <link href="//fonts.useso.com/css?family=Galdeano:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -63,9 +63,9 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="XueCat, NexT, Blog" />
@@ -79,7 +79,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/picture/favicon.ico?v=5.0.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/picture/favicon.ico?v=5.0.2" />
 
 
 
@@ -102,11 +102,11 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: {"position":"right","display":"post"},
+    sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
     }
   };
@@ -115,24 +115,17 @@
 
 
 
+  <link rel="canonical" href="https://xuecat.github.io/page/15/"/>
+
+
   <title> XueCat </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
   
 
 
-
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?8aa9f2526a323bf7a14e6fe9de652df7";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
 
 
 
@@ -146,12 +139,12 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right 
+  <div class="container one-collumn sidebar-position-left 
    page-home 
  ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
@@ -167,25 +160,23 @@
 
 <div class="site-nav-toggle">
   <button>
-    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
   </button>
 </div>
 
-
 <nav class="site-nav">
   
-  
 
   
-    <ul id="menu" class="menu menu-left">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -195,7 +186,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -205,7 +196,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             标签
           </a>
@@ -215,7 +206,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -225,7 +216,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             关于
           </a>
@@ -233,24 +224,29 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
   
     <div class="site-search">
       
-  <form class="site-search-form" >
-  <span class="search-icon fa fa-search"></span>
-  <input type="text" id="search-input">
-  <div id="search-result"><ul class="search-result-list"><li><a href="//www.baidu.com/s?wd=XXX%20site%3Ahttps://xuecat.github.io" class="search-result">百度搜索 <i class="search-keyword">XXX</i></a></li><li><a href="//www.google.com/search?q=XXX%20site%3Ahttps://xuecat.github.io" class="search-result">谷歌搜索 <i class="search-keyword">XXX</i></a></li><li><a href="#" class="popup-trigger search-result">本地搜索</a></li></ul>
-  </div>
-</form>
- <div class="popup">
-  <span class="search-icon fa fa-search"></span>
-  <input type="text" id="local-search-input">
-  <div id="local-search-result"></div>
-  <span class="popup-btn-close">close</span>
- </div>
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
 
 
     </div>
@@ -276,7 +272,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -329,6 +325,8 @@
           
 
           
+            
+          
 
           
 
@@ -349,22 +347,17 @@
       
         
           
-          group属性，会让关联控件只能成为一个。比如只能让其中一个option选中状态
-remove今天死活识别不了，添加#include 后可以使用。
-我去！死活弄了好久，结果路径问题！
-#include &quot;..\\StdAfx.h&quot;
-#include &quot;..\\Contr
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/18/52/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <p>group属性，会让关联控件只能成为一个。比如只能让其中一个option选中状态</p>
+<p>remove今天死活识别不了，添加#include <algorithm>后可以使用。</algorithm></p>
+<p>我去！死活弄了好久，结果路径问题！</p>
+<pre><code>#include &quot;..\\StdAfx.h&quot;
+#include &quot;..\\Control\UIAnimation.h&quot;
+</code></pre>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -396,7 +389,7 @@ remove今天死活识别不了，添加#include 后可以使用。
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -449,6 +442,8 @@ remove今天死活识别不了，添加#include 后可以使用。
           
 
           
+            
+          
 
           
 
@@ -465,13 +460,13 @@ remove今天死活识别不了，添加#include 后可以使用。
 
       
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+        <div class="post-gallery" itemscope itemtype="//schema.org/ImageGallery">
           
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/e.jpg" rel="gallery_civ9jycqw00d4zwcxsagiqxm6"
-                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                 href="/picture/e.jpg" rel="gallery_civ9lgkgq00d090cxvjjah91a"
+                 itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/e.jpg" itemprop="contentUrl"/>
               </a>
             
@@ -485,21 +480,15 @@ remove今天死活识别不了，添加#include 后可以使用。
       
         
           
-            不忘初心，方得始终
-  这几天自己也有点想多了，因为本来就进入大三了，该考虑的也多了起来。反而烦恼了自己。
-  写下日记，提醒自己，大三上的时间还是很充足的，不要被迷惑。做好自己！
+            <p>  不忘初心，方得始终</p>
+<p>  这几天自己也有点想多了，因为本来就进入大三了，该考虑的也多了起来。<br>反而烦恼了自己。</p>
+<p>  写下日记，提醒自己，大三上的时间还是很充足的，不要被迷惑。做好自己！</p>
 
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/17/51/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -531,7 +520,7 @@ remove今天死活识别不了，添加#include 后可以使用。
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -584,6 +573,8 @@ remove今天死活识别不了，添加#include 后可以使用。
           
 
           
+            
+          
 
           
 
@@ -604,18 +595,13 @@ remove今天死活识别不了，添加#include 后可以使用。
       
         
           
-          模板编程不允许虚函数的出现。为了使用基类函数，我们只能用转交函数++123456789101112template&lt;typename T&gt;class SquareMatrixBase &#123;protected:	void invert(std::size_t matrixsize)
-          ...
+            <p><strong>模板编程不允许虚函数的出现。为了使用基类函数，我们只能用转交函数</strong><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> SquareMatrixBase &#123;</div><div class="line"><span class="keyword">protected</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">invert</span><span class="params">(<span class="built_in">std</span>::<span class="keyword">size_t</span> matrixsize)</span></span>;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="built_in">std</span>::<span class="keyword">size_t</span> n&gt;</div><div class="line"><span class="keyword">class</span> SquareMatrix : <span class="keyword">private</span> SquareMatrixBase&lt;T&gt; &#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">using</span> SquareMatrixBase&lt;T&gt;::invert;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">invert</span><span class="params">()</span> </span>&#123;<span class="keyword">this</span>-&gt;invert(n);&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/17/50/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -647,7 +633,7 @@ remove今天死活识别不了，添加#include 后可以使用。
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -700,6 +686,8 @@ remove今天死活识别不了，添加#include 后可以使用。
           
 
           
+            
+          
 
           
 
@@ -720,23 +708,45 @@ remove今天死活识别不了，添加#include 后可以使用。
       
         
           
-          首先，普通函数的派生会出现遮掩情况：
-如；基类有多个重载函数（fun）。派生类只要定义一个（fun）；
+            <p><strong>首先，普通函数的派生会出现遮掩情况：</strong></p>
+<pre><code>如；基类有多个重载函数（fun）。派生类只要定义一个（fun）；
 所有的基类函数（fun（int）、fun（double）等）不能使用。
 当然可以通过using::Base::fun()来解决。
 （编译器智能使用父子关系类的fun函数）
-遮掩不仅会阻止派生类内部
-          ...
+</code></pre><p><strong>遮掩不仅会阻止派生类内部访问基类，还有种情况：</strong></p>
+<pre><code>class B {public: void mf();}
+class D : Public B {public: void mf();}
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/15/49/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+D x;
+B* pb = &amp;x;
+D* pd = &amp;x;
+pb-&gt;mf();//调用B的mf函数
+pd-&gt;mf();//调用D的mf函数
+//得出，它只看定义类型调用。那一定是编译期间的覆盖。
+</code></pre><p><strong>另外还有种情况会出现遮掩：</strong></p>
+<pre><code>class B {virtual void f() const;}
+class A : public B {virtual void f();}
+//只是少了个const也会出现遮掩
+</code></pre><p><strong>写个基类调用函数：        ps1-&gt;Shape::draw();</strong></p>
+<p><strong>写一个转交函数：</strong></p>
+<pre><code>class GameCharacter {
+    public:
+        int healthValue() const {
+            ....
+            int rectval = doHealthValue();
+            return retVal;
+        }
+    private:
+        virtual int doHealthValue() const {..}
+    //转交虚函数的调用。
+} 
+</code></pre><p><strong>讲下虚函数的参数：缺省参数</strong></p>
+<figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">	<span class="keyword">class</span> B &#123;<span class="keyword">public</span>: <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">mf</span><span class="params">(<span class="keyword">int</span> a = <span class="number">2</span>)</span></span>;&#125;</div><div class="line">	<span class="keyword">class</span> D : Public B &#123;<span class="keyword">public</span>: <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">mf</span><span class="params">(<span class="keyword">int</span> a = <span class="number">3</span>)</span></span>;&#125;</div><div class="line">	</div><div class="line">	B* pb = <span class="keyword">new</span> B;</div><div class="line">	D* pd = <span class="keyword">new</span> D;</div><div class="line">	pb-&gt;mf();<span class="comment">//调用B的mf函数</span></div><div class="line">	pd-&gt;mf();<span class="comment">//调用D的mf函数</span></div><div class="line">	<span class="comment">//但是，缺省参数时静态编译的，当出现下面情况的时候。</span></div><div class="line">	pb = pd;</div><div class="line">	pb-&gt;mf()<span class="comment">//调用的却是B的mf函数.</span></div><div class="line"></div><div class="line">解决方案：</div><div class="line"></div><div class="line">	取消默认赋值，为派生写转交函数来达到相同的效果。</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">		<span class="function"><span class="keyword">void</span> <span class="title">draw</span><span class="params">(<span class="keyword">int</span> a = <span class="number">3</span>)</span> <span class="keyword">const</span> </span>&#123;doDraw(a)&#125;<span class="comment">//调用虚函数</span></div><div class="line">	<span class="keyword">private</span>:</div><div class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">doDraw</span><span class="params">(<span class="keyword">int</span> a)</span> <span class="keyword">const</span> </span>&#123;&#125;<span class="comment">//构建虚函数</span></div></pre></td></tr></table></figure>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -768,7 +778,7 @@ remove今天死活识别不了，添加#include 后可以使用。
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -821,6 +831,8 @@ remove今天死活识别不了，添加#include 后可以使用。
           
 
           
+            
+          
 
           
 
@@ -837,13 +849,13 @@ remove今天死活识别不了，添加#include 后可以使用。
 
       
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+        <div class="post-gallery" itemscope itemtype="//schema.org/ImageGallery">
           
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/p.jpg" rel="gallery_civ9jycqo00cuzwcxtiprk1zl"
-                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                 href="/picture/p.jpg" rel="gallery_civ9lgkg900cm90cx119rkxdp"
+                 itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/p.jpg" itemprop="contentUrl"/>
               </a>
             
@@ -857,21 +869,15 @@ remove今天死活识别不了，添加#include 后可以使用。
       
         
           
-          不知不觉我也大三了，这几天我又没有天天去试验室。现在感觉一天不去实验室就有点罪恶感了！然后就愈来愈不敢去。
-我还有梦想没实现，我还这么弱小，我这样的颓废生活真心烦死了！现在的交际圈也越来越小了，连已有的我都不知道能不能把握到！
-写下日记，告诉自己还没有实现的东西，大学别留遗憾！
+            <p>不知不觉我也大三了，这几天我又没有天天去试验室。现在感觉一天不去实验室就有点罪恶感了！<br>然后就愈来愈不敢去。</p>
+<p>我还有梦想没实现，我还这么弱小，我这样的颓废生活真心烦死了！<br>现在的交际圈也越来越小了，连已有的我都不知道能不能把握到！</p>
+<p>写下日记，告诉自己还没有实现的东西，大学别留遗憾！</p>
 
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/14/48/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -903,7 +909,7 @@ remove今天死活识别不了，添加#include 后可以使用。
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -956,6 +962,8 @@ remove今天死活识别不了，添加#include 后可以使用。
           
 
           
+            
+          
 
           
 
@@ -976,24 +984,27 @@ remove今天死活识别不了，添加#include 后可以使用。
       
         
           
-          首先是第二次做这种题了。大概分析下吧：
-1、无前置声明，直接包含头文件调用。（当包含的头文件出现变化时，编译器就必须重新对包含文件重新编译）
+            <p>首先是第二次做这种题了。大概分析下吧：</p>
+<pre><code>1、无前置声明，直接包含头文件调用。（当包含的头文件出现变化时，编译器就必须重新对包含文件重新编译）
 
 2、我来说明下前置声明后的情况
     分析对象：
         前置的意义不大，编译器编译的时候首先对声明的对象分配大小内存，即使有了前置声明，
-   
-          ...
+        它还是会访问一次头文件的定义，来分配大小。
+        而且，对于类的方法调用始终是要通过类的定义来的。
+        作者对于这种情况做了一个处理，我觉得。。。（把调用类分成提供类和实现类两个接口）
+    分析指针：
+        首先编译期间的内存分配就解决了。只要你不调用方法，就永远不会访问定义。
+        大大节省了编译时间。
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/12/47/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+        同时，这也是头文件互相包含的解决方案。
+</code></pre><p>所以建议。使用类指针，有前置声明习惯。类对象，看你自己办！</p>
+
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1025,127 +1036,7 @@ remove今天死活识别不了，添加#include 后可以使用。
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/11/45/" itemprop="url">
-                  pass by reference to const replace pass by value(45)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-11T03:31:58+08:00" content="2014-09-11">
-              2014-09-11
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          当用类去传递的时候遇见这么一个编译消耗。
-Class Person {std::string str1, std::string str2;};
-Class Student : public Person {std::string str1, std::string str2;};
-
-//函数 va
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/11/45/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1198,6 +1089,8 @@ Class Student : public Person {std::string str1, std::string str2;};
           
 
           
+            
+          
 
           
 
@@ -1218,23 +1111,17 @@ Class Student : public Person {std::string str1, std::string str2;};
       
         
           
-          作者对返回对象觉得：
-1、拒绝用new 指针来返回引用对象（栈空间返回就省略了）。销毁问题
+            <p>作者对返回对象觉得：</p>
+<pre><code>1、拒绝用new 指针来返回引用对象（栈空间返回就省略了）。销毁问题
 2、拒绝用静态，全局空间来返回。多次调用问题。
 
 作者觉得该返回一个新的对象，调用构造函数。（具体情况而定，当是上一个栈空间的时候，返回也是很好的）
-
+</code></pre>
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/11/46/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1266,7 +1153,7 @@ Class Student : public Person {std::string str1, std::string str2;};
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1278,8 +1165,8 @@ Class Student : public Person {std::string str1, std::string str2;};
             
               
                 
-                <a class="post-title-link" href="/2014/09/10/43/" itemprop="url">
-                  effective c++数组指针销毁(43)
+                <a class="post-title-link" href="/2014/09/11/45/" itemprop="url">
+                  pass by reference to const replace pass by value(45)
                 </a>
               
             
@@ -1292,8 +1179,8 @@ Class Student : public Person {std::string str1, std::string str2;};
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-10T03:31:58+08:00" content="2014-09-10">
-              2014-09-10
+            <time itemprop="dateCreated" datetime="2014-09-11T03:31:58+08:00" content="2014-09-11">
+              2014-09-11
             </time>
           </span>
 
@@ -1319,6 +1206,8 @@ Class Student : public Person {std::string str1, std::string str2;};
           
 
           
+            
+          
 
           
 
@@ -1339,23 +1228,22 @@ Class Student : public Person {std::string str1, std::string str2;};
       
         
           
-          遇见：
-std::string* p = new std::string[100];
-请用:     delete[] p;
-用delete p；会出现内存错误。
-所以对于数组指针，拒绝使用typedef（typdedef string ADD[4];） 避免销毁异常。
+            <p>当用类去传递的时候遇见这么一个编译消耗。</p>
+<pre><code>Class Person {std::string str1, std::string str2;};
+Class Student : public Person {std::string str1, std::string str2;};
 
+//函数 validateStudent(Student s);
+//分析：Student一次构造，成员对象有两个构造；父类一个构造，父类成员对象两个构造
+要调用6次构造函数.大大的加大负担.
+
+//解决方案:
+validateStudent(const Student&amp; s);一次不需要
+</code></pre>
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/10/43/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1387,7 +1275,7 @@ std::string* p = new std::string[100];
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1440,6 +1328,8 @@ std::string* p = new std::string[100];
           
 
           
+            
+          
 
           
 
@@ -1460,18 +1350,129 @@ std::string* p = new std::string[100];
       
         
           
-          看代码:++1234567891011121314class Date &#123;public:	Date(int moth, int day, int year);&#125;//存在的问题，由于都是int，调用会出现顺序错误。修改struct Day &#123;explicit Day(in
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/10/44/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <figure class="highlight"><figcaption><span>看代码:++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class Date &#123;</div><div class="line">public:</div><div class="line">	Date(int moth, int day, int year);</div><div class="line">&#125;</div><div class="line">//存在的问题，由于都是int，调用会出现顺序错误。</div><div class="line">修改</div><div class="line">struct Day &#123;explicit Day(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line">struct Month &#123;explicit Month(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line">struct Year &#123;explicit Year(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line"></div><div class="line">class Date &#123;</div><div class="line">public:</div><div class="line">	Date(const Month&amp; m, const Day&amp; d, const Year&amp; y);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
         
       
     </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/09/10/43/" itemprop="url">
+                  effective c++数组指针销毁(43)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-09-10T03:31:58+08:00" content="2014-09-10">
+              2014-09-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>遇见：</p>
+<pre><code>std::string* p = new std::string[100];
+请用:     delete[] p;
+用delete p；会出现内存错误。
+所以对于数组指针，拒绝使用typedef（typdedef string ADD[4];） 避免销毁异常。
+</code></pre>
+          
+        
+      
+    </div>
+
     <div>
       
     </div>
@@ -1529,7 +1530,7 @@ std::string* p = new std::string[100];
       
 
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/picture/head.jpg"
                alt="XueCat" />
@@ -1579,7 +1580,7 @@ std::string* p = new std::string[100];
               <span class="links-of-author-item">
                 <a href="https://github.com/" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-github"></i>
+                    <i class="fa fa-fw fa-github"></i>
                   
                   GitHub
                 </a>
@@ -1588,7 +1589,7 @@ std::string* p = new std::string[100];
               <span class="links-of-author-item">
                 <a href="http://www.v2ex.com/" target="_blank" title="V2EX">
                   
-                    <i class="fa fa-globe"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   V2EX
                 </a>
@@ -1597,7 +1598,7 @@ std::string* p = new std::string[100];
               <span class="links-of-author-item">
                 <a href="mailto:1446969391@qq.com" target="_blank" title="E-mail">
                   
-                    <i class="fa fa-envelope"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   E-mail
                 </a>
@@ -1609,7 +1610,7 @@ std::string* p = new std::string[100];
         
         
           <div class="cc-license motion-element" itemprop="license">
-            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
               <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
             </a>
           </div>
@@ -1617,8 +1618,11 @@ std::string* p = new std::string[100];
 
         
         
-          <div class="links-of-blogroll motion-element">
-            <div class="links-of-blogroll-title">友情链接</div>
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
@@ -1662,21 +1666,11 @@ std::string* p = new std::string[100];
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">XueCat&emsp;</span>
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  <span id="busuanzi_container_page_pv" style='display:none'>
-    <span id="busuanzi_value_page_pv"></span>
-  </span>
-  <span>
-    <a href="http://service.ibruce.info" target="_blank" class="sl fa fa-globe fa-spin"></a>
-  </span>
-  <span id="busuanzi_container_site_uv" style='display:none'>
-    <span id="busuanzi_value_site_uv"></span>
-  </span>
+  <span class="author" itemprop="copyrightHolder">XueCat</span>
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
@@ -1712,56 +1706,64 @@ std::string* p = new std::string[100];
 
 
 
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
   
 
 
 
   
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
 
 
 
-  
-  
 
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
-
-
-
-  
   
   
   <script type="text/javascript">
     // Popup Window;
-    var scrollTop = '';
-    var newHeight = '100';
     var isfetched = false;
     // Search DB path;
     var search_path = "search.xml";
@@ -1770,21 +1772,8 @@ std::string* p = new std::string[100];
     }
     var path = "/" + search_path;
     // monitor main search box;
-    $('#search-input').on('input', function() {
-    if ($(this).val().length <= 0) {
-      $('#search-result').hide();
-      return;
-    }
-    $('i.search-keyword').text($(this).val());
-    $('a.search-result[href!="#"]').each(function(){
-      this.href = this.href.replace(/\=(.*?)(?=%20site)/,'='+$('#search-input').val())
-    });
-    $('#search-result').show();
-    });
 
     function proceedsearch() {
-      $('#local-search-input').val($('#search-input').val());
-      document.getElementById('local-search-input').dispatchEvent(new Event('input'));
       $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
       $('.popup').toggle();
 
@@ -1796,14 +1785,6 @@ std::string* p = new std::string[100];
         url: path,
         dataType: "xml",
         async: true,
-        beforeSend: function (){
-            $('.site-search-form>span').toggleClass('fa-spin');
-            $('#search-input').prop('disabled', function(i, v) { return !v; });
-        },
-        complete: function (){
-            $('.site-search-form>span').toggleClass('fa-spin');
-            $('#search-input').prop('disabled', function(i, v) { return !v; });
-        },
         success: function( xmlResponse ) {
             // get the contents from search data
             isfetched = true;
@@ -1819,35 +1800,32 @@ std::string* p = new std::string[100];
             var $resultContent = document.getElementById(content_id);
             $input.addEventListener('input', function(){
                 var matchcounts = 0;
-                var str='<ul class=\"search-result-list\">';                
+                var str='<ul class=\"search-result-list\">';
                 var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
                 $resultContent.innerHTML = "";
                 if (this.value.trim().length > 1) {
                 // perform local searching
                 datas.forEach(function(data) {
-                    var isMatch = true;
+                    var isMatch = false;
                     var content_index = [];
                     var data_title = data.title.trim().toLowerCase();
                     var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = data.url;
+                    var data_url = decodeURIComponent(data.url);
                     var index_title = -1;
                     var index_content = -1;
                     var first_occur = -1;
                     // only match artiles with not empty titles and contents
-                    if(data_title != '' && data_content != '') {
+                    if(data_title != '') {
                         keywords.forEach(function(keyword, i) {
                             index_title = data_title.indexOf(keyword);
                             index_content = data_content.indexOf(keyword);
-                            if( index_title < 0 && index_content < 0 ){
-                                isMatch = false;
-                            } else {
-                                if (index_content < 0) {
-                                    index_content = 0;
-                                }
-                                if (i == 0) {
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
                                     first_occur = index_content;
                                 }
-                            }
+                            } 
+							
                         });
                     }
                     // show search results
@@ -1874,7 +1852,7 @@ std::string* p = new std::string[100];
                                 var regS = new RegExp(keyword, "gi");
                                 match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
                             });
-                            
+
                             str += "<p class=\"search-result\">" + match_content +"...</p>"
                         }
                         str += "</li>";
@@ -1890,14 +1868,7 @@ std::string* p = new std::string[100];
     });}
 
     // handle and trigger popup window;
-    $(window).bind('scroll', function() {
-      scrollTop = $( window ).scrollTop();
-      newHeight = scrollTop + 100;
-    });
-    $('#search-result a').mousedown(function(e) {
-        window.location.href = this.href;
-      });
-    $('.popup-trigger').mousedown(function(e) {
+    $('.popup-trigger').click(function(e) {
       e.stopPropagation();
       if (isfetched == false) {
         searchFunc(path, 'local-search-input', 'local-search-result');
@@ -1905,20 +1876,6 @@ std::string* p = new std::string[100];
         proceedsearch();
       };
 
-    });
-
-    $('#search-input').focus(function() {
-      if(jQuery(window).width() < 750) {
-        $('body').animate({
-          scrollTop: $('.site-search').offset().top
-        }, 500);
-      };
-      if ($(this).val().length > 0) {
-        $('#search-result').show();
-      }
-    });
-    $('#search-input').blur(function() {
-      $('#search-result').hide();
     });
 
     $('.popup-btn-close').click(function(e){
@@ -1931,13 +1888,15 @@ std::string* p = new std::string[100];
     });
   </script>
 
+
+  
+
   
 
   
 
   
+
 
 </body>
-<!-- 背景动画 -->
-<script type="text/javascript" src="/js/src/particle.js"></script>
 </html>

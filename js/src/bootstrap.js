@@ -4,6 +4,8 @@ $(document).ready(function () {
 
   $(document).trigger('bootstrap:before');
 
+  NexT.utils.isMobile() && window.FastClick.attach(document.body);
+
   NexT.utils.lazyLoadPostsImages();
 
   NexT.utils.registerBackToTop();
@@ -14,7 +16,6 @@ $(document).ready(function () {
     var isSiteNavOn = $siteNav.hasClass(ON_CLASS_NAME);
     var animateAction = isSiteNavOn ? 'slideUp' : 'slideDown';
     var animateCallback = isSiteNavOn ? 'removeClass' : 'addClass';
-    isSiteNavOn ? sidebarToggleLines.init() : sidebarToggleLines.close();
 
     $siteNav.stop()[animateAction]('fast', function () {
       $siteNav[animateCallback](ON_CLASS_NAME);

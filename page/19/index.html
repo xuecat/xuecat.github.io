@@ -29,7 +29,7 @@
 
   
   
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -55,7 +55,7 @@
   
     
     
-    <link href="//fonts.useso.com/css?family=Galdeano:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -63,9 +63,9 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="XueCat, NexT, Blog" />
@@ -79,7 +79,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/picture/favicon.ico?v=5.0.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/picture/favicon.ico?v=5.0.2" />
 
 
 
@@ -102,11 +102,11 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: {"position":"right","display":"post"},
+    sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
     }
   };
@@ -115,24 +115,17 @@
 
 
 
+  <link rel="canonical" href="https://xuecat.github.io/page/19/"/>
+
+
   <title> XueCat </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
   
 
 
-
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?8aa9f2526a323bf7a14e6fe9de652df7";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
 
 
 
@@ -146,12 +139,12 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right 
+  <div class="container one-collumn sidebar-position-left 
    page-home 
  ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
@@ -167,25 +160,23 @@
 
 <div class="site-nav-toggle">
   <button>
-    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
   </button>
 </div>
 
-
 <nav class="site-nav">
   
-  
 
   
-    <ul id="menu" class="menu menu-left">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -195,7 +186,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -205,7 +196,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             标签
           </a>
@@ -215,7 +206,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -225,7 +216,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             关于
           </a>
@@ -233,24 +224,29 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
   
     <div class="site-search">
       
-  <form class="site-search-form" >
-  <span class="search-icon fa fa-search"></span>
-  <input type="text" id="search-input">
-  <div id="search-result"><ul class="search-result-list"><li><a href="//www.baidu.com/s?wd=XXX%20site%3Ahttps://xuecat.github.io" class="search-result">百度搜索 <i class="search-keyword">XXX</i></a></li><li><a href="//www.google.com/search?q=XXX%20site%3Ahttps://xuecat.github.io" class="search-result">谷歌搜索 <i class="search-keyword">XXX</i></a></li><li><a href="#" class="popup-trigger search-result">本地搜索</a></li></ul>
-  </div>
-</form>
- <div class="popup">
-  <span class="search-icon fa fa-search"></span>
-  <input type="text" id="local-search-input">
-  <div id="local-search-result"></div>
-  <span class="popup-btn-close">close</span>
- </div>
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
 
 
     </div>
@@ -276,7 +272,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -329,6 +325,8 @@
           
 
           
+            
+          
 
           
 
@@ -349,22 +347,22 @@
       
         
           
-          注意：USES_CONVERSION宏开头
-之前自己写了4个CHAR与TCHAR的编码函数，后来发现ms早就提供了类似的方法：CA2T CT2A……
-但是有同事说，这两个函数不安全，有隐患，没有在意
-但是真的用的时候，的确发现它们有些注意事项，简单来说，其实就是作用域的问题
-Fun(CA2T(szS
-          ...
+            <p>注意：USES_CONVERSION宏开头</p>
+<p>之前自己写了4个CHAR与TCHAR的编码函数，后来发现ms早就提供了类似的方法：CA2T CT2A……</p>
+<p>但是有同事说，这两个函数不安全，有隐患，没有在意</p>
+<p>但是真的用的时候，的确发现它们有些注意事项，简单来说，其实就是作用域的问题</p>
+<p>Fun(CA2T(szSrc));</p>
+<p>可以，Fun函数用转换后的TCHAR，没问题，因为没有出Fun()这个括号的作用域</p>
+<p>tstring strDes = CA2T(szSrc)；</p>
+<p>可以，因为返回值立刻赋给了strDes，strDes有自己的存储空间，CA2T的数据作用域就在这一行，出了就不要了</p>
+<p>TCHAR* szDes = CA2T(szSrc);</p>
+<p>失败，这个szDes指向一个已经释放的作用域的值，下一行在用szDes就危险了，没有分配</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/06/27/CT2A-CA2T/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -396,7 +394,7 @@ Fun(CA2T(szS
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -449,6 +447,8 @@ Fun(CA2T(szS
           
 
           
+            
+          
 
           
 
@@ -469,19 +469,15 @@ Fun(CA2T(szS
       
         
           
-          msdn中使用字符串转数字、数字转字符串：_strtoui64, _wcstoui64, _strtoui64_l, _wcstoui64_l, _itoa, _i64toa, _ui64toa,_itow, _i64tow, _ui64tow
-msdn当中有这么一句：Base of value; 
-          ...
+            <p>msdn中使用字符串转数字、数字转字符串：_strtoui64, _wcstoui64,<br> _strtoui64_l, _wcstoui64_l, _itoa, _i64toa, _ui64toa,<br>_itow, _i64tow, _ui64tow</p>
+<p>msdn当中有这么一句：Base of value; which must be in the range2–36和<br>   Number base to use.</p>
+<p>调试发现指的是进制。十进制、二进制等（最多2-36）</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/06/26/zifuzhuanshuzi/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -513,7 +509,7 @@ msdn当中有这么一句：Base of value;
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -566,6 +562,8 @@ msdn当中有这么一句：Base of value;
           
 
           
+            
+          
 
           
 
@@ -586,18 +584,13 @@ msdn当中有这么一句：Base of value;
       
         
           
-          今天在使用if语句时，发现可以如此简写：(以前的无法编码，气死) int demo = 1; bool/int foo() (函数必须要是bool或者整形，只要不是void就好); if (demo) {foo();} else{foo();}     改写成-&gt;   demo &amp;&a
-          ...
+            <p>今天在使用if语句时，发现可以如此简写：(以前的无法编码，气死)<br> int demo = 1;<br> bool/int foo() (函数必须要是bool或者整形，只要不是void就好);<br> if (demo) {foo();} else{foo();}     改写成-&gt;   demo &amp;&amp; foo();  demo || foo();</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/06/26/if-change/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -629,7 +622,7 @@ msdn当中有这么一句：Base of value;
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -682,6 +675,8 @@ msdn当中有这么一句：Base of value;
           
 
           
+            
+          
 
           
 
@@ -702,23 +697,18 @@ msdn当中有这么一句：Base of value;
       
         
           
-          严格要求：
-afx_msg LRESULT DisplayResult(WPARAM wParam,LPARAM lParam);
+            <p>严格要求：</p>
+<pre><code>afx_msg LRESULT DisplayResult(WPARAM wParam,LPARAM lParam);
 ON_MESSAGE(WM_RESULT,CDemo4View::DisplayResult)
 return 0;
-SetWindowPos会强制产生重绘，容易闪图。
+</code></pre><p>SetWindowPos会强制产生重绘，容易闪图。</p>
+<p>WM_ERASEBKGND以及WS_EX_TRANSPARENT虽然获取了父窗口dc，<br>来先绘制背景图，再绘制透明图实现的子窗口透明，<br>有闪图出现。</p>
 
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/06/25/24/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -750,7 +740,7 @@ SetWindowPos会强制产生重绘，容易闪图。
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -803,6 +793,8 @@ SetWindowPos会强制产生重绘，容易闪图。
           
 
           
+            
+          
 
           
 
@@ -819,13 +811,13 @@ SetWindowPos会强制产生重绘，容易闪图。
 
       
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+        <div class="post-gallery" itemscope itemtype="//schema.org/ImageGallery">
           
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/q1.jpg" rel="gallery_civ9jycl20050zwcxmiu9e7ej"
-                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                 href="/picture/q1.jpg" rel="gallery_civ9lgka3005490cxaw9nc0cr"
+                 itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/q1.jpg" itemprop="contentUrl"/>
               </a>
             
@@ -839,20 +831,14 @@ SetWindowPos会强制产生重绘，容易闪图。
       
         
           
-          今天代码改写button了，感觉，对于框架的架构还是欠缺点。
- 才一开始的封装，当一个模块出现四个功能时，我就该单独封装类，不然后期肯定会添加封装的，到时代码冗余就不好看了。
+            <p>今天代码改写button了，感觉，对于框架的架构还是欠缺点。</p>
+<p> 才一开始的封装，当一个模块出现四个功能时，我就该单独封装类，不然<br>后期肯定会添加封装的，到时代码冗余就不好看了。</p>
 
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/06/25/15/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -884,7 +870,7 @@ SetWindowPos会强制产生重绘，容易闪图。
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -937,6 +923,8 @@ SetWindowPos会强制产生重绘，容易闪图。
           
 
           
+            
+          
 
           
 
@@ -957,19 +945,16 @@ SetWindowPos会强制产生重绘，容易闪图。
       
         
           
-          模态对话框，非模态对话框（domodal， new、create、destroywindow）
-CRuntimeClass DECLEAR_DYNAMIC/IMPLEMENT_DYNAMIC由于所有的类继承CObject类都包含此结构，用于保存基类对象类等信息。定义宏则是为其添加此类必要成员函数和成
-          ...
+            <p>模态对话框，非模态对话框（domodal， new、create、destroywindow）</p>
+<p>CRuntimeClass DECLEAR_DYNAMIC/IMPLEMENT_DYNAMIC<br>由于所有的类继承CObject类都包含此结构，用于保存基类对象类等信息。定义宏则是为其添加此类必要成员函数和成员变量。<br>（也就是说每新建一个类我们都可以加入MFC的继承表中，就是每个类声明中加入一个CRuntimeClass但是这个数据结构中有很多成员变量和函数。而且在实现文件中也要加入一些成员变量和函数的初始化或者成员函数的定义工作，每个类都要这么做会花很多行代码。还好微软给我们定义了几个宏让我们可以很方便的把我们定义的类加入到MFC继承的大绳中去。）</p>
+<p>（其实说白了就是一个链表，每个类里加DECLARE_DYNAMIC后就生成一个CRuntimeClass的静态变量，保存了自己的类名和基类的静态CRuntimeClass指针。其它那些函数都是用这两个遍历查找。对应基类的名字，或对应名字的基类指针,在程序全局中也有一个CRuntimeClass链表，里面有所有加了运行类支持的类信息。）</p>
+<p>mfc的RTTI技术（运行时类型识别）：<br>       <code>IsKindOf(RUNTIME_CLASS(CtestDlg));</code></p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/06/25/12/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1001,7 +986,7 @@ CRuntimeClass DECLEAR_DYNAMIC/IMPLEMENT_DYNAMIC由于所有的类继承CObject�
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1054,6 +1039,8 @@ CRuntimeClass DECLEAR_DYNAMIC/IMPLEMENT_DYNAMIC由于所有的类继承CObject�
           
 
           
+            
+          
 
           
 
@@ -1074,24 +1061,22 @@ CRuntimeClass DECLEAR_DYNAMIC/IMPLEMENT_DYNAMIC由于所有的类继承CObject�
       
         
           
-          class NLComponent{}
+            <pre><code>class NLComponent{}
 class TextBlock: public NLComponent{}
 class Graphic: public NLComponent{}
 
 class NewsLetter{
 list&lt;NLComponent*&gt; components
-}
-          ...
+}    
+</code></pre><p>方法一：他用了一个static NLComponent* readComponent(istream&amp; str)，来读取数据，分别创建对象。因为每次传入数据时，调用函数然后就push_back了返回值保存指针入栈。</p>
+<p>方法二：对上面list这个成员的拷贝，因为存放的是类对象。所以他自己写了个虚函数:<br>virtual NLComponent<em> clone() const =0;<br>virtual TextBlock</em> clone() const {return new TextBlock(*this);}   等等等<br>变向的调用了复制构造函数，来进行复制。<br>所以NewsLetter的复制构造函数就直接pushback它的clone函数。</p>
+<p>感悟：<br><strong>派生类能用到的函数，最好基类虚化，分别封装虚函数。然后封装用一个函数去调用这各个不同的虚函数。</strong></p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/06/25/16/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1123,7 +1108,7 @@ list&lt;NLComponent*&gt; components
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1176,6 +1161,8 @@ list&lt;NLComponent*&gt; components
           
 
           
+            
+          
 
           
 
@@ -1196,19 +1183,14 @@ list&lt;NLComponent*&gt; components
       
         
           
-          以前用pelican，后面markdown语法多了，现在换hexo先把日记放个测试来看看效果。
- 最近是我的复习时间，我在寝室边复习边玩的状态，让我很是无奈！隔壁的小潘、老牟、他们并没有开始复习。现在， 我发现其实上课时，认真听下老师讲的，期末复习真的只要做几道题就好了；真蛋疼。室友，蔡衫连续的学习
-          ...
+            <h1 id="以前用pelican，后面markdown语法多了，现在换hexo先把日记放个测试来看看效果。"><a href="#以前用pelican，后面markdown语法多了，现在换hexo先把日记放个测试来看看效果。" class="headerlink" title="以前用pelican，后面markdown语法多了，现在换hexo先把日记放个测试来看看效果。"></a>以前用pelican，后面markdown语法多了，现在换hexo先把日记放个测试来看看效果。</h1><p><img src="/picture/q.jpg" alt=""></p>
+<p> 最近是我的复习时间，我在寝室边复习边玩的状态，让我很是无奈！隔壁的小潘、老牟、他们并没有开始复习。现在， 我发现其实上课时，认真听下老师讲的，期末复习真的只要做几道题就好了；真蛋疼。室友，蔡衫连续的学习精神已经让我十分佩服了。我为何无法成为那样的好学生；会想平时上课，基本喜欢玩手机。就算带了书去，也没有怎么看。大二饿了，我感觉自己慢慢有点堕落了！现在我有接近三周没去实验室了。汪自衡的代码我还并没有写完！<br>     我自己也很是困惑。每天每咋干就好疲惫！我想，我该去实验室了。。。</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/06/12/firsttest/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1240,7 +1222,7 @@ list&lt;NLComponent*&gt; components
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1274,6 +1256,8 @@ list&lt;NLComponent*&gt; components
           
 
           
+            
+          
 
           
 
@@ -1294,19 +1278,13 @@ list&lt;NLComponent*&gt; components
       
         
           
-          Welcome to My Blog!!!
+            <p>Welcome to My Blog!!!</p>
 
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2013/11/26/hello-world/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1364,7 +1342,7 @@ list&lt;NLComponent*&gt; components
       
 
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/picture/head.jpg"
                alt="XueCat" />
@@ -1414,7 +1392,7 @@ list&lt;NLComponent*&gt; components
               <span class="links-of-author-item">
                 <a href="https://github.com/" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-github"></i>
+                    <i class="fa fa-fw fa-github"></i>
                   
                   GitHub
                 </a>
@@ -1423,7 +1401,7 @@ list&lt;NLComponent*&gt; components
               <span class="links-of-author-item">
                 <a href="http://www.v2ex.com/" target="_blank" title="V2EX">
                   
-                    <i class="fa fa-globe"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   V2EX
                 </a>
@@ -1432,7 +1410,7 @@ list&lt;NLComponent*&gt; components
               <span class="links-of-author-item">
                 <a href="mailto:1446969391@qq.com" target="_blank" title="E-mail">
                   
-                    <i class="fa fa-envelope"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   E-mail
                 </a>
@@ -1444,7 +1422,7 @@ list&lt;NLComponent*&gt; components
         
         
           <div class="cc-license motion-element" itemprop="license">
-            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
               <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
             </a>
           </div>
@@ -1452,8 +1430,11 @@ list&lt;NLComponent*&gt; components
 
         
         
-          <div class="links-of-blogroll motion-element">
-            <div class="links-of-blogroll-title">友情链接</div>
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
@@ -1497,21 +1478,11 @@ list&lt;NLComponent*&gt; components
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">XueCat&emsp;</span>
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  <span id="busuanzi_container_page_pv" style='display:none'>
-    <span id="busuanzi_value_page_pv"></span>
-  </span>
-  <span>
-    <a href="http://service.ibruce.info" target="_blank" class="sl fa fa-globe fa-spin"></a>
-  </span>
-  <span id="busuanzi_container_site_uv" style='display:none'>
-    <span id="busuanzi_value_site_uv"></span>
-  </span>
+  <span class="author" itemprop="copyrightHolder">XueCat</span>
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
@@ -1547,56 +1518,64 @@ list&lt;NLComponent*&gt; components
 
 
 
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
   
 
 
 
   
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
 
 
 
-  
-  
 
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
-
-
-
-  
   
   
   <script type="text/javascript">
     // Popup Window;
-    var scrollTop = '';
-    var newHeight = '100';
     var isfetched = false;
     // Search DB path;
     var search_path = "search.xml";
@@ -1605,21 +1584,8 @@ list&lt;NLComponent*&gt; components
     }
     var path = "/" + search_path;
     // monitor main search box;
-    $('#search-input').on('input', function() {
-    if ($(this).val().length <= 0) {
-      $('#search-result').hide();
-      return;
-    }
-    $('i.search-keyword').text($(this).val());
-    $('a.search-result[href!="#"]').each(function(){
-      this.href = this.href.replace(/\=(.*?)(?=%20site)/,'='+$('#search-input').val())
-    });
-    $('#search-result').show();
-    });
 
     function proceedsearch() {
-      $('#local-search-input').val($('#search-input').val());
-      document.getElementById('local-search-input').dispatchEvent(new Event('input'));
       $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
       $('.popup').toggle();
 
@@ -1631,14 +1597,6 @@ list&lt;NLComponent*&gt; components
         url: path,
         dataType: "xml",
         async: true,
-        beforeSend: function (){
-            $('.site-search-form>span').toggleClass('fa-spin');
-            $('#search-input').prop('disabled', function(i, v) { return !v; });
-        },
-        complete: function (){
-            $('.site-search-form>span').toggleClass('fa-spin');
-            $('#search-input').prop('disabled', function(i, v) { return !v; });
-        },
         success: function( xmlResponse ) {
             // get the contents from search data
             isfetched = true;
@@ -1654,35 +1612,32 @@ list&lt;NLComponent*&gt; components
             var $resultContent = document.getElementById(content_id);
             $input.addEventListener('input', function(){
                 var matchcounts = 0;
-                var str='<ul class=\"search-result-list\">';                
+                var str='<ul class=\"search-result-list\">';
                 var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
                 $resultContent.innerHTML = "";
                 if (this.value.trim().length > 1) {
                 // perform local searching
                 datas.forEach(function(data) {
-                    var isMatch = true;
+                    var isMatch = false;
                     var content_index = [];
                     var data_title = data.title.trim().toLowerCase();
                     var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = data.url;
+                    var data_url = decodeURIComponent(data.url);
                     var index_title = -1;
                     var index_content = -1;
                     var first_occur = -1;
                     // only match artiles with not empty titles and contents
-                    if(data_title != '' && data_content != '') {
+                    if(data_title != '') {
                         keywords.forEach(function(keyword, i) {
                             index_title = data_title.indexOf(keyword);
                             index_content = data_content.indexOf(keyword);
-                            if( index_title < 0 && index_content < 0 ){
-                                isMatch = false;
-                            } else {
-                                if (index_content < 0) {
-                                    index_content = 0;
-                                }
-                                if (i == 0) {
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
                                     first_occur = index_content;
                                 }
-                            }
+                            } 
+							
                         });
                     }
                     // show search results
@@ -1709,7 +1664,7 @@ list&lt;NLComponent*&gt; components
                                 var regS = new RegExp(keyword, "gi");
                                 match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
                             });
-                            
+
                             str += "<p class=\"search-result\">" + match_content +"...</p>"
                         }
                         str += "</li>";
@@ -1725,14 +1680,7 @@ list&lt;NLComponent*&gt; components
     });}
 
     // handle and trigger popup window;
-    $(window).bind('scroll', function() {
-      scrollTop = $( window ).scrollTop();
-      newHeight = scrollTop + 100;
-    });
-    $('#search-result a').mousedown(function(e) {
-        window.location.href = this.href;
-      });
-    $('.popup-trigger').mousedown(function(e) {
+    $('.popup-trigger').click(function(e) {
       e.stopPropagation();
       if (isfetched == false) {
         searchFunc(path, 'local-search-input', 'local-search-result');
@@ -1740,20 +1688,6 @@ list&lt;NLComponent*&gt; components
         proceedsearch();
       };
 
-    });
-
-    $('#search-input').focus(function() {
-      if(jQuery(window).width() < 750) {
-        $('body').animate({
-          scrollTop: $('.site-search').offset().top
-        }, 500);
-      };
-      if ($(this).val().length > 0) {
-        $('#search-result').show();
-      }
-    });
-    $('#search-input').blur(function() {
-      $('#search-result').hide();
     });
 
     $('.popup-btn-close').click(function(e){
@@ -1766,13 +1700,15 @@ list&lt;NLComponent*&gt; components
     });
   </script>
 
+
+  
+
   
 
   
 
   
+
 
 </body>
-<!-- 背景动画 -->
-<script type="text/javascript" src="/js/src/particle.js"></script>
 </html>

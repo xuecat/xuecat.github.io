@@ -29,7 +29,7 @@
 
   
   
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -55,7 +55,7 @@
   
     
     
-    <link href="//fonts.useso.com/css?family=Galdeano:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -63,9 +63,9 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="XueCat, NexT, Blog" />
@@ -79,7 +79,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/picture/favicon.ico?v=5.0.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/picture/favicon.ico?v=5.0.2" />
 
 
 
@@ -102,11 +102,11 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: {"position":"right","display":"post"},
+    sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
     }
   };
@@ -115,24 +115,17 @@
 
 
 
+  <link rel="canonical" href="https://xuecat.github.io/page/11/"/>
+
+
   <title> XueCat </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
   
 
 
-
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?8aa9f2526a323bf7a14e6fe9de652df7";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
 
 
 
@@ -146,12 +139,12 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right 
+  <div class="container one-collumn sidebar-position-left 
    page-home 
  ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
@@ -167,25 +160,23 @@
 
 <div class="site-nav-toggle">
   <button>
-    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
   </button>
 </div>
 
-
 <nav class="site-nav">
   
-  
 
   
-    <ul id="menu" class="menu menu-left">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -195,7 +186,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -205,7 +196,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             标签
           </a>
@@ -215,7 +206,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -225,7 +216,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             关于
           </a>
@@ -233,24 +224,29 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
   
     <div class="site-search">
       
-  <form class="site-search-form" >
-  <span class="search-icon fa fa-search"></span>
-  <input type="text" id="search-input">
-  <div id="search-result"><ul class="search-result-list"><li><a href="//www.baidu.com/s?wd=XXX%20site%3Ahttps://xuecat.github.io" class="search-result">百度搜索 <i class="search-keyword">XXX</i></a></li><li><a href="//www.google.com/search?q=XXX%20site%3Ahttps://xuecat.github.io" class="search-result">谷歌搜索 <i class="search-keyword">XXX</i></a></li><li><a href="#" class="popup-trigger search-result">本地搜索</a></li></ul>
-  </div>
-</form>
- <div class="popup">
-  <span class="search-icon fa fa-search"></span>
-  <input type="text" id="local-search-input">
-  <div id="local-search-result"></div>
-  <span class="popup-btn-close">close</span>
- </div>
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
 
 
     </div>
@@ -276,7 +272,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -329,6 +325,8 @@
           
 
           
+            
+          
 
           
 
@@ -349,22 +347,16 @@
       
         
           
-          
- 很早就想写，今天突然想起：
- 2007年的夏天，她像夏日里荷叶上泛着月光的露珠。
-愿她一生美好！纪念最好的回忆！我的朋友！
+            <p><img src="/picture/p.png" alt=""></p>
+<p> 很早就想写，今天突然想起：</p>
+<p> 2007年的夏天，她像夏日里荷叶上泛着月光的露珠。</p>
+<p>愿她一生美好！<br>纪念最好的回忆！<br>我的朋友！</p>
 
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/12/01/93/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -396,7 +388,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -449,6 +441,8 @@
           
 
           
+            
+          
 
           
 
@@ -469,20 +463,22 @@
       
         
           
-            alloca: 是向栈申请内存,因此无需释放.  
-  calloc：初始化内存，设置为0. calloc在动态分配完内存后，自动初始化该内存空间为零，而malloc不初始化，里边数据是随机的垃圾数据。
-  malloc不能初始化所分配的内存空间，   如果由malloc()函数分配的内存空间原
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/11/21/92/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <p>  alloca: 是向栈申请内存,因此无需释放.  </p>
+<p>  calloc：初始化内存，设置为0. calloc在动态分配完内存后，自动初始化该内存空间为零，而malloc不初始化，里边数据是随机的垃圾数据。</p>
+<p>  malloc不能初始化所分配的内存空间，   <strong>如果由malloc()函数分配的内存空间原来没有被使用过，则其中的每一位可能都是0;反之, 如果这部分内存曾经被分配过,则其中可能遗留有各种各样的数据</strong>           可以看出和memset的联合使用时必须的。  也呼应了前面内存释放只是改变权限问题。</p>
+<p>  realloc：是从堆上分配内存的.当扩大一块内存空间时，realloc()试图直接从堆上现存的数据后面的那些字节中获得附加的字节，如果能够满足，自然天下太平；如果数据后面的字节不够，问题就出来了，那么就使用堆上第一个有足够大小的自由块，现存的数据然后就被拷贝至新的位置，而老块则放回到堆上.这句话传递的一个重要的信息就是数据可能被移动</p>
+<p>  另外说下指针：今天用OpenSSL的错误。</p>
+<pre><code>char* demo = (char*)calloc(0, 10);
+  memset(demo, 0, 10);
+  if (demo == NULL) {
+      cout &lt;&lt; &quot;wangiu&quot; &lt;&lt; endl;
+  }//就是置0了，也不会等于NULL,  要自己指定。
+</code></pre>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -514,7 +510,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -567,6 +563,8 @@
           
 
           
+            
+          
 
           
 
@@ -587,18 +585,15 @@
       
         
           
-             在过去（Vista之前），在win32中是使用GetOpenFileName或是GetSaveFileName API来实现，在MFC中使用CFileDialog类来实现。现在在Vista之后的系统，有了一种新的实现方法，就是今天要讲的，通过IFileDialog接口，这是一个COM接口，从它
-          ...
+            <p>   在过去（Vista之前），在win32中是使用GetOpenFileName或是GetSaveFileName API来实现，在MFC中使用CFileDialog类来实现。现在在Vista之后的系统，有了一种新的实现方法，就是今天要讲的，通过IFileDialog接口，这是一个COM接口，从它继承之后有两个接口，一个是IFileOpenDialog，另外一个IFileSaveDialog。这两个接口分别实现了打开文件对话框和另存为文件对话框</p>
+<p>  <a href="http://blog.csdn.net/xinzhiyounizhiyouni/article/details/22430735" target="_blank" rel="external">http://blog.csdn.net/xinzhiyounizhiyouni/article/details/22430735</a></p>
+<p>  我想用这个的效果应该更好吧！</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/11/17/91/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -630,7 +625,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -683,6 +678,8 @@
           
 
           
+            
+          
 
           
 
@@ -703,18 +700,12 @@
       
         
           
-          先看代码：++123456789101112131415typedef void (Baseclass::*ptr)(int);//我先指定ptr是一个返回为void的函数指针void itdemo(Baseclass* p, ptr fun) &#123;	(p-&gt;*fun)(2);//调用
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/11/14/90/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <figure class="highlight c"><figcaption><span>先看代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(Baseclass::*ptr)</span><span class="params">(<span class="keyword">int</span>)</span></span>;<span class="comment">//我先指定ptr是一个返回为void的函数指针</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">itdemo</span><span class="params">(Baseclass* p, ptr fun)</span> </span>&#123;</div><div class="line">	(p-&gt;*fun)(<span class="number">2</span>);<span class="comment">//调用类成员函数指针必须指定类对象</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	Driverclass d;</div><div class="line">	Baseclass b;</div><div class="line">	itdemo(&amp;d, &amp;Baseclass::demo);<span class="comment">//测试后发现，支持多态，估计是因为虚函数指针变化了。</span></div><div class="line"></div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -746,7 +737,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -799,6 +790,8 @@
           
 
           
+            
+          
 
           
 
@@ -819,21 +812,33 @@
       
         
           
-          OpenSSL，把所有的类型（int,long,结构体,UTC等）变成它自己的ASN格式，封装。 这些值的传输全用der编码（字节上）传输通信。
-int TS_MSG_IMPRINT_set_algo(TS_MSG_IMPRINT *a, X509_ALGOR *alg);
+            <p>OpenSSL，把所有的类型（int,long,结构体,UTC等）变成它自己的ASN格式，封装。 这些值的传输全用der编码（字节上）传输通信。</p>
+<pre><code>int TS_MSG_IMPRINT_set_algo(TS_MSG_IMPRINT *a, X509_ALGOR *alg);
 
-X509_ALGOR:
-          ...
+X509_ALGOR:表示算法  是x509.h（一个表示算法，一个表示需要参数数据）
+TS_MSG_IMPRINT：时间戳数据，国标有介绍
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/11/09/89/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+dup函数；貌似就是复制函数。
+
+string_to_hex 字符转ascii编码的十六进制结果
+
+ASN1_TYPE 表示任意类型，所有的ASN1类型都可以代表。
+
+set函数，向已有内存写入数据
+
+从结构体中获取结构体，不能free。
+
+dup获取结构体，要free。（它内部开辟）
+
+不要尝试去strlen 编码字符串（字节编码），这样永远是错误的。
+
+我用字符串读取保存时间戳结构体，bio示例。d2i_TS_RESP_bio居然有错误！
+</code></pre>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -865,123 +870,7 @@ X509_ALGOR:
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/11/08/87/" itemprop="url">
-                  for循环习惯(87)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-11-08T03:32:58+08:00" content="2014-11-08">
-              2014-11-08
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          for循环也是有讲究的。看代码：++1234567891011121314151617181920212223242526bad：	var listData = document.getElementsByTagName("li");	for（var i = 0; i &lt; listData.l
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/11/08/87/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1034,6 +923,8 @@ X509_ALGOR:
           
 
           
+            
+          
 
           
 
@@ -1054,22 +945,16 @@ X509_ALGOR:
       
         
           
-          apt-get purge 软件名
-apt-get (按tab会自动罗列软件名匹配软件)
-安装程序最后别用root用户安装
-su - git :切换到git管理用户
+            <p>apt-get purge 软件名</p>
+<p>apt-get (按tab会自动罗列软件名匹配软件)</p>
+<p>安装程序最后别用root用户安装</p>
+<p>su - git :切换到git管理用户</p>
 
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/11/08/88/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1101,7 +986,119 @@ su - git :切换到git管理用户
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/11/08/87/" itemprop="url">
+                  for循环习惯(87)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-11-08T03:32:58+08:00" content="2014-11-08">
+              2014-11-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight c"><figcaption><span>for循环也是有讲究的。看代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">bad：</div><div class="line"></div><div class="line">	var listData = document.getElementsByTagName(<span class="string">"li"</span>);</div><div class="line"></div><div class="line">	<span class="keyword">for</span>（var i = <span class="number">0</span>; i &lt; listData.length; i++)</div><div class="line">	</div><div class="line">	&#123;</div><div class="line">	</div><div class="line">	<span class="comment">//对listData进行操作</span></div><div class="line">	</div><div class="line">	&#125;</div><div class="line"></div><div class="line">good：</div><div class="line"></div><div class="line">	<span class="comment">//优化后的代码</span></div><div class="line">	</div><div class="line">	var listData = document.getElementByTagName(<span class="string">"li"</span>);</div><div class="line">	</div><div class="line">	<span class="keyword">for</span>（var i = <span class="number">0</span>, len = listData.length; i &lt; len; i++)</div><div class="line">	&#123;</div><div class="line">	</div><div class="line">	<span class="comment">//对listData进行操作</span></div><div class="line">	</div><div class="line">	&#125;</div><div class="line"></div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1154,6 +1151,8 @@ su - git :切换到git管理用户
           
 
           
+            
+          
 
           
 
@@ -1174,21 +1173,32 @@ su - git :切换到git管理用户
       
         
           
-            今天晚上做了啥，我想想都可怕。
-第一个错误：Linux的OpenSSL编译，无法找到库。我当时用cmake设置了库目录的，还是无法。
-  最后发现的原因：Linux下默认的静态库是以lib开头的，我去！这个居然忘了，伤心。
-第二个错误：我想编译libcurl来更新东西，找了尼玛半天都没找到。。。
-          ...
+            <p>  今天晚上做了啥，我想想都可怕。</p>
+<p>第一个错误：Linux的OpenSSL编译，无法找到库。我当时用cmake设置了库目录的，还是无法。</p>
+<p>  最后发现的原因：Linux下默认的静态库是以lib开头的，我去！这个居然忘了，伤心。</p>
+<p>第二个错误：我想编译libcurl来更新东西，找了尼玛半天都没找到。。。。。。无语了！</p>
+<p>  最后发现原因：我嚓，在它里面的目录居然有个叫project/vc。我嚓，直接用vs打开呀。。。<br>我去，现在的第三方库真是太智能了，把平台都给你搞好了。。</p>
+<p>  还有一个：编译库，发现不能用静态库编译，必须要动态库。唉伤心，我也不知道。没法了，只好这样。</p>
+<p>第三个错误：编译libcurl静态库，windows上静态库老是编译不好，已经添加了网页上去了（自己看）。</p>
+<p>看Linux的，编译时发现</p>
+<pre><code>../../../lib/Win32/libcurl.a(content_encoding.o):content_encoding.c:(.text+0x37): undefined reference to `inflateEnd&apos;
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/11/04/86/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+../../../lib/Win32/libcurl.a(content_encoding.o):content_encoding.c:(.text+0xbb): undefined reference to `inflate&apos;
+
+../../../lib/Win32/libcurl.a(content_encoding.o):content_encoding.c:(.text+0x105): undefined reference to `inflateEnd&apos;
+
+../../../lib/Win32/libcurl.a(content_encoding.o):content_encoding.c:(.text+0x156): undefined reference to `inflateReset&apos;
+</code></pre><p>等这些错误，纠结死了，后来发现这些代码是zlib上的，想起自己还没有安装zlib这个库。于是知道了<br>要么我安装这个第三方库，要么不去生成它。</p>
+<p>所以， –without-zlib完美解决。</p>
+<p>附加： ldap.c:(.text+0x91): undefined reference to `ldap_url_parse’错误</p>
+<p>./configure –disable-ldap –disable-ldaps （同样也有shared错误） </p>
+<p>学习：以后第三方库，还是要多看下呀，人家都弄的很智能了。不需要我去困扰了！</p>
+
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1220,7 +1230,7 @@ su - git :切换到git管理用户
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1273,6 +1283,8 @@ su - git :切换到git管理用户
           
 
           
+            
+          
 
           
 
@@ -1293,21 +1305,20 @@ su - git :切换到git管理用户
       
         
           
-          支持宽字符，（有w_函数）
-(“(\w+)(\.|_)?(\w*)@(\w+)(\.(\w+))+”);
- 首先注意‘()’表示将正则表达式分成子表达式，每个‘()’之间的内容表示一个子表达式；
-‘\’是一个转义字符，‘\’表示扔掉第二个‘\’的转义特性，‘\w+’表示匹配一个或多个单词，‘+’表示
-          ...
+            <p>支持宽字符，（有w_函数）</p>
+<p>(“(\w+)(\.|_)?(\w*)@(\w+)(\.(\w+))+”);</p>
+<p> 首先注意‘()’表示将正则表达式分成子表达式，每个‘()’之间的内容表示一个子表达式；</p>
+<p>‘\’是一个转义字符，‘\’表示扔掉第二个‘\’的转义特性，‘\w+’表示匹配一个或多个单词，‘+’表示重复一次或者多次，因此第一个子表达式的意思就是匹配一个或者多个单词；</p>
+<p>接着看第二个子表达式，‘|’表示选择，出现‘.’或者‘<em>’，后面的‘?’表示该子表示出现一次或者零次，因此第二个子表示表示‘.’或‘</em>’出现不出现都匹配。</p>
+<p>第三个子表达式表示出现一个单词，‘*’表示任意个字符。</p>
+<p>(\d{1,3}):(\d{1,3}):(\d{1,3}):(\d{1,3})</p>
+<p>首先还是通过‘()’将这个串分成几个子表达式，其中\d表示匹配一个数字，{,}表示数字的个数，例如{1,3}可以理解为匹配一个小于1000的数字</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/10/24/85/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1339,7 +1350,7 @@ su - git :切换到git管理用户
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1392,6 +1403,8 @@ su - git :切换到git管理用户
           
 
           
+            
+          
 
           
 
@@ -1412,24 +1425,34 @@ su - git :切换到git管理用户
       
         
           
-          前面加0b表示二进制
-　　加0x表示十六进制
-　　数字前加0表示八进制
-　　‘ ‘ //ASCII值是63
-　　‘\077’ //是8进制表示’ ‘，0可以省略，因为C,C++规定不允许使用斜杠加10进制数来表示字符
-　　‘\0x3F’ //是16进制表示’ ‘
-　　关键字    位长(字节)   
-          ...
+            <pre><code>前面加0b表示二进制
+</code></pre><p>　　加0x表示十六进制</p>
+<p>　　数字前加0表示八进制</p>
+<p>　　‘ ‘ //ASCII值是63</p>
+<p>　　‘\077’ //是8进制表示’ ‘，0可以省略，因为C,C++规定不允许使用斜杠加10进制数来表示字符</p>
+<p>　　‘\0x3F’ //是16进制表示’ ‘</p>
+<p>　　<br>关键字    位长(字节)    范围    格式化字符串<br>char    1    -128..127（或0..255，与体系结构相关）     %c</p>
+<p>unsigned char    1    0..255     </p>
+<p>signed char    1    -128..127     </p>
+<p>int        2(16位系统)或4         -32768..32767 或-2147483648..2147483647     %i, %d</p>
+<p>unsigned int    2或4        0..65535 或0..4294967295           %u</p>
+<p>signed int    2 或4    -32768..32767 或-2147483648..2147483647     %i, %d</p>
+<p>short int    2    -32768..32767     %hi</p>
+<p>unsigned short    2    0..65535     %hu</p>
+<p>signed short    2    -32768..32767     long int    4 或8[3]    -2147483648..2147483647或-9223372036854775808..9223372036854775807     %li, %ld</p>
+<p>unsigned long    4 或8    0..4294967295 或0..18446744073709551615     %lu</p>
+<p>signed long    4 或8    -2147483648..2147483647或-9223372036854775808..9223372036854775807    </p>
+<p>long long    8    -9223372036854775808..9223372036854775807     %lli</p>
+<p>unsigned long long    8    0..18446744073709551615     %llu</p>
+<p>float    4    3.4x10 38..3.4x10+38 (7 sf)     %f, %e, %g</p>
+<p>double    8    1.7x10 308..1.7x10+308 (15 sf)     %f, %e, %g</p>
+<p>long double    8 或以上    编译器相关     %Lf, %Le, %Lg</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/10/24/84/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1487,7 +1510,7 @@ su - git :切换到git管理用户
       
 
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/picture/head.jpg"
                alt="XueCat" />
@@ -1537,7 +1560,7 @@ su - git :切换到git管理用户
               <span class="links-of-author-item">
                 <a href="https://github.com/" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-github"></i>
+                    <i class="fa fa-fw fa-github"></i>
                   
                   GitHub
                 </a>
@@ -1546,7 +1569,7 @@ su - git :切换到git管理用户
               <span class="links-of-author-item">
                 <a href="http://www.v2ex.com/" target="_blank" title="V2EX">
                   
-                    <i class="fa fa-globe"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   V2EX
                 </a>
@@ -1555,7 +1578,7 @@ su - git :切换到git管理用户
               <span class="links-of-author-item">
                 <a href="mailto:1446969391@qq.com" target="_blank" title="E-mail">
                   
-                    <i class="fa fa-envelope"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   E-mail
                 </a>
@@ -1567,7 +1590,7 @@ su - git :切换到git管理用户
         
         
           <div class="cc-license motion-element" itemprop="license">
-            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
               <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
             </a>
           </div>
@@ -1575,8 +1598,11 @@ su - git :切换到git管理用户
 
         
         
-          <div class="links-of-blogroll motion-element">
-            <div class="links-of-blogroll-title">友情链接</div>
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
@@ -1620,21 +1646,11 @@ su - git :切换到git管理用户
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">XueCat&emsp;</span>
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  <span id="busuanzi_container_page_pv" style='display:none'>
-    <span id="busuanzi_value_page_pv"></span>
-  </span>
-  <span>
-    <a href="http://service.ibruce.info" target="_blank" class="sl fa fa-globe fa-spin"></a>
-  </span>
-  <span id="busuanzi_container_site_uv" style='display:none'>
-    <span id="busuanzi_value_site_uv"></span>
-  </span>
+  <span class="author" itemprop="copyrightHolder">XueCat</span>
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
@@ -1670,56 +1686,64 @@ su - git :切换到git管理用户
 
 
 
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
   
 
 
 
   
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
 
 
 
-  
-  
 
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
-
-
-
-  
   
   
   <script type="text/javascript">
     // Popup Window;
-    var scrollTop = '';
-    var newHeight = '100';
     var isfetched = false;
     // Search DB path;
     var search_path = "search.xml";
@@ -1728,21 +1752,8 @@ su - git :切换到git管理用户
     }
     var path = "/" + search_path;
     // monitor main search box;
-    $('#search-input').on('input', function() {
-    if ($(this).val().length <= 0) {
-      $('#search-result').hide();
-      return;
-    }
-    $('i.search-keyword').text($(this).val());
-    $('a.search-result[href!="#"]').each(function(){
-      this.href = this.href.replace(/\=(.*?)(?=%20site)/,'='+$('#search-input').val())
-    });
-    $('#search-result').show();
-    });
 
     function proceedsearch() {
-      $('#local-search-input').val($('#search-input').val());
-      document.getElementById('local-search-input').dispatchEvent(new Event('input'));
       $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
       $('.popup').toggle();
 
@@ -1754,14 +1765,6 @@ su - git :切换到git管理用户
         url: path,
         dataType: "xml",
         async: true,
-        beforeSend: function (){
-            $('.site-search-form>span').toggleClass('fa-spin');
-            $('#search-input').prop('disabled', function(i, v) { return !v; });
-        },
-        complete: function (){
-            $('.site-search-form>span').toggleClass('fa-spin');
-            $('#search-input').prop('disabled', function(i, v) { return !v; });
-        },
         success: function( xmlResponse ) {
             // get the contents from search data
             isfetched = true;
@@ -1777,35 +1780,32 @@ su - git :切换到git管理用户
             var $resultContent = document.getElementById(content_id);
             $input.addEventListener('input', function(){
                 var matchcounts = 0;
-                var str='<ul class=\"search-result-list\">';                
+                var str='<ul class=\"search-result-list\">';
                 var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
                 $resultContent.innerHTML = "";
                 if (this.value.trim().length > 1) {
                 // perform local searching
                 datas.forEach(function(data) {
-                    var isMatch = true;
+                    var isMatch = false;
                     var content_index = [];
                     var data_title = data.title.trim().toLowerCase();
                     var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = data.url;
+                    var data_url = decodeURIComponent(data.url);
                     var index_title = -1;
                     var index_content = -1;
                     var first_occur = -1;
                     // only match artiles with not empty titles and contents
-                    if(data_title != '' && data_content != '') {
+                    if(data_title != '') {
                         keywords.forEach(function(keyword, i) {
                             index_title = data_title.indexOf(keyword);
                             index_content = data_content.indexOf(keyword);
-                            if( index_title < 0 && index_content < 0 ){
-                                isMatch = false;
-                            } else {
-                                if (index_content < 0) {
-                                    index_content = 0;
-                                }
-                                if (i == 0) {
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
                                     first_occur = index_content;
                                 }
-                            }
+                            } 
+							
                         });
                     }
                     // show search results
@@ -1832,7 +1832,7 @@ su - git :切换到git管理用户
                                 var regS = new RegExp(keyword, "gi");
                                 match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
                             });
-                            
+
                             str += "<p class=\"search-result\">" + match_content +"...</p>"
                         }
                         str += "</li>";
@@ -1848,14 +1848,7 @@ su - git :切换到git管理用户
     });}
 
     // handle and trigger popup window;
-    $(window).bind('scroll', function() {
-      scrollTop = $( window ).scrollTop();
-      newHeight = scrollTop + 100;
-    });
-    $('#search-result a').mousedown(function(e) {
-        window.location.href = this.href;
-      });
-    $('.popup-trigger').mousedown(function(e) {
+    $('.popup-trigger').click(function(e) {
       e.stopPropagation();
       if (isfetched == false) {
         searchFunc(path, 'local-search-input', 'local-search-result');
@@ -1863,20 +1856,6 @@ su - git :切换到git管理用户
         proceedsearch();
       };
 
-    });
-
-    $('#search-input').focus(function() {
-      if(jQuery(window).width() < 750) {
-        $('body').animate({
-          scrollTop: $('.site-search').offset().top
-        }, 500);
-      };
-      if ($(this).val().length > 0) {
-        $('#search-result').show();
-      }
-    });
-    $('#search-input').blur(function() {
-      $('#search-result').hide();
     });
 
     $('.popup-btn-close').click(function(e){
@@ -1889,13 +1868,15 @@ su - git :切换到git管理用户
     });
   </script>
 
+
+  
+
   
 
   
 
   
+
 
 </body>
-<!-- 背景动画 -->
-<script type="text/javascript" src="/js/src/particle.js"></script>
 </html>

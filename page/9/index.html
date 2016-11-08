@@ -29,7 +29,7 @@
 
   
   
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -55,7 +55,7 @@
   
     
     
-    <link href="//fonts.useso.com/css?family=Galdeano:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -63,9 +63,9 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="XueCat, NexT, Blog" />
@@ -79,7 +79,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/picture/favicon.ico?v=5.0.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/picture/favicon.ico?v=5.0.2" />
 
 
 
@@ -102,11 +102,11 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: {"position":"right","display":"post"},
+    sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
     }
   };
@@ -115,24 +115,17 @@
 
 
 
+  <link rel="canonical" href="https://xuecat.github.io/page/9/"/>
+
+
   <title> XueCat </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
   
 
 
-
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?8aa9f2526a323bf7a14e6fe9de652df7";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
 
 
 
@@ -146,12 +139,12 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right 
+  <div class="container one-collumn sidebar-position-left 
    page-home 
  ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
@@ -167,25 +160,23 @@
 
 <div class="site-nav-toggle">
   <button>
-    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
   </button>
 </div>
 
-
 <nav class="site-nav">
   
-  
 
   
-    <ul id="menu" class="menu menu-left">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -195,7 +186,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -205,7 +196,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             标签
           </a>
@@ -215,7 +206,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -225,7 +216,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             关于
           </a>
@@ -233,24 +224,29 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
   
     <div class="site-search">
       
-  <form class="site-search-form" >
-  <span class="search-icon fa fa-search"></span>
-  <input type="text" id="search-input">
-  <div id="search-result"><ul class="search-result-list"><li><a href="//www.baidu.com/s?wd=XXX%20site%3Ahttps://xuecat.github.io" class="search-result">百度搜索 <i class="search-keyword">XXX</i></a></li><li><a href="//www.google.com/search?q=XXX%20site%3Ahttps://xuecat.github.io" class="search-result">谷歌搜索 <i class="search-keyword">XXX</i></a></li><li><a href="#" class="popup-trigger search-result">本地搜索</a></li></ul>
-  </div>
-</form>
- <div class="popup">
-  <span class="search-icon fa fa-search"></span>
-  <input type="text" id="local-search-input">
-  <div id="local-search-result"></div>
-  <span class="popup-btn-close">close</span>
- </div>
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
 
 
     </div>
@@ -276,7 +272,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -329,6 +325,8 @@
           
 
           
+            
+          
 
           
 
@@ -349,21 +347,15 @@
       
         
           
+            <blockquote>
+<p>windows喜欢用 |=添加属性，&amp;=~来删除属性，(&amp;)!=0判断是否拥有属性</p>
+</blockquote>
+
           
-windows喜欢用 |=添加属性，&amp;=~来删除属性，(&amp;)!=0判断是否拥有属性
-
-
-          
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/04/13/112/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -395,7 +387,7 @@ windows喜欢用 |=添加属性，&amp;=~来删除属性，(&amp;)!=0判断是�
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -448,6 +440,8 @@ windows喜欢用 |=添加属性，&amp;=~来删除属性，(&amp;)!=0判断是�
           
 
           
+            
+          
 
           
 
@@ -468,32 +462,44 @@ windows喜欢用 |=添加属性，&amp;=~来删除属性，(&amp;)!=0判断是�
       
         
           
-          
-typdef 和define的区别。
-
-typdef int* int_ptr;
+            <blockquote>
+<p>typdef 和define的区别。</p>
+</blockquote>
+<pre><code>typdef int* int_ptr;
 #define int* int_ptr;
-
-我相信一看就知道了。
-
-数组
-typdef int carry[3];//嘿嘿，不知道了吧
-
-实际上就是申明了一个数组。用法：
-
-carry temp;
-cout &lt
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/03/27/111/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+</code></pre><blockquote>
+<p>我相信一看就知道了。</p>
+</blockquote>
+<p><strong>数组</strong></p>
+<pre><code>typdef int carry[3];//嘿嘿，不知道了吧
+</code></pre><blockquote>
+<p>实际上就是申明了一个数组。用法：</p>
+</blockquote>
+<pre><code>carry temp;
+cout &lt;&lt; typeid(temp).name();//输出结果是int [3]; 说明temp就是个int数组的别名。
+</code></pre><p><strong>函数</strong></p>
+<pre><code>typdef int (*fun)(int);//这种写法早就见过了。嘿嘿看下面的
+typdef int fun(int);//是否见过？。除了，使用时必须添加&amp;符号外。。它还有个用处，就是在声明函数的时候，可以成为一个别名，但是有个缺点是，也仅仅是声明，只是表明有这个函数类型，定义的时候，还是要老老实实还原类型进行定义;
+//int* (*a[5])(int, char*) 函数指针和指针函数已经有了解，从已有了解到a是一个5大小的函数指针数组，看下面这个。
+//doube(*)() (*pa)[9]; 然而并没有区别。
+</code></pre><blockquote>
+<p>看一段高级用法代码:</p>
+</blockquote>
+<figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="title">NTSTATUS</span><span class="params">(*fcntab[])</span><span class="params">(PDEVICE_EXTENSION pdx, PIRP Irp)</span></span>;<span class="comment">//静态数组指针</span></div><div class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">int</span> <span class="params">(*FP_CALC)</span><span class="params">(<span class="keyword">int</span>, <span class="keyword">int</span>)</span></span>;   </div><div class="line"><span class="function"><span class="keyword">typedef</span> FP_CALC <span class="title">CAll</span><span class="params">(<span class="keyword">char</span>)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">hehea</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> a+b;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function">FP_CALC <span class="title">test</span><span class="params">(<span class="keyword">char</span> f)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (f == <span class="string">'a'</span>) &#123;</div><div class="line">		<span class="keyword">return</span> hehea;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	CAll* p = test;</div><div class="line">	p(<span class="string">'a'</span>);</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
+<blockquote>
+<p>亮点一：返回函数指针，太棒了，以前都没用过。。<br>亮点二：typedef的使用可以对函数本体使用，但是使用的时候必须添加指针。</p>
+</blockquote>
+<p><strong>对了</strong></p>
+<blockquote>
+<p>要对结构体的用法，</p>
+</blockquote>
+<pre><code>struct mem {int a; int b; char c;} *mem_ptr;//基本完了。。。。嘿嘿！
+</code></pre>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -525,7 +531,7 @@ cout &lt
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -578,6 +584,8 @@ cout &lt
           
 
           
+            
+          
 
           
 
@@ -598,22 +606,56 @@ cout &lt
       
         
           
-          http://www.cnblogs.com/Binhua-Liu/archive/2010/08/24/1803095.html
----------------------
+            <p><a href="http://www.cnblogs.com/Binhua-Liu/archive/2010/08/24/1803095.html" target="_blank" rel="external">http://www.cnblogs.com/Binhua-Liu/archive/2010/08/24/1803095.html</a></p>
+<pre><code>---------------------
 二进制 局部 - return -  参数 -//我去对不齐。。。
            -    -   -
-      
-          ...
+           -    -   -
+---------------------
+</code></pre><blockquote>
+<p>堆栈由处理器支持<br>高地址向地地址扩展，栈顶地址不断减小，越后入，地址越低。</p>
+</blockquote>
+<pre><code>---------------------
+-   -高
+-   -
+-   -
+- - -低
+</code></pre><blockquote>
+<p>32位堆栈每个数据单元大小4字节，这便和数据对齐相关了。</p>
+<blockquote>
+<p>普及下寄存器EBP（extended base pointer） ESP(extended stack pointer)</p>
+<p>指令，push 寄存器指针减4，拷贝数据到ESP指向地址</p>
+<p>pop 寄存器拷贝出数据，加4.</p>
+</blockquote>
+</blockquote>
+<p><strong>上主菜</strong></p>
+<blockquote>
+<p>先对参数的压入栈。我觉得这个过程完成形参对实参的赋值，所以压入的是实参。<br><br>然后是返回的压入，压入返回指令。<br><br>我认为以上的压入在32为下4字节内压入类型，8字节压入俩寄存器表示的类型，上压入指针<br><br>压入EBP寄存指针。访问参数和局部变量使用。调用函数形成链表。<br><br>ESP赋值EBP，EBP指向中间。<br><br>局部变量的压栈<br><br>通用寄存器压栈<br><br>开始执行二进制代码.</p>
+<pre><code>假设执行函数前堆栈指针ESP为NN
+push   p2    ;参数2入栈, ESP -= 4h , ESP = NN - 4h
+push   p1    ;参数1入栈, ESP -= 4h , ESP = NN - 8h
+call test    ;压入返回地址 ESP -= 4h, ESP = NN - 0Ch  
+;//进入函数内
+{
+push   ebp                        ;保护先前EBP指针， EBP入栈， ESP-=4h, ESP = NN - 10h
+mov    ebp, esp                   ;设置EBP指针指向栈顶 NN-10h
+mov    eax, dword ptr  [ebp+0ch]  ;ebp+0ch为NN-4h,即参数2的位置
+mov    ebx, dword ptr  [ebp+08h]  ;ebp+08h为NN-8h,即参数1的位置
+sub    esp, 8                     ;局部变量所占空间ESP-=8, ESP = NN-18h
+...
+add    esp, 8                     ;释放局部变量, ESP+=8, ESP = NN-10h
+pop    ebp                        ;出栈,恢复EBP, ESP+=4, ESP = NN-0Ch
+ret    8                          ;ret返回,弹出返回地址,ESP+=4, ESP=NN-08h, 后面加操作数8为平衡堆栈,ESP+=8,ESP=NN, 恢复进入函数前的堆栈.
+}
+//看完汇编后,再看EBP和ESP的定义,哦,豁然开朗,
+原来ESP就是一直指向栈顶的指针,而EBP只是存取某时刻的栈顶指针,以方便对栈的操作,如获取函数参数、局部变量等。
+</code></pre></blockquote>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/03/26/110/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -645,7 +687,7 @@ cout &lt
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -698,6 +740,8 @@ cout &lt
           
 
           
+            
+          
 
           
 
@@ -718,22 +762,23 @@ cout &lt
       
         
           
-          virtual BOOL StartAnimation(int nElapse, int nTotalFrame, int nAnimationID = 0, BOOL bLoop = FALSE);
+            <pre><code>virtual BOOL StartAnimation(int nElapse, int nTotalFrame, int nAnimationID = 0, BOOL bLoop = FALSE);
+</code></pre><blockquote>
+<p>timeout时间（也就是定时）、总共帧数、事件ID、是否循环</p>
+</blockquote>
+<p>定义一个类保存：<br>        int m_nAnimationID;<br>        int m_nElapse;</p>
+<pre><code>int m_nTotalFrame;
+int m_nCurFrame;
 
-timeout时间（也就是定时）、总共帧数、事件ID、是否循环
+BOOL m_bLoop;
+BOOL m_bFirstLoop;//数据
+</code></pre><p>看似乎要相关类OnTimer调用OnAnimationElapse来实现每帧的处理。<br>实际要重载OnAnimationStart OnAnimationStep OnAnimationStop来实现处理。</p>
 
-定义一个类保存：       
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/03/10/109/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -765,7 +810,7 @@ timeout时间（也就是定时）、总共帧数、事件ID、是否循环
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -818,6 +863,8 @@ timeout时间（也就是定时）、总共帧数、事件ID、是否循环
           
 
           
+            
+          
 
           
 
@@ -838,20 +885,14 @@ timeout时间（也就是定时）、总共帧数、事件ID、是否循环
       
         
           
-           最开始的时候一直无法注入，后来使用explorer强制全部退出，用手动注入，如果出现错误，就进入注入目录，重新注入。
-之后运行成功。。多个菜单项添加要注意返回值。（这也是com编程注意的，failed successed MAKE_HRESULT）。
+            <p> 最开始的时候一直无法注入，后来使用explorer强制全部退出，用手动注入，如果出现错误，就进入注入目录，重新注入。</p>
+<p>之后运行成功。。多个菜单项添加要注意返回值。（这也是com编程注意的，failed successed MAKE_HRESULT）。</p>
 
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/03/05/106/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -883,7 +924,7 @@ timeout时间（也就是定时）、总共帧数、事件ID、是否循环
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -936,6 +977,8 @@ timeout时间（也就是定时）、总共帧数、事件ID、是否循环
           
 
           
+            
+          
 
           
 
@@ -956,19 +999,37 @@ timeout时间（也就是定时）、总共帧数、事件ID、是否循环
       
         
           
-          强制转换reinterpret_cast任意类型转换，包括指针和整数的转换staticcast和dynamiccast对类型转换比较苛刻，必须是指针到指针或者实例到实例dynamic__cast对虚函数有要求才能体现，所以注意转换是否对的，如果错误运行会错误，编译无错。
-11新特性default编译
-          ...
+            <h6 id="强制转换"><a href="#强制转换" class="headerlink" title="强制转换"></a>强制转换</h6><p>reinterpret_cast任意类型转换，包括指针和整数的转换<br>static<strong><em>cast和dynamic</em></strong>cast对类型转换比较苛刻，必须是指针到指针或者实例到实例<br>dynamic__cast对虚函数有要求才能体现，所以注意转换是否对的，如果错误运行会错误，编译无错。</p>
+<h6 id="11新特性"><a href="#11新特性" class="headerlink" title="11新特性"></a>11新特性</h6><p>default编译器自动添加默认构建函数<br>delete编译器删除默认构建函数</p>
+<p>class B : A  测试发现默认是protected继承</p>
+<h6 id="逻辑符号"><a href="#逻辑符号" class="headerlink" title="逻辑符号"></a>逻辑符号</h6><p>!和~   一个是逻辑符一个是按位符。。逻辑符号后要么1要么0<br><br>按位与：取最小<br>按位或：取平均<br><br>    计算x二进制包含1的个数：</p>
+<pre><code>count = 0;
+while(x) {
+    count++;
+    x=x&amp;(x-1);
+}
+return count;
+</code></pre><h6 id="内存对齐"><a href="#内存对齐" class="headerlink" title="内存对齐"></a>内存对齐</h6><p>8字节的边界<br>4字节的舍入<br>所以类和结构体对成员的构建顺序很是要求。<br>方法：先比对最大的类型。其大小必定是它的倍数，再按次数填入数据。</p>
+<h6 id="自加和加自"><a href="#自加和加自" class="headerlink" title="自加和加自"></a>自加和加自</h6><p><em>(pp++)+=2;就是</em>(pp)+=2;<br> 先使用pp  switch(p++)就是switch(p)</p>
+<h6 id="多重继承和虚继承"><a href="#多重继承和虚继承" class="headerlink" title="多重继承和虚继承"></a>多重继承和虚继承</h6><blockquote>
+<p>多重继承只需要考虑一个报错“ambiguous”</p>
+<blockquote>
+<p>因为a; b; c&gt;b,&gt;a;如果有重复函数名无法识别，或者自己添加类限定。</p>
+</blockquote>
+<p>当多重继承是这种关系时a; b&gt;a; c&gt;a,&gt;b;问题就是already<br>所以这时候要用虚继承</p>
+<blockquote>
+<p>所谓的虚继承也只是多了个虚化表而已，只要保证有一个东东就行！！虚化谁你自己看着办。。两次或者一次虚化都可以办到。</p>
+<blockquote>
+<p>这之后还有个ambiguous错误，，同样或者自己添加类限定。。</p>
+</blockquote>
+</blockquote>
+</blockquote>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/02/18/108/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1000,7 +1061,7 @@ timeout时间（也就是定时）、总共帧数、事件ID、是否循环
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1053,6 +1114,8 @@ timeout时间（也就是定时）、总共帧数、事件ID、是否循环
           
 
           
+            
+          
 
           
 
@@ -1073,23 +1136,23 @@ timeout时间（也就是定时）、总共帧数、事件ID、是否循环
       
         
           
-          看进程空间
-每个进程都有自己的虚拟空间（win32程序中每个进程拥有4GB的虚拟地址空间，每个进程都有各自编址，同一个数据块在不同进程编址可能不一样，这存在调度问题：）
+            <h6 id="看进程空间"><a href="#看进程空间" class="headerlink" title="看进程空间"></a>看进程空间</h6><blockquote>
+<p>每个进程都有自己的虚拟空间（win32程序中每个进程拥有4GB的虚拟地址空间，每个进程都有各自编址，同一个数据块在不同进程编址可能不一样，这存在调度问题：）</p>
+<blockquote>
+<p>虚拟空间被分为好几个区：空指针赋值区、用户模式区、64k禁入区（为了分开内核和用户的边界区）、内核模式区</p>
+<blockquote>
+<p>分配的空间大小事分配粒度的倍数。<br>涉及给分区调拨物理存储器，映射虚拟内存到物理内存</p>
+<p>######来说下堆<br>用户模式区装载exe、dll等数据。</p>
+</blockquote>
+<p>程序开始开辟进程，进程开辟堆空间。也就是默认1mb的缺省堆。<br>我认为一开始堆空间是申请好了的，当执行到new或者malloc时再向一开始的堆申请空间和写入数据。<br>当然堆空间可以自由扩展，但还是要先分配到缺省堆空间那边去。<br>new-&gt;malloc-&gt;heapalloc-&gt;virtualalloc-&gt;pagealloc<br><br>现在唯一不解的就是网上讲的mtd和mdd对堆得影响。。。。</p>
+</blockquote>
+</blockquote>
 
-虚拟空间被分为好几个区：空指针赋值区、用户模式区、64k禁入区（为了分开内核和用户的边界区）、内核模式区
-
-分配的空间大小事分配
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/02/01/107/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1121,7 +1184,7 @@ timeout时间（也就是定时）、总共帧数、事件ID、是否循环
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1174,6 +1237,8 @@ timeout时间（也就是定时）、总共帧数、事件ID、是否循环
           
 
           
+            
+          
 
           
 
@@ -1194,22 +1259,16 @@ timeout时间（也就是定时）、总共帧数、事件ID、是否循环
       
         
           
-          当要绘制 渐变色，透明色，等一些高级点的绘制的时候，gdi其实是有方法的
-
-afxdrawmanager.h这个里面全是封装好了，原来微软早就有了。以后要多看看这个了！！！！
-
+            <p><strong><em>当要绘制 渐变色，透明色，等一些高级点的绘制的时候，gdi其实是有方法的</em></strong></p>
+<blockquote>
+<p>afxdrawmanager.h这个里面全是封装好了，原来微软早就有了。以后要多看看这个了！！！！</p>
+</blockquote>
 
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/01/28/158/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1241,7 +1300,7 @@ afxdrawmanager.h这个里面全是封装好了，原来微软早就有了。以�
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1294,6 +1353,8 @@ afxdrawmanager.h这个里面全是封装好了，原来微软早就有了。以�
           
 
           
+            
+          
 
           
 
@@ -1314,23 +1375,21 @@ afxdrawmanager.h这个里面全是封装好了，原来微软早就有了。以�
       
         
           
+            <blockquote>
+<p>今天用memcpy和strcpy，复制字符串。有很多冗余的数据。</p>
+<blockquote>
+<p>分析原因，估计是string的几次动态扩容造成的。于是限度长度复制，还是不行。</p>
+<blockquote>
+<p>后来用指定结尾符，(<em>_out)[sz_buffer.length()]=’\0’;注意符号优先级。开始的</em>_out[sz_buffer.length()]=’\0’;会导致赋值内存越界，因为符号优先级问题。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+
           
-今天用memcpy和strcpy，复制字符串。有很多冗余的数据。
-
-分析原因，估计是string的几次动态扩容造成的。于是限度长度复制，还是不行。
-
-后来用指定结尾符，(_out)[sz_buffer.length()]=’\0’;注意符号优先级。开始的_out[sz_buffer.length(
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/01/21/105/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1362,7 +1421,7 @@ afxdrawmanager.h这个里面全是封装好了，原来微软早就有了。以�
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1415,6 +1474,8 @@ afxdrawmanager.h这个里面全是封装好了，原来微软早就有了。以�
           
 
           
+            
+          
 
           
 
@@ -1435,22 +1496,16 @@ afxdrawmanager.h这个里面全是封装好了，原来微软早就有了。以�
       
         
           
+            <blockquote>
+<p>我在用OpenSSL进行der编码解码的时候，有一个问题。无论如何无法获取。<br>后来用unsigned char排除了。</p>
+</blockquote>
+<p>从中学习到，对于密码和编码数据要用unsigned char进行表示，不然错误情况太头疼了。</p>
+
           
-我在用OpenSSL进行der编码解码的时候，有一个问题。无论如何无法获取。后来用unsigned char排除了。
-
-从中学习到，对于密码和编码数据要用unsigned char进行表示，不然错误情况太头疼了。
-
-          
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/01/15/104/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1508,7 +1563,7 @@ afxdrawmanager.h这个里面全是封装好了，原来微软早就有了。以�
       
 
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/picture/head.jpg"
                alt="XueCat" />
@@ -1558,7 +1613,7 @@ afxdrawmanager.h这个里面全是封装好了，原来微软早就有了。以�
               <span class="links-of-author-item">
                 <a href="https://github.com/" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-github"></i>
+                    <i class="fa fa-fw fa-github"></i>
                   
                   GitHub
                 </a>
@@ -1567,7 +1622,7 @@ afxdrawmanager.h这个里面全是封装好了，原来微软早就有了。以�
               <span class="links-of-author-item">
                 <a href="http://www.v2ex.com/" target="_blank" title="V2EX">
                   
-                    <i class="fa fa-globe"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   V2EX
                 </a>
@@ -1576,7 +1631,7 @@ afxdrawmanager.h这个里面全是封装好了，原来微软早就有了。以�
               <span class="links-of-author-item">
                 <a href="mailto:1446969391@qq.com" target="_blank" title="E-mail">
                   
-                    <i class="fa fa-envelope"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   E-mail
                 </a>
@@ -1588,7 +1643,7 @@ afxdrawmanager.h这个里面全是封装好了，原来微软早就有了。以�
         
         
           <div class="cc-license motion-element" itemprop="license">
-            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
               <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
             </a>
           </div>
@@ -1596,8 +1651,11 @@ afxdrawmanager.h这个里面全是封装好了，原来微软早就有了。以�
 
         
         
-          <div class="links-of-blogroll motion-element">
-            <div class="links-of-blogroll-title">友情链接</div>
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
@@ -1641,21 +1699,11 @@ afxdrawmanager.h这个里面全是封装好了，原来微软早就有了。以�
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">XueCat&emsp;</span>
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  <span id="busuanzi_container_page_pv" style='display:none'>
-    <span id="busuanzi_value_page_pv"></span>
-  </span>
-  <span>
-    <a href="http://service.ibruce.info" target="_blank" class="sl fa fa-globe fa-spin"></a>
-  </span>
-  <span id="busuanzi_container_site_uv" style='display:none'>
-    <span id="busuanzi_value_site_uv"></span>
-  </span>
+  <span class="author" itemprop="copyrightHolder">XueCat</span>
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
@@ -1691,56 +1739,64 @@ afxdrawmanager.h这个里面全是封装好了，原来微软早就有了。以�
 
 
 
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
   
 
 
 
   
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
 
 
 
-  
-  
 
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
-
-
-
-  
   
   
   <script type="text/javascript">
     // Popup Window;
-    var scrollTop = '';
-    var newHeight = '100';
     var isfetched = false;
     // Search DB path;
     var search_path = "search.xml";
@@ -1749,21 +1805,8 @@ afxdrawmanager.h这个里面全是封装好了，原来微软早就有了。以�
     }
     var path = "/" + search_path;
     // monitor main search box;
-    $('#search-input').on('input', function() {
-    if ($(this).val().length <= 0) {
-      $('#search-result').hide();
-      return;
-    }
-    $('i.search-keyword').text($(this).val());
-    $('a.search-result[href!="#"]').each(function(){
-      this.href = this.href.replace(/\=(.*?)(?=%20site)/,'='+$('#search-input').val())
-    });
-    $('#search-result').show();
-    });
 
     function proceedsearch() {
-      $('#local-search-input').val($('#search-input').val());
-      document.getElementById('local-search-input').dispatchEvent(new Event('input'));
       $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
       $('.popup').toggle();
 
@@ -1775,14 +1818,6 @@ afxdrawmanager.h这个里面全是封装好了，原来微软早就有了。以�
         url: path,
         dataType: "xml",
         async: true,
-        beforeSend: function (){
-            $('.site-search-form>span').toggleClass('fa-spin');
-            $('#search-input').prop('disabled', function(i, v) { return !v; });
-        },
-        complete: function (){
-            $('.site-search-form>span').toggleClass('fa-spin');
-            $('#search-input').prop('disabled', function(i, v) { return !v; });
-        },
         success: function( xmlResponse ) {
             // get the contents from search data
             isfetched = true;
@@ -1798,35 +1833,32 @@ afxdrawmanager.h这个里面全是封装好了，原来微软早就有了。以�
             var $resultContent = document.getElementById(content_id);
             $input.addEventListener('input', function(){
                 var matchcounts = 0;
-                var str='<ul class=\"search-result-list\">';                
+                var str='<ul class=\"search-result-list\">';
                 var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
                 $resultContent.innerHTML = "";
                 if (this.value.trim().length > 1) {
                 // perform local searching
                 datas.forEach(function(data) {
-                    var isMatch = true;
+                    var isMatch = false;
                     var content_index = [];
                     var data_title = data.title.trim().toLowerCase();
                     var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = data.url;
+                    var data_url = decodeURIComponent(data.url);
                     var index_title = -1;
                     var index_content = -1;
                     var first_occur = -1;
                     // only match artiles with not empty titles and contents
-                    if(data_title != '' && data_content != '') {
+                    if(data_title != '') {
                         keywords.forEach(function(keyword, i) {
                             index_title = data_title.indexOf(keyword);
                             index_content = data_content.indexOf(keyword);
-                            if( index_title < 0 && index_content < 0 ){
-                                isMatch = false;
-                            } else {
-                                if (index_content < 0) {
-                                    index_content = 0;
-                                }
-                                if (i == 0) {
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
                                     first_occur = index_content;
                                 }
-                            }
+                            } 
+							
                         });
                     }
                     // show search results
@@ -1853,7 +1885,7 @@ afxdrawmanager.h这个里面全是封装好了，原来微软早就有了。以�
                                 var regS = new RegExp(keyword, "gi");
                                 match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
                             });
-                            
+
                             str += "<p class=\"search-result\">" + match_content +"...</p>"
                         }
                         str += "</li>";
@@ -1869,14 +1901,7 @@ afxdrawmanager.h这个里面全是封装好了，原来微软早就有了。以�
     });}
 
     // handle and trigger popup window;
-    $(window).bind('scroll', function() {
-      scrollTop = $( window ).scrollTop();
-      newHeight = scrollTop + 100;
-    });
-    $('#search-result a').mousedown(function(e) {
-        window.location.href = this.href;
-      });
-    $('.popup-trigger').mousedown(function(e) {
+    $('.popup-trigger').click(function(e) {
       e.stopPropagation();
       if (isfetched == false) {
         searchFunc(path, 'local-search-input', 'local-search-result');
@@ -1884,20 +1909,6 @@ afxdrawmanager.h这个里面全是封装好了，原来微软早就有了。以�
         proceedsearch();
       };
 
-    });
-
-    $('#search-input').focus(function() {
-      if(jQuery(window).width() < 750) {
-        $('body').animate({
-          scrollTop: $('.site-search').offset().top
-        }, 500);
-      };
-      if ($(this).val().length > 0) {
-        $('#search-result').show();
-      }
-    });
-    $('#search-input').blur(function() {
-      $('#search-result').hide();
     });
 
     $('.popup-btn-close').click(function(e){
@@ -1910,13 +1921,15 @@ afxdrawmanager.h这个里面全是封装好了，原来微软早就有了。以�
     });
   </script>
 
+
+  
+
   
 
   
 
   
+
 
 </body>
-<!-- 背景动画 -->
-<script type="text/javascript" src="/js/src/particle.js"></script>
 </html>

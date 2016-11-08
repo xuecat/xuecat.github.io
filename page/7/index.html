@@ -29,7 +29,7 @@
 
   
   
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -55,7 +55,7 @@
   
     
     
-    <link href="//fonts.useso.com/css?family=Galdeano:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -63,9 +63,9 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="XueCat, NexT, Blog" />
@@ -79,7 +79,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/picture/favicon.ico?v=5.0.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/picture/favicon.ico?v=5.0.2" />
 
 
 
@@ -102,11 +102,11 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: {"position":"right","display":"post"},
+    sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
     }
   };
@@ -115,24 +115,17 @@
 
 
 
+  <link rel="canonical" href="https://xuecat.github.io/page/7/"/>
+
+
   <title> XueCat </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
   
 
 
-
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?8aa9f2526a323bf7a14e6fe9de652df7";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
 
 
 
@@ -146,12 +139,12 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right 
+  <div class="container one-collumn sidebar-position-left 
    page-home 
  ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
@@ -167,25 +160,23 @@
 
 <div class="site-nav-toggle">
   <button>
-    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
   </button>
 </div>
 
-
 <nav class="site-nav">
   
-  
 
   
-    <ul id="menu" class="menu menu-left">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -195,7 +186,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -205,7 +196,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             标签
           </a>
@@ -215,7 +206,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -225,7 +216,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             关于
           </a>
@@ -233,24 +224,29 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
   
     <div class="site-search">
       
-  <form class="site-search-form" >
-  <span class="search-icon fa fa-search"></span>
-  <input type="text" id="search-input">
-  <div id="search-result"><ul class="search-result-list"><li><a href="//www.baidu.com/s?wd=XXX%20site%3Ahttps://xuecat.github.io" class="search-result">百度搜索 <i class="search-keyword">XXX</i></a></li><li><a href="//www.google.com/search?q=XXX%20site%3Ahttps://xuecat.github.io" class="search-result">谷歌搜索 <i class="search-keyword">XXX</i></a></li><li><a href="#" class="popup-trigger search-result">本地搜索</a></li></ul>
-  </div>
-</form>
- <div class="popup">
-  <span class="search-icon fa fa-search"></span>
-  <input type="text" id="local-search-input">
-  <div id="local-search-result"></div>
-  <span class="popup-btn-close">close</span>
- </div>
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
 
 
     </div>
@@ -276,7 +272,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -329,6 +325,8 @@
           
 
           
+            
+          
 
           
 
@@ -349,18 +347,23 @@
       
         
           
-          先看代码++12345678910111213141516171819202122232425262728293031class HasPem &#123;public:	HasPem() : d(new int(3)) &#123; cout &lt;&lt; "construct:" &lt;&
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/09/01/132/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <figure class="highlight c"><figcaption><span>先看代码++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> HasPem &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	HasPem() : d(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">3</span>)) &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"construct:"</span> &lt;&lt; ++n_cstr &lt;&lt; <span class="built_in">endl</span>; &#125;</div><div class="line">	HasPem(<span class="keyword">const</span> HasPem&amp; h) : d(<span class="keyword">new</span> <span class="keyword">int</span>(*h.d))&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"copy construct:"</span> &lt;&lt; ++n_cptr &lt;&lt; <span class="built_in">endl</span>; &#125;</div><div class="line">	HasPem(HasPem&amp;&amp; h) :d(h.d)&#123; h.d = <span class="literal">nullptr</span>; <span class="built_in">cout</span> &lt;&lt; <span class="string">"move construct:"</span> &lt;&lt; ++n_mvtr &lt;&lt; <span class="built_in">endl</span>; &#125;</div><div class="line">	HasPem&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> HasPem&amp; h) &#123; d = h.d; <span class="keyword">delete</span> h.d; <span class="built_in">cout</span> &lt;&lt; <span class="string">"deque construct:"</span> &lt;&lt; ++n_mvtr &lt;&lt; <span class="built_in">endl</span>; <span class="keyword">return</span> *<span class="keyword">this</span>; &#125;</div><div class="line">	~HasPem() &#123;</div><div class="line">		<span class="keyword">delete</span> d;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"destruct:"</span> &lt;&lt; ++n_dstr &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span>* d;</div><div class="line">	<span class="keyword">static</span> <span class="keyword">int</span> n_cstr;</div><div class="line">	<span class="keyword">static</span> <span class="keyword">int</span> n_dstr;</div><div class="line">	<span class="keyword">static</span> <span class="keyword">int</span> n_cptr;</div><div class="line">	<span class="keyword">static</span> <span class="keyword">int</span> n_mvtr;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">int</span> HasPem::n_cstr = <span class="number">0</span>;</div><div class="line"><span class="keyword">int</span> HasPem::n_dstr = <span class="number">0</span>;</div><div class="line"><span class="keyword">int</span> HasPem::n_cptr = <span class="number">0</span>;</div><div class="line"><span class="keyword">int</span> HasPem::n_mvtr = <span class="number">0</span>;</div><div class="line"><span class="function">HasPem <span class="title">getemp</span><span class="params">()</span> </span>&#123;</div><div class="line">	HasPem h;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"resource form"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">return</span> h;</div><div class="line">&#125;</div><div class="line"><span class="keyword">int</span> <span class="number">_</span>tmain(<span class="keyword">int</span> argc, <span class="number">_</span>TCHAR* argv[])</div><div class="line">&#123;</div><div class="line">	HasPem d = getemp();</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong><em>先说下自己的错误</em></strong></p>
+<p>居然会忘：</p>
+<pre><code>HasPem d;HasPem p = d;//这个调用的是复制函数；
+HasPem d; HasPem p; d=p;//这个才是调用的赋值函数；
+//也就是只要跟类初始化没关的才走赋值，其他就复制。
+</code></pre><p><strong><em>再说下移动函数</em></strong></p>
+<p>首先，移动构造函数是基于右值引用。<br>第一它是为了操作临时变量，（98里面，函数结束会对临时变量内存释放）。第二当出现减少复制函数带来的多余内存开辟。（当然如果用指针new就可以解决，但是对象可以自己释放内存）</p>
+<p>然后，复制函数为了安全等考虑一般会开辟内存的复制。<br><br>当程序猿希望在复制的时候能走节约内存的移动函数路线时，就可以用std::move<br></p>
+<pre><code>Moveable a; Moveable c(std::move(a));//这样c就完全是走a的移动路线得到的。
+//但是依旧有内存问题，那就是a的成员改变，生命周期内的调用。
+</code></pre>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -392,7 +395,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -445,6 +448,8 @@
           
 
           
+            
+          
 
           
 
@@ -465,24 +470,30 @@
       
         
           
+            <blockquote>
+<blockquote>
+<p>先说windbag那个系统变量设置，<br></p>
+</blockquote>
+</blockquote>
+<p><em>第一步 是从 <a href="http://www.microsoft.com/ddk/debugging" target="_blank" rel="external">http://www.microsoft.com/ddk/debugging</a> 下载最新版本的 WinDBG，因为符号服务器二进制文件是由 WinDBG 小组开发的。</em></p>
+<p><em>您将需要检查是否有 WinDBG 更新版本，因为该小组似乎具有相当紧凑的发布日程安排，并且每隔几个月就会发布更新版本。</em></p>
+<p><em>第二步 双击下载的文件安装 windbg .安装时注意记住安装到那里了.</em></p>
+<p><em>第三步 windbg 访问符号需要两个文件(SYMSRV.DLL 和 SYMSTORE.EXE)所以添加主 path 环境变量中它们的路径进去,即:你的 windbg 安装目录.</em></p>
+<p><em>操作方法:在桌面我的电脑点右键–属性–高级–环境变量,在系统变量列表框中找到 path 双击,在变量值最后面加一个分号再把你的安装目录写上.点确定.</em><br><em>这一步是告诉 windbg 那两个文件放在什么地方.</em></p>
+<p><em>第四步 新建一个环境变量_NT_SYMBOL_PATH 值为: SRV</em>c:\mysymbol<em> <a href="http://msdl.microsoft.com/download/symbols" target="_blank" rel="external">http://msdl.microsoft.com/download/symbols</a></em> </p>
+<p><em>操作方法:桌面我的电脑点右键–属性–高级–环境变量 ,点击新建,把上面的变量名和变量值填上.这一步的意思是说告诉 windbg ,我的符号文件存放在c:\mysymbol 中(当然其实里面什么也没有,甚至这个文件夹也不存在,不过没关系,系统找不到的话会给你创建一个,并在上面的网址中去帮你下载符号文件放在里面)</em></p>
+<p><em>第五步 运行 windbg 打开一个exe文件或者附加到一个进程里去, 你会看到 Symbol search path is: SRV</em>c:\mysymbol<em> <a href="http://msdl.microsoft.com/download/symbols" target="_blank" rel="external">http://msdl.microsoft.com/download/symbols</a></em></p>
+<blockquote>
+<blockquote>
+<p>再说ioregisterdeviceinterface接口的使用<br>书上说wdm一般用的是接口来访问驱动程序，一个驱动可以有多个设备（虚拟，实际），对于irp每个设备栈对应一个i/o栈。<br><br>wdm的adddevice的第二参数是顶层的设备栈吧（这个我在自定义的class安装后，貌似是空的）。<br><br>问题描述：1、没有ioattach，好像新建的自定义类就没有设备，导致读取驱动时失败的。2、没有ioregisterdeviceinterface注册adddevice的第二个参数，而是去注册自己创建的设备。也会导致注册失败。这个问题让我无法想明白，留上吧，以后解决。</p>
+</blockquote>
+</blockquote>
+
           
-
-先说windbag那个系统变量设置，
-
-
-第一步 是从 http://www.microsoft.com/ddk/debugging 下载最新版本的 WinDBG，因为符号服务器二进制文件是由 WinDBG 小组开发的。
-您将需要检查是否有 WinDBG 更新版本，因为该小组似乎具有相当紧凑的发
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/27/131/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -514,7 +525,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -567,6 +578,8 @@
           
 
           
+            
+          
 
           
 
@@ -587,21 +600,15 @@
       
         
           
-          先看图：    
-unsigned是无符号的，所以是正数。补码存储形式就是它本身。所以取反是那个。
-其它的就同理了，用补码去取反。
+            <p>先看图：<br>    <img src="/picture/img/130.png" alt=""></p>
+<p>unsigned是无符号的，所以是正数。补码存储形式就是它本身。所以取反是那个。</p>
+<p>其它的就同理了，用补码去取反。</p>
 
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/04/130/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -633,7 +640,7 @@ unsigned是无符号的，所以是正数。补码存储形式就是它本身。
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -686,6 +693,8 @@ unsigned是无符号的，所以是正数。补码存储形式就是它本身。
           
 
           
+            
+          
 
           
 
@@ -702,13 +711,13 @@ unsigned是无符号的，所以是正数。补码存储形式就是它本身。
 
       
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+        <div class="post-gallery" itemscope itemtype="//schema.org/ImageGallery">
           
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/c.jpg" rel="gallery_civ9jycja002tzwcx6dk5kvm5"
-                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                 href="/picture/c.jpg" rel="gallery_civ9lgk7k002r90cx6cuz1l35"
+                 itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/c.jpg" itemprop="contentUrl"/>
               </a>
             
@@ -722,18 +731,16 @@ unsigned是无符号的，所以是正数。补码存储形式就是它本身。
       
         
           
-             没有惊险和放纵。   没有**和期望。   更没有《大亨小传》苦涩的悲情，或许连《友情》单纯的被渴望着也不存在。   只是平淡、单调、无聊着。   就算这样，也不想重新来过。   我不想再看到那个懵懂的少年，也不想再体会坎坷的努力。   我害怕，，，害怕自己再走一遍原来的路。   即使是错误的
-          ...
+            <p>   <em>没有惊险和放纵。</em><br><br>   <em>没有<em>**</em>和期望。</em><br><br>   <em>更没有《大亨小传》苦涩的悲情，或许连《友情》单纯的被渴望着也不存在。</em><br><br>   <em>只是平淡、单调、无聊着。</em><br><br>   <em>就算这样，也不想重新来过。</em><br><br>   <em>我不想再看到那个懵懂的少年，也不想再体会坎坷的努力。</em><br><br>   <em>我害怕，，，害怕自己再走一遍原来的路。</em><br><br>   <em>即使是错误的，可以痛苦可以流泪，也绝不要后悔。这才是英雄！！！</em><br></p>
+<p><br><br>   <em>闭上眼睛</em><br><br>   <em>宁人Identity crisis的事也是随处累积着</em><br><br>   <em>讨厌自己漠然、无知、虚伪以及趑趄嗫嚅；这些黏在身上的劣根性让我厌恶、憎恨到无以复加。</em><br><br>   <em>害怕被赤裸裸的揭露，觉得自己就像白羊群中那只最不协调的黑羊。</em><br><br>   <em>想通过训练压抑住自己的本质，害怕成为拉尔夫（《蝇王》），而努力的扮演着【人类】这个角色。</em><br><br>   <em>只是，，，契可尼效应</em><br><br>  （黑羊与白羊：无法跟同伴一起感到喜悦、一起悲伤、吃相同的食物，同伴内心的感动==爱情、温柔、体贴等情意都无法理解的悲伤的黑羊能做的事，就是对身上的黑皮撒上白粉，假装自己也是一只白羊。<br><br>    如果同伴知道我是一只地道的黑羊，会不会用羊角刺我？用羊蹄踩我？希望不会被暴露。<br><br>    每当雨滴打下来，每当风吹过来，撒在身上的白粉是不是会脱落？会不会有人大声说：“原来它是只黑羊”?）</p>
+<p><br><br>   <em>回忆过去会让人后悔的想去死，展望未来又会让人担心得愁眉不展，同时又害怕自己原地回转、滞留不前。 多么矛盾！！</em><br><br>   <em>这让我想起了叶藏（《人间失格》）。太多的共同点让我每次阅读体内有一股像是胃都要绞起来似的羞耻感与耻辱感油然而生。</em><br><br>   <em>最终被磨损下的只是，只是逞强罢了。心灵深处丑恶着扭曲着，大概已经被切碎的破烂的垃圾的渣滓般的小小固执。</em><br><br>   <em>为了不否定自己的过去，行动；为了不否定信念，为了我的，仅属于我的小小固执。</em><br></p>
+<p><br><br>   **<br></p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/04/129/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -765,7 +772,7 @@ unsigned是无符号的，所以是正数。补码存储形式就是它本身。
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -818,6 +825,8 @@ unsigned是无符号的，所以是正数。补码存储形式就是它本身。
           
 
           
+            
+          
 
           
 
@@ -838,19 +847,22 @@ unsigned是无符号的，所以是正数。补码存储形式就是它本身。
       
         
           
-            主要的前缀有：Zw：Zw 和同名的 Nt 函数具有相同的功能，中间是从 Zw 到 Nt 函数的简单跳转。本系列内核函数用于文件和注册表方面的操作，比如文件操作、注册表操作、访问进程、事件操作、令牌操作、进程操作和端口操作等。
-Ex：管理层，Ex 是 Executive 的开头两个字母。Ke：核心
-          ...
+            <p>  主要的前缀有：<br>Zw：Zw 和同名的 Nt 函数具有相同的功能，中间是从 Zw 到 Nt 函数的简单跳转。本系列内核函数用于文件和注册表方面的操作，比如文件操作、注册表操作、访问进程、事件操作、令牌操作、进程操作和端口操作等。</p>
+<p>Ex：管理层，Ex 是 Executive 的开头两个字母。<br>Ke：核心层，Ke 是 Kernel 的开头两个字母。<br>Hal：硬件抽象层，Hal 是 Hardware Abstranction Layer 的缩写。<br>Ob：对象管理，Ob 是 Object 的开头两个字母。<br>Mm：内存管理，Mm 是 Memory Manager 的缩写。<br>Ps：进程（线程）管理，Ps 表示Process。<br>Se：安全管理，Se 是 Security 的开头两个字母。<br>Io：I/O管理。<br>Fs：文件系统，Fs 是 File System 的缩写。<br>Cc：文件缓存管理，Cc 表示 Cache。<br>Cm：系统配置管理，Cm 是 Configuration Manager 的缩写。<br>Pp：“即插即用”管理，Pp 表示 PnP。<br>Rtl：运行时程序库，Rtl 是 Runtime Library 的缩写。本系列内核函数用于运行时库，以Rtl为前缀的函数可以完成多种操作，例如字符串、线程、资源、临界区、安全对象的初始化和使用，内存、进程异常和数据类型的处理，还用于完成定时器、堆、IPv4和IPv6方面的操作，以及压缩和解压缩等。</p>
+<p>Ndis：与NDIS网络驱动开发相关的函数。<br>Wdf：开发WDF驱动相关的函数都是以 Wdf 开头。<br>KiEtw：本系列内核函数用于系统内核，这些函数只能从内核的内部进行调用，常用的有：KiUserCallbackDispatcher、KiRaiseUserExceptionDispatcher、KiUserApcDispatcher、KiUserExceptionDispatcher等。</p>
+<p>Csr系列：此系列函数用于客户机和服务器运行时，如果您想拦截客户机/服务器方面的操作，那么就需要对Csr系列内核函数做进一步的了解。常见的有：CsrClientCallServer、CsrCaptureMessageBuffer、CsrConnectClientToServer和CrsNewThread等。</p>
+<p>Ldr系列：本系列内核函数用于加载程序管理器，如果你打算拦截加载程序的话，那么请进一步考察这组以Ldr为前缀的函数，常用的有：LdrInitializeThunk、LdrLockLoaderLock、LdrUnlockLoaderLock、LdrGetDllHandle、LdrGetProcedureAddress等。</p>
+<p>Dbg系列：本系列内核函数用于调试管理，如果打算拦截调试操作的话，那么请进一步考察这组以Dbg为前缀的函数，常用的函数包括：、DbgBreakPoint、DbgUserBreakPoint、DbgPrint和DbgUiConnectToDbg等。</p>
+<p>Etw系列：本系列内核函数用于追踪窗口事件，如果你打算拦截追踪之类的操作的话,那么请进一步考察这组以Etw为前缀的函数。常用的函数包括：EtwTraceEvent、EtwEnableTrace、EtwGetTraceEnableLevel和EtwGetTraceEnableFlags等。</p>
+<p>Pfx系列：本系列内核函数用于ANSI字符串操作，如果你打算拦截ASNI串表方面的操作的话，就需要进一步了解这些函数。常用的包括：PfxInitialize、PfxRemovePrefix、PfxInsertPrefix、PfxFindPrefix等。</p>
+<p>不过并非所有函数名都带有这样的前缀，对前缀的使用也并非非常严格。<br>例如：核心层函数名的前缀本应该是Ke，但实际上有不少核心层函数名的前缀是 Ki，这些函数大都是与中断有关的比较底层的函数。</p>
+<p>有时候还在函数名的前缀后面加上小写字母 f，表示这个函数是快速调用函数。<br>例如：NTKERNELAPI LONG_PTR FASTCALL ObfDereferenceObject(IN PVOID Object);<br>这里的类型说明 FASTCALL 向编译工具表明这是个快速调用函数，函数名前缀加 f 则使人一看见函数名就知道这个函数是个快速调用函数，一般的函数调用是通过堆栈传递参数的，而快速调用函数则通过 ECX 等寄存器传递参数，因为避免了几个堆栈操作而使效率有所提高。<br>这里的 FASTCALL 是必须的，否则编译工具不知道应该通过寄存器传递参数，而在函数名中加 f 则只是为了增加程序的可读性</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/01/128/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -882,7 +894,7 @@ Ex：管理层，Ex 是 Executive 的开头两个字母。Ke：核心
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -935,6 +947,8 @@ Ex：管理层，Ex 是 Executive 的开头两个字母。Ke：核心
           
 
           
+            
+          
 
           
 
@@ -955,18 +969,20 @@ Ex：管理层，Ex 是 Executive 的开头两个字母。Ke：核心
       
         
           
-          先看内存的分段机制，了解到这个被linux所“抛弃”，算了先放一放，但是汇编中的cs、ss、ds还是要记住（笔记本上）分页一个32位的机器，线性地址最大可为4G，可以用4KB为一个页来划分，这页，整个线性地址就被划分为一个tatol_page[2^20]的大数组，共有2的20个次方个页。这个大数组我
-          ...
+            <p>先看内存的分段机制，了解到这个被linux所“抛弃”，算了先放一放，但是汇编中的cs、ss、ds还是要记住（笔记本上）<br><br><strong>分页</strong><br><br>一个32位的机器，线性地址最大可为4G，可以用4KB为一个页来划分，这页，整个线性地址就被划分为一个tatol_page[2^20]的大数组，共有2的20个次方个页。这个大数组我们称之为页目录。目录中的每一个目录项，就是一个地址——对应的页的地址。</p>
+<p><strong>个人认识，以后修改</strong><br><br>首先，一个程序里面用的是逻辑地址，代码访问的也是逻辑地址。<br><br>对于程序的逻辑地址来说，用的是分段机制，我想那几个段寄存器应该有用了吧。<br><br>一般32位系统是有3层页表，4k对齐方式页面大小是4kb 2^12，2^20个页。为了方便访问，使用前10位表示一级页表地址，中间10位2级页表，后12位3级页表。只有三级页表指向的才是4kb内存，其它是指针。<br><br>对于现在的操作系统来说，一个程序的加载（严格说进程），会被分配4gb的（32位）的虚拟内存，我认为，就是逻辑地址的分配，虚假的东西<br></p>
+<p>我的问题，逻辑地址4gb，线性地址4gb（32位），为何转换要当前段地址加上偏移地址？完全不够？？<br></p>
+<p>问题以后解决，接下来是过程。</p>
+<p>首先，我认为线性地址作为y=nx+z的形式存在，且分页机制管理。我觉得它就是一个物理地址的使用情况虚拟表。</p>
+<p>windows中，一个进程的开辟会有4GB（32）空间，里面有用户区、内核区等。内核区的代码和数据肯定是非分页内存。<br><br>多个进程可以共享一个内核区代码。所以，我觉得当用户区的逻辑地址进行操作时，转换线性地址通过分页来得到物理地址，进行操作。<br><br>对于内核区的逻辑地址，无须线性地址的转换，直接转换物理地址进行操作。<br></p>
+<p>多个进程进行读写时，会使用当前虚拟地址（逻辑地址），转换为线性地址（具体转换：由于每个进程会对分页内存记录，只是页表项，页目录的记录。CR3寄存器会加载当前进程页目录来进行切换）<br><br>当发现转换的地址不在内存中（我认为线性地址就是对内存的管理，所以就是从线性地址寻找），就会发生缺页，缺页中断是软中断。irl不要忘了。<br><br>缺页的发生会让系统从页交换文件里寻找，没有就坏了！有就发生页交换。<br></p>
+<p>我想一般2GB的内存条能装上64位系统，也是因为页交换文件。能使用的物理地址被保持到了住够，</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/06/12/127/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -998,7 +1014,7 @@ Ex：管理层，Ex 是 Executive 的开头两个字母。Ke：核心
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1051,6 +1067,8 @@ Ex：管理层，Ex 是 Executive 的开头两个字母。Ke：核心
           
 
           
+            
+          
 
           
 
@@ -1071,21 +1089,19 @@ Ex：管理层，Ex 是 Executive 的开头两个字母。Ke：核心
       
         
           
-            把这个放语言类。。是因为有个内核代码见居然没反应过来，惭愧！
-先说堆，默认堆、额外堆，我就不说了，它们必须要依次访问的，所以多线程注意下就好。
-new -&gt;heapalloc，这段中用静态变量记录new类的个数。
-看下dll，首先dll先看隐式的：它会在程序加载的时候（**.dll 地址 
-          ...
+            <p>  <strong>把这个放语言类。。是因为有个内核代码见居然没反应过来，惭愧！</strong></p>
+<p>先说堆，默认堆、额外堆，我就不说了，它们必须要依次访问的，所以多线程注意下就好。</p>
+<p>new -&gt;heapalloc，这段中用静态变量记录new类的个数。</p>
+<p><strong>看下dll，首先dll</strong><br>先看隐式的：它会在程序加载的时候（**.dll 地址 import 函数….）<br>。讲dll的文件映像映射到进程的地址空间。<br>然而值得注意的是用的是写时复制，也就是说，dll的静态全局会被复制到新的空间里面。<br>而且，对预定的内存区域是为进程所拥有，也就是说，开辟内存啥的是玩的进程的，堆就会从默认堆分配，栈就会从进程空间预定。</p>
+<p><strong>然后是大问题来了CRT和MTD MDD到底有哪些错误？</strong><br><br>一个程序可以链接多个库，这些库有的有静态的crt有的有动态crt。栈空间到好说，有响应汇编代码去销毁。对于堆，问题就来了。：</p>
+<p><strong>如果在相应库里面开辟堆，是否应该在程序中释放？</strong> <br> 第一dll的crt是和程序共享一个堆空间的。所以完全没问题。第二 静态的crt是有自己的额外堆的，库里面开辟，在程序中释放内存是错误的做法。<br>这也就是为何大多数库都要自己写销毁内存的代码</p>
+<p><strong>最后讲下dll吧</strong><br><br>//今天不想写了，改天继续(显式)</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/06/09/126/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1117,7 +1133,7 @@ new -&gt;heapalloc，这段中用静态变量记录new类的个数。
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1170,6 +1186,8 @@ new -&gt;heapalloc，这段中用静态变量记录new类的个数。
           
 
           
+            
+          
 
           
 
@@ -1190,24 +1208,19 @@ new -&gt;heapalloc，这段中用静态变量记录new类的个数。
       
         
           
-           说个不是汇编的：
+            <p> 说个不是汇编的：</p>
+<blockquote>
+<p>C语言调用约定(__cdecl)</p>
+<p>标准调用约定(__stdcall)</p>
+</blockquote>
+<p>这俩个不同的约定函数，翻译成的汇编是不同的。然而驱动的是寻的_DriverEntry入口,所以注意要用标准的调用约定。</p>
+<p>在函数的末尾ret指令是为了平衡esp指针在开始的参数入栈。所以看参数情况pop ip。</p>
 
-C语言调用约定(__cdecl)
-标准调用约定(__stdcall)
-
-这俩个不同的约定函数，翻译成的汇编是不同的。然而驱动的是寻的_DriverEntry入口,所以注意要用标准的调用约定。
-在函数的末尾ret指令是为了平衡esp指针在开始的参数入栈。所以看参数情况pop ip
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/21/125/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1239,7 +1252,7 @@ C语言调用约定(__cdecl)
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1292,6 +1305,8 @@ C语言调用约定(__cdecl)
           
 
           
+            
+          
 
           
 
@@ -1312,22 +1327,35 @@ C语言调用约定(__cdecl)
       
         
           
-          一个进程是4gb虚拟内存（win32），存在分区，一般用户分区为2gb。
-虚拟内存，也只是个内存对应表而已。实际内存，物理内存地址
-vitrualalloc先向这么多虚拟内存预定一块内存，再分配物理存储器，再使用。
-原话：最好把物理存储器看成是保存在磁盘（通常是硬盘）上页交换文件中的数据。
-.exe
-          ...
+            <p>一个进程是4gb虚拟内存（win32），存在分区，一般用户分区为2gb。</p>
+<p>虚拟内存，也只是个内存对应表而已。实际内存，物理内存地址</p>
+<p>vitrualalloc先向这么多虚拟内存预定一块内存，再分配物理存储器，再使用。</p>
+<p>原话：最好把物理存储器看成是保存在磁盘（通常是硬盘）上页交换文件中的数据。</p>
+<p>.exe或者dll（以下的说法dll没测试过）文件，文件头有相应的数据，通过那个，知道代码和数据大小等。然后就预定相应大小的内存空间，硬盘的话就直接映射内存文件上去，软盘就复制上去。</p>
+<p>分页内存和非分页内存  </p>
+<p>首先介绍几个术语：</p>
+<p>进程上下文，就是表示进程信息的一系列东西，包括各种变量、寄存器以及进程的运行的环境。这样，当进程被切换后，下次再切换回来继续执行，能够知道原来的状态。<br>中断上下文，就是中断发生时，原来的进程执行被打断，那么就要把原来的那些变量保存下来，以便中断完成后再恢复。</p>
+<p>Windows NT和Windows 98都是运行在支持虚拟地址空间的计算机上，虚拟地址空间或者映射到一段真实的物理内存，或者映射到交换文件中的页帧。</p>
+<p>每一个进程有4G的虚拟地址空间空间（因为一般机器是32位），这4G的空间被分为用户模式地址空间以及用户模式地址空间。无论何时我们需要访问计算机内存，都要使用内核模式的虚拟地址。每一个用户模式进程都有自己的地址上下文，记录了进程信息的一系列东西。当Windows NT调度器把控制从一个进程的当前线程切换到另一个进程的某个线程时，与进程相对应的虚拟地址空间也被更换（执行到别的进程了，也就是跑到另外的一个4G的地址）。线程切换的一个步骤就是改变处理器当前使用的页表，以便它能引用新线程的进程上下文。</p>
+<p>虚拟内存系统的特征就是能使软件有一个比物理内存大得多的虚拟内存空间。为了做到这一点，内存管理器需要在物理内存和磁盘文件间交换页帧。但操作系统的某些部分是不能被分页的，这些内存用来支持内存管理器本身。最明显的例子就是，用于处理页故障的代码和数据结构必须常驻内存。</p>
+<p>Windows NT把内核模式地址空间分成分页内存池和非分页内存池。(用户模式地址空间总是分页的) 必须驻留的代码和数据放在非分页池；不必常驻的代码和数据放在分页池中。Windows NT为决定代码和数据是否需要驻留非分页池提供了一个简单规则。</p>
+<p>非分页内容的空间是很小的，所以一般的东西都会放入分页内存中。</p>
+<p>执行在高于或等于DISPATCH_LEVEL级上的代码必须存在于非分页内存中。</p>
+<p>在写驱动的时候，经常要调用ExAllocatePoolWithTag函数分配内存，其中第一个参数可以是如下几个：</p>
+<p>NonPagedPool    从非分页内存池中分配内存<br>PagedPool    从分页内存池中分配内存<br>NonPagedPoolMustSucceed    从非分页内存池中分配内存，如果不能分配则产生bugcheck<br>NonPagedPoolCacheAligned    从非分页内存池中分配内存，并确保内存与CPU cache对齐<br>NonPagedPoolCacheAlignedMustS    与NonPagedPoolCacheAligned类似，但如果不能分配则产生bugcheck<br>PagedPoolCacheAligned<br>从分页内存池中分配内存，并确保内存与CPU cache对齐</p>
+<h2 id="最后我来说下驱动编程的的宏"><a href="#最后我来说下驱动编程的的宏" class="headerlink" title="最后我来说下驱动编程的的宏"></a>最后我来说下驱动编程的的宏</h2><p>PAGEDCODE<br>对于#pragram来说，code_seg是函数，data_seg是变量<br><br>LOCKEDCODE<br><br>INITCODE<br></p>
+<p>首先，驱动函数是严格分了IRQL的。<br>运行一个函数，如fun，如果永远是在DISPATCH_LEVEL上运行。</p>
+<p>就最好用非分页内存LOCKEDCODE进行开辟函数<br>在函数中对内存的开辟也必须是ExAllocatePool  NonPagePool类型的</p>
+<p><br>如果对于在这种irql的运行函数进行PAGEDCODE声明和ExAllocatePool PagePool</p>
+<p><br>当出现蓝屏：而如果访问分页内存的话，（注意，这是关键）如果分页内存数据不在物理内存中，也就是被交换到了虚拟内存页面文件中，将触发内存缺页中断，windows将会试图访问虚拟内存页面文件pagefile.sys，把被交换出的数据读入物理内存中，可是，访问文件是会引发i/o操作的，i/o操作中会有等待，<br>接着，系统直接崩溃</p>
+<p>没有蓝屏：<br>就算你的页面属性是分页内存，但是没有被交换出去，还是在内存中，访问时不会引发缺页中断<br>但是，哪天，windows发现内存不够了，把你的代码数据交换到内存页面文件中（pagefile。sys），<br>呵呵，立即蓝屏~~~</p>
+<p>所以建议严格分内存声明。。。。</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/19/124/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1359,7 +1387,7 @@ vitrualalloc先向这么多虚拟内存预定一块内存，再分配物理存�
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1412,6 +1440,8 @@ vitrualalloc先向这么多虚拟内存预定一块内存，再分配物理存�
           
 
           
+            
+          
 
           
 
@@ -1432,36 +1462,36 @@ vitrualalloc先向这么多虚拟内存预定一块内存，再分配物理存�
       
         
           
-          X509
+            <p><strong>X509</strong></p>
+<blockquote>
+<p>通用证书格式，国际标准</p>
+</blockquote>
+<p><strong>pem</strong></p>
+<blockquote>
+<p>一般用来当做数字认证机构（CA）<br>BASE64编码的ASCII码的文件</p>
+</blockquote>
+<p><strong>DER</strong></p>
+<blockquote>
+<p>二进制文件（网上说java适用），但windows上我也看到有，呵呵</p>
+</blockquote>
+<p><strong>CSR</strong></p>
+<blockquote>
+<p>证书请求文件</p>
+</blockquote>
+<p><strong>PKCS7</strong></p>
+<blockquote>
+<p>是个标准，存储认证证书，证书路径，证书链。实际编程中我发现证书签名验证等都是用它那个标准</p>
+</blockquote>
+<p><strong>PKCS12/PFX</strong></p>
+<blockquote>
+<p>加密二进制形式<br>服务器证书，中级证书和私钥</p>
+</blockquote>
 
-通用证书格式，国际标准
-
-pem
-
-一般用来当做数字认证机构（CA）BASE64编码的ASCII码的文件
-
-DER
-
-二进制文件（网上说java适用），但windows上我也看到有，呵呵
-
-CSR
-
-证书请求文件
-
-PKCS7
-
-是个标准，存储认证证书，证书路径，证书链。实际编程中我发现
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/18/122/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1519,7 +1549,7 @@ PKCS7
       
 
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/picture/head.jpg"
                alt="XueCat" />
@@ -1569,7 +1599,7 @@ PKCS7
               <span class="links-of-author-item">
                 <a href="https://github.com/" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-github"></i>
+                    <i class="fa fa-fw fa-github"></i>
                   
                   GitHub
                 </a>
@@ -1578,7 +1608,7 @@ PKCS7
               <span class="links-of-author-item">
                 <a href="http://www.v2ex.com/" target="_blank" title="V2EX">
                   
-                    <i class="fa fa-globe"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   V2EX
                 </a>
@@ -1587,7 +1617,7 @@ PKCS7
               <span class="links-of-author-item">
                 <a href="mailto:1446969391@qq.com" target="_blank" title="E-mail">
                   
-                    <i class="fa fa-envelope"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   E-mail
                 </a>
@@ -1599,7 +1629,7 @@ PKCS7
         
         
           <div class="cc-license motion-element" itemprop="license">
-            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
               <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
             </a>
           </div>
@@ -1607,8 +1637,11 @@ PKCS7
 
         
         
-          <div class="links-of-blogroll motion-element">
-            <div class="links-of-blogroll-title">友情链接</div>
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
@@ -1652,21 +1685,11 @@ PKCS7
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">XueCat&emsp;</span>
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  <span id="busuanzi_container_page_pv" style='display:none'>
-    <span id="busuanzi_value_page_pv"></span>
-  </span>
-  <span>
-    <a href="http://service.ibruce.info" target="_blank" class="sl fa fa-globe fa-spin"></a>
-  </span>
-  <span id="busuanzi_container_site_uv" style='display:none'>
-    <span id="busuanzi_value_site_uv"></span>
-  </span>
+  <span class="author" itemprop="copyrightHolder">XueCat</span>
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
@@ -1702,56 +1725,64 @@ PKCS7
 
 
 
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
   
 
 
 
   
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
 
 
 
-  
-  
 
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
-
-
-
-  
   
   
   <script type="text/javascript">
     // Popup Window;
-    var scrollTop = '';
-    var newHeight = '100';
     var isfetched = false;
     // Search DB path;
     var search_path = "search.xml";
@@ -1760,21 +1791,8 @@ PKCS7
     }
     var path = "/" + search_path;
     // monitor main search box;
-    $('#search-input').on('input', function() {
-    if ($(this).val().length <= 0) {
-      $('#search-result').hide();
-      return;
-    }
-    $('i.search-keyword').text($(this).val());
-    $('a.search-result[href!="#"]').each(function(){
-      this.href = this.href.replace(/\=(.*?)(?=%20site)/,'='+$('#search-input').val())
-    });
-    $('#search-result').show();
-    });
 
     function proceedsearch() {
-      $('#local-search-input').val($('#search-input').val());
-      document.getElementById('local-search-input').dispatchEvent(new Event('input'));
       $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
       $('.popup').toggle();
 
@@ -1786,14 +1804,6 @@ PKCS7
         url: path,
         dataType: "xml",
         async: true,
-        beforeSend: function (){
-            $('.site-search-form>span').toggleClass('fa-spin');
-            $('#search-input').prop('disabled', function(i, v) { return !v; });
-        },
-        complete: function (){
-            $('.site-search-form>span').toggleClass('fa-spin');
-            $('#search-input').prop('disabled', function(i, v) { return !v; });
-        },
         success: function( xmlResponse ) {
             // get the contents from search data
             isfetched = true;
@@ -1809,35 +1819,32 @@ PKCS7
             var $resultContent = document.getElementById(content_id);
             $input.addEventListener('input', function(){
                 var matchcounts = 0;
-                var str='<ul class=\"search-result-list\">';                
+                var str='<ul class=\"search-result-list\">';
                 var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
                 $resultContent.innerHTML = "";
                 if (this.value.trim().length > 1) {
                 // perform local searching
                 datas.forEach(function(data) {
-                    var isMatch = true;
+                    var isMatch = false;
                     var content_index = [];
                     var data_title = data.title.trim().toLowerCase();
                     var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = data.url;
+                    var data_url = decodeURIComponent(data.url);
                     var index_title = -1;
                     var index_content = -1;
                     var first_occur = -1;
                     // only match artiles with not empty titles and contents
-                    if(data_title != '' && data_content != '') {
+                    if(data_title != '') {
                         keywords.forEach(function(keyword, i) {
                             index_title = data_title.indexOf(keyword);
                             index_content = data_content.indexOf(keyword);
-                            if( index_title < 0 && index_content < 0 ){
-                                isMatch = false;
-                            } else {
-                                if (index_content < 0) {
-                                    index_content = 0;
-                                }
-                                if (i == 0) {
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
                                     first_occur = index_content;
                                 }
-                            }
+                            } 
+							
                         });
                     }
                     // show search results
@@ -1864,7 +1871,7 @@ PKCS7
                                 var regS = new RegExp(keyword, "gi");
                                 match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
                             });
-                            
+
                             str += "<p class=\"search-result\">" + match_content +"...</p>"
                         }
                         str += "</li>";
@@ -1880,14 +1887,7 @@ PKCS7
     });}
 
     // handle and trigger popup window;
-    $(window).bind('scroll', function() {
-      scrollTop = $( window ).scrollTop();
-      newHeight = scrollTop + 100;
-    });
-    $('#search-result a').mousedown(function(e) {
-        window.location.href = this.href;
-      });
-    $('.popup-trigger').mousedown(function(e) {
+    $('.popup-trigger').click(function(e) {
       e.stopPropagation();
       if (isfetched == false) {
         searchFunc(path, 'local-search-input', 'local-search-result');
@@ -1895,20 +1895,6 @@ PKCS7
         proceedsearch();
       };
 
-    });
-
-    $('#search-input').focus(function() {
-      if(jQuery(window).width() < 750) {
-        $('body').animate({
-          scrollTop: $('.site-search').offset().top
-        }, 500);
-      };
-      if ($(this).val().length > 0) {
-        $('#search-result').show();
-      }
-    });
-    $('#search-input').blur(function() {
-      $('#search-result').hide();
     });
 
     $('.popup-btn-close').click(function(e){
@@ -1921,13 +1907,15 @@ PKCS7
     });
   </script>
 
+
+  
+
   
 
   
 
   
+
 
 </body>
-<!-- 背景动画 -->
-<script type="text/javascript" src="/js/src/particle.js"></script>
 </html>

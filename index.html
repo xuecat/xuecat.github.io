@@ -29,7 +29,7 @@
 
   
   
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -55,7 +55,7 @@
   
     
     
-    <link href="//fonts.useso.com/css?family=Galdeano:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -63,9 +63,9 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="XueCat, NexT, Blog" />
@@ -79,7 +79,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/picture/favicon.ico?v=5.0.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/picture/favicon.ico?v=5.0.2" />
 
 
 
@@ -102,11 +102,11 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: {"position":"right","display":"post"},
+    sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
     }
   };
@@ -115,24 +115,17 @@
 
 
 
+  <link rel="canonical" href="https://xuecat.github.io/"/>
+
+
   <title> XueCat </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
   
 
 
-
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?8aa9f2526a323bf7a14e6fe9de652df7";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
 
 
 
@@ -146,12 +139,12 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right 
+  <div class="container one-collumn sidebar-position-left 
    page-home 
  ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
@@ -167,25 +160,23 @@
 
 <div class="site-nav-toggle">
   <button>
-    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
   </button>
 </div>
 
-
 <nav class="site-nav">
   
-  
 
   
-    <ul id="menu" class="menu menu-left">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -195,7 +186,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -205,7 +196,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             标签
           </a>
@@ -215,7 +206,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -225,7 +216,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             关于
           </a>
@@ -233,24 +224,29 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
   
     <div class="site-search">
       
-  <form class="site-search-form" >
-  <span class="search-icon fa fa-search"></span>
-  <input type="text" id="search-input">
-  <div id="search-result"><ul class="search-result-list"><li><a href="//www.baidu.com/s?wd=XXX%20site%3Ahttps://xuecat.github.io" class="search-result">百度搜索 <i class="search-keyword">XXX</i></a></li><li><a href="//www.google.com/search?q=XXX%20site%3Ahttps://xuecat.github.io" class="search-result">谷歌搜索 <i class="search-keyword">XXX</i></a></li><li><a href="#" class="popup-trigger search-result">本地搜索</a></li></ul>
-  </div>
-</form>
- <div class="popup">
-  <span class="search-icon fa fa-search"></span>
-  <input type="text" id="local-search-input">
-  <div id="local-search-result"></div>
-  <span class="popup-btn-close">close</span>
- </div>
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
 
 
     </div>
@@ -276,7 +272,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -329,6 +325,8 @@
           
 
           
+            
+          
 
           
 
@@ -349,22 +347,16 @@
       
         
           
-          二进制好像vs2012以后才支持的吧，八进制表示在15上可以。
- 二进制：0b011(3) 0B011(3)
- 八进制: 00011(9); js是：0o011(9) 0O011(9)
- 十六进制: 0x011(17) 0X011(17)
+            <p>二进制好像vs2012以后才支持的吧，八进制表示在15上可以。</p>
+<p> 二进制：0b011(3) 0B011(3)</p>
+<p> 八进制: 00011(9); js是：0o011(9) 0O011(9)</p>
+<p> 十六进制: 0x011(17) 0X011(17)</p>
 
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/07/195/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -396,7 +388,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -449,6 +441,8 @@
           
 
           
+            
+          
 
           
 
@@ -469,22 +463,20 @@
       
         
           
-          浅拷贝：直接赋值深拷贝：数组（nar=ar.slice(0)、nar=ar.concat()），对象(new Object())
-var deepCopy = function(source) {
+            <p>浅拷贝：直接赋值<br><br>深拷贝：数组（nar=ar.slice(0)、nar=ar.concat()），对象(new Object())<br></p>
+<pre><code>var deepCopy = function(source) {
     var result={};
     for (var key in source) {
-  
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/25/194/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+        result[key] = typeof source[key]===’object’? deepCoyp(source[key]): source[key];
+    }
+return result; 
+}
+</code></pre>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -516,7 +508,7 @@ var deepCopy = function(source) {
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -569,6 +561,8 @@ var deepCopy = function(source) {
           
 
           
+            
+          
 
           
 
@@ -589,24 +583,18 @@ var deepCopy = function(source) {
       
         
           
+            <ul>
+<li><p>npm查看全局安装过的包:<code>npm list -g --depth 0</code></p>
+</li>
+<li><p>删除node_module模块：<code>rimraf node_module</code></p>
+</li>
+</ul>
+
           
-npm查看全局安装过的包:npm list -g --depth 0
-
-删除node_module模块：rimraf node_module
-
-
-
-          
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/24/193/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -638,7 +626,7 @@ npm查看全局安装过的包:npm list -g --depth 0
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -691,6 +679,8 @@ npm查看全局安装过的包:npm list -g --depth 0
           
 
           
+            
+          
 
           
 
@@ -711,24 +701,34 @@ npm查看全局安装过的包:npm list -g --depth 0
       
         
           
+            <ol>
+<li><p>函数参数默认压栈顺序，从左到右</p>
+</li>
+<li><p>const命令只保证变量指向地址不变，不能保证数据不变。</p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> foo = [];</div><div class="line">foo.prop = <span class="number">123</span>;<span class="comment">//这是被允许的</span></div><div class="line">foo = &#123;&#125;;<span class="comment">//这是不被允许的</span></div><div class="line"></div><div class="line"><span class="comment">//要完全冻结，参考如下代码</span></div><div class="line"><span class="keyword">var</span> constantize = (obj) =&gt; &#123;</div><div class="line">    <span class="built_in">Object</span>.freeze(obj);</div><div class="line">    <span class="built_in">Object</span>.key(obj).forEach((key, value) =&gt; &#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> obj[key] === <span class="string">'object'</span>) &#123;</div><div class="line">            constantize(obj[key]);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<ol>
+<li>字符遍历。好像用<code>[]</code>也可以遍历</li>
+</ol>
+<p>es5: for (var i=0; i<str.length; i++)="" {alert(str.charat(i));}="" <br=""><br>es6: for (let i=0 of str) {alert(i);}</str.length;></p>
+<ol>
+<li>字符函数</li>
+</ol>
+<p>es6多了:<br><br>includes:返回布尔，表示十分找到参数字符串。第二个参数，表示开始搜索的位置<br>startsWith:返回布尔，表示参数字符串是否在源字符串的头部。第二个参数，表示开始搜索的位置<br>endsWith:返回布尔，表示参数字符串是否在源字符串的尾部。第二个参数，表示开始搜索的位置<br>repeat:返回一个新字符串，表示将原字符串重复n次</p>
+<ol>
+<li><p>模板字符串，使用反引号（`这个符号）</p>
+<p> 普通字符： <code>dd&#39;\n&#39;asdf</code> 这里有换行<br> 多行字符： 无需连接符，所有的空格、回车和缩进都会被保留在输出中。<br> 变量嵌入：<code>hello ${name} are ${time}?</code> name和time是定义的变量。如果括号里面的不是字符串，则按一般规则转换为字符，如调用toString方法<br> 函数调用：function tag(s, v, d); tag<code>hello ${a+b} ${a}</code>;<br> String的raw函数</p>
+</li>
+<li><p>正则，5中String对象的方法，search、match、replace、split支持JS正则</p>
+</li>
+</ol>
+
           
-函数参数默认压栈顺序，从左到右
-
-const命令只保证变量指向地址不变，不能保证数据不变。
-
-
-12345678910111213const foo = [];foo.prop = 123;//这是被允许的foo = &#123;&#125;;//这是不被允许的//要完全冻结，参考如下代码var 
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/19/192/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -760,7 +760,7 @@ const命令只保证变量指向地址不变，不能保证数据不变。
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -813,6 +813,8 @@ const命令只保证变量指向地址不变，不能保证数据不变。
           
 
           
+            
+          
 
           
 
@@ -833,23 +835,114 @@ const命令只保证变量指向地址不变，不能保证数据不变。
       
         
           
-          
-如果一个值是恒定的，它命名中的字母要全部大写（如 CONSTANT_VALUE_CASE ）
-一定要分号，js是弱语言，很多时候不要分号也能执行。但是容易出错。
- //函数表达式后面要分号结束，但是函数声明就不需要 var foo = function() {
-return true;
- };  
-          ...
+            <ol>
+<li>如果一个值是恒定的，它命名中的字母要全部大写（如 <code>CONSTANT_VALUE_CASE</code> ）</li>
+<li><p>一定要分号，js是弱语言，很多时候不要分号也能执行。但是容易出错。</p>
+<p> //函数表达式后面要分号结束，但是函数声明就不需要<br> var foo = function() {</p>
+<pre><code>return true;
+</code></pre><p> };  // 这里要分号</p>
+<p> function foo() {</p>
+<pre><code>return true;
+</code></pre><p> }  // 这里不用分号</p>
+</li>
+<li><p>不要在块内函数声明，应该使用一个变量初始化函数表达式在块内定义一个函数块</p>
+</li>
+<li>为了最大的可移植性和兼容性，总是使用标准功能而不是非标准功能（例如，采用 string.charAt(3) 而非 string[3] ，用DOM的功能访问元素而不是使用特定于一个具体应用的简写）。</li>
+<li><p>原始类型的包装对象，</p>
+<p> var x = new Boolean(false);<br> if (x) {//这是错误的，因为x是个object，而不是bool，正确该是var x = Boolean(0);</p>
+<pre><code>alert(&apos;hi&apos;);  //显示“hi”。
+</code></pre><p> }</p>
+</li>
+<li><p>方法和属性定义</p>
+</li>
+</ol>
+<p>虽然有多种使用“new”关键词来创建对象方法和属性的途径，首选的创建方法的途径是：</p>
+<pre><code>Foo.prototype.bar = function() {
+    /* ... */
+};//好像这样能提供性能
+</code></pre><p>其他特性的首选创建方式是在构造函数中初始化字段：</p>
+<pre><code>/** @constructor */
+function Foo() {
+    this.bar = value;
+}
+</code></pre><ol>
+<li>删除，使用this.foo == null,而不是delete</li>
+<li>遍历数组使用for循环 而不是for-in</li>
+<li>多行字符不要使用连接行符，直接’+’</li>
+<li><p>构建数组对象用字面量，而不是构造函数。</p>
+<p>//问题在构造只有一个元素的函数时<br>var a = new Array(x); //它表示的是开辟一个x大小的数组，内部赋值undifinew；而不是开辟一个数组，内部赋值x；<br>var a = [x1, x2];<br>var a = [x1];<br>var a = [];</p>
+<p>对象构造函数，为了一致性：<br>var o = new Object();</p>
+<p>var o2 = new Object();<br>o2.a = 0;<br>o2.b = 1;<br>o2.c = 2;<br>o2[‘strange key’] = 3;<br>改为：<br>var o = {};</p>
+<p>var o2 = {</p>
+<pre><code>a: 0,
+b: 1,
+c: 2,
+&apos;strange key&apos;: 3
+</code></pre><p>};</p>
+</li>
+<li><p>强烈禁止修改如 Object.prototype 和 Array.prototype 等对象的原型。</p>
+</li>
+<li>不要使用条件注释；条件注释会在运行时改变JavaScript语法树，阻碍自动化工具。</li>
+<li>私有 属性和方法应该以下划线开头命名</li>
+<li>保护 属性和方法应该以无下划线开头命名（像公共属性和方法一样）。</li>
+<li>可选函数参数以 opt_ 开头。</li>
+<li>参数数目可变的函数应该具有以 var_args 命名的最后一个参数。</li>
+<li>为了避免在大小写敏感的平台上引起混淆，文件名应该小写。文件名应该以 .js 结尾，并且应该不包含除了 - 或 <em> （相比较 </em> 更推荐 - ）以外的其它标点</li>
+<li><p>括号书写：</p>
+<p>if (something) {<br>} else {<br>}</p>
+</li>
+<li><p>多行，对象和数组初始化</p>
+<p>var arr = [1, 2, 3];  //之后无空格[或之前]<br>var obj = {a: 1, b: 2, c: 3};  //之后无空格[或之前]</p>
+<p>//不要像这样：<br>WRONG_Object.prototype = {</p>
+<pre><code>a          : 0,
+b          : 1,
+lengthyName: 2
+</code></pre><p>};</p>
+</li>
+<li><p>匿名函数传递</p>
+<p>prefix.something.reallyLongFunctionName(‘whatever’, function(a1, a2) {</p>
+<pre><code>if (a1.equals(a2)) {
+    someOtherLongFunctionName(a1);
+} else {
+    andNowForSomethingCompletelyDifferent(a2.parrot);
+}
+</code></pre><p>});</p>
+<p>var names = prefix.something.myExcellentMapFunction(</p>
+<pre><code>verboselyNamedCollectionOfItems,
+function(item) {
+    return item.name;
+});
+</code></pre></li>
+<li><p>字符串使用单引号，虽然js不区分单引号和双引号。<br><br>但是一般html的属性用的是双引号。所以当js字符串为了区分html和转义，最好使用单引号。</p>
+</li>
+<li>注释可以参考jsdoc的做法</li>
+<li><p>布尔类型</p>
+<p>下边的布尔表达式都返回false：<br>//@<br>null<br>undefined<br>‘’空字符串<br>数字0<br>//但是要小心，因为以下这些返回true：<br>字符串”0”<br>[]空数组<br>{}空对象</p>
+<p>//@所以 while (x != null) {}这样不好， 该是 while(x) {}<br>//if (y != null &amp;&amp; y != ‘’) {} 也改成 if (y) {}</p>
+<p>//@二元布尔操作符是可短路的,所以<br>var win;<br>if (opt_win) {</p>
+<pre><code>win = opt_win;
+</code></pre><p>} else {</p>
+<pre><code>win = window;
+</code></pre><p>}<br>//可以改成：<br>function foo(opt_win) {</p>
+<pre><code>var win = opt_win || window;
+</code></pre><p>}</p>
+<p>if (node) {</p>
+<pre><code>if (node.kids) {
+    if (node.kids[index]) {
+        foo(node.kids[index]);
+    }
+}
+</code></pre><p>}<br>//可以改成：<br>var kid = node &amp;&amp; node.kids &amp;&amp; node.kids[index];<br>if (kid) {</p>
+<pre><code>foo(kid);
+</code></pre><p>}</p>
+</li>
+</ol>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/17/191/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -881,7 +974,7 @@ return true;
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -934,6 +1027,8 @@ return true;
           
 
           
+            
+          
 
           
 
@@ -954,20 +1049,36 @@ return true;
       
         
           
-          1. this.props.children它是链表没错(当只有一个时，是string之类元素)
-React.Children.map(this.props.children, function (child) {
-        return &lt;li&gt;{child}&lt;/li&gt
-          ...
+            <p><strong>1. this.props.children</strong><br>它是链表没错(当只有一个时，是string之类元素)</p>
+<pre><code>React.Children.map(this.props.children, function (child) {
+        return &lt;li&gt;{child}&lt;/li&gt;;
+        })
+//每个child是一个ReactElement的object，可能ReactElement有默认的隐式处理吧_shadowChildren之类吧！
+</code></pre><p>此句，一直不明白为何object能当字符处理。</p>
+<p><strong>2. markdown显示</strong><br>使用remarkable库，可以支持markdown格式显示语句。<br><br>但是不能直接render解析（虽然表面看是对的），好像react做了XSS 攻击的保护。<br><br>解析后的语句只能放入节点属性中：dangerouslySetInnerHTML={ __html: md.render(this.props.children.toString()) }<br><br>值得注意的是，它支持的markdown语法是最新的，也就是说有些语法严格和空格有关(如<code># d</code>必须空格)</p>
+<p><strong>3. react key添加</strong><br>我在用map的时候，被警告必须加key。react对dom做遍历的时候，会根据data-reactid生成虚拟dom树。如果你没有手动的添加unique constant key的话，react是无法记录你的dom操作的。</p>
+<p><strong>4. createClass函数问题</strong><br>createClass创建的方法</p>
+<pre><code>rawMarkup: function() {}
+</code></pre><p>要this.rawMarkup()才能访问到；晕，刚居然没注意。</p>
+<p><strong>5. eslint安装</strong><br>eslint和eslint插件必须全部 全局安装。局部安装老是报错，无法找到插件。</p>
+<p><strong>6. react-es6</strong><br>这个由于很多，只说下属性的设置；<br>es5对类属性设置是用： <code>render: function(){}</code><br><br>es6对类属性设置是用：<code>render() {}</code><br><br>居然看半天没发现。<br><a href="http://blog.csdn.net/wangzengdi/article/details/50719395" target="_blank" rel="external">http://blog.csdn.net/wangzengdi/article/details/50719395</a></p>
+<p><strong>7. 无状态的函数式组件</strong><br>除了正统的rn创建外；还有个创建组件的方法<br></p>
+<p>声明：<br>const Pane = (props) =&gt; <div>{props.children}</div>;<br>Pane.propTypes = {<br>  label: React.PropTypes.string.isRequired,<br>  children: React.PropTypes.element.isRequired<br>};<br>使用：<br></p>
+<pane label="asdf">
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/16/190/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+<p>注意俩点：<br></p>
+<ol>
+<li>不能有生命周期方法</li>
+<li>不能有ref（实例dom属性，React.findDOMNode）</li>
+</ol>
+<p><strong>8. children isrequired</strong><br>children: React.PropTypes.element.isRequired</p>
+<p><strong>9. react全家桶</strong><br>webpack和其它基本已经知道了；给个前端ui库吧：reactui库有个ant design 和material ui、 boostrap<br><br>flux网上说文档又臭又长，转redux</p>
+</pane>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -999,7 +1110,7 @@ React.Children.map(this.props.children, function (child) {
   
   
 
-  <article class="post post-type-picture " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-picture " itemscope itemtype="//schema.org/Article">
 
     
 
@@ -1012,23 +1123,17 @@ React.Children.map(this.props.children, function (child) {
       
         
           
+            <a href="/2016/10/12/189/"><div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/e1.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
+<ul>
+<li>vscode 插件项</li>
+<li>桌面的<code>笔记.txt</code></li>
+</ul>
+</a>
           
-
-vscode 插件项
-桌面的笔记.txt
-
-
-          
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/12/189/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1060,7 +1165,7 @@ vscode 插件项
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1113,6 +1218,8 @@ vscode 插件项
           
 
           
+            
+          
 
           
 
@@ -1133,20 +1240,19 @@ vscode 插件项
       
         
           
-          今日为楼下写多线程的文件操作测试程序，记录下。
-CFile::shareDenyNone 表示允许其它进/线程访问（多线程时便用此CFile::shareDenyNone和CFile::shareDenyNone搭配，对文件边读边写）
-CFile::shareDenyRead 禁止其它进/线程读操作
-          ...
+            <p><strong>今日为楼下写多线程的文件操作测试程序，记录下。</strong></p>
+<p>CFile::shareDenyNone 表示允许其它进/线程访问（多线程时便用此CFile::shareDenyNone和CFile::shareDenyNone搭配，对文件边读边写）</p>
+<p>CFile::shareDenyRead 禁止其它进/线程读操作</p>
+<p>CFile::shareDenyWrite 禁止其它进/线程写操作</p>
+<p>CFile::shareExclusive 禁止其它进/线程读写操作</p>
+<p>CFile::modeNoTruncate 它必须要和CFile::modeCreate连用保证稳定性。好吧对于它一般是写操作时用的多，<br><br>CFile::modeCreate会清零文件，即原来文件80k，你写入50k，这下文件就只有50k新数据。<br><br>CFile::modeNoTruncate不会清零文件，即原来80k，写入50k，这下文件就有50k新数据和30k旧数据。如果想对尾部添加的话直接seek到end就好<br></p>
+<p><strong>CFile::osNoBuffer 不会有系统缓存。它太特殊了，今天就卡这儿；它对文件操作必须按照卷大小来操作：也就是说添加此属性的CFile，seek、read、write的操作大小必须是1024的倍数</strong> </p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/27/188/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1178,7 +1284,7 @@ CFile::shareDenyRead 禁止其它进/线程读操作
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1231,6 +1337,8 @@ CFile::shareDenyRead 禁止其它进/线程读操作
           
 
           
+            
+          
 
           
 
@@ -1251,20 +1359,15 @@ CFile::shareDenyRead 禁止其它进/线程读操作
       
         
           
-          --save-dev 是你开发时候依赖的东西，--save 是你发布之后还依赖的东西。
-比如，你写 ES6 代码，如果你想编译成 ES5 发布那么 babel 就是devDependencies。如果你用了 jQuery，由于发布之后还是依赖jQuery，所以是dependencies。
-但是在 n
-          ...
+            <p><code>--save-dev</code> 是你开发时候依赖的东西，<code>--save</code> 是你发布之后还依赖的东西。</p>
+<p>比如，你写 ES6 代码，如果你想编译成 ES5 发布那么 babel 就是devDependencies。<br><br>如果你用了 jQuery，由于发布之后还是依赖jQuery，所以是dependencies。</p>
+<p>但是在 npm 里面除了二进制的依赖，似乎也不用区分是不是dev。<br><br>因为使用npm就是自己编译的意思，而不使用npm直接拿编译后的版本的，这些依赖项也看不到。</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/26/187/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1296,7 +1399,7 @@ CFile::shareDenyRead 禁止其它进/线程读操作
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1349,6 +1452,8 @@ CFile::shareDenyRead 禁止其它进/线程读操作
           
 
           
+            
+          
 
           
 
@@ -1369,19 +1474,16 @@ CFile::shareDenyRead 禁止其它进/线程读操作
       
         
           
-          今天死活断点不了，google了好久；发现有个debugger放入代码中就好了，可以看堆栈了。断点不了的问题至今没找到，气死人了。！
-好吧v2ex果然大神多，jsx需要编译产生sourcemap后才能被调试，所以webpack是标配。另外react-hot-loader（js库）和react-dev
-          ...
+            <p>今天死活断点不了，google了好久；发现有个<code>debugger</code>放入代码中就好了，可以看堆栈了。<br><br>断点不了的问题至今没找到，气死人了。！</p>
+<p>好吧v2ex果然大神多，jsx需要编译产生sourcemap后才能被调试，所以webpack是标配。另外react-hot-loader（js库）和react-devtools（google插件）不错</p>
+<p><code>Create React App</code>和<code>generator-react-webpack</code>会自动生成react项目，使用webpack自动打包，但是<code>dev-source-map</code>模式下无法调试。<br><br>其它模式参考：<a href="https://segmentfault.com/a/1190000004280859" target="_blank" rel="external">https://segmentfault.com/a/1190000004280859</a></p>
+<p>调试的jsx，一般都是被打包成js的，很好看，也方便调试（就google-&gt;source 那里找源码有点不好找，打包多了）。</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/25/186/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1439,7 +1541,7 @@ CFile::shareDenyRead 禁止其它进/线程读操作
       
 
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/picture/head.jpg"
                alt="XueCat" />
@@ -1489,7 +1591,7 @@ CFile::shareDenyRead 禁止其它进/线程读操作
               <span class="links-of-author-item">
                 <a href="https://github.com/" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-github"></i>
+                    <i class="fa fa-fw fa-github"></i>
                   
                   GitHub
                 </a>
@@ -1498,7 +1600,7 @@ CFile::shareDenyRead 禁止其它进/线程读操作
               <span class="links-of-author-item">
                 <a href="http://www.v2ex.com/" target="_blank" title="V2EX">
                   
-                    <i class="fa fa-globe"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   V2EX
                 </a>
@@ -1507,7 +1609,7 @@ CFile::shareDenyRead 禁止其它进/线程读操作
               <span class="links-of-author-item">
                 <a href="mailto:1446969391@qq.com" target="_blank" title="E-mail">
                   
-                    <i class="fa fa-envelope"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   E-mail
                 </a>
@@ -1519,7 +1621,7 @@ CFile::shareDenyRead 禁止其它进/线程读操作
         
         
           <div class="cc-license motion-element" itemprop="license">
-            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
               <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
             </a>
           </div>
@@ -1527,8 +1629,11 @@ CFile::shareDenyRead 禁止其它进/线程读操作
 
         
         
-          <div class="links-of-blogroll motion-element">
-            <div class="links-of-blogroll-title">友情链接</div>
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
@@ -1572,21 +1677,11 @@ CFile::shareDenyRead 禁止其它进/线程读操作
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">XueCat&emsp;</span>
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  <span id="busuanzi_container_page_pv" style='display:none'>
-    <span id="busuanzi_value_page_pv"></span>
-  </span>
-  <span>
-    <a href="http://service.ibruce.info" target="_blank" class="sl fa fa-globe fa-spin"></a>
-  </span>
-  <span id="busuanzi_container_site_uv" style='display:none'>
-    <span id="busuanzi_value_site_uv"></span>
-  </span>
+  <span class="author" itemprop="copyrightHolder">XueCat</span>
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
@@ -1622,56 +1717,64 @@ CFile::shareDenyRead 禁止其它进/线程读操作
 
 
 
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
   
 
 
 
   
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
 
 
 
-  
-  
 
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
-
-
-
-  
   
   
   <script type="text/javascript">
     // Popup Window;
-    var scrollTop = '';
-    var newHeight = '100';
     var isfetched = false;
     // Search DB path;
     var search_path = "search.xml";
@@ -1680,21 +1783,8 @@ CFile::shareDenyRead 禁止其它进/线程读操作
     }
     var path = "/" + search_path;
     // monitor main search box;
-    $('#search-input').on('input', function() {
-    if ($(this).val().length <= 0) {
-      $('#search-result').hide();
-      return;
-    }
-    $('i.search-keyword').text($(this).val());
-    $('a.search-result[href!="#"]').each(function(){
-      this.href = this.href.replace(/\=(.*?)(?=%20site)/,'='+$('#search-input').val())
-    });
-    $('#search-result').show();
-    });
 
     function proceedsearch() {
-      $('#local-search-input').val($('#search-input').val());
-      document.getElementById('local-search-input').dispatchEvent(new Event('input'));
       $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
       $('.popup').toggle();
 
@@ -1706,14 +1796,6 @@ CFile::shareDenyRead 禁止其它进/线程读操作
         url: path,
         dataType: "xml",
         async: true,
-        beforeSend: function (){
-            $('.site-search-form>span').toggleClass('fa-spin');
-            $('#search-input').prop('disabled', function(i, v) { return !v; });
-        },
-        complete: function (){
-            $('.site-search-form>span').toggleClass('fa-spin');
-            $('#search-input').prop('disabled', function(i, v) { return !v; });
-        },
         success: function( xmlResponse ) {
             // get the contents from search data
             isfetched = true;
@@ -1729,35 +1811,32 @@ CFile::shareDenyRead 禁止其它进/线程读操作
             var $resultContent = document.getElementById(content_id);
             $input.addEventListener('input', function(){
                 var matchcounts = 0;
-                var str='<ul class=\"search-result-list\">';                
+                var str='<ul class=\"search-result-list\">';
                 var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
                 $resultContent.innerHTML = "";
                 if (this.value.trim().length > 1) {
                 // perform local searching
                 datas.forEach(function(data) {
-                    var isMatch = true;
+                    var isMatch = false;
                     var content_index = [];
                     var data_title = data.title.trim().toLowerCase();
                     var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = data.url;
+                    var data_url = decodeURIComponent(data.url);
                     var index_title = -1;
                     var index_content = -1;
                     var first_occur = -1;
                     // only match artiles with not empty titles and contents
-                    if(data_title != '' && data_content != '') {
+                    if(data_title != '') {
                         keywords.forEach(function(keyword, i) {
                             index_title = data_title.indexOf(keyword);
                             index_content = data_content.indexOf(keyword);
-                            if( index_title < 0 && index_content < 0 ){
-                                isMatch = false;
-                            } else {
-                                if (index_content < 0) {
-                                    index_content = 0;
-                                }
-                                if (i == 0) {
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
                                     first_occur = index_content;
                                 }
-                            }
+                            } 
+							
                         });
                     }
                     // show search results
@@ -1784,7 +1863,7 @@ CFile::shareDenyRead 禁止其它进/线程读操作
                                 var regS = new RegExp(keyword, "gi");
                                 match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
                             });
-                            
+
                             str += "<p class=\"search-result\">" + match_content +"...</p>"
                         }
                         str += "</li>";
@@ -1800,14 +1879,7 @@ CFile::shareDenyRead 禁止其它进/线程读操作
     });}
 
     // handle and trigger popup window;
-    $(window).bind('scroll', function() {
-      scrollTop = $( window ).scrollTop();
-      newHeight = scrollTop + 100;
-    });
-    $('#search-result a').mousedown(function(e) {
-        window.location.href = this.href;
-      });
-    $('.popup-trigger').mousedown(function(e) {
+    $('.popup-trigger').click(function(e) {
       e.stopPropagation();
       if (isfetched == false) {
         searchFunc(path, 'local-search-input', 'local-search-result');
@@ -1815,20 +1887,6 @@ CFile::shareDenyRead 禁止其它进/线程读操作
         proceedsearch();
       };
 
-    });
-
-    $('#search-input').focus(function() {
-      if(jQuery(window).width() < 750) {
-        $('body').animate({
-          scrollTop: $('.site-search').offset().top
-        }, 500);
-      };
-      if ($(this).val().length > 0) {
-        $('#search-result').show();
-      }
-    });
-    $('#search-input').blur(function() {
-      $('#search-result').hide();
     });
 
     $('.popup-btn-close').click(function(e){
@@ -1841,13 +1899,15 @@ CFile::shareDenyRead 禁止其它进/线程读操作
     });
   </script>
 
+
+  
+
   
 
   
 
   
+
 
 </body>
-<!-- 背景动画 -->
-<script type="text/javascript" src="/js/src/particle.js"></script>
 </html>

@@ -3,7 +3,7 @@
 $(document).ready(function () {
   NexT.motion = {};
 
-  sidebarToggleLines = {
+  var sidebarToggleLines = {
     lines: [],
     push: function (line) {
       this.lines.push(line);

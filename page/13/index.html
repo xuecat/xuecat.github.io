@@ -29,7 +29,7 @@
 
   
   
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -55,7 +55,7 @@
   
     
     
-    <link href="//fonts.useso.com/css?family=Galdeano:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -63,9 +63,9 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="XueCat, NexT, Blog" />
@@ -79,7 +79,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/picture/favicon.ico?v=5.0.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/picture/favicon.ico?v=5.0.2" />
 
 
 
@@ -102,11 +102,11 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: {"position":"right","display":"post"},
+    sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
     }
   };
@@ -115,24 +115,17 @@
 
 
 
+  <link rel="canonical" href="https://xuecat.github.io/page/13/"/>
+
+
   <title> XueCat </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
   
 
 
-
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?8aa9f2526a323bf7a14e6fe9de652df7";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
 
 
 
@@ -146,12 +139,12 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right 
+  <div class="container one-collumn sidebar-position-left 
    page-home 
  ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
@@ -167,25 +160,23 @@
 
 <div class="site-nav-toggle">
   <button>
-    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
   </button>
 </div>
 
-
 <nav class="site-nav">
   
-  
 
   
-    <ul id="menu" class="menu menu-left">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -195,7 +186,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -205,7 +196,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             标签
           </a>
@@ -215,7 +206,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -225,7 +216,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             关于
           </a>
@@ -233,24 +224,29 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
   
     <div class="site-search">
       
-  <form class="site-search-form" >
-  <span class="search-icon fa fa-search"></span>
-  <input type="text" id="search-input">
-  <div id="search-result"><ul class="search-result-list"><li><a href="//www.baidu.com/s?wd=XXX%20site%3Ahttps://xuecat.github.io" class="search-result">百度搜索 <i class="search-keyword">XXX</i></a></li><li><a href="//www.google.com/search?q=XXX%20site%3Ahttps://xuecat.github.io" class="search-result">谷歌搜索 <i class="search-keyword">XXX</i></a></li><li><a href="#" class="popup-trigger search-result">本地搜索</a></li></ul>
-  </div>
-</form>
- <div class="popup">
-  <span class="search-icon fa fa-search"></span>
-  <input type="text" id="local-search-input">
-  <div id="local-search-result"></div>
-  <span class="popup-btn-close">close</span>
- </div>
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
 
 
     </div>
@@ -276,7 +272,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -329,6 +325,8 @@
           
 
           
+            
+          
 
           
 
@@ -349,24 +347,18 @@
       
         
           
-          他头文件用namespace包括。
-cpp文件也用namespace包括。
-cpp包含个stadx.h文件
-stadx.h文件包含duilib.h文件
-所有的东西写在duilib.h文件里面
-亮点在cpp文件包括，然后包含。导致头文件不用包含。
+            <p>他头文件用namespace包括。</p>
+<p>cpp文件也用namespace包括。</p>
+<p>cpp包含个stadx.h文件</p>
+<p>stadx.h文件包含duilib.h文件</p>
+<p>所有的东西写在duilib.h文件里面</p>
+<p>亮点在cpp文件包括，然后包含。导致头文件不用包含。</p>
 
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/10/01/74/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -398,7 +390,7 @@ stadx.h文件包含duilib.h文件
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -451,6 +443,8 @@ stadx.h文件包含duilib.h文件
           
 
           
+            
+          
 
           
 
@@ -467,13 +461,13 @@ stadx.h文件包含duilib.h文件
 
       
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+        <div class="post-gallery" itemscope itemtype="//schema.org/ImageGallery">
           
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/o.jpg" rel="gallery_civ9jycs700f2zwcxtzy4atpo"
-                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                 href="/picture/o.jpg" rel="gallery_civ9lgki500ey90cxguseo6ez"
+                 itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/o.jpg" itemprop="contentUrl"/>
               </a>
             
@@ -487,24 +481,24 @@ stadx.h文件包含duilib.h文件
       
         
           
-          对学习编程者的忠告：多用小脑和手，少用大脑、眼睛和嘴，会更快地学会编程！
-眼过千遍不如手过一遍！
-书看千行不如手敲一行！
-手敲千行不如单步一行！
-单步源代码千行不如单步Debug版对应汇编一行！
-单步Debug版对应汇编千行不如单步Release版对应汇编一行！
-单步类的实例“构造”或“复制”或“作
-          ...
+            <p>对学习编程者的忠告：<br>多用小脑和手，少用大脑、眼睛和嘴，会更快地学会编程！</p>
+<p>眼过千遍不如手过一遍！</p>
+<p>书看千行不如手敲一行！</p>
+<p>手敲千行不如单步一行！</p>
+<p>单步源代码千行不如单步Debug版对应汇编一行！</p>
+<p>单步Debug版对应汇编千行不如单步Release版对应汇编一行！</p>
+<p>单步类的实例“构造”或“复制”或“作为函数参数”或“作为函数返回值返回”或“参加各种运算”或“退出作用域”的语句对应的汇编代码几步后，</p>
+<p>就会来到该类的“构造函数”或“复制构造函数”或“运算符重载”或“析构函数”对应的C/C++源代码处。</p>
+<p>VC调试时按Alt+8、Alt+7、Alt+6和Alt+5,打开汇编窗口、堆栈窗口、内存窗口和寄存器窗口看每句C对应的汇编、单步执行并观察相应堆栈、内存和寄存器变化，</p>
+<p>这样过一遍不就啥都明白了吗。</p>
+<p>对VC来说，所谓‘调试时’就是编译连接通过以后，按F10或F11键单步执行一步以后的时候，或者在某行按F9设了断点后按F5执行停在该断点处的时候。</p>
+<p>（Turbo C或Borland C用Turbo Debugger调试,Linux或Unix下用GDB调试时,看每句C对应的汇编并单步执行观察相应内存和寄存器变化。）</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/29/72/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -536,7 +530,7 @@ stadx.h文件包含duilib.h文件
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -589,6 +583,8 @@ stadx.h文件包含duilib.h文件
           
 
           
+            
+          
 
           
 
@@ -609,22 +605,25 @@ stadx.h文件包含duilib.h文件
       
         
           
-          ON_COMMAND 以及 ON_COMMAND_RANGE 是用于处理菜单项或工具栏按钮的命令消息的对于复选框这样的控件，请使用ON_CONTROL_RANGE
+            <p>ON_COMMAND 以及 ON_COMMAND_RANGE 是用于处理菜单项或工具栏按钮的命令消息的<br>对于复选框这样的控件，请使用ON_CONTROL_RANGE</p>
+<ol>
+<li><p>打开 resource.h，将你的复选框控件ID进行连续编号，例如1001，1002…</p>
+</li>
+<li><p>在对话框类的头文件中添加公有成员函数：afx_msg void OnCheckBox(UINT uID) ;</p>
+</li>
+<li><p>在对话框类的cpp文件中BEGIN_MESSAGE_MAP(CTestDlg, CDialog) 的 //}}AFX_MSG_MAP下添加代码 ON_CONTROL_RANGE(BN_CLICKED,1001,1003,OnCheckBox)</p>
+</li>
+<li><p>然后在cpp文件中添加函数void CTestDlg::OnCheckBox(UINT uID) {}</p>
+</li>
+<li><p>在函数内判断 uID，来确定用户单击了哪项复选框，并作相应处理。</p>
+</li>
+</ol>
 
-打开 resource.h，将你的复选框控件ID进行连续编号，例如1001，1002…
-
-在对话框类的头文件中添加公有成员函数：afx
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/28/71/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -656,7 +655,7 @@ stadx.h文件包含duilib.h文件
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -709,6 +708,8 @@ stadx.h文件包含duilib.h文件
           
 
           
+            
+          
 
           
 
@@ -729,21 +730,15 @@ stadx.h文件包含duilib.h文件
       
         
           
-          首先注意不能在.h头文件中定义全局变量，否则只要其他文件包括了该头文件，就会出现already defined in *.obj的错误。
-应该把全局变量放在.cpp文件中定义，然后在其他文件中用到该变量时用extern声明一下。
-即使在.h中定义全局变量，用extern可以避免。
+            <p>首先注意不能在.h头文件中定义全局变量，否则只要其他文件包括了该头文件，就会出现already defined in *.obj的错误。</p>
+<p>应该把全局变量放在.cpp文件中定义，然后在其他文件中用到该变量时用extern声明一下。</p>
+<p>即使在.h中定义全局变量，用extern可以避免。</p>
 
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/28/70/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -775,7 +770,7 @@ stadx.h文件包含duilib.h文件
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -828,6 +823,8 @@ stadx.h文件包含duilib.h文件
           
 
           
+            
+          
 
           
 
@@ -848,20 +845,50 @@ stadx.h文件包含duilib.h文件
       
         
           
-          vector
-表示一段连续的内存区域每个元素被顺序存储在这段内存中对vector的随机访问比如先访问元素5 然后访问15然后再访问7等等效率很高，因为每次访问离vector起始处的位移都是固定的。
-但是在任意位置而不是在vector末尾插人元素则效率很低 ，因为它需要把待插入元素右边的每个元素都拷贝
-          ...
+            <p><strong>vector</strong></p>
+<p>表示一段连续的内存区域每个元素被顺序存储在这段内存中对vector的随机访问比如先访问元素5 然后访问15然后再访问7等等效率很高，因为每次访问离vector起始处的位移都是固定的。</p>
+<p>但是在任意位置而不是在vector末尾插人元素则效率很低 ，因为它需要把待插入元素右边的每个元素都拷贝一遍。</p>
+<p>类似地删除任意一个而不是vector 的最后一个元素效率同样很低。<br>因为待删除元素右边的每个元素都必须被复制一遍这种代价对于大型的复杂的类对象来说尤其大。</p>
+<p><strong>deque</strong></p>
+<p>一个deque 也表示一段连续的内存区域但是与vector不同的是它支持高效地在其首部插入和删除元素它通过两级数组结构来实现一级表示实际的容器第二级指向容器的首和尾</p>
+<p><strong>list</strong></p>
+<p>List表示非连续的内存区域并通过一对指向首尾元素的指针双向链接起来从而允许向前和向后两个方向进行遍历在list的任意位置插入和删除元素的效率都很高</p>
+<p>指针必须被重新赋值但是不需要用拷贝元素来实现移动</p>
+<p>另一方面它对随机访问的支持并不好，访问一个元素需要遍历中间的元素另外每个元素还有两个指针的额外空间开销  </p>
+<p><strong>如果我们需要随机访问一个容器则vector要比list好得多 。</strong></p>
+<p><strong>如果我们已知要存储元素的个数则vector 又是一个比list好的选择。</strong></p>
+<p><strong>如果我们需要的不只是在容器两端插入和删除元素则list显然要比vector好</strong></p>
+<p><strong>除非我们需要在容器首部插入和删除元素否则vector要比deque好</strong></p>
+<p>1 vector向量 相当于一个数组</p>
+<p>在内存中分配 一块连续的内存空间进行存储。支持不指定vector大小的存储。STL内部实现时，首先分配一个非常大的内存空间预备进行存储，即 capacituy（）函数返回的大小，当超过此分配的空间时再整体重新放分配一块内存存储，这给人以vector可以不指定vector即一个连续内存 的大小的感觉。通常此默认的内存分配能完成大部分情况下的存储。</p>
+<p>优点：</p>
+<pre><code>(1) 不指定一块内存大小的数组的连续存储，即可以像数组一样操作，但可以对此数组
+进行动态操作。通常体现在push_back() pop_back()
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/24/69/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+(2) 随机访问方便，即支持[ ]操作符和vector.at()
+
+(3) 节省空间。
+</code></pre><p>缺点：</p>
+<pre><code>(1) 在内部进行插入删除操作效率低。
+(2) 只能在vector的最后进行push和pop，不能在vector的头进行push和pop。
+(3) 当动态添加的数据超过vector默认分配的大小时要进行整体的重新分配、拷贝与释放
+</code></pre><p>2 list双向链表</p>
+<p>每一个结点都包括一个信息快Info、一个前驱指针Pre、一个后驱指针Post。可以不分配必须的内存大小方便的进行添加和删除操作。使用的是非连续的内存空间进行存储。</p>
+<p>优点：<br>    (1) 不使用连续内存完成动态操作。<br>    (2) 在内部方便的进行插入和删除操作<br>    (3) 可在两端进行push、pop<br>缺点：<br>    (1) 不能进行内部的随机访问，即不支持[ ]操作符和vector.at()<br>    (2) 相对于verctor占用内存多</p>
+<p>3 deque双端队列 double-end queue</p>
+<p>deque是在功能上合并了vector和list。</p>
+<p>优点：<br>    (1) 随机访问方便，即支持[ ]操作符和vector.at()<br>    (2) 在内部方便的进行插入和删除操作<br>    (3) 可在两端进行push、pop</p>
+<p>缺点：<br>    (1) 占用内存多</p>
+<p>使用区别：</p>
+<p>1 如果你需要高效的随即存取，而不在乎插入和删除的效率，使用vector</p>
+<p>2 如果你需要大量的插入和删除，而不关心随即存取，则应使用list</p>
+<p>3 如果你需要随即存取，而且关心两端数据的插入和删除，则应使用deque</p>
+
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -893,7 +920,7 @@ stadx.h文件包含duilib.h文件
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -946,6 +973,8 @@ stadx.h文件包含duilib.h文件
           
 
           
+            
+          
 
           
 
@@ -966,22 +995,16 @@ stadx.h文件包含duilib.h文件
       
         
           
-          我擦，又是漫长的调试。
-自定义的窗口居然这样，服了。
-原来我在OnFinalMessage里面已经delete了
-所以后面的再次调用出错。写下，记录。
+            <p>我擦，又是漫长的调试。</p>
+<p>自定义的窗口居然这样，服了。</p>
+<p>原来我在OnFinalMessage里面已经delete了</p>
+<p>所以后面的再次调用出错。写下，记录。</p>
 
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/24/68/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1013,7 +1036,7 @@ stadx.h文件包含duilib.h文件
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1066,6 +1089,8 @@ stadx.h文件包含duilib.h文件
           
 
           
+            
+          
 
           
 
@@ -1086,18 +1111,16 @@ stadx.h文件包含duilib.h文件
       
         
           
-          先看代码：++1234567891011121314151617181920212223242526272829303132333435class Baseclass&#123;public:	Baseclass() &#123;	&#125;	~Baseclass()&#123;&#125;;		
-          ...
+            <figure class="highlight c"><figcaption><span>先看代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Baseclass</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	Baseclass() &#123;</div><div class="line">	&#125;</div><div class="line">	~Baseclass()&#123;&#125;;</div><div class="line">	</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">demo</span> <span class="params">(<span class="keyword">int</span> a)</span> <span class="keyword">const</span> </span>&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"asdf"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">class</span> Driverclass : <span class="keyword">public</span> Baseclass</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	Driverclass()&#123;&#125;</div><div class="line">	~Driverclass()&#123;&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">demo</span><span class="params">(<span class="keyword">int</span> a)</span> <span class="keyword">const</span> </span>&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"qwe"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	Baseclass* pb;</div><div class="line">	Baseclass*  p = <span class="keyword">new</span> Baseclass;</div><div class="line">	Driverclass* d = <span class="keyword">new</span> Driverclass;</div><div class="line">	pb = p;</div><div class="line">	pb-&gt;demo(<span class="number">2</span>);</div><div class="line">	pb = d;</div><div class="line">	pb-&gt;demo(<span class="number">2</span>);</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>看demo虽然是driverclass的私有函数，可通过pb我们却访问到了他的私有成员。</p>
+<p>如果直接：d-&gt;demo(2)必定会报错。</p>
+<p>因为demo在基类就被声明为public了，所以如此的间接访问是可以的。</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/23/67/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1129,7 +1152,131 @@ stadx.h文件包含duilib.h文件
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/09/20/55/" itemprop="url">
+                  SIGPIPE信号(55)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-09-20T03:31:58+08:00" content="2014-09-20">
+              2014-09-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/第三方库/" itemprop="url" rel="index">
+                    <span itemprop="name">第三方库</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>使用libevent编写websocket服务端时遇到了一个问题：</p>
+<p>浏览器与服务端建立连接后，若刷新或关闭浏览器窗口（未监听相应事件并处理），服务端无法得知连接断开，按理说，这种情况属于client异常终止，跟拔网线的情况类似。这种情况下，服务端不知情，仍保留此连接，仍按照既定逻辑向client写数据，写了两次后，服务端程序终止（多次测试，均是第2次后终止），不是崩溃，是异常终止，非常不解。</p>
+<p> ，得知是SIGPIPE信号导致程序终止。</p>
+<p>查了相关资料，大致明白：连接建立，若某一端关闭连接，而另一端仍然向它写数据，第一次写数据后会收到RST响应，此后再写数据，内核将向进程发出SIGPIPE信号，通知进程此连接已经断开。而SIGPIPE信号的默认处理是终止程序，导致上述问题的发生。</p>
+<p>为避免这种情况，可以选择忽略SIGPIPE信号，不执行任何动作。</p>
+<pre><code>#include &lt;signal.h&gt;
+//SIGPIPE ignore
+struct sigaction act;
+act.sa_handler = SIG_IGN;
+if (sigaction(SIGPIPE, &amp;act, NULL) == 0) {
+    LOG(&quot;SIGPIPE ignore&quot;);
+}
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1182,6 +1329,8 @@ stadx.h文件包含duilib.h文件
           
 
           
+            
+          
 
           
 
@@ -1202,18 +1351,28 @@ stadx.h文件包含duilib.h文件
       
         
           
-          直接上代码++123456789101112131415161718192021int minuus(int a, int b)&#123;	cout &lt;&lt; a &lt;&lt; endl;	cout &lt;&lt; b &lt;&lt; endl;	return a-b;&#125;
-          ...
+            <figure class="highlight c"><figcaption><span>直接上代码++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">minuus</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">return</span> a-b;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> cc = <span class="number">4</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; minuus(cc++, cc++) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	</div><div class="line">	<span class="keyword">while</span> (cc--)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"a"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
+<p>vc6编译环境：</p>
+<p>minuus（cc, cc++）；while(–cc) 输出：4,4,0 aaaa</p>
+<p>minuus（++cc, ++cc）；while(–cc) 输出：6,5,0 aaaaa</p>
+<p>minuus（cc++, ++cc）；while(–cc) 输出：5,5,0 aaaaa</p>
+<p><strong>分析：首先vc6对参数入栈默认是从右到左的，然后入栈参数必定存在赋值临时参数(意思就是先拷贝了数据值再进行操作，不然第一个示例中：cc++确实执行了，却没有传入值)。</strong></p>
+<p>vs2012编译环境：</p>
+<p>minuus（cc, cc++）；while(–cc) 输出：5 4 1 5(和想象中的一样)</p>
+<p>minuus（++cc, ++cc）；while(–cc) 输出：6 6 0 6(不同了)</p>
+<p>minuus（cc++, ++cc）；while(–cc) 输出：5 6 -1 6(不同了)</p>
+<p>minuus（cc++, cc++）；while(–cc) 输出：5 4 1 6(不同)</p>
+<p>minuus(cc, ++cc) :5 5 0 5</p>
+<p>minuus(++cc, cc++) 6 4 2 6</p>
+<p>minuus(++cc, cc) 5 5 0 5</p>
+<p><strong>分析：首先它会对++c进行预先处理， 所以cc会自加，玩了后它才开始参数从右到左进行入栈处理。<br>有cc++就处理。</strong></p>
+<p>相比vc6对数据的自加进行了修改，但是对++c的处理并不是很好。</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/20/65/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1245,7 +1404,7 @@ stadx.h文件包含duilib.h文件
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1257,8 +1416,8 @@ stadx.h文件包含duilib.h文件
             
               
                 
-                <a class="post-title-link" href="/2014/09/20/64/" itemprop="url">
-                  指针内存长度和大小(64)
+                <a class="post-title-link" href="/2014/09/20/66/" itemprop="url">
+                  输出中文(66)
                 </a>
               
             
@@ -1298,123 +1457,7 @@ stadx.h文件包含duilib.h文件
           
 
           
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-           今天字符处理遇见这个问题：我new了一块内存，然后sizeof()；strlen()；都正常（一个返回4，一个返回分配大小）
-之后我用了ZeroMemory来分配，发现有异议了。sizeof(); strlen(); 一个返回4，一个返回0；     原来用了这个函数会置空内存。
-
-          
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/20/64/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
             
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/20/62/" itemprop="url">
-                  string和wstring(62)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-20T03:31:58+08:00" content="2014-09-20">
-              2014-09-20
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
           
 
           
@@ -1436,22 +1479,22 @@ stadx.h文件包含duilib.h文件
       
         
           
-          今天用string来find一个中文符号，首先返回符号位置正确。然后符号为界，截取字符串出现问题；
-分析原因：中文符号在string中是占用两个字节的。而string对所有的字符串是一个字符一个字节的
-，所以按位取时，夺取了一个字节，导致数据获取失败。
-用wstring进行存取，可以完全避免。
-学到
-          ...
+            <pre><code> cout.imbue(locale(&quot;&quot;));
+char data[] = &quot;dfwe玩GIS股份&quot;;
+for (size_t i = 0; i &lt; strlen(data); i++)
+{
+    cout &lt;&lt; data[i] &lt;&lt; endl;
+}
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/20/62/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+cout &lt;&lt; data;
+</code></pre><p>结果：第一个无法输出中文，第二个可以。</p>
+<p>分析：昨天已经讲了，今天写下只是写个例子。</p>
+
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1509,7 +1552,7 @@ stadx.h文件包含duilib.h文件
       
 
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/picture/head.jpg"
                alt="XueCat" />
@@ -1559,7 +1602,7 @@ stadx.h文件包含duilib.h文件
               <span class="links-of-author-item">
                 <a href="https://github.com/" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-github"></i>
+                    <i class="fa fa-fw fa-github"></i>
                   
                   GitHub
                 </a>
@@ -1568,7 +1611,7 @@ stadx.h文件包含duilib.h文件
               <span class="links-of-author-item">
                 <a href="http://www.v2ex.com/" target="_blank" title="V2EX">
                   
-                    <i class="fa fa-globe"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   V2EX
                 </a>
@@ -1577,7 +1620,7 @@ stadx.h文件包含duilib.h文件
               <span class="links-of-author-item">
                 <a href="mailto:1446969391@qq.com" target="_blank" title="E-mail">
                   
-                    <i class="fa fa-envelope"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   E-mail
                 </a>
@@ -1589,7 +1632,7 @@ stadx.h文件包含duilib.h文件
         
         
           <div class="cc-license motion-element" itemprop="license">
-            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
               <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
             </a>
           </div>
@@ -1597,8 +1640,11 @@ stadx.h文件包含duilib.h文件
 
         
         
-          <div class="links-of-blogroll motion-element">
-            <div class="links-of-blogroll-title">友情链接</div>
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
@@ -1642,21 +1688,11 @@ stadx.h文件包含duilib.h文件
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">XueCat&emsp;</span>
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  <span id="busuanzi_container_page_pv" style='display:none'>
-    <span id="busuanzi_value_page_pv"></span>
-  </span>
-  <span>
-    <a href="http://service.ibruce.info" target="_blank" class="sl fa fa-globe fa-spin"></a>
-  </span>
-  <span id="busuanzi_container_site_uv" style='display:none'>
-    <span id="busuanzi_value_site_uv"></span>
-  </span>
+  <span class="author" itemprop="copyrightHolder">XueCat</span>
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
@@ -1692,56 +1728,64 @@ stadx.h文件包含duilib.h文件
 
 
 
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
   
 
 
 
   
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
 
 
 
-  
-  
 
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
-
-
-
-  
   
   
   <script type="text/javascript">
     // Popup Window;
-    var scrollTop = '';
-    var newHeight = '100';
     var isfetched = false;
     // Search DB path;
     var search_path = "search.xml";
@@ -1750,21 +1794,8 @@ stadx.h文件包含duilib.h文件
     }
     var path = "/" + search_path;
     // monitor main search box;
-    $('#search-input').on('input', function() {
-    if ($(this).val().length <= 0) {
-      $('#search-result').hide();
-      return;
-    }
-    $('i.search-keyword').text($(this).val());
-    $('a.search-result[href!="#"]').each(function(){
-      this.href = this.href.replace(/\=(.*?)(?=%20site)/,'='+$('#search-input').val())
-    });
-    $('#search-result').show();
-    });
 
     function proceedsearch() {
-      $('#local-search-input').val($('#search-input').val());
-      document.getElementById('local-search-input').dispatchEvent(new Event('input'));
       $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
       $('.popup').toggle();
 
@@ -1776,14 +1807,6 @@ stadx.h文件包含duilib.h文件
         url: path,
         dataType: "xml",
         async: true,
-        beforeSend: function (){
-            $('.site-search-form>span').toggleClass('fa-spin');
-            $('#search-input').prop('disabled', function(i, v) { return !v; });
-        },
-        complete: function (){
-            $('.site-search-form>span').toggleClass('fa-spin');
-            $('#search-input').prop('disabled', function(i, v) { return !v; });
-        },
         success: function( xmlResponse ) {
             // get the contents from search data
             isfetched = true;
@@ -1799,35 +1822,32 @@ stadx.h文件包含duilib.h文件
             var $resultContent = document.getElementById(content_id);
             $input.addEventListener('input', function(){
                 var matchcounts = 0;
-                var str='<ul class=\"search-result-list\">';                
+                var str='<ul class=\"search-result-list\">';
                 var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
                 $resultContent.innerHTML = "";
                 if (this.value.trim().length > 1) {
                 // perform local searching
                 datas.forEach(function(data) {
-                    var isMatch = true;
+                    var isMatch = false;
                     var content_index = [];
                     var data_title = data.title.trim().toLowerCase();
                     var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = data.url;
+                    var data_url = decodeURIComponent(data.url);
                     var index_title = -1;
                     var index_content = -1;
                     var first_occur = -1;
                     // only match artiles with not empty titles and contents
-                    if(data_title != '' && data_content != '') {
+                    if(data_title != '') {
                         keywords.forEach(function(keyword, i) {
                             index_title = data_title.indexOf(keyword);
                             index_content = data_content.indexOf(keyword);
-                            if( index_title < 0 && index_content < 0 ){
-                                isMatch = false;
-                            } else {
-                                if (index_content < 0) {
-                                    index_content = 0;
-                                }
-                                if (i == 0) {
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
                                     first_occur = index_content;
                                 }
-                            }
+                            } 
+							
                         });
                     }
                     // show search results
@@ -1854,7 +1874,7 @@ stadx.h文件包含duilib.h文件
                                 var regS = new RegExp(keyword, "gi");
                                 match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
                             });
-                            
+
                             str += "<p class=\"search-result\">" + match_content +"...</p>"
                         }
                         str += "</li>";
@@ -1870,14 +1890,7 @@ stadx.h文件包含duilib.h文件
     });}
 
     // handle and trigger popup window;
-    $(window).bind('scroll', function() {
-      scrollTop = $( window ).scrollTop();
-      newHeight = scrollTop + 100;
-    });
-    $('#search-result a').mousedown(function(e) {
-        window.location.href = this.href;
-      });
-    $('.popup-trigger').mousedown(function(e) {
+    $('.popup-trigger').click(function(e) {
       e.stopPropagation();
       if (isfetched == false) {
         searchFunc(path, 'local-search-input', 'local-search-result');
@@ -1885,20 +1898,6 @@ stadx.h文件包含duilib.h文件
         proceedsearch();
       };
 
-    });
-
-    $('#search-input').focus(function() {
-      if(jQuery(window).width() < 750) {
-        $('body').animate({
-          scrollTop: $('.site-search').offset().top
-        }, 500);
-      };
-      if ($(this).val().length > 0) {
-        $('#search-result').show();
-      }
-    });
-    $('#search-input').blur(function() {
-      $('#search-result').hide();
     });
 
     $('.popup-btn-close').click(function(e){
@@ -1911,13 +1910,15 @@ stadx.h文件包含duilib.h文件
     });
   </script>
 
+
+  
+
   
 
   
 
   
+
 
 </body>
-<!-- 背景动画 -->
-<script type="text/javascript" src="/js/src/particle.js"></script>
 </html>

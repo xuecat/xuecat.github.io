@@ -29,7 +29,7 @@
 
   
   
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -55,7 +55,7 @@
   
     
     
-    <link href="//fonts.useso.com/css?family=Galdeano:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -63,9 +63,9 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="XueCat, NexT, Blog" />
@@ -79,7 +79,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/picture/favicon.ico?v=5.0.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/picture/favicon.ico?v=5.0.2" />
 
 
 
@@ -102,11 +102,11 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: {"position":"right","display":"post"},
+    sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
     }
   };
@@ -115,24 +115,17 @@
 
 
 
+  <link rel="canonical" href="https://xuecat.github.io/page/8/"/>
+
+
   <title> XueCat </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
   
 
 
-
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?8aa9f2526a323bf7a14e6fe9de652df7";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
 
 
 
@@ -146,12 +139,12 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right 
+  <div class="container one-collumn sidebar-position-left 
    page-home 
  ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
@@ -167,25 +160,23 @@
 
 <div class="site-nav-toggle">
   <button>
-    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
   </button>
 </div>
 
-
 <nav class="site-nav">
   
-  
 
   
-    <ul id="menu" class="menu menu-left">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -195,7 +186,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -205,7 +196,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             标签
           </a>
@@ -215,7 +206,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -225,7 +216,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             关于
           </a>
@@ -233,24 +224,29 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
   
     <div class="site-search">
       
-  <form class="site-search-form" >
-  <span class="search-icon fa fa-search"></span>
-  <input type="text" id="search-input">
-  <div id="search-result"><ul class="search-result-list"><li><a href="//www.baidu.com/s?wd=XXX%20site%3Ahttps://xuecat.github.io" class="search-result">百度搜索 <i class="search-keyword">XXX</i></a></li><li><a href="//www.google.com/search?q=XXX%20site%3Ahttps://xuecat.github.io" class="search-result">谷歌搜索 <i class="search-keyword">XXX</i></a></li><li><a href="#" class="popup-trigger search-result">本地搜索</a></li></ul>
-  </div>
-</form>
- <div class="popup">
-  <span class="search-icon fa fa-search"></span>
-  <input type="text" id="local-search-input">
-  <div id="local-search-result"></div>
-  <span class="popup-btn-close">close</span>
- </div>
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
 
 
     </div>
@@ -276,129 +272,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/05/18/123/" itemprop="url">
-                  编译后各个文件（123）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-05-18T03:33:58+08:00" content="2015-05-18">
-              2015-05-18
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          
-
-pdb这个是二进制代码和源代码映射文件。有了这个才能调试定位代码位置
-
-dump是进程内存镜像文件。用windbg打开。程序崩溃时用windbg生成下dmp文件，然后分析内存的错，而定位代码
-
-obj文件是目标文件，一般是程序编译后的二进制文件，在通过链接器和资源文件链接就成exe文件了。   
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/18/123/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -451,6 +325,8 @@ obj文件是目标文件，一般是程序编译后的二进制文件，在通�
           
 
           
+            
+          
 
           
 
@@ -471,44 +347,82 @@ obj文件是目标文件，一般是程序编译后的二进制文件，在通�
       
         
           
-          这几天翻了下笔记本，有好多知识没同步上来，写起！
-
-它们无本质区别，只是在编译的时候多添加了一些编译选项。
-
-
-
-
-DEBUG
-Are
-
-
-
-
-/mdd,mtd
-c语言运行库（不讲了）
-
-
-/od
-关闭优化开关
-
-
-/D
-给_DEBUG宏
-
-
-/ZI
-创建edit continue数据库（就是修改源
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/18/121/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <p>这几天翻了下笔记本，有好多知识没同步上来，写起！</p>
+<blockquote>
+<p>它们无本质区别，只是在编译的时候多添加了一些编译选项。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>DEBUG</th>
+<th style="text-align:center">Are</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/mdd,mtd</td>
+<td style="text-align:center">c语言运行库（不讲了）</td>
+</tr>
+<tr>
+<td>/od</td>
+<td style="text-align:center">关闭优化开关</td>
+</tr>
+<tr>
+<td>/D</td>
+<td style="text-align:center">给_DEBUG宏</td>
+</tr>
+<tr>
+<td>/ZI</td>
+<td style="text-align:center">创建edit continue数据库（就是修改源码不重新编译）</td>
+</tr>
+<tr>
+<td>/GI</td>
+<td style="text-align:center">捕获内存错误</td>
+</tr>
+<tr>
+<td>/GM</td>
+<td style="text-align:center">打开最小化重链接开关，减少链接时间</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>RELEASE</th>
+<th style="text-align:center">Are</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/mt,/md</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>/o1,/o2</td>
+<td style="text-align:center">优化开关，使程序最小或最快</td>
+</tr>
+<tr>
+<td>/d</td>
+<td style="text-align:center">“NDEBUG宏” 关闭条件编译调试代码开关(即不编译assert函数)</td>
+</tr>
+<tr>
+<td>/gf</td>
+<td style="text-align:center">合并重复字符串并放入只读内存</td>
+</tr>
+</tbody>
+</table>
+<p><strong>再来看下一个debug的现象</strong><br>/rtcx（插入动态检测代码）这个编译选项有点意思<br></p>
+<blockquote>
+<h4 id="0XCC初始化所有的自动变量-。"><a href="#0XCC初始化所有的自动变量-。" class="headerlink" title="0XCC初始化所有的自动变量 。"></a>0XCC初始化所有的自动变量 。<br></h4><p>所以会发现无论在栈控件只声明不定义会发现：int都是（-858993460）<br>char*一般都是0xccccccc，开辟个char数组会是：烫烫烫烫烫烫类型的</p>
+<p>####oxcd堆分配内存，0xdd填充delete内存，0xfd填充被保护内存<br><br>所以看到的堆new的数据：int永远是-842150451， char*：0xcdcdcdcd（屯屯屯屯屯屯屯）<br>还有一种情况，就是debug模式一般会保护new的内存，所以会向前后加0xfdfdfdfd保护内存防止越界访问（恰恰恰恰恰恰“麻蛋，金字旁的不会打，算了”）</p>
+</blockquote>
+<p><strong><em>最后说下俩个模式注意项</em></strong></p>
+<h4 id="网上说对windows的消息函数格式要严格要求（呵呵，-我没遇见过，反正一直都严格要求了）"><a href="#网上说对windows的消息函数格式要严格要求（呵呵，-我没遇见过，反正一直都严格要求了）" class="headerlink" title="网上说对windows的消息函数格式要严格要求（呵呵， 我没遇见过，反正一直都严格要求了）"></a>网上说对windows的消息函数格式要严格要求（呵呵， 我没遇见过，反正一直都严格要求了）<br></h4><h4 id="assert代码会忽略（遇见过）verify可以使用，但自己注意吧，我觉得这种宏。。"><a href="#assert代码会忽略（遇见过）verify可以使用，但自己注意吧，我觉得这种宏。。" class="headerlink" title="assert代码会忽略（遇见过）verify可以使用，但自己注意吧，我觉得这种宏。。"></a>assert代码会忽略（遇见过）verify可以使用，但自己注意吧，我觉得这种宏。。<br></h4><h3 id="未使用的变量会被去掉，网上有段这相关的代码，从代码的函数内存分配和入栈来想，确实会导致内存越界，结果跑的时候就是没变化感觉是坑，但还是注意吧。。-lt-gt"><a href="#未使用的变量会被去掉，网上有段这相关的代码，从代码的函数内存分配和入栈来想，确实会导致内存越界，结果跑的时候就是没变化感觉是坑，但还是注意吧。。-lt-gt" class="headerlink" title="未使用的变量会被去掉，网上有段这相关的代码，从代码的函数内存分配和入栈来想，确实会导致内存越界，结果跑的时候就是没变化感觉是坑，但还是注意吧。。&lt;&gt;"></a>未使用的变量会被去掉，网上有段这相关的代码，从代码的函数内存分配和入栈来想，确实会导致内存越界，结果跑的时候就是没变化感觉是坑，但还是注意吧。。&lt;&gt;</h3>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -540,7 +454,129 @@ c语言运行库（不讲了）
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/05/18/123/" itemprop="url">
+                  编译后各个文件（123）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-05-18T03:33:58+08:00" content="2015-05-18">
+              2015-05-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<ul>
+<li><p>pdb这个是二进制代码和源代码映射文件。有了这个才能调试定位代码位置</p>
+</li>
+<li><p>dump是进程内存镜像文件。用windbg打开。程序崩溃时用windbg生成下dmp文件，然后分析内存的错，而定位代码</p>
+</li>
+<li><p>obj文件是目标文件，一般是程序编译后的二进制文件，在通过链接器和资源文件链接就成exe文件了。   </p>
+</li>
+</ul>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -593,6 +629,8 @@ c语言运行库（不讲了）
           
 
           
+            
+          
 
           
 
@@ -613,23 +651,37 @@ c语言运行库（不讲了）
       
         
           
-          中断和异常(为了理解驱动写的，多有错误)
+            <p><strong>中断和异常(为了理解驱动写的，多有错误)</strong></p>
+<blockquote>
+<ul>
+<li><p>中断(interrupt)是异步的事件，典型的比如由I/O设备触发；异常(exception)是同步的事件，典型的比如处理器执行某条指令时发现出错了等等。</p>
+</li>
+<li><p>需要明确的一点是CPU对于中断和异常的具体处理机制本质上是完全一致的，即：<br>当CPU收到中断或者异常的信号时，它会暂停执行当前的程序或任务，通过一定的机制跳转到负责处理这个信号的相关处理程序中，在完成对这个信号的处理后再跳回到刚才被打断的程序或任务中。</p>
+</li>
+<li><p>系统要想能够应对各种不同的中断信号，总的来看就是需要知道每种信号应该由哪个中断服务程序负责以及这些中断服务程序具体是如何工作的。[a]系统将所有的中断信号统一进行了编号（一共256个：0～255），这个号称为中断向量，具体哪个中断向量表示哪种中断有的是规定好的，也有的是在给定范围内自行设定的。  </p>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li><p>中断向量和中断服务程序的对应关系主要是由IDT（中断向量表）负责。操作系统在IDT中设置好各种中断向量对应的中断描述符（一共有三类中断门描述符：任务门、中断门和陷阱门），留待CPU查询使用。而IDT本身的位置是由idtr保存的，当然这个地址也是由OS填充的。</p>
+</li>
+<li><p>[b]中断服务程序具体负责处理中断（异常）的代码是由软件，也就是操作系统实现的，这部分代码属于操作系统内核代码。也就是说从CPU检测中断信号到加载中断服务程序以及从中断服务程序中恢复执行被暂停的程序，这个流程基本上是硬件确定下来的，而具体的中断向量和服务程序的对应关系设置和中断服务程序的内容是由操作系统确定的。<br>保护当前程序的现场</p>
+</li>
+<li><p>CPU开始利用栈保护被暂停执行的程序的现场：依次压入当前程序使用的eflags，cs，eip，errorCode（如果是有错误码的异常）信息。</p>
+</li>
+</ul>
+<blockquote>
+<blockquote>
+<p>也就是说中断的接收（一般每隔一段时间向寄存器读中断信息），处理由cpu处理。处理方式交给系统。</p>
+</blockquote>
+</blockquote>
+<p><strong>（windows下）当硬件出发中断，中断信号先发给中断控制器IOAPIC（系统提供编程），IOAPIC通过重定位表判断中断类型和其他，再把相应IRQ(如IRQ1是键盘中断请求)发送到相应的CPU核心，CPU再来中断处理，处理方式交给系统提供的IDT表</strong></p>
 
-
-中断(interrupt)是异步的事件，典型的比如由I/O设备触发；异常(exception)是同步的事件，典型的比如处理器执行某条指令时发现出错了等等。
-
-需要明确的一点是CPU对于中断和异常的具体处理机制本质上是完全一致的，即：当CPU收到中断或者异
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/17/120/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -661,7 +713,7 @@ c语言运行库（不讲了）
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -714,6 +766,8 @@ c语言运行库（不讲了）
           
 
           
+            
+          
 
           
 
@@ -734,27 +788,100 @@ c语言运行库（不讲了）
       
         
           
-          DDB
+            <p><strong>DDB</strong></p>
+<blockquote>
+<ul>
+<li>是一个依赖设备的位图。它的颜色模式必需和输出的设备一致（16色的dc那内存图就是16色，256色dc内存图就是256,）<br><br>256色以下的位图中存储的像素值是系统调色板的索引，其颜色依赖于系统调色板。我想256的调色板应该在dc中吧<blockquote>
+<p>我们一般编程创建的兼容dc就是ddb的</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<pre><code>typedef struct tagBITMAP {
+LONG bmType; //必需为0
+LONG bmWidth; //位图的宽度(以像素为单位)
+LONG bmHeight; //位图的高度(以像素为单位)
+LONG bmWidthBytes; //每一扫描行所需的字节数，应是偶数
+WORD bmPlanes; //色平面数
+WORD bmBitsPixel; //色平面的颜色位数
+LPVOID bmBits; //指向存储像素阵列的数组
+} BITMAP;
+</code></pre><p><strong>DIB</strong></p>
+<blockquote>
+<ul>
+<li><p>DIB的颜色模式与设备无关。例如，一个256色的DIB即可以在真彩色显示模式下使用，也可以在16色模式下使用。</p>
+</li>
+<li><p>256色以下(包括256色)的DIB拥有自己的颜色表，像素的颜色独立于系统调色板。</p>
+</li>
+</ul>
+<ul>
+<li>由于DIB不依赖于具体设备，因此可以用来永久性地保存图象。DIB一般是以<em>.BMP文件的形式保存在磁盘中的，有时也会保存在</em>.DIB文件中。运行在不同输出设备下的应用程序可以通过DIB来交换图象。</li>
+</ul>
+</blockquote>
+<pre><code>typedef struct tagBITMAPINFO {
 
+BITMAPINFOHEADER bmiHeader;
 
-是一个依赖设备的位图。它的颜色模式必需和输出的设备一致（16色的dc那内存图就是16色，256色dc内存图就是256,）256色以下的位图中存储的像素值是系统调色板的索引，其颜色依赖于系统调色板。我想256的调色板应该在dc中吧
-我们一般编程创建的兼容dc就是ddb的
+RGBQUAD bmiColors[1]; //颜色表
 
+} BITMAPINFO;
 
+RGBQUAD结构用来描述颜色，其定义为
 
+typedef struct tagRGBQUAD {
 
-typed
-          ...
+BYTE rgbBlue; //蓝色的强度
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/16/119/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+BYTE rgbGreen; //绿色的强度
+
+BYTE rgbRed; //红色的强度
+
+BYTE rgbReserved; //保留字节，为0
+
+} RGBQUAD;
+
+注意，RGBQUAD结构中的颜色顺序是BGR，而不是平常的RGB。
+
+BITMAPINFOHEADER结构包含了DIB的各种信息，其定义为
+
+typedef struct tagBITMAPINFOHEADER{
+
+DWORD biSize; //该结构的大小
+
+LONG biWidth; //位图的宽度(以像素为单位)
+
+LONG biHeight; //位图的高度(以像素为单位)
+
+WORD biPlanes; //必须为1
+
+WORD biBitCount //每个像素的位数(1、4、8、16、24或32)
+
+DWORD biCompression; //压缩方式，一般为0或BI_RGB (未压缩)
+
+DWORD biSizeImage; //以字节为单位的图象大小(仅用于压缩位图)
+
+LONG biXPelsPerMeter; //以目标设备每米的像素数来说明位图的水平分辨率
+
+LONG biYPelsPerMeter; //以目标设备每米的像素数来说明位图的垂直分辨率
+
+DWORD biClrUsed; /*颜色表的颜色数，若为0则位图使用由biBitCount指定的最大颜色数*/
+
+DWORD biClrImportant; //重要颜色的数目，若该值为0则所有颜色都重要
+
+} BITMAPINFOHEADER;
+</code></pre><blockquote>
+<blockquote>
+<ul>
+<li>与DDB不同，DIB的字节数组是从图象的最下面一行开始的逐行向上存储的，也即等于把图象倒过来然后在逐行扫描。另外，字节数组中每个扫描行的字节数必需是4的倍数，如果不足要用0补齐。<br><br>这一点我有点不懂，指的是颜色表的链表吗？</li>
+</ul>
+</blockquote>
+</blockquote>
+
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -786,7 +913,7 @@ typed
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -839,6 +966,8 @@ typed
           
 
           
+            
+          
 
           
 
@@ -859,20 +988,17 @@ typed
       
         
           
-          
-编译器中提供了#pragma pack(n)来设定变量以n字节对齐方式。n字节对齐就是说变量存放的起始地址的偏移量有两种情况：第一、如果n大于等于该变量所占用的字节数，那么偏移量必须满足默认的对齐方式，第二、如果n小于该变量的类型所占用的字节数，那么偏移量为n的倍数，不用满足默认的对齐方式
-测试了
-          ...
+            <blockquote>
+<p>编译器中提供了#pragma pack(n)来设定变量以n字节对齐方式。n字节对齐就是说变量存放的起始地址的偏移量有两种情况：第一、如果n大于等于该变量所占用的字节数，那么偏移量必须满足默认的对齐方式，第二、如果n小于该变量的类型所占用的字节数，那么偏移量为n的倍数，不用满足默认的对齐方式</p>
+<p>测试了下基本就是比最大字节大就默认对齐，比最大字节小就指定对齐</p>
+<p>使用位域时，发现同一类型无论多少sizeof都是类型大小<br><br>：0自动填充剩下</p>
+</blockquote>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/14/117/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -904,7 +1030,7 @@ typed
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -957,6 +1083,8 @@ typed
           
 
           
+            
+          
 
           
 
@@ -977,22 +1105,111 @@ typed
       
         
           
-          __declspec语法
+            <h1 id="declspec语法"><a href="#declspec语法" class="headerlink" title="__declspec语法"></a>__declspec语法</h1><blockquote>
+<ul>
+<li><p>__declspec(align(n)) n字节对齐和pragram pack一样<br>前者最大值，后者对齐最小值</p>
+</li>
+<li><p>__declspec(deprecated )说明一个函数，类型，或别的标识符在新的版本或未来版本中不再支持，你不应该用这个函数或类型。它和#pragma deprecated作用一样。<br>后面跟函数</p>
+</li>
+<li><p>__declspec( allocate(“segname”) )要和pragma的ode_seg， const_seg, data_seg,section,init_seg配合使用。<br><br>感觉好复杂，先放放</p>
+</li>
+<li><p>用<strong>declspec(dllexport)，</strong>declspec(dllimport)显式的定义dll接口给调用它的exe或dll文件，用 dllexport定义的函数不再需要（.def）文件声明这些函数接口了。<br>注意：若在dll中定义了模板类那它已经隐式的进行了这两种声明，我们只需在 调用的时候实例化即可，呵呵。</p>
+</li>
+<li><p><strong>declspec( naked )<br>对于没有用naked声明的函数一般编译器都会产生保存现场（进入函数时编译器会产生代码来保存ESI，EDI，EBX，EBP寄存器 ——prolog）和清除现场（退出函数时则产生代码恢复这些寄存器的内容——epilog） 代码，而对于用naked声明的函数一般不会产生这些代码，这个属性对于写设备驱动程序非常有用，我们自己可以写这样一个过程，它仅支持x86 。naked只对函数有效，而对类型定义无效。对于一个标志了naked的函数不能产生一个内联函数即时使用了</strong>forceinline 关键字。 </p>
+</li>
+<li><p>__declspec(restrict) ，restrict 说明函数返回值没有被别名化，返回的指针是唯一的，没有被别的函数指针别名花，也就是说返回指针还没有被用过是唯一的。编译器一般会去检查指针是否可用和 是否被别名化，是否已经在使用，使用了这个关键字，编译器就不在去检查这些信息了。</p>
+<blockquote>
+<ul>
+<li>可以理解为和编译器做了一个君子协定（只针对指针函数），返回的指针值绝对不会在当前程序使用的（别名）</li>
+</ul>
+</blockquote>
+</li>
+<li><p>__declspec(noalias) 也是仅适用于函数，它指出该函数是半纯粹的函数。半纯粹的函数是指仅引用或修改局部变量、参数和第一层间接参数。</p>
+<blockquote>
+<ul>
+<li>网上说不能用全局变量或第二层间接指针参数，但测试没错误。实在不明白呢！</li>
+</ul>
+</blockquote>
+</li>
+<li><p>__declspec(noinline)<br>告诉编译器不去内联一个具体函数。（记得.h文件的定义是默认内联的）</p>
+</li>
+<li><p><strong>declspec(noreturn)<br>告诉编译器没有返回值.注意添加</strong>declspec(noreturn)到一个不希望返回的函数会导致已没有定义错误. </p>
+</li>
+<li><p>__declspec(nothrow)<br>用于函数声明,它告诉编译器函数不会抛出异常。</p>
+<blockquote>
+<ul>
+<li>这个和函数后面加throw()这个君子协定一样</li>
+</ul>
+</blockquote>
+</li>
+<li><p>_declspec(novtable)<br>用在任意类的声明,但是只用在纯虚接口类,因此这样的不能够被自己实例话.它阻止编译器初始化虚表指针在构造和析构类的时候,这将移除对关联到类的虚表的 引用.如果你尝试这实例化一个有novtable关键字的类,它将发生AV(access violation)错误.C++里virtual的缺陷就是vtable会增大代码的尺寸,在不需要实例化的类或者纯虚接口的时候,用这个关键字可以减 小代码的大小.</p>
+<blockquote>
+<ul>
+<li>我想它只用于纯虚基类。因为这样可以减少虚表的空间。<br>测试了下，然而并没有什么卵用。sizeof依旧。。<br>记个代码</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<pre><code>#if _MSC_VER &gt;= 1100 &amp;&amp; !defined(_DEBUG)//这个条件判断可以学习
+#define AFX_NOVTABLE __declspec(novtable)
+#else
+#define AFX_NOVTABLE
+#endif
+</code></pre><blockquote>
+<ul>
+<li><p><strong>declspec(selectany)可以让我们在.h文件中初始化一个全局变量而不是只能放在.cpp中。比如有一个类，其中有一个静态变量，那 么我们可以在.h中通过类似” </strong>declspec(selectany) type class::variable = value; “这样的代码来初始化这个全局变量。既是该.h被多次include，链接器也会为我们剔除多重定义的错误。这个有什么好处呢，我觉得对于 teamplate的编程会有很多便利。</p>
+</li>
+<li><p><strong>declspec(thread) 用于声明一个线程本地变量它告诉编译器，对应的变量应该放入可执行文件或DLL文件中它的自己的节中。</strong>declspec(thread)后面的变量 必须声明为函数中（或函数外）的一个全局变量或静态变量。不能声明一个类型为__declspec(thread)的局部变量。我想可能和volatile有点关系</p>
+</li>
+<li><p>uuid__declspec(uuid)<br>用于编译器关联一个GUID到一个有uuid属性的类或结构的声明或者定义.</p>
+</li>
+</ul>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center">:  __stdcall :</th>
+<th style="text-align:center">: __cdecl :</th>
+<th style="text-align:center">:  __fastcall  :</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>参数传递</td>
+<td style="text-align:center">右-&gt;左 压栈</td>
+<td style="text-align:center">右-&gt;左 压栈</td>
+<td style="text-align:center">左边开始的两个不大于4字节（DWORD）的参数分别放在ECX和EDX寄存器，其余的参数仍旧自右向左压栈传送</td>
+</tr>
+<tr>
+<td>清理栈方</td>
+<td style="text-align:center">被调用函数清理（即函数自己清理)</td>
+<td style="text-align:center">调用者清理</td>
+<td style="text-align:center">被调用者清理栈</td>
+</tr>
+<tr>
+<td>适用场合</td>
+<td style="text-align:center">Win API</td>
+<td style="text-align:center">c/C++  MFC默认方式可变参数的时候使用</td>
+<td style="text-align:center">速度快</td>
+</tr>
+</tbody>
+</table>
+<h1 id="pragram语法"><a href="#pragram语法" class="headerlink" title="pragram语法"></a>pragram语法</h1><p>所有的预处理指令中，#pragma 指令可能是最复杂的了</p>
+<blockquote>
+<p>/#ifdef _X86<br><br>/#pragma message(“_X86 macro activated!”)<br><br>/#endif<br><br>当我们定义了_X86这个宏以后，应用程序在编译时就会在编译输出窗口里显示<br>“_X86 macro activated!”<br>这样，我们就不会因为不记得自己定义的一些特定的宏而抓耳挠腮了。</p>
+<p>/#pragma hdrstop表示预编译头文件到此为止，后面的头文件不进行预编译。</p>
+<p>/#pragma warning指令<br>该指令允许有选择性的修改编译器的警告消息的行为<br><br>once:只显示一次(警告/错误等)消息<br><br>default:重置编译器的警告行为到默认状态<br><br>1,2,3,4:四个警告级别<br><br>disable:禁止指定的警告信息<br><br>error:将指定的警告信息作为错误报告<br><br>pragma warning( push )保存所有警告信息的现有的警告状态。<br><br>/#pragma warning( push, n)保存所有警告信息的现有的警告状态，并且把全局警告等级设定为n。<br><br>/#pragma warning( pop )向栈中弹出最后一个警告信息，在入栈和出栈之间所作的一切改动取消。<br></p>
+<p>pragma comment(…)  很多，具体自己查吧，反正就用了几个。</p>
+</blockquote>
+<p>pragma code_seg( [ [ { push | pop}, ] [ identifier, ] ] [ “segment-name” [, “segment-class” ] )</p>
 
-__declspec(align(n)) n字节对齐和pragram pack一样前者最大值，后者对齐最小值
-
-__declspec(deprecated )说明一个函数，类型，或别的标识符在新的版本或未来版本中不再支持，你不应该用这个函数或类型。它和#pragma de
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/13/118/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1024,7 +1241,7 @@ __declspec(deprecated )说明一个函数，类型，或别的标识符在新的
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1077,6 +1294,8 @@ __declspec(deprecated )说明一个函数，类型，或别的标识符在新的
           
 
           
+            
+          
 
           
 
@@ -1097,22 +1316,23 @@ __declspec(deprecated )说明一个函数，类型，或别的标识符在新的
       
         
           
+            <blockquote>
+<p>注册问题</p>
+</blockquote>
+<p>Windows Registry Editor Version 5.00</p>
+<p>[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Debug Print Filter]<br>“DEFAULT”=dword:0000000f</p>
+<blockquote>
+<p>rv<em>c:\symbols</em><a href="http://msdl.microsoft.com/download/symbols" target="_blank" rel="external">http://msdl.microsoft.com/download/symbols</a></p>
+<p>illegal use of this type as an expression错误出现的原因 C语言的声明必须放在函数的开始（所有的变量声明和定义必须分开）</p>
+<p>根据DDK上说明,Unicode格式(%C, %S, %lc, %ls, %wc, %ws, and %wZ)只能在 IRQL = PASSIVE_LEVEL时才能使用。  所以用 DBPrint老是蓝屏。KDPrint没事（check版）</p>
+<p>driverentry和riverunload 分发函数。是passive级别的。完成函数、NDIS回调是dispatch级别的</p>
+</blockquote>
+
           
-注册问题
-
-Windows Registry Editor Version 5.00
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Debug Print Filter]“DEFAULT”=dword:00
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/11/116/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1144,7 +1364,7 @@ Windows Registry Editor Version 5.00
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1197,6 +1417,8 @@ Windows Registry Editor Version 5.00
           
 
           
+            
+          
 
           
 
@@ -1217,20 +1439,54 @@ Windows Registry Editor Version 5.00
       
         
           
-          REMARKwdk7用于vs2010wdk8用于vs2012wdk8.1用于vs2013装了低版本的，没法整合高版本到vs的了。还有最好自己去vs默认的地方下载，免得手动下载出错
-函数 OBJ_CASE_INSENSITIVE不区分大小写，进行字符比对寻找驱动
- ObDereferenceObeje
-          ...
+            <h1 id="REMARK"><a href="#REMARK" class="headerlink" title="REMARK"></a>REMARK</h1><p>wdk7用于vs2010<br>wdk8用于vs2012<br>wdk8.1用于vs2013<br>装了低版本的，没法整合高版本到vs的了。还有最好自己去vs默认的地方下载，免得手动下载出错</p>
+<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><p> <strong>OBJ_CASE_INSENSITIVE</strong>不区分大小写，进行字符比对寻找驱动</p>
+<p> <strong>ObDereferenceObeject</strong>减少对读取到的引用计数，一般是Reference函数，都要减少。<br><strong>IoGetDeviceObjectPointer</strong>查阅msdn发现也要用它来减少，以后对设备的打开都要用它来进行减少。  只有减少到0才能被系统所卸载销毁。</p>
+<p><strong>DO_POWER_PAGABLE</strong>:如果IRP_MJ_POWER请求的派遣函数必须运行在PASSIVE_LEVEL级别，你需要设置DO_POWER_PAGABLE标志。该标志的名称含有相关的含义，因为只有在PASSIVE_LEVEL级上才允许分页操作。如果你把该标志设置为0，则电源管理器可以在DISPATCH_LEVEL级上向你发送电源管理请求<br>(更多关于设备对象的type可以去看张帆89上面的)</p>
+<p><strong>IoCreateDevice</strong><br>设备对象名：字符串必须是”\Device[设备名]”(UNICODE)<br>如：C盘（\Device\HarddiskVolume1）D盘（\Device\HarddiskVolume2）。如果不指定名字，会默认给一个数字来当做名。然而“c:，d:”这一类的是符号链接字符。<br><br>这个函数的倒数第二个参数，表示产生的对象是用于内核模式还是用户模式。在内核模式下，符号链接是以”\??\”（或者\DosDevices）开头。在用户模式下，是以”\.\”开头<br>注意，再看下它第二个参数。大小是扩展项的大小，不然后面强制转换扩展项会越界，并发生泄漏。</p>
+<p><strong>DO_DIRECT_IO和DO_BUFFERED_IO</strong> 自己去保存页看吧。。</p>
+<h1 id="inf"><a href="#inf" class="headerlink" title="inf"></a>inf</h1><p>看下inf结构：</p>
+<pre><code>Version Section
+SourceDisksNames Section
+SourceDisksFiles Section
+ClassInstall32 Section（可选）
+ClassInstall32.Services Section（可选）
+DestinationDirs Section
+ControlFlags Section
+Manufacturer Section
+    Models Section (per Manufacturer entry)
+        DDInstall Section (per Models entry)
+        DDInstall.Services Section
+        DDInstall.HW Section
+        DDInstall.CoInstallers Section
+        DDInstall.FactDef Section
+        DDInstall.LogConfigOverride Section
+        DDInstall.Interfaces Section
+InterfaceInstall32 Section
+DefaultInstall Section
+DefaultInstall.Services Section
+Strings Section
+</code></pre><p><strong>DestinationDirs</strong>安装目录(用代号表示)</p>
+<p><strong>SourceDisksNames</strong> 源文件目录。如果忽略，就会从inf文件目录找。可以设置为inf相对目录或者绝对目录。</p>
+<p><strong>class</strong>这个字段会在指定的设备名添加</p>
+<p><strong>ClassInstall</strong>当加载自定义的驱动时候，用这个。它会新建一个设备，就不是从已有设备做过滤啥的。（官方：A ClassInstall32 section installs a new device setup class (and possibly a class installer) for devices in the new class.）</p>
+<p><a href="https://msdn.microsoft.com/zh-cn/library/windows/hardware/ff546335" target="_blank" rel="external">https://msdn.microsoft.com/zh-cn/library/windows/hardware/ff546335</a>  这里有它必须包含的字段</p>
+<p><strong>DefaultInstall</strong> 当右键“安装”时候访问(没有字段却点击会报错)（section is accessed if a user selects the “Install” menu item after right-clicking on the INF file name.）<br><br>通过remarks知道，这个字段不能用来当做设备驱动安装，仅用于类过滤驱动，类共同安装，文件系统过滤驱动，内核驱动服务程序等不与设备驱动关联的服务。<br>数字签名不能使用这个字段<br> Unlike a DDInstall section, a DefaultInstall section cannot contain DriverVer or LogConfig directives.(和ddinstall的不同)</p>
+<p><strong>ddinstall</strong> 每个DDInstall Section包含一个可选项DriverVer指令，adreg好像也是必选<br>从marks知道，它用于安装段名（自定义），指定有或没有平台。（详细看<a href="https://msdn.microsoft.com/zh-cn/library/windows/hardware/ff547344）" target="_blank" rel="external">https://msdn.microsoft.com/zh-cn/library/windows/hardware/ff547344）</a><br>所以Manufacturer是安装入口（这个必选联系理解，下面就说它，）</p>
+<p><strong>Manufacturer</strong>：官方的name我有点不懂就跳过，讲点大众的。</p>
+<pre><code>%strkey%=models-section-name [,TargetOSVersion] [,TargetOSVersion] ...  (Windows XP and later versions of Windows)
+</code></pre><p>strkey是string段里面的被代替为name<br><br>models-section-name 这里理解为另一个节（section翻译都行）<br><br>version最后的是平台，可以选择多个平台，但是也就意味着相应的model节也必需匹配平台信息。(有时会有个主版本号和副版本号，我们用它来确定系统xpwin7)<br><br>如：%MFGNAME% = MyDevice_WinUSB,NTx86,NTamd64后面就必需有<br>[MyDevice_WinUSB.NTx86]和[MyDevice_WinUSB.NTamd64]节</p>
+<p><strong>Models</strong><br><br>device-description=install-section-name[,hw-id][,compatible-id…]</p>
+<p>desciption:是个string节的id(中文就是设备描述)<br><br>section-name:<br>然后，这个就是ddinstall的模块了。<br><br>hw-id:指定一个设备制造商定义的硬件ID串(hardware ID string)。PnP管理器用这个项来找匹配的INF文件<br><br>compatible-id:指定一个设备制造商定义的兼容ID字符串(compatible ID string)。同时可以指定多个compatible-id，之间用逗号隔开<br>后面俩个不是很理解，以后来更新。<br></p>
+<h1 id="INF-三键"><a href="#INF-三键" class="headerlink" title="INF 三键"></a>INF 三键</h1><p>硬件子键：<br>这里是对设备的键值修饰，“我的电脑”右键“管理”，指的便是这里的硬件设备。当然可以通过classinstall添加一个设备，或是虚拟设备<br>在这个里面内容主要是厂家设备信息（msdn就说过通过models的俩个id给设备增添加服务），然后为了唯一性有个类子键（classguid管理），服务性有个服务子键（加载的具体驱动服务，sys，几个type）</p>
+<p>类子键：<br>一个类键管理一个设备。<br>（以下自己理解，有待修改）<br>“我的电脑”右键“管理”这么多个设备被格子guid标识，当厂家要在某个设备下添加驱动时，就把class和classguid弄上去，但Manufacturer是厂家自己的信息，当驱动更新时，系统会更快通过这些信息更新。<br>所以一个设备下可能有很多个驱动。</p>
+<p>服务子键：<br>俩个type和错误type，和sys文件路径</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/04/27/115/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1262,7 +1518,7 @@ Windows Registry Editor Version 5.00
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1315,6 +1571,8 @@ Windows Registry Editor Version 5.00
           
 
           
+            
+          
 
           
 
@@ -1335,24 +1593,36 @@ Windows Registry Editor Version 5.00
       
         
           
-          先看常量重叠
-int main(int argc, char* argv[])
+            <p><strong>先看常量重叠</strong></p>
+<pre><code>int main(int argc, char* argv[])
 {
     const int i=0;
     int *j = (int *) &amp;i;
     *j=1;
-    cout&lt;&lt;&amp;i&lt;&lt;endlcout&lt;&lt;j&lt
-          ...
+    cout&lt;&lt;&amp;i&lt;&lt;endlcout&lt;&lt;j&lt;&lt;endl;
+    cout&lt;&lt;i&lt;&lt;endl;
+    cout&lt;&lt;*j&lt;&lt;endl;
+    return 0;
+}
+</code></pre><p>结果是</p>
+<pre><code>0012ff7c
+0012ff7c
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/04/26/114/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+0
+
+1
+</code></pre><p>因为编译器在优化的过程中，会把碰见的const全部以内容替换掉（跟宏似的: #define pi 3.1415,用到pi时就用3.1415代替），这个出现在预编译阶段；但是在运行阶段，它的内存里存的东西确实改变了!</p>
+<p>最后注意下：</p>
+<pre><code>char* p = &quot;hello world1&quot;；//常量区
+char a[] = &quot;hello world2&quot;；//栈区
+</code></pre><p><strong>看debug下的内存吧</strong></p>
+<p>0xcccccccc所有自动变量<br><br>0xcdcdcdcd new内存<br><br>0xdddddddd delete内存<br><br>0xfdfdfdfd 保护堆内存<br><br>也就解释了new 老是是铪 妄 等字符。。未赋值的老是-858993460等了</p>
+
+          
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1384,7 +1654,7 @@ int main(int argc, char* argv[])
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
       <header class="post-header">
@@ -1437,6 +1707,8 @@ int main(int argc, char* argv[])
           
 
           
+            
+          
 
           
 
@@ -1457,19 +1729,13 @@ int main(int argc, char* argv[])
       
         
           
-           ValidateRect用这个来更新重绘区域，达到剪切界面效果
+            <p> ValidateRect用这个来更新重绘区域，达到剪切界面效果</p>
 
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/04/16/113/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
-    
+
     <div>
       
     </div>
@@ -1527,7 +1793,7 @@ int main(int argc, char* argv[])
       
 
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/picture/head.jpg"
                alt="XueCat" />
@@ -1577,7 +1843,7 @@ int main(int argc, char* argv[])
               <span class="links-of-author-item">
                 <a href="https://github.com/" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-github"></i>
+                    <i class="fa fa-fw fa-github"></i>
                   
                   GitHub
                 </a>
@@ -1586,7 +1852,7 @@ int main(int argc, char* argv[])
               <span class="links-of-author-item">
                 <a href="http://www.v2ex.com/" target="_blank" title="V2EX">
                   
-                    <i class="fa fa-globe"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   V2EX
                 </a>
@@ -1595,7 +1861,7 @@ int main(int argc, char* argv[])
               <span class="links-of-author-item">
                 <a href="mailto:1446969391@qq.com" target="_blank" title="E-mail">
                   
-                    <i class="fa fa-envelope"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   E-mail
                 </a>
@@ -1607,7 +1873,7 @@ int main(int argc, char* argv[])
         
         
           <div class="cc-license motion-element" itemprop="license">
-            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
               <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
             </a>
           </div>
@@ -1615,8 +1881,11 @@ int main(int argc, char* argv[])
 
         
         
-          <div class="links-of-blogroll motion-element">
-            <div class="links-of-blogroll-title">友情链接</div>
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
@@ -1660,21 +1929,11 @@ int main(int argc, char* argv[])
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">XueCat&emsp;</span>
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  <span id="busuanzi_container_page_pv" style='display:none'>
-    <span id="busuanzi_value_page_pv"></span>
-  </span>
-  <span>
-    <a href="http://service.ibruce.info" target="_blank" class="sl fa fa-globe fa-spin"></a>
-  </span>
-  <span id="busuanzi_container_site_uv" style='display:none'>
-    <span id="busuanzi_value_site_uv"></span>
-  </span>
+  <span class="author" itemprop="copyrightHolder">XueCat</span>
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
@@ -1710,56 +1969,64 @@ int main(int argc, char* argv[])
 
 
 
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
   
 
 
 
   
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
 
 
 
-  
-  
 
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
-
-
-
-  
   
   
   <script type="text/javascript">
     // Popup Window;
-    var scrollTop = '';
-    var newHeight = '100';
     var isfetched = false;
     // Search DB path;
     var search_path = "search.xml";
@@ -1768,21 +2035,8 @@ int main(int argc, char* argv[])
     }
     var path = "/" + search_path;
     // monitor main search box;
-    $('#search-input').on('input', function() {
-    if ($(this).val().length <= 0) {
-      $('#search-result').hide();
-      return;
-    }
-    $('i.search-keyword').text($(this).val());
-    $('a.search-result[href!="#"]').each(function(){
-      this.href = this.href.replace(/\=(.*?)(?=%20site)/,'='+$('#search-input').val())
-    });
-    $('#search-result').show();
-    });
 
     function proceedsearch() {
-      $('#local-search-input').val($('#search-input').val());
-      document.getElementById('local-search-input').dispatchEvent(new Event('input'));
       $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
       $('.popup').toggle();
 
@@ -1794,14 +2048,6 @@ int main(int argc, char* argv[])
         url: path,
         dataType: "xml",
         async: true,
-        beforeSend: function (){
-            $('.site-search-form>span').toggleClass('fa-spin');
-            $('#search-input').prop('disabled', function(i, v) { return !v; });
-        },
-        complete: function (){
-            $('.site-search-form>span').toggleClass('fa-spin');
-            $('#search-input').prop('disabled', function(i, v) { return !v; });
-        },
         success: function( xmlResponse ) {
             // get the contents from search data
             isfetched = true;
@@ -1817,35 +2063,32 @@ int main(int argc, char* argv[])
             var $resultContent = document.getElementById(content_id);
             $input.addEventListener('input', function(){
                 var matchcounts = 0;
-                var str='<ul class=\"search-result-list\">';                
+                var str='<ul class=\"search-result-list\">';
                 var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
                 $resultContent.innerHTML = "";
                 if (this.value.trim().length > 1) {
                 // perform local searching
                 datas.forEach(function(data) {
-                    var isMatch = true;
+                    var isMatch = false;
                     var content_index = [];
                     var data_title = data.title.trim().toLowerCase();
                     var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = data.url;
+                    var data_url = decodeURIComponent(data.url);
                     var index_title = -1;
                     var index_content = -1;
                     var first_occur = -1;
                     // only match artiles with not empty titles and contents
-                    if(data_title != '' && data_content != '') {
+                    if(data_title != '') {
                         keywords.forEach(function(keyword, i) {
                             index_title = data_title.indexOf(keyword);
                             index_content = data_content.indexOf(keyword);
-                            if( index_title < 0 && index_content < 0 ){
-                                isMatch = false;
-                            } else {
-                                if (index_content < 0) {
-                                    index_content = 0;
-                                }
-                                if (i == 0) {
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
                                     first_occur = index_content;
                                 }
-                            }
+                            } 
+							
                         });
                     }
                     // show search results
@@ -1872,7 +2115,7 @@ int main(int argc, char* argv[])
                                 var regS = new RegExp(keyword, "gi");
                                 match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
                             });
-                            
+
                             str += "<p class=\"search-result\">" + match_content +"...</p>"
                         }
                         str += "</li>";
@@ -1888,14 +2131,7 @@ int main(int argc, char* argv[])
     });}
 
     // handle and trigger popup window;
-    $(window).bind('scroll', function() {
-      scrollTop = $( window ).scrollTop();
-      newHeight = scrollTop + 100;
-    });
-    $('#search-result a').mousedown(function(e) {
-        window.location.href = this.href;
-      });
-    $('.popup-trigger').mousedown(function(e) {
+    $('.popup-trigger').click(function(e) {
       e.stopPropagation();
       if (isfetched == false) {
         searchFunc(path, 'local-search-input', 'local-search-result');
@@ -1903,20 +2139,6 @@ int main(int argc, char* argv[])
         proceedsearch();
       };
 
-    });
-
-    $('#search-input').focus(function() {
-      if(jQuery(window).width() < 750) {
-        $('body').animate({
-          scrollTop: $('.site-search').offset().top
-        }, 500);
-      };
-      if ($(this).val().length > 0) {
-        $('#search-result').show();
-      }
-    });
-    $('#search-input').blur(function() {
-      $('#search-result').hide();
     });
 
     $('.popup-btn-close').click(function(e){
@@ -1929,13 +2151,15 @@ int main(int argc, char* argv[])
     });
   </script>
 
+
+  
+
   
 
   
 
   
+
 
 </body>
-<!-- 背景动画 -->
-<script type="text/javascript" src="/js/src/particle.js"></script>
 </html>
