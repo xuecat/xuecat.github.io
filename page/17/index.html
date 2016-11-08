@@ -284,8 +284,8 @@
             
               
                 
-                <a class="post-title-link" href="/2014/09/02/34/" itemprop="url">
-                  常量区进阶(34)
+                <a class="post-title-link" href="/2014/09/02/35/" itemprop="url">
+                  more effective c++智能指针继承传递(35)
                 </a>
               
             
@@ -312,8 +312,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
+                  <a href="/categories/书籍/" itemprop="url" rel="index">
+                    <span itemprop="name">书籍</span>
                   </a>
                 </span>
 
@@ -347,141 +347,7 @@
       
         
           
-            <figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">char</span> *<span class="title">strA</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">   	<span class="keyword">char</span> str[]=<span class="string">"hello world"</span>;</div><div class="line">   	<span class="keyword">return</span> str;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">char</span> *<span class="title">strA</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">   	<span class="keyword">char</span> *str=<span class="string">"hello world"</span>;</div><div class="line">   	<span class="keyword">return</span> str;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>首先，指针只有四个字节，无法保持数据，所以定义后会在常量区开辟空间赋值。<br>所以return str返回的是常量区空间（在程序结束后才会被释放）</p>
-<p>这也解释了第一个为什么返回乱码了。</p>
-<figure class="highlight c"><figcaption><span>然后继续再来看这一句：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span>* <span class="title">strr</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> a = <span class="number">3</span>;</div><div class="line">	<span class="keyword">int</span> *d = &amp;a;</div><div class="line">	<span class="keyword">return</span> d;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></div><div class="line">&#123; </div><div class="line">	<span class="keyword">int</span>* d =  strr();</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; *d &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">int</span>* q1 = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">1</span>);</div><div class="line">	<span class="keyword">int</span>* q2 = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">2</span>);</div><div class="line">	<span class="keyword">int</span>* q3 = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">3</span>);</div><div class="line">	<span class="keyword">int</span>* q4 = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">4</span>);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; *d;</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/01/37/" itemprop="url">
-                  libcurl源码学习(37)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-01T03:31:58+08:00" content="2014-09-01">
-              2014-09-01
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/第三方库/" itemprop="url" rel="index">
-                    <span itemprop="name">第三方库</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-        <div class="post-gallery" itemscope itemtype="//schema.org/ImageGallery">
-          
-          
-            <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox"
-                 href="/picture/o.jpg" rel="gallery_civ9lgkfq00bv90cxgejjry9f"
-                 itemscope itemtype="//schema.org/ImageObject" itemprop="url">
-                <img src="/picture/o.jpg" itemprop="contentUrl"/>
-              </a>
-            
-          
-
-          
-          </div>
-        </div>
-      
-
-      
-        
-          
-            <p>libcurl：预编译头文件，就是放置工具的地方。<br>其它文件要使用工具直接#define一下就好了。</p>
-<p>把va_list当值传入。</p>
-<p>回调函数的使用typedf  获取函数指针。指针的指针，执行就好了。</p>
-
+            <figure class="highlight"><figcaption><span>先看示例：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">class MusicProduct;</div><div class="line">class Cassette : public MusicProduct;</div><div class="line">class CD : public MusicProduct;</div><div class="line"></div><div class="line">void DisplayAndPlay(const SmartPtr&lt;MusicProduct&gt;&amp; pmp, int times)</div><div class="line">SmartPtr&lt;Cassette&gt; f(new );</div><div class="line">SmartPtr&lt;CD&gt; fd(new );</div><div class="line">DisplayAndPlay(f, 10)</div><div class="line">DisplayAndPlay(fd, 10);</div><div class="line">这样是无法通过的，</div><div class="line">解决方法是使用智能隐式转换。为SmartPtr添加转换函数</div><div class="line"></div><div class="line">templatee&lt;class newType&gt;</div><div class="line">operator SmartPtr&lt;newType&gt;()</div><div class="line">&#123;</div><div class="line">   	  return SmartPtr&lt;newType&gt;(pointee);</div><div class="line">&#125;</div><div class="line"></div><div class="line">分析：编译器总是会企图找到一种方式使成功。</div><div class="line">所以函数赋值时，它就会解析为：</div><div class="line"></div><div class="line">SmartPtr&lt;Cassette&gt;::operator SmartPtr&lt;MusicProduct&gt; () &#123;</div><div class="line">   	    return Smart&lt;MusicProduct&gt;(pointee);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
           
         
       
@@ -657,8 +523,8 @@ If (ptn)
             
               
                 
-                <a class="post-title-link" href="/2014/08/29/27/" itemprop="url">
-                  多个对象访问多线程资源
+                <a class="post-title-link" href="/2014/09/01/37/" itemprop="url">
+                  libcurl源码学习(37)
                 </a>
               
             
@@ -671,8 +537,8 @@ If (ptn)
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-08-29T03:31:58+08:00" content="2014-08-29">
-              2014-08-29
+            <time itemprop="dateCreated" datetime="2014-09-01T03:31:58+08:00" content="2014-09-01">
+              2014-09-01
             </time>
           </span>
 
@@ -685,8 +551,8 @@ If (ptn)
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
+                  <a href="/categories/第三方库/" itemprop="url" rel="index">
+                    <span itemprop="name">第三方库</span>
                   </a>
                 </span>
 
@@ -716,14 +582,29 @@ If (ptn)
 
       
       
+        <div class="post-gallery" itemscope itemtype="//schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="/picture/o.jpg" rel="gallery_civ9lzq9k00bmwwcx36ejmwz8"
+                 itemscope itemtype="//schema.org/ImageObject" itemprop="url">
+                <img src="/picture/o.jpg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
 
       
         
           
-            <p>   我初始化多个对象，对象类里面有多线程代码。</p>
-<p>多线程设置信号量来限制访问线程个数。</p>
-<p>发现：多个对象执行的时候，访问的却是同一个线程资源。</p>
-<p>分析原因：多线程函数是static或者全局函数，   函数的创建在静态或全局空间，与类的栈空间无关<br>所以访问的是同一个函数。</p>
+            <p>libcurl：预编译头文件，就是放置工具的地方。<br>其它文件要使用工具直接#define一下就好了。</p>
+<p>把va_list当值传入。</p>
+<p>回调函数的使用typedf  获取函数指针。指针的指针，执行就好了。</p>
 
           
         
@@ -837,6 +718,122 @@ If (ptn)
         
           
             <figure class="highlight c"><figcaption><span>智能指针了：构造、赋值、析构:++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">class</span> <span class="built_in">auto_ptr</span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="built_in">auto_ptr</span>(T* ptr = <span class="number">0</span>) : pointee(ptr) &#123;&#125;</div><div class="line">	<span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs); <span class="comment">//复制</span></div><div class="line">	<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; operate= (<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs);</div><div class="line">	~<span class="built_in">auto_ptr</span>() &#123;<span class="keyword">delete</span> pointee;&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	T* pointee;</div><div class="line">	<span class="comment">/* data */</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//可以看出，使用时用f</span></div><div class="line"><span class="comment">//auto_ptr&lt;TreeNode&gt; ptnq(new TreeNode);便可以了。</span></div><div class="line"><span class="comment">///</span></div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;T&gt;:::<span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs)</div><div class="line">&#123;</div><div class="line">	pointee = rhs.pointee;</div><div class="line">	rhs.pointee = <span class="number">0</span>;<span class="comment">//因为实现的是auto，被复制后拒绝前一个变量访问</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;T&gt;&amp; <span class="built_in">auto_ptr</span>&lt;T&gt;::operate= (<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span> (<span class="keyword">this</span> == &amp;rhs)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> *<span class="keyword">this</span>; <span class="comment">//这个赋值函数处理的很好，以后赋值函数添加上</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">delete</span> pointee;</div><div class="line">	。。。。</div><div class="line">	。。。。</div><div class="line">	<span class="keyword">return</span> *<span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure> 
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/08/29/27/" itemprop="url">
+                  多个对象访问多线程资源
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-08-29T03:31:58+08:00" content="2014-08-29">
+              2014-08-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>   我初始化多个对象，对象类里面有多线程代码。</p>
+<p>多线程设置信号量来限制访问线程个数。</p>
+<p>发现：多个对象执行的时候，访问的却是同一个线程资源。</p>
+<p>分析原因：多线程函数是static或者全局函数，   函数的创建在静态或全局空间，与类的栈空间无关<br>所以访问的是同一个函数。</p>
+
           
         
       
@@ -1093,7 +1090,7 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/l.jpg" rel="gallery_civ9lgkam005s90cxegwnvfij"
+                 href="/picture/l.jpg" rel="gallery_civ9lzq4p005iwwcxpkfl8a7d"
                  itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/l.jpg" itemprop="contentUrl"/>
               </a>
@@ -1223,7 +1220,7 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/k.jpg" rel="gallery_civ9lgk4d000a90cxa6p5pkcc"
+                 href="/picture/k.jpg" rel="gallery_civ9lzpyt0006wwcx22vym52h"
                  itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/k.jpg" itemprop="contentUrl"/>
               </a>
@@ -1239,6 +1236,122 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
         
           
             <p>  我讨厌温柔，温柔的人，温柔的心，以及清澈娇媚的问候；<br><br>  被擅自的靠近，被擅自的憧憬，被擅自的失望，被信任的人无可挽回的背叛了，再次回到漆黑的孤独之中，唯一增加的只有被腐蚀的心灵。<br><br>  总以为不再迷惑了，不再恐惧了，自己变强了，坚强到不会再伤害别人了，比起以前已经成长了，我一直这么坚信。但是好不容易积累起来的信心，也在那刻倾圮崩塌！！<br><br>  真相是残酷的，善良是谎言的，训练有素的孤零零只能在在这柔和的黑暗之中！！！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/08/28/25/" itemprop="url">
+                  mousehover（25）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-08-28T03:31:58+08:00" content="2014-08-28">
+              2014-08-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Windows/" itemprop="url" rel="index">
+                    <span itemprop="name">Windows</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天为程序添加mousehover函数，发现不能响应，很气人。</p>
+<p>要仔细去看下官方，翻看msdn：</p>
+<p>   msdn它只会在图像重绘地方响应<br>Posted to a window when the cursor hovers over the client area of the window for the period of time specified in a prior call to TrackMouseEvent.</p>
+<p>如果在onpaint函数使用cclientdc绘图的话，就会被判定非客户区。<br>所以，必须在onpaint里面用cpaintdc绘图，才会响应mousehover。</p>
 
           
         
@@ -1356,122 +1469,6 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
 <p>onHeap函数内，onTheStack是个局部变量，所以它被置于stack内。当onHeap被调用，其stack frame 会被放在stack的顶端，由于此框架中stack系向低地址成长，所以onThestack的地址移动比其他任何一个stack变量更低。</p>
 <p>所以address比onthestack更低，它就一定位于heap中。</p>
 <p>此部分，作者为了让对象产生于heap中，向operate new添加东西标记。。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/08/28/25/" itemprop="url">
-                  mousehover（25）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-08-28T03:31:58+08:00" content="2014-08-28">
-              2014-08-28
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Windows/" itemprop="url" rel="index">
-                    <span itemprop="name">Windows</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天为程序添加mousehover函数，发现不能响应，很气人。</p>
-<p>要仔细去看下官方，翻看msdn：</p>
-<p>   msdn它只会在图像重绘地方响应<br>Posted to a window when the cursor hovers over the client area of the window for the period of time specified in a prior call to TrackMouseEvent.</p>
-<p>如果在onpaint函数使用cclientdc绘图的话，就会被判定非客户区。<br>所以，必须在onpaint里面用cpaintdc绘图，才会响应mousehover。</p>
 
           
         
@@ -1902,6 +1899,6 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
 
   
 
-
+  <script type="text/javascript" src="/js/src/particle.js"></script>
 </body>
 </html>
