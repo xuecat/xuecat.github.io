@@ -284,8 +284,8 @@
             
               
                 
-                <a class="post-title-link" href="/2014/09/02/35/" itemprop="url">
-                  more effective c++智能指针继承传递(35)
+                <a class="post-title-link" href="/2014/09/02/34/" itemprop="url">
+                  常量区进阶(34)
                 </a>
               
             
@@ -312,8 +312,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/书籍/" itemprop="url" rel="index">
-                    <span itemprop="name">书籍</span>
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
                   </a>
                 </span>
 
@@ -347,135 +347,15 @@
       
         
           
-            <figure class="highlight"><figcaption><span>先看示例：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">class MusicProduct;</div><div class="line">class Cassette : public MusicProduct;</div><div class="line">class CD : public MusicProduct;</div><div class="line"></div><div class="line">void DisplayAndPlay(const SmartPtr&lt;MusicProduct&gt;&amp; pmp, int times)</div><div class="line">SmartPtr&lt;Cassette&gt; f(new );</div><div class="line">SmartPtr&lt;CD&gt; fd(new );</div><div class="line">DisplayAndPlay(f, 10)</div><div class="line">DisplayAndPlay(fd, 10);</div><div class="line">这样是无法通过的，</div><div class="line">解决方法是使用智能隐式转换。为SmartPtr添加转换函数</div><div class="line"></div><div class="line">templatee&lt;class newType&gt;</div><div class="line">operator SmartPtr&lt;newType&gt;()</div><div class="line">&#123;</div><div class="line">   	  return SmartPtr&lt;newType&gt;(pointee);</div><div class="line">&#125;</div><div class="line"></div><div class="line">分析：编译器总是会企图找到一种方式使成功。</div><div class="line">所以函数赋值时，它就会解析为：</div><div class="line"></div><div class="line">SmartPtr&lt;Cassette&gt;::operator SmartPtr&lt;MusicProduct&gt; () &#123;</div><div class="line">   	    return Smart&lt;MusicProduct&gt;(pointee);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
+          ++12345678910char *strA()&#123;   	char str[]="hello world";   	return str;&#125;char *strA()&#123;   	char *str="hello world";   	return str;&#125;
+首
+          ...
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/01/30/" itemprop="url">
-                  More effective c++解引操作符及指针(30)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-01T03:31:58+08:00" content="2014-09-01">
-              2014-09-01
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/书籍/" itemprop="url" rel="index">
-                    <span itemprop="name">书籍</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight c"><figcaption><span>智能指针解引操作符:++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Template&lt;Class T&gt;</div><div class="line">T&amp;SmartPtr&lt;T&gt;::<span class="keyword">operator</span>*() <span class="keyword">const</span> &#123;</div><div class="line"> 	……….</div><div class="line">	 Return * pointee;</div><div class="line">&#125;</div><div class="line">DBPtr&lt;Tuple&gt;&amp;pt;</div><div class="line">Pt-&gt;dispalyEditDialog();</div></pre></td></tr></table></figure> 
-<p>注意编译器解释为：</p>
-<pre><code>(pt.operator-&gt;())-&gt;displayEditDialog();
-</code></pre><p>所以     operator-&gt;可能返回俩种东西，一个对象，一个智能指针，要注意分清。</p>
-<p>指针判断</p>
-<pre><code>If (ptn == 0)
-If (ptn)
-</code></pre><p>都是错误的，应该向类提供隐式转换才会被认同。</p>
-<p>添加：operator void*();<br>但有缺陷，在指针比较时if (pa == po)可以通过</p>
-<p>所以，目的只是为了检索指针是否为空，直接重载否定符，只使用为空部分：</p>
-<pre><code>bool operator !() const{};
-</code></pre><p>这样if (!ptn)就没问题了</p>
-<p>对于自己的编码需求给智能指针添加隐式转换</p>
-<pre><code>operator T*() {return pointee;}
-</code></pre><p>但是智能指针的隐式转换有臭虫漏洞！<br>注意，详细看172.<br>最好去掉隐式转换。自己封装函数来获取。</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/02/34/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -587,7 +467,7 @@ If (ptn)
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/o.jpg" rel="gallery_civ9lzq9k00bmwwcx36ejmwz8"
+                 href="/picture/o.jpg" rel="gallery_civb37rbc00bbnscxylfnnm70"
                  itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/o.jpg" itemprop="contentUrl"/>
               </a>
@@ -602,11 +482,17 @@ If (ptn)
       
         
           
-            <p>libcurl：预编译头文件，就是放置工具的地方。<br>其它文件要使用工具直接#define一下就好了。</p>
-<p>把va_list当值传入。</p>
-<p>回调函数的使用typedf  获取函数指针。指针的指针，执行就好了。</p>
+          libcurl：预编译头文件，就是放置工具的地方。其它文件要使用工具直接#define一下就好了。
+把va_list当值传入。
+回调函数的使用typedf  获取函数指针。指针的指针，执行就好了。
 
           
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/01/37/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -654,8 +540,8 @@ If (ptn)
             
               
                 
-                <a class="post-title-link" href="/2014/08/29/29/" itemprop="url">
-                  more effective c++智能指针(28)
+                <a class="post-title-link" href="/2014/09/01/30/" itemprop="url">
+                  More effective c++解引操作符及指针(30)
                 </a>
               
             
@@ -668,8 +554,8 @@ If (ptn)
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-08-29T03:31:58+08:00" content="2014-08-29">
-              2014-08-29
+            <time itemprop="dateCreated" datetime="2014-09-01T03:31:58+08:00" content="2014-09-01">
+              2014-09-01
             </time>
           </span>
 
@@ -717,124 +603,14 @@ If (ptn)
       
         
           
-            <figure class="highlight c"><figcaption><span>智能指针了：构造、赋值、析构:++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">class</span> <span class="built_in">auto_ptr</span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="built_in">auto_ptr</span>(T* ptr = <span class="number">0</span>) : pointee(ptr) &#123;&#125;</div><div class="line">	<span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs); <span class="comment">//复制</span></div><div class="line">	<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; operate= (<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs);</div><div class="line">	~<span class="built_in">auto_ptr</span>() &#123;<span class="keyword">delete</span> pointee;&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	T* pointee;</div><div class="line">	<span class="comment">/* data */</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//可以看出，使用时用f</span></div><div class="line"><span class="comment">//auto_ptr&lt;TreeNode&gt; ptnq(new TreeNode);便可以了。</span></div><div class="line"><span class="comment">///</span></div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;T&gt;:::<span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs)</div><div class="line">&#123;</div><div class="line">	pointee = rhs.pointee;</div><div class="line">	rhs.pointee = <span class="number">0</span>;<span class="comment">//因为实现的是auto，被复制后拒绝前一个变量访问</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;T&gt;&amp; <span class="built_in">auto_ptr</span>&lt;T&gt;::operate= (<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span> (<span class="keyword">this</span> == &amp;rhs)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> *<span class="keyword">this</span>; <span class="comment">//这个赋值函数处理的很好，以后赋值函数添加上</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">delete</span> pointee;</div><div class="line">	。。。。</div><div class="line">	。。。。</div><div class="line">	<span class="keyword">return</span> *<span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure> 
-          
-        
-      
-    </div>
+          智能指针解引操作符:++1234567Template&lt;Class T&gt;T&amp;SmartPtr&lt;T&gt;::operator*() const &#123; 	……….	 Return * pointee;&#125;DBPtr&lt;Tuple&gt;&amp;pt;Pt
+          ...
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/08/29/27/" itemprop="url">
-                  多个对象访问多线程资源
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-08-29T03:31:58+08:00" content="2014-08-29">
-              2014-08-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>   我初始化多个对象，对象类里面有多线程代码。</p>
-<p>多线程设置信号量来限制访问线程个数。</p>
-<p>发现：多个对象执行的时候，访问的却是同一个线程资源。</p>
-<p>分析原因：多线程函数是static或者全局函数，   函数的创建在静态或全局空间，与类的栈空间无关<br>所以访问的是同一个函数。</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/01/30/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -945,40 +721,260 @@ If (ptn)
       
         
           
-            <p>线程分：ui线程和工作线程</p>
-<p>概念：</p>
-<pre><code>  在Windows中，UI控件也被视为一个“Window”，它也拥有自己的“窗体过程”，因此，它也可以同窗体一样，具备处理消息的能力。
+          线程分：ui线程和工作线程
+概念：
+  在Windows中，UI控件也被视为一个“Window”，它也拥有自己的“窗体过程”，因此，它也可以同窗体一样，具备处理消息的能力。
 
 由此我们可以知道UI线程所完成的大致工作就是：
 
-UI线程启动一个消息循环，每次从本线程所对应的消息队列中取出一条消息，然后根据消息所包容的信息，将其转发给特定的窗体对象，此窗体对象所对应的“窗体过程”函数被调用以处理这些消息。
-</code></pre><p>用户操作消息是怎样“跑”到UI线程的消息队列中的？</p>
-<pre><code> 操作系统会监控计算机上的键盘和鼠标等输入设备，为每一个输入事件（由用户操作所引发，比如用户按了某个键）生成一个消息。根据事件发生时的情况（比如当前激活的窗体负责接收用户按键，而依据用户点击鼠标的坐标可以知道用户在哪个窗体区域内点击了鼠标），操作系统会确定出此消息应该发给哪个窗体对象。
+UI线程启动一个消息循环，每次从本线程所对应的消息队列中取出一条消息，然后
+          ...
 
-这些生成的消息会统一地先临时放置在一个“系统消息队列（system message queue）”中，然后，操作系统有一个专门的线程负责从这一队列中取出消息，根据消息的目标对象（就是窗体的句柄），将其移动到创建它的UI线程所对应的消息队列中。操作系统在创建进程和线程时，都同时记录了大量的控制信息（比如通过进程控制块和句柄表可以查找到进程所创建的所有线程和引用的核心对象），因此，根据窗体句柄来确定此消息应属于哪个UI线程对于操作系统来说是很简单的一件事。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/29/28/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
 
-注意，每个UI线程都有一个消息队列，而不是每个窗体一个消息队列！
+    <div>
+      
+    </div>
 
-那么，操作系统是不是会为每一个线程都创建一个消息队列呢？
+    <div>
+      
+    </div>
 
-答案是：只有当一个线程调用Win32 API中的GDI（Graphics Device Interface）和User函数时，操作系统才会将其看成是一个UI线程，并为它创建一个消息队列。
+    <footer class="post-footer">
+      
 
-需要注意的是，消息循环是由UI线程的线程函数启动的，操作系统不管这件事，它只管为UI线程创建消息队列。因此，如果某个UI线程的线程函数中没有定义消息循环，那么，它所拥有的窗体是无法正确绘制的。
-</code></pre><p>   mfc中创建ui线程只能通过CWinthread派生下来，动态创建。<br>终止线程：AfxEndThread PostQuitMessage 获取线程返回值： GetExitCodeThred</p>
-<p>   一个线程结束后就会处于信号发送状态：WaitforSingleObject(pThread-&gt;m_hThread, INFINITE);直到线程返回</p>
-<p>同步：</p>
-<pre><code>临界区： 通过CCriticalSection 类的Lock() Unlock()同步，就中间添加执行代码，
-目的是为了避免俩个或多个线程同时访问一个资源。     执行时最好用InterlockedIncrement
-来确保线程安全。（可以设置等待时间）
+      
 
-互斥量：和临界区基本相同，区别在于，临界区用于同一个进程中的线程。互斥量用于，不同进程中
-的线程对同一个资源的访问。 CMutex
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
 
-事件：不说了，经常用。
 
-信号量：不说了，经常用。
-</code></pre>
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/08/29/27/" itemprop="url">
+                  多个对象访问多线程资源
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-08-29T03:31:58+08:00" content="2014-08-29">
+              2014-08-29
+            </time>
+          </span>
+
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+             我初始化多个对象，对象类里面有多线程代码。
+多线程设置信号量来限制访问线程个数。
+发现：多个对象执行的时候，访问的却是同一个线程资源。
+分析原因：多线程函数是static或者全局函数，   函数的创建在静态或全局空间，与类的栈空间无关所以访问的是同一个函数。
+
+          
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/29/27/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/08/29/29/" itemprop="url">
+                  more effective c++智能指针(28)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-08-29T03:31:58+08:00" content="2014-08-29">
+              2014-08-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/书籍/" itemprop="url" rel="index">
+                    <span itemprop="name">书籍</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          智能指针了：构造、赋值、析构:++1234567891011121314151617181920212223242526272829303132333435363738template &lt;class T&gt;class auto_ptr&#123;public:	auto_ptr(T* pt
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/29/29/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1090,7 +1086,7 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/l.jpg" rel="gallery_civ9lzq4p005iwwcxpkfl8a7d"
+                 href="/picture/l.jpg" rel="gallery_civb37r6u005anscxrrnab1s0"
                  itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/l.jpg" itemprop="contentUrl"/>
               </a>
@@ -1105,10 +1101,16 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
       
         
           
-            <p>祸、天、延、五、生、六、绝、辅、弼<br><br>上二为五下二天<br><br>中变绝命自古然<br><br>上一为生初变祸<br><br>上下六煞全变延<br></p>
-<p>蓬、任、冲、辅、英、芮、柱、心、禽<br></p>
+          祸、天、延、五、生、六、绝、辅、弼上二为五下二天中变绝命自古然上一为生初变祸上下六煞全变延
+蓬、任、冲、辅、英、芮、柱、心、禽
 
           
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/28/156/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1220,7 +1222,7 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/k.jpg" rel="gallery_civ9lzpyt0006wwcx22vym52h"
+                 href="/picture/k.jpg" rel="gallery_civb37r0t0000nscxwb8a4j42"
                  itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/k.jpg" itemprop="contentUrl"/>
               </a>
@@ -1235,125 +1237,14 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
       
         
           
-            <p>  我讨厌温柔，温柔的人，温柔的心，以及清澈娇媚的问候；<br><br>  被擅自的靠近，被擅自的憧憬，被擅自的失望，被信任的人无可挽回的背叛了，再次回到漆黑的孤独之中，唯一增加的只有被腐蚀的心灵。<br><br>  总以为不再迷惑了，不再恐惧了，自己变强了，坚强到不会再伤害别人了，比起以前已经成长了，我一直这么坚信。但是好不容易积累起来的信心，也在那刻倾圮崩塌！！<br><br>  真相是残酷的，善良是谎言的，训练有素的孤零零只能在在这柔和的黑暗之中！！！</p>
+            我讨厌温柔，温柔的人，温柔的心，以及清澈娇媚的问候；  被擅自的靠近，被擅自的憧憬，被擅自的失望，被信任的人无可挽回的背叛了，再次回到漆黑的孤独之中，唯一增加的只有被腐蚀的心灵。  总以为不再迷惑了，不再恐惧了，自己变强了，坚强到不会再伤害别人了，比起以前已经成长了，我一直这么坚信。但是好不容易
+          ...
 
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/08/28/25/" itemprop="url">
-                  mousehover（25）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-08-28T03:31:58+08:00" content="2014-08-28">
-              2014-08-28
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Windows/" itemprop="url" rel="index">
-                    <span itemprop="name">Windows</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天为程序添加mousehover函数，发现不能响应，很气人。</p>
-<p>要仔细去看下官方，翻看msdn：</p>
-<p>   msdn它只会在图像重绘地方响应<br>Posted to a window when the cursor hovers over the client area of the window for the period of time specified in a prior call to TrackMouseEvent.</p>
-<p>如果在onpaint函数使用cclientdc绘图的话，就会被判定非客户区。<br>所以，必须在onpaint里面用cpaintdc绘图，才会响应mousehover。</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/28/102/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1464,13 +1355,135 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
       
         
           
-            <p>这部分记住的有这几条：</p>
-<figure class="highlight c"><figcaption><span>先看理论：stack（栈）高地址往底地址， heap（堆）由低地址往高地址成长++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">onHeap</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span>* address)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">char</span> onTheStack;</div><div class="line">	<span class="keyword">return</span> address &lt; &amp;onTheStack;</div><div class="line">&#125;</div></pre></td></tr></table></figure> 
-<p>onHeap函数内，onTheStack是个局部变量，所以它被置于stack内。当onHeap被调用，其stack frame 会被放在stack的顶端，由于此框架中stack系向低地址成长，所以onThestack的地址移动比其他任何一个stack变量更低。</p>
-<p>所以address比onthestack更低，它就一定位于heap中。</p>
-<p>此部分，作者为了让对象产生于heap中，向operate new添加东西标记。。</p>
+          这部分记住的有这几条：
+先看理论：stack（栈）高地址往底地址， heap（堆）由低地址往高地址成长++123456bool onHeap(const void* address)&#123;	char onTheStack;	return address &lt; &amp;onTheStack
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/28/26/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/08/28/25/" itemprop="url">
+                  mousehover（25）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-08-28T03:31:58+08:00" content="2014-08-28">
+              2014-08-28
+            </time>
+          </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Windows/" itemprop="url" rel="index">
+                    <span itemprop="name">Windows</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          今天为程序添加mousehover函数，发现不能响应，很气人。
+要仔细去看下官方，翻看msdn：
+   msdn它只会在图像重绘地方响应Posted to a window when the cursor hovers over the client area of the window for t
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/28/25/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>

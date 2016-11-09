@@ -58,12 +58,36 @@ return result;
 </ol>
 <p>es6多了:<br><br>includes:返回布尔，表示十分找到参数字符串。第二个参数，表示开始搜索的位置<br>startsWith:返回布尔，表示参数字符串是否在源字符串的头部。第二个参数，表示开始搜索的位置<br>endsWith:返回布尔，表示参数字符串是否在源字符串的尾部。第二个参数，表示开始搜索的位置<br>repeat:返回一个新字符串，表示将原字符串重复n次</p>
 <ol>
-<li><p>模板字符串，使用反引号（`这个符号）</p>
-<p> 普通字符： <code>dd&#39;\n&#39;asdf</code> 这里有换行<br> 多行字符： 无需连接符，所有的空格、回车和缩进都会被保留在输出中。<br> 变量嵌入：<code>hello ${name} are ${time}?</code> name和time是定义的变量。如果括号里面的不是字符串，则按一般规则转换为字符，如调用toString方法<br> 函数调用：function tag(s, v, d); tag<code>hello ${a+b} ${a}</code>;<br> String的raw函数</p>
+<li>模板字符串，使用反引号（`这个符号）</li>
+</ol>
+<p>普通字符： <code>dd&#39;\n&#39;asdf</code> 这里有换行<br>多行字符： 无需连接符，所有的空格、回车和缩进都会被保留在输出中。<br>变量嵌入：<code>hello ${name} are ${time}?</code> name和time是定义的变量。如果括号里面的不是字符串，则按一般规则转换为字符，如调用toString方法<br>函数调用：function tag(s, v, d); tag<code>hello ${a+b} ${a}</code>;<br>String的raw函数</p>
+<ol>
+<li>正则</li>
+</ol>
+<p>es5中String对象的方法，search、match、replace、split支持JS正则</p>
+<ol>
+<li><p>数值<br><br>Number增加成员isFinite，isNaN.<br> es6把es5中的全局函数parseInt,parseFloat移植到了Number对象上。<br>Number成员，isSafeInteger范围在2的53次方</p>
 </li>
-<li><p>正则，5中String对象的方法，search、match、replace、split支持JS正则</p>
+<li><p>Math对象,es6新增17个方法。它的方法都是静态方法:<code>Math.abs(s)</code></p>
 </li>
 </ol>
+<p>Math.trunc(4.2)//除去一个数的小数部分，返回整数<br><br>Math.sign();//判断一个数是正数(re:+1)、负数(re:-1)、还是零(re:0)、其它(re:NaN)<br>Math.cbrt();//计算一个数的立方根<br>对数、指数、平方等就不写了。</p>
+<ol>
+<li>Array数组</li>
+</ol>
+<ul>
+<li><p>伪组数转换：</p>
+<p>  let arraylike = {</p>
+<pre><code>0: &apos;a&apos;,
+1: &apos;b&apos;,
+length: 2//这个必须有
+</code></pre><p>  };//这是个对象，并不是数组<br>  es5中转换数组： [].slice.call(arraylike);或这么写Array.prototype.slice.call(arraylike);//[‘a’, ‘b’];<br>  es6中转换数组：Array.from(arraylike);//只要部署了Iterator接口的数据结构，和ES6的Set、Map。都可以转换。</p>
+<p>  function test(a,b,c,d)<br>  { </p>
+<pre><code>var arg = Array.prototype.slice.call(arguments,1); 
+alert(arg); 
+</code></pre><p>  }<br>  test(“a”,”b”,”c”,”d”); //b,c,d</p>
+</li>
+</ul>
 ]]></content>
     </entry>
     
@@ -1185,12 +1209,6 @@ hash&lt;char&gt; d;//is char
     </entry>
     
     <entry>
-      <title><![CDATA[工具代码(170)]]></title>
-      <url>https://xuecat.github.io/2016/08/04/170/</url>
-      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">	<span class="meta">#<span class="meta-keyword">pragma</span> once</span></div><div class="line">	<span class="keyword">class</span> CSeparaString</div><div class="line">	&#123;</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">		CSeparaString() &#123; m_strBuffer.Empty(); &#125;</div><div class="line">		~CSeparaString() &#123;&#125;</div><div class="line">	</div><div class="line">		<span class="function">VOID	<span class="title">SetBuffer</span><span class="params">(LPCTSTR lpsz)</span> </span>&#123; m_strBuffer = lpsz; &#125;</div><div class="line">		<span class="function">CString <span class="title">GetBuffer</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_strBuffer; &#125;</div><div class="line">	</div><div class="line">		<span class="function">VOID	<span class="title">SetSepara</span><span class="params">(TCHAR ch)</span> </span>&#123; m_chSepara = ch; &#125;</div><div class="line">		</div><div class="line">		<span class="function">VOID	<span class="title">AppendElement</span><span class="params">(<span class="keyword">int</span> ne)</span> </span>&#123;</div><div class="line">			TCHAR buffer[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</div><div class="line">			<span class="number">_</span>itot_s(ne, buffer, <span class="number">4</span>, <span class="number">10</span>);</div><div class="line">			m_strBuffer.Append(CString(m_chSepara)); </div><div class="line">			m_strBuffer.Append(buffer);</div><div class="line">		&#125;</div><div class="line">		<span class="function">VOID	<span class="title">AppendElement</span><span class="params">(LPCTSTR lpsz)</span> </span>&#123; m_strBuffer.Append(CString(m_chSepara)); m_strBuffer.Append(lpsz); &#125;</div><div class="line">		<span class="function">VOID	<span class="title">GetElement</span><span class="params">(CStringArray &amp;arry)</span> </span>&#123;</div><div class="line">			<span class="keyword">int</span> npos = m_strBuffer.Find(m_chSepara);</div><div class="line">			<span class="keyword">while</span> (npos != m_strBuffer.GetLength())</div><div class="line">			&#123;</div><div class="line">				<span class="keyword">int</span> epos = m_strBuffer.Find(m_chSepara, npos + <span class="number">1</span>);</div><div class="line">				(epos == <span class="number">-1</span>) &amp;&amp; (epos = m_strBuffer.GetLength());</div><div class="line">				arry.Add(m_strBuffer.Mid(npos + <span class="number">1</span>, epos - npos - <span class="number">1</span>));</div><div class="line">				npos = epos;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="function">CString <span class="title">GetElement</span><span class="params">(<span class="keyword">int</span> nelement)</span> </span>&#123;</div><div class="line">			<span class="keyword">int</span> npos = <span class="number">-1</span>;</div><div class="line">			<span class="keyword">int</span> epos = m_strBuffer.Find(m_chSepara);</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nelement; i++)</div><div class="line">			&#123;</div><div class="line">				npos = epos;</div><div class="line">				epos = m_strBuffer.Find(m_chSepara, npos + <span class="number">1</span>);</div><div class="line">			&#125;</div><div class="line">			(epos == <span class="number">-1</span>) &amp;&amp; (epos = m_strBuffer.GetLength());</div><div class="line">			<span class="keyword">return</span> m_strBuffer.Mid(npos + <span class="number">1</span>, epos - npos - <span class="number">1</span>);</div><div class="line">		&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span>:</div><div class="line">		TCHAR	m_chSepara;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">		CString m_strBuffer;</div><div class="line">	&#125;;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">	CRect CDlgImportPicture::CalculateMaxRect(<span class="keyword">const</span> CRect *prect, <span class="keyword">int</span> numerator, <span class="keyword">int</span> denominator)</div><div class="line">	&#123;</div><div class="line">		CRect rtRE;</div><div class="line">		<span class="keyword">if</span> (prect)</div><div class="line">		&#123;</div><div class="line">			rtRE = prect;</div><div class="line">	</div><div class="line">			<span class="comment">//先算宽高度基准</span></div><div class="line">			<span class="keyword">if</span> (prect-&gt;Width() * denominator &gt; numerator * prect-&gt;Height())<span class="comment">//宽过多,高基准</span></div><div class="line">			&#123;</div><div class="line">				<span class="keyword">int</span> offset = prect-&gt;Width() - ((prect-&gt;Height() * numerator)/denominator);</div><div class="line">				rtRE.left += offset/<span class="number">2</span>;</div><div class="line">				rtRE.right -= offset/<span class="number">2</span>;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">else</span><span class="comment">//高过多,宽基准</span></div><div class="line">			&#123;</div><div class="line">				<span class="keyword">int</span> offset = prect-&gt;Height() - ((prect-&gt;Width() * denominator)/numerator);</div><div class="line">				rtRE.top += offset/<span class="number">2</span>;</div><div class="line">				rtRE.bottom -= offset/<span class="number">2</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> rtRE;</div><div class="line">	&#125;</div><div class="line"></div><div class="line"></div><div class="line"># 时间</div><div class="line">	<span class="meta">#<span class="meta-keyword">define</span> TickStart() DWORD dwstart = GetTickCount(), dwend = 0;\</span></div><div class="line">		TCHAR buffer[1024] = &#123;0&#125;;\</div><div class="line">		TCHAR thisname[1024] = &#123;0&#125;;\</div><div class="line">		_ltot_s(int(this), thisname, 1024, 10);\</div><div class="line">	</div><div class="line">	<span class="meta">#<span class="meta-keyword">define</span> TickOutName(str) OutputDebugString(CString(thisname) + _T(<span class="meta-string">" :"</span>) + str);\</span></div><div class="line">		OutputDebugString(_T(<span class="meta-string">"\n"</span>));\</div><div class="line">	</div><div class="line">	<span class="meta">#<span class="meta-keyword">define</span> TickOutPut(str) dwend = GetTickCount();\</span></div><div class="line">		_ltot_s(dwend - dwstart, buffer, 1024, 10);\</div><div class="line">		OutputDebugString(CString(thisname) + _T(<span class="meta-string">" :"</span>) + str);\</div><div class="line">		OutputDebugString(buffer);\</div><div class="line">		OutputDebugString(_T(<span class="meta-string">"\n"</span>));\</div><div class="line">		dwstart = dwend;\</div><div class="line"></div></pre></td></tr></table></figure>]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[微软的莫名好用的类(171)]]></title>
       <url>https://xuecat.github.io/2016/08/04/171/</url>
       <content type="html"><![CDATA[<blockquote>
@@ -1199,6 +1217,12 @@ hash&lt;char&gt; d;//is char
 <p>2、只能响应Lbuttondown，因为Track是个阻塞函数。哈哈！剩下的自己百度了。。</p>
 </blockquote>
 ]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[工具代码(170)]]></title>
+      <url>https://xuecat.github.io/2016/08/04/170/</url>
+      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">	<span class="meta">#<span class="meta-keyword">pragma</span> once</span></div><div class="line">	<span class="keyword">class</span> CSeparaString</div><div class="line">	&#123;</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">		CSeparaString() &#123; m_strBuffer.Empty(); &#125;</div><div class="line">		~CSeparaString() &#123;&#125;</div><div class="line">	</div><div class="line">		<span class="function">VOID	<span class="title">SetBuffer</span><span class="params">(LPCTSTR lpsz)</span> </span>&#123; m_strBuffer = lpsz; &#125;</div><div class="line">		<span class="function">CString <span class="title">GetBuffer</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_strBuffer; &#125;</div><div class="line">	</div><div class="line">		<span class="function">VOID	<span class="title">SetSepara</span><span class="params">(TCHAR ch)</span> </span>&#123; m_chSepara = ch; &#125;</div><div class="line">		</div><div class="line">		<span class="function">VOID	<span class="title">AppendElement</span><span class="params">(<span class="keyword">int</span> ne)</span> </span>&#123;</div><div class="line">			TCHAR buffer[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</div><div class="line">			<span class="number">_</span>itot_s(ne, buffer, <span class="number">4</span>, <span class="number">10</span>);</div><div class="line">			m_strBuffer.Append(CString(m_chSepara)); </div><div class="line">			m_strBuffer.Append(buffer);</div><div class="line">		&#125;</div><div class="line">		<span class="function">VOID	<span class="title">AppendElement</span><span class="params">(LPCTSTR lpsz)</span> </span>&#123; m_strBuffer.Append(CString(m_chSepara)); m_strBuffer.Append(lpsz); &#125;</div><div class="line">		<span class="function">VOID	<span class="title">GetElement</span><span class="params">(CStringArray &amp;arry)</span> </span>&#123;</div><div class="line">			<span class="keyword">int</span> npos = m_strBuffer.Find(m_chSepara);</div><div class="line">			<span class="keyword">while</span> (npos != m_strBuffer.GetLength())</div><div class="line">			&#123;</div><div class="line">				<span class="keyword">int</span> epos = m_strBuffer.Find(m_chSepara, npos + <span class="number">1</span>);</div><div class="line">				(epos == <span class="number">-1</span>) &amp;&amp; (epos = m_strBuffer.GetLength());</div><div class="line">				arry.Add(m_strBuffer.Mid(npos + <span class="number">1</span>, epos - npos - <span class="number">1</span>));</div><div class="line">				npos = epos;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="function">CString <span class="title">GetElement</span><span class="params">(<span class="keyword">int</span> nelement)</span> </span>&#123;</div><div class="line">			<span class="keyword">int</span> npos = <span class="number">-1</span>;</div><div class="line">			<span class="keyword">int</span> epos = m_strBuffer.Find(m_chSepara);</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nelement; i++)</div><div class="line">			&#123;</div><div class="line">				npos = epos;</div><div class="line">				epos = m_strBuffer.Find(m_chSepara, npos + <span class="number">1</span>);</div><div class="line">			&#125;</div><div class="line">			(epos == <span class="number">-1</span>) &amp;&amp; (epos = m_strBuffer.GetLength());</div><div class="line">			<span class="keyword">return</span> m_strBuffer.Mid(npos + <span class="number">1</span>, epos - npos - <span class="number">1</span>);</div><div class="line">		&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span>:</div><div class="line">		TCHAR	m_chSepara;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">		CString m_strBuffer;</div><div class="line">	&#125;;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">	CRect CDlgImportPicture::CalculateMaxRect(<span class="keyword">const</span> CRect *prect, <span class="keyword">int</span> numerator, <span class="keyword">int</span> denominator)</div><div class="line">	&#123;</div><div class="line">		CRect rtRE;</div><div class="line">		<span class="keyword">if</span> (prect)</div><div class="line">		&#123;</div><div class="line">			rtRE = prect;</div><div class="line">	</div><div class="line">			<span class="comment">//先算宽高度基准</span></div><div class="line">			<span class="keyword">if</span> (prect-&gt;Width() * denominator &gt; numerator * prect-&gt;Height())<span class="comment">//宽过多,高基准</span></div><div class="line">			&#123;</div><div class="line">				<span class="keyword">int</span> offset = prect-&gt;Width() - ((prect-&gt;Height() * numerator)/denominator);</div><div class="line">				rtRE.left += offset/<span class="number">2</span>;</div><div class="line">				rtRE.right -= offset/<span class="number">2</span>;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">else</span><span class="comment">//高过多,宽基准</span></div><div class="line">			&#123;</div><div class="line">				<span class="keyword">int</span> offset = prect-&gt;Height() - ((prect-&gt;Width() * denominator)/numerator);</div><div class="line">				rtRE.top += offset/<span class="number">2</span>;</div><div class="line">				rtRE.bottom -= offset/<span class="number">2</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> rtRE;</div><div class="line">	&#125;</div><div class="line"></div><div class="line"></div><div class="line"># 时间</div><div class="line">	<span class="meta">#<span class="meta-keyword">define</span> TickStart() DWORD dwstart = GetTickCount(), dwend = 0;\</span></div><div class="line">		TCHAR buffer[1024] = &#123;0&#125;;\</div><div class="line">		TCHAR thisname[1024] = &#123;0&#125;;\</div><div class="line">		_ltot_s(int(this), thisname, 1024, 10);\</div><div class="line">	</div><div class="line">	<span class="meta">#<span class="meta-keyword">define</span> TickOutName(str) OutputDebugString(CString(thisname) + _T(<span class="meta-string">" :"</span>) + str);\</span></div><div class="line">		OutputDebugString(_T(<span class="meta-string">"\n"</span>));\</div><div class="line">	</div><div class="line">	<span class="meta">#<span class="meta-keyword">define</span> TickOutPut(str) dwend = GetTickCount();\</span></div><div class="line">		_ltot_s(dwend - dwstart, buffer, 1024, 10);\</div><div class="line">		OutputDebugString(CString(thisname) + _T(<span class="meta-string">" :"</span>) + str);\</div><div class="line">		OutputDebugString(buffer);\</div><div class="line">		OutputDebugString(_T(<span class="meta-string">"\n"</span>));\</div><div class="line">		dwstart = dwend;\</div><div class="line"></div></pre></td></tr></table></figure>]]></content>
     </entry>
     
     <entry>
@@ -1472,21 +1496,6 @@ distributionUrl=gradle-2.4-all.zip
     </entry>
     
     <entry>
-      <title><![CDATA[python 等问题解决(155)]]></title>
-      <url>https://xuecat.github.io/2016/01/14/155/</url>
-      <content type="html"><![CDATA[<p>python安装某些模块的时候，老是出错（当然错误是Unicode和ascii字符的问题）</p>
-<p><strong>1、安装模块字符错误</strong><br><br>在python的Lib\site-packages文件夹下新建一个sitecustomize.py，内容为：</p>
-<pre><code> # encoding=utf8  
-import sys  
-
-reload(sys)  
-sys.setdefaultencoding(&apos;utf8&apos;)
-</code></pre><p>此时重启python解释器，可以解决了。</p>
-<p><strong>pip的国内源</strong><br><br>这里，我只说下指令，其它百度吧。感觉这个华中科大的源最快；<br><br>pip install ** -i <a href="http://pypi.mirrors.ustc.edu.cn/simple" target="_blank" rel="external">http://pypi.mirrors.ustc.edu.cn/simple</a></p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[调试技巧(154)]]></title>
       <url>https://xuecat.github.io/2016/01/14/154/</url>
       <content type="html"><![CDATA[<p>  自从在153文章的认识后，自己要好好熟悉下那个工具<br></p>
@@ -1519,6 +1528,21 @@ sys.setdefaultencoding(&apos;utf8&apos;)
 <p>::OutputDebugString(_T(“debug information!”));</p>
 </blockquote>
 </blockquote>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[python 等问题解决(155)]]></title>
+      <url>https://xuecat.github.io/2016/01/14/155/</url>
+      <content type="html"><![CDATA[<p>python安装某些模块的时候，老是出错（当然错误是Unicode和ascii字符的问题）</p>
+<p><strong>1、安装模块字符错误</strong><br><br>在python的Lib\site-packages文件夹下新建一个sitecustomize.py，内容为：</p>
+<pre><code> # encoding=utf8  
+import sys  
+
+reload(sys)  
+sys.setdefaultencoding(&apos;utf8&apos;)
+</code></pre><p>此时重启python解释器，可以解决了。</p>
+<p><strong>pip的国内源</strong><br><br>这里，我只说下指令，其它百度吧。感觉这个华中科大的源最快；<br><br>pip install ** -i <a href="http://pypi.mirrors.ustc.edu.cn/simple" target="_blank" rel="external">http://pypi.mirrors.ustc.edu.cn/simple</a></p>
 ]]></content>
     </entry>
     
@@ -2755,19 +2779,6 @@ return count;
     </entry>
     
     <entry>
-      <title><![CDATA[字符内存越界(98)]]></title>
-      <url>https://xuecat.github.io/2015/01/01/98/</url>
-      <content type="html"><![CDATA[<blockquote>
-<p>第一个越界：     我用变长参数函数的时候<code>va_arg(t_args, char*)</code> 又把参数强制转换成int后发现，内存越界。</p>
-<blockquote>
-<p>分析原因：char<em>的内存界是char</em>指向的一个字节字符界。int<em>的内存界是int</em>指向的4个字节（32）字符界。    强制转换会根据类型偏移量进行数据转换，所以出现错误。</p>
-</blockquote>
-<p>第二个：我自己的失误，字符数组内存开辟小了（没有结尾的空字符），导致char*把后面的数据以前读了。</p>
-</blockquote>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[项目(142)]]></title>
       <url>https://xuecat.github.io/2015/01/01/142/</url>
       <content type="html"><![CDATA[<p> <a href="http://www.epweike.com/soft/task/page2.html" target="_blank" rel="external">http://www.epweike.com/soft/task/page2.html</a></p>
@@ -2783,6 +2794,19 @@ return count;
 <li>append传入的是指针，它会一个一个遍历开辟入栈（所以会开辟内部空间吧指针字符串全部复制进去）  </li>
 <li>push_back是传入字符，只传入单个字符。</li>
 </ul>
+</blockquote>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[字符内存越界(98)]]></title>
+      <url>https://xuecat.github.io/2015/01/01/98/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>第一个越界：     我用变长参数函数的时候<code>va_arg(t_args, char*)</code> 又把参数强制转换成int后发现，内存越界。</p>
+<blockquote>
+<p>分析原因：char<em>的内存界是char</em>指向的一个字节字符界。int<em>的内存界是int</em>指向的4个字节（32）字符界。    强制转换会根据类型偏移量进行数据转换，所以出现错误。</p>
+</blockquote>
+<p>第二个：我自己的失误，字符数组内存开辟小了（没有结尾的空字符），导致char*把后面的数据以前读了。</p>
 </blockquote>
 ]]></content>
     </entry>
@@ -2960,20 +2984,6 @@ dup获取结构体，要free。（它内部开辟）
     </entry>
     
     <entry>
-      <title><![CDATA[c++正则(85)]]></title>
-      <url>https://xuecat.github.io/2014/10/24/85/</url>
-      <content type="html"><![CDATA[<p>支持宽字符，（有w_函数）</p>
-<p>(“(\w+)(\.|_)?(\w*)@(\w+)(\.(\w+))+”);</p>
-<p> 首先注意‘()’表示将正则表达式分成子表达式，每个‘()’之间的内容表示一个子表达式；</p>
-<p>‘\’是一个转义字符，‘\’表示扔掉第二个‘\’的转义特性，‘\w+’表示匹配一个或多个单词，‘+’表示重复一次或者多次，因此第一个子表达式的意思就是匹配一个或者多个单词；</p>
-<p>接着看第二个子表达式，‘|’表示选择，出现‘.’或者‘<em>’，后面的‘?’表示该子表示出现一次或者零次，因此第二个子表示表示‘.’或‘</em>’出现不出现都匹配。</p>
-<p>第三个子表达式表示出现一个单词，‘*’表示任意个字符。</p>
-<p>(\d{1,3}):(\d{1,3}):(\d{1,3}):(\d{1,3})</p>
-<p>首先还是通过‘()’将这个串分成几个子表达式，其中\d表示匹配一个数字，{,}表示数字的个数，例如{1,3}可以理解为匹配一个小于1000的数字</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[C语言中的一些小知识(84)]]></title>
       <url>https://xuecat.github.io/2014/10/24/84/</url>
       <content type="html"><![CDATA[<pre><code>前面加0b表示二进制
@@ -2998,6 +3008,20 @@ dup获取结构体，要free。（它内部开辟）
 <p>float    4    3.4x10 38..3.4x10+38 (7 sf)     %f, %e, %g</p>
 <p>double    8    1.7x10 308..1.7x10+308 (15 sf)     %f, %e, %g</p>
 <p>long double    8 或以上    编译器相关     %Lf, %Le, %Lg</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[c++正则(85)]]></title>
+      <url>https://xuecat.github.io/2014/10/24/85/</url>
+      <content type="html"><![CDATA[<p>支持宽字符，（有w_函数）</p>
+<p>(“(\w+)(\.|_)?(\w*)@(\w+)(\.(\w+))+”);</p>
+<p> 首先注意‘()’表示将正则表达式分成子表达式，每个‘()’之间的内容表示一个子表达式；</p>
+<p>‘\’是一个转义字符，‘\’表示扔掉第二个‘\’的转义特性，‘\w+’表示匹配一个或多个单词，‘+’表示重复一次或者多次，因此第一个子表达式的意思就是匹配一个或者多个单词；</p>
+<p>接着看第二个子表达式，‘|’表示选择，出现‘.’或者‘<em>’，后面的‘?’表示该子表示出现一次或者零次，因此第二个子表示表示‘.’或‘</em>’出现不出现都匹配。</p>
+<p>第三个子表达式表示出现一个单词，‘*’表示任意个字符。</p>
+<p>(\d{1,3}):(\d{1,3}):(\d{1,3}):(\d{1,3})</p>
+<p>首先还是通过‘()’将这个串分成几个子表达式，其中\d表示匹配一个数字，{,}表示数字的个数，例如{1,3}可以理解为匹配一个小于1000的数字</p>
 ]]></content>
     </entry>
     
@@ -3058,6 +3082,17 @@ main() {}
     </entry>
     
     <entry>
+      <title><![CDATA[程序软件(77)]]></title>
+      <url>https://xuecat.github.io/2014/10/14/77/</url>
+      <content type="html"><![CDATA[<pre><code>//quicksilver mac下面的软件。
+//alfred mac下的软件
+//caffeine mac下的软件
+//eudic mac下的软件
+//Parallels Desktop mac下软件
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[王道]]></title>
       <url>https://xuecat.github.io/2014/10/14/79/</url>
       <content type="html"><![CDATA[<p><img src="/picture/f.jpg" alt=""></p>
@@ -3072,17 +3107,6 @@ main() {}
 <p>但是在Archer和Rider的质疑与嘲弄之下Saber怀疑了自己作为王的道路，兰斯洛斯对自己的仇恨，义子对自己的叛乱，国家的最终分崩离析使得Saber怀疑起自己的选择，变得迷茫起来（那时好萌啊…萌啊…萌）</p>
 <p><strong>其实王没有绝对正确的道路，绝对的正确本来就不存在于世上，真正应该做的是像Rider所说的那样（“如果我的决断以及我的臣子们导致了这样的结果，那么毁灭是必然的。我会哀悼，也会流泪，但我绝不后悔。”）</strong></p>
 ]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[程序软件(77)]]></title>
-      <url>https://xuecat.github.io/2014/10/14/77/</url>
-      <content type="html"><![CDATA[<pre><code>//quicksilver mac下面的软件。
-//alfred mac下的软件
-//caffeine mac下的软件
-//eudic mac下的软件
-//Parallels Desktop mac下软件
-</code></pre>]]></content>
     </entry>
     
     <entry>
@@ -3215,6 +3239,28 @@ int memicmp(const void *buf1, const void *buf2, size_t count);
     </entry>
     
     <entry>
+      <title><![CDATA[dulib里面的头文件包含(74)]]></title>
+      <url>https://xuecat.github.io/2014/10/01/74/</url>
+      <content type="html"><![CDATA[<p>他头文件用namespace包括。</p>
+<p>cpp文件也用namespace包括。</p>
+<p>cpp包含个stadx.h文件</p>
+<p>stadx.h文件包含duilib.h文件</p>
+<p>所有的东西写在duilib.h文件里面</p>
+<p>亮点在cpp文件包括，然后包含。导致头文件不用包含。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[static作用(73)]]></title>
+      <url>https://xuecat.github.io/2014/10/01/73/</url>
+      <content type="html"><![CDATA[<p>static作用（修饰函数、局部变量、全局变量）</p>
+<p>当我们同时编译多个文件时，所有未加static前缀的全局变量和函数都具有全局可见性</p>
+<p>如果加了static，就会对其它源文件隐藏。例如在a和msg的定义前加上static，main.c就看不到它们了。</p>
+<p>利用这一特性可以在不同的文件中定义同名函数和同名变量，而不必担心命名冲突。Static可以用作函数和变量的前缀，对于函数来讲，static的作用仅限于隐藏，而对于变量，static还有下面两个作用。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[字符截取替换(78)]]></title>
       <url>https://xuecat.github.io/2014/10/01/78/</url>
       <content type="html"><![CDATA[<pre><code>//    &apos;;&apos;字符为界
@@ -3236,28 +3282,6 @@ while (line &gt;&gt; word) {
     temp.push_back(word);
 }
 </code></pre>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[dulib里面的头文件包含(74)]]></title>
-      <url>https://xuecat.github.io/2014/10/01/74/</url>
-      <content type="html"><![CDATA[<p>他头文件用namespace包括。</p>
-<p>cpp文件也用namespace包括。</p>
-<p>cpp包含个stadx.h文件</p>
-<p>stadx.h文件包含duilib.h文件</p>
-<p>所有的东西写在duilib.h文件里面</p>
-<p>亮点在cpp文件包括，然后包含。导致头文件不用包含。</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[static作用(73)]]></title>
-      <url>https://xuecat.github.io/2014/10/01/73/</url>
-      <content type="html"><![CDATA[<p>static作用（修饰函数、局部变量、全局变量）</p>
-<p>当我们同时编译多个文件时，所有未加static前缀的全局变量和函数都具有全局可见性</p>
-<p>如果加了static，就会对其它源文件隐藏。例如在a和msg的定义前加上static，main.c就看不到它们了。</p>
-<p>利用这一特性可以在不同的文件中定义同名函数和同名变量，而不必担心命名冲突。Static可以用作函数和变量的前缀，对于函数来讲，static的作用仅限于隐藏，而对于变量，static还有下面两个作用。</p>
-]]></content>
     </entry>
     
     <entry>
@@ -3371,6 +3395,41 @@ while (line &gt;&gt; word) {
     </entry>
     
     <entry>
+      <title><![CDATA[设计流程(57)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/57/</url>
+      <content type="html"><![CDATA[<p> 想出的设计流程：</p>
+<p> 先画出程序运行功能的基本流程-&gt;确定类的个数和作用-&gt;设计模式-&gt;按照先想好的类功能模块把设计模式搭建出来-&gt;最后按照功能流程图再写一遍。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[string和wstring(62)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/62/</url>
+      <content type="html"><![CDATA[<p>今天用string来find一个中文符号，首先返回符号位置正确。然后符号为界，截取字符串出现问题；</p>
+<p>分析原因：中文符号在string中是占用两个字节的。而string对所有的字符串是一个字符一个字节的</p>
+<p>，所以按位取时，夺取了一个字节，导致数据获取失败。</p>
+<p>用wstring进行存取，可以完全避免。</p>
+<p><strong>学到：或许第三方库和一些协议对unicode字符集支持不是很好，导致数据传输要使用ANSI字符串。<br>但程序之间的通信为了保证中文字符，必须使用unicode。     最多在数据传输时做一次编码转换！</strong></p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[输出中文(66)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/66/</url>
+      <content type="html"><![CDATA[<pre><code> cout.imbue(locale(&quot;&quot;));
+char data[] = &quot;dfwe玩GIS股份&quot;;
+for (size_t i = 0; i &lt; strlen(data); i++)
+{
+    cout &lt;&lt; data[i] &lt;&lt; endl;
+}
+
+cout &lt;&lt; data;
+</code></pre><p>结果：第一个无法输出中文，第二个可以。</p>
+<p>分析：昨天已经讲了，今天写下只是写个例子。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[++和++ 入栈顺序(65)]]></title>
       <url>https://xuecat.github.io/2014/09/20/65/</url>
       <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>直接上代码++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">minuus</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">return</span> a-b;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> cc = <span class="number">4</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; minuus(cc++, cc++) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	</div><div class="line">	<span class="keyword">while</span> (cc--)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"a"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
@@ -3393,30 +3452,32 @@ while (line &gt;&gt; word) {
     </entry>
     
     <entry>
+      <title><![CDATA[强制转换临时和原对象(虚函数测试)(59)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/59/</url>
+      <content type="html"><![CDATA[<p>这是个很坑的地方,大多数想法,转换嘛,</p>
+<pre><code>我把static_cast&lt;A&gt;(B)不就是把B转成A吗? 错! :
+static_cast&lt;window*&gt;(this)-&gt;onResize(); //这是拿this当成window,没问题
+static_cast&lt;window&amp;&gt;(*this).onResize();//这个也是
+
+static_cast&lt;window&gt;(*this).onResize();
+这个相当于:
+window temp=(*this);
+temp.onResize();
+</code></pre><p>我做了一下测试，你的临时对象的说法应该是对的，</p>
+<pre><code>static_cast&lt;window&gt;(*this).onresize();  确实无法执行到 对象的 base class 部分 
+
+static_cast&lt;window*&gt;(this)-&gt;onResize(); //这是拿this当成window,没问题
+static_cast&lt;window&amp;&gt;(*this).onResize();//这个也是
+</code></pre><p>这两种可以执行到base class 部分，但是因为例子中是 virtual function，所以base class 部分的 vtable pointer 跟 derived class 的 vtable pointer 指向同一个virtual table，里面的 函数是一个，所以会递归调用</p>
+<p>而 如果用 window::onResize()，就应该是直接调用的base class  里面的 virtual function 。<br>应该是这样的</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[指针内存长度和大小(64)]]></title>
       <url>https://xuecat.github.io/2014/09/20/64/</url>
       <content type="html"><![CDATA[<p> 今天字符处理遇见这个问题：我new了一块内存，然后sizeof()；strlen()；都正常（一个返回4，一个返回分配大小）</p>
 <p>之后我用了ZeroMemory来分配，发现有异议了。<br>sizeof(); strlen(); 一个返回4，一个返回0；     原来用了这个函数会置空内存。</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[string和wstring(62)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/62/</url>
-      <content type="html"><![CDATA[<p>今天用string来find一个中文符号，首先返回符号位置正确。然后符号为界，截取字符串出现问题；</p>
-<p>分析原因：中文符号在string中是占用两个字节的。而string对所有的字符串是一个字符一个字节的</p>
-<p>，所以按位取时，夺取了一个字节，导致数据获取失败。</p>
-<p>用wstring进行存取，可以完全避免。</p>
-<p><strong>学到：或许第三方库和一些协议对unicode字符集支持不是很好，导致数据传输要使用ANSI字符串。<br>但程序之间的通信为了保证中文字符，必须使用unicode。     最多在数据传输时做一次编码转换！</strong></p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[杂项]]></title>
-      <url>https://xuecat.github.io/2014/09/20/61/</url>
-      <content type="html"><![CDATA[<p>   变长参数的纠正，绑定第一参数时，直接赋值貌似不成功。要绑定临近的参数才成功。(好像它是临近取值的)</p>
-<p><strong>我擦，居然用错绘图dc。onpaintdc和cclientdc，前者只能在onpaint函数用才有效，如果传入或者其他函数调用是无效的。后者随意用。</strong></p>
-<p>  <strong> 发现当设计后，封装的类有三个完成时必须要调试跑一边，不然后期有些许不合理的地方不能及时修改。</strong></p>
 ]]></content>
     </entry>
     
@@ -3445,25 +3506,28 @@ while (line &gt;&gt; word) {
     </entry>
     
     <entry>
-      <title><![CDATA[强制转换临时和原对象(虚函数测试)(59)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/59/</url>
-      <content type="html"><![CDATA[<p>这是个很坑的地方,大多数想法,转换嘛,</p>
-<pre><code>我把static_cast&lt;A&gt;(B)不就是把B转成A吗? 错! :
-static_cast&lt;window*&gt;(this)-&gt;onResize(); //这是拿this当成window,没问题
-static_cast&lt;window&amp;&gt;(*this).onResize();//这个也是
-
-static_cast&lt;window&gt;(*this).onResize();
-这个相当于:
-window temp=(*this);
-temp.onResize();
-</code></pre><p>我做了一下测试，你的临时对象的说法应该是对的，</p>
-<pre><code>static_cast&lt;window&gt;(*this).onresize();  确实无法执行到 对象的 base class 部分 
-
-static_cast&lt;window*&gt;(this)-&gt;onResize(); //这是拿this当成window,没问题
-static_cast&lt;window&amp;&gt;(*this).onResize();//这个也是
-</code></pre><p>这两种可以执行到base class 部分，但是因为例子中是 virtual function，所以base class 部分的 vtable pointer 跟 derived class 的 vtable pointer 指向同一个virtual table，里面的 函数是一个，所以会递归调用</p>
-<p>而 如果用 window::onResize()，就应该是直接调用的base class  里面的 virtual function 。<br>应该是这样的</p>
+      <title><![CDATA[杂项]]></title>
+      <url>https://xuecat.github.io/2014/09/20/61/</url>
+      <content type="html"><![CDATA[<p>   变长参数的纠正，绑定第一参数时，直接赋值貌似不成功。要绑定临近的参数才成功。(好像它是临近取值的)</p>
+<p><strong>我擦，居然用错绘图dc。onpaintdc和cclientdc，前者只能在onpaint函数用才有效，如果传入或者其他函数调用是无效的。后者随意用。</strong></p>
+<p>  <strong> 发现当设计后，封装的类有三个完成时必须要调试跑一边，不然后期有些许不合理的地方不能及时修改。</strong></p>
 ]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[多层窗口(54)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/54/</url>
+      <content type="html"><![CDATA[<p>总于过期了，把上面的东西搬过来</p>
+<p> 我已经被这个多层窗口弄晕了，快死了。<br>首先，要使用透明窗口函数：</p>
+<pre><code>SetLayeredWindowAttributes， updataLayeredWindowAttributes，
+//就必须设置窗口属性为WS_EX_LAYERED。
+//然后，这两个函数完全可以混合使用，
+</code></pre><p>  updataLayeredWindowAttributes会拦截wm_paint消息，窗口上的所有东西，重绘，必需自己处理。前一个函数则不会这样。</p>
+<p>WS_EX_TRANSPARENT这个属性，会让窗体透明，真正的透明，不响应任何消息的透明。就只能自己去处理画图的那种。</p>
+<p>窗体透明控件不透明：</p>
+<pre><code>this-&gt;SetBackgroundColor(RGB(255, 255, 255), TRUE);
+SetLayeredWindowAttributes(RGB(255, 255, 255), 200, LWA_ALPHA | LWA_COLORKEY);
+</code></pre>]]></content>
     </entry>
     
     <entry>
@@ -3471,14 +3535,6 @@ static_cast&lt;window&amp;&gt;(*this).onResize();//这个也是
       <url>https://xuecat.github.io/2014/09/20/58/</url>
       <content type="html"><![CDATA[<p>可变长函数：</p>
 <p>  函数多参数情况下，可变长函数虽然设置“…”   //一定要“…”之前的那个参数 va_start，来避免异常抛出。（实践）</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[设计流程(57)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/57/</url>
-      <content type="html"><![CDATA[<p> 想出的设计流程：</p>
-<p> 先画出程序运行功能的基本流程-&gt;确定类的个数和作用-&gt;设计模式-&gt;按照先想好的类功能模块把设计模式搭建出来-&gt;最后按照功能流程图再写一遍。</p>
 ]]></content>
     </entry>
     
@@ -3497,22 +3553,6 @@ static_cast&lt;window&amp;&gt;(*this).onResize();//这个也是
     </entry>
     
     <entry>
-      <title><![CDATA[输出中文(66)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/66/</url>
-      <content type="html"><![CDATA[<pre><code> cout.imbue(locale(&quot;&quot;));
-char data[] = &quot;dfwe玩GIS股份&quot;;
-for (size_t i = 0; i &lt; strlen(data); i++)
-{
-    cout &lt;&lt; data[i] &lt;&lt; endl;
-}
-
-cout &lt;&lt; data;
-</code></pre><p>结果：第一个无法输出中文，第二个可以。</p>
-<p>分析：昨天已经讲了，今天写下只是写个例子。</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[SIGPIPE信号(55)]]></title>
       <url>https://xuecat.github.io/2014/09/20/55/</url>
       <content type="html"><![CDATA[<p>使用libevent编写websocket服务端时遇到了一个问题：</p>
@@ -3527,22 +3567,6 @@ act.sa_handler = SIG_IGN;
 if (sigaction(SIGPIPE, &amp;act, NULL) == 0) {
     LOG(&quot;SIGPIPE ignore&quot;);
 }
-</code></pre>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[多层窗口(54)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/54/</url>
-      <content type="html"><![CDATA[<p>总于过期了，把上面的东西搬过来</p>
-<p> 我已经被这个多层窗口弄晕了，快死了。<br>首先，要使用透明窗口函数：</p>
-<pre><code>SetLayeredWindowAttributes， updataLayeredWindowAttributes，
-//就必须设置窗口属性为WS_EX_LAYERED。
-//然后，这两个函数完全可以混合使用，
-</code></pre><p>  updataLayeredWindowAttributes会拦截wm_paint消息，窗口上的所有东西，重绘，必需自己处理。前一个函数则不会这样。</p>
-<p>WS_EX_TRANSPARENT这个属性，会让窗体透明，真正的透明，不响应任何消息的透明。就只能自己去处理画图的那种。</p>
-<p>窗体透明控件不透明：</p>
-<pre><code>this-&gt;SetBackgroundColor(RGB(255, 255, 255), TRUE);
-SetLayeredWindowAttributes(RGB(255, 255, 255), 200, LWA_ALPHA | LWA_COLORKEY);
 </code></pre>]]></content>
     </entry>
     
@@ -3566,18 +3590,18 @@ SetLayeredWindowAttributes(RGB(255, 255, 255), 200, LWA_ALPHA | LWA_COLORKEY);
     </entry>
     
     <entry>
-      <title><![CDATA[模板和虚函数(50)]]></title>
-      <url>https://xuecat.github.io/2014/09/17/50/</url>
-      <content type="html"><![CDATA[<p><strong>模板编程不允许虚函数的出现。为了使用基类函数，我们只能用转交函数</strong><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> SquareMatrixBase &#123;</div><div class="line"><span class="keyword">protected</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">invert</span><span class="params">(<span class="built_in">std</span>::<span class="keyword">size_t</span> matrixsize)</span></span>;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="built_in">std</span>::<span class="keyword">size_t</span> n&gt;</div><div class="line"><span class="keyword">class</span> SquareMatrix : <span class="keyword">private</span> SquareMatrixBase&lt;T&gt; &#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">using</span> SquareMatrixBase&lt;T&gt;::invert;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">invert</span><span class="params">()</span> </span>&#123;<span class="keyword">this</span>-&gt;invert(n);&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[勿忘初心(51)]]></title>
       <url>https://xuecat.github.io/2014/09/17/51/</url>
       <content type="html"><![CDATA[<p>  不忘初心，方得始终</p>
 <p>  这几天自己也有点想多了，因为本来就进入大三了，该考虑的也多了起来。<br>反而烦恼了自己。</p>
 <p>  写下日记，提醒自己，大三上的时间还是很充足的，不要被迷惑。做好自己！</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[模板和虚函数(50)]]></title>
+      <url>https://xuecat.github.io/2014/09/17/50/</url>
+      <content type="html"><![CDATA[<p><strong>模板编程不允许虚函数的出现。为了使用基类函数，我们只能用转交函数</strong><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> SquareMatrixBase &#123;</div><div class="line"><span class="keyword">protected</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">invert</span><span class="params">(<span class="built_in">std</span>::<span class="keyword">size_t</span> matrixsize)</span></span>;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="built_in">std</span>::<span class="keyword">size_t</span> n&gt;</div><div class="line"><span class="keyword">class</span> SquareMatrix : <span class="keyword">private</span> SquareMatrixBase&lt;T&gt; &#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">using</span> SquareMatrixBase&lt;T&gt;::invert;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">invert</span><span class="params">()</span> </span>&#123;<span class="keyword">this</span>-&gt;invert(n);&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 ]]></content>
     </entry>
     
@@ -3651,6 +3675,17 @@ class A : public B {virtual void f();}
     </entry>
     
     <entry>
+      <title><![CDATA[返回对象(46)]]></title>
+      <url>https://xuecat.github.io/2014/09/11/46/</url>
+      <content type="html"><![CDATA[<p>作者对返回对象觉得：</p>
+<pre><code>1、拒绝用new 指针来返回引用对象（栈空间返回就省略了）。销毁问题
+2、拒绝用静态，全局空间来返回。多次调用问题。
+
+作者觉得该返回一个新的对象，调用构造函数。（具体情况而定，当是上一个栈空间的时候，返回也是很好的）
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[pass by reference to const replace pass by value(45)]]></title>
       <url>https://xuecat.github.io/2014/09/11/45/</url>
       <content type="html"><![CDATA[<p>当用类去传递的时候遇见这么一个编译消耗。</p>
@@ -3663,17 +3698,6 @@ Class Student : public Person {std::string str1, std::string str2;};
 
 //解决方案:
 validateStudent(const Student&amp; s);一次不需要
-</code></pre>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[返回对象(46)]]></title>
-      <url>https://xuecat.github.io/2014/09/11/46/</url>
-      <content type="html"><![CDATA[<p>作者对返回对象觉得：</p>
-<pre><code>1、拒绝用new 指针来返回引用对象（栈空间返回就省略了）。销毁问题
-2、拒绝用静态，全局空间来返回。多次调用问题。
-
-作者觉得该返回一个新的对象，调用构造函数。（具体情况而定，当是上一个栈空间的时候，返回也是很好的）
 </code></pre>]]></content>
     </entry>
     
@@ -3769,14 +3793,6 @@ long double f; //12字节
     </entry>
     
     <entry>
-      <title><![CDATA[指针函数与函数指针(33)]]></title>
-      <url>https://xuecat.github.io/2014/09/03/33/</url>
-      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>先看一段代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">	<span class="function"><span class="keyword">typedef</span> <span class="title">int</span><span class="params">(*outhead)</span><span class="params">(<span class="keyword">int</span> a)</span></span>;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">a</span><span class="params">(<span class="keyword">int</span> d)</span> </span>&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"this is A"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; d &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		<span class="keyword">return</span> d;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span>* <span class="title">cou</span><span class="params">(<span class="keyword">int</span>* a, outhead d)</span> </span>&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; d(*a);</div><div class="line">		<span class="keyword">return</span> a;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span> </span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">int</span> aa = <span class="number">2</span>;</div><div class="line">		cou(&amp;aa, a);</div><div class="line">		system(<span class="string">"pause"</span>);</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line"><span class="comment">//输出 2\n this is a\n 2\n</span></div></pre></td></tr></table></figure>
-<p>分析：<br>先定义outthead函数指针为int的别名。 (只对静态和全局有效）)<br>我可以规定一种类型封装很多个全局函数，用一个指针函数，参数是函数指针，然后调用就好了。</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[more effective c++为智能指针添加计数(36)]]></title>
       <url>https://xuecat.github.io/2014/09/03/36/</url>
       <content type="html"><![CDATA[<p>作者使用结构体完成这一功能。为使用字符串添加引用计数。</p>
@@ -3784,6 +3800,14 @@ long double f; //12字节
 <p>最后：混蛋作者，最后还是封装了一个智能基类。<br>详细见199  </p>
 <p>分析：String需要StringValue模块来专门服务，相应功能String不管，只是知道初始化时构造它就好。然后String需要StringValue的一些结果，所以设计智能指针模块来访问数据，当然也可以修改数据。</p>
 <p>如此关系，可以记录下。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[指针函数与函数指针(33)]]></title>
+      <url>https://xuecat.github.io/2014/09/03/33/</url>
+      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>先看一段代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">	<span class="function"><span class="keyword">typedef</span> <span class="title">int</span><span class="params">(*outhead)</span><span class="params">(<span class="keyword">int</span> a)</span></span>;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">a</span><span class="params">(<span class="keyword">int</span> d)</span> </span>&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"this is A"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; d &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		<span class="keyword">return</span> d;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span>* <span class="title">cou</span><span class="params">(<span class="keyword">int</span>* a, outhead d)</span> </span>&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; d(*a);</div><div class="line">		<span class="keyword">return</span> a;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span> </span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">int</span> aa = <span class="number">2</span>;</div><div class="line">		cou(&amp;aa, a);</div><div class="line">		system(<span class="string">"pause"</span>);</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line"><span class="comment">//输出 2\n this is a\n 2\n</span></div></pre></td></tr></table></figure>
+<p>分析：<br>先定义outthead函数指针为int的别名。 (只对静态和全局有效）)<br>我可以规定一种类型封装很多个全局函数，用一个指针函数，参数是函数指针，然后调用就好了。</p>
 ]]></content>
     </entry>
     
@@ -3797,6 +3821,12 @@ long double f; //12字节
     </entry>
     
     <entry>
+      <title><![CDATA[more effective c++智能指针继承传递(35)]]></title>
+      <url>https://xuecat.github.io/2014/09/02/35/</url>
+      <content type="html"><![CDATA[<figure class="highlight"><figcaption><span>先看示例：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">class MusicProduct;</div><div class="line">class Cassette : public MusicProduct;</div><div class="line">class CD : public MusicProduct;</div><div class="line"></div><div class="line">void DisplayAndPlay(const SmartPtr&lt;MusicProduct&gt;&amp; pmp, int times)</div><div class="line">SmartPtr&lt;Cassette&gt; f(new );</div><div class="line">SmartPtr&lt;CD&gt; fd(new );</div><div class="line">DisplayAndPlay(f, 10)</div><div class="line">DisplayAndPlay(fd, 10);</div><div class="line">这样是无法通过的，</div><div class="line">解决方法是使用智能隐式转换。为SmartPtr添加转换函数</div><div class="line"></div><div class="line">templatee&lt;class newType&gt;</div><div class="line">operator SmartPtr&lt;newType&gt;()</div><div class="line">&#123;</div><div class="line">   	  return SmartPtr&lt;newType&gt;(pointee);</div><div class="line">&#125;</div><div class="line"></div><div class="line">分析：编译器总是会企图找到一种方式使成功。</div><div class="line">所以函数赋值时，它就会解析为：</div><div class="line"></div><div class="line">SmartPtr&lt;Cassette&gt;::operator SmartPtr&lt;MusicProduct&gt; () &#123;</div><div class="line">   	    return Smart&lt;MusicProduct&gt;(pointee);</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[常量区进阶(34)]]></title>
       <url>https://xuecat.github.io/2014/09/02/34/</url>
       <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">char</span> *<span class="title">strA</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">   	<span class="keyword">char</span> str[]=<span class="string">"hello world"</span>;</div><div class="line">   	<span class="keyword">return</span> str;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">char</span> *<span class="title">strA</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">   	<span class="keyword">char</span> *str=<span class="string">"hello world"</span>;</div><div class="line">   	<span class="keyword">return</span> str;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -3806,9 +3836,12 @@ long double f; //12字节
     </entry>
     
     <entry>
-      <title><![CDATA[more effective c++智能指针继承传递(35)]]></title>
-      <url>https://xuecat.github.io/2014/09/02/35/</url>
-      <content type="html"><![CDATA[<figure class="highlight"><figcaption><span>先看示例：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">class MusicProduct;</div><div class="line">class Cassette : public MusicProduct;</div><div class="line">class CD : public MusicProduct;</div><div class="line"></div><div class="line">void DisplayAndPlay(const SmartPtr&lt;MusicProduct&gt;&amp; pmp, int times)</div><div class="line">SmartPtr&lt;Cassette&gt; f(new );</div><div class="line">SmartPtr&lt;CD&gt; fd(new );</div><div class="line">DisplayAndPlay(f, 10)</div><div class="line">DisplayAndPlay(fd, 10);</div><div class="line">这样是无法通过的，</div><div class="line">解决方法是使用智能隐式转换。为SmartPtr添加转换函数</div><div class="line"></div><div class="line">templatee&lt;class newType&gt;</div><div class="line">operator SmartPtr&lt;newType&gt;()</div><div class="line">&#123;</div><div class="line">   	  return SmartPtr&lt;newType&gt;(pointee);</div><div class="line">&#125;</div><div class="line"></div><div class="line">分析：编译器总是会企图找到一种方式使成功。</div><div class="line">所以函数赋值时，它就会解析为：</div><div class="line"></div><div class="line">SmartPtr&lt;Cassette&gt;::operator SmartPtr&lt;MusicProduct&gt; () &#123;</div><div class="line">   	    return Smart&lt;MusicProduct&gt;(pointee);</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+      <title><![CDATA[libcurl源码学习(37)]]></title>
+      <url>https://xuecat.github.io/2014/09/01/37/</url>
+      <content type="html"><![CDATA[<p>libcurl：预编译头文件，就是放置工具的地方。<br>其它文件要使用工具直接#define一下就好了。</p>
+<p>把va_list当值传入。</p>
+<p>回调函数的使用typedf  获取函数指针。指针的指针，执行就好了。</p>
+]]></content>
     </entry>
     
     <entry>
@@ -3829,31 +3862,6 @@ If (ptn)
 <p>对于自己的编码需求给智能指针添加隐式转换</p>
 <pre><code>operator T*() {return pointee;}
 </code></pre><p>但是智能指针的隐式转换有臭虫漏洞！<br>注意，详细看172.<br>最好去掉隐式转换。自己封装函数来获取。</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[libcurl源码学习(37)]]></title>
-      <url>https://xuecat.github.io/2014/09/01/37/</url>
-      <content type="html"><![CDATA[<p>libcurl：预编译头文件，就是放置工具的地方。<br>其它文件要使用工具直接#define一下就好了。</p>
-<p>把va_list当值传入。</p>
-<p>回调函数的使用typedf  获取函数指针。指针的指针，执行就好了。</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[more effective c++智能指针(28)]]></title>
-      <url>https://xuecat.github.io/2014/08/29/29/</url>
-      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>智能指针了：构造、赋值、析构:++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">class</span> <span class="built_in">auto_ptr</span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="built_in">auto_ptr</span>(T* ptr = <span class="number">0</span>) : pointee(ptr) &#123;&#125;</div><div class="line">	<span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs); <span class="comment">//复制</span></div><div class="line">	<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; operate= (<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs);</div><div class="line">	~<span class="built_in">auto_ptr</span>() &#123;<span class="keyword">delete</span> pointee;&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	T* pointee;</div><div class="line">	<span class="comment">/* data */</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//可以看出，使用时用f</span></div><div class="line"><span class="comment">//auto_ptr&lt;TreeNode&gt; ptnq(new TreeNode);便可以了。</span></div><div class="line"><span class="comment">///</span></div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;T&gt;:::<span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs)</div><div class="line">&#123;</div><div class="line">	pointee = rhs.pointee;</div><div class="line">	rhs.pointee = <span class="number">0</span>;<span class="comment">//因为实现的是auto，被复制后拒绝前一个变量访问</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;T&gt;&amp; <span class="built_in">auto_ptr</span>&lt;T&gt;::operate= (<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span> (<span class="keyword">this</span> == &amp;rhs)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> *<span class="keyword">this</span>; <span class="comment">//这个赋值函数处理的很好，以后赋值函数添加上</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">delete</span> pointee;</div><div class="line">	。。。。</div><div class="line">	。。。。</div><div class="line">	<span class="keyword">return</span> *<span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure> ]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[多个对象访问多线程资源]]></title>
-      <url>https://xuecat.github.io/2014/08/29/27/</url>
-      <content type="html"><![CDATA[<p>   我初始化多个对象，对象类里面有多线程代码。</p>
-<p>多线程设置信号量来限制访问线程个数。</p>
-<p>发现：多个对象执行的时候，访问的却是同一个线程资源。</p>
-<p>分析原因：多线程函数是static或者全局函数，   函数的创建在静态或全局空间，与类的栈空间无关<br>所以访问的是同一个函数。</p>
 ]]></content>
     </entry>
     
@@ -3896,6 +3904,22 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
     </entry>
     
     <entry>
+      <title><![CDATA[多个对象访问多线程资源]]></title>
+      <url>https://xuecat.github.io/2014/08/29/27/</url>
+      <content type="html"><![CDATA[<p>   我初始化多个对象，对象类里面有多线程代码。</p>
+<p>多线程设置信号量来限制访问线程个数。</p>
+<p>发现：多个对象执行的时候，访问的却是同一个线程资源。</p>
+<p>分析原因：多线程函数是static或者全局函数，   函数的创建在静态或全局空间，与类的栈空间无关<br>所以访问的是同一个函数。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[more effective c++智能指针(28)]]></title>
+      <url>https://xuecat.github.io/2014/08/29/29/</url>
+      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>智能指针了：构造、赋值、析构:++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">class</span> <span class="built_in">auto_ptr</span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="built_in">auto_ptr</span>(T* ptr = <span class="number">0</span>) : pointee(ptr) &#123;&#125;</div><div class="line">	<span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs); <span class="comment">//复制</span></div><div class="line">	<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; operate= (<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs);</div><div class="line">	~<span class="built_in">auto_ptr</span>() &#123;<span class="keyword">delete</span> pointee;&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	T* pointee;</div><div class="line">	<span class="comment">/* data */</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//可以看出，使用时用f</span></div><div class="line"><span class="comment">//auto_ptr&lt;TreeNode&gt; ptnq(new TreeNode);便可以了。</span></div><div class="line"><span class="comment">///</span></div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;T&gt;:::<span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs)</div><div class="line">&#123;</div><div class="line">	pointee = rhs.pointee;</div><div class="line">	rhs.pointee = <span class="number">0</span>;<span class="comment">//因为实现的是auto，被复制后拒绝前一个变量访问</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;T&gt;&amp; <span class="built_in">auto_ptr</span>&lt;T&gt;::operate= (<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span> (<span class="keyword">this</span> == &amp;rhs)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> *<span class="keyword">this</span>; <span class="comment">//这个赋值函数处理的很好，以后赋值函数添加上</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">delete</span> pointee;</div><div class="line">	。。。。</div><div class="line">	。。。。</div><div class="line">	<span class="keyword">return</span> *<span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure> ]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[言156]]></title>
       <url>https://xuecat.github.io/2014/08/28/156/</url>
       <content type="html"><![CDATA[<p>祸、天、延、五、生、六、绝、辅、弼<br><br>上二为五下二天<br><br>中变绝命自古然<br><br>上一为生初变祸<br><br>上下六煞全变延<br></p>
@@ -3911,16 +3935,6 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
     </entry>
     
     <entry>
-      <title><![CDATA[mousehover（25）]]></title>
-      <url>https://xuecat.github.io/2014/08/28/25/</url>
-      <content type="html"><![CDATA[<p>今天为程序添加mousehover函数，发现不能响应，很气人。</p>
-<p>要仔细去看下官方，翻看msdn：</p>
-<p>   msdn它只会在图像重绘地方响应<br>Posted to a window when the cursor hovers over the client area of the window for the period of time specified in a prior call to TrackMouseEvent.</p>
-<p>如果在onpaint函数使用cclientdc绘图的话，就会被判定非客户区。<br>所以，必须在onpaint里面用cpaintdc绘图，才会响应mousehover。</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[more effective c++限制对象个数(27)]]></title>
       <url>https://xuecat.github.io/2014/08/28/26/</url>
       <content type="html"><![CDATA[<p>这部分记住的有这几条：</p>
@@ -3928,6 +3942,16 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
 <p>onHeap函数内，onTheStack是个局部变量，所以它被置于stack内。当onHeap被调用，其stack frame 会被放在stack的顶端，由于此框架中stack系向低地址成长，所以onThestack的地址移动比其他任何一个stack变量更低。</p>
 <p>所以address比onthestack更低，它就一定位于heap中。</p>
 <p>此部分，作者为了让对象产生于heap中，向operate new添加东西标记。。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[mousehover（25）]]></title>
+      <url>https://xuecat.github.io/2014/08/28/25/</url>
+      <content type="html"><![CDATA[<p>今天为程序添加mousehover函数，发现不能响应，很气人。</p>
+<p>要仔细去看下官方，翻看msdn：</p>
+<p>   msdn它只会在图像重绘地方响应<br>Posted to a window when the cursor hovers over the client area of the window for the period of time specified in a prior call to TrackMouseEvent.</p>
+<p>如果在onpaint函数使用cclientdc绘图的话，就会被判定非客户区。<br>所以，必须在onpaint里面用cpaintdc绘图，才会响应mousehover。</p>
 ]]></content>
     </entry>
     
@@ -4085,6 +4109,14 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
     </entry>
     
     <entry>
+      <title><![CDATA[框架(15)]]></title>
+      <url>https://xuecat.github.io/2014/06/25/15/</url>
+      <content type="html"><![CDATA[<p>今天代码改写button了，感觉，对于框架的架构还是欠缺点。</p>
+<p> 才一开始的封装，当一个模块出现四个功能时，我就该单独封装类，不然<br>后期肯定会添加封装的，到时代码冗余就不好看了。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[消息自定义（24）]]></title>
       <url>https://xuecat.github.io/2014/06/25/24/</url>
       <content type="html"><![CDATA[<p>严格要求：</p>
@@ -4093,14 +4125,6 @@ ON_MESSAGE(WM_RESULT,CDemo4View::DisplayResult)
 return 0;
 </code></pre><p>SetWindowPos会强制产生重绘，容易闪图。</p>
 <p>WM_ERASEBKGND以及WS_EX_TRANSPARENT虽然获取了父窗口dc，<br>来先绘制背景图，再绘制透明图实现的子窗口透明，<br>有闪图出现。</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[框架(15)]]></title>
-      <url>https://xuecat.github.io/2014/06/25/15/</url>
-      <content type="html"><![CDATA[<p>今天代码改写button了，感觉，对于框架的架构还是欠缺点。</p>
-<p> 才一开始的封装，当一个模块出现四个功能时，我就该单独封装类，不然<br>后期肯定会添加封装的，到时代码冗余就不好看了。</p>
 ]]></content>
     </entry>
     

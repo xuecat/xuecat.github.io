@@ -347,24 +347,19 @@
       
         
           
-            <blockquote>
-<p>今天虽然熬夜，但是学了个新东西！！！！！！<br><br>以前，release和release项目工程；有个缺点就是没法调试到mfc的动态库，只能自己调试自己的代码。<br></p>
-</blockquote>
-<p><strong>调试mfc库代码</strong></p>
-<blockquote>
-<p>调试-&gt;窗口-&gt;模块-&gt;有很多的dll-&gt;windows的库就右键加载服务器的库，自己的库就找到pdb文件，链接上！！！</p>
-</blockquote>
-<p><strong><em>注意有个大前提，一定要设置 c/c++-&gt;优化-&gt;优化 设置禁止  c/c++-&gt;常规-&gt;调试信息格式 设置程序数据库 才行</em></strong></p>
-<p><strong>调试发行版</strong></p>
-<ul>
-<li>配置C/C++ &gt;General&gt;Debug Information Format 应该为 “Program Database(/Zi)”</li>
-<li>配置C/C++ &gt;Optimization&gt;Optimization 应该为”Disabld(/Od)”</li>
-<li>配置Linker&gt;Debugging&gt;Generate Debug Info 应该为”Yes/(DEBUG)”</li>
-</ul>
-<p><strong>远程调试</strong></p>
-<p>算了以上俩个用了太多了，直接上别人写的：<a href="http://blog.jobbole.com/45249/" target="_blank" rel="external">http://blog.jobbole.com/45249/</a></p>
-
           
+今天虽然熬夜，但是学了个新东西！！！！！！以前，release和release项目工程；有个缺点就是没法调试到mfc的动态库，只能自己调试自己的代码。
+
+调试mfc库代码
+
+调试-&gt;窗口-&gt;模块-&gt;有很多的dll-&gt;windows的库就右键加载服务器的库，自己的库就找到pd
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/01/11/153/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -475,13 +470,18 @@
       
         
           
-            <blockquote>
-<p>首先，windows对所有的afx是有源码的，也就是说mfc框架是源码出来的。</p>
-<p>然后调试的时候，debug，Use MFC in a Static Library。或者下载符号文件。这样才可以正常调试进去。</p>
-</blockquote>
-<p>CRectTracker类的源代码在Trckrect.cpp里面。藏得够深！！！！！！！！！<br><br>CFrameWnd类的源代码在winfrm.cpp里面。<br><br>CMDIFrameWnd类的源代码在winmdi.cpp里面。<br></p>
-
           
+首先，windows对所有的afx是有源码的，也就是说mfc框架是源码出来的。
+然后调试的时候，debug，Use MFC in a Static Library。或者下载符号文件。这样才可以正常调试进去。
+
+CRectTracker类的源代码在Trckrect.cpp里面。藏得够深！！！！！！！
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/01/06/152/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -592,14 +592,18 @@
       
         
           
-            <p><img src="/picture/img/151.png" alt=""></p>
-<blockquote>
-<p>1、果然大数据hash表虐红黑树了。<br><br><br>2、但是唯一确定的是unordered_map &gt; hash_map &gt; map,官方也是如此认为的，前面map虽然高效，但是开辟的内存却是更多，也更难使用。（见146使用方法）</p>
-<p>3、使用数据，50000存储，2000查询</p>
-<p>4、现象，map在上万的查询就各种内存泄露了，cmap依旧需要removeall释放。map性能可能更差，上千未测试map的数据；</p>
-</blockquote>
-<figure class="highlight"><figcaption><span>下面是代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">// test.cpp : 定义控制台应用程序的入口点。</div><div class="line">//</div><div class="line"></div><div class="line">#include "stdafx.h"</div><div class="line">#include &lt;afx.h&gt;</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;deque&gt;</div><div class="line">#include &lt;string&gt;</div><div class="line">#include &lt;queue&gt;</div><div class="line">#include &lt;map&gt;</div><div class="line">#include &lt;unordered_map&gt;</div><div class="line">#include &lt;hash_map&gt;</div><div class="line">#include &lt;xhash&gt;</div><div class="line">#include &lt;vector&gt;</div><div class="line">#include &lt;stdarg.h&gt;</div><div class="line">#include &lt;afxtempl.h&gt;</div><div class="line">#include &lt;functional&gt;</div><div class="line">#include &lt;algorithm&gt;</div><div class="line"></div><div class="line"></div><div class="line">using namespace std;</div><div class="line"></div><div class="line">typedef struct TDATA0 &#123;</div><div class="line">	int year;</div><div class="line">	int month;</div><div class="line">	int day;</div><div class="line">&#125; *PTDATA0;</div><div class="line">typedef struct TDATA1 &#123;</div><div class="line">	TDATA1&amp; operator= (TDATA1&amp; t) &#123;</div><div class="line">		name = t.name;</div><div class="line">		adress = t.adress;</div><div class="line">		parents = t.parents;</div><div class="line">		brithday = t.brithday;</div><div class="line">		return *this;</div><div class="line">	&#125;</div><div class="line">	CString name;</div><div class="line">	CString adress;</div><div class="line">	CString parents;</div><div class="line">	TDATA0 brithday;</div><div class="line">&#125; *PTDATA1;</div><div class="line"></div><div class="line">typedef struct FINDDATA &#123;</div><div class="line">	FINDDATA(int in) &#123;</div><div class="line">		index = in;</div><div class="line">		::CoCreateGuid(&amp;findguid);</div><div class="line">	&#125;</div><div class="line">	~FINDDATA() &#123;&#125;</div><div class="line">	operator int () &#123;</div><div class="line">		return index;</div><div class="line">	&#125;</div><div class="line">	int index;</div><div class="line">	GUID findguid;</div><div class="line">&#125; *PFINDDATA;</div><div class="line"></div><div class="line">std::wstring GUIDToWstring(GUID* guid) &#123;</div><div class="line">	wchar_t guid_string[37];</div><div class="line">	swprintf(</div><div class="line">		guid_string, sizeof(guid_string) / sizeof(guid_string[0]),</div><div class="line">		L"%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x",</div><div class="line">		guid-&gt;Data1, guid-&gt;Data2, guid-&gt;Data3,</div><div class="line">		guid-&gt;Data4[0], guid-&gt;Data4[1], guid-&gt;Data4[2],</div><div class="line">		guid-&gt;Data4[3], guid-&gt;Data4[4], guid-&gt;Data4[5],</div><div class="line">		guid-&gt;Data4[6], guid-&gt;Data4[7]);</div><div class="line">	return guid_string;</div><div class="line">&#125;</div><div class="line">struct WCharLess : public binary_function&lt;const wchar_t*, const wchar_t*, bool&gt;  </div><div class="line">&#123;  </div><div class="line">public:  </div><div class="line">	result_type operator()(const first_argument_type&amp; _Left, const second_argument_type&amp; _Right) const  </div><div class="line">	&#123;  </div><div class="line">		return(_wcsicmp(_Left, _Right) &lt; 0 ? true : false);</div><div class="line">	&#125;  </div><div class="line">&#125;;</div><div class="line">//struct KeyHasher</div><div class="line">//&#123;</div><div class="line">//	std::size_t operator()(const CString&amp; k) const</div><div class="line">//	&#123;</div><div class="line">//		using std::size_t;</div><div class="line">//		using std::tr1::hash;</div><div class="line">//</div><div class="line">//		return (hash&lt;CString&gt;()(k));</div><div class="line">//	&#125;</div><div class="line">//&#125;;</div><div class="line">typedef std::queue&lt;FINDDATA&gt; stru_find;</div><div class="line">typedef std::map&lt;CString, TDATA1&gt; map_d_type;</div><div class="line">typedef stdext::hash_map&lt;CString, TDATA1, stdext::hash_compare&lt;const wchar_t*, WCharLess&gt;&gt; hashmap_d_type;</div><div class="line">typedef std::tr1::unordered_map&lt;wstring, TDATA1&gt; unordemap_d_type;</div><div class="line">typedef std::vector&lt;std::pair&lt;CString, TDATA1&gt;&gt; vecpair_d_type;</div><div class="line">typedef CMap&lt;CString, LPCTSTR, TDATA1, TDATA1&amp;&gt; cmap_d_type;</div><div class="line"></div><div class="line">void createfinddata(stru_find&amp; find) &#123;</div><div class="line">	for (int i = 2000; i &lt; 4000; i++)</div><div class="line">	&#123;</div><div class="line">		find.push(FINDDATA(i));</div><div class="line">	&#125;</div><div class="line">	find.push(0);</div><div class="line">&#125;</div><div class="line">size_t loadCmapData(stru_find find, cmap_d_type &amp;test_data) &#123;</div><div class="line">	for (int i = 1; i &lt;= 50000; i++)</div><div class="line">	&#123;</div><div class="line">		GUID guid;</div><div class="line">		wchar_t strbuffer[10] = &#123;0&#125;;</div><div class="line"></div><div class="line">		_itow(i, strbuffer, 10);</div><div class="line"></div><div class="line">		TDATA1 t ;</div><div class="line">		t.name = _T("name");</div><div class="line">		t.name += strbuffer;</div><div class="line">		t.adress = _T("address");</div><div class="line">		t.adress += strbuffer;</div><div class="line">		t.parents = _T("parents");</div><div class="line">		t.parents += strbuffer;</div><div class="line">		t.brithday.year = t.brithday.month = t.brithday.day = i;</div><div class="line"></div><div class="line"></div><div class="line">		::CoCreateGuid(&amp;guid);</div><div class="line">		if (i == find.front()) &#123;</div><div class="line">			guid = find.front().findguid;</div><div class="line">			find.pop();</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		CString temp(GUIDToWstring(&amp;guid).c_str());</div><div class="line">		test_data.SetAt(temp, t);</div><div class="line">	&#125;</div><div class="line">	return test_data.GetSize();</div><div class="line">&#125;</div><div class="line">void printfcmap(stru_find&amp; find, cmap_d_type &amp;test_data) &#123;</div><div class="line">	TDATA1 out;</div><div class="line">	BOOL b;</div><div class="line">	CString temp;</div><div class="line"></div><div class="line">	int n = find.size();</div><div class="line">	for (int i = 0; i &lt; n; i++)</div><div class="line">	&#123;</div><div class="line">		temp.Empty();</div><div class="line">		temp.Append(GUIDToWstring(&amp;find.front().findguid).c_str());</div><div class="line">		b = test_data.Lookup(temp, out);</div><div class="line">		if (b) &#123;</div><div class="line">			wcout &lt;&lt; endl &lt;&lt; L"find count: " &lt;&lt; find.size() &lt;&lt; "find index:"&lt;&lt; find.front() &lt;&lt; endl</div><div class="line">				&lt;&lt; "data key :" &lt;&lt; temp.GetString()  &lt;&lt; endl</div><div class="line">				&lt;&lt; L"name :" &lt;&lt; out.name.GetString()&lt;&lt; endl</div><div class="line">				&lt;&lt; L"address :"&lt;&lt; out.adress.GetString() &lt;&lt;endl</div><div class="line">				&lt;&lt; L"parents :"&lt;&lt;out.parents.GetString() &lt;&lt; endl</div><div class="line">				&lt;&lt; L"birthday :" &lt;&lt; out.brithday.year &lt;&lt; " "&lt;&lt; out.brithday.month&lt;&lt;" "&lt;&lt;out.brithday.day &lt;&lt; endl;</div><div class="line">			find.pop();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">size_t loadMapData(stru_find findata, map_d_type&amp; mapdata) &#123;</div><div class="line">	for (int i = 1; i &lt;= 50000; i++)</div><div class="line">	&#123;</div><div class="line">		GUID guid;</div><div class="line">		wchar_t strbuffer[10] = &#123;0&#125;;</div><div class="line">		_itow(i, strbuffer, 10);</div><div class="line"></div><div class="line">		TDATA1 t ;</div><div class="line">		t.name = _T("name");</div><div class="line">		t.name += strbuffer;</div><div class="line">		t.adress = _T("address");</div><div class="line">		t.adress += strbuffer;</div><div class="line">		t.parents = _T("parents");</div><div class="line">		t.parents += strbuffer;</div><div class="line">		t.brithday.year = t.brithday.month = t.brithday.day = i;</div><div class="line"></div><div class="line"></div><div class="line">		::CoCreateGuid(&amp;guid);</div><div class="line">		if (i == findata.front()) &#123;</div><div class="line">			guid = findata.front().findguid;</div><div class="line">			findata.pop();</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		CString temp(GUIDToWstring(&amp;guid).c_str());</div><div class="line">		mapdata.insert(map_d_type::value_type(temp, t));</div><div class="line">	&#125;</div><div class="line">	return mapdata.size();</div><div class="line">&#125;</div><div class="line"></div><div class="line">void printfmap(stru_find&amp; find, map_d_type &amp;test_data) &#123;</div><div class="line">	</div><div class="line">	CString temp;</div><div class="line"></div><div class="line">	int n = find.size();</div><div class="line">	for (int i = 0; i &lt; n; i++)</div><div class="line">	&#123;</div><div class="line">		temp.Empty();</div><div class="line">		temp.Append(GUIDToWstring(&amp;find.front().findguid).c_str());</div><div class="line">		map_d_type::iterator ifind = test_data.find(temp);</div><div class="line">		//map_d_type::iterator ifind ;</div><div class="line">		//out = (*ifind).second;</div><div class="line">		if (ifind != test_data.end()) &#123;</div><div class="line">			wcout &lt;&lt; endl &lt;&lt; L"left find count: " &lt;&lt; find.size() &lt;&lt; " find index:"&lt;&lt; find.front() &lt;&lt; endl</div><div class="line">				&lt;&lt; "data key :" &lt;&lt; temp.GetString()  &lt;&lt; endl</div><div class="line">				&lt;&lt; L"name :" &lt;&lt; (*ifind).second.name.GetString()&lt;&lt; endl</div><div class="line">				&lt;&lt; L"address :"&lt;&lt; (*ifind).second.adress.GetString() &lt;&lt;endl</div><div class="line">				&lt;&lt; L"parents :"&lt;&lt;(*ifind).second.parents.GetString() &lt;&lt; endl</div><div class="line">				&lt;&lt; L"birthday :" &lt;&lt; (*ifind).second.brithday.year &lt;&lt; " "&lt;&lt; (*ifind).second.brithday.month&lt;&lt;" "&lt;&lt;(*ifind).second.brithday.day &lt;&lt; endl;</div><div class="line">			find.pop();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">size_t loadUnoderMapData(stru_find findata, unordemap_d_type&amp; test_data) &#123;</div><div class="line">	test_data.rehash(50000);</div><div class="line">	for (int i = 1; i &lt;= 50000; i++)</div><div class="line">	&#123;</div><div class="line">		GUID guid;</div><div class="line">		wchar_t strbuffer[10] = &#123;0&#125;;</div><div class="line">		_itow(i, strbuffer, 10);</div><div class="line"></div><div class="line">		TDATA1 t ;</div><div class="line">		t.name = _T("name");</div><div class="line">		t.name += strbuffer;</div><div class="line">		t.adress = _T("address");</div><div class="line">		t.adress += strbuffer;</div><div class="line">		t.parents = _T("parents");</div><div class="line">		t.parents += strbuffer;</div><div class="line">		t.brithday.year = t.brithday.month = t.brithday.day = i;</div><div class="line"></div><div class="line"></div><div class="line">		::CoCreateGuid(&amp;guid);</div><div class="line">		if (i == findata.front()) &#123;</div><div class="line">			guid = findata.front().findguid;</div><div class="line">			findata.pop();</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		wstring temp(GUIDToWstring(&amp;guid).c_str());</div><div class="line"></div><div class="line">		test_data.insert(unordemap_d_type::value_type(temp, t));</div><div class="line">	&#125;</div><div class="line">	return test_data.size();</div><div class="line">&#125;</div><div class="line"></div><div class="line">void printUnoderMap(stru_find findata, unordemap_d_type&amp; test_data) &#123;</div><div class="line">	wstring temp;</div><div class="line"></div><div class="line">	int n = findata.size();</div><div class="line">	for (int i = 0; i &lt; n; i++)</div><div class="line">	&#123;</div><div class="line">		//temp.empty();</div><div class="line">		temp = (GUIDToWstring(&amp;findata.front().findguid));</div><div class="line">		unordemap_d_type::iterator ifind = test_data.find(temp);</div><div class="line">		</div><div class="line">		if (ifind != test_data.end()) &#123;</div><div class="line">			wcout &lt;&lt; endl &lt;&lt; L"left find count: " &lt;&lt; findata.size() &lt;&lt; " find index:"&lt;&lt; findata.front() &lt;&lt; endl</div><div class="line">				&lt;&lt; "data key :" &lt;&lt; temp  &lt;&lt; endl</div><div class="line">				&lt;&lt; L"name :" &lt;&lt; (*ifind).second.name.GetString()&lt;&lt; endl</div><div class="line">				&lt;&lt; L"address :"&lt;&lt; (*ifind).second.adress.GetString() &lt;&lt;endl</div><div class="line">				&lt;&lt; L"parents :"&lt;&lt;(*ifind).second.parents.GetString() &lt;&lt; endl</div><div class="line">				&lt;&lt; L"birthday :" &lt;&lt; (*ifind).second.brithday.year &lt;&lt; " "&lt;&lt; (*ifind).second.brithday.month&lt;&lt;" "&lt;&lt;(*ifind).second.brithday.day &lt;&lt; endl;</div><div class="line">			findata.pop();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">size_t loadHashMapData(stru_find findata, hashmap_d_type&amp; test_data) &#123;</div><div class="line">	test_data.rehash(50000);</div><div class="line">	for (int i = 1; i &lt;= 50000; i++)</div><div class="line">	&#123;</div><div class="line">		GUID guid;</div><div class="line">		wchar_t strbuffer[10] = &#123;0&#125;;</div><div class="line">		_itow(i, strbuffer, 10);</div><div class="line"></div><div class="line">		TDATA1 t ;</div><div class="line">		t.name = _T("name");</div><div class="line">		t.name += strbuffer;</div><div class="line">		t.adress = _T("address");</div><div class="line">		t.adress += strbuffer;</div><div class="line">		t.parents = _T("parents");</div><div class="line">		t.parents += strbuffer;</div><div class="line">		t.brithday.year = t.brithday.month = t.brithday.day = i;</div><div class="line"></div><div class="line"></div><div class="line">		::CoCreateGuid(&amp;guid);</div><div class="line">		if (i == findata.front()) &#123;</div><div class="line">			guid = findata.front().findguid;</div><div class="line">			findata.pop();</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		CString temp(GUIDToWstring(&amp;guid).c_str());</div><div class="line"></div><div class="line">		test_data.insert(hashmap_d_type::value_type(temp, t));</div><div class="line">	&#125;</div><div class="line">	return test_data.size();</div><div class="line">&#125;</div><div class="line"></div><div class="line">void printHashMap(stru_find findata, hashmap_d_type&amp; test_data) &#123;</div><div class="line">	CString temp;</div><div class="line"></div><div class="line">	int n = findata.size();</div><div class="line">	for (int i = 0; i &lt; n; i++)</div><div class="line">	&#123;</div><div class="line">		temp.Empty();</div><div class="line">		temp.Append(GUIDToWstring(&amp;findata.front().findguid).c_str());</div><div class="line">		hashmap_d_type::iterator ifind = test_data.find(temp);</div><div class="line">		</div><div class="line">		if (ifind != test_data.end()) &#123;</div><div class="line">			wcout &lt;&lt; endl &lt;&lt; L"left find count: " &lt;&lt; findata.size() &lt;&lt; " find index:"&lt;&lt; findata.front() &lt;&lt; endl</div><div class="line">				&lt;&lt; "data key :" &lt;&lt; temp.GetString()  &lt;&lt; endl</div><div class="line">				&lt;&lt; L"name :" &lt;&lt; (*ifind).second.name.GetString()&lt;&lt; endl</div><div class="line">				&lt;&lt; L"address :"&lt;&lt; (*ifind).second.adress.GetString() &lt;&lt;endl</div><div class="line">				&lt;&lt; L"parents :"&lt;&lt;(*ifind).second.parents.GetString() &lt;&lt; endl</div><div class="line">				&lt;&lt; L"birthday :" &lt;&lt; (*ifind).second.brithday.year &lt;&lt; " "&lt;&lt; (*ifind).second.brithday.month&lt;&lt;" "&lt;&lt;(*ifind).second.brithday.day &lt;&lt; endl;</div><div class="line">			findata.pop();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">int _tmain(int argc, _TCHAR* argv[])</div><div class="line">&#123;</div><div class="line">	size_t loadsize = 0;</div><div class="line">	string loadtype;</div><div class="line"></div><div class="line">	stru_find finddata;</div><div class="line">	map_d_type	test_mapdata;</div><div class="line">	cmap_d_type test_cmapdata;</div><div class="line">	hashmap_d_type test_hashmapdata;</div><div class="line">	unordemap_d_type test_unordermapdata;</div><div class="line"></div><div class="line">	createfinddata(finddata);</div><div class="line"></div><div class="line">	time_t start = clock();</div><div class="line">	//loadsize = loadMapData(finddata, test_mapdata);loadtype.empty();loadtype.append("In map type:");</div><div class="line">	//loadsize = loadCmapData(finddata, test_cmapdata);loadtype.empty();loadtype.append("In cmap type:");</div><div class="line">	//loadsize = loadHashMapData(finddata, test_hashmapdata); loadtype.empty();loadtype.append("In hash_map type:");</div><div class="line">	loadsize = loadUnoderMapData(finddata, test_unordermapdata); loadtype.empty();loadtype.append("In unordered_map type:");</div><div class="line">	time_t end = clock();</div><div class="line">	cout &lt;&lt; loadtype &lt;&lt; endl &lt;&lt; "load "&lt;&lt; loadsize &lt;&lt;" data useing time:" &lt;&lt; end - start &lt;&lt; "/ms" &lt;&lt; endl;</div><div class="line">	</div><div class="line">	start = clock();</div><div class="line">	//printfmap(finddata, test_mapdata);</div><div class="line">	//printfcmap(finddata, test_cmapdata);</div><div class="line">	//printHashMap(finddata, test_hashmapdata);</div><div class="line">	printUnoderMap(finddata, test_unordermapdata);</div><div class="line">	end = clock();</div><div class="line">	test_mapdata.clear();</div><div class="line">	test_cmapdata.RemoveAll();</div><div class="line">	cout &lt;&lt; endl &lt;&lt; "find "&lt;&lt;finddata.size()&lt;&lt;" data using time:" &lt;&lt; end - start &lt;&lt; "/ms" &lt;&lt; endl;</div><div class="line">	</div><div class="line">	system("pause");</div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
           
+
+1、果然大数据hash表虐红黑树了。2、但是唯一确定的是unordered_map &gt; hash_map &gt; map,官方也是如此认为的，前面map虽然高效，但是开辟的内存却是更多，也更难使用。（见146使用方法）
+3、使用数据，50000存储，2000查询
+4、现象，map在上万的
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/27/151/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -710,8 +714,14 @@
       
         
           
-            <figure class="highlight c"><figcaption><span>弄个函数学习++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function">BOOL WINAPI <span class="title">PostThreadMessage</span><span class="params">(<span class="number">_</span>In_ DWORD idThread,<span class="number">_</span>In_ UINT Msg,<span class="number">_</span>In_ WPARAM wParam,<span class="number">_</span>In_ LPARAM lParam)</span></span>;</div><div class="line"><span class="comment">//向指定线程ID，发送消息，高低字节参数。</span></div><div class="line"></div><div class="line"><span class="comment">//嘿嘿，线程可以完全像消息机制；</span></div><div class="line"><span class="function">DWORD <span class="title">ThreadProc</span><span class="params">(LPVOID lParam)</span></span></div><div class="line">&#123;</div><div class="line">               MSG msg;</div><div class="line">               <span class="keyword">while</span>(GetMessage(&amp;msg,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>))</div><div class="line">               &#123;</div><div class="line">                       <span class="keyword">if</span>(msg.message == TALK_MESSAGE)</div><div class="line">                       &#123;</div><div class="line">                               MessageBox(<span class="literal">NULL</span>,<span class="string">L"Hi"</span>,<span class="string">L"Worker Thread"</span>,MB_OK);</div><div class="line">                       &#125;</div><div class="line">                       DispatchMessage(&amp;msg);<span class="comment">//下发消息，好像线程没有消息注册窗口。</span></div><div class="line">               &#125;</div><div class="line">               MessageBox(<span class="literal">NULL</span>,<span class="string">L"Thread will close by pressing OK"</span>,<span class="string">L"From Worker Thread"</span>,MB_OK);</div><div class="line">               AfxGetApp()-&gt;m_pMainWnd-&gt;PostMessageW(TALK_MESSAGE+<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>);</div><div class="line">               <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
-          
+          弄个函数学习++123456789101112131415161718192021BOOL WINAPI PostThreadMessage(_In_ DWORD idThread,_In_ UINT Msg,_In_ WPARAM wParam,_In_ LPARAM lParam);//向指定线
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/26/150/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -822,14 +832,20 @@
       
         
           
-            <p><strong>csdn文章一般都会放书签里面，但是多了就又记不住了，算了，开个页面吧：</strong></p>
-<p>1、<br><img src="/picture/img/149a.jpg" alt=""></p>
-<p>2、</p>
-<p><img src="/picture/img/149b.jpg" alt=""></p>
-<p>查了下，居然是google的东西，貌似浏览器和Android都用它，屌屌，，google大大的东东就是牛逼</p>
-<p>3、</p>
+          csdn文章一般都会放书签里面，但是多了就又记不住了，算了，开个页面吧：
+1、
+2、
+
+查了下，居然是google的东西，貌似浏览器和Android都用它，屌屌，，google大大的东东就是牛逼
+3、
 
           
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/26/149/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -940,11 +956,17 @@
       
         
           
-            <p>  开发的时候，宏展开，动态调试简直没法玩。</p>
-<p>今天遇见一个。最好单个文件设置，整个项目设置简直没法玩，随便就是几十万行。</p>
-<p>cpp右键,属性，c/c++,预编译宏，预编译到文件，“/p”<br><br>这样会生成一个.i的文件，里面就全是cpp的代码宏展开，调试时替换就好，<br>反正是个然并卵的东西。。</p>
+            开发的时候，宏展开，动态调试简直没法玩。
+今天遇见一个。最好单个文件设置，整个项目设置简直没法玩，随便就是几十万行。
+cpp右键,属性，c/c++,预编译宏，预编译到文件，“/p”这样会生成一个.i的文件，里面就全是cpp的代码宏展开，调试时替换就好，反正是个然并卵的东西。。
 
           
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/20/148/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1056,7 +1078,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/z.jpg" rel="gallery_civ9lzq3y004nwwcx5qomeo0f"
+                 href="/picture/z.jpg" rel="gallery_civb37r6c004knscx4rc9n7hf"
                  itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/z.jpg" itemprop="contentUrl"/>
               </a>
@@ -1071,9 +1093,15 @@
       
         
           
-            <p>  本来就没有什么优点，平凡而又卑微的人生，回首过去是羞愧不已，展望未来却又愁眉不展；时光的流逝唯独对自己的厌恶却是日渐增加；既如此不堪却也只好本着不给别人添加麻烦，不用对别人负责的理念，做一个骄傲的孤独者罢了！！！</p>
+            本来就没有什么优点，平凡而又卑微的人生，回首过去是羞愧不已，展望未来却又愁眉不展；时光的流逝唯独对自己的厌恶却是日渐增加；既如此不堪却也只好本着不给别人添加麻烦，不用对别人负责的理念，做一个骄傲的孤独者罢了！！！
 
           
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/16/147/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1184,44 +1212,19 @@
       
         
           
-            <h3 id="最近懈怠了STL，弄得都要翻资料了，赶紧弄点笔记："><a href="#最近懈怠了STL，弄得都要翻资料了，赶紧弄点笔记：" class="headerlink" title="最近懈怠了STL，弄得都要翻资料了，赶紧弄点笔记："></a>最近懈怠了STL，弄得都要翻资料了，赶紧弄点笔记：</h3><hr>
-<p><strong>建议</strong></p>
-<ul>
-<li><p>vector，等容器指针，真心是坑；要写就一定要保证，所有复制，赋值，创建，删除，自己写，所有的stl函数要留意点，比如remove这种移动函数。不然，用默认函数就特么操作指针，后面简直叫妈妈！！！</p>
-</li>
-<li><p>vector比deque多了capacity（能容纳的元素数量，就是开辟内存），reserve。可以看出vector的虚拟预定义分配。<br>vector对内存的处理是开辟后，clear并不释放，而是在析构函数上释放；所以要动态回收大多内存就要用swap来。vec.swap(vector<int>());注意这段代码只能和clear连用，因为它同样能清空容器数据。</int></p>
-</li>
-</ul>
-<ul>
-<li>容器指针，老是需要自己写新函数，并自己调用它。所以STL提供智能指针来解决问题.<br><br>Effective stl指出了几个问题：<br><br>1、auto_ptr不能共享所有权<br><br>2、auto_ptr不能用数组初始化<br><br>3、auto_ptr不能作为容器成员<br><br>4、不能通过赋值操作来初始化auto_ptr<br><br>5、不要把auto_ptr放入容器。<br><br>shared_ptr就解决了1个问题而已。</li>
-</ul>
-<figure class="highlight c"><figcaption><span>代码演示++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>*&gt; v_pint;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;v_pint&gt; auto_p(<span class="keyword">new</span> v_pint<span class="comment">/*, 这里可以指定析构函数*/</span>);</div><div class="line">auto_p-&gt;push_back(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">1</span>));</div><div class="line">auto_p-&gt;push_back(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">2</span>));</div><div class="line">auto_p-&gt;push_back(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">3</span>));</div><div class="line">auto_p-&gt;push_back(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">4</span>));</div><div class="line"></div><div class="line">v_pint auto_pt;</div><div class="line">auto_pt.push_back(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">5</span>));</div><div class="line">auto_pt.push_back(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">6</span>));</div><div class="line">auto_pt.push_back(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">7</span>));</div><div class="line"></div><div class="line"><span class="keyword">bool</span> bequal = <span class="built_in">std</span>::equal(auto_pt.begin(), auto_pt.end(), auto_p-&gt;begin());<span class="comment">//这里比较的是指针，注意。永远是错误</span></div><div class="line">pair&lt;v_pint::iterator, v_pint::iterator&gt; it = <span class="built_in">std</span>::mismatch(auto_pt.begin(), auto_pt.end(), auto_p-&gt;begin());<span class="comment">//第一个是auto_pt第二个是auto_p</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//干脆下面开写各种函数</span></div><div class="line"><span class="keyword">struct</span> dd</div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> d_;</div><div class="line">	<span class="keyword">int</span> a_;</div><div class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>==(<span class="keyword">const</span> dd&amp; d) &#123; </div><div class="line">		<span class="keyword">if</span> (d.a_ == a_ &amp;&amp; d.d_ == d_) &#123;</div><div class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>; </div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">bequal</span><span class="params">(dd*&amp; d1, dd*&amp; d2)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (d1-&gt;a_==d2-&gt;a_&amp;&amp;d1-&gt;d_==d2-&gt;d_) &#123;</div><div class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">static</span> dd* <span class="title">copydata</span><span class="params">(dd* p)</span> </span>&#123;</div><div class="line">		dd* rp = <span class="keyword">new</span> dd;</div><div class="line">		rp-&gt;a_ = p-&gt;a_;</div><div class="line">		rp-&gt;d_ = p-&gt;d_;</div><div class="line">		<span class="keyword">return</span> rp;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">struct</span> RemoveTranData :</div><div class="line">	<span class="keyword">public</span> <span class="built_in">std</span>::binary_function&lt;T*&amp;, T* , <span class="keyword">void</span>&gt;</div><div class="line">&#123;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">operator</span> <span class="params">()</span><span class="params">(T*&amp; p, T*)</span> <span class="keyword">const</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (*T == *p) &#123;</div><div class="line">			DEL_P(p);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">struct</span> RemoveAllTranData :</div><div class="line">	<span class="keyword">public</span> <span class="built_in">std</span>::unary_function&lt;T*, <span class="keyword">void</span>&gt;</div><div class="line">&#123;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">operator</span> <span class="params">()</span><span class="params">(T* p)</span> <span class="keyword">const</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (p != <span class="literal">NULL</span>) &#123;</div><div class="line">			<span class="keyword">delete</span> p;</div><div class="line">			p = <span class="literal">NULL</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">int</span> <span class="number">_</span>tmain(<span class="keyword">int</span> argc, <span class="number">_</span>TCHAR* argv[])</div><div class="line">&#123;</div><div class="line">	<span class="keyword">typedef</span> <span class="built_in">vector</span>&lt;dd*&gt; v_pint;</div><div class="line">	v_pint v_int;</div><div class="line">	v_int.push_back(<span class="keyword">new</span> dd&#123;<span class="number">2</span>,<span class="number">3</span>&#125;);</div><div class="line">	v_int.push_back(<span class="keyword">new</span> dd&#123;<span class="number">3</span>,<span class="number">4</span>&#125;);</div><div class="line">	v_int.push_back(<span class="keyword">new</span> dd&#123;<span class="number">4</span>,<span class="number">5</span>&#125;);</div><div class="line">	v_int.push_back(<span class="keyword">new</span> dd&#123;<span class="number">6</span>,<span class="number">7</span>&#125;);</div><div class="line"></div><div class="line">	dd* pt = <span class="keyword">new</span> dd&#123; <span class="number">6</span>, <span class="number">7</span> &#125;;</div><div class="line">	v_pint::iterator i = find_if(v_int.begin(), v_int.end(), bind2nd(mem_fun(&amp;dd::<span class="keyword">operator</span>==), *pt));<span class="comment">//指针的find</span></div><div class="line">	<span class="keyword">bool</span> b = <span class="built_in">std</span>::equal(v_int.begin(), v_int.end(), v_int2.begin(), (&amp;dd::bequal));<span class="comment">//指针的比较equl，最好更新成成员函数，待修改吧</span></div><div class="line">	</div><div class="line">	v_int3.resize(v_int2.size());<span class="comment">//注意这里哟</span></div><div class="line">	<span class="built_in">std</span>::transform(v_int2.begin(), v_int2.end(), v_int3.begin(), (&amp;dd::copydata));<span class="comment">//指针的复制， 想用上面find那种类型来着，发现复制错误了！！！&lt;/br&gt;</span></div><div class="line">	<span class="comment">//值得一提的是stl虽然有copy，但是却对容器指针依旧只是指针的赋值；而且使用前必须用resize来分配大小后再使用。</span></div><div class="line">	<span class="comment">//copy_if却是c++11的东西了要配合lamda了；copy_if(arr.begin(), arr.end(), back_inserter(res)//res.begin(),[](const int i) &#123; return i == 5 || i == 7; &#125;);</span></div><div class="line">	<span class="comment">//copy_backward是copy的逆向复制</span></div><div class="line"></div><div class="line">	for_each(<span class="number">_</span>doorVec.begin(), <span class="number">_</span>doorVec.end(), mem_fun_ref(&amp;Door::open));<span class="comment">//留个思想,以后封装用</span></div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
-<p><strong>2</strong></p>
-<figure class="highlight c"><figcaption><span>后面就给点有用的东东++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> forwardItr,<span class="keyword">class</span> Type&gt;  </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">replace</span><span class="params">(forwardItr first, forwardItr last,<span class="keyword">const</span> Type&amp; oldValue <span class="keyword">const</span> Type&amp; newValue)</span></span>;  </div><div class="line">  </div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> forwardItr, <span class="keyword">class</span> unaryPredicate,<span class="keyword">class</span> Type&gt;  </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">replace_if</span><span class="params">(forwardItr first, forwardItr last, unaryPredicate op,<span class="keyword">const</span> Type&amp; newValue)</span></span>;  </div><div class="line">  </div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> inputItr,<span class="keyword">class</span> outputItr,<span class="keyword">class</span> Type&gt;  </div><div class="line"><span class="function">outputItr <span class="title">replace_copy</span><span class="params">(inputItr first1, inputItr last1, outputItr destFirst,<span class="keyword">const</span> Type&amp; oldValue, <span class="keyword">const</span> Type&amp; newValue)</span></span>;  </div><div class="line">  </div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> inputItr,<span class="keyword">class</span> outputItr, <span class="keyword">class</span> unaryPredicate&gt;  </div><div class="line"><span class="function">outputItr <span class="title">replace_copy_if</span><span class="params">(inputItr first1, inputItr last1, outputItr destFirst, unaryPredicate op,<span class="keyword">const</span> Type&amp; newValue)</span></span>;  </div><div class="line"></div></pre></td></tr></table></figure>
-<p><strong>3</strong></p>
-<blockquote>
-<p>首先可供查找的算法大致有count,find,binary_search,lower_bound,upper_bound,equal_range。带有判别式的如count_if,find_if或者binary_search的派别式版本，其用法大致相同</p>
-</blockquote>
-<p><strong>4</strong></p>
-<p>参考：<a href="http://blog.csdn.net/sdhongjun/article/details/4517325/" target="_blank" rel="external">http://blog.csdn.net/sdhongjun/article/details/4517325/</a></p>
-<figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//stdext::hash_map等都比map高效多了</span></div><div class="line"><span class="keyword">struct</span> less: <span class="keyword">public</span> binary_funtion&lt;<span class="keyword">const</span> <span class="keyword">char</span>, <span class="keyword">const</span> <span class="keyword">char</span>*, <span class="keyword">bool</span>&gt;</div><div class="line">&#123;</div><div class="line">	<span class="function">result_type <span class="title">opeator</span><span class="params">()</span><span class="params">(<span class="keyword">const</span> first_argument_type&amp; <span class="number">_l</span>eft, <span class="keyword">const</span> second_argument_type <span class="number">_</span>right)</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> (<span class="number">_</span>wcsicmp(left, right) &lt; <span class="number">0</span> ? <span class="literal">true</span> : <span class="literal">false</span>);</div><div class="line">	&#125;</div><div class="line">&#125;<span class="comment">//简直太装逼了，result_type first_argument_type second_argument_type。悬浮一看，就特么是前面 const char* bool，只是被内部转换了一些。。。。真装逼。。。。</span></div><div class="line"><span class="comment">//这个是hash_map的比较，因为键不能默认字符，必须自己写比较。</span></div><div class="line">stdext::hash_map&lt;cstring, TDATA1, stdext::hash_compare&lt;<span class="keyword">const</span> <span class="keyword">whcar_t</span>*, less&gt;&gt;</div><div class="line"><span class="comment">//参考 </span></div><div class="line"></div></pre></td></tr></table></figure>
-<p><strong>5</strong></p>
-<blockquote>
-<p>参考来自：stackoverflow :c++ unordered_map using a custom class type as the key</p>
-</blockquote>
-<pre><code>//std::tr1::unordered_map无序的高效map，貌似虐爆hash_map和map
-//boost却要写个hash_value
-struct KeyHasher
-{
-    std::size_t operator()(const CString&amp; k) const
-    {
-        retrun (hash&lt;wstring&gt;()(k.GetString()));
-    }
-}
-</code></pre><p><strong>6</strong></p>
-<p>151对stl所有map和mfc的map做了比较，请看链接</p>
+          最近懈怠了STL，弄得都要翻资料了，赶紧弄点笔记：
+建议
 
-          
+vector，等容器指针，真心是坑；要写就一定要保证，所有复制，赋值，创建，删除，自己写，所有的stl函数要留意点，比如remove这种移动函数。不然，用默认函数就特么操作指针，后面简直叫妈妈！！！
+
+vector比deque多了capac
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/12/146/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1332,39 +1335,15 @@ struct KeyHasher
       
         
           
-            <p> 1.Java保存的文件名必须与类名一致；<br><br> 2.如果文件中只有一个类，文件名必须与类名一致；<br><br> 3.一个Java文件中只能有一个public类；<br><br> 4.如果文件中不止一个类，文件名必须与public类名一致；<br><br> 5.如果文件中不止一个类，而且没有public类，文件名可与任一类名一致。<br></p>
-<p>protected：自身，子类及同一个包中类可以访问。相比c++倒是多了个，访问路径。<br><br>default（默认）：同一包中的类可以访问，声明时没有加修饰符，认为是friendly。c++默认是protected吧，但是也分编译器。<br></p>
-<h2 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h2><blockquote>
-<ul>
-<li><p>android:gravity　属性是对该view中内容的限定．比如一个button 上面的text. 你可以设置该text 相对于view的靠左，靠右等位置．<br><br>android:layout_gravity是用来设置该view相对与父view 的位置．比如一个button 在linearlayout里，你想把该button放在linearlayout里靠左、靠右等位置就可以通过该属性设置．</p>
-</li>
-<li><p>dip: device independent pixels(设备独立像素). 不同设备有不同的显示效果,这个和设备硬件有关，一般我们为了支持WVGA、HVGA和QVGA 推荐使用这个，不依赖像素。<br><br>dp: dip是一样的<br><br>px: pixels(像素). 不同设备显示效果相同，一般我们HVGA代表320x480像素，这个用的比较多。<br><br>pt: point，是一个标准的长度单位，1pt＝1/72英寸，用于印刷业，非常简单易用；<br><br>sp: scaled pixels(放大像素). 主要用于字体显示best for textsize。 </p>
-</li>
-</ul>
-</blockquote>
-<h2 id="eclipse"><a href="#eclipse" class="headerlink" title="eclipse"></a>eclipse<br></h2><blockquote>
-<p>中断debug，的在左上的debug窗口，选择总进程，再点击红色的中断。<br><br>修改重启的话一定要在java页面点击重启，在xml页面点击重启会不动，跑都不跑。<br></p>
-</blockquote>
-<h2 id="仅下twicetest"><a href="#仅下twicetest" class="headerlink" title="仅下twicetest"></a>仅下twicetest<br></h2><blockquote>
-<p>左上是一个activebar</p>
-<p>先走main的oncreate，main里面新建NavigationDrawerFragment，所以就走NavigationDrawerFragment的oncreate，oncreateview，添加menu，item等布局。<br>main就获取title，把title设置到activebar里面去<br><br>程序先加载activemain，里面有FrameLayout和fragment<br>实在不明白前者为何没有，后者就是那个NavigationDrawerFragment的界面。？？？？？？？？？？<br><br>main会在ondrawn里面建立fragment_main，Navigatfragment会在每次点击时显示，俩个布局平分了整个屏幕。</p>
-</blockquote>
-<h2 id="回调和监听"><a href="#回调和监听" class="headerlink" title="回调和监听"></a>回调和监听</h2><blockquote>
-<p>内部监听、外部监听、activity监听、匿名监听（直接new就开写的那个）<br><br>xml定义监听函数</p>
-<p>回调函数<br>先调用事件监听器-&gt;对应控件回调方法-&gt;activity对应的回调方法。（如果其中有一个返回false就终止）</p>
-</blockquote>
-<h2 id="target-sdk-compile-sdk"><a href="#target-sdk-compile-sdk" class="headerlink" title="target sdk compile sdk"></a>target sdk compile sdk</h2><p>v7是5.0以后才有的，所以，compile sdk注意用23(因为我sdk manager里面5.0以后只有23)。不然会资源错误，报r的错误,对了不需要v7支持记住要mini sdk&gt;=14<br></p>
-<blockquote>
-<p>targetSdkVersion相对复杂一些，如果设置了此属性，那么在程序执行时，如果目标设备的API版本正好等于此数值，他会告诉Android平台：此程序在此版本已经经过充分测，没有问题。不必为此程序开启兼容性检查判断的工作了。也就是说，如果targetSdkVersion与目标设备的API版本相同时，运行效率可能会高一些。</p>
-<p>但是，这个设置仅仅是一个声明、一个通知，不会有太实质的作用，比如说，使用了targetSdkVersion这个SDK版本中的一个特性，但是这个特性在低版本中是不支持的，那么在低版本的API设备上运行程序时，可能会报错：java.lang.VerifyError。也就是说，此属性不会帮你解决兼容性的测试问题。你至少需要在minSdkVersion这个版本上将程序完整的跑一遍来确定兼容性是没有问题的。(这个问题确实让人头疼)</p>
-<p>在default.properties中的target是指在编译的时候使用哪个版本的API进行编译。</p>
-<p>综上，上面的四个值其实是作用于不同的时期：<br>target API level是在编译的时候起作用，用于指定使用哪个API版本(SDK版本)进行编译。<br>minSdkVersion和maxSdkVersion是在程序安装的时候起作用，用于指定哪些版本的设备可以安装此应用。<br>targetSdkVersion是在程序运行的时候起作用，用于提高指定版本的设备上程序运行体验。</p>
-<p>这四个数值在程序编译时也没有严格的检查，比如说，你可以将minSdkVersion设置的比maxSdkVersion还大，他会自动忽略掉错误的maxSdkVersion。</p>
-<p>但是在Ubuntu下，用Android studio就不存在这些问题，target和source会被一起默认设置为当前platform。</p>
-</blockquote>
-<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><p>   默认情况下Handler会与其被定义时所在线程的Looper绑定，比如，Handler在主线程中定义，那么它是与主线程的Looper绑定。 mainHandler = new Handler() 等价于new Handler（Looper.myLooper()）. Looper.myLooper()：获取当前进程的looper对象，类似的 Looper.getMainLooper() 用于获取主线程的Looper对象。<br><br> 所以handler一开始就被绑定了。变定义就好了。</p>
+           1.Java保存的文件名必须与类名一致； 2.如果文件中只有一个类，文件名必须与类名一致； 3.一个Java文件中只能有一个public类； 4.如果文件中不止一个类，文件名必须与public类名一致； 5.如果文件中不止一个类，而且没有public类，文件名可与任一类名一致。
+protected
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/05/145/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1475,23 +1454,16 @@ struct KeyHasher
       
         
           
-            <p>  呵呵，写了好久，模板错误。我特么真傻逼。<br>模板是要假设每种情况都要生成的，用个if然后就指向成员。唉！！！！错误哎呀！！！！</p>
-<p>以后，结构体，数量不等，类型不同；打死都不想用模板了<br>搞得最后没法弄成这样</p>
-<pre><code>static T* createdata(int n1, int n2, int n3, int ncount, va_list args) {
-    /*
-     *    调试赋值是否完全正确；有无空符号
-     */
-    T* p = new T;
-    if (ncount == 1) {
-        changewatchdata((PWATCH_PROCESS_INFORMATION)p, n1, n2, n3, 0, ncount, args);
-    }
-    else {
-        changeconfigdata((PConfigData)p, n1, n2, n3, 0, ncount, args);
-    }
-    return p;
-}
-</code></pre>
-          
+            呵呵，写了好久，模板错误。我特么真傻逼。模板是要假设每种情况都要生成的，用个if然后就指向成员。唉！！！！错误哎呀！！！！
+以后，结构体，数量不等，类型不同；打死都不想用模板了搞得最后没法弄成这样
+static T* createdata(int n1, int n2, int n3, int 
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/04/144/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>

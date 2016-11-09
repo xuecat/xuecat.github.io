@@ -102,7 +102,7 @@ const命令只保证变量指向地址不变，不能保证数据不变。
 
 
 12345678910111213const foo = [];foo.prop = 123;//这是被允许的foo = &amp;#123;&amp;#125;;//这是不被允许的//要完全冻结，参考如下代码var constantize = (obj) =&amp;gt; &amp;#123;    Object.freeze(">
-<meta property="og:updated_time" content="2016-11-07T15:36:11.768Z">
+<meta property="og:updated_time" content="2016-11-09T15:35:17.047Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="es6和js笔记192">
 <meta name="twitter:description" content="函数参数默认压栈顺序，从左到右
@@ -372,12 +372,36 @@ const命令只保证变量指向地址不变，不能保证数据不变。
 </ol>
 <p>es6多了:<br><br>includes:返回布尔，表示十分找到参数字符串。第二个参数，表示开始搜索的位置<br>startsWith:返回布尔，表示参数字符串是否在源字符串的头部。第二个参数，表示开始搜索的位置<br>endsWith:返回布尔，表示参数字符串是否在源字符串的尾部。第二个参数，表示开始搜索的位置<br>repeat:返回一个新字符串，表示将原字符串重复n次</p>
 <ol>
-<li><p>模板字符串，使用反引号（`这个符号）</p>
-<p> 普通字符： <code>dd&#39;\n&#39;asdf</code> 这里有换行<br> 多行字符： 无需连接符，所有的空格、回车和缩进都会被保留在输出中。<br> 变量嵌入：<code>hello ${name} are ${time}?</code> name和time是定义的变量。如果括号里面的不是字符串，则按一般规则转换为字符，如调用toString方法<br> 函数调用：function tag(s, v, d); tag<code>hello ${a+b} ${a}</code>;<br> String的raw函数</p>
+<li>模板字符串，使用反引号（`这个符号）</li>
+</ol>
+<p>普通字符： <code>dd&#39;\n&#39;asdf</code> 这里有换行<br>多行字符： 无需连接符，所有的空格、回车和缩进都会被保留在输出中。<br>变量嵌入：<code>hello ${name} are ${time}?</code> name和time是定义的变量。如果括号里面的不是字符串，则按一般规则转换为字符，如调用toString方法<br>函数调用：function tag(s, v, d); tag<code>hello ${a+b} ${a}</code>;<br>String的raw函数</p>
+<ol>
+<li>正则</li>
+</ol>
+<p>es5中String对象的方法，search、match、replace、split支持JS正则</p>
+<ol>
+<li><p>数值<br><br>Number增加成员isFinite，isNaN.<br> es6把es5中的全局函数parseInt,parseFloat移植到了Number对象上。<br>Number成员，isSafeInteger范围在2的53次方</p>
 </li>
-<li><p>正则，5中String对象的方法，search、match、replace、split支持JS正则</p>
+<li><p>Math对象,es6新增17个方法。它的方法都是静态方法:<code>Math.abs(s)</code></p>
 </li>
 </ol>
+<p>Math.trunc(4.2)//除去一个数的小数部分，返回整数<br><br>Math.sign();//判断一个数是正数(re:+1)、负数(re:-1)、还是零(re:0)、其它(re:NaN)<br>Math.cbrt();//计算一个数的立方根<br>对数、指数、平方等就不写了。</p>
+<ol>
+<li>Array数组</li>
+</ol>
+<ul>
+<li><p>伪组数转换：</p>
+<p>  let arraylike = {</p>
+<pre><code>0: &apos;a&apos;,
+1: &apos;b&apos;,
+length: 2//这个必须有
+</code></pre><p>  };//这是个对象，并不是数组<br>  es5中转换数组： [].slice.call(arraylike);或这么写Array.prototype.slice.call(arraylike);//[‘a’, ‘b’];<br>  es6中转换数组：Array.from(arraylike);//只要部署了Iterator接口的数据结构，和ES6的Set、Map。都可以转换。</p>
+<p>  function test(a,b,c,d)<br>  { </p>
+<pre><code>var arg = Array.prototype.slice.call(arguments,1); 
+alert(arg); 
+</code></pre><p>  }<br>  test(“a”,”b”,”c”,”d”); //b,c,d</p>
+</li>
+</ul>
 
       
     </div>

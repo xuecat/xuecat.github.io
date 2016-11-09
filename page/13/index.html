@@ -284,8 +284,8 @@
             
               
                 
-                <a class="post-title-link" href="/2014/10/01/73/" itemprop="url">
-                  static作用(73)
+                <a class="post-title-link" href="/2014/10/01/78/" itemprop="url">
+                  字符截取替换(78)
                 </a>
               
             
@@ -312,8 +312,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
+                  <a href="/categories/配置/" itemprop="url" rel="index">
+                    <span itemprop="name">配置</span>
                   </a>
                 </span>
 
@@ -347,12 +347,19 @@
       
         
           
-            <p>static作用（修饰函数、局部变量、全局变量）</p>
-<p>当我们同时编译多个文件时，所有未加static前缀的全局变量和函数都具有全局可见性</p>
-<p>如果加了static，就会对其它源文件隐藏。例如在a和msg的定义前加上static，main.c就看不到它们了。</p>
-<p>利用这一特性可以在不同的文件中定义同名函数和同名变量，而不必担心命名冲突。Static可以用作函数和变量的前缀，对于函数来讲，static的作用仅限于隐藏，而对于变量，static还有下面两个作用。</p>
+          //    &apos;;&apos;字符为界
+size_t pos = 0, found = 0;
+while (found != wstring::npos)
+{
+    found = m_strData.find(L&quot;;&quot;, pos);
+    m_strLineData
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/10/01/78/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -464,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/o.jpg" rel="gallery_civ9lzqch00f3wwcxrc6dtghk"
+                 href="/picture/o.jpg" rel="gallery_civb37re500f6nscxyr48jz9w"
                  itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/o.jpg" itemprop="contentUrl"/>
               </a>
@@ -479,20 +486,20 @@
       
         
           
-            <p>对学习编程者的忠告：<br>多用小脑和手，少用大脑、眼睛和嘴，会更快地学会编程！</p>
-<p>眼过千遍不如手过一遍！</p>
-<p>书看千行不如手敲一行！</p>
-<p>手敲千行不如单步一行！</p>
-<p>单步源代码千行不如单步Debug版对应汇编一行！</p>
-<p>单步Debug版对应汇编千行不如单步Release版对应汇编一行！</p>
-<p>单步类的实例“构造”或“复制”或“作为函数参数”或“作为函数返回值返回”或“参加各种运算”或“退出作用域”的语句对应的汇编代码几步后，</p>
-<p>就会来到该类的“构造函数”或“复制构造函数”或“运算符重载”或“析构函数”对应的C/C++源代码处。</p>
-<p>VC调试时按Alt+8、Alt+7、Alt+6和Alt+5,打开汇编窗口、堆栈窗口、内存窗口和寄存器窗口看每句C对应的汇编、单步执行并观察相应堆栈、内存和寄存器变化，</p>
-<p>这样过一遍不就啥都明白了吗。</p>
-<p>对VC来说，所谓‘调试时’就是编译连接通过以后，按F10或F11键单步执行一步以后的时候，或者在某行按F9设了断点后按F5执行停在该断点处的时候。</p>
-<p>（Turbo C或Borland C用Turbo Debugger调试,Linux或Unix下用GDB调试时,看每句C对应的汇编并单步执行观察相应内存和寄存器变化。）</p>
+          对学习编程者的忠告：多用小脑和手，少用大脑、眼睛和嘴，会更快地学会编程！
+眼过千遍不如手过一遍！
+书看千行不如手敲一行！
+手敲千行不如单步一行！
+单步源代码千行不如单步Debug版对应汇编一行！
+单步Debug版对应汇编千行不如单步Release版对应汇编一行！
+单步类的实例“构造”或“复制”或“作
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/29/72/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -603,21 +610,18 @@
       
         
           
-            <p>ON_COMMAND 以及 ON_COMMAND_RANGE 是用于处理菜单项或工具栏按钮的命令消息的<br>对于复选框这样的控件，请使用ON_CONTROL_RANGE</p>
-<ol>
-<li><p>打开 resource.h，将你的复选框控件ID进行连续编号，例如1001，1002…</p>
-</li>
-<li><p>在对话框类的头文件中添加公有成员函数：afx_msg void OnCheckBox(UINT uID) ;</p>
-</li>
-<li><p>在对话框类的cpp文件中BEGIN_MESSAGE_MAP(CTestDlg, CDialog) 的 //}}AFX_MSG_MAP下添加代码 ON_CONTROL_RANGE(BN_CLICKED,1001,1003,OnCheckBox)</p>
-</li>
-<li><p>然后在cpp文件中添加函数void CTestDlg::OnCheckBox(UINT uID) {}</p>
-</li>
-<li><p>在函数内判断 uID，来确定用户单击了哪项复选框，并作相应处理。</p>
-</li>
-</ol>
+          ON_COMMAND 以及 ON_COMMAND_RANGE 是用于处理菜单项或工具栏按钮的命令消息的对于复选框这样的控件，请使用ON_CONTROL_RANGE
 
-          
+打开 resource.h，将你的复选框控件ID进行连续编号，例如1001，1002…
+
+在对话框类的头文件中添加公有成员函数：afx
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/28/71/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -728,11 +732,17 @@
       
         
           
-            <p>首先注意不能在.h头文件中定义全局变量，否则只要其他文件包括了该头文件，就会出现already defined in *.obj的错误。</p>
-<p>应该把全局变量放在.cpp文件中定义，然后在其他文件中用到该变量时用extern声明一下。</p>
-<p>即使在.h中定义全局变量，用extern可以避免。</p>
+          首先注意不能在.h头文件中定义全局变量，否则只要其他文件包括了该头文件，就会出现already defined in *.obj的错误。
+应该把全局变量放在.cpp文件中定义，然后在其他文件中用到该变量时用extern声明一下。
+即使在.h中定义全局变量，用extern可以避免。
 
           
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/28/70/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -843,46 +853,16 @@
       
         
           
-            <p><strong>vector</strong></p>
-<p>表示一段连续的内存区域每个元素被顺序存储在这段内存中对vector的随机访问比如先访问元素5 然后访问15然后再访问7等等效率很高，因为每次访问离vector起始处的位移都是固定的。</p>
-<p>但是在任意位置而不是在vector末尾插人元素则效率很低 ，因为它需要把待插入元素右边的每个元素都拷贝一遍。</p>
-<p>类似地删除任意一个而不是vector 的最后一个元素效率同样很低。<br>因为待删除元素右边的每个元素都必须被复制一遍这种代价对于大型的复杂的类对象来说尤其大。</p>
-<p><strong>deque</strong></p>
-<p>一个deque 也表示一段连续的内存区域但是与vector不同的是它支持高效地在其首部插入和删除元素它通过两级数组结构来实现一级表示实际的容器第二级指向容器的首和尾</p>
-<p><strong>list</strong></p>
-<p>List表示非连续的内存区域并通过一对指向首尾元素的指针双向链接起来从而允许向前和向后两个方向进行遍历在list的任意位置插入和删除元素的效率都很高</p>
-<p>指针必须被重新赋值但是不需要用拷贝元素来实现移动</p>
-<p>另一方面它对随机访问的支持并不好，访问一个元素需要遍历中间的元素另外每个元素还有两个指针的额外空间开销  </p>
-<p><strong>如果我们需要随机访问一个容器则vector要比list好得多 。</strong></p>
-<p><strong>如果我们已知要存储元素的个数则vector 又是一个比list好的选择。</strong></p>
-<p><strong>如果我们需要的不只是在容器两端插入和删除元素则list显然要比vector好</strong></p>
-<p><strong>除非我们需要在容器首部插入和删除元素否则vector要比deque好</strong></p>
-<p>1 vector向量 相当于一个数组</p>
-<p>在内存中分配 一块连续的内存空间进行存储。支持不指定vector大小的存储。STL内部实现时，首先分配一个非常大的内存空间预备进行存储，即 capacituy（）函数返回的大小，当超过此分配的空间时再整体重新放分配一块内存存储，这给人以vector可以不指定vector即一个连续内存 的大小的感觉。通常此默认的内存分配能完成大部分情况下的存储。</p>
-<p>优点：</p>
-<pre><code>(1) 不指定一块内存大小的数组的连续存储，即可以像数组一样操作，但可以对此数组
-进行动态操作。通常体现在push_back() pop_back()
+          vector
+表示一段连续的内存区域每个元素被顺序存储在这段内存中对vector的随机访问比如先访问元素5 然后访问15然后再访问7等等效率很高，因为每次访问离vector起始处的位移都是固定的。
+但是在任意位置而不是在vector末尾插人元素则效率很低 ，因为它需要把待插入元素右边的每个元素都拷贝
+          ...
 
-(2) 随机访问方便，即支持[ ]操作符和vector.at()
-
-(3) 节省空间。
-</code></pre><p>缺点：</p>
-<pre><code>(1) 在内部进行插入删除操作效率低。
-(2) 只能在vector的最后进行push和pop，不能在vector的头进行push和pop。
-(3) 当动态添加的数据超过vector默认分配的大小时要进行整体的重新分配、拷贝与释放
-</code></pre><p>2 list双向链表</p>
-<p>每一个结点都包括一个信息快Info、一个前驱指针Pre、一个后驱指针Post。可以不分配必须的内存大小方便的进行添加和删除操作。使用的是非连续的内存空间进行存储。</p>
-<p>优点：<br>    (1) 不使用连续内存完成动态操作。<br>    (2) 在内部方便的进行插入和删除操作<br>    (3) 可在两端进行push、pop<br>缺点：<br>    (1) 不能进行内部的随机访问，即不支持[ ]操作符和vector.at()<br>    (2) 相对于verctor占用内存多</p>
-<p>3 deque双端队列 double-end queue</p>
-<p>deque是在功能上合并了vector和list。</p>
-<p>优点：<br>    (1) 随机访问方便，即支持[ ]操作符和vector.at()<br>    (2) 在内部方便的进行插入和删除操作<br>    (3) 可在两端进行push、pop</p>
-<p>缺点：<br>    (1) 占用内存多</p>
-<p>使用区别：</p>
-<p>1 如果你需要高效的随即存取，而不在乎插入和删除的效率，使用vector</p>
-<p>2 如果你需要大量的插入和删除，而不关心随即存取，则应使用list</p>
-<p>3 如果你需要随即存取，而且关心两端数据的插入和删除，则应使用deque</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/24/69/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -993,12 +973,18 @@
       
         
           
-            <p>我擦，又是漫长的调试。</p>
-<p>自定义的窗口居然这样，服了。</p>
-<p>原来我在OnFinalMessage里面已经delete了</p>
-<p>所以后面的再次调用出错。写下，记录。</p>
+          我擦，又是漫长的调试。
+自定义的窗口居然这样，服了。
+原来我在OnFinalMessage里面已经delete了
+所以后面的再次调用出错。写下，记录。
 
           
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/24/68/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1109,12 +1095,14 @@
       
         
           
-            <figure class="highlight c"><figcaption><span>先看代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Baseclass</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	Baseclass() &#123;</div><div class="line">	&#125;</div><div class="line">	~Baseclass()&#123;&#125;;</div><div class="line">	</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">demo</span> <span class="params">(<span class="keyword">int</span> a)</span> <span class="keyword">const</span> </span>&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"asdf"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">class</span> Driverclass : <span class="keyword">public</span> Baseclass</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	Driverclass()&#123;&#125;</div><div class="line">	~Driverclass()&#123;&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">demo</span><span class="params">(<span class="keyword">int</span> a)</span> <span class="keyword">const</span> </span>&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"qwe"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	Baseclass* pb;</div><div class="line">	Baseclass*  p = <span class="keyword">new</span> Baseclass;</div><div class="line">	Driverclass* d = <span class="keyword">new</span> Driverclass;</div><div class="line">	pb = p;</div><div class="line">	pb-&gt;demo(<span class="number">2</span>);</div><div class="line">	pb = d;</div><div class="line">	pb-&gt;demo(<span class="number">2</span>);</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>看demo虽然是driverclass的私有函数，可通过pb我们却访问到了他的私有成员。</p>
-<p>如果直接：d-&gt;demo(2)必定会报错。</p>
-<p>因为demo在基类就被声明为public了，所以如此的间接访问是可以的。</p>
+          先看代码：++1234567891011121314151617181920212223242526272829303132333435class Baseclass&#123;public:	Baseclass() &#123;	&#125;	~Baseclass()&#123;&#125;;		
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/23/67/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1162,136 +1150,8 @@
             
               
                 
-                <a class="post-title-link" href="/2014/09/20/65/" itemprop="url">
-                  ++和++ 入栈顺序(65)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-20T03:31:58+08:00" content="2014-09-20">
-              2014-09-20
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight c"><figcaption><span>直接上代码++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">minuus</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">return</span> a-b;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> cc = <span class="number">4</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; minuus(cc++, cc++) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	</div><div class="line">	<span class="keyword">while</span> (cc--)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"a"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
-<p>vc6编译环境：</p>
-<p>minuus（cc, cc++）；while(–cc) 输出：4,4,0 aaaa</p>
-<p>minuus（++cc, ++cc）；while(–cc) 输出：6,5,0 aaaaa</p>
-<p>minuus（cc++, ++cc）；while(–cc) 输出：5,5,0 aaaaa</p>
-<p><strong>分析：首先vc6对参数入栈默认是从右到左的，然后入栈参数必定存在赋值临时参数(意思就是先拷贝了数据值再进行操作，不然第一个示例中：cc++确实执行了，却没有传入值)。</strong></p>
-<p>vs2012编译环境：</p>
-<p>minuus（cc, cc++）；while(–cc) 输出：5 4 1 5(和想象中的一样)</p>
-<p>minuus（++cc, ++cc）；while(–cc) 输出：6 6 0 6(不同了)</p>
-<p>minuus（cc++, ++cc）；while(–cc) 输出：5 6 -1 6(不同了)</p>
-<p>minuus（cc++, cc++）；while(–cc) 输出：5 4 1 6(不同)</p>
-<p>minuus(cc, ++cc) :5 5 0 5</p>
-<p>minuus(++cc, cc++) 6 4 2 6</p>
-<p>minuus(++cc, cc) 5 5 0 5</p>
-<p><strong>分析：首先它会对++c进行预先处理， 所以cc会自加，玩了后它才开始参数从右到左进行入栈处理。<br>有cc++就处理。</strong></p>
-<p>相比vc6对数据的自加进行了修改，但是对++c的处理并不是很好。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/20/64/" itemprop="url">
-                  指针内存长度和大小(64)
+                <a class="post-title-link" href="/2014/09/20/57/" itemprop="url">
+                  设计流程(57)
                 </a>
               
             
@@ -1349,14 +1209,36 @@
 
       
       
+        <div class="post-gallery" itemscope itemtype="//schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="/picture/m.png" rel="gallery_civb37rcu00d8nscxvzrmes3x"
+                 itemscope itemtype="//schema.org/ImageObject" itemprop="url">
+                <img src="/picture/m.png" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
 
       
         
           
-            <p> 今天字符处理遇见这个问题：我new了一块内存，然后sizeof()；strlen()；都正常（一个返回4，一个返回分配大小）</p>
-<p>之后我用了ZeroMemory来分配，发现有异议了。<br>sizeof(); strlen(); 一个返回4，一个返回0；     原来用了这个函数会置空内存。</p>
+           想出的设计流程：
+ 先画出程序运行功能的基本流程-&gt;确定类的个数和作用-&gt;设计模式-&gt;按照先想好的类功能模块把设计模式搭建出来-&gt;最后按照功能流程图再写一遍。
 
           
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/20/57/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1467,13 +1349,140 @@
       
         
           
-            <p>今天用string来find一个中文符号，首先返回符号位置正确。然后符号为界，截取字符串出现问题；</p>
-<p>分析原因：中文符号在string中是占用两个字节的。而string对所有的字符串是一个字符一个字节的</p>
-<p>，所以按位取时，夺取了一个字节，导致数据获取失败。</p>
-<p>用wstring进行存取，可以完全避免。</p>
-<p><strong>学到：或许第三方库和一些协议对unicode字符集支持不是很好，导致数据传输要使用ANSI字符串。<br>但程序之间的通信为了保证中文字符，必须使用unicode。     最多在数据传输时做一次编码转换！</strong></p>
+          今天用string来find一个中文符号，首先返回符号位置正确。然后符号为界，截取字符串出现问题；
+分析原因：中文符号在string中是占用两个字节的。而string对所有的字符串是一个字符一个字节的
+，所以按位取时，夺取了一个字节，导致数据获取失败。
+用wstring进行存取，可以完全避免。
+学到
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/20/62/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/09/20/66/" itemprop="url">
+                  输出中文(66)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-09-20T03:31:58+08:00" content="2014-09-20">
+              2014-09-20
+            </time>
+          </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+           cout.imbue(locale(&quot;&quot;));
+char data[] = &quot;dfwe玩GIS股份&quot;;
+for (size_t i = 0; i &lt; strlen(data); i++)
+{
+    cout &lt;&lt; data[i] &lt;
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/20/66/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>

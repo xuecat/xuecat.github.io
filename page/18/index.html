@@ -347,14 +347,18 @@
       
         
           
-            <p>作者安排了一个基类和派生类的调用方式</p>
-<p>1、基类先封装 destroy函数提供外部调用</p>
-<pre><code>void destroy() const {delete this;}
-</code></pre><p>2、基类析构函数他说要限制为protected，我不懂。<br>我想应该是让外部调用必须使用destroy来销毁对象吧！</p>
- <figure class="highlight c"><figcaption><span>来看下调用和派生++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> UPNumber </div><div class="line">	&#123;</div><div class="line"> <span class="keyword">public</span>:</div><div class="line"> 	UPNumber(arguments);</div><div class="line"> <span class="keyword">protected</span>:</div><div class="line"> 	~UPNumber();</div><div class="line"> </div><div class="line"> 	<span class="comment">/* data */</span></div><div class="line"> &#125;;</div><div class="line"></div><div class="line"> <span class="keyword">class</span> Asset</div><div class="line"> &#123;</div><div class="line"> <span class="keyword">public</span>:</div><div class="line"> 	Asset(arguments);</div><div class="line"> 	~Asset();</div><div class="line"></div><div class="line"> <span class="keyword">private</span>:</div><div class="line"> 	UPNumber* value;</div><div class="line"> </div><div class="line"> 	<span class="comment">/* data */</span></div><div class="line"> &#125;;</div><div class="line"></div><div class="line"> Asset::Asset(arguments)</div><div class="line"> 	: value(<span class="keyword">new</span> UPNumber(arguments)) &#123;</div><div class="line"> 		...</div><div class="line"> 	&#125;</div><div class="line"> Asset::~Asset()</div><div class="line"> &#123;</div><div class="line"> 	value-&gt;destroy();</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
-<p>派生类产生基类数据于头，设置基类数据对象来调用函数。<br>析构使用基类自释放性！</p>
+          作者安排了一个基类和派生类的调用方式
+1、基类先封装 destroy函数提供外部调用
+void destroy() const {delete this;}
+2、基类析构函数他说要限制为protected，我不懂。我想应该是让外部调用必须使用destroy来销毁对象吧！
+ 来看下调用和派生++123
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/26/23/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -465,11 +469,17 @@
       
         
           
-            <p>首先，对WS_EX_LAYERED  /WS_EX_TRANSPARENT(这个前面讲过)<br>对子窗口无效。</p>
-<p>如不设置WS_CHILD就从屏幕坐标开始计算。<br>只要是子窗口就不能设置WS_POPUP</p>
-<p>所以WS_POPUP窗口都具有CLIPDRENW属性（记得貌似还有vscroll似的）。</p>
+          首先，对WS_EX_LAYERED  /WS_EX_TRANSPARENT(这个前面讲过)对子窗口无效。
+如不设置WS_CHILD就从屏幕坐标开始计算。只要是子窗口就不能设置WS_POPUP
+所以WS_POPUP窗口都具有CLIPDRENW属性（记得貌似还有vscroll似的）。
 
           
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/26/22/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -581,7 +591,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/t.png" rel="gallery_civ9lzq8f00a2wwcx7c6kippw"
+                 href="/picture/t.png" rel="gallery_civb37rae009rnscx1fztcjad"
                  itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/t.png" itemprop="contentUrl"/>
               </a>
@@ -596,7 +606,7 @@
       
         
           
-            <pre><code>天下风云出我辈，一入江湖岁月催。
+          天下风云出我辈，一入江湖岁月催。
 
     皇图霸业谈笑中，不胜人生一场醉。
 
@@ -614,12 +624,14 @@
 
     夜雨八方战孤城，平明剑气看刀声。
 
-    侠骨千年寻不见，碧血红叶醉秋风。
+    侠
+          ...
 
-
-            ——已开始以为伟大的是感情，到最后发现强悍的是命运！
-</code></pre>
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/26/20/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -730,16 +742,14 @@
       
         
           
-             <figure class="highlight c"><figcaption><span>封装的基类很好++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">   	<span class="keyword">template</span>&lt;calss BeingCounted&gt;</div><div class="line"></div><div class="line">	<span class="keyword">class</span> Counted &#123;</div><div class="line">		<span class="keyword">public</span>:</div><div class="line">		<span class="keyword">class</span> TooManyObjects&#123;&#125;;</div><div class="line">		<span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">objectcount</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> numObjects;&#125;</div><div class="line">		protect:</div><div class="line">		Counted();</div><div class="line">		Counted(<span class="keyword">const</span> Counted&amp; rhs);</div><div class="line">		~Counted() &#123;--numObjects;&#125;</div><div class="line">		<span class="keyword">private</span>:</div><div class="line">		<span class="keyword">static</span> <span class="keyword">int</span> numObjects;</div><div class="line">		<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">size_t</span> maxobjects;</div><div class="line">		<span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>;</div><div class="line">	&#125;;</div><div class="line"></div><div class="line">	<span class="keyword">template</span>&lt;<span class="keyword">class</span> BeingCounted&gt;</div><div class="line">	Counted&lt;BeingCounted&gt;::Counted()</div><div class="line">	&#123;init();&#125;</div><div class="line"></div><div class="line">	<span class="keyword">template</span>&lt;<span class="keyword">class</span> BeingCounted&gt;</div><div class="line">	Counted&lt;BeingCounted&gt;::Counted(<span class="keyword">const</span> Counted&lt;BeingCounted&gt;&amp;)</div><div class="line">	&#123;init();&#125;</div><div class="line"></div><div class="line">	<span class="keyword">template</span>&lt;<span class="keyword">class</span> BeingCounted&gt;</div><div class="line">	<span class="keyword">void</span> Counted&lt;BeingCOunted&gt;::init()</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span> (numObjects &gt;= maxObjects) <span class="keyword">throw</span> TooManyObjects();</div><div class="line">		++numobjects;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">派生类很好：</div><div class="line"></div><div class="line">	<span class="keyword">class</span> Printer: Private Counted&lt;Printer&gt; &#123;</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">static</span> Printer* <span class="title">MakePrinter</span><span class="params">()</span></span>;</div><div class="line">	<span class="function"><span class="keyword">static</span> Pritner* <span class="title">makePrinter</span><span class="params">(<span class="keyword">const</span> Printer&amp; rhs)</span></span>;</div><div class="line">	~Printer</div><div class="line">	..............</div><div class="line">	..........</div><div class="line"></div><div class="line">	<span class="keyword">using</span> Counted&lt;Printer&gt;::objectCount;</div><div class="line">	<span class="keyword">using</span> Counted&lt;Printer&gt;::TooManyObjects;</div><div class="line"></div><div class="line">	<span class="keyword">private</span>:</div><div class="line">	Printer();</div><div class="line">	Printer(<span class="keyword">const</span> Printer&amp; rhs);</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div></pre></td></tr></table></figure>
-<p>方法一： 它用基类的两个成员，用静态成员，来避免了无法继承问题。（因为就是是私有，静态变量也能继承，毕竟同一块内存区）</p>
-<p>也为后来的TooManyOBjects()和objectCount()函数调用做铺垫。</p>
-<p>方法二：在头文件const只能初始化int size_t等类型</p>
-<p>方法三：昨天一样，生成对象函数和复制函数用static，并返回。</p>
-<p>方法四：私有继承也是继承，只要是继承，派生类就会拥有基类所有对象，只存在访问权限而已。<br>private权限导致派生类无法直接访问。<br>但是，派生类构造/析构函数默认是加入了基类的构造/析构函数的。Printer的调用，必定会导致Counted的调用，init便存在间接访问权限。</p>
-<p>所以Printer可以只管用，计数功能完全基类代替。</p>
-<p>不得不感叹作者写的太好了！</p>
+           封装的基类很好++123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051   	template&lt;calss BeingCounted&gt;	class Co
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/25/21/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -850,14 +860,15 @@
       
         
           
-            <p>今天差点就放弃了，简直作弄人。<br>我使用http协议走去调用我发现的那个百度api。<br>图片获取不到，总是返回302（资源重定向），重定向的资源确实错误的页面，我也不知道为何！</p>
-<p>气人，最后我被逼无路，从http底层找错误。用google浏览器发现我的http头貌似。。<br>于是我复制google浏览器的http头，重写http请求（添加http头重定义）</p>
-<p>发现可行，下载正常！问题解决！</p>
-<p>十分开心！</p>
-<p>附上过程猜测：<br>      我在一次过程猜测中，以为是我的数据问题，以为它传给我的数据存在换行符解析错误。<br>linux换行符是：’\n’<br>mac：相同<br>windows:’\n\t’</p>
-<p>百度不可能犯这错误吧！ 后来发现数据大小不够。唉！居然这么解决了。</p>
+          今天差点就放弃了，简直作弄人。我使用http协议走去调用我发现的那个百度api。图片获取不到，总是返回302（资源重定向），重定向的资源确实错误的页面，我也不知道为何！
+气人，最后我被逼无路，从http底层找错误。用google浏览器发现我的http头貌似。。于是我复制google浏览器的http头
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/25/19/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -968,15 +979,21 @@
       
         
           
-            <p>为了获取线程返回值，必须要手动销毁线程，销毁线程错误的做法：</p>
-<p><img src="/picture/img/de.jpg" alt=""></p>
-<p>应该如此销毁：</p>
-<p><img src="/picture/img/ok.jpg" alt=""></p>
-<p>另外，讲一下c++的new：</p>
-<p>类的静态成员变量， 它不是你new 出来的，你不new 它就已经分配了内存。</p>
-<p>所以，delete无法销毁静态空间。</p>
+          为了获取线程返回值，必须要手动销毁线程，销毁线程错误的做法：
+
+应该如此销毁：
+
+另外，讲一下c++的new：
+类的静态成员变量， 它不是你new 出来的，你不new 它就已经分配了内存。
+所以，delete无法销毁静态空间。
 
           
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/23/18/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1087,10 +1104,15 @@
       
         
           
-            <p>方法一：仅允许一个对象<br>它先把类构造析构函数私化，<br>然后为类写个friend Printer&amp; thePrinter()–——友元函数不是类成员，直接static Printer p; return p;来打到限制的作用。</p>
-<p>感悟：<strong>封装有计数功能的类，最好把类析构构造函数私有化，（这两个函数进行计数值得自加和自减，抛出异常）。  设计一个static的接口来new创建对象，当然希望用auto_ptr来创建。</strong></p>
+          方法一：仅允许一个对象它先把类构造析构函数私化，然后为类写个friend Printer&amp; thePrinter()–——友元函数不是类成员，直接static Printer p; return p;来打到限制的作用。
+感悟：封装有计数功能的类，最好把类析构构造函数私有化，（这两个函数进行计
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/22/17/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1201,10 +1223,14 @@
       
         
           
-            <p>很多人都弄不清楚这CreateMenu与CreatePopupMenu的区别，继而发生很多莫名其妙的菜单行为。虽然极少数情况下，Windows能检测出来是你混淆了这两个函数，并且会在合适的时候把错误的函数调换过来，但我们不能总是指望Windows能够正确的判断出我们想要的操作，所以还是得弄清楚这两个函数到底有什么不同。</p>
-<p>CreateMenu是创建水平菜单，通常是放置在顶级窗口中，同时也是作为顶级菜单的，就像我们经常看到的“文件”，“编辑”等菜单。而CreatePopupMenu则是创建一个竖立的弹出菜单，通常被用来做另一个菜单的子菜单，或者右键菜单的顶级菜单。<br>菜单资源总是以菜单栏的形式出现，然而，当你想从资源中加载一个弹出菜单时，就应该将弹出菜单放到一个空的水平菜单栏中。下面通过这个函数来说明如何在水平菜单中内嵌一个弹出菜单。</p>
-<figure class="highlight c"><figcaption><span>代码测试++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">  </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">UsePopUpMenu</span><span class="params">(HWND hwnd, HINSTANCE hinst, LPCTSTR pszMenu)</span></span></div><div class="line">&#123;</div><div class="line">    HMENU hmenu = LoadMenu(hinst, pszMenu);</div><div class="line">    <span class="keyword">if</span>(hmenu)</div><div class="line">    &#123;</div><div class="line">        HMENU hpopMenu = GetSubMenu(hmenu, <span class="number">0</span>);</div><div class="line">        TrackPopupMenu(hpopMenu, TPM_LEFTALIGN | TPM_TOPALIGN | TPM_RIGHTBUTTON, GET_X_LPARAM(lparam), GET_Y_LPARAM(lparam), <span class="number">0</span>, hwnd, <span class="literal">NULL</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
-          
+          很多人都弄不清楚这CreateMenu与CreatePopupMenu的区别，继而发生很多莫名其妙的菜单行为。虽然极少数情况下，Windows能检测出来是你混淆了这两个函数，并且会在合适的时候把错误的函数调换过来，但我们不能总是指望Windows能够正确的判断出我们想要的操作，所以还是得弄清楚这两个
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/06/14/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1315,9 +1341,15 @@
       
         
           
-            <p> getdc和releasedc必须配对使用。造成内存泄露。</p>
+           getdc和releasedc必须配对使用。造成内存泄露。
 
           
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/04/13/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1428,12 +1460,18 @@
       
         
           
-            <p>IShellDispatch4::ToggleDesktop<br>切换桌面函数。<br>全部最小化当前进程。切回桌面</p>
-<pre><code>#undef **
-</code></pre><p>取消对应宏定义。</p>
-<p>SystemParametersInfo获取修改系统信息</p>
+          IShellDispatch4::ToggleDesktop切换桌面函数。全部最小化当前进程。切回桌面
+#undef **
+取消对应宏定义。
+SystemParametersInfo获取修改系统信息
 
           
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/02/11/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>

@@ -347,11 +347,16 @@
       
         
           
-            <pre><code>dodragdrop 一直出发不了拖拽事件，后面发现是没有初始化ole。
-</code></pre><p>mfc程序调用：afxoleinit。<br><br>但是这个函数只能用于主进程，且程序会自动释放。</p>
-<p>dll的话用：看情况使用CoInitialize和OleInitialize（当然必须自己调用 OleUninitialize、CoUninitialize来释放）<br><br>前者是com环境初始化，后者是前者的更近一步，ole环境初始化。当然剪切板是ole环境下的哟！</p>
+          dodragdrop 一直出发不了拖拽事件，后面发现是没有初始化ole。
+mfc程序调用：afxoleinit。但是这个函数只能用于主进程，且程序会自动释放。
+dll的话用：看情况使用CoInitialize和OleInitialize（当然必须自己调用 OleUninitialize、CoUnin
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/05/165/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -462,7 +467,7 @@
       
         
           
-            <pre><code>int f (int *restrict x, int *restrict y)
+          int f (int *restrict x, int *restrict y)
 {
     ...
     *x = 0;
@@ -471,11 +476,14 @@
 }
 //这个关键字是编译器优化关键字。
 //首先，x和y这两个参数是相同类型的
-//所以执行的时候可能，x，y指向同一个地方，y改变定会改变x
-//所以编译器为了正确，在x，y每次操作都会重新读取一次。
-//restrict为此而生，告诉编译器，这两个相同类型的不指向同一地方，你可以自己优化。所以接下来的操作就会直接读缓存。
-</code></pre>
-          
+//所以执行的时候可能，x，y指向同一个地
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/01/163/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -586,25 +594,16 @@
       
         
           
-            <h2 id="flex属性"><a href="#flex属性" class="headerlink" title="flex属性"></a>flex属性</h2><p>就是说，所有带flex属性的子容器，flex值相加得到一个总数，该容器占父容器的比重就是这个容器flex值除以总flex值</p>
-<p>举个例子，<br>你要实现一排图片，平分父容器的宽度，就可以先设置父容器的flexDirection:’row’<br>然后所有图片设为flex:1</p>
-<p> 要和flexDirection，alignItems,justyContent这些属性配合</p>
-<h2 id="image"><a href="#image" class="headerlink" title="image"></a>image</h2><pre><code>&lt;Image source={require(&apos;./android/app/src/main/res/drawable/ic_launcher.png&apos;)} /&gt;
-&lt;/br&gt; **./** 指的是当前js代码文件的当前路径
+          flex属性就是说，所有带flex属性的子容器，flex值相加得到一个总数，该容器占父容器的比重就是这个容器flex值除以总flex值
+举个例子，你要实现一排图片，平分父容器的宽度，就可以先设置父容器的flexDirection:’row’然后所有图片设为flex:1
+ 要和flexDirectio
+          ...
 
-&lt;Image source={{uri:'http://i1.s.hjfile.cn/entry/201405/0d2b3417-c6fe-48cd-9199-6278fa0e6041.jpg'}}  style={{width:100,height:100}} /&gt;
-</code></pre><h2 id="PropTypes"><a href="#PropTypes" class="headerlink" title="PropTypes"></a>PropTypes</h2><p><a href="http://jamestw.logdown.com/posts/257890-257890-reactjs-prop" target="_blank" rel="external">查看链接学习地址！！！</a></p>
-<p>这个只是为了规范属性用的，比如数字属性用 number:’string’机会出错。</p>
-<h2 id="dexDug"><a href="#dexDug" class="headerlink" title="dexDug"></a>dexDug</h2><p>错误一次编译，它会在修改后继续编译其他。所以有些错误可以删除 app/build 文件，再重新编译就好了</p>
-<h2 id="Bind函数"><a href="#Bind函数" class="headerlink" title="Bind函数"></a>Bind函数</h2><p>情况是这样：</p>
-<p>1、chat要添加文件就要新开一个navigator，chat有个回调函数提供给新开的navigator调用（功能是给chat添加数据）。</p>
-<p>2、回调函数里面必须修改chat的数据所以用了this。</p>
-<p>3、结果调用回调函数报错：this setstate is not a function。</p>
-<p>分析原因是找不到this吧，因为回调函数传了几次，this该搞乱了吧。</p>
-<p>问题解决：extrafun:this.addFileMessage.bind(this)</p>
-<p>传值得时候就绑定this，这样就不会乱了！！！！！！！！</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/02/27/162/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -715,13 +714,16 @@
       
         
           
-            <h1 id="process-platform"><a href="#process-platform" class="headerlink" title="process.platform"></a>process.platform</h1><p>The variable to use would be process.platform</p>
-<p>On Mac the variable returns darwin. On Windows, it returns win32 (even on 64 bit).</p>
-<p>Possible values are: ‘darwin’, ‘freebsd’, ‘linux’, ‘sunos’ or ‘win32’</p>
-<p>I just set this at the top of my jakeFile:</p>
-<p>var isWin = /^win/.test(process.platform);</p>
+          process.platformThe variable to use would be process.platform
+On Mac the variable returns darwin. On Windows, it returns win32 (even on 64 bit).
+Possi
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/02/27/164/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -832,20 +834,19 @@
       
         
           
-            <p><a href="http://www.lcode.org/react-native%E7%96%91%E9%9A%BE%E7%82%B9%E9%97%AE%E9%A2%98%E6%B7%B1%E5%9D%91%E6%9C%80%E5%BC%BA%E6%80%BB%E7%BB%93%E5%B8%96%E4%B8%8D%E6%96%AD%E6%9B%B4%E6%96%B0%E4%B8%AD/" target="_blank" rel="external">大部分的错误，辅助页面</a></p>
-<h2 id="我遇到的错误"><a href="#我遇到的错误" class="headerlink" title="我遇到的错误"></a>我遇到的错误</h2><p>   npm版本不对，升级。</p>
-<p>gredle本地安装，zip包要是all，且放在当前目录。</p>
-<pre><code>distributionBase=GRADLE_USER_HOME
+          大部分的错误，辅助页面
+我遇到的错误   npm版本不对，升级。
+gredle本地安装，zip包要是all，且放在当前目录。
+distributionBase=GRADLE_USER_HOME
 distributionPath=wrapper/dists
-zipStoreBase=GRADLE_USER_HOME
-zipStorePath=wrapper/dists
-#distributionUrl=https\://services.gradle.org/distributions/gradle-2.4-all.zip
-distributionUrl=gradle-2.4-all.zip
-</code></pre><p>别用git bash页面，最好用cmd，别用户权限</p>
-<p>先开虚拟机，再start服务器。</p>
-<p>一直红色，就删除配置文件，再重启。</p>
+zipStoreBase=GRADLE_US
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/02/23/161/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -956,12 +957,16 @@ distributionUrl=gradle-2.4-all.zip
       
         
           
-            <p>主流有：hex cef nw（node-webkit）Electron</p>
-<p>Atom、Visual Studio Code用的是Electron<br></p>
-<p>倘若你的桌面版应用没有跟底层挂钩，也就是没有使用到消息推送、版本升级、打印功能之类的东西，那么没关系。但是一旦使用到这些功能，你就彻底调到坑里了，nw有个致命的缺陷在于所有的非javascript编写的模块都需要重新用nw-gyp重新编译一下，这个编译的过程会出现各种各样的问题。而Electron几乎可以使用所有的node模块，只需要node-gyp编译的即可。主要深坑就在这！！！<br></p>
-<p>有道自己有个项目叫 heX 。这是其官网的介绍：<br>heX 项目于 2012 年启动，基于开源项目 CEF，它内部整合了开源项目 Chromium 及 Node.JS，将两者的 V8 引擎和消息循环合并，从而达到了在 Chromium 所展现的 Web 页面内可以直接使用 Node.JS 原生和及第三方扩展的 API 以及 Node.JS 最大的特色——异步回调与事件循环。</p>
+          主流有：hex cef nw（node-webkit）Electron
+Atom、Visual Studio Code用的是Electron
+倘若你的桌面版应用没有跟底层挂钩，也就是没有使用到消息推送、版本升级、打印功能之类的东西，那么没关系。但是一旦使用到这些功能，你就彻底调到坑里了，nw有个致命
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/02/18/160/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1072,11 +1077,17 @@ distributionUrl=gradle-2.4-all.zip
       
         
           
-            <blockquote>
-<p>Artistic Style:<br><br><br>D:\AStyle_2.05.1_windows\AStyle\bin\AStyle.exe<br><br>–options=D:\AStyle_2.05.1_windows\AStyle\bin\astylerc <em>.h </em>.cpp <em>.hpp </em>.c<br><br>$(ItemDir)<br></p>
-</blockquote>
+          
+Artistic Style:D:\AStyle_2.05.1_windows\AStyle\bin\AStyle.exe–options=D:\AStyle_2.05.1_windows\AStyle\bin\astylerc .h .cpp .hpp .c$(ItemDir)
+
 
           
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/01/28/159/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1187,132 +1198,14 @@ distributionUrl=gradle-2.4-all.zip
       
         
           
-            <figure class="highlight"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#define MAKEWORD(a, b)      ((WORD)(((BYTE)((DWORD_PTR)(a) &amp; 0xff)) | ((WORD)((BYTE)((DWORD_PTR)(b) &amp; 0xff))) &lt;&lt; 8))</div><div class="line">#define MAKELONG(a, b)      ((LONG)(((WORD)((DWORD_PTR)(a) &amp; 0xffff)) | ((DWORD)((WORD)((DWORD_PTR)(b) &amp; 0xffff))) &lt;&lt; 16))</div><div class="line">#define LOWORD(l)           ((WORD)((DWORD_PTR)(l) &amp; 0xffff))</div><div class="line">#define HIWORD(l)           ((WORD)((DWORD_PTR)(l) &gt;&gt; 16))</div><div class="line">#define LOBYTE(w)           ((BYTE)((DWORD_PTR)(w) &amp; 0xff))</div><div class="line">#define HIBYTE(w)           ((BYTE)((DWORD_PTR)(w) &gt;&gt; 8))</div><div class="line"></div></pre></td></tr></table></figure>
-<p>/<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>*</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>/</p>
-<p>从上面加粗部分可以看出 LOWORD 和 HIWORD 返回值是WORD型，即unsigned short，因此不能表示负数，在使用的时候可能就要注意了。<br><br>对于一般情况，用它们是没有问题的，但有一个特例，就是利用它们取当前鼠标的坐标时，因为鼠标有时候会移出窗口，因此我们得到的值本应该是负数，但是利用这两个宏得出的值始终是正值。我们可以用以下的宏来代替。</p>
- <figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> GET_X_LPARAM(lp)                        ((int)(short)LOWORD(lp))</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> GET_Y_LPARAM(lp)                        ((int)(short)HIWORD(lp))</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span>       DWORD;</div><div class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">char</span>       BYTE;</div><div class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">short</span>      WORD;</div><div class="line"></div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
+          ++12345678#define MAKEWORD(a, b)      ((WORD)(((BYTE)((DWORD_PTR)(a) &amp; 0xff)) | ((WORD)((BYTE)((DWORD_PTR)(b) &amp; 0xff))) &lt;&lt; 8))#define MA
+          ...
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/14/155/" itemprop="url">
-                  python 等问题解决(155)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-01-14T03:33:58+08:00" content="2016-01-14">
-              2016-01-14
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/配置/" itemprop="url" rel="index">
-                    <span itemprop="name">配置</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>python安装某些模块的时候，老是出错（当然错误是Unicode和ascii字符的问题）</p>
-<p><strong>1、安装模块字符错误</strong><br><br>在python的Lib\site-packages文件夹下新建一个sitecustomize.py，内容为：</p>
-<pre><code> # encoding=utf8  
-import sys  
-
-reload(sys)  
-sys.setdefaultencoding(&apos;utf8&apos;)
-</code></pre><p>此时重启python解释器，可以解决了。</p>
-<p><strong>pip的国内源</strong><br><br>这里，我只说下指令，其它百度吧。感觉这个华中科大的源最快；<br><br>pip install ** -i <a href="http://pypi.mirrors.ustc.edu.cn/simple" target="_blank" rel="external">http://pypi.mirrors.ustc.edu.cn/simple</a></p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/01/25/157/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1423,38 +1316,140 @@ sys.setdefaultencoding(&apos;utf8&apos;)
       
         
           
-            <p>  自从在153文章的认识后，自己要好好熟悉下那个工具<br></p>
-<h2 id="调试篇"><a href="#调试篇" class="headerlink" title="调试篇"></a>调试篇</h2><blockquote>
-<p><strong>1、运行中，就直接调试改变</strong>（以前一直用的是悬浮时看值，都不敢改值）<br><img src="/picture/img/1541.png" alt=""></p>
-<p><strong>2、黄色箭头的使用</strong>（首先可以上拉和下拉）<br><strong>上拉</strong>：假如我有一句看漏了想在看一遍，直接上拉，拉回到某个地方，再继续F10，编译器又会继续走的；<br><strong>下拉</strong>：假如我中间有一句不想执行，想直接跳过，下拉超过那一句便好！！！<br><img src="/picture/img/1542.png" alt=""></p>
-<p><strong>3、编辑后继续执行</strong><br>这个的话，vs2008我试了下是会重新编译的；vs2013也分情况，但是这个功能依旧要自己使用。</p>
-<p><strong>4、监听窗口伪变量；如：当前error的值</strong>。一般窗口运行错误的时候，我以前的做法是用getlasterror来赋值。然而监视窗口却有个值可以直接获取到的<br><img src="/picture/img/1543.png" alt=""></p>
-<p>最后提下：<br><br>$tid—–当前线程的线程ID<br><br>$pid——进程ID<br><br>$cmdline———-启动程序的命令行字符串<br><br>$user———-正在运行程序的账户信息<br><br>$registername—–显示寄存器registername 的内容<br><br>不管怎么样，关于最后一个错误的伪变量是非常有用的：<br><br><br><br>$err——–显示最后一个错误的错误码<br><br>$err,hr—显示最后一个错误的错误信息<br><br><br><br><strong>5、多线程调试</strong>，这个暂时不说，我那点贫瘠的多线程调试也写不多，希望以后能补充上<br><a href="http://blog.jobbole.com/45447/" target="_blank" rel="external">http://blog.jobbole.com/45447/</a></p>
-<p><strong>6、条件断点</strong> 我暂时也就只会一些简单的条件语法<br><img src="/picture/img/1544.png" alt=""><br><br><br></p>
-<p><strong>7、使用命令窗口来测试函数有效性</strong><br><img src="/picture/img/1545.jpg" alt=""></p>
-<p><strong>比如，有个time_t的变量（它当然是个int），要看它的时间格式，就可以用这个来</strong><br><img src="/picture/img/1546.jpg" alt=""></p>
-<p><strong>8、自定义中断，这个我感觉还用不上，跳过了</strong></p>
-<p><strong>9、远程调试</strong><br>先去IDE的 Common7\IDE\Remote Debugger，找到合适的64位或32位工具。直接复制到远程机器上；远程机器运行后设置允许任何人连接。如此，本地通过附加进程的方式可以远程调试。</p>
-<p><strong>10、调试时数据信息格式化</strong><br><br>想要改变显示类型可在变量前加以下前缀：<br></p>
-<p>by –unsigned char (又称为unsigned byte)<br><br>wo – unsigned shot(又称为 unsigned word)<br><br>dw – unsigned long（又称为 unsigned double word）<br><br>要改变显示的进制数在变量前加下列前缀：<br></p>
-<p>d 或者 i– 有符号十进制数<br><br>u – 无符号十进制数<br><br>o -  无符号八进制数<br><br>x – 小写十六进制数<br><br>X – 大写十六进制数<br><br><img src="/picture/img/154a.png" alt=""></p>
-<blockquote>
-<p>字符串的格式化<br><br>mb 或者 m – 十六进制显示的16字节数据，后跟16个ASCII 字符<br><br>mw – 8 words<br><br>md – 4 double words<br><br>mq -  2 quad-words<br><br>ma – 64个ASCII字符<br><br>mu – 2字节的UNICODE字符<br><br><img src="/picture/img/154b.png" alt=""></p>
-</blockquote>
-</blockquote>
-<h2 id="有趣的快捷键"><a href="#有趣的快捷键" class="headerlink" title="有趣的快捷键"></a>有趣的快捷键</h2><blockquote>
-<p><strong>1、同名跳转</strong><br>vs对双击的变量和函数等，会高亮当前文档的所有；以前我一般用 ctrl + f来一个一个跳转翻看。今天发现可以ctrl +　shift + 上箭头/下箭头来跳转翻看。<br><img src="/picture/img/1547.jpg" alt=""><br><br><br><br><br><strong>2、自动生成类</strong> 当然，你写个clas +名 vs会自动给你生成类。我说的是没有声明的情况下。<br>当写到某句时，我想新建一个类，又不想跳过去一个一个新建说明；<br>直接 ctrl+shirft+c就新建好了<br><img src="/picture/img/1548.jpg" alt=""></p>
-</blockquote>
-<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><blockquote>
-<blockquote>
-<p>1、有一段时间我的vs全是16进制的，解决方法：随便弄个调试窗口出来，右键调试窗口，把选中的16进制显示 取消掉<br><br><br></p>
-<p>2、实时监控的时候，可以把某个变量某个值 的监控钉在编辑框上<br><img src="/picture/img/1549.png" alt=""><br><br><br></p>
-<p>3、查看某个函数被哪些函数调用过，选中，右键.查看调用层次结构（view call Hierarchy）</p>
-<p>::OutputDebugString(_T(“debug information!”));</p>
-</blockquote>
-</blockquote>
+            自从在153文章的认识后，自己要好好熟悉下那个工具
+调试篇
+1、运行中，就直接调试改变（以前一直用的是悬浮时看值，都不敢改值）
+2、黄色箭头的使用（首先可以上拉和下拉）上拉：假如我有一句看漏了想在看一遍，直接上拉，拉回到某个地方，再继续F10，编译器又会继续走的；下拉：假如我中间有一句不想执行，
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/01/14/154/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/01/14/155/" itemprop="url">
+                  python 等问题解决(155)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-01-14T03:33:58+08:00" content="2016-01-14">
+              2016-01-14
+            </time>
+          </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/配置/" itemprop="url" rel="index">
+                    <span itemprop="name">配置</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          python安装某些模块的时候，老是出错（当然错误是Unicode和ascii字符的问题）
+1、安装模块字符错误在python的Lib\site-packages文件夹下新建一个sitecustomize.py，内容为：
+ # encoding=utf8  
+import sys  
+
+reload
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/01/14/155/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>

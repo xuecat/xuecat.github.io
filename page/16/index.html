@@ -347,26 +347,18 @@
       
         
           
-            <p>先看取非符：</p>
-<pre><code>a=0=(00000000);  ~a=(11111111)=-1
+          先看取非符：
+a=0=(00000000);  ~a=(11111111)=-1
 a=1=(00000001);  ~a=(11111110)=-2
 a=2=(00000010);  ~a=(11111101)=-3
 而计算机里是用补码来存储的，因此111...11101是补码，对应的有符号数是-3
-运算也是补码。a&amp;~a = 0
-</code></pre><p>再看内存对齐：</p>
-<pre><code>首先只会当下一阶内存大于本阶内存时，才会修改偏移量来对齐。对齐的倍数是4、8
-:int a;          //4字节
-short int b;  //2字节
-char c;       //1字节
-(1字节padding, 因为d要从整4字节开始，所以要插入1字节)
-float d;       //4字节
-(4字节padding, 因为e要从整8字节开始，所以要插入4字节)
-double e;   //8字节
-long double f; //12字节
-(4字节padding, 因为整个结构的长度要能被8整除，这个8是按结构中最长对齐的字段e决定的
-，所以要加4字节补齐) 
-</code></pre>
-          
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/09/42/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -477,10 +469,14 @@ long double f; //12字节
       
         
           
-            <figure class="highlight c"><figcaption><span>先看代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">	<span class="keyword">class</span> Animal &#123;</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">		<span class="keyword">int</span> a;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">		Animal&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> Animal&amp; rhs) &#123;</div><div class="line">			<span class="keyword">this</span>-&gt;a = rhs.a;</div><div class="line">			<span class="keyword">return</span> *<span class="keyword">this</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;;</div><div class="line">	<span class="keyword">class</span> Lizard : <span class="keyword">public</span> Animal &#123;</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">		<span class="keyword">int</span> d;</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">		Lizard&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> Lizard&amp; rhs) &#123;</div><div class="line">			<span class="keyword">this</span>-&gt;d = rhs.d;</div><div class="line">			<span class="keyword">return</span> *<span class="keyword">this</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;;</div><div class="line">	<span class="keyword">class</span> Chicken : <span class="keyword">public</span> Animal &#123;</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">		<span class="built_in">string</span> str;</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">		Chicken&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> Chicken&amp; rhs) &#123;</div><div class="line">			<span class="keyword">this</span>-&gt;str = rhs.str;</div><div class="line">			<span class="keyword">return</span> *<span class="keyword">this</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;;</div><div class="line"></div><div class="line">	Lizard liz1;</div><div class="line">	Lizard liz2;</div><div class="line">	Animal* panimal1 = &amp;liz1;</div><div class="line">	Animal* panimal2 = &amp;liz2;</div><div class="line"></div><div class="line">	*panimal1 = *panimal2;</div><div class="line"></div><div class="line"><span class="comment">//问题1：执行最后一个函数时，必定会执行Animal的赋值函数。 导致情况：liz1的Animal部分被修改，</span></div><div class="line">liz1的Animal内容变得和liz2的Animal内容一样。</div><div class="line"></div><div class="line"><span class="comment">//采取行动：虚化赋值函数(注意：成员函数是基类)</span></div><div class="line"></div><div class="line">	<span class="keyword">virtual</span> Animal&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> Animal&amp; rhs);</div><div class="line">	<span class="keyword">virtual</span> Lizard&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> Animal&amp; rhs);</div><div class="line">	<span class="keyword">virtual</span> Chicken&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> Animal&amp; rhs);</div><div class="line"></div><div class="line"><span class="comment">//问题：虽然它现在会动态改变赋值对象函数了，但存在”异型赋值“（类没有的成员进行赋值）</span></div><div class="line"></div><div class="line"><span class="comment">//采取行动：重载函数，动态强制转换</span></div><div class="line"></div><div class="line">	例如Lizard：</div><div class="line">		Lizard&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> Animal&amp; rhs);<span class="comment">//用来转换本地的</span></div><div class="line">		<span class="keyword">virtual</span> Lizard&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> Animal&amp; rhs);<span class="comment">//用来转换继承关系的</span></div><div class="line">		&#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">operator</span>=(<span class="keyword">dynamic_cast</span>&lt;<span class="keyword">const</span> Lizard&amp;&gt;(rhs));</div><div class="line">			<span class="comment">//当被转换的类型不是Lizard的时候，就会抛出异常错误。</span></div><div class="line">		&#125;</div></pre></td></tr></table></figure>
-<p>后面的纯虚化基类，我看不太懂；</p>
+          先看代码：++1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556	class Animal &#123;	public:		int a;		pu
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/06/41/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -591,18 +587,19 @@ long double f; //12字节
       
         
           
-            <p>第31条了，这一跳一下就解决了我最近的疑惑！</p>
-<p>先看游戏规则:</p>
-<p>1、有的类型，宇宙飞船、太空站、小行星、</p>
-<p>2、他们互相碰撞，任意两两进行碰撞。</p>
-<p>3、具有主被动性！且不同的主被动，不同的类型进行碰撞，产生的结果也不一样。</p>
-<p>分析，需要运行时动态识别，所包含的对象，所以设计c++RTTI计数。（过程代码不列出了，直接走封装）</p>
-<figure class="highlight c"><figcaption><span>看代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line">   <span class="keyword">class</span> GameObject;</div><div class="line"><span class="keyword">class</span> SpaceShip : <span class="keyword">public</span> GameObject &#123;&#125;;</div><div class="line"><span class="keyword">class</span> SpaceStation : <span class="keyword">public</span> GameObject &#123;&#125;;</div><div class="line"><span class="keyword">class</span> Asteroid : <span class="keyword">public</span> GameObject &#123;&#125;;</div><div class="line"><span class="keyword">class</span> GameObject</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">collide</span><span class="params">(GameObject&amp; otherobject)</span> </span>= <span class="number">0</span>;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">hitSpaceShip</span><span class="params">(GameObject&amp; otherobject)</span> </span>= <span class="number">0</span>;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">hitSpaceStation</span><span class="params">(GameObject&amp; otherobject)</span> </span>= <span class="number">0</span>;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">hitAsteroid</span><span class="params">(GameObject&amp; otherobject)</span> </span>= <span class="number">0</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">class</span> SpaceShip : <span class="keyword">public</span> GameObject &#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(SpaceShip::*HitFunctionPtr)</span><span class="params">(GameObject&amp;)</span></span>;</div><div class="line">	<span class="keyword">typedef</span> <span class="built_in">map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, HitFunctionPtr&gt; HitMap;</div><div class="line"></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">static</span> HitFunctionPtr <span class="title">lookup</span><span class="params">(<span class="keyword">const</span> GameObject&amp; whats)</span></span>;</div><div class="line">	<span class="function"><span class="keyword">static</span> HitMap <span class="title">initializeCollisionMap</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">collide</span><span class="params">(GameObject&amp; otherobject)</span> </span>&#123;</div><div class="line">		HitFunctionPtr hfp = lookup(otherobject);</div><div class="line"></div><div class="line">		<span class="keyword">if</span> (hfp) &#123;</div><div class="line">			(<span class="keyword">this</span>-&gt;*hfp)(otherobject);</div><div class="line">		&#125; <span class="keyword">else</span> <span class="comment">/*抛出错误*/</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">hitSpaceShip</span><span class="params">(GameObject&amp; otherobject)</span> </span>&#123;</div><div class="line">		SpaceShip&amp; other = <span class="keyword">dynamic_cast</span>&lt;SpaceShip&amp;&gt;(otherobject);</div><div class="line">		<span class="comment">//处理撞击</span></div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">hitSpaceStation</span><span class="params">(GameObject&amp; otherobject)</span> </span>&#123;</div><div class="line">		SpaceStation&amp; other = <span class="keyword">dynamic_cast</span>&lt;SpaceStation&amp;&gt;(otherobject);</div><div class="line">		<span class="comment">//处理撞击</span></div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">hitAsteroid</span><span class="params">(GameObject&amp; otherobject)</span> </span>&#123;</div><div class="line">		Asteroid&amp; other = <span class="keyword">dynamic_cast</span>&lt;Asteroid&amp;&gt;(otherobject);</div><div class="line">		<span class="comment">//处理撞击</span></div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line">SpaceShip::HitMap</div><div class="line">	SpaceShip::initializeCollisionMap() &#123;</div><div class="line">		HitMap* phm = <span class="keyword">new</span> HitMap;</div><div class="line">		(*phm)[<span class="string">"SpaceShip"</span>] = &amp;hitSpaceShip;</div><div class="line">		(*phm)[<span class="string">"SpaceStation"</span>] = &amp;hitSpaceStation;</div><div class="line">		(*phm)[<span class="string">"Asteroid"</span>] = &amp;hitAsteroid;</div><div class="line">&#125;</div><div class="line">SpaceShip::HitFunctionPtr</div><div class="line">	SpaceShip::lookup(<span class="keyword">const</span> GameObject&amp; whats) &#123;</div><div class="line">		<span class="keyword">static</span> HitMap collisionMap = initializeCollisionMap();</div><div class="line">		HitMap::iterator it = </div><div class="line">			collisionMap.find(<span class="keyword">typeid</span>(whats).name());</div><div class="line">		<span class="keyword">if</span> (it == collisionMap.end()) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"></div><div class="line">		<span class="keyword">return</span> (*it).second;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//其它类的封装都基本一样，只需要处理撞击函数</span></div><div class="line"><span class="comment">//便可以了，下面是场景类，进行调用</span></div><div class="line"><span class="keyword">class</span> Client &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">leftcollide</span><span class="params">(GameObject&amp; ot, GameObject&amp; or)</span> </span>&#123;</div><div class="line">		ot.collide(or);</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">rightcollide</span><span class="params">(GameObject&amp; ot, GameObject&amp; or)</span> </span>&#123;</div><div class="line">		leftcollide(or, ot);</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>作者对函数指针的使用，对c++的rtti技术体现的</p>
-<p>最后要提下的是，作者在后面添加了一个注册函数指针的接口。我感觉他写的并不是很好。</p>
-<p>如果是我的话，我重写一个类让他继承这些类，重写initializeCollisionMap函数不就好了吗？</p>
+          第31条了，这一跳一下就解决了我最近的疑惑！
+先看游戏规则:
+1、有的类型，宇宙飞船、太空站、小行星、
+2、他们互相碰撞，任意两两进行碰撞。
+3、具有主被动性！且不同的主被动，不同的类型进行碰撞，产生的结果也不一样。
+分析，需要运行时动态识别，所包含的对象，所以设计c++RTTI计数。（过程代码不列
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/05/40/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -713,11 +710,16 @@ long double f; //12字节
       
         
           
-            <p>string a = typeid(dynamic_cast<novebook*>(this)).name();</novebook*></p>
-<p>发现dynamic_cast确实能把父子类的类型做转换，但是<br>对于虚函数，还是无法，应该是内存覆盖了就无法修改了。</p>
-<p>只有<br>int selfprice = static_cast<novebook>(*this).GetPrice();<br>才能转换成临时变量，调用基类虚函数。</novebook></p>
+          string a = typeid(dynamic_cast(this)).name();
+发现dynamic_cast确实能把父子类的类型做转换，但是对于虚函数，还是无法，应该是内存覆盖了就无法修改了。
+只有int selfprice = static_cast(*this).GetPrice()
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/05/39/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -828,11 +830,17 @@ long double f; //12字节
       
         
           
-            <p>more effective c++作者在封装全局函数时，对当前有效的所有全局函数都使用了“匿名空间”</p>
-<p>函数的定义和声明都要在匿名空间才能被识别。</p>
-<p>多个namespace，是没问题的，会在一个匿名空间。</p>
+          more effective c++作者在封装全局函数时，对当前有效的所有全局函数都使用了“匿名空间”
+函数的定义和声明都要在匿名空间才能被识别。
+多个namespace，是没问题的，会在一个匿名空间。
 
           
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/05/38/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -943,124 +951,16 @@ long double f; //12字节
       
         
           
-            <p>无论是类还是结构体，对于数据对其都遵循按照最高字节数，进行对齐。</p>
-<p>注意一点就是，当无数据时候是占一个字节，只有一个char时，也只占一个字节</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/03/33/" itemprop="url">
-                  指针函数与函数指针(33)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-03T03:31:58+08:00" content="2014-09-03">
-              2014-09-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
+          无论是类还是结构体，对于数据对其都遵循按照最高字节数，进行对齐。
+注意一点就是，当无数据时候是占一个字节，只有一个char时，也只占一个字节
 
           
 
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight c"><figcaption><span>先看一段代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">	<span class="function"><span class="keyword">typedef</span> <span class="title">int</span><span class="params">(*outhead)</span><span class="params">(<span class="keyword">int</span> a)</span></span>;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">a</span><span class="params">(<span class="keyword">int</span> d)</span> </span>&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"this is A"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; d &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		<span class="keyword">return</span> d;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span>* <span class="title">cou</span><span class="params">(<span class="keyword">int</span>* a, outhead d)</span> </span>&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; d(*a);</div><div class="line">		<span class="keyword">return</span> a;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span> </span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">int</span> aa = <span class="number">2</span>;</div><div class="line">		cou(&amp;aa, a);</div><div class="line">		system(<span class="string">"pause"</span>);</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line"><span class="comment">//输出 2\n this is a\n 2\n</span></div></pre></td></tr></table></figure>
-<p>分析：<br>先定义outthead函数指针为int的别名。 (只对静态和全局有效）)<br>我可以规定一种类型封装很多个全局函数，用一个指针函数，参数是函数指针，然后调用就好了。</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/04/31/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1171,13 +1071,133 @@ long double f; //12字节
       
         
           
-            <p>作者使用结构体完成这一功能。为使用字符串添加引用计数。</p>
-<figure class="highlight c"><figcaption><span>看代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Stringg &#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line"><span class="comment">//作者声明了一个结构体，来完成操作</span></div><div class="line"> 		 <span class="keyword">struct</span>  StringValue &#123;</div><div class="line">        	<span class="keyword">int</span> refCount;</div><div class="line">        	<span class="keyword">char</span>* data;</div><div class="line"></div><div class="line">        StringValue(<span class="keyword">const</span> <span class="keyword">char</span> * initValue);</div><div class="line">        ~StringValue();</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">String::StringValue::StringValue(<span class="keyword">const</span> <span class="keyword">char</span>* initValue)</div><div class="line">: refCont(<span class="number">1</span>)</div><div class="line">&#123;</div><div class="line">      data = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="built_in">strlen</span>(initValue) + <span class="number">1</span>];</div><div class="line">      <span class="built_in">strcpy</span>(data, initValue);</div><div class="line">&#125;</div><div class="line"></div><div class="line">String::StringVlue::~StrinValue()</div><div class="line">&#123;</div><div class="line">     <span class="keyword">delete</span> []data;</div><div class="line">&#125;</div><div class="line"></div><div class="line">String::String(<span class="keyword">const</span> <span class="keyword">char</span>* initValue)</div><div class="line"> 	: value(<span class="keyword">new</span> StringValue(initValue))</div><div class="line">&#123;\\它这里就创建对数据的跟踪&#125;</div><div class="line"></div><div class="line"><span class="comment">//对于赋值和复制函数，就先判断是否自己，</span></div><div class="line"><span class="comment">//是否--value-&gt;refCount==0;delete.++refcount.</span></div><div class="line"></div><div class="line">Stringg::~Stringg()</div><div class="line">&#123;<span class="keyword">if</span>(--value-&gt;refCount == <span class="number">0</span> ) <span class="keyword">delete</span> value;&#125;</div></pre></td></tr></table></figure>
-<p>最后：混蛋作者，最后还是封装了一个智能基类。<br>详细见199  </p>
-<p>分析：String需要StringValue模块来专门服务，相应功能String不管，只是知道初始化时构造它就好。然后String需要StringValue的一些结果，所以设计智能指针模块来访问数据，当然也可以修改数据。</p>
-<p>如此关系，可以记录下。</p>
+          作者使用结构体完成这一功能。为使用字符串添加引用计数。
+看代码：++123456789101112131415161718192021222324252627282930313233class Stringg &#123;private://作者声明了一个结构体，来完成操作 		 struct  S
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/03/36/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/09/03/33/" itemprop="url">
+                  指针函数与函数指针(33)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-09-03T03:31:58+08:00" content="2014-09-03">
+              2014-09-03
+            </time>
+          </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          先看一段代码：++123456789101112131415161718192021	typedef int(*outhead)(int a);		int a(int d) &#123;		cout &lt;&lt; "this is A" &lt;&lt; endl;		cout &lt;&lt;
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/03/33/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1288,11 +1308,14 @@ long double f; //12字节
       
         
           
-            <figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Base</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">"Enter Base::func()\n"</span>); &#125;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">virtual_func</span><span class="params">()</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">"Enter Base::virtual_func()\n"</span>); &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">class</span> Derived : <span class="keyword">public</span> Base</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">"Enter Derived::func()\n"</span>); &#125;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">virtual_func</span><span class="params">()</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">"Enter Derived::virtual_func()\n"</span>); &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(Base::*p_base_func)</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></div><div class="line">&#123; </div><div class="line">	Derived d;</div><div class="line">	Base b;</div><div class="line">	Base *pb = &amp;d;</div><div class="line"></div><div class="line">	p_base_func pbf = &amp;Base::func;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"-- Call via pointer to normal function of base\n"</span>);</div><div class="line">	(pb-&gt;*pbf)();</div><div class="line">	(d.*pbf)();</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="comment">//cout &lt;&lt; (pb-&gt;*pbf) &lt;&lt; endl;</span></div><div class="line"></div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	pbf = &amp;Base::virtual_func;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"-- Call via pointer to virtual function of base\n"</span>);</div><div class="line">	(pb-&gt;*pbf)();</div><div class="line">	(d.*pbf)();</div><div class="line">	<span class="comment">//cout &lt;&lt; (pb-&gt;*pbf) &lt;&lt; endl;</span></div><div class="line"></div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p> 注释部分会发生编译器内部错误。我也不知道为什么？</p>
-<p>看代码，为成员函数添加一个引用（支持虚函数）。<br>然后利用对象调用函数。<br>貌似，只能利用对象才能成功。</p>
+          ++123456789101112131415161718192021222324252627282930313233343536373839class Base&#123;public:	void func() &#123; printf("Enter Base::func()\n"); &#12
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/03/32/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1340,8 +1363,8 @@ long double f; //12字节
             
               
                 
-                <a class="post-title-link" href="/2014/09/02/34/" itemprop="url">
-                  常量区进阶(34)
+                <a class="post-title-link" href="/2014/09/02/35/" itemprop="url">
+                  more effective c++智能指针继承传递(35)
                 </a>
               
             
@@ -1368,8 +1391,8 @@ long double f; //12字节
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
+                  <a href="/categories/书籍/" itemprop="url" rel="index">
+                    <span itemprop="name">书籍</span>
                   </a>
                 </span>
 
@@ -1403,11 +1426,14 @@ long double f; //12字节
       
         
           
-            <figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">char</span> *<span class="title">strA</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">   	<span class="keyword">char</span> str[]=<span class="string">"hello world"</span>;</div><div class="line">   	<span class="keyword">return</span> str;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">char</span> *<span class="title">strA</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">   	<span class="keyword">char</span> *str=<span class="string">"hello world"</span>;</div><div class="line">   	<span class="keyword">return</span> str;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>首先，指针只有四个字节，无法保持数据，所以定义后会在常量区开辟空间赋值。<br>所以return str返回的是常量区空间（在程序结束后才会被释放）</p>
-<p>这也解释了第一个为什么返回乱码了。</p>
-<figure class="highlight c"><figcaption><span>然后继续再来看这一句：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span>* <span class="title">strr</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> a = <span class="number">3</span>;</div><div class="line">	<span class="keyword">int</span> *d = &amp;a;</div><div class="line">	<span class="keyword">return</span> d;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></div><div class="line">&#123; </div><div class="line">	<span class="keyword">int</span>* d =  strr();</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; *d &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">int</span>* q1 = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">1</span>);</div><div class="line">	<span class="keyword">int</span>* q2 = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">2</span>);</div><div class="line">	<span class="keyword">int</span>* q3 = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">3</span>);</div><div class="line">	<span class="keyword">int</span>* q4 = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">4</span>);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; *d;</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          
+          先看示例：++123456789101112131415161718192021222324class MusicProduct;class Cassette : public MusicProduct;class CD : public MusicProduct;void DisplayAndPl
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/02/35/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>

@@ -347,18 +347,18 @@
       
         
           
-            <p>注意：USES_CONVERSION宏开头</p>
-<p>之前自己写了4个CHAR与TCHAR的编码函数，后来发现ms早就提供了类似的方法：CA2T CT2A……</p>
-<p>但是有同事说，这两个函数不安全，有隐患，没有在意</p>
-<p>但是真的用的时候，的确发现它们有些注意事项，简单来说，其实就是作用域的问题</p>
-<p>Fun(CA2T(szSrc));</p>
-<p>可以，Fun函数用转换后的TCHAR，没问题，因为没有出Fun()这个括号的作用域</p>
-<p>tstring strDes = CA2T(szSrc)；</p>
-<p>可以，因为返回值立刻赋给了strDes，strDes有自己的存储空间，CA2T的数据作用域就在这一行，出了就不要了</p>
-<p>TCHAR* szDes = CA2T(szSrc);</p>
-<p>失败，这个szDes指向一个已经释放的作用域的值，下一行在用szDes就危险了，没有分配</p>
+          注意：USES_CONVERSION宏开头
+之前自己写了4个CHAR与TCHAR的编码函数，后来发现ms早就提供了类似的方法：CA2T CT2A……
+但是有同事说，这两个函数不安全，有隐患，没有在意
+但是真的用的时候，的确发现它们有些注意事项，简单来说，其实就是作用域的问题
+Fun(CA2T(szS
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/06/27/CT2A-CA2T/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -469,11 +469,15 @@
       
         
           
-            <p>msdn中使用字符串转数字、数字转字符串：_strtoui64, _wcstoui64,<br> _strtoui64_l, _wcstoui64_l, _itoa, _i64toa, _ui64toa,<br>_itow, _i64tow, _ui64tow</p>
-<p>msdn当中有这么一句：Base of value; which must be in the range2–36和<br>   Number base to use.</p>
-<p>调试发现指的是进制。十进制、二进制等（最多2-36）</p>
+          msdn中使用字符串转数字、数字转字符串：_strtoui64, _wcstoui64, _strtoui64_l, _wcstoui64_l, _itoa, _i64toa, _ui64toa,_itow, _i64tow, _ui64tow
+msdn当中有这么一句：Base of value; 
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/06/26/zifuzhuanshuzi/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -584,127 +588,14 @@
       
         
           
-            <p>今天在使用if语句时，发现可以如此简写：(以前的无法编码，气死)<br> int demo = 1;<br> bool/int foo() (函数必须要是bool或者整形，只要不是void就好);<br> if (demo) {foo();} else{foo();}     改写成-&gt;   demo &amp;&amp; foo();  demo || foo();</p>
+          今天在使用if语句时，发现可以如此简写：(以前的无法编码，气死) int demo = 1; bool/int foo() (函数必须要是bool或者整形，只要不是void就好); if (demo) {foo();} else{foo();}     改写成-&gt;   demo &amp;&a
+          ...
 
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/06/25/24/" itemprop="url">
-                  消息自定义（24）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-06-25T03:31:58+08:00" content="2014-06-25">
-              2014-06-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Windows/" itemprop="url" rel="index">
-                    <span itemprop="name">Windows</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>严格要求：</p>
-<pre><code>afx_msg LRESULT DisplayResult(WPARAM wParam,LPARAM lParam);
-ON_MESSAGE(WM_RESULT,CDemo4View::DisplayResult)
-return 0;
-</code></pre><p>SetWindowPos会强制产生重绘，容易闪图。</p>
-<p>WM_ERASEBKGND以及WS_EX_TRANSPARENT虽然获取了父窗口dc，<br>来先绘制背景图，再绘制透明图实现的子窗口透明，<br>有闪图出现。</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/06/26/if-change/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -816,7 +707,7 @@ return 0;
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/q1.jpg" rel="gallery_civ9lzq49004xwwcx4e2n4rog"
+                 href="/picture/q1.jpg" rel="gallery_civb37r6n004ynscxehe5lty8"
                  itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/q1.jpg" itemprop="contentUrl"/>
               </a>
@@ -831,10 +722,139 @@ return 0;
       
         
           
-            <p>今天代码改写button了，感觉，对于框架的架构还是欠缺点。</p>
-<p> 才一开始的封装，当一个模块出现四个功能时，我就该单独封装类，不然<br>后期肯定会添加封装的，到时代码冗余就不好看了。</p>
+          今天代码改写button了，感觉，对于框架的架构还是欠缺点。
+ 才一开始的封装，当一个模块出现四个功能时，我就该单独封装类，不然后期肯定会添加封装的，到时代码冗余就不好看了。
 
           
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/06/25/15/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/06/25/24/" itemprop="url">
+                  消息自定义（24）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-06-25T03:31:58+08:00" content="2014-06-25">
+              2014-06-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Windows/" itemprop="url" rel="index">
+                    <span itemprop="name">Windows</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          严格要求：
+afx_msg LRESULT DisplayResult(WPARAM wParam,LPARAM lParam);
+ON_MESSAGE(WM_RESULT,CDemo4View::DisplayResult)
+return 0;
+SetWindowPos会强制产生重绘，容易闪图。
+
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/06/25/24/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -945,12 +965,15 @@ return 0;
       
         
           
-            <p>模态对话框，非模态对话框（domodal， new、create、destroywindow）</p>
-<p>CRuntimeClass DECLEAR_DYNAMIC/IMPLEMENT_DYNAMIC<br>由于所有的类继承CObject类都包含此结构，用于保存基类对象类等信息。定义宏则是为其添加此类必要成员函数和成员变量。<br>（也就是说每新建一个类我们都可以加入MFC的继承表中，就是每个类声明中加入一个CRuntimeClass但是这个数据结构中有很多成员变量和函数。而且在实现文件中也要加入一些成员变量和函数的初始化或者成员函数的定义工作，每个类都要这么做会花很多行代码。还好微软给我们定义了几个宏让我们可以很方便的把我们定义的类加入到MFC继承的大绳中去。）</p>
-<p>（其实说白了就是一个链表，每个类里加DECLARE_DYNAMIC后就生成一个CRuntimeClass的静态变量，保存了自己的类名和基类的静态CRuntimeClass指针。其它那些函数都是用这两个遍历查找。对应基类的名字，或对应名字的基类指针,在程序全局中也有一个CRuntimeClass链表，里面有所有加了运行类支持的类信息。）</p>
-<p>mfc的RTTI技术（运行时类型识别）：<br>       <code>IsKindOf(RUNTIME_CLASS(CtestDlg));</code></p>
+          模态对话框，非模态对话框（domodal， new、create、destroywindow）
+CRuntimeClass DECLEAR_DYNAMIC/IMPLEMENT_DYNAMIC由于所有的类继承CObject类都包含此结构，用于保存基类对象类等信息。定义宏则是为其添加此类必要成员函数和成
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/06/25/12/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1061,18 +1084,20 @@ return 0;
       
         
           
-            <pre><code>class NLComponent{}
+          class NLComponent{}
 class TextBlock: public NLComponent{}
 class Graphic: public NLComponent{}
 
 class NewsLetter{
 list&lt;NLComponent*&gt; components
-}    
-</code></pre><p>方法一：他用了一个static NLComponent* readComponent(istream&amp; str)，来读取数据，分别创建对象。因为每次传入数据时，调用函数然后就push_back了返回值保存指针入栈。</p>
-<p>方法二：对上面list这个成员的拷贝，因为存放的是类对象。所以他自己写了个虚函数:<br>virtual NLComponent<em> clone() const =0;<br>virtual TextBlock</em> clone() const {return new TextBlock(*this);}   等等等<br>变向的调用了复制构造函数，来进行复制。<br>所以NewsLetter的复制构造函数就直接pushback它的clone函数。</p>
-<p>感悟：<br><strong>派生类能用到的函数，最好基类虚化，分别封装虚函数。然后封装用一个函数去调用这各个不同的虚函数。</strong></p>
+}
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/06/25/16/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1183,10 +1208,15 @@ list&lt;NLComponent*&gt; components
       
         
           
-            <h1 id="以前用pelican，后面markdown语法多了，现在换hexo先把日记放个测试来看看效果。"><a href="#以前用pelican，后面markdown语法多了，现在换hexo先把日记放个测试来看看效果。" class="headerlink" title="以前用pelican，后面markdown语法多了，现在换hexo先把日记放个测试来看看效果。"></a>以前用pelican，后面markdown语法多了，现在换hexo先把日记放个测试来看看效果。</h1><p><img src="/picture/q.jpg" alt=""></p>
-<p> 最近是我的复习时间，我在寝室边复习边玩的状态，让我很是无奈！隔壁的小潘、老牟、他们并没有开始复习。现在， 我发现其实上课时，认真听下老师讲的，期末复习真的只要做几道题就好了；真蛋疼。室友，蔡衫连续的学习精神已经让我十分佩服了。我为何无法成为那样的好学生；会想平时上课，基本喜欢玩手机。就算带了书去，也没有怎么看。大二饿了，我感觉自己慢慢有点堕落了！现在我有接近三周没去实验室了。汪自衡的代码我还并没有写完！<br>     我自己也很是困惑。每天每咋干就好疲惫！我想，我该去实验室了。。。</p>
+          以前用pelican，后面markdown语法多了，现在换hexo先把日记放个测试来看看效果。
+ 最近是我的复习时间，我在寝室边复习边玩的状态，让我很是无奈！隔壁的小潘、老牟、他们并没有开始复习。现在， 我发现其实上课时，认真听下老师讲的，期末复习真的只要做几道题就好了；真蛋疼。室友，蔡衫连续的学习
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/06/12/firsttest/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1278,9 +1308,15 @@ list&lt;NLComponent*&gt; components
       
         
           
-            <p>Welcome to My Blog!!!</p>
+          Welcome to My Blog!!!
 
           
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/11/26/hello-world/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
