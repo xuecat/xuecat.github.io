@@ -88,35 +88,41 @@
 
 <meta name="description" content="如果一个值是恒定的，它命名中的字母要全部大写（如 CONSTANT_VALUE_CASE ）
 一定要分号，js是弱语言，很多时候不要分号也能执行。但是容易出错。
- //函数表达式后面要分号结束，但是函数声明就不需要 var foo = function() {
-return true;
- };  // 这里要分号
- function foo() {
-return true;
- }  // 这里不">
+ //函数表达式后面要分号结束，但是函数声明就不需要
+var foo = function() {
+    return true;
+};  // 这里要分号
+
+function foo() {
+    return true;
+}">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS-Google语法191">
 <meta property="og:url" content="https://xuecat.github.io/2016/10/17/191/index.html">
 <meta property="og:site_name" content="XueCat">
 <meta property="og:description" content="如果一个值是恒定的，它命名中的字母要全部大写（如 CONSTANT_VALUE_CASE ）
 一定要分号，js是弱语言，很多时候不要分号也能执行。但是容易出错。
- //函数表达式后面要分号结束，但是函数声明就不需要 var foo = function() {
-return true;
- };  // 这里要分号
- function foo() {
-return true;
- }  // 这里不">
-<meta property="og:updated_time" content="2016-10-18T15:17:32.371Z">
+ //函数表达式后面要分号结束，但是函数声明就不需要
+var foo = function() {
+    return true;
+};  // 这里要分号
+
+function foo() {
+    return true;
+}">
+<meta property="og:updated_time" content="2016-11-15T12:39:59.282Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS-Google语法191">
 <meta name="twitter:description" content="如果一个值是恒定的，它命名中的字母要全部大写（如 CONSTANT_VALUE_CASE ）
 一定要分号，js是弱语言，很多时候不要分号也能执行。但是容易出错。
- //函数表达式后面要分号结束，但是函数声明就不需要 var foo = function() {
-return true;
- };  // 这里要分号
- function foo() {
-return true;
- }  // 这里不">
+ //函数表达式后面要分号结束，但是函数声明就不需要
+var foo = function() {
+    return true;
+};  // 这里要分号
+
+function foo() {
+    return true;
+}">
 
 
 
@@ -365,21 +371,24 @@ return true;
         <ol>
 <li>如果一个值是恒定的，它命名中的字母要全部大写（如 <code>CONSTANT_VALUE_CASE</code> ）</li>
 <li><p>一定要分号，js是弱语言，很多时候不要分号也能执行。但是容易出错。</p>
-<p> //函数表达式后面要分号结束，但是函数声明就不需要<br> var foo = function() {</p>
-<pre><code>return true;
-</code></pre><p> };  // 这里要分号</p>
-<p> function foo() {</p>
-<pre><code>return true;
-</code></pre><p> }  // 这里不用分号</p>
-</li>
+<p> //函数表达式后面要分号结束，但是函数声明就不需要</p>
+<pre><code>var foo = function() {
+    return true;
+};  // 这里要分号
+
+function foo() {
+    return true;
+}  // 这里不用分号
+</code></pre></li>
 <li><p>不要在块内函数声明，应该使用一个变量初始化函数表达式在块内定义一个函数块</p>
 </li>
 <li>为了最大的可移植性和兼容性，总是使用标准功能而不是非标准功能（例如，采用 string.charAt(3) 而非 string[3] ，用DOM的功能访问元素而不是使用特定于一个具体应用的简写）。</li>
 <li><p>原始类型的包装对象，</p>
-<p> var x = new Boolean(false);<br> if (x) {//这是错误的，因为x是个object，而不是bool，正确该是var x = Boolean(0);</p>
-<pre><code>alert(&apos;hi&apos;);  //显示“hi”。
-</code></pre><p> }</p>
-</li>
+<pre><code>var x = new Boolean(false);
+if (x) {//这是错误的，因为x是个object，而不是bool，正确该是var x = Boolean(0);
+    alert(&apos;hi&apos;);  //显示“hi”。
+}
+</code></pre></li>
 <li><p>方法和属性定义</p>
 </li>
 </ol>
@@ -396,19 +405,32 @@ function Foo() {
 <li>删除，使用this.foo == null,而不是delete</li>
 <li>遍历数组使用for循环 而不是for-in</li>
 <li>多行字符不要使用连接行符，直接’+’</li>
-<li><p>构建数组对象用字面量，而不是构造函数。</p>
-<p>//问题在构造只有一个元素的函数时<br>var a = new Array(x); //它表示的是开辟一个x大小的数组，内部赋值undifinew；而不是开辟一个数组，内部赋值x；<br>var a = [x1, x2];<br>var a = [x1];<br>var a = [];</p>
-<p>对象构造函数，为了一致性：<br>var o = new Object();</p>
-<p>var o2 = new Object();<br>o2.a = 0;<br>o2.b = 1;<br>o2.c = 2;<br>o2[‘strange key’] = 3;<br>改为：<br>var o = {};</p>
-<p>var o2 = {</p>
-<pre><code>a: 0,
-b: 1,
-c: 2,
-&apos;strange key&apos;: 3
-</code></pre><p>};</p>
-</li>
-<li><p>强烈禁止修改如 Object.prototype 和 Array.prototype 等对象的原型。</p>
-</li>
+<li>构建数组对象用字面量，而不是构造函数。</li>
+</ol>
+<p>//问题在构造只有一个元素的函数时</p>
+<pre><code>var a = new Array(x); //它表示的是开辟一个x大小的数组，内部赋值undifinew；而不是开辟一个数组，内部赋值x；
+var a = [x1, x2];
+var a = [x1];
+var a = [];
+</code></pre><p>对象构造函数，为了一致性：</p>
+<pre><code>var o = new Object();
+
+var o2 = new Object();
+o2.a = 0;
+o2.b = 1;
+o2.c = 2;
+o2[&apos;strange key&apos;] = 3;
+</code></pre><p>改为：</p>
+<pre><code>var o = {};
+
+var o2 = {
+    a: 0,
+    b: 1,
+    c: 2,
+    &apos;strange key&apos;: 3
+};
+</code></pre><ol>
+<li>强烈禁止修改如 Object.prototype 和 Array.prototype 等对象的原型。</li>
 <li>不要使用条件注释；条件注释会在运行时改变JavaScript语法树，阻碍自动化工具。</li>
 <li>私有 属性和方法应该以下划线开头命名</li>
 <li>保护 属性和方法应该以无下划线开头命名（像公共属性和方法一样）。</li>
@@ -416,53 +438,80 @@ c: 2,
 <li>参数数目可变的函数应该具有以 var_args 命名的最后一个参数。</li>
 <li>为了避免在大小写敏感的平台上引起混淆，文件名应该小写。文件名应该以 .js 结尾，并且应该不包含除了 - 或 <em> （相比较 </em> 更推荐 - ）以外的其它标点</li>
 <li><p>括号书写：</p>
-<p>if (something) {<br>} else {<br>}</p>
-</li>
-<li><p>多行，对象和数组初始化</p>
-<p>var arr = [1, 2, 3];  //之后无空格[或之前]<br>var obj = {a: 1, b: 2, c: 3};  //之后无空格[或之前]</p>
-<p>//不要像这样：<br>WRONG_Object.prototype = {</p>
-<pre><code>a          : 0,
-b          : 1,
-lengthyName: 2
-</code></pre><p>};</p>
-</li>
-<li><p>匿名函数传递</p>
-<p>prefix.something.reallyLongFunctionName(‘whatever’, function(a1, a2) {</p>
-<pre><code>if (a1.equals(a2)) {
-    someOtherLongFunctionName(a1);
+<pre><code>if (something) {
 } else {
-    andNowForSomethingCompletelyDifferent(a2.parrot);
 }
-</code></pre><p>});</p>
-<p>var names = prefix.something.myExcellentMapFunction(</p>
-<pre><code>verboselyNamedCollectionOfItems,
-function(item) {
-    return item.name;
+</code></pre></li>
+<li><p>多行，对象和数组初始化</p>
+<pre><code>var arr = [1, 2, 3];  //之后无空格[或之前]
+var obj = {a: 1, b: 2, c: 3};  //之后无空格[或之前]
+
+//不要像这样：
+
+WRONG_Object.prototype = {
+    a          : 0,
+    b          : 1,
+    lengthyName: 2
+};
+</code></pre></li>
+<li><p>匿名函数传递</p>
+<pre><code>prefix.something.reallyLongFunctionName(&apos;whatever&apos;, function(a1, a2) {
+    if (a1.equals(a2)) {
+        someOtherLongFunctionName(a1);
+    } else {
+        andNowForSomethingCompletelyDifferent(a2.parrot);
+    }
 });
+
+var names = prefix.something.myExcellentMapFunction(
+    verboselyNamedCollectionOfItems,
+    function(item) {
+        return item.name;
+    });
 </code></pre></li>
 <li><p>字符串使用单引号，虽然js不区分单引号和双引号。<br><br>但是一般html的属性用的是双引号。所以当js字符串为了区分html和转义，最好使用单引号。</p>
 </li>
 <li>注释可以参考jsdoc的做法</li>
 <li><p>布尔类型</p>
-<p>下边的布尔表达式都返回false：<br>//@<br>null<br>undefined<br>‘’空字符串<br>数字0<br>//但是要小心，因为以下这些返回true：<br>字符串”0”<br>[]空数组<br>{}空对象</p>
-<p>//@所以 while (x != null) {}这样不好， 该是 while(x) {}<br>//if (y != null &amp;&amp; y != ‘’) {} 也改成 if (y) {}</p>
-<p>//@二元布尔操作符是可短路的,所以<br>var win;<br>if (opt_win) {</p>
-<pre><code>win = opt_win;
-</code></pre><p>} else {</p>
-<pre><code>win = window;
-</code></pre><p>}<br>//可以改成：<br>function foo(opt_win) {</p>
-<pre><code>var win = opt_win || window;
-</code></pre><p>}</p>
-<p>if (node) {</p>
-<pre><code>if (node.kids) {
-    if (node.kids[index]) {
-        foo(node.kids[index]);
+<pre><code>下边的布尔表达式都返回false：
+//@
+null
+undefined
+&apos;&apos;空字符串
+数字0
+//但是要小心，因为以下这些返回true：
+字符串&quot;0&quot;
+[]空数组
+{}空对象
+
+//@所以 while (x != null) {}这样不好， 该是 while(x) {}
+//if (y != null &amp;&amp; y != &apos;&apos;) {} 也改成 if (y) {}
+
+//@二元布尔操作符是可短路的,所以
+    var win;
+    if (opt_win) {
+        win = opt_win;
+    } else {
+        win = window;
     }
-}
-</code></pre><p>}<br>//可以改成：<br>var kid = node &amp;&amp; node.kids &amp;&amp; node.kids[index];<br>if (kid) {</p>
-<pre><code>foo(kid);
-</code></pre><p>}</p>
-</li>
+    //可以改成：
+    function foo(opt_win) {
+        var win = opt_win || window;
+    }
+
+    if (node) {
+        if (node.kids) {
+            if (node.kids[index]) {
+                foo(node.kids[index]);
+            }
+        }
+    }
+    //可以改成：
+    var kid = node &amp;&amp; node.kids &amp;&amp; node.kids[index];
+    if (kid) {
+        foo(kid);
+    }
+</code></pre></li>
 </ol>
 
       
@@ -575,7 +624,7 @@ function(item) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">189</span>
+              <span class="site-state-item-count">190</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -622,7 +671,7 @@ function(item) {
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://www.v2ex.com/" target="_blank" title="V2EX">
+                <a href="http://www.v2ex.com/?r=xuecat" target="_blank" title="V2EX">
                   
                     <i class="fa fa-fw fa-globe"></i>
                   

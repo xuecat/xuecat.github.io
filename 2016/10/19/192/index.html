@@ -102,7 +102,7 @@ const命令只保证变量指向地址不变，不能保证数据不变。
 
 
 12345678910111213const foo = [];foo.prop = 123;//这是被允许的foo = &amp;#123;&amp;#125;;//这是不被允许的//要完全冻结，参考如下代码var constantize = (obj) =&amp;gt; &amp;#123;    Object.freeze(">
-<meta property="og:updated_time" content="2016-11-09T15:35:17.047Z">
+<meta property="og:updated_time" content="2016-11-15T14:07:51.872Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="es6和js笔记192">
 <meta name="twitter:description" content="函数参数默认压栈顺序，从左到右
@@ -390,18 +390,65 @@ const命令只保证变量指向地址不变，不能保证数据不变。
 <li>Array数组</li>
 </ol>
 <ul>
-<li><p>伪组数转换：</p>
+<li><p>from函数；伪组数转换：</p>
 <p>  let arraylike = {</p>
 <pre><code>0: &apos;a&apos;,
 1: &apos;b&apos;,
-length: 2//这个必须有
-</code></pre><p>  };//这是个对象，并不是数组<br>  es5中转换数组： [].slice.call(arraylike);或这么写Array.prototype.slice.call(arraylike);//[‘a’, ‘b’];<br>  es6中转换数组：Array.from(arraylike);//只要部署了Iterator接口的数据结构，和ES6的Set、Map。都可以转换。</p>
-<p>  function test(a,b,c,d)<br>  { </p>
-<pre><code>var arg = Array.prototype.slice.call(arguments,1); 
-alert(arg); 
-</code></pre><p>  }<br>  test(“a”,”b”,”c”,”d”); //b,c,d</p>
+length: 2//这个属性必须有
+</code></pre><p>  };//注意这是个对象，并不是数组</p>
 </li>
 </ul>
+<p>es5中转换数组：[].slice.call(arraylike);或这么写Array.prototype.slice.call(arraylike);//[‘a’, ‘b’];<br>es6中转换数组：Array.from(arraylike);<br>//只要部署了Iterator接口的数据结构，和ES6的Set、Map。都可以转换。<br><br>//如果参数是数组，则返回新数组<br><br>//from还可以接受第二个参数，用来对每个元素进行处理，将处理后的值放入返回的数组中<br></p>
+<pre><code>function test(a,b,c,d) 
+{ 
+    var arg = Array.prototype.slice.call(arguments,1); 
+    alert(arg); 
+} 
+test(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;); //b,c,d
+</code></pre><ul>
+<li><p>find返回的是第一个符合条件的元素:  [1, 4, -5, 10].find((n) =&gt; n &lt; 0)//-5    [1, 5].find(function(value, index, arr) { return value &gt; 9;})//10</p>
+</li>
+<li><p>fill填充数组</p>
+</li>
+<li><p>entries()//返回键值对遍历器，keys()//返回值遍历器，values()//返回键遍历器</p>
+<p>  for (let index of [‘a’, ‘b’].keys()) {}<br>  for (let [index, elem] of [‘a’, ‘b’].entries()) {}<br>  //es6有遍历器对象</p>
+</li>
+<li><p>includes()//返回一个布尔值，表示某个数组是否包含给定值。 [1, 2, 3].includes(2);//true</p>
+</li>
+</ul>
+<ol>
+<li>函数参数的默认值 </li>
+</ol>
+<p>es5 </p>
+<pre><code>function log (x, y) { y = y || &apos;world&apos;;}
+</code></pre><p>es6</p>
+<pre><code>function log(x, y = &apos;world&apos;) {}
+</code></pre><ul>
+<li><p>解构和默认参数</p>
+<pre><code>function foo({x, y = 5}) { console.log(x, y);}
+foo({})//undefined, 5
+foo({x:1})//1, 5
+foo({x:1, y:2})//1, 2
+
+function m1({x=0, y=0} = {}) {}
+function m2({x, y} = {x:0, y:0}) {}
+//上面俩个函数，在m({x:3})、m({})这种类型时，就不同
+//它们顺序是先赋值参数，再执行构里面的默认值
+
+//默认参数位置不用在尾部。但是调用要用undefined参数，如： f(undefined, 1)
+
+//使用默认参数会相应减少length属性的值。(function(a, b, c = 5){}).length //2
+</code></pre></li>
+</ul>
+<ol>
+<li>rest参数和扩展运算符</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">...values</span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> sum = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> val <span class="keyword">of</span> values) &#123;</div><div class="line">        sum += val;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> sum;</div><div class="line">&#125;</div><div class="line"><span class="comment">//有了rest后，就可以不使用arguments；只是注意rest参数是数组，且后面不能再有其它参数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">push</span>(<span class="params">array, ...items</span>) </span>&#123;</div><div class="line">    items.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</div><div class="line">        array.push(item);</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> a = [];</div><div class="line">push(a, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>);</div></pre></td></tr></table></figure>
+<p>扩展运算符也是加三个点(…)，好比rest参数的逆运算，将一个数组转为用逗号分隔的参数序列</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//es5</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">x, w, v, h</span>) </span>&#123;&#125;</div><div class="line"><span class="keyword">var</span> args = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</div><div class="line"><span class="keyword">var</span> arge = [<span class="number">4</span>, <span class="number">5</span>];</div><div class="line">f.apply(<span class="literal">null</span>, args);</div><div class="line"></div><div class="line"><span class="built_in">Math</span>.max.apply(<span class="literal">null</span>, [<span class="number">14</span>, <span class="number">3</span>, <span class="number">77</span>]);</div><div class="line"><span class="built_in">Array</span>.prototype.push.apply(args, arge);</div><div class="line">args.concat(arge, arge);</div><div class="line"></div><div class="line"><span class="comment">//es6</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">x, w, v, h</span>) </span>&#123;&#125;</div><div class="line"><span class="keyword">var</span> args = [<span class="number">0</span>, <span class="number">1</span>];</div><div class="line">f (<span class="number">-1</span>, ...args, ...[<span class="number">7</span>]);</div><div class="line"></div><div class="line"><span class="built_in">Math</span>.max(...[<span class="number">14</span>, <span class="number">3</span>, <span class="number">77</span>]);</div><div class="line">args.push(...arge);</div><div class="line">[...args, ...arge, ...arge];</div></pre></td></tr></table></figure>
+<ol>
+<li>function有name属性（浏览器支持，es6才标准）</li>
+</ol>
 
       
     </div>
@@ -513,7 +560,7 @@ alert(arg);
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">189</span>
+              <span class="site-state-item-count">190</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -560,7 +607,7 @@ alert(arg);
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://www.v2ex.com/" target="_blank" title="V2EX">
+                <a href="http://www.v2ex.com/?r=xuecat" target="_blank" title="V2EX">
                   
                     <i class="fa fa-fw fa-globe"></i>
                   
