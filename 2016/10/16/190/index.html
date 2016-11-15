@@ -100,7 +100,7 @@ React.Children.map(this.props.children, function (child) {
         return &amp;lt;li&amp;gt;{child}&amp;lt;/li&amp;gt;;
         })
 //每个child是一个ReactElement的object，可能Re">
-<meta property="og:updated_time" content="2016-10-27T15:07:00.054Z">
+<meta property="og:updated_time" content="2016-11-15T14:11:43.191Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React记录190">
 <meta name="twitter:description" content="1. this.props.children它是链表没错(当只有一个时，是string之类元素)
@@ -367,17 +367,16 @@ React.Children.map(this.props.children, function (child) {
 <p><strong>5. eslint安装</strong><br>eslint和eslint插件必须全部 全局安装。局部安装老是报错，无法找到插件。</p>
 <p><strong>6. react-es6</strong><br>这个由于很多，只说下属性的设置；<br>es5对类属性设置是用： <code>render: function(){}</code><br><br>es6对类属性设置是用：<code>render() {}</code><br><br>居然看半天没发现。<br><a href="http://blog.csdn.net/wangzengdi/article/details/50719395" target="_blank" rel="external">http://blog.csdn.net/wangzengdi/article/details/50719395</a></p>
 <p><strong>7. 无状态的函数式组件</strong><br>除了正统的rn创建外；还有个创建组件的方法<br></p>
-<p>声明：<br>const Pane = (props) =&gt; <div>{props.children}</div>;<br>Pane.propTypes = {<br>  label: React.PropTypes.string.isRequired,<br>  children: React.PropTypes.element.isRequired<br>};<br>使用：<br></p>
-<pane label="asdf">
-
-<p>注意俩点：<br></p>
+<p>声明：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Pane = (props) =&gt; &lt;div&gt;&#123;props.children&#125;&lt;/div&gt;;</div><div class="line">Pane.propTypes = &#123;</div><div class="line">  label: React.PropTypes.string.isRequired,</div><div class="line">  children: React.PropTypes.element.isRequired</div><div class="line">&#125;;</div><div class="line"><span class="comment">//使用：</span></div><div class="line">&lt;Pane label=<span class="string">"asdf"</span> /&gt;</div></pre></td></tr></table></figure>
+<p>注意俩点：</p>
 <ol>
 <li>不能有生命周期方法</li>
 <li>不能有ref（实例dom属性，React.findDOMNode）</li>
 </ol>
-<p><strong>8. children isrequired</strong><br>children: React.PropTypes.element.isRequired</p>
+<p><strong>8. children isrequired</strong><br><code>children: React.PropTypes.element.isRequired</code></p>
 <p><strong>9. react全家桶</strong><br>webpack和其它基本已经知道了；给个前端ui库吧：reactui库有个ant design 和material ui、 boostrap<br><br>flux网上说文档又臭又长，转redux</p>
-</pane>
+
       
     </div>
 
