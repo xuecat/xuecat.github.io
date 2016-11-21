@@ -87,27 +87,18 @@
 
 
 <meta name="description" content="1. this.props.children它是链表没错(当只有一个时，是string之类元素)
-React.Children.map(this.props.children, function (child) {
-        return &amp;lt;li&amp;gt;{child}&amp;lt;/li&amp;gt;;
-        })
-//每个child是一个ReactElement的object，可能Re">
+1234React.Children.map(this.props.children, function (child) &amp;#123;        return &amp;lt;li&amp;gt;&amp;#123;child&amp;#125;&amp;lt;/li&amp;gt;;        &amp;#125;)//每个child是一个Rea">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React记录190">
 <meta property="og:url" content="https://xuecat.github.io/2016/10/16/190/index.html">
 <meta property="og:site_name" content="XueCat">
 <meta property="og:description" content="1. this.props.children它是链表没错(当只有一个时，是string之类元素)
-React.Children.map(this.props.children, function (child) {
-        return &amp;lt;li&amp;gt;{child}&amp;lt;/li&amp;gt;;
-        })
-//每个child是一个ReactElement的object，可能Re">
-<meta property="og:updated_time" content="2016-11-15T14:11:43.191Z">
+1234React.Children.map(this.props.children, function (child) &amp;#123;        return &amp;lt;li&amp;gt;&amp;#123;child&amp;#125;&amp;lt;/li&amp;gt;;        &amp;#125;)//每个child是一个Rea">
+<meta property="og:updated_time" content="2016-11-21T13:49:10.497Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React记录190">
 <meta name="twitter:description" content="1. this.props.children它是链表没错(当只有一个时，是string之类元素)
-React.Children.map(this.props.children, function (child) {
-        return &amp;lt;li&amp;gt;{child}&amp;lt;/li&amp;gt;;
-        })
-//每个child是一个ReactElement的object，可能Re">
+1234React.Children.map(this.props.children, function (child) &amp;#123;        return &amp;lt;li&amp;gt;&amp;#123;child&amp;#125;&amp;lt;/li&amp;gt;;        &amp;#125;)//每个child是一个Rea">
 
 
 
@@ -354,16 +345,13 @@ React.Children.map(this.props.children, function (child) {
 
       
         <p><strong>1. this.props.children</strong><br>它是链表没错(当只有一个时，是string之类元素)</p>
-<pre><code>React.Children.map(this.props.children, function (child) {
-        return &lt;li&gt;{child}&lt;/li&gt;;
-        })
-//每个child是一个ReactElement的object，可能ReactElement有默认的隐式处理吧_shadowChildren之类吧！
-</code></pre><p>此句，一直不明白为何object能当字符处理。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">React.Children.map(<span class="keyword">this</span>.props.children, <span class="function"><span class="keyword">function</span> (<span class="params">child</span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> &lt;li&gt;&#123;child&#125;&lt;/li&gt;;</div><div class="line">        &#125;)</div><div class="line"><span class="comment">//每个child是一个ReactElement的object，可能ReactElement有默认的隐式处理吧_shadowChildren之类吧！</span></div></pre></td></tr></table></figure>
+<p>此句，一直不明白为何object能当字符处理。</p>
 <p><strong>2. markdown显示</strong><br>使用remarkable库，可以支持markdown格式显示语句。<br><br>但是不能直接render解析（虽然表面看是对的），好像react做了XSS 攻击的保护。<br><br>解析后的语句只能放入节点属性中：dangerouslySetInnerHTML={ __html: md.render(this.props.children.toString()) }<br><br>值得注意的是，它支持的markdown语法是最新的，也就是说有些语法严格和空格有关(如<code># d</code>必须空格)</p>
 <p><strong>3. react key添加</strong><br>我在用map的时候，被警告必须加key。react对dom做遍历的时候，会根据data-reactid生成虚拟dom树。如果你没有手动的添加unique constant key的话，react是无法记录你的dom操作的。</p>
 <p><strong>4. createClass函数问题</strong><br>createClass创建的方法</p>
-<pre><code>rawMarkup: function() {}
-</code></pre><p>要this.rawMarkup()才能访问到；晕，刚居然没注意。</p>
+<p><code>rawMarkup: function() {}</code></p>
+<p>要<code>this.rawMarkup()</code>才能访问到；晕，刚居然没注意。</p>
 <p><strong>5. eslint安装</strong><br>eslint和eslint插件必须全部 全局安装。局部安装老是报错，无法找到插件。</p>
 <p><strong>6. react-es6</strong><br>这个由于很多，只说下属性的设置；<br>es5对类属性设置是用： <code>render: function(){}</code><br><br>es6对类属性设置是用：<code>render() {}</code><br><br>居然看半天没发现。<br><a href="http://blog.csdn.net/wangzengdi/article/details/50719395" target="_blank" rel="external">http://blog.csdn.net/wangzengdi/article/details/50719395</a></p>
 <p><strong>7. 无状态的函数式组件</strong><br>除了正统的rn创建外；还有个创建组件的方法<br></p>
@@ -487,7 +475,7 @@ React.Children.map(this.props.children, function (child) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">190</span>
+              <span class="site-state-item-count">192</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -495,7 +483,7 @@ React.Children.map(this.props.children, function (child) {
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

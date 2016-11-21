@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2016-11-13T02:19:07.264Z</updated>
+  <updated>2016-11-21T17:10:38.481Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -16,22 +16,116 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>test196</title>
-    <link href="https://xuecat.github.io/2016/11/13/196/"/>
-    <id>https://xuecat.github.io/2016/11/13/196/</id>
-    <published>2016-11-13T02:16:25.000Z</published>
-    <updated>2016-11-13T02:19:07.264Z</updated>
+    <title>多线程198</title>
+    <link href="https://xuecat.github.io/2016/11/21/198/"/>
+    <id>https://xuecat.github.io/2016/11/21/198/</id>
+    <published>2016-11-21T15:22:33.000Z</published>
+    <updated>2016-11-21T17:10:38.481Z</updated>
     
-    <content type="html"><![CDATA[<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">h</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'as'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">ha</span><span class="params">(<span class="keyword">int</span> s)</span> </span>&#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"as"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">ha</span><span class="params">(<span class="keyword">int</span> s)</span> </span>&#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"as"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>咋说呢，一直以来虽然知道<code>_beginthreadex</code>比较好。但是想起55用<code>CreateThread</code>，还是有点余悸。</p>
+<p><strong>先看段原话</strong>：</p>
+<p>有些CRT的函数象<code>malloc(), fopen(), _open(), strtok(), ctime(), 或localtime()</code>等函数需要专门的线程局部存储的数据块，<br><br>这个数据块通常需要在创建线程的时候就建立，如果使用<code>CreateThread</code>，这个数据块就没有建立，然后会怎样呢？<br><br>在这样的线程中还是可以使用这些函数而且没有出错，实际上函数发现这个数据块的指针为空时，会自己建立一个，<br><br>然后将其与线程联系在一起，这意味着如果你用<code>CreateThread</code>来创建线程，然后使用这样的函数，<br><br>会有一块内存在不知不觉中创建，遗憾的是，这些函数并不将其删除，而<code>CreateThread</code>和<code>ExitThread</code>也无法知道这件事，<br><br>于是就会有Memory Leak，在线程频繁启动的软件中(比如某些服务器软件)，迟早会让系统的内存资源耗尽！<br></p>
+<hr>
+<p><strong>说白了</strong>：如果多线程里面有CRT函数，最好使用<code>_beginthread</code>   <code>_beginthreadex</code>   <code>AfxBeginThread</code>(这个函数内部调用<code>_beginthreadex</code>创建处理的<code>CWinThread</code>专门的UI线程，可以通过发送接收message)</p>
+<p>上面四个线程都有相应的<code>ExitThread或_endthread</code>；当然这些函数必须放入线程函数中。<br></p>
+<h4 id="共同点："><a href="#共同点：" class="headerlink" title="共同点："></a>共同点：</h4><h4 id="共同的毛病1："><a href="#共同的毛病1：" class="headerlink" title="共同的毛病1："></a>共同的毛病1：</h4><p><strong>虽然</strong>：在线程被创建成功后，都可以用<code>WaitForSingleObject( hThread, INFINITE );</code>来等待线程结束。<br><br><strong>但是这是不准的</strong>：一些<code>begin</code>函数本身就有<code>CloseHandle</code>了（如：<code>_beginthread</code>），再加上一些代码的<code>CloseHandle</code>，<br><br>所以无法正确知道线程的计数到底是在哪个时候被置为0，而且被置为0也不一定会是线程退出。<br><br><strong>也就是说，最好不要这么等待线程结束，最好给个事件、原子等放在线程函数末尾，来判断线程是否结束。</strong></p>
+<h4 id="共同的毛病2："><a href="#共同的毛病2：" class="headerlink" title="共同的毛病2："></a>共同的毛病2：</h4><p>如果在线程函数中调用退出函数，是会立即退出的。<br><br>也就是说连执行线程函数中，定义类的析构函数都来不及，就会直接退出线程返回，<br><br>如果那个类有析构有内存释放的话就糟糕了，会出现内存泄漏的。<br><br><strong>也就是说，最好不要用退出线程函数来退出线程，用return自然返回是最好的。</strong></p>
+<h4 id="内存释放："><a href="#内存释放：" class="headerlink" title="内存释放："></a>内存释放：</h4><ul>
+<li>内存释放这里也有个共同点； 创建线程后直接<code>CloseHandle</code>是可以的，这样的线程对象，在函数运行完了就自动释放（就算是_beginthread等有自释放代码的类型也同样适用）</li>
+</ul>
+<p><code>AfxBeginThread</code>会自动<code>CloseHandle</code>；相应<code>endthread</code>函数也有<code>CloseHandle</code>代码<br><br><code>_beginthread</code>会自动<code>CloseHandle</code>；相应<code>endthread</code>函数也有<code>CloseHandle</code>代码<br><br><code>_beginthreadex</code>必须手动<code>CloseHandle</code><br><br><code>CreateThread</code>必须手动<code>CloseHandle</code><br></p>
+<h4 id="比较："><a href="#比较：" class="headerlink" title="比较："></a>比较：</h4><p><code>AfxBeginThread</code>创建的线程比较庞大，一般的后台运行线程是没必要的<br><br><code>CreateThread</code>创建的线程无法使用CRT函数<br><br><code>_beginthread</code>创建的线程可以使用CRT函数，但引用官方的话来说：“使用 _beginthreadex 比 _beginthread 更为安全”；</p>
+]]></content>
     
     <summary type="html">
     
-      &lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;
+      &lt;p&gt;咋说呢，一直以来虽然知道&lt;code&gt;_beginthreadex&lt;/code&gt;比较好。但是想起55用&lt;code&gt;CreateThread&lt;/code&gt;，还是有点余悸。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;先看段原话&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;有些CRT的函数象&lt;code&gt;
     
     </summary>
     
+      <category term="Windows" scheme="https://xuecat.github.io/categories/Windows/"/>
+    
+    
+      <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
+    
+      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="多线程" scheme="https://xuecat.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>c#入门经典197</title>
+    <link href="https://xuecat.github.io/2016/11/21/197/"/>
+    <id>https://xuecat.github.io/2016/11/21/197/</id>
+    <published>2016-11-21T13:39:27.000Z</published>
+    <updated>2016-11-21T16:07:54.903Z</updated>
+    
+    <content type="html"><![CDATA[<p>好烦，es6正看着呢；去海外组了。。。。要补c#知识了</p>
+<h4 id="NET程序："><a href="#NET程序：" class="headerlink" title=".NET程序："></a>.NET程序：</h4><p>使用.NET兼容语言（如c#）编写程序 -&gt; 把代码编译为CIL，存储在程序集中（即VS干的事） <br><br>-&gt; 执行时，先使用JIT编译器将代码编译为本机代码 -&gt; 在托管的CLR环境下运行本机代码。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;好烦，es6正看着呢；去海外组了。。。。要补c#知识了&lt;/p&gt;
+&lt;h4 id=&quot;NET程序：&quot;&gt;&lt;a href=&quot;#NET程序：&quot; class=&quot;headerlink&quot; title=&quot;.NET程序：&quot;&gt;&lt;/a&gt;.NET程序：&lt;/h4&gt;&lt;p&gt;使用.NET兼容语言（如c#）编写
+    
+    </summary>
+    
+      <category term="C#" scheme="https://xuecat.github.io/categories/C/"/>
+    
+    
+      <category term="编译器和VC" scheme="https://xuecat.github.io/tags/%E7%BC%96%E8%AF%91%E5%99%A8%E5%92%8CVC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ReactRouter-tutorial196</title>
+    <link href="https://xuecat.github.io/2016/11/13/196/"/>
+    <id>https://xuecat.github.io/2016/11/13/196/</id>
+    <published>2016-11-13T02:16:25.000Z</published>
+    <updated>2016-11-21T13:55:27.086Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="http://www.ruanyifeng.com/blog/2016/05/react_router.html?utm_source=tool.lu" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2016/05/react_router.html?utm_source=tool.lu</a></p>
+<ol>
+<li>Router指定历史控件,切换路径历史直接：</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; browserHistory &#125; <span class="keyword">from</span> <span class="string">'react-router'</span>;</div><div class="line">browserHistory.push(<span class="string">'/some/path'</span>);</div></pre></td></tr></table></figure>
+<ol>
+<li>Route来控制布局,path指定路径(path有匹配规则)，component指定控件。<br><code>&lt;Link to=&quot;/about&quot;&gt;</code> 被点击后，会激活to指定的相应路径，并渲染上面path指定的控件。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;Router history=&#123;hashHistory&#125;&gt;</div><div class="line">    &lt;Route path="/" component=&#123;App&#125;&gt;</div><div class="line">        &lt;Route path="/repos" component=&#123;Repos&#125;&gt;</div><div class="line">            &lt;Route path="/repos/:repoName" component=&#123;Repo&#125;/&gt;</div><div class="line">        &lt;/Route&gt;</div><div class="line">        &lt;Route path="/about" component=&#123;About&#125;/&gt;</div><div class="line">    &lt;/Route&gt;</div><div class="line">&lt;/Router&gt;</div><div class="line">//上面App包含了俩个，可以通过分别激活路径来切换显示区</div><div class="line"></div><div class="line">&lt;Router history=&#123;hashHistory&#125;&gt;</div><div class="line">    &lt;Route path="/" component=&#123;App&#125;/&gt;</div><div class="line">    &lt;Route path="/repos" component=&#123;Repos&#125;&gt;</div><div class="line">        &lt;Route path="/repos/:repoName" component=&#123;Repo&#125;/&gt;</div><div class="line">    &lt;/Route&gt;</div><div class="line">    &lt;Route path="/about" component=&#123;About&#125;/&gt;</div><div class="line">&lt;/Router&gt;</div><div class="line">//三面三个同级，所以无论在哪个类里激活路径，都会跳转页面。</div><div class="line"></div><div class="line">//注意如果在App里面激活`/repos/:repoName`,则会先激活`/repos`再来激活它的子组件</div></pre></td></tr></table></figure>
+<ol>
+<li><p><code>&lt;IndexRoute component={Home}/&gt;</code> 设置默认渲染组件,如放上面1 - App下面，就会成为默认children渲染。<br> 如果想在列表有个组件相应的选中项 还要在App加个 <code>&lt;li&gt;&lt;NavLink to=&quot;/&quot; onlyActiveOnIndex={true}&gt;Home&lt;/NavLink&gt;&lt;/li&gt;</code></p>
+</li>
+<li><p>Contexts属性。</p>
+</li>
+</ol>
+<ul>
+<li>通过context传递属性的方式可以大量减少 通过显式的通过 props 逐层传递属性的方式。这样可以减少组件之间的直接依赖关系</li>
+<li>如果你为一个组件指定了context，那么这个组件的子组件只要定义了contextTypes 属性，就可以访问到父组件指定的context了。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> A = React.createClass(&#123;</div><div class="line">    contextTypes: &#123;</div><div class="line">        name: React.PropTypes.string.isRequired,</div><div class="line">    &#125;,</div><div class="line">    render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> &lt;div&gt;My name is: &#123;this.context.name&#125;&lt;/div&gt;;</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">React.withContext(&#123;<span class="string">'name'</span>: <span class="string">'Jonas'</span>&#125;, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// Outputs: "My name is: Jonas"</span></div><div class="line">    React.render(&lt;A /&gt;, document.body);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">/////////////////////////////////////////////////////////////////////////</div><div class="line">//父类可以指定contextTypes，也可以指定childContextTypes；childContextTypes只是限定了传给子类的类型,无它就默认全下传。</div><div class="line">var A = React.createClass(&#123;</div><div class="line">    childContextTypes: &#123;</div><div class="line">         fruit: React.PropTypes.string.isRequired</div><div class="line">    &#125;,</div><div class="line">    getChildContext: function() &#123;//如果不书写这个函数，子类则无法获取</div><div class="line">         return &#123; fruit: "Banana"，name: "Apple" &#125;;</div><div class="line">    &#125;,</div><div class="line">    render: function() &#123;</div><div class="line">         return &lt;B /&gt;;</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">var B = React.createClass(&#123;</div><div class="line">    contextTypes: &#123;</div><div class="line">        name: React.PropTypes.string.isRequired,</div><div class="line">        fruit: React.PropTypes.string.isRequired</div><div class="line">    &#125;,</div><div class="line">    render: function() &#123;</div><div class="line">        return &lt;div&gt;My name is: &#123;this.context.name&#125; and my favorite fruit is: &#123;this.context.fruit&#125;&lt;/div&gt;;//由于父类限定了类型，所以如果是this.context.name就会报错</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line">React.withContext(&#123;'name': 'Jonas'&#125;, function () &#123;//给A类，构造ContextTypes属性</div><div class="line">    React.render(&lt;A /&gt;, document.body);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<ol>
+<li>关于跳转的方式,一种是用相应的history来push，一种是用context.router来push</li>
+</ol>
+<p>子类的<code>contextTypes</code>其实访问的是<code>Router</code>的<code>context</code>,<code>Router</code>有个叫router的<code>RouterContext</code>类型变量</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2016/05/react_router.html?utm_source=tool.lu&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.ruanyifen
+    
+    </summary>
+    
+      <category term="第三方库" scheme="https://xuecat.github.io/categories/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
+    
+    
+      <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
+    
+      <category term="react" scheme="https://xuecat.github.io/tags/react/"/>
     
   </entry>
   
@@ -140,17 +234,21 @@ return result;
     <link href="https://xuecat.github.io/2016/10/19/192/"/>
     <id>https://xuecat.github.io/2016/10/19/192/</id>
     <published>2016-10-19T13:57:07.000Z</published>
-    <updated>2016-11-15T14:07:51.872Z</updated>
+    <updated>2016-11-20T08:49:52.884Z</updated>
     
-    <content type="html"><![CDATA[<ol>
-<li><p>函数参数默认压栈顺序，从左到右</p>
-</li>
-<li><p>const命令只保证变量指向地址不变，不能保证数据不变。</p>
-</li>
+    <content type="html"><![CDATA[<h3 id="变量命令"><a href="#变量命令" class="headerlink" title="变量命令"></a>变量命令</h3><ol>
+<li>var和let </li>
+</ol>
+<ul>
+<li>let只在其块级作用域内有效，而var却全局有效。</li>
+<li>区块中有let和const，则这个区块暂时性死区；即区块会对这些命令声明的变量一开始就形成封闭作用域，只要在声明前使用这些变量，就会报错（相反var不会）</li>
+</ul>
+<ol>
+<li>const命令只保证变量指向地址不变，不能保证数据不变。</li>
 </ol>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> foo = [];</div><div class="line">foo.prop = <span class="number">123</span>;<span class="comment">//这是被允许的</span></div><div class="line">foo = &#123;&#125;;<span class="comment">//这是不被允许的</span></div><div class="line"></div><div class="line"><span class="comment">//要完全冻结，参考如下代码</span></div><div class="line"><span class="keyword">var</span> constantize = (obj) =&gt; &#123;</div><div class="line">    <span class="built_in">Object</span>.freeze(obj);</div><div class="line">    <span class="built_in">Object</span>.key(obj).forEach((key, value) =&gt; &#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> obj[key] === <span class="string">'object'</span>) &#123;</div><div class="line">            constantize(obj[key]);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<ol>
-<li>字符遍历。好像用<code>[]</code>也可以遍历</li>
+<h3 id="字符"><a href="#字符" class="headerlink" title="字符"></a>字符</h3><ol>
+<li>字符遍历。（好像用<code>[]</code>也可以遍历）</li>
 </ol>
 <p>es5: for (var i=0; i<str.length; i++)="" {alert(str.charat(i));}="" <br=""><br>es6: for (let i=0 of str) {alert(i);}</str.length;></p>
 <ol>
@@ -165,8 +263,8 @@ return result;
 <li>正则</li>
 </ol>
 <p>es5中String对象的方法，search、match、replace、split支持JS正则</p>
-<ol>
-<li><p>数值<br><br>Number增加成员isFinite，isNaN.<br> es6把es5中的全局函数parseInt,parseFloat移植到了Number对象上。<br>Number成员，isSafeInteger范围在2的53次方</p>
+<h3 id="类型扩展"><a href="#类型扩展" class="headerlink" title="类型扩展"></a>类型扩展</h3><ol>
+<li><p>数值<br>Number增加成员isFinite，isNaN.<br> es6把es5中的全局函数parseInt,parseFloat移植到了Number对象上。<br>Number成员，isSafeInteger范围在2的53次方</p>
 </li>
 <li><p>Math对象,es6新增17个方法。它的方法都是静态方法:<code>Math.abs(s)</code></p>
 </li>
@@ -202,7 +300,7 @@ test(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;); //b,c,d
 <li><p>includes()//返回一个布尔值，表示某个数组是否包含给定值。 [1, 2, 3].includes(2);//true</p>
 </li>
 </ul>
-<ol>
+<h3 id="函数（函数参数默认压栈顺序，从左到右）"><a href="#函数（函数参数默认压栈顺序，从左到右）" class="headerlink" title="函数（函数参数默认压栈顺序，从左到右）"></a>函数（函数参数默认压栈顺序，从左到右）</h3><ol>
 <li>函数参数的默认值 </li>
 </ol>
 <p>es5 </p>
@@ -233,19 +331,29 @@ function m2({x, y} = {x:0, y:0}) {}
 <p>扩展运算符也是加三个点(…)，好比rest参数的逆运算，将一个数组转为用逗号分隔的参数序列</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//es5</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">x, w, v, h</span>) </span>&#123;&#125;</div><div class="line"><span class="keyword">var</span> args = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</div><div class="line"><span class="keyword">var</span> arge = [<span class="number">4</span>, <span class="number">5</span>];</div><div class="line">f.apply(<span class="literal">null</span>, args);</div><div class="line"></div><div class="line"><span class="built_in">Math</span>.max.apply(<span class="literal">null</span>, [<span class="number">14</span>, <span class="number">3</span>, <span class="number">77</span>]);</div><div class="line"><span class="built_in">Array</span>.prototype.push.apply(args, arge);</div><div class="line">args.concat(arge, arge);</div><div class="line"></div><div class="line"><span class="comment">//es6</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">x, w, v, h</span>) </span>&#123;&#125;</div><div class="line"><span class="keyword">var</span> args = [<span class="number">0</span>, <span class="number">1</span>];</div><div class="line">f (<span class="number">-1</span>, ...args, ...[<span class="number">7</span>]);</div><div class="line"></div><div class="line"><span class="built_in">Math</span>.max(...[<span class="number">14</span>, <span class="number">3</span>, <span class="number">77</span>]);</div><div class="line">args.push(...arge);</div><div class="line">[...args, ...arge, ...arge];</div></pre></td></tr></table></figure>
 <ol>
-<li>function有name属性（浏览器支持，es6才标准）</li>
+<li><p>function有name属性（浏览器支持，es6才标准）</p>
+</li>
+<li><p>箭头函数</p>
+</li>
 </ol>
+<p>箭头函数内部没有自己的this，导致内部的this就是外层代码块的this。<br><br>除此外，arguments、super、new.target也是指向外层函数对应的。</p>
+<h3 id="对象扩展"><a href="#对象扩展" class="headerlink" title="对象扩展"></a>对象扩展</h3><ol>
+<li>属性</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//es5</span></div><div class="line"><span class="keyword">var</span> foo = <span class="string">'bar'</span>;</div><div class="line"><span class="keyword">var</span> baz = &#123;foo&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> o = &#123;</div><div class="line">    <span class="string">'class'</span>: <span class="function"><span class="keyword">function</span> </span>&#123;&#125;<span class="comment">//此处，class对语法解析器来说是个关键字，为了让语法解析器解析为属性函数，必须加单引号</span></div><div class="line">    method: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">'he'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//es6</span></div><div class="line"><span class="keyword">var</span> baz = &#123;foo: <span class="string">'bar'</span>&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> o = &#123;</div><div class="line">    <span class="class"><span class="keyword">class</span>() </span>&#123;&#125;</div><div class="line">    method() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">'he'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//书上说CommonJS模块输出变量，我感觉这代码很单独js文件时来借鉴，这样很方便导入使用</span></div><div class="line"><span class="keyword">var</span> ms = &#123;&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getItem</span>(<span class="params">key</span>) </span>&#123;</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setItem</span>(<span class="params">key, value</span>) </span>&#123;</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">clear</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    ms = &#123;&#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = &#123;getItem, setItem, clear&#125;;</div><div class="line"><span class="comment">//等同于</span></div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">    getItem: getItem,</div><div class="line">    setItem: setItem,</div><div class="line">    clear: clear</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<ol>
+<li>属性名表达式(使用[]来实现)</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//对属性的定义有俩种(es5只能用方法一)</span></div><div class="line">obj.foo = <span class="number">123</span>;</div><div class="line">obj[<span class="string">'f'</span> + <span class="string">'oo'</span>] = <span class="number">123</span>;</div><div class="line"></div><div class="line"><span class="comment">//当多个定义的时候</span></div><div class="line"><span class="keyword">var</span> na = <span class="number">4</span>;</div><div class="line"><span class="keyword">var</span> hh = <span class="string">'wq'</span>;</div><div class="line"><span class="keyword">let</span> obj = &#123;</div><div class="line">    pro: <span class="number">1</span>,</div><div class="line">    <span class="string">'pp'</span>: <span class="number">2</span>,</div><div class="line">    [<span class="string">'a'</span> + na]: <span class="number">3</span>,</div><div class="line">    [wq]: <span class="number">4</span>,</div><div class="line">    [<span class="string">'a'</span> + wq]: <span class="number">5</span></div><div class="line">&#125;;</div><div class="line"><span class="comment">//虽然第一种和第二种都可以，但是遇见编译器关键字时第一种就会出错。所以建议用第二种来实现定义</span></div><div class="line"><span class="comment">//另外（表达式虽然可以使用，但是表达式计算的结果是全数字的话（数字开头也算），访问属性时会混乱出错）</span></div><div class="line"></div><div class="line"><span class="comment">//访问属性时</span></div><div class="line">obj[pro];<span class="comment">//ok</span></div><div class="line">obj[<span class="string">'pro'</span>];<span class="comment">//error</span></div><div class="line">obj[pp];<span class="comment">//error</span></div><div class="line">obj[<span class="string">'pp'</span>];<span class="comment">//ok</span></div><div class="line">obj.pro;<span class="comment">//ok</span></div><div class="line">obj.pp;<span class="comment">//ok</span></div><div class="line"></div><div class="line">obj.a4;<span class="comment">//ok</span></div><div class="line">obj[<span class="string">'a4'</span>];<span class="comment">//ok</span></div><div class="line">obj[a4];<span class="comment">//error</span></div><div class="line">obj[wq];<span class="comment">//ok</span></div><div class="line">obj[<span class="string">'awq'</span>];<span class="comment">//ok</span></div><div class="line">obj[awq];<span class="comment">//error</span></div><div class="line">obj.a4, obj.wq, obj.awq;<span class="comment">//ok</span></div><div class="line"><span class="comment">//从上看到，访问属性时最好使用`.`的形式。实在要用表达式的形式就要注意定义时候的形式。</span></div></pre></td></tr></table></figure>
 ]]></content>
     
     <summary type="html">
     
-      &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;函数参数默认压栈顺序，从左到右&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;const命令只保证变量指向地址不变，不能保证数据不变。&lt;/p&gt;
-&lt;/li&gt;
+      &lt;h3 id=&quot;变量命令&quot;&gt;&lt;a href=&quot;#变量命令&quot; class=&quot;headerlink&quot; title=&quot;变量命令&quot;&gt;&lt;/a&gt;变量命令&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;var和let &lt;/li&gt;
 &lt;/ol&gt;
-&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=
+&lt;ul&gt;
+&lt;li&gt;let只在其块级作用域内有效，而var却全局有效。&lt;/
     
     </summary>
     
@@ -263,7 +371,7 @@ function m2({x, y} = {x:0, y:0}) {}
     <link href="https://xuecat.github.io/2016/10/17/191/"/>
     <id>https://xuecat.github.io/2016/10/17/191/</id>
     <published>2016-10-17T13:09:30.000Z</published>
-    <updated>2016-11-15T12:39:59.282Z</updated>
+    <updated>2016-11-20T08:49:51.513Z</updated>
     
     <content type="html"><![CDATA[<ol>
 <li>如果一个值是恒定的，它命名中的字母要全部大写（如 <code>CONSTANT_VALUE_CASE</code> ）</li>
@@ -310,23 +418,8 @@ var a = [x1, x2];
 var a = [x1];
 var a = [];
 </code></pre><p>对象构造函数，为了一致性：</p>
-<pre><code>var o = new Object();
-
-var o2 = new Object();
-o2.a = 0;
-o2.b = 1;
-o2.c = 2;
-o2[&apos;strange key&apos;] = 3;
-</code></pre><p>改为：</p>
-<pre><code>var o = {};
-
-var o2 = {
-    a: 0,
-    b: 1,
-    c: 2,
-    &apos;strange key&apos;: 3
-};
-</code></pre><ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">    <span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>();</div><div class="line"></div><div class="line">    <span class="keyword">var</span> o2 = <span class="keyword">new</span> <span class="built_in">Object</span>();</div><div class="line">    o2.a = <span class="number">0</span>;</div><div class="line">    o2.b = <span class="number">1</span>;</div><div class="line">    o2.c = <span class="number">2</span>;</div><div class="line">    o2[<span class="string">'strange key'</span>] = <span class="number">3</span>;</div><div class="line"></div><div class="line">改为：</div><div class="line"></div><div class="line">    <span class="keyword">var</span> o = &#123;&#125;;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> o2 = &#123;</div><div class="line">        a: <span class="number">0</span>,</div><div class="line">        b: <span class="number">1</span>,</div><div class="line">        c: <span class="number">2</span>,</div><div class="line">        <span class="string">'strange key'</span>: <span class="number">3</span></div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="comment">//关于对象属性的设置和获取，也最好使用字面量；请看`192`第15条</span></div></pre></td></tr></table></figure>
+<ol>
 <li>强烈禁止修改如 Object.prototype 和 Array.prototype 等对象的原型。</li>
 <li>不要使用条件注释；条件注释会在运行时改变JavaScript语法树，阻碍自动化工具。</li>
 <li>私有 属性和方法应该以下划线开头命名</li>
@@ -435,19 +528,16 @@ undefined
     <link href="https://xuecat.github.io/2016/10/16/190/"/>
     <id>https://xuecat.github.io/2016/10/16/190/</id>
     <published>2016-10-16T08:57:00.000Z</published>
-    <updated>2016-11-15T14:11:43.191Z</updated>
+    <updated>2016-11-21T13:49:10.497Z</updated>
     
     <content type="html"><![CDATA[<p><strong>1. this.props.children</strong><br>它是链表没错(当只有一个时，是string之类元素)</p>
-<pre><code>React.Children.map(this.props.children, function (child) {
-        return &lt;li&gt;{child}&lt;/li&gt;;
-        })
-//每个child是一个ReactElement的object，可能ReactElement有默认的隐式处理吧_shadowChildren之类吧！
-</code></pre><p>此句，一直不明白为何object能当字符处理。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">React.Children.map(<span class="keyword">this</span>.props.children, <span class="function"><span class="keyword">function</span> (<span class="params">child</span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> &lt;li&gt;&#123;child&#125;&lt;/li&gt;;</div><div class="line">        &#125;)</div><div class="line"><span class="comment">//每个child是一个ReactElement的object，可能ReactElement有默认的隐式处理吧_shadowChildren之类吧！</span></div></pre></td></tr></table></figure>
+<p>此句，一直不明白为何object能当字符处理。</p>
 <p><strong>2. markdown显示</strong><br>使用remarkable库，可以支持markdown格式显示语句。<br><br>但是不能直接render解析（虽然表面看是对的），好像react做了XSS 攻击的保护。<br><br>解析后的语句只能放入节点属性中：dangerouslySetInnerHTML={ __html: md.render(this.props.children.toString()) }<br><br>值得注意的是，它支持的markdown语法是最新的，也就是说有些语法严格和空格有关(如<code># d</code>必须空格)</p>
 <p><strong>3. react key添加</strong><br>我在用map的时候，被警告必须加key。react对dom做遍历的时候，会根据data-reactid生成虚拟dom树。如果你没有手动的添加unique constant key的话，react是无法记录你的dom操作的。</p>
 <p><strong>4. createClass函数问题</strong><br>createClass创建的方法</p>
-<pre><code>rawMarkup: function() {}
-</code></pre><p>要this.rawMarkup()才能访问到；晕，刚居然没注意。</p>
+<p><code>rawMarkup: function() {}</code></p>
+<p>要<code>this.rawMarkup()</code>才能访问到；晕，刚居然没注意。</p>
 <p><strong>5. eslint安装</strong><br>eslint和eslint插件必须全部 全局安装。局部安装老是报错，无法找到插件。</p>
 <p><strong>6. react-es6</strong><br>这个由于很多，只说下属性的设置；<br>es5对类属性设置是用： <code>render: function(){}</code><br><br>es6对类属性设置是用：<code>render() {}</code><br><br>居然看半天没发现。<br><a href="http://blog.csdn.net/wangzengdi/article/details/50719395" target="_blank" rel="external">http://blog.csdn.net/wangzengdi/article/details/50719395</a></p>
 <p><strong>7. 无状态的函数式组件</strong><br>除了正统的rn创建外；还有个创建组件的方法<br></p>
@@ -465,7 +555,7 @@ undefined
     <summary type="html">
     
       &lt;p&gt;&lt;strong&gt;1. this.props.children&lt;/strong&gt;&lt;br&gt;它是链表没错(当只有一个时，是string之类元素)&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;React.Children.map(this.props.children, function (ch
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre
     
     </summary>
     
@@ -900,9 +990,9 @@ var btnOk2=document.createElement(&quot;&lt;input type=&apos;button&apos; value=
       <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
     
     
-      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
-    
       <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
+    
+      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
     
       <category term="stl" scheme="https://xuecat.github.io/tags/stl/"/>
     
@@ -993,159 +1083,6 @@ var btnOk2=document.createElement(&quot;&lt;input type=&apos;button&apos; value=
       <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
     
       <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Sobey的sdk库178</title>
-    <link href="https://xuecat.github.io/2016/08/30/178/"/>
-    <id>https://xuecat.github.io/2016/08/30/178/</id>
-    <published>2016-08-30T15:39:20.000Z</published>
-    <updated>2016-09-21T13:53:09.922Z</updated>
-    
-    <content type="html"><![CDATA[<table>
-<thead>
-<tr>
-<th>头文件</th>
-<th style="text-align:center">用途</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="#SBT_WAVFileReadWrite">SBT_WAVFileReadWrite</a></td>
-<td style="text-align:center">Wave文件读写（附重采样转换）</td>
-</tr>
-<tr>
-<td><a href="#SBT_PCMAdvProcess">SBT_PCMAdvProcess</a></td>
-<td style="text-align:center">PCM数据操作：重采样转换、WAV数据大小计算（整个音频数据长度）、(跳下)</td>
-</tr>
-<tr>
-<td><a href="#SBT_PCMAdvProcess2">SBT_PCMAdvProcess2</a></td>
-<td style="text-align:center">SBT_AudioMIX_Param_ST,没用过，从解释感觉是通道增益 <code>待更新</code></td>
-</tr>
-<tr>
-<td><a href="#SBT_PCMBasicProcess">SBT_PCMBasicProcess</a></td>
-<td style="text-align:center">PCM数据操作：重采样、调节音量、声道分离、声道合并、降噪、采样率过滤、（跳下）</td>
-</tr>
-<tr>
-<td><a href="#SBT_PCMBasicProcess2">SBT_PCMBasicProcess2</a></td>
-<td style="text-align:center">时间计算</td>
-</tr>
-<tr>
-<td><a href="#SBT_MPEGBufferEncode">SBT_MPEGBufferEncode</a></td>
-<td style="text-align:center">MPEG编码，视频和音频基带数据编码，只用过YUV、RGB基带数据视频编码其它未尝试<code>待更新</code></td>
-</tr>
-<tr>
-<td><a href="#SBT_MPGABufferDecode">SBT_MPGABufferDecode</a></td>
-<td style="text-align:center">MPGE(mpga)音频的解码,支持mp1/mp2/mp3解码（帧解码）,对应SBT_MPABufferEncode</td>
-</tr>
-<tr>
-<td><a href="#SBT_CutlistV2">SBT_CutlistV2</a></td>
-<td style="text-align:center">万能代码，把文件名给传给cutlist，让cutlist播，自己去取缓存</td>
-</tr>
-<tr>
-<td><a href="#SBT_MediaDetect">SBT_MediaDetect</a></td>
-<td style="text-align:center">万能媒体文件读取，读取视音频文件信息，GetClipSampleIcon不知道何用<code>待更新</code></td>
-</tr>
-<tr>
-<td><a href="#SBT_MediaDetect2">SBT_MediaDetect2</a></td>
-<td style="text-align:center">同上，增加可读性的文件读取，测试代码见<a href="#SBT_CutlistV2">SBT_CutlistV2</a></td>
-</tr>
-</tbody>
-</table>
-<hr>
-<p></p><h2 id="SBT_WAVFileReadWrite"> SBT_WAVFileReadWrite <h2><p></p>
-<ol>
-<li>writer是自带重采样的（采样率或通道转换）</li>
-<li>readerex才带有重采样功能<figure class="highlight c"><figcaption><span>测试代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">   BYTE* bybuffer = <span class="literal">NULL</span>;</div><div class="line"><span class="keyword">int</span> len = <span class="number">0</span>;</div><div class="line">BOOL end;</div><div class="line">WAVEFORMATEX wavef, *pwave;</div><div class="line">Init_StanderWave(wavef);</div><div class="line"></div><div class="line">pwave = &amp;wavef;</div><div class="line">SBT_WAVFileReaderEx read;</div><div class="line">read.Initialize();</div><div class="line">read.SetInputFile(<span class="number">_</span>T(<span class="string">"D:\\tebig.wav"</span>));</div><div class="line">read.GetOutputWAVEFormat(&amp;pwave);</div><div class="line">wavef.nChannels = pwave-&gt;nChannels;</div><div class="line">wavef.wBitsPerSample = pwave-&gt;wBitsPerSample;</div><div class="line">Calcute_Block_SamplesPer(wavef);</div><div class="line">read.SetOutputWAVEFormat(&amp;wavef);</div><div class="line">read.SetPCMFrameSize(BY_BYTE, wavef.nAvgBytesPerSec/<span class="number">25</span>);<span class="comment">//</span></div><div class="line">read.EnableInternalBuffer();</div><div class="line">read.StartRead();</div><div class="line"></div><div class="line">SBT_WAVFileWriter wavwrite;</div><div class="line"><span class="keyword">int</span> ar = wavwrite.Initialize();</div><div class="line">ar = wavwrite.SetOutputFile(<span class="number">_</span>T(<span class="string">"D:\\wwaw.wav"</span>));</div><div class="line">ar = wavwrite.SetInputWAVEFormat(&amp;wavef);</div><div class="line">ar = wavwrite.SetOutputWAVEFormat(&amp;wavef);</div><div class="line">ar = wavwrite.StartWrite();</div><div class="line"></div><div class="line"><span class="keyword">while</span> (<span class="number">1</span>)</div><div class="line">&#123;</div><div class="line">	read.ReadEx(BY_BYTE, wavef.nAvgBytesPerSec/<span class="number">25</span>, &amp;bybuffer, &amp;len, &amp;pwave, &amp;end);<span class="comment">//输出长度依旧不定长不知为何,BY_FRAME我没成功过</span></div><div class="line">	<span class="keyword">if</span> (end)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	&#125;</div><div class="line">	ar = wavwrite.SetInputBuffer(bybuffer, len);<span class="comment">//这个函数很挑剔，SBT_PCMBasicProcess2的从采样数据输入就不行（不知为何）。</span></div><div class="line">&#125;</div><div class="line">wavwrite.StopWrite();</div><div class="line">   </div></pre></td></tr></table></figure>
-</li>
-</ol>
-<hr>
-<p></p><h2 id="SBT_PCMAdvProcess"> SBT_PCMAdvProcess <h2><p></p>
-<p></p><h2 id="SBT_PCMAdvProcess2"> SBT_PCMAdvProcess2 <h2><p></p>
-<ol>
-<li>这个是通过名和void指针调用</li>
-</ol>
-<hr>
-<p></p><h2 id="SBT_PCMBasicProcess"> SBT_PCMBasicProcess <h2><p></p>
-<p></p><h2 id="SBT_PCMBasicProcess2"> SBT_PCMBasicProcess2 <h2><p></p>
-<ol>
-<li>CalResampleParam参数未知，待研究</li>
-<li>ReformatLPCM在按照帧做转换时会出现输出数据不定长（连续写入也有问题），ReformatLPCM2按帧转换输出长度比较正常，但是对WAVEFORMATEX要计算好。<figure class="highlight c"><figcaption><span>测试代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">m_SBPcmProcess.ReformatLPCM2(*m_pSrcWave, m_pReadData, inlen, *m_pDstWave, &amp;pOut1, &amp;outlen1);</div><div class="line"></div></pre></td></tr></table></figure>
-</li>
-</ol>
-<hr>
-<p></p><h2 id="SBT_MPEGBufferEncode"> SBT_MPEGBufferEncode <h2><br><figure class="highlight c"><figcaption><span>测试代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">SBT_MPEGBufferEncode*	m_pBufferEncode;</div><div class="line">DO(m_pBufferEncode-&gt;SetEncodeOperationMode(XH_MPEG_ESBUF_OUT));</div><div class="line">    </div><div class="line">XH_MPEG_ENCODE_PARAM paramIn;</div><div class="line">paramIn.GetDefaultParam(m_nVideoType == SD_TYPE ? XH_MPEG2_422PML : XH_MPEG2_422PHL);</div><div class="line">paramIn.chroma_format = <span class="number">1</span>;</div><div class="line">paramIn.group_I_frame_count = <span class="number">1</span>;</div><div class="line">paramIn.group_B_frame_count = <span class="number">0</span>;</div><div class="line">paramIn.group_P_frame_count = <span class="number">0</span>;</div><div class="line"></div><div class="line">DO(m_pBufferEncode-&gt;SetEncodeParam(&amp;paramIn));</div><div class="line">DO(m_pBufferEncode-&gt;SetEncodeOutputCB(XH_VIDEO_OUTPUT_CB, EncodeOutCB, <span class="keyword">this</span>));</div><div class="line"></div><div class="line">m_bitInfoHead.biCompression = BI_RGB;</div><div class="line">DO(m_pBufferEncode-&gt;SetVideoInputBufferFormat(&amp;m_bitInfoHead));</div><div class="line">DO(m_pBufferEncode-&gt;StartEncode());</div><div class="line">DO(m_pBufferEncode-&gt;SetVideoInputBuffer(m_pBmpDataBuf, m_dwBmpSize));</div><div class="line"></div></pre></td></tr></table></figure><p></p>
-<hr>
-<p></p><h2 id="SBT_MPGABufferDecode"> SBT_MPGABufferDecode <h2><br><figure class="highlight"><figcaption><span>测试代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">//这是mp3解码测试，从MP3里一个个读取帧数据，再放入解码。</div><div class="line">//对pcm文件写入，要用SBT_WAVFileReadWrite。</div><div class="line">//自写的pcm文件写入老是有点问题，也没调试；代码不易，暂时放入记录以后修改。</div><div class="line">#define Calcute_Block_SamplesPer(outhead) outhead.nBlockAlign = (outhead.nChannels * outhead.wBitsPerSample) / 8;\</div><div class="line">outhead.nAvgBytesPerSec = outhead.nSamplesPerSec * outhead.nBlockAlign;</div><div class="line"></div><div class="line">#define Create_DstWave(outhead, inhead) \</div><div class="line">	outhead.wFormatTag = 1;\</div><div class="line">	outhead.nSamplesPerSec = 48000;\</div><div class="line">	outhead.nAvgBytesPerSec = 1152000;\</div><div class="line">	outhead.nChannels = 8;\</div><div class="line">	outhead.nBlockAlign = 24;\</div><div class="line">	outhead.wBitsPerSample = inhead.wBitsPerSample;\</div><div class="line">	Calcute_Block_SamplesPer(outhead);</div><div class="line"></div><div class="line">#define GetID3V2Size(header) (header.Size[0] &amp; 0x7F)&lt;&lt; 21 | (header.Size[1] &amp; 0x7F) &lt;&lt; 14 | (header.Size[2] &amp; 0x7F) &lt;&lt; 7 | (header.Size[3] &amp; 0x7F); </div><div class="line"></div><div class="line">#define BITRATEFREE 0xfffe</div><div class="line">#define BITRATEBAD  0xffff</div><div class="line"></div><div class="line">//// MP3FRAMEHEADER structure</div><div class="line">//struct MP3FRAMEHEADER //4byte</div><div class="line">//&#123;</div><div class="line">//	unsigned framesync   :11;    //同步信息</div><div class="line">//	unsigned MPEGID      : 2;    //版本</div><div class="line">//	unsigned layer       : 2;    //层</div><div class="line">//	unsigned protectbit  : 1;    //CRC 校验</div><div class="line">//	unsigned bitrateindx : 4;    //位率</div><div class="line">//	unsigned samplefreq  : 2;    //采样率</div><div class="line">//	unsigned paddingbit  : 1;    //帧长调节</div><div class="line">//	unsigned privatebit  : 1;    //保留字</div><div class="line">//	unsigned channel     : 2;    //声道模式</div><div class="line">//	unsigned modeext     : 2;    //扩充模型</div><div class="line">//	unsigned copyright   : 1;    //Copyright</div><div class="line">//	unsigned original    : 1;    //原版标志</div><div class="line">//	unsigned emphasis    : 2;    //强调模式</div><div class="line">//&#125;;</div><div class="line"></div><div class="line">// MP3FRAMEHEADER structure</div><div class="line">struct MP3FRAMEHEADER</div><div class="line">&#123;</div><div class="line">	unsigned emphasis : 2;			// M</div><div class="line">	unsigned original : 1;			// L</div><div class="line">	unsigned copyright : 1;			// K</div><div class="line">	unsigned modeext : 2;			// J</div><div class="line">	unsigned channel : 2;			// I</div><div class="line">	unsigned privatebit : 1;			// H</div><div class="line">	unsigned paddingbit : 1;			// G</div><div class="line">	unsigned samplefreq : 2;		// F</div><div class="line">	unsigned bitrateindx : 4;			// E</div><div class="line">	unsigned protectbit : 1;			// D</div><div class="line">	unsigned layer : 2;			// C</div><div class="line">	unsigned MPEGID : 2;			// B</div><div class="line">	unsigned framesync : 11;		// A</div><div class="line">&#125;;</div><div class="line"></div><div class="line">struct MP3ID3V2TAG //10byte</div><div class="line">&#123;</div><div class="line">	char Header[3];//ID3</div><div class="line">	char Ver;//3</div><div class="line">	char Revision;</div><div class="line">	char Flag;</div><div class="line">	char Size[4];</div><div class="line">&#125;;</div><div class="line"></div><div class="line">// MP3ID3V1TAG structure</div><div class="line">struct MP3ID3V1TAG//128byte</div><div class="line">&#123;</div><div class="line">	char ident[3]; // TAG</div><div class="line">	char title[30];</div><div class="line">	char artist[30];</div><div class="line">	char album[30];</div><div class="line">	char year[4];</div><div class="line">	char comment[28];</div><div class="line">	BYTE reserved;</div><div class="line">	BYTE tracknum;</div><div class="line">	BYTE genre;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line">int g_BitRates[] = &#123;</div><div class="line">	BITRATEFREE, BITRATEFREE, BITRATEFREE, BITRATEFREE, BITRATEFREE, </div><div class="line">	32,  32,  32,  32,    8,</div><div class="line">	64,  48,  40,  48,   16,</div><div class="line">	96,  56,  48,  56,  24,</div><div class="line">	128,  64,  56,  64,  32,</div><div class="line">	160,  80,  64,  80,  40,</div><div class="line">	192,  96,  80,  96,  48,</div><div class="line">	224, 112,  96, 112,  56,</div><div class="line">	256, 128, 112, 128,  64,</div><div class="line">	288, 160, 128, 144,  80,</div><div class="line">	320, 192, 160, 160,  96,</div><div class="line">	352, 224, 192, 176, 112,</div><div class="line">	384, 256, 224, 192, 128,</div><div class="line">	416, 320, 256, 224, 144,</div><div class="line">	448, 384, 320, 256, 160,</div><div class="line">	BITRATEBAD, BITRATEBAD, BITRATEBAD, BITRATEBAD, BITRATEBAD</div><div class="line">&#125;;</div><div class="line"></div><div class="line">int g_SampleCountMap[4][4] = &#123;</div><div class="line">	0,    0,    0,    0,</div><div class="line">	576,  0,  576, 1152, //l3</div><div class="line">	1152, 0, 1152, 1152, //l2</div><div class="line">	384,  0,  384,  384, //l1</div><div class="line">&#125;;</div><div class="line"></div><div class="line">int g_SampleRate[4][4] = &#123;</div><div class="line">	11025, 0, 22050, 44100,//0</div><div class="line">	12000,     0,    24000,   48000,//1</div><div class="line">	8000,		0,	  16000,   32000,//2</div><div class="line">	0,		0,		0,	0,</div><div class="line">&#125;;</div><div class="line"></div><div class="line">int GetBitRate(INT nlayer, INT nversion, int nbitindex)</div><div class="line">&#123;</div><div class="line">	if (nversion == 3)</div><div class="line">	&#123;</div><div class="line">		return g_BitRates[nbitindex * 5 + (3 - nlayer)];</div><div class="line">	&#125;</div><div class="line">	else if (nversion == 2)//</div><div class="line">	&#123;</div><div class="line">		if (nlayer == 3)</div><div class="line">			return g_BitRates[nbitindex * 5 + 3];</div><div class="line">		else</div><div class="line">			return g_BitRates[nbitindex * 5 + 4];</div><div class="line">	&#125;</div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">bool Is_Mp3FrameHead(const unsigned char * pHead) </div><div class="line">&#123;</div><div class="line">	if (pHead[0] == 0xff &amp;&amp; (pHead[1] &amp; 0xe0) == 0xe0)</div><div class="line">	&#123;</div><div class="line">		if (((pHead[1] &amp; 0x06) &gt;&gt; 1) == 0) return 0; /* no layer 4 */</div><div class="line">		if (((pHead[2] &amp; 0xf0) &gt;&gt; 4) == 15) return 0; /* bitrate can't be 1111 */</div><div class="line">		if (((pHead[2] &amp; 0x0c) &gt;&gt; 2) == 3) return 0; /* samplerate can't be 11 */</div><div class="line">		return 1;</div><div class="line">	&#125;</div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">bool Is_Mp3V1Head(const unsigned char* pHead)</div><div class="line">&#123;</div><div class="line">	if (pHead[0] == 0x00 &amp;&amp; pHead[1] == 0x00 &amp;&amp; pHead[2] == 0x01 &amp;&amp; pHead[3] == 0xba) &#123;</div><div class="line">		return 1;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void ChangeEndian(void* pBuffer, int nBufSize)</div><div class="line">&#123;</div><div class="line">	if (!pBuffer || !nBufSize)</div><div class="line">		return;</div><div class="line"></div><div class="line">	char temp;</div><div class="line">	for (int i = 0; i &lt; nBufSize / 2; i++)</div><div class="line">	&#123;</div><div class="line">		temp = ((char*)pBuffer)[i];</div><div class="line">		((char*)pBuffer)[i] = ((char*)pBuffer)[nBufSize - i - 1];</div><div class="line">		((char*)pBuffer)[nBufSize - i - 1] = temp;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">void writefilehead(WAVEFORMATEX&amp; head, int sz, FILE* pwrite)</div><div class="line">&#123;</div><div class="line">	int bits = head.wBitsPerSample;</div><div class="line">	char *data = (char*)"RIFF";</div><div class="line">	short short_temp;</div><div class="line">	int long_temp;</div><div class="line">	int fileSize;</div><div class="line">	int size = sz;</div><div class="line"></div><div class="line">	fileSize = size + 36;</div><div class="line"></div><div class="line">	data = (char*)"RIFF";</div><div class="line">	fwrite(data, sizeof(char), 4, pwrite);</div><div class="line">	fwrite(&amp;fileSize, sizeof(int), 1, pwrite);</div><div class="line">	data = (char*)"WAVE";</div><div class="line">	fwrite(data,sizeof(char),4,pwrite);</div><div class="line">	data = (char*)"fmt ";</div><div class="line">	fwrite(data,sizeof(char),4,pwrite);</div><div class="line">	long_temp = 16;</div><div class="line">	fwrite(&amp;long_temp, sizeof(int), 1, pwrite);</div><div class="line">	short_temp = 0x01;</div><div class="line">	fwrite(&amp;short_temp,sizeof(int),1,pwrite);</div><div class="line"></div><div class="line">	short_temp = (head.nChannels);</div><div class="line">	fwrite(&amp;short_temp, sizeof(short), 1,pwrite);</div><div class="line">	long_temp=(head.nSamplesPerSec);</div><div class="line">	fwrite(&amp;long_temp,sizeof(int),1,pwrite);</div><div class="line">	long_temp=(bits/8)*(head.nChannels)*(head.nSamplesPerSec);</div><div class="line">	fwrite(&amp;long_temp,sizeof(int),1,pwrite);</div><div class="line">	short_temp=(bits/8)*(head.nChannels);</div><div class="line">	fwrite(&amp;short_temp,sizeof(short),1,pwrite);</div><div class="line">	short_temp=(bits);</div><div class="line">	fwrite(&amp;short_temp,sizeof(short),1,pwrite);</div><div class="line"></div><div class="line">	data=(char*)"data";</div><div class="line">	fwrite(data,sizeof(char),4,pwrite);</div><div class="line">	fwrite(&amp;size,sizeof(int),1,pwrite);</div><div class="line">	fseek(pwrite,44,SEEK_SET);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int CBmp2Video::ReadMP3(int lengh)</div><div class="line">&#123;</div><div class="line">	#define Release_And_Return() &#123; fclose(m_pAudioInfo-&gt;pFile);\</div><div class="line">	delete m_pAudioInfo;\</div><div class="line">	m_pAudioInfo = NULL;\</div><div class="line">	return 0;&#125;\</div><div class="line"></div><div class="line">	if (m_pAudioInfo-&gt;pFile == NULL)</div><div class="line">		return 0;</div><div class="line"></div><div class="line">	int nReadPos = 0;</div><div class="line">	int v2headsz = 0;</div><div class="line">	SBT_MPGABufferDecode decode;</div><div class="line">	MP3FRAMEHEADER frameHead = &#123;0&#125;;</div><div class="line">	MP3ID3V2TAG v2tag = &#123;0&#125;;</div><div class="line"></div><div class="line">	int rd = fread_s(&amp;v2tag, sizeof(MP3ID3V2TAG), sizeof(MP3ID3V2TAG), 1, m_pAudioInfo-&gt;pFile);</div><div class="line">	if (rd &lt; 1)</div><div class="line">		Release_And_Return();</div><div class="line"></div><div class="line">	if (v2tag.Header[0] == 'I' &amp;&amp;//</div><div class="line">		v2tag.Header[1] == 'D' &amp;&amp;</div><div class="line">		v2tag.Header[2] == '3')</div><div class="line">	&#123;</div><div class="line">		if (v2tag.Ver != 3)</div><div class="line">			Release_And_Return();</div><div class="line"></div><div class="line">		v2headsz = GetID3V2Size(v2tag);</div><div class="line"></div><div class="line">		rd = fseek(m_pAudioInfo-&gt;pFile, v2headsz, SEEK_CUR);</div><div class="line">		</div><div class="line">		bool bfind = false;</div><div class="line">		int nBlockPos = 0;</div><div class="line">		BYTE headbuffer[10] = &#123;0&#125;;</div><div class="line">		while (true)//部分MP3，会对标签到第一帧进行多余填充，此时长度无法定位第一帧，只能一个一个读取寻找</div><div class="line">		&#123;</div><div class="line">			if (bfind)</div><div class="line">				break;</div><div class="line"></div><div class="line">			rd = fread_s(&amp;headbuffer, sizeof(headbuffer) * sizeof(BYTE), sizeof(headbuffer) * sizeof(BYTE), 1, m_pAudioInfo-&gt;pFile);</div><div class="line">			for (int i = 0; i &lt; 10; i++)</div><div class="line">			&#123;</div><div class="line">				if (headbuffer[i] == 255)</div><div class="line">				&#123;</div><div class="line">					bfind = true;</div><div class="line">					break;</div><div class="line">				&#125;</div><div class="line">				nBlockPos++;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		nReadPos = v2headsz + nBlockPos + 10;</div><div class="line">		rd = fseek(m_pAudioInfo-&gt;pFile, nReadPos, SEEK_SET);</div><div class="line">	&#125;</div><div class="line">	else//当没有标签头时</div><div class="line">	&#123;</div><div class="line">		rd = fseek(m_pAudioInfo-&gt;pFile, 0-sizeof(MP3ID3V2TAG), SEEK_CUR);</div><div class="line">		nReadPos = 0;</div><div class="line">	&#125;</div><div class="line">	if (rd == 0)</div><div class="line">	&#123;</div><div class="line">		m_pAudioInfo-&gt;nDataType = MP3_TYPE;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	SBT_MPGABufferDecode decode;</div><div class="line"></div><div class="line">	FILE* writewave = NULL;</div><div class="line">	int allsize = 0;</div><div class="line">	int nsamplerate = 0;</div><div class="line">	int outlen = 0;</div><div class="line">	int nbitrate = 0;</div><div class="line">	int nframebyte = 0;</div><div class="line">	bool bhavehead = false;</div><div class="line">	WAVEFORMATEX writeformat = &#123;0&#125;;</div><div class="line">	MP3FRAMEHEADER frameHead = &#123;0&#125;;</div><div class="line"></div><div class="line">	decode.Initialize();</div><div class="line">	decode.StartDecode();</div><div class="line"></div><div class="line">	fopen_s(&amp;writewave, "www.wav", "wb");</div><div class="line"></div><div class="line">	rd = fread_s(&amp;frameHead, sizeof(MP3FRAMEHEADER), sizeof(MP3FRAMEHEADER), 1, m_pAudioInfo-&gt;pFile);</div><div class="line"></div><div class="line">	while (rd &gt; 0)</div><div class="line">	&#123;</div><div class="line">		if (rd &lt; 1)</div><div class="line">			return -1;</div><div class="line">		else if (Is_Mp3FrameHead((const unsigned char*)&amp;frameHead))</div><div class="line">		&#123;</div><div class="line">			fseek(m_pAudioInfo-&gt;pFile, 0-sizeof(MP3FRAMEHEADER), SEEK_CUR);</div><div class="line"></div><div class="line">			ChangeEndian(&amp;frameHead, 4);</div><div class="line"></div><div class="line">			nsamplerate = g_SampleRate[frameHead.samplefreq][frameHead.MPEGID];</div><div class="line">			nbitrate	= GetBitRate(frameHead.layer, frameHead.MPEGID, frameHead.bitrateindx);</div><div class="line"></div><div class="line">			if (frameHead.layer == 3)</div><div class="line">				nframebyte = (12000 * nbitrate / nsamplerate + frameHead.paddingbit) * 4;</div><div class="line">			else</div><div class="line">				nframebyte = 144000 * nbitrate / nsamplerate + frameHead.paddingbit;</div><div class="line"></div><div class="line">			int noutDecodelen = 0;</div><div class="line">			BYTE* poutDecodebuffer = NULL;</div><div class="line">			BYTE* pReadbuffer = new BYTE[nframebyte];</div><div class="line">			rd = fread_s(pReadbuffer, nframebyte, nframebyte, 1, m_pAudioInfo-&gt;pFile);</div><div class="line">			</div><div class="line">			//解码</div><div class="line">			nReadPos += nframebyte;</div><div class="line">			MPEG_AUDIO_FRAME_INFO mpginfo = &#123;0&#125;;</div><div class="line">			decode.GetAudioFrameInfo(pReadbuffer, nframebyte, mpginfo);</div><div class="line">			rd = decode.SetInputBuffer(pReadbuffer, nframebyte);</div><div class="line">			rd = decode.GetOutputBufferFormat(&amp;noutDecodelen, &amp;writeformat);</div><div class="line">			rd = decode.GetOutputBuffer(&amp;poutDecodebuffer, &amp;noutDecodelen);</div><div class="line"></div><div class="line">			allsize += noutDecodelen;</div><div class="line">			if (!bhavehead)</div><div class="line">			&#123;</div><div class="line">				bhavehead = true;</div><div class="line">				writefilehead(writeformat, noutDecodelen, writewave);</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			fwrite(poutDecodebuffer, noutDecodelen, 1, writewave);</div><div class="line"></div><div class="line">			delete pReadbuffer;</div><div class="line"></div><div class="line">			if (nReadPos &gt;= lengh)</div><div class="line">			&#123;</div><div class="line">				break;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		else if (Is_Mp3V1Head((const unsigned char*)&amp;frameHead))</div><div class="line">		&#123;</div><div class="line">			return -1;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		rd = fread_s(&amp;frameHead, sizeof(MP3FRAMEHEADER), sizeof(MP3FRAMEHEADER), 1, m_pAudioInfo-&gt;pFile);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	fseek(writewave, 40, SEEK_SET);</div><div class="line">	fwrite(&amp;allsize, 1, sizeof(int), writewave);</div><div class="line">	allsize += 36;</div><div class="line">	fseek(writewave, 4, SEEK_SET);</div><div class="line">	fwrite(&amp;allsize, 1, sizeof(int), writewave);</div><div class="line">	fclose(writewave);</div><div class="line"></div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure><p></p>
-<hr>
-<p></p><h2 id="SBT_CutlistV2"> SBT_CutlistV2 <h2><br><figure class="highlight c"><figcaption><span>测试代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">////////////////////////////////////////////////////////////////////////////////////</span></div><div class="line"><span class="keyword">int</span> allsize = <span class="number">0</span>;</div><div class="line">*FILE* writewave = <span class="literal">NULL</span>;</div><div class="line">fopen_s(&amp;writewave, <span class="string">"D:\\wwq.wav"</span>, <span class="string">"wb"</span>);*/</div><div class="line">SBT_WAVFileWriter wavewrite;</div><div class="line">SBT_MEDIA_INFO2 info2;</div><div class="line">SBT_MediaDetect2 detect2;</div><div class="line">detect2.SetInputFile(lpPath);</div><div class="line">detect2.GetMediaInfo2(&amp;info2);</div><div class="line"></div><div class="line">WAVEFORMATEX outhead = info2.AudioInfo(<span class="number">0</span>).stWavFormat;</div><div class="line">outhead.nSamplesPerSec = <span class="number">48000</span>;</div><div class="line">Calcute_Block_SamplesPer(outhead);</div><div class="line"></div><div class="line">AM_MEDIA_TYPE meditype = &#123;<span class="number">0</span>&#125;;</div><div class="line">meditype.majortype = MEDIATYPE_Audio;</div><div class="line">meditype.formattype = FORMAT_WaveFormatEx;</div><div class="line">meditype.cbFormat = <span class="keyword">sizeof</span>(WAVEFORMATEX);</div><div class="line">meditype.pbFormat = <span class="keyword">new</span> BYTE[meditype.cbFormat];</div><div class="line">memcpy_s(meditype.pbFormat, <span class="keyword">sizeof</span>(WAVEFORMATEX), &amp;outhead, <span class="keyword">sizeof</span>(WAVEFORMATEX));</div><div class="line"></div><div class="line">ST_CUTLIST_ITEM* pItemList = <span class="keyword">new</span> ST_CUTLIST_ITEM[<span class="number">1</span>];</div><div class="line"><span class="keyword">int</span> nFrameNum = (<span class="keyword">int</span>)((info2.AudioInfo(<span class="number">0</span>).llDuration*<span class="number">25</span>/(<span class="number">1000</span>*<span class="number">10</span>*<span class="number">1000</span>))+<span class="number">0.001</span>);</div><div class="line">pItemList[<span class="number">0</span>].llMediaOut = nFrameNum;</div><div class="line">pItemList[<span class="number">0</span>].llTimelineIn = <span class="number">0</span>;</div><div class="line">pItemList[<span class="number">0</span>].llTimelineOut = pItemList[<span class="number">0</span>].llMediaOut;</div><div class="line">pItemList[<span class="number">0</span>].bstrFileName = strPath;</div><div class="line">pItemList[<span class="number">0</span>].dwFileFormatID = info2.FileFormatID();</div><div class="line">pItemList[<span class="number">0</span>].dwMediaTypeID = info2.AudioInfo(<span class="number">0</span>).nMediaID;</div><div class="line">pItemList[<span class="number">0</span>].dwItemType = SBT_CUTLIST_ITEM_AUDIO;</div><div class="line">pItemList[<span class="number">0</span>].dwReserved1 = pItemList[<span class="number">0</span>].dwReserved2 = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="comment">//////////////////函数执行</span></div><div class="line"><span class="comment">//////////////////设置参数</span></div><div class="line">wavewrite.Initialize();</div><div class="line">wavewrite.SetOutputFile(<span class="number">_</span>T(<span class="string">"D:\\qqw.wav"</span>));</div><div class="line">wavewrite.SetInputWAVEFormat(&amp;outhead);</div><div class="line">wavewrite.SetOutputWAVEFormat(&amp;outhead);</div><div class="line">wavewrite.StartWrite();</div><div class="line"></div><div class="line"><span class="comment">//writefilehead(outhead, 22, writewave);</span></div><div class="line"></div><div class="line"><span class="keyword">int</span> rd = m_pSbCutList-&gt;Initialize(SBT_CUTLIST_ITEM_AUDIO);</div><div class="line">rd = m_pSbCutList-&gt;SetBufferingMode(TRUE);</div><div class="line">rd = m_pSbCutList-&gt;SetBufferPoolSize(<span class="number">25</span>, <span class="number">100</span>);</div><div class="line">rd = m_pSbCutList-&gt;SetFPS(<span class="number">0L</span>);</div><div class="line">rd = m_pSbCutList-&gt;SetOutputFormat(SBT_CUTLIST_ITEM_AUDIO, &amp;meditype);</div><div class="line">rd = m_pSbCutList-&gt;SetItemList(pItemList, <span class="number">1</span>);</div><div class="line">rd = m_pSbCutList-&gt;SetStatus(SBT_CUTLIST_STATUS_PLAY);</div><div class="line"></div><div class="line"><span class="comment">/////////////////////获取数据</span></div><div class="line">ST_CUTLISTV2_DECODE_OUT stDecout;</div><div class="line">ST_CUTLISTV2_DECODE_IN stDecIn;</div><div class="line"></div><div class="line">stDecIn.llTimelinePos = <span class="number">0</span>;</div><div class="line">stDecIn.pUserBuffer = <span class="literal">NULL</span>;</div><div class="line">stDecIn.pUserBuffer2 = <span class="literal">NULL</span>;</div><div class="line">stDecIn.nUserBufSize = <span class="number">0</span>;</div><div class="line">stDecIn.nUserBufStride =  <span class="number">0</span>;</div><div class="line">stDecIn.dwMask = <span class="number">0xFFFF</span>;</div><div class="line">stDecIn.dwReserved  = <span class="number">0x00</span>;</div><div class="line">stDecIn.dwParameter  = <span class="number">0x01</span>;</div><div class="line"></div><div class="line">ErrorInfo errinfo;</div><div class="line">ST_CUTLIST_PROCESS_INFO proinfo;</div><div class="line"><span class="keyword">while</span> ((rd = m_pSbCutList-&gt;GetOutputBuffer(&amp;stDecIn, stDecout)) &gt; <span class="number">0</span>)</div><div class="line">&#123;</div><div class="line">	rd = m_pSbCutList-&gt;GetCutlistProInfo(proinfo);</div><div class="line">	rd = m_pSbCutList-&gt;GerLastErrorCodeInfo(errinfo);</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (proinfo.nDecodedBufferNum == <span class="number">0</span>)</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">if</span> (stDecout.pDestBuffer == <span class="literal">NULL</span>)</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">if</span> (stDecIn.llTimelinePos == nFrameNum)</div><div class="line">		<span class="keyword">break</span>;</div><div class="line"></div><div class="line">	stDecIn.llTimelinePos++;</div><div class="line"></div><div class="line">	allsize += stDecout.nActualDataSize;</div><div class="line">	wavewrite.SetInputBuffer(stDecout.pDestBuffer, stDecout.nActualDataSize);</div><div class="line">	<span class="comment">//fwrite(stDecout.pDestBuffer, stDecout.nActualDataSize, 1, writewave);</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">wavewrite.StopWrite();</div><div class="line">fseek(writewave, <span class="number">40</span>, SEEK_SET);</div><div class="line">fwrite(&amp;allsize, <span class="number">1</span>, <span class="keyword">sizeof</span>(<span class="keyword">int</span>), writewave);</div><div class="line">allsize += <span class="number">36</span>;</div><div class="line">fseek(writewave, <span class="number">4</span>, SEEK_SET);</div><div class="line">fwrite(&amp;allsize, <span class="number">1</span>, <span class="keyword">sizeof</span>(<span class="keyword">int</span>), writewave);</div><div class="line">fclose(writewave);</div><div class="line"></div><div class="line"><span class="keyword">delete</span> meditype.pbFormat;</div><div class="line"><span class="comment">//delete pItemList;</span></div><div class="line"><span class="comment">////////////////////////////////////////////////////////////////////////////////////</span></div><div class="line"></div></pre></td></tr></table></figure><p></p>
-</h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2>]]></content>
-    
-    <summary type="html">
-    
-      &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;头文件&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;用途&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href=&quot;#SBT_WAVFileReadWrite&quot;&gt;SBT_
-    
-    </summary>
-    
-      <category term="音视频" scheme="https://xuecat.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/"/>
-    
-    
-      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
-    
-      <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
-    
-      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hexo新博客搭建177</title>
-    <link href="https://xuecat.github.io/2016/08/29/177/"/>
-    <id>https://xuecat.github.io/2016/08/29/177/</id>
-    <published>2016-08-28T16:23:34.000Z</published>
-    <updated>2016-10-18T16:47:11.209Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="搭建坑"><a href="#搭建坑" class="headerlink" title="搭建坑"></a>搭建坑</h1><p><strong><em>1. favior坑</em></strong><br>和配置文件里面说的不一样，必须要给个路径，不然简直呵呵。</p>
-<p><strong><em>2. about页面坑</em></strong><br>我想用photos对about页面进行修饰，我去。NexT对所有属性页面都处理了不支持photos；<br><br>气死人。只有两种方式：1、改布局，头上写layout:post；2、加本地图片<code>&lt;img&gt;</code>属性，但是有个坑就是无法水平布局（只能求他们看看了）</p>
-<p><strong><em>3. 最强之坑</em></strong><br>url问题，对于几个menu的访问，我一直访问不到。<br><br>一直以为是其他问题(本来该访问<code>https:\\</code>的，它直接访问了站点，所以找不到网页) <br><br>搞了一天，我了个去！！。最后发现长城这坑货做了访问缓存的。。。。。。。。<br><br>它对国外所有站都做了缓存，，，也就是说发现要耗资源，要么从以前的post取一个随便发，要么用以前的页面来展示。</p>
-<p><strong><em>4. 代码高亮坑</em></strong><br>普通makedown的tab识别有问题，只能加上标注了<br></p>
-<pre><code>{% codeblock [title] [lang:language] [url] [link text] %}  
-    code snippet  
-    {% endcodeblock %}
-</code></pre><p><strong><em>5. swiftype坑</em></strong><br>我想把按钮改成编辑框，晕了没法,还好有好人写的博客 <a href="http://www.wuxubj.cn/2016/05/Hexo-build-personal-blog-advance/#%E6%B7%BB%E5%8A%A0swiftype%E6%90%9C%E7%B4%A2%E5%B9%B6%E8%87%AA%E5%AE%9A%E4%B9%89%E6%90%9C%E7%B4%A2%E6%A1%86" target="_blank" rel="external">http://www.wuxubj.cn/2016/05/Hexo-build-personal-blog-advance/#%E6%B7%BB%E5%8A%A0swiftype%E6%90%9C%E7%B4%A2%E5%B9%B6%E8%87%AA%E5%AE%9A%E4%B9%89%E6%90%9C%E7%B4%A2%E6%A1%86</a><br><br>居然没法用<a href="https://github.com/iissnan/hexo-theme-next/pull/721/files" target="_blank" rel="external">https://github.com/iissnan/hexo-theme-next/pull/721/files</a></p>
-<p><strong><em>6. 加载缓慢</em></strong><br>这个坑也是害我不浅，最后没法去<code>layout\_partials\head</code>里面把最后一块关于font_families删除了，才好点。<br><br>坏处就是，字体不好看了。</p>
-<p><strong><em>7. 多图模式坑</em></strong></p>
-<ol>
-<li><p>多图模式下：</p>
-<p> ‘% gp 5-3 %’ //这里去掉了大括号改成引号，因为hexo老是去解析它<br> //这句里，图片数必须超过2，不然就显示错误。就算只有俩个图源，也没关系，可以正常显示。</p>
-</li>
-<li><p>正文图片显示布局永远是竖直布局，只有在<code>归档</code>里的缩略里才按照正常布局显示。<br><br><em>可能是我版本不对吧，我暂时也不想弄了，以后再看看吧！！</em></p>
-</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;搭建坑&quot;&gt;&lt;a href=&quot;#搭建坑&quot; class=&quot;headerlink&quot; title=&quot;搭建坑&quot;&gt;&lt;/a&gt;搭建坑&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;1. favior坑&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;和配置文件里面说的不一样，必须要给个路径，不然简直呵
-    
-    </summary>
-    
-      <category term="学习" scheme="https://xuecat.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="工具" scheme="https://xuecat.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
-    
-      <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
     
   </entry>
   

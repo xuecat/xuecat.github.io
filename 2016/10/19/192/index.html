@@ -86,31 +86,46 @@
 
 
 
-<meta name="description" content="函数参数默认压栈顺序，从左到右
+<meta name="description" content="变量命令
+var和let 
+
+
+let只在其块级作用域内有效，而var却全局有效。
+区块中有let和const，则这个区块暂时性死区；即区块会对这些命令声明的变量一开始就形成封闭作用域，只要在声明前使用这些变量，就会报错（相反var不会）
+
 
 const命令只保证变量指向地址不变，不能保证数据不变。
 
-
-12345678910111213const foo = [];foo.prop = 123;//这是被允许的foo = &amp;#123;&amp;#125;;//这是不被允许的//要完全冻结，参考如下代码var constantize = (obj) =&amp;gt; &amp;#123;    Object.freeze(">
+12345678910111213const foo = [];foo.prop = 123;/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="es6和js笔记192">
 <meta property="og:url" content="https://xuecat.github.io/2016/10/19/192/index.html">
 <meta property="og:site_name" content="XueCat">
-<meta property="og:description" content="函数参数默认压栈顺序，从左到右
+<meta property="og:description" content="变量命令
+var和let 
+
+
+let只在其块级作用域内有效，而var却全局有效。
+区块中有let和const，则这个区块暂时性死区；即区块会对这些命令声明的变量一开始就形成封闭作用域，只要在声明前使用这些变量，就会报错（相反var不会）
+
 
 const命令只保证变量指向地址不变，不能保证数据不变。
 
-
-12345678910111213const foo = [];foo.prop = 123;//这是被允许的foo = &amp;#123;&amp;#125;;//这是不被允许的//要完全冻结，参考如下代码var constantize = (obj) =&amp;gt; &amp;#123;    Object.freeze(">
-<meta property="og:updated_time" content="2016-11-15T14:07:51.872Z">
+12345678910111213const foo = [];foo.prop = 123;/">
+<meta property="og:updated_time" content="2016-11-20T08:49:52.884Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="es6和js笔记192">
-<meta name="twitter:description" content="函数参数默认压栈顺序，从左到右
+<meta name="twitter:description" content="变量命令
+var和let 
+
+
+let只在其块级作用域内有效，而var却全局有效。
+区块中有let和const，则这个区块暂时性死区；即区块会对这些命令声明的变量一开始就形成封闭作用域，只要在声明前使用这些变量，就会报错（相反var不会）
+
 
 const命令只保证变量指向地址不变，不能保证数据不变。
 
-
-12345678910111213const foo = [];foo.prop = 123;//这是被允许的foo = &amp;#123;&amp;#125;;//这是不被允许的//要完全冻结，参考如下代码var constantize = (obj) =&amp;gt; &amp;#123;    Object.freeze(">
+12345678910111213const foo = [];foo.prop = 123;/">
 
 
 
@@ -356,15 +371,19 @@ const命令只保证变量指向地址不变，不能保证数据不变。
       
 
       
-        <ol>
-<li><p>函数参数默认压栈顺序，从左到右</p>
-</li>
-<li><p>const命令只保证变量指向地址不变，不能保证数据不变。</p>
-</li>
+        <h3 id="变量命令"><a href="#变量命令" class="headerlink" title="变量命令"></a>变量命令</h3><ol>
+<li>var和let </li>
+</ol>
+<ul>
+<li>let只在其块级作用域内有效，而var却全局有效。</li>
+<li>区块中有let和const，则这个区块暂时性死区；即区块会对这些命令声明的变量一开始就形成封闭作用域，只要在声明前使用这些变量，就会报错（相反var不会）</li>
+</ul>
+<ol>
+<li>const命令只保证变量指向地址不变，不能保证数据不变。</li>
 </ol>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> foo = [];</div><div class="line">foo.prop = <span class="number">123</span>;<span class="comment">//这是被允许的</span></div><div class="line">foo = &#123;&#125;;<span class="comment">//这是不被允许的</span></div><div class="line"></div><div class="line"><span class="comment">//要完全冻结，参考如下代码</span></div><div class="line"><span class="keyword">var</span> constantize = (obj) =&gt; &#123;</div><div class="line">    <span class="built_in">Object</span>.freeze(obj);</div><div class="line">    <span class="built_in">Object</span>.key(obj).forEach((key, value) =&gt; &#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> obj[key] === <span class="string">'object'</span>) &#123;</div><div class="line">            constantize(obj[key]);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<ol>
-<li>字符遍历。好像用<code>[]</code>也可以遍历</li>
+<h3 id="字符"><a href="#字符" class="headerlink" title="字符"></a>字符</h3><ol>
+<li>字符遍历。（好像用<code>[]</code>也可以遍历）</li>
 </ol>
 <p>es5: for (var i=0; i<str.length; i++)="" {alert(str.charat(i));}="" <br=""><br>es6: for (let i=0 of str) {alert(i);}</str.length;></p>
 <ol>
@@ -379,8 +398,8 @@ const命令只保证变量指向地址不变，不能保证数据不变。
 <li>正则</li>
 </ol>
 <p>es5中String对象的方法，search、match、replace、split支持JS正则</p>
-<ol>
-<li><p>数值<br><br>Number增加成员isFinite，isNaN.<br> es6把es5中的全局函数parseInt,parseFloat移植到了Number对象上。<br>Number成员，isSafeInteger范围在2的53次方</p>
+<h3 id="类型扩展"><a href="#类型扩展" class="headerlink" title="类型扩展"></a>类型扩展</h3><ol>
+<li><p>数值<br>Number增加成员isFinite，isNaN.<br> es6把es5中的全局函数parseInt,parseFloat移植到了Number对象上。<br>Number成员，isSafeInteger范围在2的53次方</p>
 </li>
 <li><p>Math对象,es6新增17个方法。它的方法都是静态方法:<code>Math.abs(s)</code></p>
 </li>
@@ -416,7 +435,7 @@ test(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;); //b,c,d
 <li><p>includes()//返回一个布尔值，表示某个数组是否包含给定值。 [1, 2, 3].includes(2);//true</p>
 </li>
 </ul>
-<ol>
+<h3 id="函数（函数参数默认压栈顺序，从左到右）"><a href="#函数（函数参数默认压栈顺序，从左到右）" class="headerlink" title="函数（函数参数默认压栈顺序，从左到右）"></a>函数（函数参数默认压栈顺序，从左到右）</h3><ol>
 <li>函数参数的默认值 </li>
 </ol>
 <p>es5 </p>
@@ -447,8 +466,20 @@ function m2({x, y} = {x:0, y:0}) {}
 <p>扩展运算符也是加三个点(…)，好比rest参数的逆运算，将一个数组转为用逗号分隔的参数序列</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//es5</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">x, w, v, h</span>) </span>&#123;&#125;</div><div class="line"><span class="keyword">var</span> args = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</div><div class="line"><span class="keyword">var</span> arge = [<span class="number">4</span>, <span class="number">5</span>];</div><div class="line">f.apply(<span class="literal">null</span>, args);</div><div class="line"></div><div class="line"><span class="built_in">Math</span>.max.apply(<span class="literal">null</span>, [<span class="number">14</span>, <span class="number">3</span>, <span class="number">77</span>]);</div><div class="line"><span class="built_in">Array</span>.prototype.push.apply(args, arge);</div><div class="line">args.concat(arge, arge);</div><div class="line"></div><div class="line"><span class="comment">//es6</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">x, w, v, h</span>) </span>&#123;&#125;</div><div class="line"><span class="keyword">var</span> args = [<span class="number">0</span>, <span class="number">1</span>];</div><div class="line">f (<span class="number">-1</span>, ...args, ...[<span class="number">7</span>]);</div><div class="line"></div><div class="line"><span class="built_in">Math</span>.max(...[<span class="number">14</span>, <span class="number">3</span>, <span class="number">77</span>]);</div><div class="line">args.push(...arge);</div><div class="line">[...args, ...arge, ...arge];</div></pre></td></tr></table></figure>
 <ol>
-<li>function有name属性（浏览器支持，es6才标准）</li>
+<li><p>function有name属性（浏览器支持，es6才标准）</p>
+</li>
+<li><p>箭头函数</p>
+</li>
 </ol>
+<p>箭头函数内部没有自己的this，导致内部的this就是外层代码块的this。<br><br>除此外，arguments、super、new.target也是指向外层函数对应的。</p>
+<h3 id="对象扩展"><a href="#对象扩展" class="headerlink" title="对象扩展"></a>对象扩展</h3><ol>
+<li>属性</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//es5</span></div><div class="line"><span class="keyword">var</span> foo = <span class="string">'bar'</span>;</div><div class="line"><span class="keyword">var</span> baz = &#123;foo&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> o = &#123;</div><div class="line">    <span class="string">'class'</span>: <span class="function"><span class="keyword">function</span> </span>&#123;&#125;<span class="comment">//此处，class对语法解析器来说是个关键字，为了让语法解析器解析为属性函数，必须加单引号</span></div><div class="line">    method: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">'he'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//es6</span></div><div class="line"><span class="keyword">var</span> baz = &#123;foo: <span class="string">'bar'</span>&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> o = &#123;</div><div class="line">    <span class="class"><span class="keyword">class</span>() </span>&#123;&#125;</div><div class="line">    method() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">'he'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//书上说CommonJS模块输出变量，我感觉这代码很单独js文件时来借鉴，这样很方便导入使用</span></div><div class="line"><span class="keyword">var</span> ms = &#123;&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getItem</span>(<span class="params">key</span>) </span>&#123;</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setItem</span>(<span class="params">key, value</span>) </span>&#123;</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">clear</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    ms = &#123;&#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = &#123;getItem, setItem, clear&#125;;</div><div class="line"><span class="comment">//等同于</span></div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">    getItem: getItem,</div><div class="line">    setItem: setItem,</div><div class="line">    clear: clear</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<ol>
+<li>属性名表达式(使用[]来实现)</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//对属性的定义有俩种(es5只能用方法一)</span></div><div class="line">obj.foo = <span class="number">123</span>;</div><div class="line">obj[<span class="string">'f'</span> + <span class="string">'oo'</span>] = <span class="number">123</span>;</div><div class="line"></div><div class="line"><span class="comment">//当多个定义的时候</span></div><div class="line"><span class="keyword">var</span> na = <span class="number">4</span>;</div><div class="line"><span class="keyword">var</span> hh = <span class="string">'wq'</span>;</div><div class="line"><span class="keyword">let</span> obj = &#123;</div><div class="line">    pro: <span class="number">1</span>,</div><div class="line">    <span class="string">'pp'</span>: <span class="number">2</span>,</div><div class="line">    [<span class="string">'a'</span> + na]: <span class="number">3</span>,</div><div class="line">    [wq]: <span class="number">4</span>,</div><div class="line">    [<span class="string">'a'</span> + wq]: <span class="number">5</span></div><div class="line">&#125;;</div><div class="line"><span class="comment">//虽然第一种和第二种都可以，但是遇见编译器关键字时第一种就会出错。所以建议用第二种来实现定义</span></div><div class="line"><span class="comment">//另外（表达式虽然可以使用，但是表达式计算的结果是全数字的话（数字开头也算），访问属性时会混乱出错）</span></div><div class="line"></div><div class="line"><span class="comment">//访问属性时</span></div><div class="line">obj[pro];<span class="comment">//ok</span></div><div class="line">obj[<span class="string">'pro'</span>];<span class="comment">//error</span></div><div class="line">obj[pp];<span class="comment">//error</span></div><div class="line">obj[<span class="string">'pp'</span>];<span class="comment">//ok</span></div><div class="line">obj.pro;<span class="comment">//ok</span></div><div class="line">obj.pp;<span class="comment">//ok</span></div><div class="line"></div><div class="line">obj.a4;<span class="comment">//ok</span></div><div class="line">obj[<span class="string">'a4'</span>];<span class="comment">//ok</span></div><div class="line">obj[a4];<span class="comment">//error</span></div><div class="line">obj[wq];<span class="comment">//ok</span></div><div class="line">obj[<span class="string">'awq'</span>];<span class="comment">//ok</span></div><div class="line">obj[awq];<span class="comment">//error</span></div><div class="line">obj.a4, obj.wq, obj.awq;<span class="comment">//ok</span></div><div class="line"><span class="comment">//从上看到，访问属性时最好使用`.`的形式。实在要用表达式的形式就要注意定义时候的形式。</span></div></pre></td></tr></table></figure>
 
       
     </div>
@@ -560,7 +591,7 @@ function m2({x, y} = {x:0, y:0}) {}
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">190</span>
+              <span class="site-state-item-count">192</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -568,7 +599,7 @@ function m2({x, y} = {x:0, y:0}) {}
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -674,7 +705,7 @@ function m2({x, y} = {x:0, y:0}) {}
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量命令"><span class="nav-number">1.</span> <span class="nav-text">变量命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符"><span class="nav-number">2.</span> <span class="nav-text">字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型扩展"><span class="nav-number">3.</span> <span class="nav-text">类型扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数（函数参数默认压栈顺序，从左到右）"><span class="nav-number">4.</span> <span class="nav-text">函数（函数参数默认压栈顺序，从左到右）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象扩展"><span class="nav-number">5.</span> <span class="nav-text">对象扩展</span></a></li></ol></div>
             
           </div>
         </section>
