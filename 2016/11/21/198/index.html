@@ -96,7 +96,7 @@
 <meta property="og:description" content="咋说呢，一直以来虽然知道_beginthreadex比较好。但是想起55用CreateThread，还是有点余悸。
 先看段原话：
 有些CRT的函数象malloc(), fopen(), _open(), strtok(), ctime(), 或localtime()等函数需要专门的线程局部存储的数据块，这个数据块通常需要在创建线程的时候就建立，如果使用CreateThread，这个数据块就没有建立">
-<meta property="og:updated_time" content="2016-11-21T17:10:38.481Z">
+<meta property="og:updated_time" content="2016-11-22T12:19:30.693Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多线程198">
 <meta name="twitter:description" content="咋说呢，一直以来虽然知道_beginthreadex比较好。但是想起55用CreateThread，还是有点余悸。
@@ -353,7 +353,7 @@
 <hr>
 <p><strong>说白了</strong>：如果多线程里面有CRT函数，最好使用<code>_beginthread</code>   <code>_beginthreadex</code>   <code>AfxBeginThread</code>(这个函数内部调用<code>_beginthreadex</code>创建处理的<code>CWinThread</code>专门的UI线程，可以通过发送接收message)</p>
 <p>上面四个线程都有相应的<code>ExitThread或_endthread</code>；当然这些函数必须放入线程函数中。<br></p>
-<h4 id="共同点："><a href="#共同点：" class="headerlink" title="共同点："></a>共同点：</h4><h4 id="共同的毛病1："><a href="#共同的毛病1：" class="headerlink" title="共同的毛病1："></a>共同的毛病1：</h4><p><strong>虽然</strong>：在线程被创建成功后，都可以用<code>WaitForSingleObject( hThread, INFINITE );</code>来等待线程结束。<br><br><strong>但是这是不准的</strong>：一些<code>begin</code>函数本身就有<code>CloseHandle</code>了（如：<code>_beginthread</code>），再加上一些代码的<code>CloseHandle</code>，<br><br>所以无法正确知道线程的计数到底是在哪个时候被置为0，而且被置为0也不一定会是线程退出。<br><br><strong>也就是说，最好不要这么等待线程结束，最好给个事件、原子等放在线程函数末尾，来判断线程是否结束。</strong></p>
+<h4 id="共同点："><a href="#共同点：" class="headerlink" title="共同点："></a>共同点：</h4><h4 id="共同的毛病1："><a href="#共同的毛病1：" class="headerlink" title="共同的毛病1："></a>共同的毛病1：</h4><p><strong>虽然</strong>：在线程被创建成功后，都可以用<code>WaitForSingleObject( hThread, INFINITE );</code>来等待线程结束。<br><br><strong>但是这是不准的</strong>：一些<code>begin</code>函数本身就有<code>CloseHandle</code>了（如：<code>_beginthread</code>），再加上一些代码的<code>CloseHandle</code>，<br><br>所以无法正确知道线程的计数到底是在哪个时候被置为0，而且被置为0也不一定会是线程退出。<br><br>再说执行完线程函数后，<code>beging</code>函数本身有许多代码要执行。<br><br><strong>也就是说，最好不要这么等待线程结束，最好给个事件、原子等放在线程函数末尾，来判断线程是否结束。</strong></p>
 <h4 id="共同的毛病2："><a href="#共同的毛病2：" class="headerlink" title="共同的毛病2："></a>共同的毛病2：</h4><p>如果在线程函数中调用退出函数，是会立即退出的。<br><br>也就是说连执行线程函数中，定义类的析构函数都来不及，就会直接退出线程返回，<br><br>如果那个类有析构有内存释放的话就糟糕了，会出现内存泄漏的。<br><br><strong>也就是说，最好不要用退出线程函数来退出线程，用return自然返回是最好的。</strong></p>
 <h4 id="内存释放："><a href="#内存释放：" class="headerlink" title="内存释放："></a>内存释放：</h4><ul>
 <li>内存释放这里也有个共同点； 创建线程后直接<code>CloseHandle</code>是可以的，这样的线程对象，在函数运行完了就自动释放（就算是_beginthread等有自释放代码的类型也同样适用）</li>
