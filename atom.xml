@@ -61,13 +61,28 @@
     <link href="https://xuecat.github.io/2016/11/21/197/"/>
     <id>https://xuecat.github.io/2016/11/21/197/</id>
     <published>2016-11-21T13:39:27.000Z</published>
-    <updated>2016-11-22T14:38:07.255Z</updated>
+    <updated>2016-11-23T16:16:11.408Z</updated>
     
     <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/r4.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
-<p>好烦，es6正看着呢；去海外组了。。。。要补c#知识了</p>
+<p>唉！！，es6正看着呢；去海外组了。。。。要补c#知识了</p>
 <h4 id="NET程序："><a href="#NET程序：" class="headerlink" title=".NET程序："></a>.NET程序：</h4><p>使用.NET兼容语言（如c#）编写程序 -&gt; 把代码编译为CIL，存储在程序集中（即VS干的事） <br><br>-&gt; 执行时，先使用JIT编译器将代码编译为本机代码 -&gt; 在托管的CLR环境下运行本机代码。</p>
 <h4 id="变量类型："><a href="#变量类型：" class="headerlink" title="变量类型："></a>变量类型：</h4><p>字节数增多：sbyte(1) short(2) int(4) long(8)<br>不同的是：其它类型的<code>unsigned</code>前面加<code>u</code>就好，唯独<code>byte</code>是0到255</p>
-]]></content>
+<p>转义字符(\”表示”)和字面量(100L 100F)都和c++差不多<br>多了个新功能</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">string</span> strTest = <span class="string">"wangqiu"</span>;</div><div class="line"><span class="built_in">string</span> strHEHE = $<span class="string">"&#123;strTest&#125; hehe"</span> + $<span class="string">" &#123;3+5&#125;de"</span>;<span class="comment">//这样是可以的哟，用法如同js的模板字符</span></div></pre></td></tr></table></figure>
+<p><strong>差点忘了说，c#中变量类型其实全是System的类，也就意味着基本变量类型本身就有很多成员函数可以使用</strong></p>
+<h4 id="语句："><a href="#语句：" class="headerlink" title="语句："></a>语句：</h4><p><code>switch</code>语句有点不同，多了个<code>goto case &lt;com&gt;:</code>，用来实现在这个case语句中跳转到其它case语句中</p>
+<h5 id="强制转换"><a href="#强制转换" class="headerlink" title="强制转换"></a>强制转换</h5><p>用法基本同；c#多了层保险，可以用<code>checked((type))</code>出现的崩溃来保证，高字节向低字节转换;也可以默认设置强制转换加check；在书67页。</p>
+<h5 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h5><p>用法和c++基本同；多了个指定类型，<code>enum Type : long</code>，这样指定枚举变量的类型。</p>
+<h5 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span>[] myArray = &#123;<span class="number">4</span>, <span class="number">5</span>&#125;;<span class="comment">//很智能，可以自动创建数组类，这样就能使用很多成员函数了。</span></div><div class="line"><span class="keyword">int</span>[] myArray = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>] &#123;<span class="number">6</span>, <span class="number">7</span>&#125;;<span class="comment">//new int[number],不能new int;</span></div></pre></td></tr></table></figure>
+<p>数组的遍历可以用<code>for</code>也可以用<code>foreach(string f in fN)</code>;只是<code>foreach</code>里的f是只读属性，不能写。</p>
+<ul>
+<li>多元数组</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//几元数组就用几个`,`表示</span></div><div class="line"><span class="keyword">int</span>[,] h = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>, <span class="number">4</span>];</div><div class="line"><span class="keyword">int</span>[,] s = &#123;&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;, &#123;<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;, &#123;<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&#125;&#125;;<span class="comment">//但是这种赋值会改变，声明的几元</span></div><div class="line"><span class="comment">//foreach会一行一行遍历全部元素。</span></div></pre></td></tr></table></figure>
+<ul>
+<li>锯齿数组<br>这个更该是数组中的数组，一个行不一定固定个数</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> [][] d = &#123;</div><div class="line">    <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">1</span>&#125;,<span class="comment">//这行就一个</span></div><div class="line">    <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">1</span>, <span class="number">2</span>&#125;,<span class="comment">//这行俩个</span></div><div class="line">    <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>&#125;,</div><div class="line">    <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">7</span>, <span class="number">8</span>&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
@@ -155,9 +170,9 @@
       <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
     
     
-      <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
-    
       <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
+    
+      <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
     
   </entry>
   
@@ -1081,9 +1096,9 @@ var btnOk2=document.createElement(&quot;&lt;input type=&apos;button&apos; value=
       <category term="音视频" scheme="https://xuecat.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/"/>
     
     
-      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
-    
       <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
+    
+      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
