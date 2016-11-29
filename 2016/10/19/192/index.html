@@ -102,7 +102,7 @@ let只在其块级作用域内有效，而var却全局有效。
 区块中有let和const，则这个区块暂时性死区；即区块会对这些命令声明的变量一开始就形成封闭作用域，只要在声明前使用这些变量，就会报错（相反var不会）
 
 const命令只保证变量指向地址不变，不能保证数据不变。12345678910111213const foo = [];foo.prop = 123;">
-<meta property="og:updated_time" content="2016-11-25T15:13:40.031Z">
+<meta property="og:updated_time" content="2016-11-29T14:17:01.363Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="es6和js笔记192">
 <meta name="twitter:description" content="变量命令####. var和let 
@@ -436,6 +436,24 @@ function m2({x, y} = {x:0, y:0}) {}
 <p><code>Symbol.for()</code>接受一个字符串作为参数，然后搜索有没有以该参数作为名称的Symbol值<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> s1 = <span class="built_in">Symbol</span>.<span class="keyword">for</span>(<span class="string">'ff'</span>);</div><div class="line"><span class="keyword">var</span> s2 = <span class="built_in">Symbol</span>.<span class="keyword">for</span>(<span class="string">'ff'</span>);</div><div class="line">s1 === s2<span class="comment">//true</span></div></pre></td></tr></table></figure></p>
 <p><code>Symbol.keyFor()</code>返回一个已登记的<code>Symbol</code>类型的key；<br>换句话说，它对<code>Symbol.for</code>返回成功的是能返回的。<br>对新建的<code>Symbol(&lt;string&gt;)</code>类型是无法返回的。</p>
 <h3 id="Proxy-属于元编程"><a href="#Proxy-属于元编程" class="headerlink" title="Proxy(属于元编程)"></a>Proxy(属于元编程)</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;&#125;, &#123;</div><div class="line">  get: <span class="function"><span class="keyword">function</span> (<span class="params">target, key, receiver</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`getting <span class="subst">$&#123;key&#125;</span>!`</span>);</div><div class="line">    <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(target, key, receiver);</div><div class="line">  &#125;,</div><div class="line">  set: <span class="function"><span class="keyword">function</span> (<span class="params">target, key, value, receiver</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`setting <span class="subst">$&#123;key&#125;</span>!`</span>);</div><div class="line">    <span class="keyword">return</span> <span class="built_in">Reflect</span>.set(target, key, value, receiver);</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">obj.count = <span class="number">1</span></div><div class="line"><span class="comment">//  setting count!</span></div><div class="line">++obj.count</div><div class="line"><span class="comment">//  getting count!</span></div><div class="line"><span class="comment">//  setting count!</span></div><div class="line"><span class="comment">//  2</span></div><div class="line"></div><div class="line"><span class="comment">//同一个拦截器，可以设置多个操作</span></div><div class="line"><span class="keyword">var</span> handler = &#123;</div><div class="line">  get: <span class="function"><span class="keyword">function</span>(<span class="params">target, name</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (name === <span class="string">'prototype'</span>) &#123;</div><div class="line">      <span class="keyword">return</span> <span class="built_in">Object</span>.prototype;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="string">'Hello, '</span> + name;</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  apply: <span class="function"><span class="keyword">function</span>(<span class="params">target, thisBinding, args</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> args[<span class="number">0</span>];</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  construct: <span class="function"><span class="keyword">function</span>(<span class="params">target, args</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;value: args[<span class="number">1</span>]&#125;;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> fproxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(<span class="function"><span class="keyword">function</span>(<span class="params">x, y</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> x + y;</div><div class="line">&#125;, handler);</div><div class="line"></div><div class="line">fproxy(<span class="number">1</span>, <span class="number">2</span>) <span class="comment">// 1</span></div><div class="line"><span class="keyword">new</span> fproxy(<span class="number">1</span>,<span class="number">2</span>) <span class="comment">// &#123;value: 2&#125;</span></div><div class="line">fproxy.prototype === <span class="built_in">Object</span>.prototype <span class="comment">// true</span></div><div class="line">fproxy.foo <span class="comment">// "Hello, foo"</span></div></pre></td></tr></table></figure>
+<p><strong>总的来说有点像c++的操作符函数，但比操作符函数高级</strong><br>支持一下特性：</p>
+<ol>
+<li><code>get(target, propKey, receiver)</code>拦截对象属性读取</li>
+<li><code>set(target, propKey, value, receiver)</code>拦截对象属性的设置 返回一个布尔值。</li>
+<li><code>has(target, propKey)</code>拦截propKey in proxy的操作，以及对象的hasOwnProperty方法 返回一个布尔值。</li>
+<li><code>deleteProperty(target, propKey)</code>拦截delete proxy[propKey]的操作 返回一个布尔值。</li>
+<li><code>ownKeys(target)</code>拦截Object.getOwnPropertyNames(proxy)、Object.getOwnPropertySymbols(proxy)、Object.keys(proxy)，返回一个数组</li>
+<li><code>getOwnPropertyDescriptor(target, propKey)</code>拦截Object.getOwnPropertyDescriptor(proxy, propKey)，返回属性的描述对象。</li>
+<li><code>defineProperty(target, propKey, propDesc)</code>拦截Object.defineProperty(proxy, propKey, propDesc）、Object.defineProperties(proxy, propDescs)，返回一个布尔值。</li>
+<li><code>preventExtensions(target)</code>拦截Object.preventExtensions(proxy)，返回一个布尔值。</li>
+<li><code>getPrototypeOf(target)</code>拦截Object.getPrototypeOf(proxy)，返回一个对象。</li>
+<li><code>isExtensible(target)</code>拦截Object.isExtensible(proxy)，返回一个布尔值。</li>
+<li><code>setPrototypeOf(target, proto)</code>拦截Object.setPrototypeOf(proxy, proto)，返回一个布尔值。</li>
+<li><code>apply(target, object, args)</code>拦截 Proxy 实例作为函数调用的操作，比如proxy(…args)、proxy.call(object, …args)、proxy.apply(…)。</li>
+<li><code>construct(target, args)</code>拦截 Proxy 实例作为构造函数调用的操作，比如new proxy(…args)。</li>
+</ol>
+<p><strong>这个确实太多了，也没咋记，具体看书吧！</strong></p>
+
       
     </div>
 
@@ -546,7 +564,7 @@ function m2({x, y} = {x:0, y:0}) {}
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">192</span>
+              <span class="site-state-item-count">193</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
