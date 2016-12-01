@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2016-11-29T16:03:05.058Z</updated>
+  <updated>2016-12-01T13:26:51.130Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -14,6 +14,69 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>c#空字符和无字符201</title>
+    <link href="https://xuecat.github.io/2016/12/01/201/"/>
+    <id>https://xuecat.github.io/2016/12/01/201/</id>
+    <published>2016-12-01T13:24:56.000Z</published>
+    <updated>2016-12-01T13:26:51.130Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">string</span> str1=stirng.Empty;</div><div class="line"><span class="built_in">string</span> str2=<span class="string">""</span>;</div><div class="line"><span class="built_in">string</span> str3=null;</div></pre></td></tr></table></figure>
+<p>str1和str2暂时可视为无区别，但建议多str1<br>str3是空指针，堆上没有开辟内存的。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;
+    
+    </summary>
+    
+      <category term="C#" scheme="https://xuecat.github.io/categories/C/"/>
+    
+    
+      <category term="编译器和VC" scheme="https://xuecat.github.io/tags/%E7%BC%96%E8%AF%91%E5%99%A8%E5%92%8CVC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>windbg调试200</title>
+    <link href="https://xuecat.github.io/2016/12/01/200/"/>
+    <id>https://xuecat.github.io/2016/12/01/200/</id>
+    <published>2016-12-01T13:05:20.000Z</published>
+    <updated>2016-12-01T14:29:24.792Z</updated>
+    
+    <content type="html"><![CDATA[<p>产生dump：<a href="https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump" target="_blank" rel="external">https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump</a></p>
+<p>debug工具一般都有debugger.chm这个文档可以参考<br>x64:</p>
+<ol>
+<li>拖拽到windbg，lm查看模块状态</li>
+<li>查看时间戳(lmt)，找到对应pdb，设置pdb路径</li>
+<li>重新加载pdb(.reload)，运行分析命令(!analyze -v)<br>一般崩溃会有exception，就查找这个字符串，就可以找到对应执行函数。(~N 切换到N号线程，主线程是0号)<br>主线程没有就切换到其它线程查找(~*e kb)</li>
+</ol>
+<p>x32:<br>基本相同，但是当32位程序运行在64位系统的时候，产生的dump</p>
+<ol>
+<li>先加载64位的扩展(.load wow64exts)</li>
+<li>切换到32位模式(!sw)</li>
+<li>然后才再像上面那样调试</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;产生dump：&lt;a href=&quot;https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump&quot; target=&quot;_blank&quot;
+    
+    </summary>
+    
+      <category term="Windows" scheme="https://xuecat.github.io/categories/Windows/"/>
+    
+    
+      <category term="工具" scheme="https://xuecat.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="编译器和VC" scheme="https://xuecat.github.io/tags/%E7%BC%96%E8%AF%91%E5%99%A8%E5%92%8CVC/"/>
+    
+      <category term="错误认识" scheme="https://xuecat.github.io/tags/%E9%94%99%E8%AF%AF%E8%AE%A4%E8%AF%86/"/>
+    
+  </entry>
   
   <entry>
     <title>VA_snippets199</title>
@@ -84,7 +147,7 @@
     <link href="https://xuecat.github.io/2016/11/21/197/"/>
     <id>https://xuecat.github.io/2016/11/21/197/</id>
     <published>2016-11-21T13:39:27.000Z</published>
-    <updated>2016-11-29T16:04:15.279Z</updated>
+    <updated>2016-12-01T15:40:37.285Z</updated>
     
     <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/r4.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
 <p>唉！！，es6正看着呢；去海外组了。。。。要补c#知识了</p>
@@ -107,6 +170,7 @@
 </ul>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> [][] d = &#123;</div><div class="line">    <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">1</span>&#125;,<span class="comment">//这行就一个</span></div><div class="line">    <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">1</span>, <span class="number">2</span>&#125;,<span class="comment">//这行俩个</span></div><div class="line">    <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>&#125;,</div><div class="line">    <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">7</span>, <span class="number">8</span>&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <h4 id="匿名类型"><a href="#匿名类型" class="headerlink" title="匿名类型"></a>匿名类型</h4><p><code>var</code>会自动转换到相应的类型，当然也可以访问相应的成员函数。</p>
+<h4 id="as和is"><a href="#as和is" class="headerlink" title="as和is"></a>as和is</h4><p>is会做俩次检查，as会做一次检查，as效率会高点<br>as类似于强制转换，转换失败便返回null<br>as只能用于引用类型和装箱转换，所以值类型还是得用is</p>
 <h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h4><p>类中函数默认是private类型的，如果访问要public<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//数组参数</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Show</span>(<span class="params"><span class="keyword">int</span>[] intA</span>) </span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="comment">//引用参数</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Show</span>(<span class="params"><span class="keyword">ref</span> <span class="keyword">int</span> val</span>) </span>&#123;&#125;</div><div class="line">Show(<span class="keyword">ref</span> intA);<span class="comment">//它调用也比较特殊，还有就是intA必须要被赋过值</span></div><div class="line"></div><div class="line"><span class="comment">//输出参数</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Show</span>(<span class="params"><span class="keyword">out</span> <span class="keyword">int</span> valA</span>) </span>&#123;&#125;</div><div class="line">Show(<span class="keyword">out</span> intA)<span class="comment">//感觉它比引用都高级</span></div></pre></td></tr></table></figure></p>
 <p>函数可以重载，但是<code>out</code>和<code>ref</code>不能相同</p>
 <ul>
@@ -138,22 +202,28 @@
 <h4 id="预编译"><a href="#预编译" class="headerlink" title="预编译"></a>预编译</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> #<span class="meta-keyword">undef</span> #<span class="meta-keyword">if</span> #<span class="meta-keyword">elif</span> #<span class="meta-keyword">else</span> #<span class="meta-keyword">endif</span> <span class="comment">//和c++相同</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">if</span> DEBUG </span></div><div class="line">    <span class="meta">#<span class="meta-keyword">warning</span> <span class="meta-string">"Don't"</span><span class="comment">//c#的警告和错误的预编译和c++不同</span></span></div><div class="line">    <span class="meta">#<span class="meta-keyword">error</span> <span class="meta-string">"Wrong"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"></div><div class="line"><span class="meta">#region #endregion<span class="comment">//折叠用</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span><span class="comment">//此指令和c++使用完全不同</span></span></div></pre></td></tr></table></figure>
 <h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><h4 id="this和base"><a href="#this和base" class="headerlink" title="this和base"></a>this和base</h4><h4 id="类的定义"><a href="#类的定义" class="headerlink" title="类的定义"></a>类的定义</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">internal <span class="keyword">class</span> My&#123;&#125;;<span class="comment">//此关键字修饰的类，只运行同一个程序集访问（即同一exe或dll）</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> My&#123;&#125;;<span class="comment">//运行其它程序集访问</span></div><div class="line"></div><div class="line"><span class="keyword">public</span> abstract <span class="keyword">class</span> M&#123;&#125;;<span class="comment">//也可以加private等，此修饰符是抽象类，只能继承，不能实例化</span></div><div class="line"><span class="keyword">public</span> sealed <span class="keyword">class</span> M&#123;&#125;;<span class="comment">//此修饰符不允许继承</span></div><div class="line"></div><div class="line"><span class="comment">//继承的时候要注意：编译器不允许派生类的可访性高于基类，即内部类继承公共类可以，公共类继承内部不行。</span></div><div class="line"><span class="comment">//以下不行：</span></div><div class="line">internal <span class="keyword">class</span> My&#123;&#125;</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> MD : My&#123;&#125;<span class="comment">//不行</span></div><div class="line"></div><div class="line"><span class="comment">//继承时不能有多个基类，c#只运行一个基类；但是可以加接口的</span></div><div class="line"><span class="keyword">class</span> My : MyBass, IMyInterface, IMy&#123;&#125; <span class="comment">//虽然只能一个基类，但是多个接口是可以的。注意接口必须在基类后面</span></div></pre></td></tr></table></figure>
 <h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><p>大量例子对属性的使用都是这样的，感觉这个属性有点多余。<br>属性支持访问控制：<code>get</code>和<code>set</code>支持使用：public、private、protected来控制访问。<br>属性支持重写：<code>abstract</code>、<code>virtual</code>、<code>override</code>这些可以联合使用<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> <span class="keyword">int</span> <span class="number">_</span>age;</div><div class="line"><span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">int</span> Age &#123;</div><div class="line">    get &#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">_</span>age;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">set</span> &#123;</div><div class="line">        <span class="number">_</span>age = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>自动属性<code>public double Height { get; set; }</code></p>
 <h4 id="构造函数和析构"><a href="#构造函数和析构" class="headerlink" title="构造函数和析构"></a>构造函数和析构</h4><p>基本和c++相同，允许重载、访问控制。<br>不同：</p>
 <ul>
 <li>执行顺序（MyDericed继承基类）；MyDericed myO = new MyDericed();1、执行System.Object.Object()构造函数；2、执行MyBaseClass.MyBaseClass构造函数；3、执行MyDericed构造函数</li>
 <li>委托不同；<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public class MyD: MyBass</div><div class="line">&#123;</div><div class="line">    public MyD() : this(5, 6)&#123;&#125;//委托给自身的另一个构造函数</div><div class="line">    public MyD(int i, int j) : base(i) &#123;&#125;//调用基类构造函数</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>##然后就是静态构造函数## ：<br>编写静态构造函数的一个原因是,类有一些静态字段或属性,需要在第一次使用类之前,从外部源中初始化这些静态字段和属性<br>由于并不确定它执行的时间，所以注意下此函数中对静态变量的赋值。</p>
+<p>##然后就是静态构造函数##<br>编写静态构造函数的一个原因是,类有一些静态字段或属性,需要在第一次使用类之前,从外部源中初始化这些静态字段和属性<br>由于并不确定它执行的时间，所以注意下此函数中对静态变量的赋值。</p>
 <h4 id="静态类"><a href="#静态类" class="headerlink" title="静态类"></a>静态类</h4><p>给类加个static只是告诉编译器，这个类的所有成员必须是<code>static</code>类型的，不然就报错</p>
 <h4 id="类和结构体区别"><a href="#类和结构体区别" class="headerlink" title="类和结构体区别"></a>类和结构体区别</h4><p>c#中类和结构体有个大大的区别， 类是引用类型，结构体是值类型。<br>也就是说：<br>直接的<code>=</code>操作对类来说是引用赋值（是浅拷贝过程）<br>直接的<code>=</code>操作对结构体来说是复制信息（是深拷贝）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MyStru st = <span class="keyword">new</span> MyStru&#123; d=<span class="number">1</span>, a=<span class="number">2</span> &#125;;<span class="comment">//值类型还是在栈空间</span></div></pre></td></tr></table></figure>
 <h4 id="嵌套类"><a href="#嵌套类" class="headerlink" title="嵌套类"></a>嵌套类</h4><p>被嵌套在里面的类可以访问外部类的private成员，这和c++不同</p>
+<p>对于嵌套类则不能把类型定义为protectcd、private和protected internal,<br>因为这些修饰符对于包含在名称空间中的类型没有意义。因此这些修饰符只能应用于成员。<br><strong>但是</strong>,如果是嵌套类的话，这些修饰符就有了些意义。</p>
 <h4 id="其它定义字段"><a href="#其它定义字段" class="headerlink" title="其它定义字段"></a>其它定义字段</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> readonly <span class="keyword">int</span> MyInt = <span class="number">3</span>;<span class="comment">//表示这个字段只能在执行构造函数的过程中赋值，或由初始化赋值语句赋值。</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> MyInt;<span class="comment">//书上建议用const代替static，这样既避免出错也可以达到相同效果</span></div></pre></td></tr></table></figure>
 <p>c#的extern导入的是外部程序集，经常和DllImport联合使用。</p>
 <h4 id="继承使用"><a href="#继承使用" class="headerlink" title="继承使用"></a>继承使用</h4><p>c#的virtual、override、更是不同<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> MyClass &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">virtual</span>  <span class="keyword">void</span> <span class="title">ShowD</span><span class="params">()</span> </span>&#123;</div><div class="line">            Console.WriteLine(<span class="string">"My"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">class</span> YouClass : MyClass &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> override <span class="keyword">void</span> <span class="title">ShowD</span><span class="params">()</span> </span>&#123;</div><div class="line">            Console.WriteLine(<span class="string">"You"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">class</span> HeClass : YouClass &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> override <span class="keyword">void</span> <span class="title">ShowD</span><span class="params">()</span> </span>&#123;</div><div class="line">            Console.WriteLine(<span class="string">"He"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//可以看出，如果想要重写，必须用virtual、override的配合</span></div><div class="line">    <span class="comment">//如果是 override sealed void... 配合的话，重写就此结束；派生类不能再重写。</span></div></pre></td></tr></table></figure></p>
-<h4 id="partial"><a href="#partial" class="headerlink" title="partial"></a>partial</h4><p>partial关键字允许把类、结构或接口放在多个文件中，编译再变成一个类。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Big1.cs</span></div><div class="line">partial <span class="keyword">class</span> TheBig</div><div class="line">&#123;</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line"><span class="comment">//Big2.cs</span></div><div class="line">partial <span class="keyword">class</span> TheBig</div><div class="line">&#123;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>###继承</p>
-<h4 id="函数隐藏"><a href="#函数隐藏" class="headerlink" title="函数隐藏"></a>函数隐藏</h4><p>c#会像c++那样出现函数隐藏，但是它面对函数隐藏的时候会报警告的,如果要消除警告：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> MyDriver:</div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">new</span> <span class="keyword">int</span> <span class="title">ShowD</span><span class="params">()</span></span>&#123;&#125;<span class="comment">//加个new，这样做并不会改变执行时的代码调用；只是去掉编译的警告而已。</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="partial部分关键字的使用"><a href="#partial部分关键字的使用" class="headerlink" title="partial部分关键字的使用"></a>partial部分关键字的使用</h4><p>partial关键字允许把类、结构或接口放在多个文件中，编译再变成一个类。<br>包括继承对象也会整合在一起（但是访问权限关键字不能整合）<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Big1.cs</span></div><div class="line">partial <span class="keyword">class</span> TheBig : IMyInter1</div><div class="line">&#123;</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line"><span class="comment">//Big2.cs</span></div><div class="line">partial <span class="keyword">class</span> TheBig : IMyInter2</div><div class="line">&#123;</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//编译后就是</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> TheBig :IMyInter1, IMyInter2 </div><div class="line">&#123;&#125;</div><div class="line"></div><div class="line"><span class="comment">//上面介绍了部分类，下面介绍部分方法</span></div><div class="line"><span class="keyword">public</span> partial <span class="keyword">class</span> MyClass</div><div class="line">&#123;</div><div class="line">    <span class="function">partial <span class="keyword">void</span> <span class="title">MyMethod</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> partial <span class="keyword">class</span> MyClass</div><div class="line">&#123;</div><div class="line">    <span class="function">partial <span class="keyword">void</span> <span class="title">MyMethod</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">//...</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//部分方法的出现是为了解决要使用其它部分类的方法时，避免访问不到。</span></div><div class="line"><span class="comment">//但是它有以下毛病：</span></div><div class="line"><span class="comment">//0、只能存在于partial的类中</span></div><div class="line"><span class="comment">//1、总是私有类型，且不能有返回值</span></div><div class="line"><span class="comment">//2、使用的任何参数不能是out参数。但ref参数是可以的</span></div><div class="line"><span class="comment">//3、不能使用virtual、abstract、overrride、new、sealed、extern这些修饰符</span></div></pre></td></tr></table></figure></p>
+<h4 id="浅拷贝和深拷贝"><a href="#浅拷贝和深拷贝" class="headerlink" title="浅拷贝和深拷贝"></a>浅拷贝和深拷贝</h4><p>浅拷贝由默认隐式转换和MemberwiseClone来完成不用说。<br>来看深拷贝代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> HeClass : ICloneable</div><div class="line">&#123;</div><div class="line">    HeClass(<span class="keyword">int</span> a)</div><div class="line">    &#123; <span class="number">_</span>me = a; &#125;</div><div class="line">    <span class="keyword">int</span> <span class="number">_</span>me;</div><div class="line">    <span class="function"><span class="keyword">public</span> object <span class="title">Clone</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        HeClass c = <span class="keyword">new</span> HeClass(<span class="number">_</span>me);</div><div class="line">        <span class="keyword">return</span> c;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//发现必须继承ICloneable，并重写其函数</span></div><div class="line"><span class="comment">//还要注意new的构造函数传值问题。</span></div></pre></td></tr></table></figure></p>
+<h4 id="重载符函数"><a href="#重载符函数" class="headerlink" title="重载符函数"></a>重载符函数</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> YouClass : MyClass &#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> YouClass <span class="keyword">operator</span> +(YouClass a) &#123;</div><div class="line">        YouClass yy = <span class="keyword">new</span> YouClass();</div><div class="line">        <span class="keyword">return</span> yy;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">ClassA a;</div><div class="line">classB b;</div><div class="line">ClassC c;</div><div class="line">c = a + b;</div><div class="line">像这样的参数就必须是(ClassA, classB)，更重要的和顺序有关。</div></pre></td></tr></table></figure>
+<p>如上操作符函数有这些要求：<br>必须是public<br>必须是static<br>返回值必须是原型</p>
+<p>一元运算符：+、-、！、~、++、–、true、false<br>二元：+、-、*、/、%、&amp;、|、^、&lt;&lt;、&gt;&gt;<br>比较：==、!=、&lt;、&gt;、&lt;=、&gt;=</p>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><h4 id="函数隐藏"><a href="#函数隐藏" class="headerlink" title="函数隐藏"></a>函数隐藏</h4><p>c#会像c++那样出现函数隐藏，但是它面对函数隐藏的时候会报警告的,如果要消除警告：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> MyDriver:</div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">new</span> <span class="keyword">int</span> <span class="title">ShowD</span><span class="params">()</span></span>&#123;&#125;<span class="comment">//加个new，这样做并不会改变执行时的代码调用；只是去掉编译的警告而已。</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h4 id="Object类"><a href="#Object类" class="headerlink" title="Object类"></a>Object类</h4><p>所有类都派生于<code>System.Object</code>，即使定义时没指定基类也会默认继承。</p>
 <h4 id="abstract和sealed"><a href="#abstract和sealed" class="headerlink" title="abstract和sealed"></a>abstract和sealed</h4><ul>
 <li><code>abstract</code>对类；修饰并不能阻止其函数的定义，也无法使函数默认变成可重写类型(函数依旧需要自己声明重写类型)；<br>它对类来说就只能是个说明是接口类的作用，实际作用并没有。</li>
@@ -161,8 +231,17 @@
 <li><code>sealed</code>对类；这样表示此类不能被继承</li>
 <li><code>sealed</code>对函数；只能对可重写类型的函数才能使用（virtual abstract），表示此函数子类不能重写，常和<code>override</code>联合使用</li>
 </ul>
+<h4 id="拆箱和装箱"><a href="#拆箱和装箱" class="headerlink" title="拆箱和装箱"></a>拆箱和装箱</h4><p><strong>首先这俩个操作是隐式的</strong><br>所有值类型均隐式派生自System.ValueType：<br>结构体、数值、整形、字符（char）、浮点、bool、枚举、派生于System.Nullable<br>如<code>int i = new int()</code>等价于<code>int i = 0</code></p>
+<p>所有引用类型均隐式派生自System.object(包括它本身)：<br>数组：（派生于System.Array）数组的元素，不管是引用类型还是值类型，都存储在托管堆上；<br>类：class（派生于System.Object）；<br>接口：interface（接口不是一个“东西”，所以不存在派生于何处的问题。）；<br>委托：delegate（派生于System.Delegate）；<br>object：（System.Object的别名）；<br>字符串：string（System.String的别名）。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">object obj = <span class="number">1</span>;<span class="comment">//装箱</span></div><div class="line"><span class="keyword">int</span> value = (<span class="keyword">int</span>)obj;<span class="comment">//拆箱</span></div><div class="line"></div><div class="line"><span class="comment">//如上，c#中对值类型是放入栈中，对引用类型是放入堆中</span></div><div class="line"><span class="comment">//上面1是值，obj是引用。所以存在过程的转换</span></div><div class="line"><span class="comment">//这多余的转换会导致运行效率低下，所以请尽量避免。</span></div><div class="line"></div><div class="line"><span class="comment">//比如使用List&lt;obj&gt;来代替ArrayList;避免拆箱和装箱</span></div></pre></td></tr></table></figure>
+<h3 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h3><h4 id="yield"><a href="#yield" class="headerlink" title="yield"></a>yield</h4><p>这个一般是yield return, yield break联合使用；如下<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">IEnumerable&lt;<span class="keyword">int</span>&gt; SName(<span class="keyword">int</span> a)</div><div class="line">&#123;</div><div class="line">    yield <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    yield <span class="keyword">return</span> <span class="number">3</span>;</div><div class="line">    yield <span class="keyword">return</span> <span class="number">6</span>;</div><div class="line">    yield <span class="keyword">break</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//注意返回值必须是 IEnumerable 或 IEnumerator</span></div><div class="line"><span class="comment">//好像说这种方法比在函数里面push或add更有效</span></div></pre></td></tr></table></figure></p>
+<h4 id="where约束"><a href="#where约束" class="headerlink" title="where约束"></a>where约束</h4><p>这个我不是很深，以后补充；先看段代码。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">class MyBase&lt;T&gt;</div><div class="line">    where T: class</div><div class="line">    , new() &#123;</div><div class="line">    public MyBase() &#123;</div><div class="line">        Console.WriteLine("base");</div><div class="line">    &#125;</div><div class="line">    public MyBase(int n)</div><div class="line">        :this() &#123;</div><div class="line">        Console.WriteLine("base");</div><div class="line">    &#125;</div><div class="line">    public virtual T ShowD() &#123;</div><div class="line">        Console.WriteLine("MyBase");</div><div class="line">        T b = new T();//这里很重要</div><div class="line">        return b;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class MyDrive&lt;D&gt; : MyBase&lt;D&gt;, IEnumerable</div><div class="line">    where D: class, new() &#123;</div><div class="line">    public MyDrive()</div><div class="line">        : base(3) &#123;</div><div class="line">        Console.WriteLine("Drive");</div><div class="line">    &#125;</div><div class="line">    public MyDrive(int a)</div><div class="line">    &#123; &#125;</div><div class="line">    public override D ShowD() &#123;</div><div class="line">        Console.WriteLine("MyDrive");</div><div class="line">        D b = new D();//这句很重要</div><div class="line">        return b;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">MyDrive&lt;Program&gt; my = new MyDrive&lt;Program&gt;(3);//调用</div></pre></td></tr></table></figure></p>
+<p>第一个类；where对T约束为引用类型（值类型可以用struct），这样调用<code>&lt;&gt;</code>里面就只能是引用类型了<br>除此外where还约束为new()，表示<code>&lt;&gt;</code>里的类型必须有默认的构造函数，这样才可以用<code>new T()</code>这样的代码（测试发现里面不能加参数）</p>
+<p>where还可以准确约束，有点像c++的模板特例化</p>
+<h4 id="协变和抗变"><a href="#协变和抗变" class="headerlink" title="协变和抗变"></a>协变和抗变</h4><p><a href="http://blog.csdn.net/sudazf/article/details/17148971" target="_blank" rel="external">http://blog.csdn.net/sudazf/article/details/17148971</a></p>
 <h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> internal IMyInter&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Do</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>暂时看它和虚基类没啥区别呀！！！！！！以后再加吧。</p>
+<h4 id="foreach的自定义"><a href="#foreach的自定义" class="headerlink" title="foreach的自定义"></a>foreach的自定义</h4><p>自定义类要使用foreach，就必须实现IEnumerator和IEnumerable<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> MyDrive : IEnumerable</div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> IEnumerator <span class="title">GetEnumerator</span><span class="params">()</span></span></div><div class="line">    &#123; <span class="keyword">return</span> <span class="keyword">new</span> MyTor(); &#125;</div><div class="line"></div><div class="line">    <span class="keyword">class</span> MyTor : IEnumerator</div><div class="line">    &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">bool</span> <span class="title">MoveNext</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="literal">true</span>; &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Reset</span><span class="params">()</span> </span>&#123; &#125;</div><div class="line">        <span class="keyword">public</span> object Current &#123; get &#123; <span class="keyword">return</span> null; &#125; &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">MyDrive ss = <span class="keyword">new</span> MyDrive();</div><div class="line">foreach (var t in ss) &#123;&#125;</div></pre></td></tr></table></figure></p>
 ]]></content>
     
     <summary type="html">
@@ -251,9 +330,9 @@
       <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
     
     
-      <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
-    
       <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
+    
+      <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
     
   </entry>
   
@@ -615,7 +694,7 @@ undefined
     <updated>2016-11-21T13:49:10.497Z</updated>
     
     <content type="html"><![CDATA[<p><strong>1. this.props.children</strong><br>它是链表没错(当只有一个时，是string之类元素)</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">React.Children.map(<span class="keyword">this</span>.props.children, <span class="function"><span class="keyword">function</span> (<span class="params">child</span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;child&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span>;</div><div class="line">        &#125;)</div><div class="line"><span class="comment">//每个child是一个ReactElement的object，可能ReactElement有默认的隐式处理吧_shadowChildren之类吧！</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">React.Children.map(<span class="keyword">this</span>.props.children, <span class="function"><span class="keyword">function</span> (<span class="params">child</span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> &lt;li&gt;&#123;child&#125;&lt;/li&gt;;</div><div class="line">        &#125;)</div><div class="line"><span class="comment">//每个child是一个ReactElement的object，可能ReactElement有默认的隐式处理吧_shadowChildren之类吧！</span></div></pre></td></tr></table></figure>
 <p>此句，一直不明白为何object能当字符处理。</p>
 <p><strong>2. markdown显示</strong><br>使用remarkable库，可以支持markdown格式显示语句。<br><br>但是不能直接render解析（虽然表面看是对的），好像react做了XSS 攻击的保护。<br><br>解析后的语句只能放入节点属性中：dangerouslySetInnerHTML={ __html: md.render(this.props.children.toString()) }<br><br>值得注意的是，它支持的markdown语法是最新的，也就是说有些语法严格和空格有关(如<code># d</code>必须空格)</p>
 <p><strong>3. react key添加</strong><br>我在用map的时候，被警告必须加key。react对dom做遍历的时候，会根据data-reactid生成虚拟dom树。如果你没有手动的添加unique constant key的话，react是无法记录你的dom操作的。</p>
@@ -626,7 +705,7 @@ undefined
 <p><strong>6. react-es6</strong><br>这个由于很多，只说下属性的设置；<br>es5对类属性设置是用： <code>render: function(){}</code><br><br>es6对类属性设置是用：<code>render() {}</code><br><br>居然看半天没发现。<br><a href="http://blog.csdn.net/wangzengdi/article/details/50719395" target="_blank" rel="external">http://blog.csdn.net/wangzengdi/article/details/50719395</a></p>
 <p><strong>7. 无状态的函数式组件</strong><br>除了正统的rn创建外；还有个创建组件的方法<br></p>
 <p>声明：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Pane = (props) =&gt; <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;props.children&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</div><div class="line">Pane.propTypes = &#123;</div><div class="line">  label: React.PropTypes.string.isRequired,</div><div class="line">  children: React.PropTypes.element.isRequired</div><div class="line">&#125;;</div><div class="line"><span class="comment">//使用：</span></div><div class="line">&lt;Pane label=<span class="string">"asdf"</span> /&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Pane = (props) =&gt; &lt;div&gt;&#123;props.children&#125;&lt;/div&gt;;</div><div class="line">Pane.propTypes = &#123;</div><div class="line">  label: React.PropTypes.string.isRequired,</div><div class="line">  children: React.PropTypes.element.isRequired</div><div class="line">&#125;;</div><div class="line"><span class="comment">//使用：</span></div><div class="line">&lt;Pane label=<span class="string">"asdf"</span> /&gt;</div></pre></td></tr></table></figure>
 <p>注意俩点：</p>
 <ol>
 <li>不能有生命周期方法</li>
@@ -1074,73 +1153,11 @@ var btnOk2=document.createElement(&quot;&lt;input type=&apos;button&apos; value=
       <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
     
     
-      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
-    
       <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
     
-      <category term="stl" scheme="https://xuecat.github.io/tags/stl/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MP3解码过程小知识181</title>
-    <link href="https://xuecat.github.io/2016/09/08/181/"/>
-    <id>https://xuecat.github.io/2016/09/08/181/</id>
-    <published>2016-09-08T13:27:43.000Z</published>
-    <updated>2016-10-02T01:28:18.754Z</updated>
-    
-    <content type="html"><![CDATA[<p>代码暂时不提供了，直接去<code>178</code>的sobey库寻。说明MP3音频过程遇见。</p>
-<ol>
-<li>帧头是大端字节，所以要转换下</li>
-<li>判断是否是帧头，看第一个字节是否是FF，同步信息第一个字节必须是FF（qq音乐喜欢用ff fe，网络音乐喜欢用ff fb）</li>
-<li>vbr的xing头并不影响解码，照常使用，只是在标签帧中多些信息而已</li>
-<li>有些MP3没有TAG ID3V2头只有ID3V1头，文件起点直接开始第一帧帧头，数据。。。</li>
-<li><p>有些MP3的TAG ID3V2头算出来的大小不准确，并不能找到第一帧位置。<br>这时，多半是它在第一帧和标签头之间又填充了很多无用信息<br>此时只能一个个字节去找FF帧头了</p>
-</li>
-<li><p>MP3标签帧对图片有保存：<a href="http://blog.csdn.net/studywithallofyou/article/details/7738785" target="_blank" rel="external">http://blog.csdn.net/studywithallofyou/article/details/7738785</a>  但是我在用ue去解析qq的MP3文件，却发现无APIC，虽没用代码检测，<code>先标记吧</code></p>
-</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;代码暂时不提供了，直接去&lt;code&gt;178&lt;/code&gt;的sobey库寻。说明MP3音频过程遇见。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;帧头是大端字节，所以要转换下&lt;/li&gt;
-&lt;li&gt;判断是否是帧头，看第一个字节是否是FF，同步信息第一个字节必须是FF（qq音乐喜欢用ff fe，网络
-    
-    </summary>
-    
-      <category term="音视频" scheme="https://xuecat.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/"/>
-    
-    
       <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
     
-      <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
-    
-      <category term="错误认识" scheme="https://xuecat.github.io/tags/%E9%94%99%E8%AF%AF%E8%AE%A4%E8%AF%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>180</title>
-    <link href="https://xuecat.github.io/2016/09/08/180/"/>
-    <id>https://xuecat.github.io/2016/09/08/180/</id>
-    <published>2016-09-08T13:25:50.000Z</published>
-    <updated>2016-09-10T01:32:27.976Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote class="blockquote-center"><h5 id="“梦里相逢人不见，若知是梦何须醒。纵然梦里常幽会，怎比真如见一回。”"><a href="#“梦里相逢人不见，若知是梦何须醒。纵然梦里常幽会，怎比真如见一回。”" class="headerlink" title="“梦里相逢人不见，若知是梦何须醒。纵然梦里常幽会，怎比真如见一回。”"></a>“梦里相逢人不见，若知是梦何须醒。纵然梦里常幽会，怎比真如见一回。”</h5></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;h5 id=&quot;“梦里相逢人不见，若知是梦何须醒。纵然梦里常幽会，怎比真如见一回。”&quot;&gt;&lt;a href=&quot;#“梦里相逢人不见，若知是梦何须醒。纵然梦里常幽会，怎比真如见一回。”&quot; class=&quot;heade
-    
-    </summary>
-    
-      <category term="生活" scheme="https://xuecat.github.io/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="life" scheme="https://xuecat.github.io/tags/life/"/>
+      <category term="stl" scheme="https://xuecat.github.io/tags/stl/"/>
     
   </entry>
   
