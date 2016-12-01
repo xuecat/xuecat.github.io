@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2016-12-01T13:26:51.130Z</updated>
+  <updated>2016-12-01T15:50:31.195Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -14,6 +14,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>c#入门经典2202</title>
+    <link href="https://xuecat.github.io/2016/12/01/202/"/>
+    <id>https://xuecat.github.io/2016/12/01/202/</id>
+    <published>2016-12-01T15:48:04.000Z</published>
+    <updated>2016-12-01T15:50:31.195Z</updated>
+    
+    <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/t2.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
+<h3 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h3><h4 id="yield"><a href="#yield" class="headerlink" title="yield"></a>yield</h4><p>这个一般是yield return, yield break联合使用；如下<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">IEnumerable&lt;<span class="keyword">int</span>&gt; SName(<span class="keyword">int</span> a)</div><div class="line">&#123;</div><div class="line">    yield <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    yield <span class="keyword">return</span> <span class="number">3</span>;</div><div class="line">    yield <span class="keyword">return</span> <span class="number">6</span>;</div><div class="line">    yield <span class="keyword">break</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//注意返回值必须是 IEnumerable 或 IEnumerator</span></div><div class="line"><span class="comment">//好像说这种方法比在函数里面push或add更有效</span></div></pre></td></tr></table></figure></p>
+<h4 id="where约束"><a href="#where约束" class="headerlink" title="where约束"></a>where约束</h4><p>这个我不是很深，以后补充；先看段代码。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">class MyBase&lt;T&gt;</div><div class="line">    where T: class</div><div class="line">    , new() &#123;</div><div class="line">    public MyBase() &#123;</div><div class="line">        Console.WriteLine("base");</div><div class="line">    &#125;</div><div class="line">    public MyBase(int n)</div><div class="line">        :this() &#123;</div><div class="line">        Console.WriteLine("base");</div><div class="line">    &#125;</div><div class="line">    public virtual T ShowD() &#123;</div><div class="line">        Console.WriteLine("MyBase");</div><div class="line">        T b = new T();//这里很重要</div><div class="line">        return b;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class MyDrive&lt;D&gt; : MyBase&lt;D&gt;, IEnumerable</div><div class="line">    where D: class, new() &#123;</div><div class="line">    public MyDrive()</div><div class="line">        : base(3) &#123;</div><div class="line">        Console.WriteLine("Drive");</div><div class="line">    &#125;</div><div class="line">    public MyDrive(int a)</div><div class="line">    &#123; &#125;</div><div class="line">    public override D ShowD() &#123;</div><div class="line">        Console.WriteLine("MyDrive");</div><div class="line">        D b = new D();//这句很重要</div><div class="line">        return b;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">MyDrive&lt;Program&gt; my = new MyDrive&lt;Program&gt;(3);//调用</div></pre></td></tr></table></figure></p>
+<p>第一个类；where对T约束为引用类型（值类型可以用struct），这样调用<code>&lt;&gt;</code>里面就只能是引用类型了<br>除此外where还约束为new()，表示<code>&lt;&gt;</code>里的类型必须有默认的构造函数，这样才可以用<code>new T()</code>这样的代码（测试发现里面不能加参数）</p>
+<p>where还可以准确约束，有点像c++的模板特例化</p>
+<h4 id="协变和抗变"><a href="#协变和抗变" class="headerlink" title="协变和抗变"></a>协变和抗变</h4><p><a href="http://blog.csdn.net/sudazf/article/details/17148971" target="_blank" rel="external">http://blog.csdn.net/sudazf/article/details/17148971</a></p>
+<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> internal IMyInter&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Do</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>暂时看它和虚基类没啥区别呀！！！！！！以后再加吧。</p>
+<h4 id="foreach的自定义"><a href="#foreach的自定义" class="headerlink" title="foreach的自定义"></a>foreach的自定义</h4><p>自定义类要使用foreach，就必须实现IEnumerator和IEnumerable<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> MyDrive : IEnumerable</div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> IEnumerator <span class="title">GetEnumerator</span><span class="params">()</span></span></div><div class="line">    &#123; <span class="keyword">return</span> <span class="keyword">new</span> MyTor(); &#125;</div><div class="line"></div><div class="line">    <span class="keyword">class</span> MyTor : IEnumerator</div><div class="line">    &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">bool</span> <span class="title">MoveNext</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="literal">true</span>; &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Reset</span><span class="params">()</span> </span>&#123; &#125;</div><div class="line">        <span class="keyword">public</span> object Current &#123; get &#123; <span class="keyword">return</span> null; &#125; &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">MyDrive ss = <span class="keyword">new</span> MyDrive();</div><div class="line">foreach (var t in ss) &#123;&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;div class=&quot;group-picture&quot;&gt;&lt;div class=&quot;group-picture-container&quot;&gt;&lt;div class=&quot;group-picture-row&quot;&gt;&lt;div class=&quot;group-picture-column&quot; style=&quot;widt
+    
+    </summary>
+    
+      <category term="C#" scheme="https://xuecat.github.io/categories/C/"/>
+    
+    
+      <category term="编译器和VC" scheme="https://xuecat.github.io/tags/%E7%BC%96%E8%AF%91%E5%99%A8%E5%92%8CVC/"/>
+    
+  </entry>
   
   <entry>
     <title>c#空字符和无字符201</title>
@@ -143,11 +174,11 @@
   </entry>
   
   <entry>
-    <title>c#入门经典197</title>
+    <title>c#入门经典1197</title>
     <link href="https://xuecat.github.io/2016/11/21/197/"/>
     <id>https://xuecat.github.io/2016/11/21/197/</id>
     <published>2016-11-21T13:39:27.000Z</published>
-    <updated>2016-12-01T15:40:37.285Z</updated>
+    <updated>2016-12-01T15:50:32.882Z</updated>
     
     <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/r4.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
 <p>唉！！，es6正看着呢；去海外组了。。。。要补c#知识了</p>
@@ -233,16 +264,7 @@
 </ul>
 <h4 id="拆箱和装箱"><a href="#拆箱和装箱" class="headerlink" title="拆箱和装箱"></a>拆箱和装箱</h4><p><strong>首先这俩个操作是隐式的</strong><br>所有值类型均隐式派生自System.ValueType：<br>结构体、数值、整形、字符（char）、浮点、bool、枚举、派生于System.Nullable<br>如<code>int i = new int()</code>等价于<code>int i = 0</code></p>
 <p>所有引用类型均隐式派生自System.object(包括它本身)：<br>数组：（派生于System.Array）数组的元素，不管是引用类型还是值类型，都存储在托管堆上；<br>类：class（派生于System.Object）；<br>接口：interface（接口不是一个“东西”，所以不存在派生于何处的问题。）；<br>委托：delegate（派生于System.Delegate）；<br>object：（System.Object的别名）；<br>字符串：string（System.String的别名）。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">object obj = <span class="number">1</span>;<span class="comment">//装箱</span></div><div class="line"><span class="keyword">int</span> value = (<span class="keyword">int</span>)obj;<span class="comment">//拆箱</span></div><div class="line"></div><div class="line"><span class="comment">//如上，c#中对值类型是放入栈中，对引用类型是放入堆中</span></div><div class="line"><span class="comment">//上面1是值，obj是引用。所以存在过程的转换</span></div><div class="line"><span class="comment">//这多余的转换会导致运行效率低下，所以请尽量避免。</span></div><div class="line"></div><div class="line"><span class="comment">//比如使用List&lt;obj&gt;来代替ArrayList;避免拆箱和装箱</span></div></pre></td></tr></table></figure>
-<h3 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h3><h4 id="yield"><a href="#yield" class="headerlink" title="yield"></a>yield</h4><p>这个一般是yield return, yield break联合使用；如下<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">IEnumerable&lt;<span class="keyword">int</span>&gt; SName(<span class="keyword">int</span> a)</div><div class="line">&#123;</div><div class="line">    yield <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    yield <span class="keyword">return</span> <span class="number">3</span>;</div><div class="line">    yield <span class="keyword">return</span> <span class="number">6</span>;</div><div class="line">    yield <span class="keyword">break</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//注意返回值必须是 IEnumerable 或 IEnumerator</span></div><div class="line"><span class="comment">//好像说这种方法比在函数里面push或add更有效</span></div></pre></td></tr></table></figure></p>
-<h4 id="where约束"><a href="#where约束" class="headerlink" title="where约束"></a>where约束</h4><p>这个我不是很深，以后补充；先看段代码。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">class MyBase&lt;T&gt;</div><div class="line">    where T: class</div><div class="line">    , new() &#123;</div><div class="line">    public MyBase() &#123;</div><div class="line">        Console.WriteLine("base");</div><div class="line">    &#125;</div><div class="line">    public MyBase(int n)</div><div class="line">        :this() &#123;</div><div class="line">        Console.WriteLine("base");</div><div class="line">    &#125;</div><div class="line">    public virtual T ShowD() &#123;</div><div class="line">        Console.WriteLine("MyBase");</div><div class="line">        T b = new T();//这里很重要</div><div class="line">        return b;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class MyDrive&lt;D&gt; : MyBase&lt;D&gt;, IEnumerable</div><div class="line">    where D: class, new() &#123;</div><div class="line">    public MyDrive()</div><div class="line">        : base(3) &#123;</div><div class="line">        Console.WriteLine("Drive");</div><div class="line">    &#125;</div><div class="line">    public MyDrive(int a)</div><div class="line">    &#123; &#125;</div><div class="line">    public override D ShowD() &#123;</div><div class="line">        Console.WriteLine("MyDrive");</div><div class="line">        D b = new D();//这句很重要</div><div class="line">        return b;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">MyDrive&lt;Program&gt; my = new MyDrive&lt;Program&gt;(3);//调用</div></pre></td></tr></table></figure></p>
-<p>第一个类；where对T约束为引用类型（值类型可以用struct），这样调用<code>&lt;&gt;</code>里面就只能是引用类型了<br>除此外where还约束为new()，表示<code>&lt;&gt;</code>里的类型必须有默认的构造函数，这样才可以用<code>new T()</code>这样的代码（测试发现里面不能加参数）</p>
-<p>where还可以准确约束，有点像c++的模板特例化</p>
-<h4 id="协变和抗变"><a href="#协变和抗变" class="headerlink" title="协变和抗变"></a>协变和抗变</h4><p><a href="http://blog.csdn.net/sudazf/article/details/17148971" target="_blank" rel="external">http://blog.csdn.net/sudazf/article/details/17148971</a></p>
-<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> internal IMyInter&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Do</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>暂时看它和虚基类没啥区别呀！！！！！！以后再加吧。</p>
-<h4 id="foreach的自定义"><a href="#foreach的自定义" class="headerlink" title="foreach的自定义"></a>foreach的自定义</h4><p>自定义类要使用foreach，就必须实现IEnumerator和IEnumerable<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> MyDrive : IEnumerable</div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> IEnumerator <span class="title">GetEnumerator</span><span class="params">()</span></span></div><div class="line">    &#123; <span class="keyword">return</span> <span class="keyword">new</span> MyTor(); &#125;</div><div class="line"></div><div class="line">    <span class="keyword">class</span> MyTor : IEnumerator</div><div class="line">    &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">bool</span> <span class="title">MoveNext</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="literal">true</span>; &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Reset</span><span class="params">()</span> </span>&#123; &#125;</div><div class="line">        <span class="keyword">public</span> object Current &#123; get &#123; <span class="keyword">return</span> null; &#125; &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">MyDrive ss = <span class="keyword">new</span> MyDrive();</div><div class="line">foreach (var t in ss) &#123;&#125;</div></pre></td></tr></table></figure></p>
-]]></content>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">object obj = <span class="number">1</span>;<span class="comment">//装箱</span></div><div class="line"><span class="keyword">int</span> value = (<span class="keyword">int</span>)obj;<span class="comment">//拆箱</span></div><div class="line"></div><div class="line"><span class="comment">//如上，c#中对值类型是放入栈中，对引用类型是放入堆中</span></div><div class="line"><span class="comment">//上面1是值，obj是引用。所以存在过程的转换</span></div><div class="line"><span class="comment">//这多余的转换会导致运行效率低下，所以请尽量避免。</span></div><div class="line"></div><div class="line"><span class="comment">//比如使用List&lt;obj&gt;来代替ArrayList;避免拆箱和装箱</span></div></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
@@ -992,172 +1014,6 @@ var btnOk2=document.createElement(&quot;&lt;input type=&apos;button&apos; value=
       <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
     
       <category term="vscode" scheme="https://xuecat.github.io/tags/vscode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>仿函数和配接器的使用182</title>
-    <link href="https://xuecat.github.io/2016/09/17/182/"/>
-    <id>https://xuecat.github.io/2016/09/17/182/</id>
-    <published>2016-09-17T14:38:08.000Z</published>
-    <updated>2016-09-29T01:25:57.762Z</updated>
-    
-    <content type="html"><![CDATA[<p>要想使用stl配接器算法，unary_function、binary_function的仿函数就必须使用.</p>
-<h3 id="先来看STL已经提供的仿函数"><a href="#先来看STL已经提供的仿函数" class="headerlink" title="先来看STL已经提供的仿函数"></a>先来看STL已经提供的仿函数</h3><h2 id="—"><a href="#—" class="headerlink" title="—"></a>—</h2><h4 id="算法类仿函数"><a href="#算法类仿函数" class="headerlink" title="算法类仿函数"></a>算法类仿函数</h4><p>加法： <code>plus&lt;T&gt;</code> <br><br>减法：<code>minus&lt;T&gt;</code><br><br>乘法：<code>multiplies&lt;T&gt;</code><br><br>除法：<code>divides&lt;T&gt;</code> <br><br>模取：<code>modulus&lt;T&gt;</code><br><br>否定：<code>negate&lt;T&gt;</code>(一元)<br></p>
-<h4 id="关系仿函数"><a href="#关系仿函数" class="headerlink" title="关系仿函数"></a>关系仿函数</h4><p>等于：<code>equal_to&lt;T&gt;</code><br><br>不等于：<code>not_equal_to&lt;T&gt;</code><br><br>大于：<code>greater&lt;T&gt;</code><br><br>大于或等于：<code>greater_equal&lt;T&gt;</code><br><br>小于：<code>less&lt;T&gt;</code><br><br>小于或等于:<code>less_equal&lt;T&gt;</code><br></p>
-<h4 id="逻辑运算仿函数"><a href="#逻辑运算仿函数" class="headerlink" title="逻辑运算仿函数"></a>逻辑运算仿函数</h4><p>and: <code>logical_and&lt;T&gt;</code><br><br>or: <code>logical_or&lt;T&gt;</code><br><br>not: <code>logical_not&lt;T&gt;</code><br></p>
-<h4 id="选择和投射"><a href="#选择和投射" class="headerlink" title="选择和投射"></a>选择和投射</h4><p><code>select1st&lt;T&gt;</code> <code>select2nd&lt;T&gt;</code> 对于此类，是针对pair的，传入pair，并返回第一个元素或第二个元素<br><br><code>project1st&lt;T&gt;</code> <code>project2nd&lt;T&gt;</code> 对于此类，是针对多参数的，传入俩个参数，只返回第一个元素或第二个元素<br></p>
-<h2 id="—-1"><a href="#—-1" class="headerlink" title="—"></a>—</h2><h3 id="再看配接器"><a href="#再看配接器" class="headerlink" title="再看配接器"></a>再看配接器</h3><table>
-<thead>
-<tr>
-<th>函数名</th>
-<th style="text-align:center">实际效果</th>
-<th style="text-align:center">实际对象</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="#bind">bind(_Farg0::* const _Pmd, _Arg0&amp;&amp; _A0)</a></td>
-<td style="text-align:center">11的新特性，auto配合万能绑定，参数能支持到20个参数，对成员函数绑定时第一个参数默认为传入<code>对象</code></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td><a href="#bind1st">bind1st(const op&amp; op, const T&amp; x)</a></td>
-<td style="text-align:center">op(x, param)</td>
-<td style="text-align:center">binder1st<op>(op, arg1_type(x))</op></td>
-</tr>
-<tr>
-<td><a href="#bind2nd">bind2nd(const op&amp; op, const T&amp; x)</a></td>
-<td style="text-align:center">op(param, x)</td>
-<td style="text-align:center">binder2nd<op>(op, arg2_type(x))</op></td>
-</tr>
-<tr>
-<td><a href="#not1">not1(const Pred&amp; pred)</a></td>
-<td style="text-align:center">!pred(param)</td>
-<td style="text-align:center">unary_negate<pred>(pred)</pred></td>
-</tr>
-<tr>
-<td><a href="#not2">not2(const Pred&amp; pred)</a></td>
-<td style="text-align:center">!pred(param1, param2)</td>
-<td style="text-align:center">binary_negate<pred>(pred)</pred></td>
-</tr>
-<tr>
-<td><a href="#compose1">compose1(const Op1&amp; op1, const Op2&amp; op2)</a></td>
-<td style="text-align:center">op1(op2(param))</td>
-<td style="text-align:center">unary_compose<op1, op2="">(op1, op2)</op1,></td>
-</tr>
-<tr>
-<td><a href="#compose2">compose2(<br>const Op1&amp; op1,<br> const Op2&amp; op2,<br> const Op3&amp; op3)</a></td>
-<td style="text-align:center">op1(op2(param),<br> op3(param))</td>
-<td style="text-align:center">binary_compose<op1, op2,="" op3=""><br>(op1, op2, op3)</op1,></td>
-</tr>
-<tr>
-<td><a href="#ptr_fun">ptr_fun(Result(*fp)(Arg))</a></td>
-<td style="text-align:center">fp(param)</td>
-<td style="text-align:center">pointer_to_unary_function<arg, result="">(fp)</arg,></td>
-</tr>
-<tr>
-<td><a href="#ptr_fun">ptr_fun(Result(*fp)(Arg1, Arg2))</a></td>
-<td style="text-align:center">fp(param1, param2)</td>
-<td style="text-align:center">pointer_to_binary_function<arg1, arg2,="" result="">(fp)</arg1,></td>
-</tr>
-<tr>
-<td><a href="#mem_fn">mem_fn()</a></td>
-<td style="text-align:center">11的新特性，auto配合，和bind绑定成员函数块差别不大，第一个参数默认为传入<code>对象</code></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td><a href="#mem_fun">mem_fun(S (T::*f)())</a></td>
-<td style="text-align:center">(param-&gt;*f)()</td>
-<td style="text-align:center">mem_fun_t<s, t="">(f)</s,></td>
-</tr>
-<tr>
-<td><a href="#mem_fun">mem_fun(S (T::*f)() const)</a></td>
-<td style="text-align:center">(param-&gt;*f)()</td>
-<td style="text-align:center">const_mem_fun_t<s, t="">(f)</s,></td>
-</tr>
-<tr>
-<td><a href="#mem_fun_ref">mem_fun_ref(S (T::*f)())</a></td>
-<td style="text-align:center">(param.*f)()</td>
-<td style="text-align:center">mem_fun_ref_t<s, t="">(f)</s,></td>
-</tr>
-<tr>
-<td><a href="#mem_fun_ref">mem_fun_ref(S (T::*f)() const)</a></td>
-<td style="text-align:center">(param.*f)()</td>
-<td style="text-align:center">const_mem_fun_ref_t<s, t="">(f)</s,></td>
-</tr>
-<tr>
-<td><a href="#mem_fun1">mem_fun1(S (T::*f)(A))</a></td>
-<td style="text-align:center">(param-&gt;*f)(x)</td>
-<td style="text-align:center">mem_fun1_t<s, t,="" a="">(f)</s,></td>
-</tr>
-<tr>
-<td><a href="#mem_fun1">mem_fun1(S (T::*f)(A) const)</a></td>
-<td style="text-align:center">(param-&gt;*f)(x)</td>
-<td style="text-align:center">const_mem_fun1_t<s, t,="" a="">(f)</s,></td>
-</tr>
-<tr>
-<td><a href="#mem_fun1_ref">mem_fun1_ref(S (T::*f)(A))</a></td>
-<td style="text-align:center">(param.*f)(x)</td>
-<td style="text-align:center">mem_fun1_ref_t<s, t,="" a="">(f)</s,></td>
-</tr>
-<tr>
-<td><a href="#mem_fun1_ref">mem_fun1_ref(S (T::*f)(A) const)</a></td>
-<td style="text-align:center">(param.*f)(x)</td>
-<td style="text-align:center">const_mem_fun1_ref_t<s, t,="" a="">(f)</s,></td>
-</tr>
-</tbody>
-</table>
-<hr>
-<p></p><h2 id="bind"> bind <h2><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">my_divide</span> <span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span> </span>&#123;<span class="keyword">return</span> x/y;&#125;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> MyPair &#123;</div><div class="line"><span class="keyword">double</span> a,b;</div><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">multiply</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> a*b;&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> Foo &#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print_sum</span><span class="params">(<span class="keyword">int</span> n1, <span class="keyword">int</span> n2)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; n1+n2 &lt;&lt; <span class="string">'\n'</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> data = <span class="number">10</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>::placeholders;    <span class="comment">//这里注意 adds visibility of _1, _2, _3,...</span></div><div class="line"></div><div class="line"><span class="comment">// binding functions:</span></div><div class="line"><span class="keyword">auto</span> fn_five = <span class="built_in">std</span>::bind (my_divide,<span class="number">10</span>,<span class="number">2</span>);               <span class="comment">// returns 10/2</span></div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; fn_five() &lt;&lt; <span class="string">'\n'</span>;                          <span class="comment">// 5</span></div><div class="line"></div><div class="line"><span class="keyword">auto</span> fn_half = <span class="built_in">std</span>::bind (my_divide,<span class="number">_1</span>,<span class="number">2</span>);               <span class="comment">// returns x/2</span></div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; fn_half(<span class="number">10</span>) &lt;&lt; <span class="string">'\n'</span>;                        <span class="comment">// 5</span></div><div class="line"></div><div class="line"><span class="keyword">auto</span> fn_invert = <span class="built_in">std</span>::bind (my_divide,<span class="number">_2</span>,<span class="number">_1</span>);            <span class="comment">// returns y/x</span></div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; fn_invert(<span class="number">10</span>,<span class="number">2</span>) &lt;&lt; <span class="string">'\n'</span>;                    <span class="comment">// 0.2</span></div><div class="line"></div><div class="line"><span class="keyword">auto</span> fn_rounding = <span class="built_in">std</span>::bind&lt;<span class="keyword">int</span>&gt; (my_divide,<span class="number">_1</span>,<span class="number">_2</span>);     <span class="comment">// returns int(x/y)</span></div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; fn_rounding(<span class="number">10</span>,<span class="number">3</span>) &lt;&lt; <span class="string">'\n'</span>;                  <span class="comment">// 3</span></div><div class="line"></div><div class="line">MyPair ten_two &#123;<span class="number">10</span>,<span class="number">2</span>&#125;;</div><div class="line"></div><div class="line"><span class="comment">// binding members:</span></div><div class="line"><span class="keyword">auto</span> bound_member_fn = <span class="built_in">std</span>::bind (&amp;MyPair::multiply,<span class="number">_1</span>); <span class="comment">// returns x.multiply()</span></div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; bound_member_fn(ten_two) &lt;&lt; <span class="string">'\n'</span>;           <span class="comment">// 20</span></div><div class="line"></div><div class="line"><span class="keyword">auto</span> bound_member_data = <span class="built_in">std</span>::bind (&amp;MyPair::a,ten_two); <span class="comment">// returns ten_two.a</span></div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; bound_member_data() &lt;&lt; <span class="string">'\n'</span>; </div><div class="line"></div><div class="line">Foo foo;</div><div class="line"><span class="keyword">auto</span> f3 = <span class="built_in">std</span>::bind(&amp;Foo::print_sum, foo, <span class="number">95</span>, <span class="number">_1</span>);</div><div class="line">f3(<span class="number">5</span>);</div><div class="line"></div></pre></td></tr></table></figure><p></p>
-<hr>
-<p></p><h2 id="bind1st"> bind1st <h2><p></p>
-<p></p><h2 id="bind2nd"> bind2nd <h2><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; a - b &lt;&lt; <span class="built_in">endl</span>;;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">int</span> <span class="number">_</span>tmain(<span class="keyword">int</span> argc, <span class="number">_</span>TCHAR* argv[])</div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> a[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;;</div><div class="line">    for_each(a, a+<span class="number">4</span>, bind1st(ptr_fun(fun), <span class="number">2</span>));<span class="comment">//此处由于，bind1st要传入适配器，所以要么fun继承前面的多元函数，要么如此处理</span></div><div class="line">    for_each(a, a+<span class="number">4</span>, bind2nd(ptr_fun(fun), <span class="number">2</span>));</div><div class="line">    system(<span class="string">"pause"</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure><p></p>
-<hr>
-<p></p><h2 id="not1"> not1 <h2><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">count_if(a, a+<span class="number">5</span>, not1(bind2nd(less&lt;<span class="keyword">int</span>&gt;(), <span class="number">4</span>)))<span class="comment">//统计大于等于4的个数</span></div><div class="line"></div></pre></td></tr></table></figure><p></p>
-<hr>
-<p></p><h2 id="not2"> not2 <h2><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">int</span> h = accumulate(a, a+<span class="number">5</span>, <span class="number">4</span>, not2(ptr_fun(fun)));<span class="comment">//此中的not2然并卵作用，主要是自己无法想到好的二元算法了</span></div><div class="line"></div></pre></td></tr></table></figure><p></p>
-<hr>
-<p></p><h2 id="compose1"> compose1 <h2><p></p>
-<p></p><h2 id="compose2"> compose2 <h2><br><figure class="highlight c"><figcaption><span>它是GNU的所以vs STL没有，有源码如下++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="number">_F</span>n1, <span class="keyword">class</span> <span class="number">_F</span>n2&gt;</div><div class="line"><span class="keyword">class</span> unary_compose</div><div class="line">    : <span class="keyword">public</span> unary_function&lt;<span class="keyword">typename</span> <span class="number">_F</span>n2::argument_type,</div><div class="line">        <span class="keyword">typename</span> <span class="number">_F</span>n1::result_type&gt;</div><div class="line">&#123;    <span class="comment">// functor adapter _Func(stored, right)</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">typedef</span> unary_function&lt;<span class="keyword">typename</span> <span class="number">_F</span>n2::argument_type,</div><div class="line">        <span class="keyword">typename</span> <span class="number">_F</span>n1::result_type&gt; <span class="number">_B</span>ase;</div><div class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="number">_B</span>ase::argument_type argument_type;</div><div class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="number">_B</span>ase::result_type result_type;</div><div class="line"></div><div class="line">    unary_compose(<span class="keyword">const</span> <span class="number">_F</span>n1&amp; <span class="number">_F</span>unc1,</div><div class="line">        <span class="keyword">const</span> <span class="number">_F</span>n2&amp; <span class="number">_F</span>unc2)</div><div class="line">        : op1(<span class="number">_F</span>unc1), op2(<span class="number">_F</span>unc2)</div><div class="line">        &#123;    <span class="comment">// construct from functor and left operand</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">    <span class="function">result_type <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">const</span> argument_type&amp; <span class="number">_</span>Value)</span> <span class="keyword">const</span></span></div><div class="line">        &#123;    <span class="comment">// apply functor to operands</span></div><div class="line">        <span class="keyword">return</span> (op1(op2(<span class="number">_</span>Value)));</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    <span class="function">result_type <span class="title">operator</span><span class="params">()</span><span class="params">(argument_type&amp; <span class="number">_</span>Value)</span> <span class="keyword">const</span></span></div><div class="line">        &#123;    <span class="comment">// apply functor to operands</span></div><div class="line">        <span class="keyword">return</span> (op1(op2(<span class="number">_</span>Value)));</div><div class="line">        &#125;</div><div class="line"></div><div class="line"><span class="keyword">protected</span>:</div><div class="line">    <span class="number">_F</span>n1 op1;    <span class="comment">// the functor to apply</span></div><div class="line">    <span class="number">_F</span>n2 op2;    <span class="comment">// the functor to apply</span></div><div class="line">&#125;;</div><div class="line"> </div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="number">_F</span>n1,</div><div class="line"><span class="keyword">class</span> <span class="number">_F</span>n2&gt; <span class="keyword">inline</span></div><div class="line">unary_compose&lt;<span class="number">_F</span>n1, <span class="number">_F</span>n2&gt; compose1(<span class="keyword">const</span> <span class="number">_F</span>n1&amp; <span class="number">_F</span>unc1, <span class="keyword">const</span> <span class="number">_F</span>n2&amp; <span class="number">_F</span>unc2)</div><div class="line">&#123;    <span class="comment">// return a unary_compose functor adapter</span></div><div class="line">    <span class="keyword">return</span> (unary_compose&lt;<span class="number">_F</span>n1, <span class="number">_F</span>n2&gt;(<span class="number">_F</span>unc1, <span class="number">_F</span>unc2));</div><div class="line">&#125;</div><div class="line"></div><div class="line">for_each(a, a+<span class="number">5</span>, compose1(bind2nd(multiplies&lt;<span class="keyword">int</span>&gt;(), <span class="number">2</span>), bind2nd(plus&lt;<span class="keyword">int</span>&gt;(), <span class="number">2</span>))); </div><div class="line"></div></pre></td></tr></table></figure><p></p>
-<hr>
-<p></p><h2 id="ptr_fun"> ptr_fun <h2><p></p>
-<blockquote>
-<p>上面已经有代码演示，无需</p>
-</blockquote>
-<hr>
-<p></p><h2 id="mem_fun"> mem_fun <h2><br><figure class="highlight c"><figcaption><span>成员对象必须是指针++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"> <span class="built_in">vector</span> &lt;<span class="built_in">string</span>*&gt; numbers;</div><div class="line"></div><div class="line"><span class="comment">// populate vector of pointers:</span></div><div class="line">numbers.push_back ( <span class="keyword">new</span> <span class="built_in">string</span> (<span class="string">"one"</span>) );</div><div class="line">numbers.push_back ( <span class="keyword">new</span> <span class="built_in">string</span> (<span class="string">"two"</span>) );</div><div class="line">numbers.push_back ( <span class="keyword">new</span> <span class="built_in">string</span> (<span class="string">"three"</span>) );</div><div class="line">numbers.push_back ( <span class="keyword">new</span> <span class="built_in">string</span> (<span class="string">"four"</span>) );</div><div class="line">numbers.push_back ( <span class="keyword">new</span> <span class="built_in">string</span> (<span class="string">"five"</span>) );</div><div class="line"></div><div class="line"><span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt; lengths ( numbers.size() );</div><div class="line"></div><div class="line">transform (numbers.begin(), numbers.end(), lengths.begin(), mem_fun(&amp;<span class="built_in">string</span>::length));</div><div class="line">    </div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++) &#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; *numbers[i] &lt;&lt; <span class="string">" has "</span> &lt;&lt; lengths[i] &lt;&lt; <span class="string">" letters.\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// deallocate strings:</span></div><div class="line"><span class="keyword">for</span> (<span class="built_in">vector</span>&lt;<span class="built_in">string</span>*&gt;::iterator it = numbers.begin(); it!=numbers.end(); ++it)</div><div class="line">    <span class="keyword">delete</span> *it;</div><div class="line"></div></pre></td></tr></table></figure><p></p>
-<hr>
-<p></p><h2 id="mem_fun1"> mem_fun1 <h2><p></p>
-<blockquote>
-<p>这个函数并不像<code>实际效果</code>那样，它应该是俩个参数，且各个绑定不同。<br>此函数11之后被淘汰</p>
-</blockquote>
-<figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">   numbers.push_back ( <span class="keyword">new</span> dd );</div><div class="line">numbers.push_back ( <span class="keyword">new</span> dd );</div><div class="line"></div><div class="line">   <span class="keyword">class</span> dd &#123;</div><div class="line">   <span class="keyword">public</span>:</div><div class="line">       dd() &#123;&#125;</div><div class="line">       ~dd() &#123;&#125;</div><div class="line">       <span class="function"><span class="keyword">int</span> <span class="title">aa</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</div><div class="line">           <span class="built_in">cout</span> &lt;&lt; a - <span class="number">1</span>  &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">           <span class="keyword">return</span> a - <span class="number">1</span>;</div><div class="line">       &#125;</div><div class="line">   &#125;;</div><div class="line">   for_each (numbers.begin(), numbers.end(), bind2nd(mem_fun1(&amp;dd::aa), <span class="number">2</span>));<span class="comment">//如此便是循环执行：iterator-&gt;aa(2);</span></div><div class="line"></div><div class="line">   <span class="comment">////////////////////////////</span></div><div class="line">   numbers.push_back ( <span class="keyword">new</span> dd );</div><div class="line">numbers.push_back ( <span class="keyword">new</span> dd );</div><div class="line"></div><div class="line">   <span class="keyword">class</span> aa &#123;</div><div class="line">   <span class="keyword">public</span>:</div><div class="line">       aa() &#123;&#125;</div><div class="line">       ~aa() &#123;&#125;</div><div class="line">       <span class="function"><span class="keyword">int</span> <span class="title">dd</span><span class="params">(dd* a)</span> </span>&#123;</div><div class="line">           <span class="built_in">cout</span> &lt;&lt; <span class="number">33</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">           <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">       &#125;</div><div class="line">   &#125;;</div><div class="line">   aa s;</div><div class="line">   for_each (numbers.begin(), numbers.end(), bind1st(mem_fun1(&amp;aa::dd), &amp;s));<span class="comment">//如此便是循环执行：(&amp;s)-&gt;dd(iterator);</span></div><div class="line"></div></pre></td></tr></table></figure>
-<hr>
-<p></p><h2 id="mem_fun_ref"> mem_fun_ref <h2><p></p>
-<p></p><h2 id="mem_fun1_ref"> mem_fun1_ref <h2><p></p>
-<blockquote>
-<p>它们和<code>mem_fun</code>区别在于，iterator是对象，而不是指针。<br>mem_fun1_ref此函数11之后被淘汰</p>
-</blockquote>
-<hr>
-<p></p><h2 id="mem_fn"> mem_fn <h2><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">   dd a;</div><div class="line"><span class="keyword">auto</span> triple = <span class="built_in">std</span>::mem_fn(&amp;dd::aa);</div><div class="line"><span class="built_in">cout</span> &lt;&lt; triple(a, <span class="number">2</span>) &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//以a为调用对象，传入2</span></div><div class="line"></div></pre></td></tr></table></figure><p></p>
-</h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2></h2>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;要想使用stl配接器算法，unary_function、binary_function的仿函数就必须使用.&lt;/p&gt;
-&lt;h3 id=&quot;先来看STL已经提供的仿函数&quot;&gt;&lt;a href=&quot;#先来看STL已经提供的仿函数&quot; class=&quot;headerlink&quot; title=&quot;先来看
-    
-    </summary>
-    
-      <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
-    
-    
-      <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
-    
-      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
-    
-      <category term="stl" scheme="https://xuecat.github.io/tags/stl/"/>
     
   </entry>
   
