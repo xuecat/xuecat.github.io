@@ -97,7 +97,7 @@ yield这个一般是yield return, yield break联合使用；如下123456789IEnum
 T a = default(null)这样的话值类型就是0，引用类型就是null
 yield这个一般是yield return, yield break联合使用；如下123456789IEnumerable&amp;lt;int&amp;gt; SName(int a)&amp;#123;    yield">
 <meta property="og:image" content="https://xuecat.github.io/picture/t2.jpg">
-<meta property="og:updated_time" content="2016-12-05T13:33:36.074Z">
+<meta property="og:updated_time" content="2016-12-06T14:22:21.638Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c#入门经典(2)202">
 <meta name="twitter:description" content="泛型default由于泛型T不确定是值类型还是引用类型，所以T a = null这句是错误的（值类型就空了）。
@@ -357,7 +357,7 @@ yield这个一般是yield return, yield break联合使用；如下123456789IEnum
 <p>第一个类；where对T约束为引用类型（值类型可以用struct），这样调用<code>&lt;&gt;</code>里面就只能是引用类型了<br>除此外where还约束为new()，表示<code>&lt;&gt;</code>里的类型必须有默认的构造函数，这样才可以用<code>new T()</code>这样的代码（测试发现里面不能加参数）</p>
 <p>where还可以准确约束，有点像c++的模板特例化</p>
 <h4 id="协变和抗变"><a href="#协变和抗变" class="headerlink" title="协变和抗变"></a>协变和抗变</h4><p><a href="http://blog.csdn.net/sudazf/article/details/17148971" target="_blank" rel="external">http://blog.csdn.net/sudazf/article/details/17148971</a></p>
-<h4 id="可空类型"><a href="#可空类型" class="headerlink" title="可空类型"></a>可空类型</h4><p>可空类型原型是<code>System.Nullable&lt;T&gt;</code>，简单型<code>T?</code><br>网上说它是为了sql设计<br>操作符可以和原型相同<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//？？是判断是否为空</span></div><div class="line"><span class="keyword">int</span>? x = <span class="number">3</span>;</div><div class="line"><span class="keyword">int</span> y = x ?? <span class="number">5</span>;<span class="comment">//y:3</span></div><div class="line"></div><div class="line">x = <span class="number">0</span>;</div><div class="line">y = x ?? <span class="number">6</span>;<span class="comment">//x:0 y:0</span></div><div class="line"></div><div class="line">x = null;</div><div class="line">y = x ?? <span class="number">7</span>;<span class="comment">//x:null y:7</span></div></pre></td></tr></table></figure></p>
+<h4 id="可空类型及运算符"><a href="#可空类型及运算符" class="headerlink" title="可空类型及运算符"></a>可空类型及运算符</h4><p>可空类型原型是<code>System.Nullable&lt;T&gt;</code>，简单型<code>T?</code><br>网上说它是为了sql设计<br>操作符可以和原型相同<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//？？是判断是否为空</span></div><div class="line"><span class="keyword">int</span>? x = <span class="number">3</span>;</div><div class="line"><span class="keyword">int</span> y = x ?? <span class="number">5</span>;<span class="comment">//y:3</span></div><div class="line"></div><div class="line">x = <span class="number">0</span>;</div><div class="line">y = x ?? <span class="number">6</span>;<span class="comment">//x:0 y:0</span></div><div class="line"></div><div class="line">x = null;</div><div class="line">y = x ?? <span class="number">7</span>;<span class="comment">//x:null y:7</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//再看运算符应用（好像它只能用于引用类型，不能用于值类型）</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">string</span> <span class="title">DoQG</span><span class="params">(dynamic dy)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">string</span> result = dy.GG();</div><div class="line">    <span class="keyword">return</span> result ?? <span class="string">"hehe"</span>;</div><div class="line">&#125;</div><div class="line">MyClass hh = <span class="keyword">new</span> MyClass();</div><div class="line">YouClass yy = <span class="keyword">new</span> YouClass();</div><div class="line">MyClass sss = yy ?? null;</div></pre></td></tr></table></figure></p>
 <h4 id="各个泛型容器及性能"><a href="#各个泛型容器及性能" class="headerlink" title="各个泛型容器及性能"></a>各个泛型容器及性能</h4><p>队列Queue<t><br>栈Statck<t><br>链表LinkedList<t><br>有序列表SortedList<tkey, tvalue="">, IComparef<tkey>接口用于排序<br>字典Dictionary<tkey, tvalue=""> 无排序 键类型需要实现GethashCode和IEquatable<t><br>有序字典SortedDictionary<tkey, tvalue=""><br>集 HashSet<t><br>有序集 SortedSet<t></t></t></tkey,></t></tkey,></tkey></tkey,></t></t></t></p>
 <p>书上本来是有个性能表，但是纠结了感觉没啥用，就不写等以后更新。</p>
 <h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> internal IMyInter&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Do</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -410,6 +410,10 @@ yield这个一般是yield return, yield break联合使用；如下123456789IEnum
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/06/203/" rel="prev" title="c#入门经典(3)203">
+                c#入门经典(3)203 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -477,7 +481,7 @@ yield这个一般是yield return, yield break联合使用；如下123456789IEnum
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">196</span>
+              <span class="site-state-item-count">198</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -494,7 +498,7 @@ yield这个一般是yield return, yield break联合使用；如下123456789IEnum
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -591,7 +595,7 @@ yield这个一般是yield return, yield break联合使用；如下123456789IEnum
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型"><span class="nav-number">1.</span> <span class="nav-text">泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#default"><span class="nav-number">1.1.</span> <span class="nav-text">default</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#yield"><span class="nav-number">1.2.</span> <span class="nav-text">yield</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#where约束"><span class="nav-number">1.3.</span> <span class="nav-text">where约束</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#协变和抗变"><span class="nav-number">1.4.</span> <span class="nav-text">协变和抗变</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可空类型"><span class="nav-number">1.5.</span> <span class="nav-text">可空类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#各个泛型容器及性能"><span class="nav-number">1.6.</span> <span class="nav-text">各个泛型容器及性能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口"><span class="nav-number">2.</span> <span class="nav-text">接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#foreach的自定义"><span class="nav-number">2.1.</span> <span class="nav-text">foreach的自定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#排序搜索等"><span class="nav-number">2.2.</span> <span class="nav-text">排序搜索等</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#其它接口"><span class="nav-number">2.2.1.</span> <span class="nav-text">其它接口</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型"><span class="nav-number">1.</span> <span class="nav-text">泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#default"><span class="nav-number">1.1.</span> <span class="nav-text">default</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#yield"><span class="nav-number">1.2.</span> <span class="nav-text">yield</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#where约束"><span class="nav-number">1.3.</span> <span class="nav-text">where约束</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#协变和抗变"><span class="nav-number">1.4.</span> <span class="nav-text">协变和抗变</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可空类型及运算符"><span class="nav-number">1.5.</span> <span class="nav-text">可空类型及运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#各个泛型容器及性能"><span class="nav-number">1.6.</span> <span class="nav-text">各个泛型容器及性能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口"><span class="nav-number">2.</span> <span class="nav-text">接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#foreach的自定义"><span class="nav-number">2.1.</span> <span class="nav-text">foreach的自定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#排序搜索等"><span class="nav-number">2.2.</span> <span class="nav-text">排序搜索等</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#其它接口"><span class="nav-number">2.2.1.</span> <span class="nav-text">其它接口</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2016-12-05T13:33:36.074Z</updated>
+  <updated>2016-12-07T15:35:04.220Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -16,11 +16,65 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>WPF学习204</title>
+    <link href="https://xuecat.github.io/2016/12/07/204/"/>
+    <id>https://xuecat.github.io/2016/12/07/204/</id>
+    <published>2016-12-07T15:14:24.000Z</published>
+    <updated>2016-12-07T15:35:04.220Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="代码隐藏文件"><a href="#代码隐藏文件" class="headerlink" title="代码隐藏文件"></a>代码隐藏文件</h3><p>界面描述放在<code>xaml</code>文件里的<br>为界面增加功能（事件呀等）的cs代码，就放入<code>.xaml.cs</code>文件中<br>隐藏文件默认是放入xaml文件同一个目录中的。</p>
+<p>界面第一句：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Window</span> <span class="attr">x:Class</span>=<span class="string">"WpfApplication1.MainWindow"</span>&gt;</span></div><div class="line">//第一句就指定了，对应隐藏文件的类</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;代码隐藏文件&quot;&gt;&lt;a href=&quot;#代码隐藏文件&quot; class=&quot;headerlink&quot; title=&quot;代码隐藏文件&quot;&gt;&lt;/a&gt;代码隐藏文件&lt;/h3&gt;&lt;p&gt;界面描述放在&lt;code&gt;xaml&lt;/code&gt;文件里的&lt;br&gt;为界面增加功能（事件呀等）的cs代码，就放入&lt;
+    
+    </summary>
+    
+      <category term="C#" scheme="https://xuecat.github.io/categories/C/"/>
+    
+    
+      <category term="编译器和VC" scheme="https://xuecat.github.io/tags/%E7%BC%96%E8%AF%91%E5%99%A8%E5%92%8CVC/"/>
+    
+      <category term="wpf" scheme="https://xuecat.github.io/tags/wpf/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>c#入门经典(3)203</title>
+    <link href="https://xuecat.github.io/2016/12/06/203/"/>
+    <id>https://xuecat.github.io/2016/12/06/203/</id>
+    <published>2016-12-06T12:37:27.000Z</published>
+    <updated>2016-12-06T14:22:17.799Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[DebuggerStepThrough]<span class="comment">//调试跳过下面方法</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DullMethod</span><span class="params">()</span> </span>&#123;...&#125;</div><div class="line"></div><div class="line">[DoesInterestingThings(<span class="number">1000</span>, WhatDoesItDo = <span class="string">"voodoo"</span>)]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> DecoratedClass &#123;&#125;</div></pre></td></tr></table></figure>
+<h3 id="动态类型"><a href="#动态类型" class="headerlink" title="动态类型"></a>动态类型</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> T Sum&lt;T&gt;(params T[] Args)</div><div class="line">&#123;</div><div class="line">    T sum = Args[<span class="number">0</span>];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; Args.Length; ++i)</div><div class="line">    &#123;</div><div class="line">         sum += Args[i];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> sum;</div><div class="line">&#125;<span class="comment">//上面这一段代码并不会编译通过</span></div></pre></td></tr></table></figure>
+<p>在C++中这是最最基本的函数模板，但是在C#中代码通不过，<br>因为泛型不是模板，它不会生成多份代码，T是当做object来处理的，<br>因此不能用来进行加法运算。</p>
+<p>##所以c#又引入了动态类型的概念##<br>便可以如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> T Sum&lt;T&gt;(params T[] Args)</div><div class="line">&#123;</div><div class="line">    dynamic sum = Args[<span class="number">0</span>];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; Args.Length; ++i)</div><div class="line">    &#123;</div><div class="line">         sum += Args[i];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> sum;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>C#编译器允许你通过dynamic对象调用任何方法，即使这个方法根本不存在，<br>编译器也不会在编译的时候报编译错误。只有在运行的时候，<br>它才会检查这个对象的实际类型</p>
+<p>再看一段代码：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> Duck</div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">string</span> <span class="title">QQ</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        Console.WriteLine(<span class="string">"qq"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="string">"qq"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> Humen</div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">string</span> <span class="title">GG</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        Console.WriteLine(<span class="string">"gg"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="string">"gg"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">class</span> Program</div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">string</span> <span class="title">DoQG</span><span class="params">(dynamic dy)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">string</span> result = dy.GG();<span class="comment">//由于是dynamic，所以任何代码都是对的，编译器更不会报错</span></div><div class="line">        <span class="keyword">return</span> result ?? <span class="string">"hehe"</span>;<span class="comment">//但是执行的话，由于duck类是没有GG这个函数的。会直接抛出异常。</span></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span><span class="params">(<span class="built_in">string</span>[] args)</span></span></div><div class="line">    &#123;</div><div class="line">        Duck duck = <span class="keyword">new</span> Duck();</div><div class="line">        Humen hu = <span class="keyword">new</span> Humen();</div><div class="line"></div><div class="line">        Console.WriteLine(DoQG(hu));</div><div class="line">        Console.WriteLine(DoQG(duck));</div><div class="line">        Console.ReadKey();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;特性&quot;&gt;&lt;a href=&quot;#特性&quot; class=&quot;headerlink&quot; title=&quot;特性&quot;&gt;&lt;/a&gt;特性&lt;/h3&gt;&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class
+    
+    </summary>
+    
+      <category term="C#" scheme="https://xuecat.github.io/categories/C/"/>
+    
+    
+      <category term="编译器和VC" scheme="https://xuecat.github.io/tags/%E7%BC%96%E8%AF%91%E5%99%A8%E5%92%8CVC/"/>
+    
+  </entry>
+  
+  <entry>
     <title>c#入门经典(2)202</title>
     <link href="https://xuecat.github.io/2016/12/01/202/"/>
     <id>https://xuecat.github.io/2016/12/01/202/</id>
     <published>2016-12-01T15:48:04.000Z</published>
-    <updated>2016-12-05T13:33:36.074Z</updated>
+    <updated>2016-12-06T14:22:21.638Z</updated>
     
     <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/t2.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
 <h3 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h3><h4 id="default"><a href="#default" class="headerlink" title="default"></a>default</h4><p>由于泛型T不确定是值类型还是引用类型，所以<br><code>T a = null</code>这句是错误的（值类型就空了）。</p>
@@ -30,7 +84,7 @@
 <p>第一个类；where对T约束为引用类型（值类型可以用struct），这样调用<code>&lt;&gt;</code>里面就只能是引用类型了<br>除此外where还约束为new()，表示<code>&lt;&gt;</code>里的类型必须有默认的构造函数，这样才可以用<code>new T()</code>这样的代码（测试发现里面不能加参数）</p>
 <p>where还可以准确约束，有点像c++的模板特例化</p>
 <h4 id="协变和抗变"><a href="#协变和抗变" class="headerlink" title="协变和抗变"></a>协变和抗变</h4><p><a href="http://blog.csdn.net/sudazf/article/details/17148971" target="_blank" rel="external">http://blog.csdn.net/sudazf/article/details/17148971</a></p>
-<h4 id="可空类型"><a href="#可空类型" class="headerlink" title="可空类型"></a>可空类型</h4><p>可空类型原型是<code>System.Nullable&lt;T&gt;</code>，简单型<code>T?</code><br>网上说它是为了sql设计<br>操作符可以和原型相同<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//？？是判断是否为空</span></div><div class="line"><span class="keyword">int</span>? x = <span class="number">3</span>;</div><div class="line"><span class="keyword">int</span> y = x ?? <span class="number">5</span>;<span class="comment">//y:3</span></div><div class="line"></div><div class="line">x = <span class="number">0</span>;</div><div class="line">y = x ?? <span class="number">6</span>;<span class="comment">//x:0 y:0</span></div><div class="line"></div><div class="line">x = null;</div><div class="line">y = x ?? <span class="number">7</span>;<span class="comment">//x:null y:7</span></div></pre></td></tr></table></figure></p>
+<h4 id="可空类型及运算符"><a href="#可空类型及运算符" class="headerlink" title="可空类型及运算符"></a>可空类型及运算符</h4><p>可空类型原型是<code>System.Nullable&lt;T&gt;</code>，简单型<code>T?</code><br>网上说它是为了sql设计<br>操作符可以和原型相同<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//？？是判断是否为空</span></div><div class="line"><span class="keyword">int</span>? x = <span class="number">3</span>;</div><div class="line"><span class="keyword">int</span> y = x ?? <span class="number">5</span>;<span class="comment">//y:3</span></div><div class="line"></div><div class="line">x = <span class="number">0</span>;</div><div class="line">y = x ?? <span class="number">6</span>;<span class="comment">//x:0 y:0</span></div><div class="line"></div><div class="line">x = null;</div><div class="line">y = x ?? <span class="number">7</span>;<span class="comment">//x:null y:7</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//再看运算符应用（好像它只能用于引用类型，不能用于值类型）</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">string</span> <span class="title">DoQG</span><span class="params">(dynamic dy)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">string</span> result = dy.GG();</div><div class="line">    <span class="keyword">return</span> result ?? <span class="string">"hehe"</span>;</div><div class="line">&#125;</div><div class="line">MyClass hh = <span class="keyword">new</span> MyClass();</div><div class="line">YouClass yy = <span class="keyword">new</span> YouClass();</div><div class="line">MyClass sss = yy ?? null;</div></pre></td></tr></table></figure></p>
 <h4 id="各个泛型容器及性能"><a href="#各个泛型容器及性能" class="headerlink" title="各个泛型容器及性能"></a>各个泛型容器及性能</h4><p>队列Queue<t><br>栈Statck<t><br>链表LinkedList<t><br>有序列表SortedList<tkey, tvalue="">, IComparef<tkey>接口用于排序<br>字典Dictionary<tkey, tvalue=""> 无排序 键类型需要实现GethashCode和IEquatable<t><br>有序字典SortedDictionary<tkey, tvalue=""><br>集 HashSet<t><br>有序集 SortedSet<t></t></t></tkey,></t></tkey,></tkey></tkey,></t></t></t></p>
 <p>书上本来是有个性能表，但是纠结了感觉没啥用，就不写等以后更新。</p>
 <h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> internal IMyInter&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Do</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -89,26 +143,31 @@
     <link href="https://xuecat.github.io/2016/12/01/200/"/>
     <id>https://xuecat.github.io/2016/12/01/200/</id>
     <published>2016-12-01T13:05:20.000Z</published>
-    <updated>2016-12-01T14:29:24.792Z</updated>
+    <updated>2016-12-07T15:11:24.939Z</updated>
     
-    <content type="html"><![CDATA[<p>产生dump：<a href="https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump" target="_blank" rel="external">https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump</a></p>
-<p>debug工具一般都有debugger.chm这个文档可以参考<br>x64:</p>
+    <content type="html"><![CDATA[<p>dump：<a href="https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump" target="_blank" rel="external">https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump</a></p>
+<p>如果只想程序运行时的内存dump，直接从资源管理器；进程tab页上，选中程序右键，就有个产生dump选项。</p>
+<p>debug工具一般都有debugger.chm这个文档可以参考<br><strong>x64</strong>:</p>
 <ol>
 <li>拖拽到windbg，lm查看模块状态</li>
 <li>查看时间戳(lmt)，找到对应pdb，设置pdb路径</li>
 <li>重新加载pdb(.reload)，运行分析命令(!analyze -v)<br>一般崩溃会有exception，就查找这个字符串，就可以找到对应执行函数。(~N 切换到N号线程，主线程是0号)<br>主线程没有就切换到其它线程查找(~*e kb)</li>
 </ol>
-<p>x32:<br>基本相同，但是当32位程序运行在64位系统的时候，产生的dump</p>
+<p><strong>x32</strong>:<br>基本相同，但是当32位程序运行在64位系统的时候，产生的dump</p>
 <ol>
 <li>先加载64位的扩展(.load wow64exts)</li>
 <li>切换到32位模式(!sw)</li>
 <li>然后才再像上面那样调试</li>
 </ol>
+<hr>
+<p>今天又测试了下，指定符号、源、exe后，lm居然没找到对应符号。。。</p>
+<p>只好强制加载了。<br><strong>后来发现居然要多个后缀才行</strong>：<br><code>.reload /i simpledoc1.exe</code>这样才行。。。</p>
+<p><strong>lm会全部显示，太多了，如果只想显示能加载符号的模块的话用：</strong><code>lml</code>就可以了</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;产生dump：&lt;a href=&quot;https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump&quot; target=&quot;_blank&quot;
+      &lt;p&gt;dump：&lt;a href=&quot;https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump&quot; target=&quot;_blank&quot; r
     
     </summary>
     
@@ -192,7 +251,7 @@
     <link href="https://xuecat.github.io/2016/11/21/197/"/>
     <id>https://xuecat.github.io/2016/11/21/197/</id>
     <published>2016-11-21T13:39:27.000Z</published>
-    <updated>2016-12-05T15:10:05.317Z</updated>
+    <updated>2016-12-06T13:19:39.661Z</updated>
     
     <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/r4.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
 <p>唉！！，es6正看着呢；去海外组了。。。。要补c#知识了</p>
@@ -258,6 +317,7 @@
 <li>委托不同；<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public class MyD: MyBass</div><div class="line">&#123;</div><div class="line">    public MyD() : this(5, 6)&#123;&#125;//委托给自身的另一个构造函数</div><div class="line">    public MyD(int i, int j) : base(i) &#123;&#125;//调用基类构造函数</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
+<h4 id="对象初始化器"><a href="#对象初始化器" class="headerlink" title="对象初始化器"></a>对象初始化器</h4><p><code>HeClass hh = new HeClass(2) { _me = 3 };</code><br>HeClass有个成员_me；<br>这个功能简直装逼用，没啥实用。效率和调用构造函数一样；<br>而且成员还必须是public，不然没法访问。。。。</p>
 <p>##然后就是静态构造函数##<br>编写静态构造函数的一个原因是,类有一些静态字段或属性,需要在第一次使用类之前,从外部源中初始化这些静态字段和属性<br>由于并不确定它执行的时间，所以注意下此函数中对静态变量的赋值。</p>
 <h4 id="静态类"><a href="#静态类" class="headerlink" title="静态类"></a>静态类</h4><p>给类加个static只是告诉编译器，这个类的所有成员必须是<code>static</code>类型的，不然就报错</p>
 <h4 id="类和结构体区别"><a href="#类和结构体区别" class="headerlink" title="类和结构体区别"></a>类和结构体区别</h4><p>c#中类和结构体有个大大的区别， 类是引用类型，结构体是值类型。<br>也就是说：<br>直接的<code>=</code>操作对类来说是引用赋值（是浅拷贝过程）<br>直接的<code>=</code>操作对结构体来说是复制信息（是深拷贝）</p>
@@ -371,9 +431,9 @@
       <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
     
     
-      <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
-    
       <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
+    
+      <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
     
   </entry>
   
@@ -440,9 +500,9 @@ return result;
       <category term="配置" scheme="https://xuecat.github.io/categories/%E9%85%8D%E7%BD%AE/"/>
     
     
-      <category term="工具" scheme="https://xuecat.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
-    
       <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
+    
+      <category term="工具" scheme="https://xuecat.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
@@ -735,7 +795,7 @@ undefined
     <updated>2016-11-21T13:49:10.497Z</updated>
     
     <content type="html"><![CDATA[<p><strong>1. this.props.children</strong><br>它是链表没错(当只有一个时，是string之类元素)</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">React.Children.map(<span class="keyword">this</span>.props.children, <span class="function"><span class="keyword">function</span> (<span class="params">child</span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;child&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span>;</div><div class="line">        &#125;)</div><div class="line"><span class="comment">//每个child是一个ReactElement的object，可能ReactElement有默认的隐式处理吧_shadowChildren之类吧！</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">React.Children.map(<span class="keyword">this</span>.props.children, <span class="function"><span class="keyword">function</span> (<span class="params">child</span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> &lt;li&gt;&#123;child&#125;&lt;/li&gt;;</div><div class="line">        &#125;)</div><div class="line"><span class="comment">//每个child是一个ReactElement的object，可能ReactElement有默认的隐式处理吧_shadowChildren之类吧！</span></div></pre></td></tr></table></figure>
 <p>此句，一直不明白为何object能当字符处理。</p>
 <p><strong>2. markdown显示</strong><br>使用remarkable库，可以支持markdown格式显示语句。<br><br>但是不能直接render解析（虽然表面看是对的），好像react做了XSS 攻击的保护。<br><br>解析后的语句只能放入节点属性中：dangerouslySetInnerHTML={ __html: md.render(this.props.children.toString()) }<br><br>值得注意的是，它支持的markdown语法是最新的，也就是说有些语法严格和空格有关(如<code># d</code>必须空格)</p>
 <p><strong>3. react key添加</strong><br>我在用map的时候，被警告必须加key。react对dom做遍历的时候，会根据data-reactid生成虚拟dom树。如果你没有手动的添加unique constant key的话，react是无法记录你的dom操作的。</p>
@@ -746,7 +806,7 @@ undefined
 <p><strong>6. react-es6</strong><br>这个由于很多，只说下属性的设置；<br>es5对类属性设置是用： <code>render: function(){}</code><br><br>es6对类属性设置是用：<code>render() {}</code><br><br>居然看半天没发现。<br><a href="http://blog.csdn.net/wangzengdi/article/details/50719395" target="_blank" rel="external">http://blog.csdn.net/wangzengdi/article/details/50719395</a></p>
 <p><strong>7. 无状态的函数式组件</strong><br>除了正统的rn创建外；还有个创建组件的方法<br></p>
 <p>声明：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Pane = (props) =&gt; <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;props.children&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</div><div class="line">Pane.propTypes = &#123;</div><div class="line">  label: React.PropTypes.string.isRequired,</div><div class="line">  children: React.PropTypes.element.isRequired</div><div class="line">&#125;;</div><div class="line"><span class="comment">//使用：</span></div><div class="line">&lt;Pane label=<span class="string">"asdf"</span> /&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Pane = (props) =&gt; &lt;div&gt;&#123;props.children&#125;&lt;/div&gt;;</div><div class="line">Pane.propTypes = &#123;</div><div class="line">  label: React.PropTypes.string.isRequired,</div><div class="line">  children: React.PropTypes.element.isRequired</div><div class="line">&#125;;</div><div class="line"><span class="comment">//使用：</span></div><div class="line">&lt;Pane label=<span class="string">"asdf"</span> /&gt;</div></pre></td></tr></table></figure>
 <p>注意俩点：</p>
 <ol>
 <li>不能有生命周期方法</li>
@@ -802,9 +862,9 @@ undefined
       <category term="配置" scheme="https://xuecat.github.io/categories/%E9%85%8D%E7%BD%AE/"/>
     
     
-      <category term="工具" scheme="https://xuecat.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
-    
       <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
+    
+      <category term="工具" scheme="https://xuecat.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
@@ -955,84 +1015,6 @@ var btnOk2=document.createElement(&quot;&lt;input type=&apos;button&apos; value=
     
     
       <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>critical_section临界区注意事项184</title>
-    <link href="https://xuecat.github.io/2016/09/22/184/"/>
-    <id>https://xuecat.github.io/2016/09/22/184/</id>
-    <published>2016-09-22T13:50:33.000Z</published>
-    <updated>2016-09-22T13:53:00.253Z</updated>
-    
-    <content type="html"><![CDATA[<p>EnterCriticalSection作为临界区</p>
-<p>critical_section效率要高一些，因为是针对同一个进程的。<br>mutex是针对整个操作系统的。</p>
-<p>//1.测试同一线程两次EnterCriticalSection会不会阻塞<br>//答案:不会<br>/*</p>
-<p>//2.测试同一线程两次EnterCriticalSection，调用一次LeaveCriticalSection 另一个线程是否可以以EnterCriticalSection<br>//答案:不可以 两次EnterCriticalSection 必须调用 LeaveCriticalSection两次</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;EnterCriticalSection作为临界区&lt;/p&gt;
-&lt;p&gt;critical_section效率要高一些，因为是针对同一个进程的。&lt;br&gt;mutex是针对整个操作系统的。&lt;/p&gt;
-&lt;p&gt;//1.测试同一线程两次EnterCriticalSection会不会阻塞&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Windows" scheme="https://xuecat.github.io/categories/Windows/"/>
-    
-    
-      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
-    
-      <category term="多线程" scheme="https://xuecat.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在VSCode开发react环境过程IDE183</title>
-    <link href="https://xuecat.github.io/2016/09/21/183/"/>
-    <id>https://xuecat.github.io/2016/09/21/183/</id>
-    <published>2016-09-21T15:54:37.000Z</published>
-    <updated>2016-11-13T02:15:32.030Z</updated>
-    
-    <content type="html"><![CDATA[<p>###过程多了186也有，这里这说下开发环境，有利工具</p>
-<ol>
-<li><p>代码语法提示，插件ESLint；它对写的代码进行语法错误提示，特别是配置了react的插件后，对react属性、状态等书写有全面提示。</p>
-</li>
-<li><p>代码自动补全，node插件Typings和vsc插件Typings suto installer，前者全局安装，后者会自动把package.jason的TS（微软的TypingScript）包全下全</p>
-</li>
-<li><p>Debugger for Chrome,这个很好就是配置不好弄，用google远程调试协议来达到vsc本地调试，它的example可以直接下在本地使用。<br><br>example项目确实让人见识了很多东西；</p>
-</li>
-<li><p>Reactjs code snippets,这个很好专门的react的自动补全。</p>
-</li>
-<li><p>emment（内置，它简直为前端而生，语法很好使）；它默认是不支持js的，jsx倒是可以。<br><br>我google和官网了很久都没找到提示，最后没法，去git看看（原来git官网的doc是实时更新的，比官网的doc更新都勤快，以后只去git去看doc了）<br><br>在<code>.vscode</code>目录新建一个<code>settings.json</code>，加上<code>{&quot;emmet.syntaxProfiles&quot;: { &quot;javascript&quot;: &quot;html&quot; }}</code>便好了</p>
-</li>
-<li><p>调试和堆栈过程放186吧。</p>
-</li>
-</ol>
-<ul>
-<li><p>单个js调试，launch.json的配置  <a href="https://segmentfault.com/a/1190000004136202" target="_blank" rel="external">https://segmentfault.com/a/1190000004136202</a></p>
-<p>  “name”: “启动”,<br>  “type”: “node”,<br>  “request”: “launch”,<br>  “program”: “${workspaceRoot}/demo01/tt.js”,</p>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;###过程多了186也有，这里这说下开发环境，有利工具&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;代码语法提示，插件ESLint；它对写的代码进行语法错误提示，特别是配置了react的插件后，对react属性、状态等书写有全面提示。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;代码自动补全，n
-    
-    </summary>
-    
-      <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
-    
-    
-      <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
-    
-      <category term="vscode" scheme="https://xuecat.github.io/tags/vscode/"/>
     
   </entry>
   

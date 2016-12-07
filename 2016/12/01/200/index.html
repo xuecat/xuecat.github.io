@@ -86,31 +86,22 @@
 
 
 
-<meta name="description" content="产生dump：https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump
-debug工具一般都有debugger.chm这个文档可以参考x64:
-
-拖拽到windbg，lm查看模块状态
-查看时间戳(lmt)，找到对应pdb，设置pdb路径
-重新加载p">
+<meta name="description" content="dump：https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump
+如果只想程序运行时的内存dump，直接从资源管理器；进程tab页上，选中程序右键，就有个产生dump选项。
+debug工具一般都有debugger.chm这个文档可以参考x64:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="windbg调试200">
 <meta property="og:url" content="https://xuecat.github.io/2016/12/01/200/index.html">
 <meta property="og:site_name" content="XueCat">
-<meta property="og:description" content="产生dump：https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump
-debug工具一般都有debugger.chm这个文档可以参考x64:
-
-拖拽到windbg，lm查看模块状态
-查看时间戳(lmt)，找到对应pdb，设置pdb路径
-重新加载p">
-<meta property="og:updated_time" content="2016-12-01T14:29:24.792Z">
+<meta property="og:description" content="dump：https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump
+如果只想程序运行时的内存dump，直接从资源管理器；进程tab页上，选中程序右键，就有个产生dump选项。
+debug工具一般都有debugger.chm这个文档可以参考x64:">
+<meta property="og:updated_time" content="2016-12-07T15:11:24.939Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="windbg调试200">
-<meta name="twitter:description" content="产生dump：https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump
-debug工具一般都有debugger.chm这个文档可以参考x64:
-
-拖拽到windbg，lm查看模块状态
-查看时间戳(lmt)，找到对应pdb，设置pdb路径
-重新加载p">
+<meta name="twitter:description" content="dump：https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump
+如果只想程序运行时的内存dump，直接从资源管理器；进程tab页上，选中程序右键，就有个产生dump选项。
+debug工具一般都有debugger.chm这个文档可以参考x64:">
 
 
 
@@ -356,19 +347,24 @@ debug工具一般都有debugger.chm这个文档可以参考x64:
       
 
       
-        <p>产生dump：<a href="https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump" target="_blank" rel="external">https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump</a></p>
-<p>debug工具一般都有debugger.chm这个文档可以参考<br>x64:</p>
+        <p>dump：<a href="https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump" target="_blank" rel="external">https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump</a></p>
+<p>如果只想程序运行时的内存dump，直接从资源管理器；进程tab页上，选中程序右键，就有个产生dump选项。</p>
+<p>debug工具一般都有debugger.chm这个文档可以参考<br><strong>x64</strong>:</p>
 <ol>
 <li>拖拽到windbg，lm查看模块状态</li>
 <li>查看时间戳(lmt)，找到对应pdb，设置pdb路径</li>
 <li>重新加载pdb(.reload)，运行分析命令(!analyze -v)<br>一般崩溃会有exception，就查找这个字符串，就可以找到对应执行函数。(~N 切换到N号线程，主线程是0号)<br>主线程没有就切换到其它线程查找(~*e kb)</li>
 </ol>
-<p>x32:<br>基本相同，但是当32位程序运行在64位系统的时候，产生的dump</p>
+<p><strong>x32</strong>:<br>基本相同，但是当32位程序运行在64位系统的时候，产生的dump</p>
 <ol>
 <li>先加载64位的扩展(.load wow64exts)</li>
 <li>切换到32位模式(!sw)</li>
 <li>然后才再像上面那样调试</li>
 </ol>
+<hr>
+<p>今天又测试了下，指定符号、源、exe后，lm居然没找到对应符号。。。</p>
+<p>只好强制加载了。<br><strong>后来发现居然要多个后缀才行</strong>：<br><code>.reload /i simpledoc1.exe</code>这样才行。。。</p>
+<p><strong>lm会全部显示，太多了，如果只想显示能加载符号的模块的话用：</strong><code>lml</code>就可以了</p>
 
       
     </div>
@@ -482,7 +478,7 @@ debug工具一般都有debugger.chm这个文档可以参考x64:
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">196</span>
+              <span class="site-state-item-count">198</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -499,7 +495,7 @@ debug工具一般都有debugger.chm这个文档可以参考x64:
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
