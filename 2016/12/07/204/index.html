@@ -87,18 +87,23 @@
 
 
 <meta name="description" content="代码隐藏文件界面描述放在xaml文件里的为界面增加功能（事件呀等）的cs代码，就放入.xaml.cs文件中隐藏文件默认是放入xaml文件同一个目录中的。
-界面第一句：12&amp;lt;Window x:Class=&quot;WpfApplication1.MainWindow&quot;&amp;gt;//第一句就指定了，对应隐藏文件的类">
+界面第一句：12&amp;lt;Window x:Class=&quot;WpfApplication1.MainWindow&quot;&amp;gt;//第一句就指定了，对应隐藏文件的类
+路由事件路由事件有点想mfc的common，但是它要多点。lbutondown这些事件是">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WPF学习204">
 <meta property="og:url" content="https://xuecat.github.io/2016/12/07/204/index.html">
 <meta property="og:site_name" content="XueCat">
 <meta property="og:description" content="代码隐藏文件界面描述放在xaml文件里的为界面增加功能（事件呀等）的cs代码，就放入.xaml.cs文件中隐藏文件默认是放入xaml文件同一个目录中的。
-界面第一句：12&amp;lt;Window x:Class=&quot;WpfApplication1.MainWindow&quot;&amp;gt;//第一句就指定了，对应隐藏文件的类">
-<meta property="og:updated_time" content="2016-12-07T15:35:04.220Z">
+界面第一句：12&amp;lt;Window x:Class=&quot;WpfApplication1.MainWindow&quot;&amp;gt;//第一句就指定了，对应隐藏文件的类
+路由事件路由事件有点想mfc的common，但是它要多点。lbutondown这些事件是">
+<meta property="og:image" content="https://xuecat.github.io/picture/y2.jpg">
+<meta property="og:updated_time" content="2016-12-12T15:59:19.492Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WPF学习204">
 <meta name="twitter:description" content="代码隐藏文件界面描述放在xaml文件里的为界面增加功能（事件呀等）的cs代码，就放入.xaml.cs文件中隐藏文件默认是放入xaml文件同一个目录中的。
-界面第一句：12&amp;lt;Window x:Class=&quot;WpfApplication1.MainWindow&quot;&amp;gt;//第一句就指定了，对应隐藏文件的类">
+界面第一句：12&amp;lt;Window x:Class=&quot;WpfApplication1.MainWindow&quot;&amp;gt;//第一句就指定了，对应隐藏文件的类
+路由事件路由事件有点想mfc的common，但是它要多点。lbutondown这些事件是">
+<meta name="twitter:image" content="https://xuecat.github.io/picture/y2.jpg">
 
 
 
@@ -344,8 +349,25 @@
       
 
       
-        <h3 id="代码隐藏文件"><a href="#代码隐藏文件" class="headerlink" title="代码隐藏文件"></a>代码隐藏文件</h3><p>界面描述放在<code>xaml</code>文件里的<br>为界面增加功能（事件呀等）的cs代码，就放入<code>.xaml.cs</code>文件中<br>隐藏文件默认是放入xaml文件同一个目录中的。</p>
+        <div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/y2.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
+<h3 id="代码隐藏文件"><a href="#代码隐藏文件" class="headerlink" title="代码隐藏文件"></a>代码隐藏文件</h3><p>界面描述放在<code>xaml</code>文件里的<br>为界面增加功能（事件呀等）的cs代码，就放入<code>.xaml.cs</code>文件中<br>隐藏文件默认是放入xaml文件同一个目录中的。</p>
 <p>界面第一句：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Window</span> <span class="attr">x:Class</span>=<span class="string">"WpfApplication1.MainWindow"</span>&gt;</span></div><div class="line">//第一句就指定了，对应隐藏文件的类</div></pre></td></tr></table></figure></p>
+<h3 id="路由事件"><a href="#路由事件" class="headerlink" title="路由事件"></a>路由事件</h3><p>路由事件有点想mfc的common，但是它要多点。<br>lbutondown这些事件是标准事件，它只会发给被显示订阅的控件。</p>
+<p>像keydown这种路由事件它会：<br>先走下钻事件（Preview开头的事件），再走上钻事件（正常开头的事件）；<br>pre的Window事件-&gt;pre的Grid网格事件-&gt;pre的焦点控件事件-&gt;焦点控件事件-&gt;Grid网格事件-&gt;Window事件</p>
+<p>如需要停止路由，直接<code>e.Handled = true;</code></p>
+<h3 id="布局控件"><a href="#布局控件" class="headerlink" title="布局控件"></a>布局控件</h3><p>把这几个基本的布局控件搞了，就直接干代码了。太麻烦了！！</p>
+<h4 id="Canvas控件"><a href="#Canvas控件" class="headerlink" title="Canvas控件"></a>Canvas控件</h4><p>书上说这个可以完全自由地对控件的位置进行安排，且<code>HorizontalAligment</code>和<code>VerticalAlignment</code>并不能改变这些元素位置</p>
+<p>测试发现，窗口的变大变小如果是Grid则会跟随变化里面子控件的大小；而Canvas则不会，里面的子控件大小位置被固定了似的。</p>
+<p>可以用<code>Canvas.Top</code>等这些属性来限定子控件在<code>Canvas</code>里面的布局，但我估计实际应用慢慢看吧。。。。</p>
+<h4 id="DockPanel控件"><a href="#DockPanel控件" class="headerlink" title="DockPanel控件"></a>DockPanel控件</h4><p>它会从上往下（越接近顶层，越优先）。布局子控件，除非有限制（height、width），不然会尽量布满布局。</p>
+<p>它是从剩余空间来进行计算(<code>DockPanel.Dock=&quot;Top&quot;</code>以剩余的上半部分为基础)</p>
+<h4 id="StackPanel控件"><a href="#StackPanel控件" class="headerlink" title="StackPanel控件"></a>StackPanel控件</h4><p>它的设置更多的设置本身，它来控制内部子控件的堆叠方向，不会占满布局。</p>
+<p>用<code>Orientaion、VerticalAlignment、HorizontalAlignment</code>来设置内部控件的堆叠方向、内部控件对齐方向。</p>
+<h4 id="WrapPanel控件"><a href="#WrapPanel控件" class="headerlink" title="WrapPanel控件"></a>WrapPanel控件</h4><p>是StackPanel的扩展版本；容纳不下的控件会被安排到下一行</p>
+<h4 id="Grid控件"><a href="#Grid控件" class="headerlink" title="Grid控件"></a>Grid控件</h4><h3 id="控件TIPS"><a href="#控件TIPS" class="headerlink" title="控件TIPS"></a>控件TIPS</h3><h4 id="控件标题内容换行"><a href="#控件标题内容换行" class="headerlink" title="控件标题内容换行"></a>控件标题内容换行</h4><figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attr">Content</span>=<span class="string">"wrewrwere&amp;#13;wrewrewrwe"</span></div><div class="line"><span class="attr">Text</span>=<span class="string">"oiomlkljoijlo&amp;#x0a;klklkkjkjjk"</span></div></pre></td></tr></table></figure>
+<p>如上，很方便。但还是纠结了，本来Windows换行符是<code>\r\n</code>的，c#代码换行也是如此。<br>于是有下：<br>空格 (&#x0020;)<br>Tab (&#x0009;)<br>回车 (&#x000D;) 难怪上面是13<br>换行 (&#x000A;)</p>
+<h4 id="高宽百分比设置"><a href="#高宽百分比设置" class="headerlink" title="高宽百分比设置"></a>高宽百分比设置</h4><p>今天试了下，发现 Height和Width 不仅可以用数字表示，还可以 <code>30*</code>这种百分比表示。</p>
+<p>这样的话就会把所有子控件的加上，再除以相应数字。得出百分比，进行布局设置。</p>
 
       
     </div>
@@ -567,7 +589,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码隐藏文件"><span class="nav-number">1.</span> <span class="nav-text">代码隐藏文件</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码隐藏文件"><span class="nav-number">1.</span> <span class="nav-text">代码隐藏文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由事件"><span class="nav-number">2.</span> <span class="nav-text">路由事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#布局控件"><span class="nav-number">3.</span> <span class="nav-text">布局控件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Canvas控件"><span class="nav-number">3.1.</span> <span class="nav-text">Canvas控件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DockPanel控件"><span class="nav-number">3.2.</span> <span class="nav-text">DockPanel控件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#StackPanel控件"><span class="nav-number">3.3.</span> <span class="nav-text">StackPanel控件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WrapPanel控件"><span class="nav-number">3.4.</span> <span class="nav-text">WrapPanel控件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Grid控件"><span class="nav-number">3.5.</span> <span class="nav-text">Grid控件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控件TIPS"><span class="nav-number">4.</span> <span class="nav-text">控件TIPS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#控件标题内容换行"><span class="nav-number">4.1.</span> <span class="nav-text">控件标题内容换行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#高宽百分比设置"><span class="nav-number">4.2.</span> <span class="nav-text">高宽百分比设置</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
