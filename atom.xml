@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2016-12-12T15:59:19.492Z</updated>
+  <updated>2016-12-13T15:29:58.276Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://xuecat.github.io/2016/12/07/204/"/>
     <id>https://xuecat.github.io/2016/12/07/204/</id>
     <published>2016-12-07T15:14:24.000Z</published>
-    <updated>2016-12-12T15:59:19.492Z</updated>
+    <updated>2016-12-13T15:29:58.276Z</updated>
     
     <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/y2.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
 <h3 id="代码隐藏文件"><a href="#代码隐藏文件" class="headerlink" title="代码隐藏文件"></a>代码隐藏文件</h3><p>界面描述放在<code>xaml</code>文件里的<br>为界面增加功能（事件呀等）的cs代码，就放入<code>.xaml.cs</code>文件中<br>隐藏文件默认是放入xaml文件同一个目录中的。</p>
@@ -41,6 +41,9 @@
 <p>如上，很方便。但还是纠结了，本来Windows换行符是<code>\r\n</code>的，c#代码换行也是如此。<br>于是有下：<br>空格 (&#x0020;)<br>Tab (&#x0009;)<br>回车 (&#x000D;) 难怪上面是13<br>换行 (&#x000A;)</p>
 <h4 id="高宽百分比设置"><a href="#高宽百分比设置" class="headerlink" title="高宽百分比设置"></a>高宽百分比设置</h4><p>今天试了下，发现 Height和Width 不仅可以用数字表示，还可以 <code>30*</code>这种百分比表示。</p>
 <p>这样的话就会把所有子控件的加上，再除以相应数字。得出百分比，进行布局设置。</p>
+<h4 id="grid跨行跨列"><a href="#grid跨行跨列" class="headerlink" title="grid跨行跨列"></a>grid跨行跨列</h4><p>对于grid可以分区：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//行的使用</div><div class="line"><span class="tag">&lt;<span class="name">Grid.RowDefinitions</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">RowDefinition</span> <span class="attr">Height</span>=<span class="string">"34"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">RowDefinition</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">RowDefinition</span> <span class="attr">Height</span>=<span class="string">"24"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">Grid.RowDefinitions</span>&gt;</span></div><div class="line">//子控件使用 Grid.Row="0" 等语法就可以放置到相应区里面</div></pre></td></tr></table></figure></p>
+<p>但是当有个控件比较特殊，需要占多个行或列时（上面grid划分好了的行和列）<br>就可以使用<code>Grid.RowSpan（列同理）</code> 它会从 <code>Grid.Row（列同理）</code>开始，占满接下来几个的行（列）</p>
+<h4 id="x命名空间"><a href="#x命名空间" class="headerlink" title="x命名空间"></a>x命名空间</h4><h4 id="tab控件使用"><a href="#tab控件使用" class="headerlink" title="tab控件使用"></a>tab控件使用</h4><p>注意TabItem子控件只能有一个，所以一般用布局控件来代替。</p>
 ]]></content>
     
     <summary type="html">
@@ -456,9 +459,9 @@
       <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
     
     
-      <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
-    
       <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
+    
+      <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
     
   </entry>
   
@@ -525,9 +528,9 @@ return result;
       <category term="配置" scheme="https://xuecat.github.io/categories/%E9%85%8D%E7%BD%AE/"/>
     
     
-      <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
-    
       <category term="工具" scheme="https://xuecat.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
     
   </entry>
   
@@ -887,9 +890,9 @@ undefined
       <category term="配置" scheme="https://xuecat.github.io/categories/%E9%85%8D%E7%BD%AE/"/>
     
     
-      <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
-    
       <category term="工具" scheme="https://xuecat.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
     
   </entry>
   
