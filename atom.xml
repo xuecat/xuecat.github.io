@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2016-12-13T15:29:58.276Z</updated>
+  <updated>2016-12-19T13:09:23.946Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -14,6 +14,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Gen2项目学习205</title>
+    <link href="https://xuecat.github.io/2016/12/15/205/"/>
+    <id>https://xuecat.github.io/2016/12/15/205/</id>
+    <published>2016-12-15T12:51:59.000Z</published>
+    <updated>2016-12-19T13:09:23.946Z</updated>
+    
+    <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 50%;"><img src="/picture/u1.jpg" alt=""></div><div class="group-picture-column" style="width: 50%;"><img src="/picture/u2.jpg" alt=""></div></div><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/u3.jpg" alt=""></div></div></div></div>
+<h4 id="LoggingDBService"><a href="#LoggingDBService" class="headerlink" title="LoggingDBService"></a>LoggingDBService</h4><p>212失联后，为了配置这个服务，也是伤神死了。</p>
+<p>1、服务是否正确。启动LoggingDBService，在网页上输入相应网址访问；再看看<code>asmx</code>访问是否成功，成功的话就表示服务是好的。</p>
+<p>2、数据库配置是否正确。进入数据库，对比相应数据库名、用户名、和密码。</p>
+<p>3、本地<code>webService.ini</code>是配置正确。要注意的是里面的ip地址必须是c类ip；回环ip和localhost之类的是不行的。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;div class=&quot;group-picture&quot;&gt;&lt;div class=&quot;group-picture-container&quot;&gt;&lt;div class=&quot;group-picture-row&quot;&gt;&lt;div class=&quot;group-picture-column&quot; style=&quot;widt
+    
+    </summary>
+    
+      <category term="配置" scheme="https://xuecat.github.io/categories/%E9%85%8D%E7%BD%AE/"/>
+    
+    
+      <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
+    
+      <category term="sobey项目" scheme="https://xuecat.github.io/tags/sobey%E9%A1%B9%E7%9B%AE/"/>
+    
+  </entry>
   
   <entry>
     <title>WPF学习204</title>
@@ -459,9 +488,9 @@
       <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
     
     
-      <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
-    
       <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
+    
+      <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
     
   </entry>
   
@@ -984,65 +1013,6 @@ undefined
       <category term="错误认识" scheme="https://xuecat.github.io/tags/%E9%94%99%E8%AF%AF%E8%AE%A4%E8%AF%86/"/>
     
       <category term="google-chrome" scheme="https://xuecat.github.io/tags/google-chrome/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JS中单引号与双引号的一个区别185</title>
-    <link href="https://xuecat.github.io/2016/09/25/185/"/>
-    <id>https://xuecat.github.io/2016/09/25/185/</id>
-    <published>2016-09-25T02:30:36.000Z</published>
-    <updated>2016-09-25T04:44:40.333Z</updated>
-    
-    <content type="html"><![CDATA[<p>一般Javascript资料里面，很少区分单引号(‘)和双引号(“)，认为它们作用相同，今天发现有一处不同点，举例如下：</p>
-<pre><code>在一段JS语句中，希望通过编程在网页中动态添加一个命令按钮， 则基本实现语句如下所示 
-
-      var btnOk2=document.createElement(&quot;&lt;input type=&apos;button&apos; value=&apos;确定/&gt;&quot;);
-      document.body.appendChild(btnOk2);
-若要在点击按钮后显示一个提示信息，则要对其onclick事件编程，此时有多种方法可以实现。
-
-1. 添加函数
-
-      onclick=clickOK();//clickOK()为单独定义的函数
-
-      function clickOK(){
-
-         alert(&quot;确定&quot;);
-
-      }
-
-2. 使用匿名函数
-
-      onclick=function(){alert(&apos;确定&apos;)};//注意，此处alert内的提示信息应使用单引号，若使用双引号则放入整个input 时语法不正确
-
-3. 直接使用javascript语句，单引号
-
-      onclick=&apos;javascript:{alert(&apos;确定&apos;)&apos;;//注意，此语句语法没问题，但却不能正常执行，点击按钮时无结果，具体原因不详，也未深究
-
-4. 直接使用javascript语句，双引号
-
-      由于要放入input语句中，因此alert不能直接使用双引号，使用转义符/完成
-
-      onclick=&apos;javascript:alert(/&quot;确定/&quot;)&apos;;//注意，此语句语法没问题，也能够正常执行
-
-使用第4中方法的完整实例语句如下：
-
-var btnOk2=document.createElement(&quot;&lt;input type=&apos;button&apos; value=&apos;确定 onclick=&apos;javascript:alert(/&quot;确定/&quot;)&apos;/&gt;&quot;);
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;一般Javascript资料里面，很少区分单引号(‘)和双引号(“)，认为它们作用相同，今天发现有一处不同点，举例如下：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;在一段JS语句中，希望通过编程在网页中动态添加一个命令按钮， 则基本实现语句如下所示 
-
-      var btnOk2
-    
-    </summary>
-    
-      <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
-    
-    
-      <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
     
   </entry>
   
