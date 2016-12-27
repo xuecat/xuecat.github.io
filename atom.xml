@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2016-12-19T13:09:23.946Z</updated>
+  <updated>2016-12-27T14:24:00.597Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -14,6 +14,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>加锁问题206</title>
+    <link href="https://xuecat.github.io/2016/12/27/206/"/>
+    <id>https://xuecat.github.io/2016/12/27/206/</id>
+    <published>2016-12-27T14:19:35.000Z</published>
+    <updated>2016-12-27T14:24:00.597Z</updated>
+    
+    <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/206.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
+<p>今天加临界区时讨论了下。<br>一开始觉得迭代器，写的地方加锁就好了。<br>但是后来发现</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m_VTRUploadTaskList.size(); i++)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(m_VTRUploadTaskList[i]<span class="number">._</span>nTaskID == nTaskID)</div><div class="line">&#125;</div><div class="line"><span class="comment">//这样，如果外部对这个clear的话，再走操作函数就会挂的。</span></div><div class="line"><span class="comment">//所以，结论是有关写的整块都要加锁</span></div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;div class=&quot;group-picture&quot;&gt;&lt;div class=&quot;group-picture-container&quot;&gt;&lt;div class=&quot;group-picture-row&quot;&gt;&lt;div class=&quot;group-picture-column&quot; style=&quot;widt
+    
+    </summary>
+    
+      <category term="杂项" scheme="https://xuecat.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
+    
+    
+      <category term="mfc" scheme="https://xuecat.github.io/tags/mfc/"/>
+    
+      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
   
   <entry>
     <title>Gen2项目学习205</title>
@@ -49,7 +75,7 @@
     <link href="https://xuecat.github.io/2016/12/07/204/"/>
     <id>https://xuecat.github.io/2016/12/07/204/</id>
     <published>2016-12-07T15:14:24.000Z</published>
-    <updated>2016-12-25T10:18:24.983Z</updated>
+    <updated>2016-12-27T15:18:56.306Z</updated>
     
     <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/y2.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
 <h3 id="wpf和winform"><a href="#wpf和winform" class="headerlink" title="wpf和winform"></a>wpf和winform</h3><p>winform -&gt; 新建windows窗体程序<br>控件的描述全在一个<code>Designer</code>的cs文件中，控件事件则在对应的cs文件里。</p>
@@ -92,6 +118,8 @@
 <p>所以mode和INotifyPropertyChanged配合才是最好的</p>
 <h3 id="Menu控件"><a href="#Menu控件" class="headerlink" title="Menu控件"></a>Menu控件</h3><p>这个控件可以像其他控件那样，随便放哪个地方，然后自己设置menu内容。<br><code>Menu.Icon</code>设置单个选项的图标。<br><code>InputGestureText</code>只是个显示内容，不会和指令绑定。<br><code>Click</code>子项直接相应此属性的函数就好了。</p>
 <p>主要讲下：<br>Command，确实它能和指令绑定，但是默认只能和wpf能解析的指令绑定（自定义命令，下次再讲述吧）。<br>它设置命令后，如果想拦截命令的执行：<br><figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> &lt;<span class="built_in">Window</span>.CommandBindings&gt;</div><div class="line">    &lt;CommandBinding Command=<span class="string">"Save"</span> CanExecute=<span class="string">"NewCommand_CanExecute"</span> Executed=<span class="string">"NewCommand_Executed"</span> /&gt;</div><div class="line">&lt;/<span class="built_in">Window</span>.CommandBindings&gt;</div><div class="line"><span class="comment">//CanExecute 是开始展开menu时执行函数，以此来判断哪些项不允许点击和点击</span></div><div class="line"><span class="comment">//Executed 是点击了menuitme是执行的函数</span></div></pre></td></tr></table></figure></p>
+<h3 id="样式和模板"><a href="#样式和模板" class="headerlink" title="样式和模板"></a>样式和模板</h3><p>样式：<a href="http://www.wpf-tutorial.com/styles/using-styles/" target="_blank" rel="external">http://www.wpf-tutorial.com/styles/using-styles/</a><br>分层、显隐式（x:Key; Style=”{StaticResource HeaderStyle}”）<br>//可以同一设置控件的属性内容</p>
+<p>模板：<a href="http://www.cnblogs.com/dingli/archive/2011/07/20/2112150.html" target="_blank" rel="external">http://www.cnblogs.com/dingli/archive/2011/07/20/2112150.html</a><br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">Style</span> TargetType=<span class="string">"Button"</span>&gt;</div><div class="line">    &lt;<span class="keyword">Setter</span> <span class="keyword">Property</span>=<span class="string">"Template"</span>&gt;</div><div class="line">        &lt;<span class="keyword">Setter</span>.<span class="keyword">Value</span>&gt;</div><div class="line">            &lt;ControlTemplate TargetType=<span class="string">"Button"</span>&gt;</div><div class="line">            ...</div><div class="line"></div><div class="line">//通过ControlTemplate的VisualTree内容，可以重做控件外观模板</div><div class="line">//通过tigger，&lt;ControlTemplate.Triggers&gt; &lt;<span class="keyword">Trigger</span> <span class="keyword">Property</span>=<span class="string">"IsMouseOver"</span> <span class="keyword">Value</span>=<span class="string">"true"</span>&gt; ，可以对控件的事件作出响应</div><div class="line">//控件内容显示用ContentPresenter要比ContentControl轻量一些</div></pre></td></tr></table></figure></p>
 ]]></content>
     
     <summary type="html">
@@ -1002,37 +1030,6 @@ undefined
       <category term="工具" scheme="https://xuecat.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
     
       <category term="错误认识" scheme="https://xuecat.github.io/tags/%E9%94%99%E8%AF%AF%E8%AE%A4%E8%AF%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>google调试react186</title>
-    <link href="https://xuecat.github.io/2016/09/25/186/"/>
-    <id>https://xuecat.github.io/2016/09/25/186/</id>
-    <published>2016-09-25T09:01:40.000Z</published>
-    <updated>2016-10-18T16:36:11.529Z</updated>
-    
-    <content type="html"><![CDATA[<p>今天死活断点不了，google了好久；发现有个<code>debugger</code>放入代码中就好了，可以看堆栈了。<br><br>断点不了的问题至今没找到，气死人了。！</p>
-<p>好吧v2ex果然大神多，jsx需要编译产生sourcemap后才能被调试，所以webpack是标配。另外react-hot-loader（js库）和react-devtools（google插件）不错</p>
-<p><code>Create React App</code>和<code>generator-react-webpack</code>会自动生成react项目，使用webpack自动打包，但是<code>dev-source-map</code>模式下无法调试。<br><br>其它模式参考：<a href="https://segmentfault.com/a/1190000004280859" target="_blank" rel="external">https://segmentfault.com/a/1190000004280859</a></p>
-<p>调试的jsx，一般都是被打包成js的，很好看，也方便调试（就google-&gt;source 那里找源码有点不好找，打包多了）。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天死活断点不了，google了好久；发现有个&lt;code&gt;debugger&lt;/code&gt;放入代码中就好了，可以看堆栈了。&lt;br&gt;&lt;br&gt;断点不了的问题至今没找到，气死人了。！&lt;/p&gt;
-&lt;p&gt;好吧v2ex果然大神多，jsx需要编译产生sourcemap后才能被调试，所以web
-    
-    </summary>
-    
-      <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
-    
-    
-      <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
-    
-      <category term="错误认识" scheme="https://xuecat.github.io/tags/%E9%94%99%E8%AF%AF%E8%AE%A4%E8%AF%86/"/>
-    
-      <category term="google-chrome" scheme="https://xuecat.github.io/tags/google-chrome/"/>
     
   </entry>
   
