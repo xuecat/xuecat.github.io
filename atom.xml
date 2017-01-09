@@ -75,7 +75,7 @@
     <link href="https://xuecat.github.io/2016/12/07/204/"/>
     <id>https://xuecat.github.io/2016/12/07/204/</id>
     <published>2016-12-07T15:14:24.000Z</published>
-    <updated>2017-01-03T15:29:04.716Z</updated>
+    <updated>2017-01-09T15:42:07.861Z</updated>
     
     <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/y2.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
 <h3 id="wpf和winform"><a href="#wpf和winform" class="headerlink" title="wpf和winform"></a>wpf和winform</h3><p>winform -&gt; 新建windows窗体程序<br>控件的描述全在一个<code>Designer</code>的cs文件中，控件事件则在对应的cs文件里。</p>
@@ -126,6 +126,9 @@
 <h3 id="转换接口"><a href="#转换接口" class="headerlink" title="转换接口"></a>转换接口</h3><p>对于静态绑定到内部对象太重要了，这个接口。<br>比如：通过输入<code>no</code>，来禁止控件；一个是字符一个是bool，绑定就不会成功，所以需要转换。</p>
 <figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">local</span>:Convert x:<span class="built_in">Key</span>=<span class="string">"toconvert"</span>&gt;&lt;/<span class="keyword">local</span>:Convert&gt;</div><div class="line">&lt;RadioButton IsEnabled=<span class="string">"&#123;Binding ElementName=tbt, Path=Content, Converter=&#123;StaticResource toconvert&#125;&#125;"</span> /&gt;</div><div class="line"></div><div class="line"><span class="comment">//上面是cs文件处理，代码上继承IValueConverter自己转换便好</span></div><div class="line"><span class="comment">//由于上面是单向绑定，所以实现Convert便好</span></div><div class="line"><span class="comment">//当面对双向绑定时，ConvertBack也需要同时实现</span></div></pre></td></tr></table></figure>
 <h3 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h3><p>使用的结构也比较多，简单说下：<br>动画必须放入模板里面<code>Storyboard</code>,这样一个模板可以包含多个动画可以同时触发。<br>触发方式有俩种：<br>1、放入EventTrigger进行触发，只是要多个<code>BeginStoryboard</code>这样才能表示为此事件发生，模板开始触发。<br>2、放入<code>Resources</code>内（这个时候只需要<code>Storyboard</code>就够了）。因为有name属性，代码里面直接：<code>name.Begin()</code>，模板开始触发。</p>
+<h3 id="自定义控件"><a href="#自定义控件" class="headerlink" title="自定义控件"></a>自定义控件</h3><p>custom control有点没看透，直接讲user control。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">region</span> 属性</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> DependencyProperty ShowStringProperty =</div><div class="line">    DependencyProperty.Register(<span class="string">"ShowString"</span>, <span class="keyword">typeof</span>(<span class="keyword">string</span>), <span class="keyword">typeof</span>(UserTest),</div><div class="line">        <span class="keyword">new</span> PropertyMetadata(<span class="string">"默认值"</span>, <span class="keyword">new</span> PropertyChangedCallback(OnChangeShowString)));</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">OnChangeShowString</span>(<span class="params">DependencyObject obj, DependencyPropertyChangedEventArgs args</span>)<span class="comment">//设置属性被修改时的回调函数</span></span></div><div class="line">&#123;</div><div class="line">    UserTest tt = obj <span class="keyword">as</span> UserTest;</div><div class="line">    tt.t1.Text = (<span class="keyword">string</span>)args.NewValue;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> ShowString</div><div class="line">&#123;</div><div class="line">    <span class="keyword">set</span> &#123; SetValue(ShowStringProperty, <span class="keyword">value</span>); &#125;</div><div class="line">    <span class="keyword">get</span> &#123; <span class="keyword">return</span> (<span class="keyword">string</span>)GetValue(ShowStringProperty); &#125;</div><div class="line">&#125;</div><div class="line"><span class="meta">#<span class="meta-keyword">endregion</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">region</span> 事件</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">readonly</span> RoutedEvent ShowStringEvent =</div><div class="line">    EventManager.RegisterRoutedEvent(<span class="string">"ShowEvent"</span>, RoutingStrategy.Bubble,</div><div class="line">        <span class="keyword">typeof</span>(RoutedPropertyChangedEventHandler&lt;<span class="keyword">object</span>&gt;), <span class="keyword">typeof</span>(UserTest));</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">event</span> RoutedPropertyChangedEventHandler&lt;<span class="keyword">object</span>&gt; ShowEvent</div><div class="line">&#123;</div><div class="line">    add &#123; AddHandler(ShowStringEvent, <span class="keyword">value</span>); &#125;</div><div class="line">    remove &#123; RemoveHandler(ShowStringEvent, <span class="keyword">value</span>); &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">BtnClickme</span>(<span class="params"><span class="keyword">object</span> sender, RoutedEventArgs e</span>)<span class="comment">//这是自定义控件给button加了个事件，这样这个函数就会通知外面我的自定义事件</span></span></div><div class="line">&#123;</div><div class="line">    RoutedPropertyChangedEventArgs&lt;<span class="keyword">object</span>&gt; arg =</div><div class="line">        <span class="keyword">new</span> RoutedPropertyChangedEventArgs&lt;<span class="keyword">object</span>&gt;(sender, e, ShowStringEvent);</div><div class="line">    RaiseEvent(arg);</div><div class="line">&#125;</div><div class="line"><span class="meta">#<span class="meta-keyword">endregion</span></span></div><div class="line">&lt;local:UserTest HorizontalAlignment=<span class="string">"Center"</span> VerticalAlignment=<span class="string">"Bottom"</span> ShowString=<span class="string">"wangqiu"</span> ShowEvent=<span class="string">"UserTest_ShowEvent"</span> &gt;&lt;/local:UserTest&gt;</div></pre></td></tr></table></figure>
+<p>都是先注册静态变量创建，再编写属性设置。</p>
 ]]></content>
     
     <summary type="html">
@@ -253,9 +256,10 @@
     <link href="https://xuecat.github.io/2016/12/01/200/"/>
     <id>https://xuecat.github.io/2016/12/01/200/</id>
     <published>2016-12-01T13:05:20.000Z</published>
-    <updated>2016-12-07T15:11:24.939Z</updated>
+    <updated>2017-01-07T10:26:56.012Z</updated>
     
-    <content type="html"><![CDATA[<p>dump：<a href="https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump" target="_blank" rel="external">https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump</a></p>
+    <content type="html"><![CDATA[<p>ps: 退出指令 <code>q</code> 就好了。</p>
+<p>dump：<a href="https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump" target="_blank" rel="external">https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump</a></p>
 <p>如果只想程序运行时的内存dump，直接从资源管理器；进程tab页上，选中程序右键，就有个产生dump选项。</p>
 <p>debug工具一般都有debugger.chm这个文档可以参考<br><strong>x64</strong>:</p>
 <ol>
@@ -273,11 +277,33 @@
 <p>今天又测试了下，指定符号、源、exe后，lm居然没找到对应符号。。。</p>
 <p>只好强制加载了。<br><strong>后来发现居然要多个后缀才行</strong>：<br><code>.reload /i simpledoc1.exe</code>这样才行。。。</p>
 <p><strong>lm会全部显示，太多了，如果只想显示能加载符号的模块的话用：</strong><code>lml</code>就可以了</p>
+<hr>
+<p>今天认真看了调试的第一个例子，做下记录，调试的是一个内存破坏的例子：<br>1、先用<code>k</code>命令来显示异常前的函数执行堆栈（后面跟个数字就表示显示几行， k 3：显示最后三行）</p>
+<blockquote>
+<p>我喜欢用<code>kpn</code>。因为<code>p</code>会列举出函数的调用参数；<code>n</code>会对他们排号，这样方便我用<code>frame</code>来切换上下文作用域；（另外说下<code>b</code>会列举参数地址，反正我也不咋习惯看，就不用）</p>
+</blockquote>
+<p>2、找到我方代码函数后，用<code>.frame &lt;number&gt;</code>的形式切换到函数的上下文里面。（这个 number 就是我上面说的<code>n</code>所列出的排号）</p>
+<blockquote>
+<p>为何要切换呢？因为我要找变量呀！！ 默认的<code>X</code>找的是全局变量，我要找局部变量就只好切进函数里去。<br>X Mytest!g<em>* //在Mytest模块中找 g</em> 开头的变量<br>切进去，我直接 X g_ 就可以找到</p>
+</blockquote>
+<p>3、 X指令或dv，找出变量。</p>
+<blockquote>
+<p>我喜欢<code>X</code>，虽然都差不多。找的的变量会自动给出此变量的地址</p>
+</blockquote>
+<p>4、dt转换</p>
+<blockquote>
+<p>拿到变量地址后，就 <code>dt CAppInfo 0x0047d768</code> 它会把此地址转换成设置的类型，并变量的成员内存一一的列举出来。<br>简单来说这就是个c式的强制转换，只是为了方便研究成员变量的有效性</p>
+</blockquote>
+<p>5、dd查看成员变量内存</p>
+<blockquote>
+<p>如上面所说，成员变量被全部列出来了，就可以一个一个查看成员变量的内存<code>dd 0x72726f43</code>。这样就判断有效和无效！</p>
+</blockquote>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;dump：&lt;a href=&quot;https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump&quot; target=&quot;_blank&quot; r
+      &lt;p&gt;ps: 退出指令 &lt;code&gt;q&lt;/code&gt; 就好了。&lt;/p&gt;
+&lt;p&gt;dump：&lt;a href=&quot;https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-
     
     </summary>
     
@@ -361,7 +387,7 @@
     <link href="https://xuecat.github.io/2016/11/21/197/"/>
     <id>https://xuecat.github.io/2016/11/21/197/</id>
     <published>2016-11-21T13:39:27.000Z</published>
-    <updated>2016-12-20T14:49:00.659Z</updated>
+    <updated>2017-01-09T13:58:11.745Z</updated>
     
     <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/r4.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
 <p>唉！！，es6正看着呢；去海外组了。。。。要补c#知识了</p>
@@ -370,6 +396,8 @@
 <p>转义字符(\”表示”)和字面量(100L 100F)都和c++差不多<br>多了个新功能</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">string</span> strTest = <span class="string">"wangqiu"</span>;</div><div class="line"><span class="built_in">string</span> strHEHE = $<span class="string">"&#123;strTest&#125; hehe"</span> + $<span class="string">" &#123;3+5&#125;de"</span>;<span class="comment">//这样是可以的哟，用法如同js的模板字符</span></div></pre></td></tr></table></figure>
 <p><strong>差点忘了说，c#中变量类型其实全是System的类，也就意味着基本变量类型本身就有很多成员函数可以使用</strong></p>
+<h4 id="typeof和GetType"><a href="#typeof和GetType" class="headerlink" title="typeof和GetType"></a>typeof和GetType</h4><p>c++的是typeid，记得mfc好像有个，忘了。</p>
+<p>都返回<code>System.Type</code>类型，一个是类函数一个是语言函数（参数是类名）。</p>
 <h4 id="switch语句"><a href="#switch语句" class="headerlink" title="switch语句"></a>switch语句</h4><p><code>switch</code>语句有点不同，多了个<code>goto case &lt;com&gt;:</code>，用来实现在这个case语句中跳转到其它case语句中</p>
 <h4 id="强制转换"><a href="#强制转换" class="headerlink" title="强制转换"></a>强制转换</h4><p>用法基本同；c#多了层保险，可以用<code>checked((type))</code>出现的崩溃来保证，高字节向低字节转换;也可以默认设置强制转换加check；在书67页。</p>
 <h4 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h4><p>用法和c++基本同；多了个指定类型，<code>enum Type : long</code>，这样指定枚举变量的类型。</p>
@@ -542,9 +570,9 @@
       <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
     
     
-      <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
-    
       <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
+    
+      <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
     
   </entry>
   
