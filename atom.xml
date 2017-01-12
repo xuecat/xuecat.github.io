@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2016-12-27T14:24:00.597Z</updated>
+  <updated>2017-01-12T14:01:41.937Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -14,6 +14,58 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C#文档208</title>
+    <link href="https://xuecat.github.io/2017/01/12/208/"/>
+    <id>https://xuecat.github.io/2017/01/12/208/</id>
+    <published>2017-01-12T13:53:43.000Z</published>
+    <updated>2017-01-12T14:01:41.937Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="DirectoryInfo-Directory"><a href="#DirectoryInfo-Directory" class="headerlink" title="DirectoryInfo Directory"></a>DirectoryInfo Directory</h3><p>今天想遍历目录里的文件，发现c#有个巨好用的类，现在用下原话：<br>在开发过程中如果你打算多次重用某个对象<br>建议你使用DirectoryInfo的实例方法，而不是Directory类的方法<br>因为Directory类是静态的，在使用它的方法时每次都需要安全检查<br>而DirectoryInfo类的方法则不需要安全检查</p>
+<p>看：<a href="http://www.cnblogs.com/zhcw/archive/2013/01/12/2857433.html" target="_blank" rel="external">http://www.cnblogs.com/zhcw/archive/2013/01/12/2857433.html</a><br>看：<a href="http://www.cnblogs.com/luluping/archive/2011/07/26/2117681.html" target="_blank" rel="external">http://www.cnblogs.com/luluping/archive/2011/07/26/2117681.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;DirectoryInfo-Directory&quot;&gt;&lt;a href=&quot;#DirectoryInfo-Directory&quot; class=&quot;headerlink&quot; title=&quot;DirectoryInfo Directory&quot;&gt;&lt;/a&gt;DirectoryInfo Dir
+    
+    </summary>
+    
+      <category term="C#" scheme="https://xuecat.github.io/categories/C/"/>
+    
+    
+      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Windows编译器对异常的处理207</title>
+    <link href="https://xuecat.github.io/2017/01/12/207/"/>
+    <id>https://xuecat.github.io/2017/01/12/207/</id>
+    <published>2017-01-12T13:51:01.000Z</published>
+    <updated>2017-01-12T14:35:30.161Z</updated>
+    
+    <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/207.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
+<p>c/c++ 配置属性 代码生成 启用c++异常</p>
+<p>2013版本讲解要详细点：<br><a href="https://msdn.microsoft.com/zh-cn/library/1deeycx5(v=vs.120).aspx" target="_blank" rel="external">https://msdn.microsoft.com/zh-cn/library/1deeycx5(v=vs.120).aspx</a></p>
+<p>编译器会对异常捕获进行优化。</p>
+<p>使用<code>/EHs</code> <code>EHsc</code> catch(…) 是不会捕获异步结构化异常、访问冲突和 System.Exception 异常。只会捕获c++异常<br>当必须要捕获这些异常时，就只能用 <strong>try, </strong>except 和 __finally 语法</p>
+<p>使用<code>/EHa</code> catch(…)会捕获所有的异常。<br>但是引用官方的话<code>指定 /EHa 并尝试使用 catch(...) 处理所有异常可能很危险。 在大多数情况下，异步异常是不可恢复的，因而被认为是致命的。 捕获它们并继续可能导致进程损坏并使 Bug 难以发现和修复。</code></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;div class=&quot;group-picture&quot;&gt;&lt;div class=&quot;group-picture-container&quot;&gt;&lt;div class=&quot;group-picture-row&quot;&gt;&lt;div class=&quot;group-picture-column&quot; style=&quot;widt
+    
+    </summary>
+    
+      <category term="Windows" scheme="https://xuecat.github.io/categories/Windows/"/>
+    
+    
+      <category term="编译器和VC" scheme="https://xuecat.github.io/tags/%E7%BC%96%E8%AF%91%E5%99%A8%E5%92%8CVC/"/>
+    
+  </entry>
   
   <entry>
     <title>加锁问题206</title>
@@ -75,7 +127,7 @@
     <link href="https://xuecat.github.io/2016/12/07/204/"/>
     <id>https://xuecat.github.io/2016/12/07/204/</id>
     <published>2016-12-07T15:14:24.000Z</published>
-    <updated>2017-01-09T15:42:07.861Z</updated>
+    <updated>2017-01-12T13:30:53.606Z</updated>
     
     <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/y2.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
 <h3 id="wpf和winform"><a href="#wpf和winform" class="headerlink" title="wpf和winform"></a>wpf和winform</h3><p>winform -&gt; 新建windows窗体程序<br>控件的描述全在一个<code>Designer</code>的cs文件中，控件事件则在对应的cs文件里。</p>
@@ -107,6 +159,7 @@
 <p>像FrameworkElement, VisualStateGroup的某些type，我们在xaml中可以使用Name来代替x:Name，<br>因为它们定义了Name Property，但是最关键的是在type上声明了一个Attribute，[RuntimeNameProperty(“Name”)]，<br>正是这个attribute把Name映射到了x:Name上，所以让Name可以做到x:Name的功能。</p>
 <p>正因为如此，name属性超级好用，在xaml给个name属性，相应的隐藏文件就可以直接使用此name来代表此控件</p>
 <h3 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h3><p><a href="https://www.tutorialspoint.com/wpf" target="_blank" rel="external">https://www.tutorialspoint.com/wpf</a><br><a href="https://msdn.microsoft.com/zh-cn/library/ms752347(v=vs.110).aspx" target="_blank" rel="external">https://msdn.microsoft.com/zh-cn/library/ms752347(v=vs.110).aspx</a></p>
+<p><code>Content=&quot;{Binding}&quot;</code> <a href="https://technet.microsoft.com/zh-cn/subscriptions/index/system.windows.controls.contentcontrol.contenttemplate(v=vs.95" target="_blank" rel="external">默认关联属性</a>.aspx)</p>
 <h4 id="本地对象绑定"><a href="#本地对象绑定" class="headerlink" title="本地对象绑定"></a>本地对象绑定</h4><p>如上所说，绑定和<code>Name</code>相关。</p>
 <p>先看本地对象绑定：<br><figure class="highlight dust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">CheckBox</span> <span class="attr">Name</span>=<span class="string">"ee"</span> <span class="attr">Content</span>=<span class="string">"Play against computer"</span> <span class="attr">HorizontalAlignment</span>=<span class="string">"Left"</span> <span class="attr">VerticalAlignment</span>=<span class="string">"Top"</span> <span class="attr">Margin</span>=<span class="string">"8,2,0,0"</span> /&gt;</span></span></div><div class="line"><span class="tag">&lt;<span class="name">Label</span> <span class="attr">Content</span>=<span class="string">"Number"</span> <span class="attr">Margin</span>=<span class="string">"8,28,0,0"</span> <span class="attr">HorizontalAlignment</span>=<span class="string">"Left"</span> <span class="attr">VerticalAlignment</span>=<span class="string">"Top"</span> <span class="attr">IsEnabled</span>=<span class="string">"</span></span><span class="template-variable">&#123;Binding ElementName=ee, Path=IsChecked&#125;</span><span class="xml"><span class="tag"><span class="string">"</span> /&gt;</span></span></div><div class="line"><span class="tag">&lt;<span class="name">ComboBox</span> <span class="attr">x:Name</span>=<span class="string">"hhe"</span> <span class="attr">Width</span>=<span class="string">"86"</span> <span class="attr">Margin</span>=<span class="string">"180,28,0,0"</span> <span class="attr">HorizontalAlignment</span>=<span class="string">"Left"</span> <span class="attr">VerticalAlignment</span>=<span class="string">"Top"</span> <span class="attr">SelectedIndex</span>=<span class="string">"0"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">ComboBoxItem</span>&gt;</span>2<span class="tag">&lt;/<span class="name">ComboBoxItem</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">ComboBoxItem</span>&gt;</span>3<span class="tag">&lt;/<span class="name">ComboBoxItem</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ComboBox</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">TextBox</span> <span class="attr">Text</span>=<span class="string">"</span></span><span class="template-variable">&#123;Binding ElementName=hhe, Path=SelectedItem.Content&#125;</span><span class="xml"><span class="tag"><span class="string">"</span> <span class="attr">Width</span>=<span class="string">"86"</span> <span class="attr">Margin</span>=<span class="string">"180,68,0,0"</span> <span class="attr">HorizontalAlignment</span>=<span class="string">"Left"</span> <span class="attr">VerticalAlignment</span>=<span class="string">"Top"</span> /&gt;</span></span></div><div class="line"></div><div class="line">//如下形式是同样的</div><div class="line"><span class="tag">&lt;<span class="name">ComboBox.IsEnabled</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">Binding</span> <span class="attr">ElementName</span>=<span class="string">"ee"</span> <span class="attr">Path</span>=<span class="string">"IsChecked"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ComboBox.IsEnabled</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>先看<code>Label</code>的绑定，<code>Binding</code>通过<code>ElementName</code>的<code>Name</code>属性找到了<code>CheckBox</code>对象，并绑定到它身上，再通过<code>IsChecked</code>属性来传值。实际效果：check选中，label就enable（相反同理）<br>再看<code>TextBox</code>绑定，<code>Binding</code>还是绑定到<code>ComboBox</code>上，且它文本绑定到了选中的内容上。实际效果：<code>ComboBox</code>选中哪项，<code>TextBox</code>就显示相应的选中内容。</p>
@@ -129,7 +182,30 @@
 <h3 id="自定义控件"><a href="#自定义控件" class="headerlink" title="自定义控件"></a>自定义控件</h3><p>custom control有点没看透，直接讲user control。</p>
 <figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">region</span> 属性</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> DependencyProperty ShowStringProperty =</div><div class="line">    DependencyProperty.Register(<span class="string">"ShowString"</span>, <span class="keyword">typeof</span>(<span class="keyword">string</span>), <span class="keyword">typeof</span>(UserTest),</div><div class="line">        <span class="keyword">new</span> PropertyMetadata(<span class="string">"默认值"</span>, <span class="keyword">new</span> PropertyChangedCallback(OnChangeShowString)));</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">OnChangeShowString</span>(<span class="params">DependencyObject obj, DependencyPropertyChangedEventArgs args</span>)<span class="comment">//设置属性被修改时的回调函数</span></span></div><div class="line">&#123;</div><div class="line">    UserTest tt = obj <span class="keyword">as</span> UserTest;</div><div class="line">    tt.t1.Text = (<span class="keyword">string</span>)args.NewValue;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> ShowString</div><div class="line">&#123;</div><div class="line">    <span class="keyword">set</span> &#123; SetValue(ShowStringProperty, <span class="keyword">value</span>); &#125;</div><div class="line">    <span class="keyword">get</span> &#123; <span class="keyword">return</span> (<span class="keyword">string</span>)GetValue(ShowStringProperty); &#125;</div><div class="line">&#125;</div><div class="line"><span class="meta">#<span class="meta-keyword">endregion</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">region</span> 事件</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">readonly</span> RoutedEvent ShowStringEvent =</div><div class="line">    EventManager.RegisterRoutedEvent(<span class="string">"ShowEvent"</span>, RoutingStrategy.Bubble,</div><div class="line">        <span class="keyword">typeof</span>(RoutedPropertyChangedEventHandler&lt;<span class="keyword">object</span>&gt;), <span class="keyword">typeof</span>(UserTest));</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">event</span> RoutedPropertyChangedEventHandler&lt;<span class="keyword">object</span>&gt; ShowEvent</div><div class="line">&#123;</div><div class="line">    add &#123; AddHandler(ShowStringEvent, <span class="keyword">value</span>); &#125;</div><div class="line">    remove &#123; RemoveHandler(ShowStringEvent, <span class="keyword">value</span>); &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">BtnClickme</span>(<span class="params"><span class="keyword">object</span> sender, RoutedEventArgs e</span>)<span class="comment">//这是自定义控件给button加了个事件，这样这个函数就会通知外面我的自定义事件</span></span></div><div class="line">&#123;</div><div class="line">    RoutedPropertyChangedEventArgs&lt;<span class="keyword">object</span>&gt; arg =</div><div class="line">        <span class="keyword">new</span> RoutedPropertyChangedEventArgs&lt;<span class="keyword">object</span>&gt;(sender, e, ShowStringEvent);</div><div class="line">    RaiseEvent(arg);</div><div class="line">&#125;</div><div class="line"><span class="meta">#<span class="meta-keyword">endregion</span></span></div><div class="line">&lt;local:UserTest HorizontalAlignment=<span class="string">"Center"</span> VerticalAlignment=<span class="string">"Bottom"</span> ShowString=<span class="string">"wangqiu"</span> ShowEvent=<span class="string">"UserTest_ShowEvent"</span> &gt;&lt;/local:UserTest&gt;</div></pre></td></tr></table></figure>
 <p>都是先注册静态变量创建，再编写属性设置。</p>
-]]></content>
+<h4 id="依赖属性"><a href="#依赖属性" class="headerlink" title="依赖属性"></a>依赖属性</h4><p>wpf的控件是有共享的内存的，所以上面属性注册全用依赖属性注册。<br>官方说转换的时候 DependencyProperty.UnsetValue 会清空当前属性值。null 传给依赖属性是不行的，会被寻找其它值。</p>
+<h3 id="ControlTemplate和ContentTemplate"><a href="#ControlTemplate和ContentTemplate" class="headerlink" title="ControlTemplate和ContentTemplate"></a>ControlTemplate和ContentTemplate</h3><p>前者可以改变控件的外形。后者改变控件的内容。<br>比如你的button，想变成圆形，就用前者。你想<code>Content=&quot;asasas&quot;</code>这些内容圆形显示时就用后者。</p>
+<p>由于强大的xaml，使的内容和形状都可以用控件表述。但是表述内容和DataTemplate联合无疑是好的选择: <a href="http://www.cnblogs.com/zhouhb/p/3284827.html" target="_blank" rel="external">http://www.cnblogs.com/zhouhb/p/3284827.html</a></p>
+<h3 id="ZIndex"><a href="#ZIndex" class="headerlink" title="ZIndex"></a>ZIndex</h3><p>数字越小则层数越低，数字最大的在最前面</p>
+<h3 id="RenderTransform"><a href="#RenderTransform" class="headerlink" title="RenderTransform"></a>RenderTransform</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Label.RenderTransform</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">RotateTransform</span> <span class="attr">Angle</span>=<span class="string">"180"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">Label.RenderTransform</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>1、RotateTransform：元素旋转：</p>
+<blockquote>
+<p>Angle：旋转角度。<br>CenterX：旋转水平中心。<br>CenterY旋转的垂直中心}这两个是绝对定位坐标，<br>而RenderTransformOrigin是相对定位的</p>
+</blockquote>
+<p>2、ScaleTransform：会对元素水平，垂直方向上缩放。</p>
+<blockquote>
+<p>CenterX：缩放水平中心。CenterY缩放的垂直中心<br>ScaleX：水平缩放倍数 ScaleY：垂直缩放倍数。</p>
+</blockquote>
+<p>3、SkewTransform：元素倾斜：</p>
+<blockquote>
+<p>CenterX：倾斜水平中心。CenterY倾斜的垂直中心<br>AngleX：水平倾斜角度。AngleY：垂直倾斜角度。</p>
+</blockquote>
+<p>4、TranslateTransform：元素移动(只对RenderTransform有效果)</p>
+<blockquote>
+<p>X=水平移动像素，Y=垂直移动像素。</p>
+</blockquote>
+<h3 id="OpacityMask"><a href="#OpacityMask" class="headerlink" title="OpacityMask"></a>OpacityMask</h3><p>简单形状的渐变直接fill渐变画刷就好了（而且画刷颜色直接指定透明度）。<br>可是路径和图片也要渐变的改变透明度只能用<code>OpacityMask</code></p>
+<p><code>Opacity</code>是指定控件的透明度</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Image.OpacityMask</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">LinearGradientBrush</span> <span class="attr">StartPoint</span>=<span class="string">"0,0"</span> <span class="attr">EndPoint</span>=<span class="string">"0,1"</span>&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">GradientStop</span> <span class="attr">Color</span>=<span class="string">"#FFFFFFFF"</span> <span class="attr">Offset</span>=<span class="string">"0"</span>/&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">GradientStop</span> <span class="attr">Color</span>=<span class="string">"#00FFFFFF"</span> <span class="attr">Offset</span>=<span class="string">"1"</span>/&gt;</span>  </div><div class="line">    <span class="tag">&lt;/<span class="name">LinearGradientBrush</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="name">Image.OpacityMask</span>&gt;</span></div></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
@@ -570,9 +646,9 @@
       <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
     
     
-      <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
-    
       <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
+    
+      <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
     
   </entry>
   
@@ -976,7 +1052,7 @@ undefined
     <link href="https://xuecat.github.io/2016/10/12/189/"/>
     <id>https://xuecat.github.io/2016/10/12/189/</id>
     <published>2016-10-12T15:32:07.000Z</published>
-    <updated>2016-11-12T08:33:54.444Z</updated>
+    <updated>2017-01-12T13:36:27.802Z</updated>
     
     <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/e1.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
 <ul>
@@ -990,6 +1066,8 @@ undefined
 <li>电脑更新和安装vs，不要插移动硬盘！</li>
 <li>电脑更新和安装vs，不要插移动硬盘！ 尼玛，它会直接破坏小马的系统激活，气死我了。</li>
 </ul>
+<hr>
+<p>我win7 sp1系统想换英语语言包一直更新不到，今天发现可以直接google下面这个：<br>windows6.1-kb2483139-x64-en-us_9b9c8a867baff2920507fbf1e1b4a158572b9b87</p>
 ]]></content>
     
     <summary type="html">
@@ -1004,66 +1082,6 @@ undefined
       <category term="工具" scheme="https://xuecat.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
     
       <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CFile各属性笔记188</title>
-    <link href="https://xuecat.github.io/2016/09/27/188/"/>
-    <id>https://xuecat.github.io/2016/09/27/188/</id>
-    <published>2016-09-27T14:09:47.000Z</published>
-    <updated>2016-09-27T14:39:50.818Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>今日为楼下写多线程的文件操作测试程序，记录下。</strong></p>
-<p>CFile::shareDenyNone 表示允许其它进/线程访问（多线程时便用此CFile::shareDenyNone和CFile::shareDenyNone搭配，对文件边读边写）</p>
-<p>CFile::shareDenyRead 禁止其它进/线程读操作</p>
-<p>CFile::shareDenyWrite 禁止其它进/线程写操作</p>
-<p>CFile::shareExclusive 禁止其它进/线程读写操作</p>
-<p>CFile::modeNoTruncate 它必须要和CFile::modeCreate连用保证稳定性。好吧对于它一般是写操作时用的多，<br><br>CFile::modeCreate会清零文件，即原来文件80k，你写入50k，这下文件就只有50k新数据。<br><br>CFile::modeNoTruncate不会清零文件，即原来80k，写入50k，这下文件就有50k新数据和30k旧数据。如果想对尾部添加的话直接seek到end就好<br></p>
-<p><strong>CFile::osNoBuffer 不会有系统缓存。它太特殊了，今天就卡这儿；它对文件操作必须按照卷大小来操作：也就是说添加此属性的CFile，seek、read、write的操作大小必须是1024的倍数</strong> </p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;今日为楼下写多线程的文件操作测试程序，记录下。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;CFile::shareDenyNone 表示允许其它进/线程访问（多线程时便用此CFile::shareDenyNone和CFile::shareDenyNone搭配，对文件边
-    
-    </summary>
-    
-      <category term="Windows" scheme="https://xuecat.github.io/categories/Windows/"/>
-    
-    
-      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
-    
-      <category term="错误认识" scheme="https://xuecat.github.io/tags/%E9%94%99%E8%AF%AF%E8%AE%A4%E8%AF%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>npm install注意187</title>
-    <link href="https://xuecat.github.io/2016/09/26/187/"/>
-    <id>https://xuecat.github.io/2016/09/26/187/</id>
-    <published>2016-09-26T15:34:46.000Z</published>
-    <updated>2016-09-29T00:24:42.293Z</updated>
-    
-    <content type="html"><![CDATA[<p><code>--save-dev</code> 是你开发时候依赖的东西，<code>--save</code> 是你发布之后还依赖的东西。</p>
-<p>比如，你写 ES6 代码，如果你想编译成 ES5 发布那么 babel 就是devDependencies。<br><br>如果你用了 jQuery，由于发布之后还是依赖jQuery，所以是dependencies。</p>
-<p>但是在 npm 里面除了二进制的依赖，似乎也不用区分是不是dev。<br><br>因为使用npm就是自己编译的意思，而不使用npm直接拿编译后的版本的，这些依赖项也看不到。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;code&gt;--save-dev&lt;/code&gt; 是你开发时候依赖的东西，&lt;code&gt;--save&lt;/code&gt; 是你发布之后还依赖的东西。&lt;/p&gt;
-&lt;p&gt;比如，你写 ES6 代码，如果你想编译成 ES5 发布那么 babel 就是devDependencies。&lt;br&gt;&lt;b
-    
-    </summary>
-    
-      <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
-    
-    
-      <category term="工具" scheme="https://xuecat.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
-    
-      <category term="错误认识" scheme="https://xuecat.github.io/tags/%E9%94%99%E8%AF%AF%E8%AE%A4%E8%AF%86/"/>
     
   </entry>
   
