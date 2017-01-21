@@ -86,25 +86,25 @@
 
 
 
-<meta name="description" content="ps: 退出指令 q 就好了。
+<meta name="description" content="64位寻址到16EB （1EB=1000TB）x64控制寻址范围16TB
+ps: 退出指令 q 就好了。
 dump：https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump
-如果只想程序运行时的内存dump，直接从资源管理器；进程tab页上，选中程序右键，就有个产生dump选项。
-debug工具一般都有debugger.">
+如果只想程序运行时的内存dump，直接从资源管理器；进程tab页上，选中程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="windbg调试200">
 <meta property="og:url" content="https://xuecat.github.io/2016/12/01/200/index.html">
 <meta property="og:site_name" content="XueCat">
-<meta property="og:description" content="ps: 退出指令 q 就好了。
+<meta property="og:description" content="64位寻址到16EB （1EB=1000TB）x64控制寻址范围16TB
+ps: 退出指令 q 就好了。
 dump：https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump
-如果只想程序运行时的内存dump，直接从资源管理器；进程tab页上，选中程序右键，就有个产生dump选项。
-debug工具一般都有debugger.">
-<meta property="og:updated_time" content="2017-01-07T10:26:56.012Z">
+如果只想程序运行时的内存dump，直接从资源管理器；进程tab页上，选中程">
+<meta property="og:updated_time" content="2017-01-21T08:56:01.846Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="windbg调试200">
-<meta name="twitter:description" content="ps: 退出指令 q 就好了。
+<meta name="twitter:description" content="64位寻址到16EB （1EB=1000TB）x64控制寻址范围16TB
+ps: 退出指令 q 就好了。
 dump：https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump
-如果只想程序运行时的内存dump，直接从资源管理器；进程tab页上，选中程序右键，就有个产生dump选项。
-debug工具一般都有debugger.">
+如果只想程序运行时的内存dump，直接从资源管理器；进程tab页上，选中程">
 
 
 
@@ -350,7 +350,8 @@ debug工具一般都有debugger.">
       
 
       
-        <p>ps: 退出指令 <code>q</code> 就好了。</p>
+        <p>64位寻址到16EB （1EB=1000TB）x64控制寻址范围16TB</p>
+<p>ps: 退出指令 <code>q</code> 就好了。</p>
 <p>dump：<a href="https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump" target="_blank" rel="external">https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump</a></p>
 <p>如果只想程序运行时的内存dump，直接从资源管理器；进程tab页上，选中程序右键，就有个产生dump选项。</p>
 <p>debug工具一般都有debugger.chm这个文档可以参考<br><strong>x64</strong>:</p>
@@ -369,7 +370,7 @@ debug工具一般都有debugger.">
 <p>今天又测试了下，指定符号、源、exe后，lm居然没找到对应符号。。。</p>
 <p>只好强制加载了。<br><strong>后来发现居然要多个后缀才行</strong>：<br><code>.reload /i simpledoc1.exe</code>这样才行。。。</p>
 <p><strong>lm会全部显示，太多了，如果只想显示能加载符号的模块的话用：</strong><code>lml</code>就可以了</p>
-<hr>
+<h3 id="栈破坏第一个例子"><a href="#栈破坏第一个例子" class="headerlink" title="栈破坏第一个例子"></a>栈破坏第一个例子</h3><hr>
 <p>今天认真看了调试的第一个例子，做下记录，调试的是一个内存破坏的例子：<br>1、先用<code>k</code>命令来显示异常前的函数执行堆栈（后面跟个数字就表示显示几行， k 3：显示最后三行）</p>
 <blockquote>
 <p>我喜欢用<code>kpn</code>。因为<code>p</code>会列举出函数的调用参数；<code>n</code>会对他们排号，这样方便我用<code>frame</code>来切换上下文作用域；（另外说下<code>b</code>会列举参数地址，反正我也不咋习惯看，就不用）</p>
@@ -390,6 +391,39 @@ debug工具一般都有debugger.">
 <blockquote>
 <p>如上面所说，成员变量被全部列出来了，就可以一个一个查看成员变量的内存<code>dd 0x72726f43</code>。这样就判断有效和无效！</p>
 </blockquote>
+<hr>
+<h3 id="断点"><a href="#断点" class="headerlink" title="断点"></a>断点</h3><p>bp ConsoleApplication1!main+4c 函数第4行<br>bp ConsoleApplication1.cpp:4<br>t 运行单步</p>
+<h3 id="k命令"><a href="#k命令" class="headerlink" title="k命令"></a>k命令</h3><p>kb 显示的参数 从左到右分别为 ebp， ret ，arg1， arg2</p>
+<h3 id="内存溢出"><a href="#内存溢出" class="headerlink" title="内存溢出"></a>内存溢出</h3><p>r eip  查看下一指令地址<br>u eip  查看下一指令的汇编代码</p>
+<h3 id="约定不一致"><a href="#约定不一致" class="headerlink" title="约定不一致"></a>约定不一致</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">int</span><span class="params">(<span class="number">__</span>cdecl *MYPROC)</span><span class="params">(DWORD dwOne, DWORD dwTwo)</span></span>;</div><div class="line"><span class="function">VOID <span class="title">CallProc</span><span class="params">(MYPROC pProc)</span></span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> <span class="number">__</span><span class="function">cdecl <span class="title">wmain</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    HMODULE hMod = LoadLibrary(<span class="string">L"Win32Dll.dll"</span>);</div><div class="line">    <span class="keyword">if</span> (hMod)</div><div class="line">    &#123;</div><div class="line">        MYPROC pProc = (MYPROC)GetProcAddress(hMod, <span class="string">"InitModule"</span>);</div><div class="line">        <span class="keyword">if</span> (pProc)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//这里InitModule本阿里是个__stadcall的约定，由于获取时用 __cdecl。导致函数返回前就清理了栈，使得堆栈破坏。</span></div></pre></td></tr></table></figure>
+<h3 id="自动错误"><a href="#自动错误" class="headerlink" title="自动错误"></a>自动错误</h3><p>以前把程序放入windbg，指定pdb，然后运行。如果有空指针调用它会自动跳转到代码。<br>后来有几次测试，又不成功了。<br>今天我无意中发现，<code>.frame &lt;number&gt;</code>到错误的函数后，它又能自动加载跳转到代码了。</p>
+<h3 id="堆错误-使用未初始化状态"><a href="#堆错误-使用未初始化状态" class="headerlink" title="堆错误-使用未初始化状态"></a>堆错误-使用未初始化状态</h3><p>此类报错，会在加载后，给出问题代码的，如果有pdb则会直接指出源代码。先看windbg显示的：<br>ConsoleApplication1!wmain+0x87:<br>00265107 c7000a000000    mov     dword ptr [eax],0Ah  ds:002b:baadf00d=????????</p>
+<p>eax 的值是baadfood 填充模式时分配成功但没初始化。释放填充是feeefeee</p>
+<h3 id="堆错误-堆句柄不匹配"><a href="#堆错误-堆句柄不匹配" class="headerlink" title="堆错误-堆句柄不匹配"></a>堆错误-堆句柄不匹配</h3><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">hSmallHeap = GetProcessHeap();<span class="comment">//默认堆</span></div><div class="line">hLargeHeap = HeapCreate(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);<span class="comment">//私有堆</span></div><div class="line"></div><div class="line">_DPH_BLOCK_INFORMATION有个Heap会辨识堆句柄，以此来判断堆句柄是否匹配。</div></pre></td></tr></table></figure>
+<p>去找结构体，自己声明，还要自己定义（因为它定义了才会有符号，才能找到自己声明的那个结构体）</p>
+<h3 id="死锁情况"><a href="#死锁情况" class="headerlink" title="死锁情况"></a>死锁情况</h3><p><code>~*kb</code> 显示真进线程信息很有用 (<code>~*</code>切线程)</p>
+<p>先看它们第一行信息，Unfrozen表示它们都在运行。<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="number">0</span>  <span class="string">Id:</span> <span class="number">2384.</span>f68 <span class="string">Suspend:</span> <span class="number">1</span> <span class="string">Teb:</span> <span class="number">7</span>efdd000 Unfrozen<span class="comment">//主进程</span></div><div class="line"><span class="number">1</span>  <span class="string">Id:</span> <span class="number">2384.14</span>f4 <span class="string">Suspend:</span> <span class="number">1</span> <span class="string">Teb:</span> <span class="number">7</span>efda000 Unfrozen<span class="comment">//子线程</span></div><div class="line"><span class="comment">//这个id很有用，特别是小数点后面的数字代表EBP。</span></div><div class="line"><span class="comment">//后面的OwningThread上的值就是此数字。</span></div></pre></td></tr></table></figure></p>
+<p>从堆栈看，俩个线程都在<code>NtWaitForSingleObject</code>结束。找到执行函数<code>RtlEnterCriticalSection</code>的参数<br>在分别<code>!cs 00d9a138</code> <code>!cs 00d9a150</code>(这个命令由于涉及到了内核对象，必须去服务器那边下符号)<br>发现这俩个临界区都锁住了，<code>LOCKED LockCount = 0x1 WaiterWoken = No</code>；<br>而它们的<code>OwningThread</code>则正好分别是彼此，说明是互相锁住了。</p>
+<h3 id="锁中产生异常"><a href="#锁中产生异常" class="headerlink" title="锁中产生异常"></a>锁中产生异常</h3><p>临界区的<code>OwningThread</code>会被分配给一个找不到ID的地址（Windows异常模块接管），会导致接下来不会释放临界区。<br>且问题栈会有：<code>DbgBreakPoint DbgUiRemoteBreakin</code></p>
+<p>微软建议，封装个类，在析构函数进行解锁。（所以建议使用CCriticalSection而不是windows对象）</p>
+<h3 id="线程结束"><a href="#线程结束" class="headerlink" title="线程结束"></a>线程结束</h3><p>当主线程结束工作者线程是，工作者线程正处于分配内存或释放内存的过程中。<br>在这些操作中，堆管理器通常会获得一个临界区。<br>当工作者线程被强行结束时，堆管理器将永远无法离开临界区。<br>意思就是说你terminal时正在开辟堆时（new），可能会导致堆管理器死锁。</p>
+<h3 id="DllMain的死锁问题"><a href="#DllMain的死锁问题" class="headerlink" title="DllMain的死锁问题"></a>DllMain的死锁问题</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">BOOL</span> WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)</div><div class="line">&#123;</div><div class="line">    <span class="built_in">BOOL</span> bRet=<span class="literal">FALSE</span>;</div><div class="line">    <span class="keyword">switch</span>(fdwReason)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">case</span> DLL_PROCESS_ATTACH:</div><div class="line">        &#123;</div><div class="line">            DWORD dwId=<span class="number">0</span>;</div><div class="line">            HANDLE hThread=<span class="literal">NULL</span>;</div><div class="line"></div><div class="line">            hThread = CreateThread(<span class="literal">NULL</span>, <span class="number">0</span>, InitDllProc, <span class="literal">NULL</span>, <span class="number">0</span>, &amp;dwId);        </div><div class="line">            <span class="keyword">if</span>(hThread)</div><div class="line">            &#123;</div><div class="line">                WaitForSingleObject(hThread, INFINITE);</div><div class="line">                CloseHandle(hThread);</div><div class="line">                bRet=<span class="literal">TRUE</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> bRet;</div><div class="line">&#125;</div><div class="line"><span class="comment">//如上此代码会陷入卡死状态。</span></div></pre></td></tr></table></figure>
+<ol>
+<li><p>进入dllmain后创建线程。</p>
+<blockquote>
+<p>当windows创建线程时，线程并不会自动从<code>kernel32!BaseThreadStart</code>开始执行；<br>而是首先由APC分发器分发一个APC到新线程，然后作为apc进行初始化完成后才会执行线程。<br>然而APC的分发有一个加载器锁来控制的，以此保护分发访问的冲突问题。<br><strong>然而对于DllMain来说，它本身就是动态库的加载和创建也会出现新线程进程，它本身也会用到APC管理器</strong><br>ps：apc分发和回收用的是同一个锁</p>
+</blockquote>
+</li>
+<li><p>dllmain等待线程</p>
+<blockquote>
+<p>dllmain等待子线程的创建和设置事件。<br>然而子线程等待dllmain的APC管理器锁解锁。<br>如此就造成了死锁的情况。<br>apc的死锁导致调试线程的注入发生中断，超过30秒后；调试线程会自动挂起进程中所有线程。</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="临界区的判断"><a href="#临界区的判断" class="headerlink" title="临界区的判断"></a>临界区的判断</h3><figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">+<span class="number">0</span>x000 DebugInfo        : 0<span class="type">x0085c560</span> _RTL_CRITICAL_SECTION_DEBUG</div><div class="line">+<span class="number">0</span>x004 LockCount        : 0<span class="type">n</span>-<span class="number">1</span></div><div class="line">+<span class="number">0</span>x008 RecursionCount   : 0<span class="type">n0</span></div><div class="line">+<span class="number">0</span>x00c OwningThread     : (<span class="keyword"><span class="keyword">null</span></span>) </div><div class="line">+<span class="number">0</span>x010 LockSemaphore    : (<span class="keyword"><span class="keyword">null</span></span>) </div><div class="line">+<span class="number">0</span>x014 SpinCount        : 0<span class="type">xfa0</span></div></pre></td></tr></table></figure>
+<p><code>dt CRITICAL_SECTION</code>和<code>!cs</code>都行。<br>当处理一个尚未被初始化的临界区，看的值都是随机的<br>当被删除的临界区，看到的值是零<br>过度释放的临界区，会导致程序挂起，<code>LockCount &lt; -1 || RscursionCount &lt; 0</code></p>
+<h3 id="64位"><a href="#64位" class="headerlink" title="64位"></a>64位</h3><p>64位运行32位时，加载WOW（windows on windows）子系统模块</p>
+<p>Mini dump代码直接实例初始化处调用RunCrashHandler<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">CreateDumpFile</span><span class="params">(LPCTSTR lpstrDumpFilePathName, EXCEPTION_POINTERS *pException)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="comment">// 创建Dump文件    </span></div><div class="line">	<span class="comment">//    </span></div><div class="line">	HANDLE hDumpFile = CreateFile(lpstrDumpFilePathName, GENERIC_WRITE, <span class="number">0</span>, <span class="literal">NULL</span>, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, <span class="literal">NULL</span>);</div><div class="line"></div><div class="line">	<span class="comment">// Dump信息    </span></div><div class="line">	<span class="comment">//    </span></div><div class="line">	MINIDUMP_EXCEPTION_INFORMATION dumpInfo;</div><div class="line">	dumpInfo.ExceptionPointers = pException;</div><div class="line">	dumpInfo.ThreadId = GetCurrentThreadId();</div><div class="line">	dumpInfo.ClientPointers = TRUE;</div><div class="line"></div><div class="line">	<span class="comment">// 写入Dump文件内容    </span></div><div class="line">	<span class="comment">//    </span></div><div class="line">	MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), hDumpFile, MiniDumpNormal, &amp;dumpInfo, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</div><div class="line"></div><div class="line">	CloseHandle(hDumpFile);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function">LONG WINAPI <span class="title">UnhandledExceptionFilterEx</span><span class="params">(<span class="keyword">struct</span> <span class="number">_</span>EXCEPTION_POINTERS *pException)</span></span></div><div class="line">&#123;</div><div class="line">	TCHAR szMbsFile[MAX_PATH] = &#123; <span class="number">0</span> &#125;;</div><div class="line">	::GetModuleFileName(<span class="literal">NULL</span>, szMbsFile, MAX_PATH);</div><div class="line">	TCHAR* pFind = <span class="number">_</span>tcsrchr(szMbsFile, <span class="number">_</span>T(<span class="string">'\\'</span>));</div><div class="line">	<span class="keyword">if</span> (pFind)</div><div class="line">	&#123;</div><div class="line">		*(pFind + <span class="number">1</span>) = <span class="number">0</span>;</div><div class="line">		SYSTEMTIME Time = &#123; <span class="number">0</span> &#125;;</div><div class="line">		TCHAR szGuid[<span class="number">512</span>] = &#123; <span class="number">0</span> &#125;;</div><div class="line">		GUID guid;</div><div class="line">		<span class="keyword">if</span> (S_OK == ::CoCreateGuid(&amp;guid))</div><div class="line">		&#123;</div><div class="line">			<span class="number">_</span>sntprintf_s(szGuid, <span class="keyword">sizeof</span>(szGuid),</div><div class="line">				<span class="number">_</span>T(<span class="string">"%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X.dmp"</span>),</div><div class="line">				guid.Data1, guid.Data2, guid.Data3,</div><div class="line">				guid.Data4[<span class="number">0</span>], guid.Data4[<span class="number">1</span>],</div><div class="line">				guid.Data4[<span class="number">2</span>], guid.Data4[<span class="number">3</span>],</div><div class="line">				guid.Data4[<span class="number">4</span>], guid.Data4[<span class="number">5</span>],</div><div class="line">				guid.Data4[<span class="number">6</span>], guid.Data4[<span class="number">7</span>]);</div><div class="line">		&#125;</div><div class="line">		<span class="number">_</span>tcscat_s(szMbsFile, MAX_PATH, szGuid );</div><div class="line">		CreateDumpFile(szMbsFile, pException);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">// <span class="doctag">TODO:</span> MiniDumpWriteDump  </span></div><div class="line">	FatalAppExit(<span class="number">-1</span>, <span class="number">_</span>T(<span class="string">"Fatal Error"</span>));</div><div class="line">	<span class="keyword">return</span> EXCEPTION_CONTINUE_SEARCH;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">RunCrashHandler</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	SetUnhandledExceptionFilter(UnhandledExceptionFilterEx);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -503,7 +537,7 @@ debug工具一般都有debugger.">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">202</span>
+              <span class="site-state-item-count">203</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -520,7 +554,7 @@ debug工具一般都有debugger.">
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -613,7 +647,7 @@ debug工具一般都有debugger.">
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#栈破坏第一个例子"><span class="nav-number">1.</span> <span class="nav-text">栈破坏第一个例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#断点"><span class="nav-number">2.</span> <span class="nav-text">断点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#k命令"><span class="nav-number">3.</span> <span class="nav-text">k命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存溢出"><span class="nav-number">4.</span> <span class="nav-text">内存溢出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#约定不一致"><span class="nav-number">5.</span> <span class="nav-text">约定不一致</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动错误"><span class="nav-number">6.</span> <span class="nav-text">自动错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆错误-使用未初始化状态"><span class="nav-number">7.</span> <span class="nav-text">堆错误-使用未初始化状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆错误-堆句柄不匹配"><span class="nav-number">8.</span> <span class="nav-text">堆错误-堆句柄不匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁情况"><span class="nav-number">9.</span> <span class="nav-text">死锁情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#锁中产生异常"><span class="nav-number">10.</span> <span class="nav-text">锁中产生异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程结束"><span class="nav-number">11.</span> <span class="nav-text">线程结束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DllMain的死锁问题"><span class="nav-number">12.</span> <span class="nav-text">DllMain的死锁问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#临界区的判断"><span class="nav-number">13.</span> <span class="nav-text">临界区的判断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#64位"><span class="nav-number">14.</span> <span class="nav-text">64位</span></a></li></ol></div>
             
           </div>
         </section>
