@@ -97,7 +97,7 @@ FileStream读写的是字节数组StreamReader StreamWriter读写的是字符数
 new FileInfo(@&amp;quot;C:\Log.txt&amp;quot;)使用@前缀表示字符按字面意义解释，没有的话就要用\\代替\了。
 FileStream读写的是字节数组StreamReader StreamWriter读写的是字符数组字符和数组的转换用De">
 <meta property="og:image" content="https://xuecat.github.io/picture/210.jpg">
-<meta property="og:updated_time" content="2017-01-21T09:15:57.318Z">
+<meta property="og:updated_time" content="2017-02-06T15:59:15.862Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C#文件和其它210">
 <meta name="twitter:description" content="文件File和FileInfoDirectory和DirectoryInfo如果执行单一调用使用静态类如果执行一系列调用使用Info类
@@ -353,6 +353,18 @@ FileStream读写的是字节数组StreamReader StreamWriter读写的是字符数
 <h3 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h3><p>File和FileInfo<br>Directory和DirectoryInfo<br>如果执行单一调用使用静态类<br>如果执行一系列调用使用Info类</p>
 <p><code>new FileInfo(@&quot;C:\Log.txt&quot;)</code>使用<code>@</code>前缀表示字符按字面意义解释，没有的话就要用<code>\\</code>代替<code>\</code>了。</p>
 <p><code>FileStream</code>读写的是字节数组<br><code>StreamReader</code> <code>StreamWriter</code>读写的是字符数组<br>字符和数组的转换用<code>Decoder</code>和<code>Encoder</code></p>
+<h3 id="文本格式"><a href="#文本格式" class="headerlink" title="文本格式"></a>文本格式</h3><ol>
+<li><p>XPath 用于检索xml的节点。</p>
+</li>
+<li><p>创建xml的话，我绝对linq的XDocument要比XmlDocument好用多了。</p>
+</li>
+</ol>
+<h3 id="LINQ"><a href="#LINQ" class="headerlink" title="LINQ"></a>LINQ</h3><p>它的实现是基于<code>IEnumerable&lt;T&gt;</code>接口,所以下面俩句是等效的。<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span>[] name = &#123;<span class="string">"n1"</span>, <span class="string">"n2"</span>, <span class="string">"n3"</span>, <span class="string">"n4"</span> &#125;;</div><div class="line"><span class="keyword">var</span> dd = name.Where(n =&gt; n.StartsWith(<span class="string">"n"</span>));</div><div class="line"><span class="keyword">var</span> hh = <span class="keyword">from</span> n <span class="keyword">in</span> name <span class="keyword">where</span> n.StartsWith(<span class="string">"n"</span>) <span class="keyword">select</span> n;</div></pre></td></tr></table></figure></p>
+<h4 id="orderby"><a href="#orderby" class="headerlink" title="orderby"></a>orderby</h4><p>暂时就个字母，其它排列再看看吧<br><code>var hh = from n in name where n.StartsWith(&quot;n&quot;) orderby n select n;</code>升序排列结果<br><code>var hh = from n in name where n.StartsWith(&quot;n&quot;) orderby n descending select n;</code>降序排列结果</p>
+<h5 id="多级排序，并返回新建立的对象。"><a href="#多级排序，并返回新建立的对象。" class="headerlink" title="多级排序，并返回新建立的对象。"></a>多级排序，并返回新建立的对象。</h5><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> queryResults = from <span class="built_in">c</span> <span class="keyword">in</span> customers</div><div class="line"> orderby <span class="built_in">c</span>.<span class="type">Region</span>, <span class="built_in">c</span>.<span class="type">Country</span> descending, <span class="built_in">c</span>.<span class="type">City</span></div><div class="line"> select new &#123; <span class="built_in">c</span>.<span class="type">ID</span>, <span class="built_in">c</span>.<span class="type">Region</span>, <span class="built_in">c</span>.<span class="type">Country</span>, <span class="built_in">c</span>.<span class="type">City</span> &#125;;</div></pre></td></tr></table></figure>
+<h4 id="查找不重复"><a href="#查找不重复" class="headerlink" title="查找不重复"></a>查找不重复</h4><p>会按照Region属性选出所有，Distinct来排除重复。<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> <span class="keyword">qu</span> = name.Select(c =&gt; c.Region).<span class="keyword">Distinct</span>();</div><div class="line"><span class="keyword">var</span> <span class="keyword">qu</span> = (from c <span class="keyword">in</span> name select c.Region).<span class="keyword">Distinct</span>();</div></pre></td></tr></table></figure></p>
+<h4 id="分组查询"><a href="#分组查询" class="headerlink" title="分组查询"></a>分组查询</h4><p>书上的例子是，按照国家来比较销量<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">var</span> q =</div><div class="line"> from c <span class="keyword">in</span> customers</div><div class="line"> <span class="keyword">group</span> c <span class="keyword">by</span> c.Region <span class="keyword">into</span> cg</div><div class="line"> <span class="keyword">select</span> <span class="literal">new</span> &#123; TotalSaleds = cg.<span class="keyword">Sum</span>(c =&gt; c.Sales), Region = cg.Key&#125;</div><div class="line"></div><div class="line"> <span class="comment">//第二句by后面指定重组使用的Key，再重新组合成cg（即后面cg.Key）</span></div><div class="line"> <span class="comment">//第三句</span></div></pre></td></tr></table></figure></p>
+<h4 id="join查询"><a href="#join查询" class="headerlink" title="join查询"></a>join查询</h4><p>书上的例子是把客户列表(customers)和订单列表(orders)中，id相同的找出重组合<br><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> q =</div><div class="line"> <span class="keyword">from</span> c <span class="keyword">in</span> customers</div><div class="line"> <span class="keyword">join</span> o <span class="keyword">in</span> orders <span class="keyword">on</span> c.ID <span class="keyword">equals</span> o.ID</div><div class="line"> <span class="keyword">select</span> <span class="keyword">new</span> <span class="comment">&#123;c.ID, c.City&#125;</span>;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -386,13 +398,17 @@ FileStream读写的是字节数组StreamReader StreamWriter读写的是字符数
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/17/209/" rel="next" title="ASP.NET学习209">
-                <i class="fa fa-chevron-left"></i> ASP.NET学习209
+              <a href="/2017/01/17/209/" rel="next" title="ASP.NET和wcf学习209">
+                <i class="fa fa-chevron-left"></i> ASP.NET和wcf学习209
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/11/211/" rel="prev" title="effective javsscript(211)">
+                effective javsscript(211) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -460,7 +476,7 @@ FileStream读写的是字节数组StreamReader StreamWriter读写的是字符数
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">203</span>
+              <span class="site-state-item-count">205</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -477,7 +493,7 @@ FileStream读写的是字节数组StreamReader StreamWriter读写的是字符数
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">42</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -570,7 +586,7 @@ FileStream读写的是字节数组StreamReader StreamWriter读写的是字符数
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件"><span class="nav-number">1.</span> <span class="nav-text">文件</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件"><span class="nav-number">1.</span> <span class="nav-text">文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本格式"><span class="nav-number">2.</span> <span class="nav-text">文本格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LINQ"><span class="nav-number">3.</span> <span class="nav-text">LINQ</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#orderby"><span class="nav-number">3.1.</span> <span class="nav-text">orderby</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#多级排序，并返回新建立的对象。"><span class="nav-number">3.1.1.</span> <span class="nav-text">多级排序，并返回新建立的对象。</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查找不重复"><span class="nav-number">3.2.</span> <span class="nav-text">查找不重复</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分组查询"><span class="nav-number">3.3.</span> <span class="nav-text">分组查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#join查询"><span class="nav-number">3.4.</span> <span class="nav-text">join查询</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
