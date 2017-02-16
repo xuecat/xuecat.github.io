@@ -97,7 +97,7 @@
 .NET程序：使用.NET兼容语言（如c#）编写程序 -&amp;gt; 把代码编译为CIL，存储在程序集中（即VS干的事） -&amp;gt; 执行时，先使用JIT编译器将代码编译为本机代码 -&amp;gt; 在托管的CLR环境下运行本机代码。
 基本类型变量类型：字节数增多：sbyte(1) short(2) int(4) long(8)不同的是：其它类型的">
 <meta property="og:image" content="https://xuecat.github.io/picture/r4.jpg">
-<meta property="og:updated_time" content="2017-01-09T13:58:11.745Z">
+<meta property="og:updated_time" content="2017-02-14T13:53:25.576Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c#入门经典(1)197">
 <meta name="twitter:description" content="唉！！，es6正看着呢；去海外组了。。。。要补c#知识了
@@ -442,6 +442,7 @@
 </ul>
 <h4 id="拆箱和装箱"><a href="#拆箱和装箱" class="headerlink" title="拆箱和装箱"></a>拆箱和装箱</h4><p><strong>首先这俩个操作是隐式的</strong><br>所有值类型均隐式派生自System.ValueType：<br>结构体、数值、整形、字符（char）、浮点、bool、枚举、派生于System.Nullable<br>如<code>int i = new int()</code>等价于<code>int i = 0</code></p>
 <p>所有引用类型均隐式派生自System.object(包括它本身)：<br>数组：（派生于System.Array）数组的元素，不管是引用类型还是值类型，都存储在托管堆上；<br>类：class（派生于System.Object）；<br>接口：interface（接口不是一个“东西”，所以不存在派生于何处的问题。）；<br>委托：delegate（派生于System.Delegate）；<br>object：（System.Object的别名）；<br>字符串：string（System.String的别名）。</p>
+<p><em>今天测试了下，发现string却可以像值类型那样运作，搜索了下：</em><br><em>string最为显著的一个特点就是它具有恒定不变性：我们一旦创建了一个string，在managed heap 上为他分配了一块连续的内存空间，我们将不能以任何方式对这个string进行修改使之变长、变短、改变格式。</em><br><em>所有对这个string进行各项操作（比如调用ToUpper获得大写格式的string）而返回的string，实际上另一个重新创建的string，其本身并不会产生任何变化。 </em><br><em>每次改变值时都会建立一个新的string对象，变量会指向这个新的对象，而原来的还是指向原来的对象，所以不会改变。这也是string效率低下的原因。</em></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">object obj = <span class="number">1</span>;<span class="comment">//装箱</span></div><div class="line"><span class="keyword">int</span> value = (<span class="keyword">int</span>)obj;<span class="comment">//拆箱</span></div><div class="line"></div><div class="line"><span class="comment">//如上，c#中对值类型是放入栈中，对引用类型是放入堆中</span></div><div class="line"><span class="comment">//上面1是值，obj是引用。所以存在过程的转换</span></div><div class="line"><span class="comment">//这多余的转换会导致运行效率低下，所以请尽量避免。</span></div><div class="line"></div><div class="line"><span class="comment">//比如使用List&lt;obj&gt;来代替ArrayList;避免拆箱和装箱</span></div></pre></td></tr></table></figure>
       
     </div>
@@ -551,7 +552,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">205</span>
+              <span class="site-state-item-count">206</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -559,7 +560,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -568,7 +569,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
