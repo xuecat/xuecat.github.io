@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2017-02-16T15:20:32.442Z</updated>
+  <updated>2017-02-21T14:51:34.527Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -14,6 +14,92 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>jquery215</title>
+    <link href="https://xuecat.github.io/2017/02/21/215/"/>
+    <id>https://xuecat.github.io/2017/02/21/215/</id>
+    <published>2017-02-21T14:50:18.000Z</published>
+    <updated>2017-02-21T14:51:34.527Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="jquery"><a href="#jquery" class="headerlink" title="jquery"></a>jquery</h3><p>其它不说，hide和show的参数有个speed，可以动画执行显示。<br>toggle来切换元素显示和隐藏,和上面一样也有个speed。</p>
+<h3 id="特效"><a href="#特效" class="headerlink" title="特效"></a>特效</h3><p>可以加特效：<br>fade类型的函数是淡入淡出（有透明度）<br>slide类型的函数是滑入滑出<br>animate类型函数。可以设height:’toggle’ (默认情况下，所有的 HTML 元素有一个静态的位置，且是不可移动的。 如果需要改变为，我们需要将元素的 position 属性设置为 relative, fixed, 或 absolute!)</p>
+<h3 id="方法链"><a href="#方法链" class="headerlink" title="方法链"></a>方法链</h3><p>jquery方法链<code>$(&quot;#p1&quot;).css(&quot;color&quot;, &quot;red&quot;).slideUp(200).slideDown(&#39;fast&#39;);</code></p>
+<h3 id="dom属性获取和设置"><a href="#dom属性获取和设置" class="headerlink" title="dom属性获取和设置"></a>dom属性获取和设置</h3><p>dom获取和设置。<br>text()设置和获取文本，获取会自动连接子文本、<br>html()设置和获取的文本包括html、<br>val()设置和获取value属性值、<br>attr()设置和获取属性对应值，感觉这个可以替换val</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"button"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    $(<span class="string">"#runoob"</span>).attr(&#123;</div><div class="line">        <span class="string">"href"</span> : <span class="string">"http://www.runoob.com/jquery"</span>,</div><div class="line">        <span class="string">"title"</span> : <span class="string">"jQuery 教程"</span></div><div class="line">    &#125;);</div><div class="line">    $(<span class="string">"#runoob"</span>).attr(<span class="string">"href"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">i,origValue</span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> origValue + <span class="string">"/jquery"</span>; </div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="添加新元素"><a href="#添加新元素" class="headerlink" title="添加新元素"></a>添加新元素</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">appendText</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">var</span> txt1=<span class="string">"&lt;p&gt;文本。&lt;/p&gt;"</span>;              <span class="comment">// 使用 HTML 标签创建文本</span></div><div class="line">    <span class="keyword">var</span> txt2=$(<span class="string">"&lt;p&gt;&lt;/p&gt;"</span>).text(<span class="string">"文本。"</span>);  <span class="comment">// 使用 jQuery 创建文本</span></div><div class="line">    <span class="keyword">var</span> txt3=<span class="built_in">document</span>.createElement(<span class="string">"p"</span>);</div><div class="line">    txt3.innerHTML=<span class="string">"文本。"</span>;               <span class="comment">// 使用 DOM 创建文本 text with DOM</span></div><div class="line">    $(<span class="string">"body"</span>).append(txt1,txt2,txt3);        <span class="comment">// 追加新元素</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h3><p>remove()删除包括本身,接收参数css选择器<br>empty()删除不包括本身,接收参数css选择器</p>
+<h3 id="css类设置"><a href="#css类设置" class="headerlink" title="css类设置"></a>css类设置</h3><p>addClass() 添加<br>removeClass()<br>toggleClass() 添加和删除切换<br>css() 设置和返回css <code>css({&quot;background-color&quot;:&quot;yellow&quot;,&quot;font-size&quot;:&quot;200%&quot;});</code></p>
+<p>这里css好像只能用类<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"h1,h2,p"</span>).addClass(<span class="string">"blue"</span>);</div><div class="line">.blue</div><div class="line">&#123; ... &#125;</div></pre></td></tr></table></figure></p>
+<h3 id="尺寸"><a href="#尺寸" class="headerlink" title="尺寸"></a>尺寸</h3><p>outerWidth(true) //包括margin及全部<br>outerWidth()     //不包括margin,包括border及剩下<br>innerWidth()     //不包括border,包括padding及剩下<br>width()          //只包括element<br>高度类似。</p>
+<h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h3><p>返回数组元素的函数都允许参数返回指定.<br>parent(); 单个元素<br>parents();数组元素,允许参数返回指定<code>parents(&quot;.hehe&quot;)</code><br>parentsUntil(); 数组元素, 返回介于俩个给定元素之间的所有祖先元素，如<code>parentsUntil(&quot;div&quot;);</code><br>children() 数组元素,允许参数返回指定<code>children(&quot;.hehe&quot;)</code><br>find(…) 单个元素,从后代元素寻找,包含自己<br>siblings(); 数组元素,返回被选元素的所有同胞元素，允许参数返回指定<br>next(); 单个元素,返回被选元素下一个同胞元素<br>nextAll(); 数组元素,返回接下来所有同胞元素<br>nextUntil(); 数组元素,返回参数指定元素之间所有接下来的同胞元素<code>nextUntil(&quot;h6&quot;)</code></p>
+<p>first(); 返回被选元素第一个元素<br>last(); 返回被选元素最后一个元素<br>eq(); <code>eq(0)</code>就是第一个 <code>eq(1)</code>第二个<br>filter(); 再次过滤 <code>$(&quot;p&quot;).filter(&quot;.url&quot;);</code><br>not(); <code>$(&quot;p&quot;).not(&quot;.url&quot;);</code></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;jquery&quot;&gt;&lt;a href=&quot;#jquery&quot; class=&quot;headerlink&quot; title=&quot;jquery&quot;&gt;&lt;/a&gt;jquery&lt;/h3&gt;&lt;p&gt;其它不说，hide和show的参数有个speed，可以动画执行显示。&lt;br&gt;toggle来切换元素显示和隐藏
+    
+    </summary>
+    
+      <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
+    
+    
+      <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="前端" scheme="https://xuecat.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>css笔记214</title>
+    <link href="https://xuecat.github.io/2017/02/18/214/"/>
+    <id>https://xuecat.github.io/2017/02/18/214/</id>
+    <published>2017-02-18T06:49:37.000Z</published>
+    <updated>2017-02-21T14:49:43.783Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="很多css属性，在IE8之前必须声明-lt-DOCTYPE-gt"><a href="#很多css属性，在IE8之前必须声明-lt-DOCTYPE-gt" class="headerlink" title="很多css属性，在IE8之前必须声明&lt;!DOCTYPE&gt;"></a>很多css属性，在IE8之前必须声明&lt;!DOCTYPE&gt;</h3><h3 id="css构成"><a href="#css构成" class="headerlink" title="css构成"></a>css构成</h3><p>css具有层叠特性，后面属性会掩盖前面属性</p>
+<p>css构成：<br>选择器 {属性:值; 属性:值}</p>
+<p>属性选择器: html的属性 h1/p 之类</p>
+<p>id选择器：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#paral</div><div class="line">&#123;</div><div class="line">    text-align:center;</div><div class="line">    color:red;</div><div class="line">&#125;</div><div class="line"></div><div class="line">&lt;p id="paral"&gt;hello&lt;/p&gt;</div></pre></td></tr></table></figure></p>
+<p>class选择器(类名第一个字符不能使用数字):<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">.center </div><div class="line">&#123;</div><div class="line">    text-align:center;</div><div class="line">&#125;</div><div class="line">&lt;p class="center"&gt;标题&lt;/p&gt;</div><div class="line"></div><div class="line">p.center/*它还有个嵌套选择器与它长得很像，但完全不同。下面有讲*/</div><div class="line">&#123;</div><div class="line">    text-align:center;</div><div class="line">&#125;</div><div class="line">&lt;p class="center"&gt;这个要居中（且不能缺少class属性）&lt;/p&gt;</div><div class="line">&lt;h1 class="center"&gt;这个不居中&lt;/h1&gt;</div></pre></td></tr></table></figure></p>
+<p><code>:</code>选择器:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-pseudo">:link</span> &#123;<span class="attribute">color</span>:red; <span class="attribute">text-decoration</span>:...&#125;     <span class="comment">/*所有未被访问的链接，一般用于&lt;a/&gt; 但也可用于其他dom，如: &lt;p/&gt;*/</span></div><div class="line"><span class="selector-pseudo">:visited</span>  <span class="comment">/*所有已被访问链接，同上*/</span></div><div class="line"><span class="selector-pseudo">:active</span>     <span class="comment">/*活动链接，同上*/</span></div><div class="line"><span class="selector-pseudo">:hover</span>     <span class="comment">/**/</span></div><div class="line"><span class="selector-pseudo">:focus</span>     <span class="comment">/**/</span></div></pre></td></tr></table></figure></p>
+<p>其它选择器：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">/*后代选择器*/</div><div class="line">a p /*a子元素下的p*/</div><div class="line">&#123;</div><div class="line">    color: green;</div><div class="line">&#125;</div><div class="line">ul li /*ul子元素下的li*/</div><div class="line">&#123;</div><div class="line">    background-repeat: no-repeat;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/*分组选择器*/</div><div class="line">h1, h2, p</div><div class="line">&#123;...&#125;</div><div class="line"></div><div class="line">table, th, td</div><div class="line">&#123;</div><div class="line">    border: 1px solid black;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/*嵌套选择器*/</div><div class="line">.marked</div><div class="line">&#123; background-color: red; &#125;</div><div class="line">.marked p</div><div class="line">&#123; color: white; &#125;</div><div class="line"></div><div class="line">&lt;div class="marked"&gt;&lt;p&gt;ddd&lt;/p&gt;&lt;/div&gt;/*class为marked的元素，其子元素为p的会得到此css属性*/</div><div class="line"></div><div class="line">/*子元素选择器*/</div><div class="line">div&gt;p</div><div class="line">&#123; background-color: yellow; &#125; /*它会严格按照div&gt;p的层次顺序来找元素*/</div><div class="line"></div><div class="line">/*相邻兄弟选择器*/</div><div class="line">div+p+p</div><div class="line">&#123; background-color: yellow; &#125; /*它只会让div第二个相邻p元素的style改变*/</div><div class="line"></div><div class="line">/*普通相邻兄弟选择器*/</div><div class="line">div~p</div><div class="line">&#123; background-color: yellow; &#125; /*上面的选择器只能选择一个，这个会把所有具有此关系的元素选上*/</div><div class="line"></div><div class="line">/*属性选择器*/</div><div class="line">[title]</div><div class="line">&#123; color: blue; &#125; /*选择具有title属性的元素*/</div><div class="line"></div><div class="line">[title=runoob]</div><div class="line">&#123; color: blue; &#125; /*选择title属性的值为runoob的元素*/</div><div class="line"></div><div class="line">[title~=hello]</div><div class="line">&#123; color: blue; &#125; /*选择title属性的值包含有hello单词的元素,即hello有空格隔开就算包含*/</div><div class="line"></div><div class="line">[title|=hello]</div><div class="line">&#123; color: blue; &#125; /*选择title属性的值包含有hello的元素,只要有hello出现就行*/</div></pre></td></tr></table></figure></p>
+<h3 id="插入样式表"><a href="#插入样式表" class="headerlink" title="插入样式表"></a>插入样式表</h3><p>外部插入样式表：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"mystyle.css"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>内部插入样式表：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></div><div class="line"><span class="selector-tag">hr</span> &#123;<span class="attribute">color</span>:sienna;&#125;</div><div class="line"><span class="selector-tag">p</span> &#123;<span class="attribute">margin-left</span>:<span class="number">20px</span>;&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>内联样式：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"color:sienna;margin-left:20px"</span>&gt;</span>this is<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>多重样式：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">h3</span></div><div class="line">&#123;</div><div class="line">    <span class="attribute">color</span>:red;</div><div class="line">    <span class="attribute">text-align</span>:left;</div><div class="line">    <span class="attribute">font-size</span>:<span class="number">8pt</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">h3</span></div><div class="line">&#123;</div><div class="line">    <span class="attribute">text-align</span>:right;</div><div class="line">    <span class="attribute">font-size</span>:<span class="number">20pt</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>它们将会重叠成一个。</p>
+<p>层叠次序：</p>
+<p>内联样式 &gt; 内部样式 &gt; 外部样式 &gt; 浏览器缺省设置<br>这些层叠会继续替换和补充。</p>
+<p>###　属性<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">background-repeat: no-repeat|repeat-x|repeat-y;/*背景图片重复平铺的方向*/</div><div class="line">text-decoration: overline|line-through|underline;/*文字的横线位置(上方，中，下方)*/</div><div class="line">text-transform: uppercase|lowercase|capitalize;/*文字转换(大写，小写，首字母大写)*/</div><div class="line">text-indent: *px;/*文本第一行的缩进*/</div><div class="line">font-size: *em;/*为避免ie无法调整文本问题，使用em单位代替*/</div><div class="line">a: link &#123;color:#FF0000;text-decoration:underline;&#125;</div><div class="line">list-style-type: circle|square|upper-roman|lower-alpha;/*列表标题 无序和有序*/</div><div class="line">border: 25px solid green;</div><div class="line">border-style: dotted|dashed|solid|double|groove|ridge|inset|outset;/*电线框、虚线框、实线、俩个边界、3d沟(有四个重载函数：上、右、下、左；上、左右、下；上下、左右；四边)*/</div><div class="line">margin: /*重载：上、右、下、左；上、左右、下；上下、左右；四边;;auto中心对齐*/</div><div class="line">Padding: /*同上*/</div><div class="line">display: inline|block; /*只需要宽度，不强制换行；占用全部宽高，前后换行*/</div><div class="line">position: fixed|relative|absolute /*相对浏览器窗口；相对自己的定位；相对父元素的定位。配合z-index来重叠*/</div></pre></td></tr></table></figure></p>
+<h3 id="盒子"><a href="#盒子" class="headerlink" title="盒子"></a>盒子</h3><p>从外到内： Margin  Border  Padding  Content</p>
+<h3 id="隐藏元素"><a href="#隐藏元素" class="headerlink" title="隐藏元素"></a>隐藏元素</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">display</span>: <span class="selector-tag">none</span>;<span class="comment">/*隐藏某个元素，且元素不会占用任何空间*/</span></div><div class="line"><span class="selector-tag">visibility</span>: <span class="selector-tag">hidden</span>;<span class="comment">/*隐藏元素，但是隐藏的元素任占用与未隐藏前一样的空间*/</span></div></pre></td></tr></table></figure>
+<h3 id="伪类"><a href="#伪类" class="headerlink" title="伪类"></a>伪类</h3><p>这个也是个选择器<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">p:first-child /*这个会指定到第一个p元素*/</div><div class="line">&#123; color: blue; &#125;</div><div class="line">p &gt; i:first-child /*第一个为p的子元素的i*/</div><div class="line">&#123; color: blue; &#125;</div><div class="line">&lt;p&gt;I am a &lt;i&gt;zhege&lt;/i&gt; man. I am a &lt;i&gt;strong&lt;/i&gt; man.&lt;/p&gt;</div><div class="line">&lt;p&gt;I am a &lt;i&gt;zhege&lt;/i&gt; man. I am a &lt;i&gt;strong&lt;/i&gt; man.&lt;/p&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.button </div><div class="line">&#123;</div><div class="line">    background-color: #4caf50;</div><div class="line">&#125;</div><div class="line">.button2</div><div class="line">&#123;</div><div class="line">    color: white;</div><div class="line">&#125;</div><div class="line">&lt;button class="button button2" /&gt; /*这样就具有俩个属性了*/</div></pre></td></tr></table></figure>
+<h3 id="下拉菜单"><a href="#下拉菜单" class="headerlink" title="下拉菜单"></a>下拉菜单</h3><p>这儿类名字限定了，必须如此。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.dropdown</span> &#123;&#125; <span class="comment">/* 容器 &lt;div&gt; - 需要定位下拉内容 */</span></div><div class="line"><span class="selector-class">.dropbtn</span> &#123;&#125; <span class="comment">/* 下拉按钮样式 */</span></div><div class="line"><span class="selector-class">.dropdown-content</span> &#123;&#125; <span class="comment">/* 下拉内容 (默认隐藏) */</span></div><div class="line"></div><div class="line"><span class="comment">/* 下拉菜单的链接 */</span></div><div class="line"><span class="selector-class">.dropdown-content</span> <span class="selector-tag">a</span> &#123;</div><div class="line">    <span class="attribute">color</span>: black;</div><div class="line">    <span class="attribute">padding</span>: <span class="number">12px</span> <span class="number">16px</span>;</div><div class="line">    <span class="attribute">text-decoration</span>: none;</div><div class="line">    <span class="attribute">display</span>: block;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 鼠标移上去后修改下拉菜单链接颜色 */</span></div><div class="line"><span class="selector-class">.dropdown-content</span> <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span> &#123;<span class="attribute">background-color</span>: <span class="number">#f1f1f1</span>&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 在鼠标移上去后显示下拉菜单 */</span></div><div class="line"><span class="selector-class">.dropdown</span><span class="selector-pseudo">:hover</span> <span class="selector-class">.dropdown-content</span> &#123;</div><div class="line">    <span class="attribute">display</span>: block;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 当下拉内容显示后修改下拉按钮的背景颜色 */</span></div><div class="line"><span class="selector-class">.dropdown</span><span class="selector-pseudo">:hover</span> <span class="selector-class">.dropbtn</span> &#123;</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#3e8e41</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><p>设置透明:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">img</span> &#123; <span class="attribute">opacity</span>: <span class="number">0.4</span>; <span class="attribute">filter</span>: <span class="built_in">alpha</span>(opcity=1)&#125; <span class="comment">/*一般是0.0-1.0,越小越透明。ie8和早期版本是0-100,越小越透明*/</span></div></pre></td></tr></table></figure></p>
+<p>拼合:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">img</span><span class="selector-class">.home</span> </div><div class="line">&#123;</div><div class="line">    <span class="attribute">width</span>: <span class="number">46px</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">44px</span>;<span class="comment">/*上面是指定显示图片的高宽*/</span></div><div class="line">    <span class="attribute">background</span>: <span class="built_in">url</span>(...) <span class="number">0</span> <span class="number">0</span>;<span class="comment">/*指定显示图片的路径和位置left top*/</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="图片廊"><a href="#图片廊" class="headerlink" title="图片廊"></a>图片廊</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"responsive"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"img"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">href</span>=<span class="string">"img_fjords.jpg"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"http://www.runoob.com/wp-content/uploads/2016/04/img_fjords.jpg"</span> <span class="attr">alt</span>=<span class="string">"Trolltunga Norway"</span> <span class="attr">width</span>=<span class="string">"300"</span> <span class="attr">height</span>=<span class="string">"200"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"desc"</span>&gt;</span>这里添加图片文本描述<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="css3"><a href="#css3" class="headerlink" title="css3"></a>css3</h2><h3 id="边框"><a href="#边框" class="headerlink" title="边框"></a>边框</h3><p>圆角: border-radius<br>阴影：border-shadow<br>图片: border-image<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#round</span></div><div class="line">&#123;</div><div class="line">	<span class="attribute">-webkit-border-image</span>:<span class="built_in">url</span>(border.png) <span class="number">30</span> <span class="number">30</span> round; <span class="comment">/* Safari 5 and older */</span></div><div class="line">	<span class="attribute">-o-border-image</span>:<span class="built_in">url</span>(border.png) <span class="number">30</span> <span class="number">30</span> round; <span class="comment">/* Opera */</span></div><div class="line">	<span class="attribute">border-image</span>:<span class="built_in">url</span>(border.png) <span class="number">30</span> <span class="number">30</span> round;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;很多css属性，在IE8之前必须声明-lt-DOCTYPE-gt&quot;&gt;&lt;a href=&quot;#很多css属性，在IE8之前必须声明-lt-DOCTYPE-gt&quot; class=&quot;headerlink&quot; title=&quot;很多css属性，在IE8之前必须声明&amp;lt;!DOCTY
+    
+    </summary>
+    
+      <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
+    
+    
+      <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="前端" scheme="https://xuecat.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="css" scheme="https://xuecat.github.io/tags/css/"/>
+    
+  </entry>
   
   <entry>
     <title>DockPanelSuite213</title>
@@ -80,9 +166,10 @@
     <link href="https://xuecat.github.io/2017/02/11/211/"/>
     <id>https://xuecat.github.io/2017/02/11/211/</id>
     <published>2017-02-11T07:15:38.000Z</published>
-    <updated>2017-02-15T12:38:05.231Z</updated>
+    <updated>2017-02-21T14:49:42.433Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="js的值类型和引用类型"><a href="#js的值类型和引用类型" class="headerlink" title="js的值类型和引用类型"></a>js的值类型和引用类型</h3><p>值类型：数值、布尔、null、undefined<br>引用类型：对象、数组、函数</p>
+    <content type="html"><![CDATA[<p>##js的值类型和引用类型<br>值类型：数值、布尔、null、undefined<br>引用类型：对象、数组、函数</p>
+<h3 id="js的值类型和引用类型"><a href="#js的值类型和引用类型" class="headerlink" title="js的值类型和引用类型"></a>js的值类型和引用类型</h3><p>值类型：数值、布尔、null、undefined<br>引用类型：对象、数组、函数</p>
 <h3 id="隐式转换"><a href="#隐式转换" class="headerlink" title="隐式转换"></a>隐式转换</h3><ol>
 <li>(1+2)+”3” //“33”</li>
 <li><p>当多个运算符被重载时，js会盲目的选择valueOf; 所以要么明确重载一个，要么保证重载的俩个值相同。</p>
@@ -170,12 +257,15 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;js的值类型和引用类型&quot;&gt;&lt;a href=&quot;#js的值类型和引用类型&quot; class=&quot;headerlink&quot; title=&quot;js的值类型和引用类型&quot;&gt;&lt;/a&gt;js的值类型和引用类型&lt;/h3&gt;&lt;p&gt;值类型：数值、布尔、null、undefined&lt;br&gt;引用类型：对
+      &lt;p&gt;##js的值类型和引用类型&lt;br&gt;值类型：数值、布尔、null、undefined&lt;br&gt;引用类型：对象、数组、函数&lt;/p&gt;
+&lt;h3 id=&quot;js的值类型和引用类型&quot;&gt;&lt;a href=&quot;#js的值类型和引用类型&quot; class=&quot;headerlink&quot; title=&quot;js的值
     
     </summary>
     
       <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
     
+    
+      <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
       <category term="js语法" scheme="https://xuecat.github.io/tags/js%E8%AF%AD%E6%B3%95/"/>
     
@@ -186,7 +276,7 @@
     <link href="https://xuecat.github.io/2017/01/21/210/"/>
     <id>https://xuecat.github.io/2017/01/21/210/</id>
     <published>2017-01-21T08:36:46.000Z</published>
-    <updated>2017-02-06T15:59:15.862Z</updated>
+    <updated>2017-02-21T14:49:41.273Z</updated>
     
     <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/210.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
 <h3 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h3><p>File和FileInfo<br>Directory和DirectoryInfo<br>如果执行单一调用使用静态类<br>如果执行一系列调用使用Info类</p>
@@ -219,6 +309,8 @@
     
       <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
     
+      <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
   </entry>
   
   <entry>
@@ -226,7 +318,7 @@
     <link href="https://xuecat.github.io/2017/01/17/209/"/>
     <id>https://xuecat.github.io/2017/01/17/209/</id>
     <published>2017-01-17T14:58:11.000Z</published>
-    <updated>2017-02-08T14:30:05.288Z</updated>
+    <updated>2017-02-21T14:49:40.254Z</updated>
     
     <content type="html"><![CDATA[<p>###　ASP.NET Razor<br>书中也只是用一章来介绍它，vs有相关模板的建立！！<br>它和html连用，全名<code>cshtml</code></p>
 ]]></content>
@@ -240,6 +332,8 @@
     
       <category term="C#" scheme="https://xuecat.github.io/categories/C/"/>
     
+    
+      <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
       <category term="前端" scheme="https://xuecat.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
@@ -335,7 +429,7 @@
     <link href="https://xuecat.github.io/2016/12/07/204/"/>
     <id>https://xuecat.github.io/2016/12/07/204/</id>
     <published>2016-12-07T15:14:24.000Z</published>
-    <updated>2017-02-02T02:12:07.128Z</updated>
+    <updated>2017-02-21T14:49:39.251Z</updated>
     
     <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/y2.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
 <h3 id="wpf和winform"><a href="#wpf和winform" class="headerlink" title="wpf和winform"></a>wpf和winform</h3><p>winform -&gt; 新建windows窗体程序<br>控件的描述全在一个<code>Designer</code>的cs文件中，控件事件则在对应的cs文件里。</p>
@@ -439,6 +533,8 @@
     
       <category term="编译器和VC" scheme="https://xuecat.github.io/tags/%E7%BC%96%E8%AF%91%E5%99%A8%E5%92%8CVC/"/>
     
+      <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
       <category term="wpf" scheme="https://xuecat.github.io/tags/wpf/"/>
     
   </entry>
@@ -448,7 +544,7 @@
     <link href="https://xuecat.github.io/2016/12/06/203/"/>
     <id>https://xuecat.github.io/2016/12/06/203/</id>
     <published>2016-12-06T12:37:27.000Z</published>
-    <updated>2016-12-10T07:41:35.517Z</updated>
+    <updated>2017-02-21T14:49:38.015Z</updated>
     
     <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/y1.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
 <h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[DebuggerStepThrough]<span class="comment">//调试跳过下面方法</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DullMethod</span><span class="params">()</span> </span>&#123;...&#125;</div><div class="line"></div><div class="line">[DoesInterestingThings(<span class="number">1000</span>, WhatDoesItDo = <span class="string">"voodoo"</span>)]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> DecoratedClass &#123;&#125;</div></pre></td></tr></table></figure>
@@ -477,6 +573,8 @@
     
       <category term="编译器和VC" scheme="https://xuecat.github.io/tags/%E7%BC%96%E8%AF%91%E5%99%A8%E5%92%8CVC/"/>
     
+      <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
   </entry>
   
   <entry>
@@ -484,7 +582,7 @@
     <link href="https://xuecat.github.io/2016/12/01/202/"/>
     <id>https://xuecat.github.io/2016/12/01/202/</id>
     <published>2016-12-01T15:48:04.000Z</published>
-    <updated>2016-12-06T14:22:21.638Z</updated>
+    <updated>2017-02-21T14:49:36.621Z</updated>
     
     <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/t2.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
 <h3 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h3><h4 id="default"><a href="#default" class="headerlink" title="default"></a>default</h4><p>由于泛型T不确定是值类型还是引用类型，所以<br><code>T a = null</code>这句是错误的（值类型就空了）。</p>
@@ -522,6 +620,8 @@
     
       <category term="编译器和VC" scheme="https://xuecat.github.io/tags/%E7%BC%96%E8%AF%91%E5%99%A8%E5%92%8CVC/"/>
     
+      <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
   </entry>
   
   <entry>
@@ -553,7 +653,7 @@
     <link href="https://xuecat.github.io/2016/12/01/200/"/>
     <id>https://xuecat.github.io/2016/12/01/200/</id>
     <published>2016-12-01T13:05:20.000Z</published>
-    <updated>2017-01-21T08:56:01.846Z</updated>
+    <updated>2017-02-21T14:49:35.135Z</updated>
     
     <content type="html"><![CDATA[<p>64位寻址到16EB （1EB=1000TB）x64控制寻址范围16TB</p>
 <p>ps: 退出指令 <code>q</code> 就好了。</p>
@@ -648,6 +748,8 @@
     
       <category term="错误认识" scheme="https://xuecat.github.io/tags/%E9%94%99%E8%AF%AF%E8%AE%A4%E8%AF%86/"/>
     
+      <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
   </entry>
   
   <entry>
@@ -719,7 +821,7 @@
     <link href="https://xuecat.github.io/2016/11/21/197/"/>
     <id>https://xuecat.github.io/2016/11/21/197/</id>
     <published>2016-11-21T13:39:27.000Z</published>
-    <updated>2017-02-14T13:53:25.576Z</updated>
+    <updated>2017-02-21T14:49:33.820Z</updated>
     
     <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/r4.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
 <p>唉！！，es6正看着呢；去海外组了。。。。要补c#知识了</p>
@@ -828,6 +930,8 @@
     
       <category term="编译器和VC" scheme="https://xuecat.github.io/tags/%E7%BC%96%E8%AF%91%E5%99%A8%E5%92%8CVC/"/>
     
+      <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
   </entry>
   
   <entry>
@@ -903,78 +1007,9 @@
       <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
     
     
-      <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
-    
       <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
     
-  </entry>
-  
-  <entry>
-    <title>js浅拷贝和深拷贝194</title>
-    <link href="https://xuecat.github.io/2016/10/25/194/"/>
-    <id>https://xuecat.github.io/2016/10/25/194/</id>
-    <published>2016-10-25T13:39:04.000Z</published>
-    <updated>2016-10-25T13:40:44.979Z</updated>
-    
-    <content type="html"><![CDATA[<p>浅拷贝：直接赋值<br><br>深拷贝：数组（nar=ar.slice(0)、nar=ar.concat()），对象(new Object())<br></p>
-<pre><code>var deepCopy = function(source) {
-    var result={};
-    for (var key in source) {
-        result[key] = typeof source[key]===’object’? deepCoyp(source[key]): source[key];
-    }
-return result; 
-}
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;浅拷贝：直接赋值&lt;br&gt;&lt;br&gt;深拷贝：数组（nar=ar.slice(0)、nar=ar.concat()），对象(new Object())&lt;br&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var deepCopy = function(source) {
-    var res
-    
-    </summary>
-    
-      <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
-    
-    
-      <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
-    
-      <category term="语言" scheme="https://xuecat.github.io/tags/%E8%AF%AD%E8%A8%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>node-npm指令193</title>
-    <link href="https://xuecat.github.io/2016/10/24/193/"/>
-    <id>https://xuecat.github.io/2016/10/24/193/</id>
-    <published>2016-10-24T15:16:26.000Z</published>
-    <updated>2016-10-24T15:18:57.980Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li><p>npm查看全局安装过的包:<code>npm list -g --depth 0</code></p>
-</li>
-<li><p>删除node_module模块：<code>rimraf node_module</code></p>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;npm查看全局安装过的包:&lt;code&gt;npm list -g --depth 0&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;删除node_module模块：&lt;code&gt;rimraf node_module&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="配置" scheme="https://xuecat.github.io/categories/%E9%85%8D%E7%BD%AE/"/>
-    
-    
       <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
-    
-      <category term="工具" scheme="https://xuecat.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
