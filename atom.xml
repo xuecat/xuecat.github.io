@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2017-02-21T14:51:34.527Z</updated>
+  <updated>2017-02-27T15:14:28.402Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -14,6 +14,51 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>AngularJS216</title>
+    <link href="https://xuecat.github.io/2017/02/23/216/"/>
+    <id>https://xuecat.github.io/2017/02/23/216/</id>
+    <published>2017-02-23T12:56:17.000Z</published>
+    <updated>2017-02-27T15:14:28.402Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Angular"><a href="#Angular" class="headerlink" title="Angular"></a>Angular</h2><h3 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h3><p>no-repeat是所有内置指令中优先级最高的。</p>
+<p><code>ng-app</code> 指定AngularJS脚步执行作用域<br><code>ng-model</code> 绑定html元素到数据<br><code>ng-init</code> 初始化数据<br><code>ng-if</code>从dom删除元素<br><code>ng-hide</code> 从dom隐藏元素<br><code>ng-disabled</code> 绑定数据到html的disabled属性<br><code>ng-show</code> <code>ng-hide</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>=<span class="string">""</span> <span class="attr">ng-init</span>=<span class="string">"qu=1;pr=5"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"number"</span> <span class="attr">ng-model</span>=<span class="string">"qu"</span>&gt;</span><span class="tag">&lt;/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><code>angular.module(name,[requires],[configfn])</code> 一个参数是获取，一个以上是创建。</p>
+<p>先用<code>ng-app</code>指定模块名，再用<code>angular.module</code>创建对应angular的模型。模型是当前元素拥有的作用域。<br>再用<code>ng-controller</code>指定控制名，再用<code>模型名.controller</code>创建对应angular的控制器。控制器是当前元素的控制器<br>最后用<code>$scope</code>来添加要控制的属性</p>
+<p>每个模型有个<code>$rootScope</code>是根，是各个controller中scope的桥梁。</p>
+<h3 id="错误认识"><a href="#错误认识" class="headerlink" title="错误认识"></a>错误认识</h3><p><code>ng-repeat</code>和<code>ng-controller</code>不能放到同一元素(这个纠结了好久)，如果放都要用奇淫技巧。</p>
+<h3 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;lastName|lowercase&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span>//小写转换</div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;lastName|uppercase&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span>//大写转换</div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;lastName|currency&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span> //数字格式化为货币格式</div><div class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">ng-repeat</span>=<span class="string">"x in names | orderBy:'country'"</span> /&gt;</span>//x是结构体有country属性。先按国家排序，再遍历</div><div class="line"></div><div class="line">#### 自定义过滤</div><div class="line">$scope.myfilter = function(item) &#123;return bool&#125;; //这个过滤必须返回bool类型，来表示此元素是否要被过滤掉。更注意的是它只能配合filter</div><div class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">ng-repeat</span>=<span class="string">"x in names | filter:myfilter"</span> /&gt;</span> //自定义函数过滤</div><div class="line"></div><div class="line">myApp.filter('replace', function() &#123;</div><div class="line">    return function(input, n1, n2) &#123; return datas;&#125;//这个过滤中则必须返回整个的数据。更注意它只能用于指令时，必须返回多个才行。</div><div class="line">&#125;);</div><div class="line">Result: &#123;&#123; yourinput | replace:3:'b' &#125;&#125;</div></pre></td></tr></table></figure>
+<h3 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h3><p>它封装了很多浏览器东西，来作为自己的内建服务。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">app.service(<span class="string">"customerserver"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.myFunc = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>) </span>&#123;&#125;;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">app.controller(<span class="string">'customers'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope, $location, $http, $interval, customerserver</span>) </span>&#123;</div><div class="line">    $location.absUrl();<span class="comment">//当前页面的url</span></div><div class="line">    $http.get(<span class="string">""</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>));//请求数据</span></div><div class="line">    <span class="title">$interval</span>(<span class="params">function(</span>)&#123;&#125;, <span class="number">1000</span>);<span class="comment">//定时器</span></div><div class="line">    customerserver.myFunc(<span class="number">3</span>);<span class="comment">//自定义服务</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">//自定义过滤使用自定义服务,注意传入的服务那块的代码</span></div><div class="line"><span class="keyword">var</span> app = angular.module(<span class="string">'myApp'</span>, []);</div><div class="line">app.service(<span class="string">'hexafy'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">this</span>.myFunc = <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> x;</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line">app.filter(<span class="string">'myFormat'</span>,[<span class="string">'hexafy'</span>, <span class="string">'$location'</span> ,<span class="function"><span class="keyword">function</span>(<span class="params">hexafy,$location</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">x</span>) </span>&#123;</div><div class="line">		<span class="keyword">return</span> $location.absUrl();</div><div class="line">        <span class="keyword">return</span> hexafy.myFunc(x);</div><div class="line">    &#125;;</div><div class="line">&#125;]);</div><div class="line"></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123;255|myFormat&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></div></pre></td></tr></table></figure></p>
+<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><p>感觉里面的<code>$odd</code>等是内部的<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;table&gt;</div><div class="line">  <span class="xml"><span class="tag">&lt;<span class="name">tr</span> <span class="attr">ng-repeat</span>=<span class="string">"x in names"</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span> <span class="attr">ng-if</span>=<span class="string">"$odd"</span> <span class="attr">style</span>=<span class="string">"background-color:#f1f1f1"</span>&gt;</span></div><div class="line">    &#123;&#123; x.Name &#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span> <span class="attr">ng-if</span>=<span class="string">"$even"</span>&gt;</span></div><div class="line">    &#123;&#123; x.Name &#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span> <span class="attr">ng-if</span>=<span class="string">"$odd"</span> <span class="attr">style</span>=<span class="string">"background-color:#f1f1f1"</span>&gt;</span></div><div class="line">    &#123;&#123; x.Country &#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span> <span class="attr">ng-if</span>=<span class="string">"$even"</span>&gt;</span></div><div class="line">    &#123;&#123; x.Country &#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">&lt;<span class="regexp">/table&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="自定义指令"><a href="#自定义指令" class="headerlink" title="自定义指令"></a>自定义指令</h3><p>必须先建个前缀代码自己的命名空间, 如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">myApp.directive(<span class="string">'ddDrie'</span>, <span class="function"><span class="keyword">function</span> )  =&gt;  &lt;<span class="title">div</span> <span class="title">dd</span>-<span class="title">drie</span>...&gt; //以大写字符为界，前缀必须是小写，命名必须只有一个大写字符。</span></div></pre></td></tr></table></figure></p>
+<p>一般属性:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">angular.module(<span class="string">'myApp'</span>, [])</div><div class="line">    .directive(<span class="string">'myDirective'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> &#123;</div><div class="line">            restrict: <span class="string">'EA'</span>, <span class="comment">//E标签指令 A属性指令（默认） M注释 Cclass指令</span></div><div class="line">            priority: <span class="number">3</span>,<span class="comment">//优先级</span></div><div class="line">            terminal: <span class="literal">true</span>,<span class="comment">//执行此指令是否停止其它指令</span></div><div class="line">            template: <span class="string">'&lt;h2 class="head"&gt;&#123;&#123;title&#125;&#125;&lt;/h2&gt;'</span>,<span class="comment">//输出类型</span></div><div class="line">            replace: <span class="literal">true</span>,<span class="comment">//是否替换，就上面的输出类型是否替换上html上的元素。否-html就包含</span></div><div class="line">            scope: <span class="literal">true</span>,<span class="comment">//这个属性传入bool时。默认false，true时会从父作用域创建一个自己的作用域</span></div><div class="line">            controllerAs: <span class="string">'ctrl'</span>,<span class="comment">//这个属性牛逼了。下面的scope例子中，controller自定义的变量只能在template或其他用 ctrl.name 来访问</span></div><div class="line">            bindToController: <span class="literal">true</span>,<span class="comment">//这个组件的属性都被绑定到controller上了而不是scope上面。可以视为继承到了父controller的同名的指定属性</span></div><div class="line">            scope: &#123;</div><div class="line">                <span class="comment">//这些属性要注意，头最好加上命名前缀</span></div><div class="line">                mytest1: <span class="string">'@'</span>, <span class="comment">//解析普通字符，即传入数据当字符处理</span></div><div class="line">                mytest2: <span class="string">'='</span>, <span class="comment">//解析数据，传入数据当数据处理</span></div><div class="line">                mytest3: <span class="string">'&amp;'</span>, <span class="comment">//解析函数, 传入数据当函数</span></div><div class="line">            &#125;,</div><div class="line">        &#125;;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line"><span class="comment">////////////////scope例子</span></div><div class="line">&lt;body ng-app=<span class="string">"myApp"</span>&gt;</div><div class="line">	<span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-controller</span>=<span class="string">"mycc"</span>&gt;</span></span></div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">runoob-directive</span> <span class="attr">runoobst1</span>=<span class="string">"ww"</span> <span class="attr">runoobst2</span>=<span class="string">"name"</span> <span class="attr">runoobst3</span>=<span class="string">"show(3)"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">&lt;script&gt;</div><div class="line"><span class="keyword">var</span> app = angular.module(<span class="string">"myApp"</span>, []);</div><div class="line">app.controller(<span class="string">'mycc'</span>,[<span class="string">'$scope'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>)</span>&#123;</div><div class="line">    $scope.name = <span class="string">'xiecg'</span>;</div><div class="line">    $scope.show = <span class="function"><span class="keyword">function</span>(<span class="params">vvv</span>) </span>&#123;</div><div class="line">		<span class="keyword">return</span> vvv;</div><div class="line">    &#125;;</div><div class="line">&#125;]);</div><div class="line">app.directive(<span class="string">"runoobDirective"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">		scope: &#123;</div><div class="line">			runoobst1: <span class="string">'@'</span>,</div><div class="line">			runoobst2: <span class="string">'='</span>,</div><div class="line">			runoobst3: <span class="string">'&amp;'</span></div><div class="line">		&#125;,</div><div class="line">		controller : [<span class="string">'$scope'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>) </span>&#123;</div><div class="line">            $scope.name = <span class="string">'this is a xiecg'</span>;<span class="comment">//这个添属性,只能内部访问（想要访问只能用controllerAs属性）。不能当数据传入给runoobst2</span></div><div class="line">            $scope.hehe = <span class="string">"hehe"</span>;</div><div class="line">        &#125;],</div><div class="line">        template : <span class="string">'&lt;p&gt;&#123;&#123;runoobst1&#125;&#125;&lt;/p&gt; &lt;p&gt;&#123;&#123;runoobst2&#125;&#125;&lt;/p&gt; &lt;p&gt;&#123;&#123;name&#125;&#125;&lt;/p&gt;  &lt;p&gt;&#123;&#123;runoobst3()&#125;&#125;&lt;/p&gt;'</span></div><div class="line">    &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h3 id="全局API"><a href="#全局API" class="headerlink" title="全局API"></a>全局API</h3><p>angular.isString();<br>angular.isNumber();</p>
+<h3 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 创建 value 对象 "defaultInput" 并传递数据</span></div><div class="line">mainApp.value(<span class="string">"defaultInput"</span>, <span class="number">5</span>);</div><div class="line"><span class="comment">// 将 "defaultInput" 注入到控制器</span></div><div class="line">mainApp.controller(<span class="string">'CalcController'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope, CalcService, defaultInput</span>)</span>&#123;&#125;</div><div class="line"></div><div class="line">mainApp.factory(<span class="string">'MathService'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">...</span>) </span>&#123; <span class="keyword">return</span> &#123;&#125;; &#125;</div><div class="line"></div><div class="line">mainApp.service(<span class="string">'CalcService'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">...</span>) </span>&#123; <span class="keyword">this</span>...=...; &#125;</div><div class="line"></div><div class="line">mainApp.constant(<span class="string">"configParam"</span>, <span class="string">"constant value"</span>);</div><div class="line"></div><div class="line">mainApp.config(<span class="function"><span class="keyword">function</span>(<span class="params">$provide</span>) </span>&#123;</div><div class="line">    $provide.provider(<span class="string">'Mprovider'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.$get = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> &#123;&#125;;&#125;</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>上面的注入，除了<code>config</code>有点特殊，其它都可以互相随意注入放置.</p>
+<hr>
+<p><em>angular思想</em><br><strong>Angular分俩个块儿：配置块和运行块(它更多的在于思想)</strong></p>
+<p><strong>配置块</strong><br><code>angular.config</code> 这个会在配置块执行，然而上面的依赖注入只有<code>provider</code>才能在配置块被执行。<br>所以设计<code>provider</code>为初始化设置，<code>$get</code>返回一个对象，让所有注入</p>
+<p><code>factory</code>要返回一个对象，所以一般被设为仅仅需要的是一个方法和数据的集合且不需要处理复杂的逻辑的时候<br><code>service</code>当使用在功能控制比较多的service里面</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Angular&quot;&gt;&lt;a href=&quot;#Angular&quot; class=&quot;headerlink&quot; title=&quot;Angular&quot;&gt;&lt;/a&gt;Angular&lt;/h2&gt;&lt;h3 id=&quot;基本指令&quot;&gt;&lt;a href=&quot;#基本指令&quot; class=&quot;headerlink&quot; titl
+    
+    </summary>
+    
+      <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
+    
+    
+      <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
+    
+      <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="angularjs" scheme="https://xuecat.github.io/tags/angularjs/"/>
+    
+  </entry>
   
   <entry>
     <title>jquery215</title>
@@ -305,9 +350,9 @@
       <category term="C#" scheme="https://xuecat.github.io/categories/C/"/>
     
     
-      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
-    
       <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
+    
+      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
     
       <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
@@ -387,9 +432,9 @@
       <category term="杂项" scheme="https://xuecat.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
     
     
-      <category term="mfc" scheme="https://xuecat.github.io/tags/mfc/"/>
-    
       <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="mfc" scheme="https://xuecat.github.io/tags/mfc/"/>
     
   </entry>
   
@@ -979,37 +1024,6 @@
       <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
     
       <category term="react" scheme="https://xuecat.github.io/tags/react/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>各个进制的表示195</title>
-    <link href="https://xuecat.github.io/2016/11/07/195/"/>
-    <id>https://xuecat.github.io/2016/11/07/195/</id>
-    <published>2016-11-07T15:34:55.000Z</published>
-    <updated>2016-11-07T15:39:41.577Z</updated>
-    
-    <content type="html"><![CDATA[<p>二进制好像vs2012以后才支持的吧，八进制表示在15上可以。</p>
-<p> 二进制：0b011(3) 0B011(3)</p>
-<p> 八进制: 00011(9); js是：0o011(9) 0O011(9)</p>
-<p> 十六进制: 0x011(17) 0X011(17)</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;二进制好像vs2012以后才支持的吧，八进制表示在15上可以。&lt;/p&gt;
-&lt;p&gt; 二进制：0b011(3) 0B011(3)&lt;/p&gt;
-&lt;p&gt; 八进制: 00011(9); js是：0o011(9) 0O011(9)&lt;/p&gt;
-&lt;p&gt; 十六进制: 0x011(17) 0X011(
-    
-    </summary>
-    
-      <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
-    
-    
-      <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
-    
-      <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
     
   </entry>
   
