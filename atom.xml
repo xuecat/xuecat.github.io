@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2017-02-27T15:14:28.402Z</updated>
+  <updated>2017-02-28T14:38:27.484Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -14,6 +14,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>js好用代码217</title>
+    <link href="https://xuecat.github.io/2017/02/28/217/"/>
+    <id>https://xuecat.github.io/2017/02/28/217/</id>
+    <published>2017-02-28T14:17:40.000Z</published>
+    <updated>2017-02-28T14:38:27.484Z</updated>
+    
+    <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 50%;"><img src="/picture/217a.jpg" alt=""></div><div class="group-picture-column" style="width: 50%;"><img src="/picture/217b.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
+<h3 id="js-判断俩对象属性是否相同"><a href="#js-判断俩对象属性是否相同" class="headerlink" title="js(判断俩对象属性是否相同)"></a>js(判断俩对象属性是否相同)</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">IsPropertyEqual</span>(<span class="params">obj1, obj2</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (obj1 === obj2) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (!(obj1 <span class="keyword">instanceof</span> <span class="built_in">Object</span>) || !(obj2 <span class="keyword">instanceof</span> <span class="built_in">Object</span>)) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> p <span class="keyword">in</span> obj1) &#123;</div><div class="line">    <span class="keyword">if</span> (obj1.hasOwnProperty(p) &amp;&amp; !obj2.hasOwnProperty(p)) &#123;</div><div class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">for</span> (p <span class="keyword">in</span> obj2) &#123;</div><div class="line">    <span class="keyword">if</span> (obj1.hasOwnProperty(p) &amp;&amp; !obj2.hasOwnProperty(p)) &#123;</div><div class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">IsStructer</span>(<span class="params">data, obj</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> IsPropertyEqual(obj, <span class="built_in">JSON</span>.parse(data));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="angular-文件选取"><a href="#angular-文件选取" class="headerlink" title="angular(文件选取)"></a>angular(文件选取)</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;input type=<span class="string">"file"</span> fileread=<span class="string">"app.js"</span> /&gt;</div><div class="line"></div><div class="line">.directive(<span class="string">"fileread"</span>, [<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        scope: &#123;</div><div class="line">            fileread: <span class="string">"="</span></div><div class="line">        &#125;,</div><div class="line">        link: <span class="function"><span class="keyword">function</span> (<span class="params">scope, element, attributes</span>) </span>&#123;</div><div class="line">            element.bind(<span class="string">"change"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">changeEvent</span>) </span>&#123;</div><div class="line">                scope.$apply(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                    scope.fileread = changeEvent.target.files[<span class="number">0</span>];</div><div class="line">                &#125;);</div><div class="line">                <span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();</div><div class="line">                reader.onload = <span class="function"><span class="keyword">function</span> (<span class="params">etc</span>) </span>&#123;</div><div class="line">                etc.target.result;</div><div class="line">                <span class="comment">//reader.readAsText(scope.fileread);</span></div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;div class=&quot;group-picture&quot;&gt;&lt;div class=&quot;group-picture-container&quot;&gt;&lt;div class=&quot;group-picture-row&quot;&gt;&lt;div class=&quot;group-picture-column&quot; style=&quot;widt
+    
+    </summary>
+    
+      <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
+    
+    
+      <category term="工具" scheme="https://xuecat.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
+    
+      <category term="前端" scheme="https://xuecat.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>AngularJS216</title>
@@ -211,10 +239,11 @@
     <link href="https://xuecat.github.io/2017/02/11/211/"/>
     <id>https://xuecat.github.io/2017/02/11/211/</id>
     <published>2017-02-11T07:15:38.000Z</published>
-    <updated>2017-02-21T14:49:42.433Z</updated>
+    <updated>2017-02-28T14:15:50.227Z</updated>
     
     <content type="html"><![CDATA[<p>##js的值类型和引用类型<br>值类型：数值、布尔、null、undefined<br>引用类型：对象、数组、函数</p>
 <h3 id="js的值类型和引用类型"><a href="#js的值类型和引用类型" class="headerlink" title="js的值类型和引用类型"></a>js的值类型和引用类型</h3><p>值类型：数值、布尔、null、undefined<br>引用类型：对象、数组、函数</p>
+<h3 id="类型判断"><a href="#类型判断" class="headerlink" title="类型判断"></a>类型判断</h3><p><code>typeof</code> 返回字符串<br><code>instanceof</code> 后接类型，返回bool</p>
 <h3 id="隐式转换"><a href="#隐式转换" class="headerlink" title="隐式转换"></a>隐式转换</h3><ol>
 <li>(1+2)+”3” //“33”</li>
 <li><p>当多个运算符被重载时，js会盲目的选择valueOf; 所以要么明确重载一个，要么保证重载的俩个值相同。</p>
@@ -432,9 +461,9 @@
       <category term="杂项" scheme="https://xuecat.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
     
     
-      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
-    
       <category term="mfc" scheme="https://xuecat.github.io/tags/mfc/"/>
+    
+      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -976,54 +1005,6 @@
       <category term="编译器和VC" scheme="https://xuecat.github.io/tags/%E7%BC%96%E8%AF%91%E5%99%A8%E5%92%8CVC/"/>
     
       <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ReactRouter-tutorial196</title>
-    <link href="https://xuecat.github.io/2016/11/13/196/"/>
-    <id>https://xuecat.github.io/2016/11/13/196/</id>
-    <published>2016-11-13T02:16:25.000Z</published>
-    <updated>2016-11-21T13:55:27.086Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="http://www.ruanyifeng.com/blog/2016/05/react_router.html?utm_source=tool.lu" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2016/05/react_router.html?utm_source=tool.lu</a></p>
-<ol>
-<li>Router指定历史控件,切换路径历史直接：</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; browserHistory &#125; <span class="keyword">from</span> <span class="string">'react-router'</span>;</div><div class="line">browserHistory.push(<span class="string">'/some/path'</span>);</div></pre></td></tr></table></figure>
-<ol>
-<li>Route来控制布局,path指定路径(path有匹配规则)，component指定控件。<br><code>&lt;Link to=&quot;/about&quot;&gt;</code> 被点击后，会激活to指定的相应路径，并渲染上面path指定的控件。</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;Router history=&#123;hashHistory&#125;&gt;</div><div class="line">    &lt;Route path="/" component=&#123;App&#125;&gt;</div><div class="line">        &lt;Route path="/repos" component=&#123;Repos&#125;&gt;</div><div class="line">            &lt;Route path="/repos/:repoName" component=&#123;Repo&#125;/&gt;</div><div class="line">        &lt;/Route&gt;</div><div class="line">        &lt;Route path="/about" component=&#123;About&#125;/&gt;</div><div class="line">    &lt;/Route&gt;</div><div class="line">&lt;/Router&gt;</div><div class="line">//上面App包含了俩个，可以通过分别激活路径来切换显示区</div><div class="line"></div><div class="line">&lt;Router history=&#123;hashHistory&#125;&gt;</div><div class="line">    &lt;Route path="/" component=&#123;App&#125;/&gt;</div><div class="line">    &lt;Route path="/repos" component=&#123;Repos&#125;&gt;</div><div class="line">        &lt;Route path="/repos/:repoName" component=&#123;Repo&#125;/&gt;</div><div class="line">    &lt;/Route&gt;</div><div class="line">    &lt;Route path="/about" component=&#123;About&#125;/&gt;</div><div class="line">&lt;/Router&gt;</div><div class="line">//三面三个同级，所以无论在哪个类里激活路径，都会跳转页面。</div><div class="line"></div><div class="line">//注意如果在App里面激活`/repos/:repoName`,则会先激活`/repos`再来激活它的子组件</div></pre></td></tr></table></figure>
-<ol>
-<li><p><code>&lt;IndexRoute component={Home}/&gt;</code> 设置默认渲染组件,如放上面1 - App下面，就会成为默认children渲染。<br> 如果想在列表有个组件相应的选中项 还要在App加个 <code>&lt;li&gt;&lt;NavLink to=&quot;/&quot; onlyActiveOnIndex={true}&gt;Home&lt;/NavLink&gt;&lt;/li&gt;</code></p>
-</li>
-<li><p>Contexts属性。</p>
-</li>
-</ol>
-<ul>
-<li>通过context传递属性的方式可以大量减少 通过显式的通过 props 逐层传递属性的方式。这样可以减少组件之间的直接依赖关系</li>
-<li>如果你为一个组件指定了context，那么这个组件的子组件只要定义了contextTypes 属性，就可以访问到父组件指定的context了。</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> A = React.createClass(&#123;</div><div class="line">    contextTypes: &#123;</div><div class="line">        name: React.PropTypes.string.isRequired,</div><div class="line">    &#125;,</div><div class="line">    render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>My name is: &#123;this.context.name&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">React.withContext(&#123;<span class="string">'name'</span>: <span class="string">'Jonas'</span>&#125;, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// Outputs: "My name is: Jonas"</span></div><div class="line">    React.render(<span class="xml"><span class="tag">&lt;<span class="name">A</span> /&gt;</span>, document.body);</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line">/////////////////////////////////////////////////////////////////////////</div><div class="line">//父类可以指定contextTypes，也可以指定childContextTypes；childContextTypes只是限定了传给子类的类型,无它就默认全下传。</div><div class="line">var A = React.createClass(&#123;</div><div class="line">    childContextTypes: &#123;</div><div class="line">         fruit: React.PropTypes.string.isRequired</div><div class="line">    &#125;,</div><div class="line">    getChildContext: function() &#123;//如果不书写这个函数，子类则无法获取</div><div class="line">         return &#123; fruit: "Banana"，name: "Apple" &#125;;</div><div class="line">    &#125;,</div><div class="line">    render: function() &#123;</div><div class="line">         return <span class="tag">&lt;<span class="name">B</span> /&gt;</span>;</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">var B = React.createClass(&#123;</div><div class="line">    contextTypes: &#123;</div><div class="line">        name: React.PropTypes.string.isRequired,</div><div class="line">        fruit: React.PropTypes.string.isRequired</div><div class="line">    &#125;,</div><div class="line">    render: function() &#123;</div><div class="line">        return <span class="tag">&lt;<span class="name">div</span>&gt;</span>My name is: &#123;this.context.name&#125; and my favorite fruit is: &#123;this.context.fruit&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span>;//由于父类限定了类型，所以如果是this.context.name就会报错</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line">React.withContext(&#123;'name': 'Jonas'&#125;, function () &#123;//给A类，构造ContextTypes属性</div><div class="line">    React.render(<span class="tag">&lt;<span class="name">A</span> /&gt;</span>, document.body);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<ol>
-<li>关于跳转的方式,一种是用相应的history来push，一种是用context.router来push</li>
-</ol>
-<p>子类的<code>contextTypes</code>其实访问的是<code>Router</code>的<code>context</code>,<code>Router</code>有个叫router的<code>RouterContext</code>类型变量</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2016/05/react_router.html?utm_source=tool.lu&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.ruanyifen
-    
-    </summary>
-    
-      <category term="第三方库" scheme="https://xuecat.github.io/categories/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
-    
-    
-      <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
-    
-      <category term="react" scheme="https://xuecat.github.io/tags/react/"/>
     
   </entry>
   
