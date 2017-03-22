@@ -97,7 +97,7 @@
 先看段原话：
 有些CRT的函数象malloc(), fopen(), _open(), strtok(), ctime(), 或localtime()等函数需要专门的线程局部存储的数据块，这个数据块通常需要在创建线程的时候就建立，如果使用CreateThread，这个数据块就没有建">
 <meta property="og:image" content="https://xuecat.github.io/picture/t1.jpg">
-<meta property="og:updated_time" content="2016-11-26T07:16:03.812Z">
+<meta property="og:updated_time" content="2017-03-22T14:47:07.420Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多线程198">
 <meta name="twitter:description" content="咋说呢，一直以来虽然知道_beginthreadex比较好。但是想起55用CreateThread，还是有点余悸。
@@ -349,7 +349,7 @@
       
 
       
-        <div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/t1.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
+        <p><img src="/picture/t1.jpg" alt=""></p>
 <p>咋说呢，一直以来虽然知道<code>_beginthreadex</code>比较好。但是想起55用<code>CreateThread</code>，还是有点余悸。</p>
 <p><strong>先看段原话</strong>：</p>
 <p>有些CRT的函数象<code>malloc(), fopen(), _open(), strtok(), ctime(), 或localtime()</code>等函数需要专门的线程局部存储的数据块，<br>这个数据块通常需要在创建线程的时候就建立，如果使用<code>CreateThread</code>，这个数据块就没有建立，然后会怎样呢？<br>在这样的线程中还是可以使用这些函数而且没有出错，实际上函数发现这个数据块的指针为空时，会自己建立一个，<br>然后将其与线程联系在一起，这意味着如果你用<code>CreateThread</code>来创建线程，然后使用这样的函数，<br>会有一块内存在不知不觉中创建，遗憾的是，这些函数并不将其删除，而<code>CreateThread</code>和<code>ExitThread</code>也无法知道这件事，<br>于是就会有Memory Leak，在线程频繁启动的软件中(比如某些服务器软件)，迟早会让系统的内存资源耗尽！<br></p>
@@ -476,7 +476,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">210</span>
+              <span class="site-state-item-count">212</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -484,7 +484,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -493,7 +493,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

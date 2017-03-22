@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2017-03-15T13:38:17.011Z</updated>
+  <updated>2017-03-22T14:49:33.713Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -14,6 +14,85 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Html5(219)</title>
+    <link href="https://xuecat.github.io/2017/03/22/219/"/>
+    <id>https://xuecat.github.io/2017/03/22/219/</id>
+    <published>2017-03-22T14:39:08.000Z</published>
+    <updated>2017-03-22T14:49:33.713Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/picture/219.jpg" alt=""></p>
+<h3 id="aria-role"><a href="#aria-role" class="headerlink" title="aria-* role"></a>aria-* role</h3><p>今天看bootstrap，发现太多页面都有这个就查了下。<br>role的作用是描述一个非标准的tag的实际作用。比如用div做button，那么设置div 的 role=“button”，辅助工具就可以认出这实际上是个button。</p>
+<p>而aria-*的作用就是描述这个tag在可视化的情境中的具体信息。比如，<br>　　<div role="checkbox" aria-checked="checked" $amp;="">amp;$lt;/div&gt;<br>　　辅助工具就会知道，这个div实际上是个checkbox的角色，为选中状态。</div></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/picture/219.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;aria-role&quot;&gt;&lt;a href=&quot;#aria-role&quot; class=&quot;headerlink&quot; title=&quot;aria-* role&quot;&gt;&lt;/a&gt;aria-* role&lt;/h
+    
+    </summary>
+    
+      <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
+    
+    
+      <category term="html" scheme="https://xuecat.github.io/tags/html/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Bootstrap(218)</title>
+    <link href="https://xuecat.github.io/2017/03/22/218/"/>
+    <id>https://xuecat.github.io/2017/03/22/218/</id>
+    <published>2017-03-22T13:56:53.000Z</published>
+    <updated>2017-03-22T15:56:28.483Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/picture/218.jpg" alt=""></p>
+<p>bootstrap语法太丰富了，完全可以把很多js代码去掉。所以记录下来</p>
+<p><a href="http://v3.bootcss.com/components/" target="_blank" rel="external">http://v3.bootcss.com/components/</a><br><a href="http://getbootstrap.com/javascript/#modals-examples" target="_blank" rel="external">http://getbootstrap.com/javascript/#modals-examples</a></p>
+<h3 id="ui-bootstrap"><a href="#ui-bootstrap" class="headerlink" title="ui-bootstrap"></a>ui-bootstrap</h3><p>bootstrap的TPLS版本里面有所有组件的html代码.angular最好用这个.<br>然后对于angular使用的是ui-boostrap，这个只是定义了控件，还是要去bootstrap官网去下载bootstrap的源码来。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>它主要是自己的<code>data</code>语法太多了:</p>
+<ul>
+<li><p><code>data-dismiss=&quot;modal&quot;</code> 如果在<code>modal</code>弹窗加上，那么点击则会关闭弹窗</p>
+</li>
+<li><p><code>data-toggle=&quot;modal&quot; data-target=&quot;.bs-example-modal-lg&quot;</code>  这样点击按钮就会弹出<code>modal</code>窗口，由于<code>data-target</code>具有css的选择器功能(<code>#id</code>也可以)，所以选择的是class为bs-exampl-modal-lg的元素。</p>
+<p>  如：<code>&lt;div class=&quot;modal fade bs-example-modal-sm&quot; tabindex=&quot;-1&quot;&gt;</code> <strong>加上fade类有淡入淡出的特效</strong></p>
+</li>
+<li><p><code>data-whatever=&quot;&quot;</code> 当一堆按钮要使用同一个模态框时，用这个来传入分别的数据。然而对angular来说完全没必要，毕竟数据绑定了。</p>
+</li>
+<li><p><code>data-toggle=&quot;dropdown&quot;</code> angular感觉用处不大没细看</p>
+</li>
+<li><p><code>data-spy=&quot;scroll&quot; data-target=&quot;#navbar-example&quot;</code> 滚动时顺便修改选项</p>
+</li>
+<li><p><code>data-toggle=&quot;tab&quot;</code> </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;a href="#ejb" tabindex="-1" data-toggle="tab"&gt;//tab项</div><div class="line">&lt;/a&gt;</div><div class="line"></div><div class="line">&lt;div class="tab-pane fade" id="ios"&gt;...&lt;/div&gt;//tab内容</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>data-toggle=&quot;tooltip&quot; data-placement=&quot;right&quot; title=&quot;Tooltip on right&quot;</code> //表示右边显示tooltip，可以左上下</p>
+</li>
+<li><p><code>data-container=&quot;body&quot; data-toggle=&quot;popover&quot; data-placement=&quot;left&quot; data-content=&quot;Vivamus sagittis lacus vel augue laoreet rutrum faucibus.&quot;</code> 点击弹出带指定箭头的属性窗口，点击再消失； 多个title=”…”的话弹出窗口会多个标题显示。</p>
+</li>
+<li><p><code>data-loading-text=&quot;Loading...&quot;</code> 这个我没写全，它展示的效果是点击后显示加载，鼠标禁止，加载完再恢复。</p>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/picture/218.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;bootstrap语法太丰富了，完全可以把很多js代码去掉。所以记录下来&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://v3.bootcss.com/components/&quot; target
+    
+    </summary>
+    
+      <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
+    
+    
+      <category term="前端" scheme="https://xuecat.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="bootstrap" scheme="https://xuecat.github.io/tags/bootstrap/"/>
+    
+  </entry>
   
   <entry>
     <title>js好用代码217</title>
@@ -50,7 +129,7 @@
     <link href="https://xuecat.github.io/2017/02/23/216/"/>
     <id>https://xuecat.github.io/2017/02/23/216/</id>
     <published>2017-02-23T12:56:17.000Z</published>
-    <updated>2017-03-21T15:23:35.390Z</updated>
+    <updated>2017-03-22T15:14:58.713Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Angular"><a href="#Angular" class="headerlink" title="Angular"></a>Angular</h2><h3 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h3><p>no-repeat是所有内置指令中优先级最高的。</p>
 <p><code>ng-app</code> 指定AngularJS脚步执行作用域<br><code>ng-model</code> 绑定html元素到数据<br><code>ng-init</code> 初始化数据<br><code>ng-if</code>从dom删除元素<br><code>ng-switch</code> 如同switch适用于多个例子，有ngSwitchCase ngSwitchDefault<br><code>ng-hide</code> 从dom隐藏元素<br><code>ng-options</code> 这个有点多，放下面单独列一项<br><code>ng-disabled</code> 绑定数据到html的disabled属性<br><code>ng-show</code> <code>ng-hide</code><br><code>ng-bind</code>  是指定数据，和<code></code>差不多<br><code>ng-model</code> 是双向绑定, 在<code>ng-repeat</code>中<code>ng-model</code>必须和<code>ng-change</code>连用<br><code>ng-class</code> 绑定css:</p>
@@ -60,6 +139,7 @@
 <li>ng-class=”{‘sty1’: active, ‘sty2’: inactive}” active为true增加sty1,inactive为true增加sty2</li>
 <li>ng-class=”[sty1, sty2]”</li>
 </ol>
+<p><code>ng-include</code>用于包含外部的html文件，包含的内容将作为知指定元素的子节点<br><code>&lt;div ng-include=&quot;&#39;myfile.html&#39;&quot;&gt;</code> 注意：它是一个双引号和一个单引号<br><code>element ng-include=&quot;&#39;filename&#39;&quot; onload=&quot;&quot; autoscroll=&quot;&quot;</code><br><code>&lt;ng-include src=&quot;finelname&quot; onload=&quot;&quot; autoscroll=&quot;&quot;&gt;</code><br>onload 文件载入后执行的表达式<br>autoscroll 是否指定视图的可滚动</p>
 <p><code>ng-repeat</code> 它里面有几个属性可以直接放html使用:<br>$index 序列号<br>$first 第一个元素是它是true,其它false ($last同理)<br>$middle 是否在中间<br>$even $index的值是否是偶数<br>$odd $index的值是否是奇数</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>=<span class="string">""</span> <span class="attr">ng-init</span>=<span class="string">"qu=1;pr=5"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"number"</span> <span class="attr">ng-model</span>=<span class="string">"qu"</span>&gt;</span><span class="tag">&lt;/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
 <p><code>angular.module(name,[requires],[configfn])</code> 一个参数是获取，一个以上是创建。</p>
@@ -101,7 +181,7 @@
 <li>注意下面代码中弹出类的三个参数传入</li>
 </ol>
 <p>angular弹出窗口，使用：<br>templateUrl: 模态窗口地址, 相应html用<code>id</code>标志<br>template：用于显示html标签<br>scope：一个作用域为模态的内容使用（事实上，$modal会创建一个当前作用域的子作用域）默认为$rootScope<br>controller：为$modal指定的控制器，初始化$scope，该控制器可用$modalInstance注入<br>resolve：定义一个成员并将他传递给$modal指定的控制器，相当于routes的一个reslove属性，如果需要传递一个objec对象，需要使用angular.copy()<br>backdrop：控制背景，允许的值：true（默认），false（无背景），“static” - 背景是存在的，但点击模态窗口之外时，模态窗口不关闭<br>keyboard：当按下Esc时，模态对话框是否关闭，默认为ture<br>windowClass：指定一个class并被添加到模态窗口中<br>open方法返回一个实例，该实例具有如下属性：<br>close(result)：关闭模态窗口并传递一个结果<br>dismiss(reason)：撤销模态方法并传递一个原因<br>result：一个契约，当模态窗口被关闭或撤销时传递<br>opened：一个契约，当模态窗口打开并且加载完内容时传递的变量</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/ng-template"</span> <span class="attr">id</span>=<span class="string">"myModalContent.html"</span> /&gt;</span><span class="xml">  <span class="comment">&lt;!--这一段html对应templateUrl属性，注意--&gt;</span></span></div><div class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"modal-header"</span>&gt;</span>  </div><div class="line">       <span class="tag">&lt;<span class="name">h3</span>&gt;</span>I'm a modal!<span class="tag">&lt;/<span class="name">h3</span>&gt;</span>  </div><div class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span>  </div><div class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"modal-body"</span>&gt;</span>  </div><div class="line">       <span class="tag">&lt;<span class="name">ul</span>&gt;</span>  </div><div class="line">           <span class="tag">&lt;<span class="name">li</span> <span class="attr">ng-repeat</span>=<span class="string">"item in items"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span>  </span></div><div class="line">               <span class="attr">ng-click</span>=<span class="string">"selected.item = item"</span>&gt;&#123;&#123; item &#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span>  </div><div class="line">       <span class="tag">&lt;/<span class="name">ul</span>&gt;</span>  </div><div class="line">       Selected: <span class="tag">&lt;<span class="name">b</span>&gt;</span>&#123;&#123; selected.item &#125;&#125;<span class="tag">&lt;/<span class="name">b</span>&gt;</span>  </div><div class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span>  </div><div class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"modal-footer"</span>&gt;</span>  </div><div class="line">       <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn btn-primary"</span> <span class="attr">ng-click</span>=<span class="string">"ok()"</span>&gt;</span>OK<span class="tag">&lt;/<span class="name">button</span>&gt;</span>  </div><div class="line">       <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn btn-warning"</span> <span class="attr">ng-click</span>=<span class="string">"cancel()"</span>&gt;</span>Cancel<span class="tag">&lt;/<span class="name">button</span>&gt;</span>  </div><div class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span>  </div><div class="line">   <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/ng-template"</span> <span class="attr">id</span>=<span class="string">"myModalContent.html"</span> /&gt;</span><span class="handlebars"><span class="xml">  <span class="comment">&lt;!--这一段html对应templateUrl属性，注意--&gt;</span></span></span></div><div class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"modal-header"</span>&gt;</span>  </div><div class="line">       <span class="tag">&lt;<span class="name">h3</span>&gt;</span>I'm a modal!<span class="tag">&lt;/<span class="name">h3</span>&gt;</span>  </div><div class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span>  </div><div class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"modal-body"</span>&gt;</span>  </div><div class="line">       <span class="tag">&lt;<span class="name">ul</span>&gt;</span>  </div><div class="line">           <span class="tag">&lt;<span class="name">li</span> <span class="attr">ng-repeat</span>=<span class="string">"item in items"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span>  </span></div><div class="line">               <span class="attr">ng-click</span>=<span class="string">"selected.item = item"</span>&gt;<span class="template-variable">&#123;&#123; item &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span>  </span></div><div class="line">       <span class="tag">&lt;/<span class="name">ul</span>&gt;</span>  </div><div class="line">       Selected: <span class="tag">&lt;<span class="name">b</span>&gt;</span><span class="template-variable">&#123;&#123; selected.item &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">b</span>&gt;</span>  </span></div><div class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span>  </div><div class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"modal-footer"</span>&gt;</span>  </div><div class="line">       <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn btn-primary"</span> <span class="attr">ng-click</span>=<span class="string">"ok()"</span>&gt;</span>OK<span class="tag">&lt;/<span class="name">button</span>&gt;</span>  </div><div class="line">       <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn btn-warning"</span> <span class="attr">ng-click</span>=<span class="string">"cancel()"</span>&gt;</span>Cancel<span class="tag">&lt;/<span class="name">button</span>&gt;</span>  </div><div class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span>  </div><div class="line">   <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn"</span> <span class="attr">ng-click</span>=<span class="string">"open()"</span>&gt;</span>Open me!<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div></pre></td></tr></table></figure>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">angular.module(<span class="string">'ui.bootstrap.demo'</span>).controller(<span class="string">'ModalInstanceCtrl'</span>, </div><div class="line"><span class="function"><span class="keyword">function</span> (<span class="params">$scope,$modal, $modalInstance, items</span>) </span>&#123;<span class="comment">// 注意在这里的三个参数和 父类的resolve对应属性</span></div><div class="line">          $scope.items= items;<span class="comment">//这里必须要赋值，才能被html访问</span></div><div class="line">          $scope.selected = &#123;</div><div class="line">            item: items[<span class="number">0</span>] </div><div class="line">          &#125;;</div><div class="line">          $scope.ok = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            $modalInstance.close($scope.selected);</div><div class="line">          &#125;;</div><div class="line">          $scope.cancel = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            $modalInstance.dismiss(<span class="string">'cancel'</span>);</div><div class="line">          &#125;;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">$scope.open = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;  </div><div class="line">        <span class="keyword">var</span> modalInstance = $modal.open(&#123;  </div><div class="line">            templateUrl : <span class="string">'myModalContent.html'</span>,  </div><div class="line">            controller : ModalInstanceCtrl,  </div><div class="line">            resolve : &#123;  </div><div class="line">                items : <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;  </div><div class="line">                    <span class="keyword">return</span> $scope.items;  </div><div class="line">                &#125;  </div><div class="line">            &#125;  </div><div class="line">        &#125;);  </div><div class="line">       </div><div class="line">        modalInstance.result.then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;  </div><div class="line">            <span class="built_in">console</span>.log(result);  </div><div class="line">        &#125;, <span class="function"><span class="keyword">function</span>(<span class="params">reason</span>) </span>&#123;  </div><div class="line">            <span class="built_in">console</span>.log(reason);<span class="comment">// 点击空白区域，总会输出backdrop  </span></div><div class="line">            <span class="comment">// click，点击取消，则会暑促cancel  </span></div><div class="line">            $log.info(<span class="string">'Modal dismissed at: '</span> + <span class="keyword">new</span> <span class="built_in">Date</span>());  </div><div class="line">        &#125;);  </div><div class="line">    &#125;;  </div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <h4 id="resolve"><a href="#resolve" class="headerlink" title="resolve"></a>resolve</h4><p><code>ui-router</code>和<code>modal</code>都用到它，我就仔细看了下。<br>路由弹出也好，窗口弹出也是。为了让界面显示前准备好数据而使用这个属性(网络数据获取等)<br>它会在之前被设定好，再注入到控制器中</p>
@@ -119,7 +199,7 @@
 </li>
 </ul>
 <h3 id="查找dom"><a href="#查找dom" class="headerlink" title="查找dom"></a>查找dom</h3><p><code>jqLite</code>太难用了，返回的还是它的对象。算了。</p>
-<p>用这个，正好还可以找到属性对应的dom<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> dd = angular.element(<span class="built_in">document</span>.querySelector(<span class="string">'ul'</span>));</div><div class="line"><span class="keyword">var</span> dd = angular.element(<span class="built_in">document</span>.querySelector(<span class="string">'[id="ew"]'</span>));<span class="comment">//id="ew"的dom</span></div></pre></td></tr></table></figure></p>
+<p>用这个，正好还可以找到属性对应的dom<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> dd = angular.element(<span class="built_in">document</span>.querySelector(<span class="string">'ul'</span>));</div><div class="line"><span class="keyword">var</span> dd = angular.element(<span class="built_in">document</span>.querySelector(<span class="string">'[id="ew"]'</span>));<span class="comment">//id="ew"的dom</span></div><div class="line"></div><div class="line"><span class="comment">//我才发现既然angular.element支持 css的选择器，那就可以用 `.modal-body input`这种css语法来选择呀。。。。。。晕！！太笨了。。</span></div></pre></td></tr></table></figure></p>
 <p><em>angular思想</em><br><strong>Angular分俩个块儿：配置块和运行块(它更多的在于思想)</strong></p>
 <p><strong>配置块</strong><br><code>angular.config</code> 这个会在配置块执行，然而上面的依赖注入只有<code>provider</code>才能在配置块被执行。<br>所以设计<code>provider</code>为初始化设置，<code>$get</code>返回一个对象，让所有注入</p>
 <p><code>factory</code>要返回一个对象，所以一般被设为仅仅需要的是一个方法和数据的集合且不需要处理复杂的逻辑的时候<br><code>service</code>当使用在功能控制比较多的service里面</p>
@@ -256,9 +336,9 @@
     <link href="https://xuecat.github.io/2017/02/16/213/"/>
     <id>https://xuecat.github.io/2017/02/16/213/</id>
     <published>2017-02-16T15:05:38.000Z</published>
-    <updated>2017-02-16T15:20:32.442Z</updated>
+    <updated>2017-03-22T14:46:02.856Z</updated>
     
-    <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/213.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
+    <content type="html"><![CDATA[<p><img src="/picture/213.jpg" alt=""></p>
 <p>深读了后，不得不说太佩服作者了。</p>
 <p>1、 MainForm去掉SetSplashScreen函数，去掉开始的登录显示。</p>
 <p>2、 Measures.cs 这里修改拖拽的最小边界</p>
@@ -270,11 +350,14 @@
     
     <summary type="html">
     
-      &lt;div class=&quot;group-picture&quot;&gt;&lt;div class=&quot;group-picture-container&quot;&gt;&lt;div class=&quot;group-picture-row&quot;&gt;&lt;div class=&quot;group-picture-column&quot; style=&quot;widt
+      &lt;p&gt;&lt;img src=&quot;/picture/213.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;深读了后，不得不说太佩服作者了。&lt;/p&gt;
+&lt;p&gt;1、 MainForm去掉SetSplashScreen函数，去掉开始的登录显示。&lt;/p&gt;
+&lt;p&gt;2、 Measures.cs 这里修改拖拽
     
     </summary>
     
-      <category term="c#" scheme="https://xuecat.github.io/categories/c/"/>
+      <category term="C#" scheme="https://xuecat.github.io/categories/C/"/>
     
     
       <category term="dockpane" scheme="https://xuecat.github.io/tags/dockpane/"/>
@@ -495,9 +578,9 @@
     <link href="https://xuecat.github.io/2017/01/12/207/"/>
     <id>https://xuecat.github.io/2017/01/12/207/</id>
     <published>2017-01-12T13:51:01.000Z</published>
-    <updated>2017-01-12T14:35:30.161Z</updated>
+    <updated>2017-03-22T14:46:25.363Z</updated>
     
-    <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/207.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
+    <content type="html"><![CDATA[<p><img src="/picture/207.jpg" alt=""></p>
 <p>c/c++ 配置属性 代码生成 启用c++异常</p>
 <p>2013版本讲解要详细点：<br><a href="https://msdn.microsoft.com/zh-cn/library/1deeycx5(v=vs.120).aspx" target="_blank" rel="external">https://msdn.microsoft.com/zh-cn/library/1deeycx5(v=vs.120).aspx</a></p>
 <p>编译器会对异常捕获进行优化。</p>
@@ -507,7 +590,9 @@
     
     <summary type="html">
     
-      &lt;div class=&quot;group-picture&quot;&gt;&lt;div class=&quot;group-picture-container&quot;&gt;&lt;div class=&quot;group-picture-row&quot;&gt;&lt;div class=&quot;group-picture-column&quot; style=&quot;widt
+      &lt;p&gt;&lt;img src=&quot;/picture/207.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;c/c++ 配置属性 代码生成 启用c++异常&lt;/p&gt;
+&lt;p&gt;2013版本讲解要详细点：&lt;br&gt;&lt;a href=&quot;https://msdn.microsoft.com/zh-cn/libr
     
     </summary>
     
@@ -580,9 +665,9 @@
     <link href="https://xuecat.github.io/2016/12/07/204/"/>
     <id>https://xuecat.github.io/2016/12/07/204/</id>
     <published>2016-12-07T15:14:24.000Z</published>
-    <updated>2017-02-21T14:49:39.251Z</updated>
+    <updated>2017-03-22T14:46:37.589Z</updated>
     
-    <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/y2.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
+    <content type="html"><![CDATA[<p><img src="/picture/y2.jpg" alt=""></p>
 <h3 id="wpf和winform"><a href="#wpf和winform" class="headerlink" title="wpf和winform"></a>wpf和winform</h3><p>winform -&gt; 新建windows窗体程序<br>控件的描述全在一个<code>Designer</code>的cs文件中，控件事件则在对应的cs文件里。</p>
 <p>wpf -&gt; 新建wpf程序</p>
 <p>感觉winform就是基于mfc再封装了一层c#，界面设计等还是wpf吧</p>
@@ -675,7 +760,8 @@
     
     <summary type="html">
     
-      &lt;div class=&quot;group-picture&quot;&gt;&lt;div class=&quot;group-picture-container&quot;&gt;&lt;div class=&quot;group-picture-row&quot;&gt;&lt;div class=&quot;group-picture-column&quot; style=&quot;widt
+      &lt;p&gt;&lt;img src=&quot;/picture/y2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;wpf和winform&quot;&gt;&lt;a href=&quot;#wpf和winform&quot; class=&quot;headerlink&quot; title=&quot;wpf和winform&quot;&gt;&lt;/a&gt;wpf和winform
     
     </summary>
     
@@ -695,9 +781,9 @@
     <link href="https://xuecat.github.io/2016/12/06/203/"/>
     <id>https://xuecat.github.io/2016/12/06/203/</id>
     <published>2016-12-06T12:37:27.000Z</published>
-    <updated>2017-02-21T14:49:38.015Z</updated>
+    <updated>2017-03-22T14:46:45.041Z</updated>
     
-    <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/y1.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
+    <content type="html"><![CDATA[<p><img src="/picture/y1.jpg" alt=""></p>
 <h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[DebuggerStepThrough]<span class="comment">//调试跳过下面方法</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DullMethod</span><span class="params">()</span> </span>&#123;...&#125;</div><div class="line"></div><div class="line">[DoesInterestingThings(<span class="number">1000</span>, WhatDoesItDo = <span class="string">"voodoo"</span>)]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> DecoratedClass &#123;&#125;</div></pre></td></tr></table></figure>
 <h3 id="动态类型"><a href="#动态类型" class="headerlink" title="动态类型"></a>动态类型</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> T Sum&lt;T&gt;(params T[] Args)</div><div class="line">&#123;</div><div class="line">    T sum = Args[<span class="number">0</span>];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; Args.Length; ++i)</div><div class="line">    &#123;</div><div class="line">         sum += Args[i];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> sum;</div><div class="line">&#125;<span class="comment">//上面这一段代码并不会编译通过</span></div></pre></td></tr></table></figure>
 <p>在C++中这是最最基本的函数模板，但是在C#中代码通不过，<br>因为泛型不是模板，它不会生成多份代码，T是当做object来处理的，<br>因此不能用来进行加法运算。</p>
@@ -715,7 +801,8 @@
     
     <summary type="html">
     
-      &lt;div class=&quot;group-picture&quot;&gt;&lt;div class=&quot;group-picture-container&quot;&gt;&lt;div class=&quot;group-picture-row&quot;&gt;&lt;div class=&quot;group-picture-column&quot; style=&quot;widt
+      &lt;p&gt;&lt;img src=&quot;/picture/y1.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;特性&quot;&gt;&lt;a href=&quot;#特性&quot; class=&quot;headerlink&quot; title=&quot;特性&quot;&gt;&lt;/a&gt;特性&lt;/h3&gt;&lt;figure class=&quot;highlight c&quot;&gt;&lt;ta
     
     </summary>
     
@@ -733,9 +820,9 @@
     <link href="https://xuecat.github.io/2016/12/01/202/"/>
     <id>https://xuecat.github.io/2016/12/01/202/</id>
     <published>2016-12-01T15:48:04.000Z</published>
-    <updated>2017-03-01T15:53:13.690Z</updated>
+    <updated>2017-03-22T14:46:53.909Z</updated>
     
-    <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/t2.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
+    <content type="html"><![CDATA[<p><img src="/picture/t2.jpg" alt=""></p>
 <h3 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h3><h4 id="default"><a href="#default" class="headerlink" title="default"></a>default</h4><p>由于泛型T不确定是值类型还是引用类型，所以<br><code>T a = null</code>这句是错误的（值类型就空了）。</p>
 <p><code>T a = default(null)</code>这样的话值类型就是0，引用类型就是null</p>
 <h4 id="yield"><a href="#yield" class="headerlink" title="yield"></a>yield</h4><p>这个一般是yield return, yield break联合使用；如下<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">IEnumerable&lt;<span class="keyword">int</span>&gt; SName(<span class="keyword">int</span> a)</div><div class="line">&#123;</div><div class="line">    yield <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    yield <span class="keyword">return</span> <span class="number">3</span>;</div><div class="line">    yield <span class="keyword">return</span> <span class="number">6</span>;</div><div class="line">    yield <span class="keyword">break</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//注意返回值必须是 IEnumerable 或 IEnumerator</span></div><div class="line"><span class="comment">//好像说这种方法比在函数里面push或add更有效</span></div></pre></td></tr></table></figure></p>
@@ -768,7 +855,8 @@
     
     <summary type="html">
     
-      &lt;div class=&quot;group-picture&quot;&gt;&lt;div class=&quot;group-picture-container&quot;&gt;&lt;div class=&quot;group-picture-row&quot;&gt;&lt;div class=&quot;group-picture-column&quot; style=&quot;widt
+      &lt;p&gt;&lt;img src=&quot;/picture/t2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;泛型&quot;&gt;&lt;a href=&quot;#泛型&quot; class=&quot;headerlink&quot; title=&quot;泛型&quot;&gt;&lt;/a&gt;泛型&lt;/h3&gt;&lt;h4 id=&quot;default&quot;&gt;&lt;a href=&quot;#defa
     
     </summary>
     
@@ -930,164 +1018,6 @@
       <category term="工具" scheme="https://xuecat.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
     
       <category term="编译器和VC" scheme="https://xuecat.github.io/tags/%E7%BC%96%E8%AF%91%E5%99%A8%E5%92%8CVC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>多线程198</title>
-    <link href="https://xuecat.github.io/2016/11/21/198/"/>
-    <id>https://xuecat.github.io/2016/11/21/198/</id>
-    <published>2016-11-21T15:22:33.000Z</published>
-    <updated>2016-11-26T07:16:03.812Z</updated>
-    
-    <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/t1.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
-<p>咋说呢，一直以来虽然知道<code>_beginthreadex</code>比较好。但是想起55用<code>CreateThread</code>，还是有点余悸。</p>
-<p><strong>先看段原话</strong>：</p>
-<p>有些CRT的函数象<code>malloc(), fopen(), _open(), strtok(), ctime(), 或localtime()</code>等函数需要专门的线程局部存储的数据块，<br>这个数据块通常需要在创建线程的时候就建立，如果使用<code>CreateThread</code>，这个数据块就没有建立，然后会怎样呢？<br>在这样的线程中还是可以使用这些函数而且没有出错，实际上函数发现这个数据块的指针为空时，会自己建立一个，<br>然后将其与线程联系在一起，这意味着如果你用<code>CreateThread</code>来创建线程，然后使用这样的函数，<br>会有一块内存在不知不觉中创建，遗憾的是，这些函数并不将其删除，而<code>CreateThread</code>和<code>ExitThread</code>也无法知道这件事，<br>于是就会有Memory Leak，在线程频繁启动的软件中(比如某些服务器软件)，迟早会让系统的内存资源耗尽！<br></p>
-<hr>
-<p><strong>说白了</strong>：如果多线程里面有CRT函数，最好使用<code>_beginthread</code>   <code>_beginthreadex</code>   <code>AfxBeginThread</code>(这个函数内部调用<code>_beginthreadex</code>创建处理的<code>CWinThread</code>专门的UI线程，可以通过发送接收message)</p>
-<p>上面四个线程都有相应的<code>ExitThread或_endthread</code>；当然这些函数必须放入线程函数中。<br></p>
-<h4 id="共同点："><a href="#共同点：" class="headerlink" title="共同点："></a>共同点：</h4><h4 id="共同的毛病1："><a href="#共同的毛病1：" class="headerlink" title="共同的毛病1："></a>共同的毛病1：</h4><p><strong>虽然</strong>：在线程被创建成功后，都可以用<code>WaitForSingleObject( hThread, INFINITE );</code>来等待线程结束。<br><strong>但是这是不准的</strong>：一些<code>begin</code>函数本身就有<code>CloseHandle</code>了（如：<code>_beginthread</code>），再加上一些代码的<code>CloseHandle</code>，<br>所以无法正确知道线程的计数到底是在哪个时候被置为0，而且被置为0也不一定会是线程退出。<br>再说执行完线程函数后，<code>beging</code>函数本身有许多代码要执行。<br><strong>也就是说，最好不要这么等待线程结束，最好给个事件、原子等放在线程函数末尾，来判断线程是否结束。</strong></p>
-<h4 id="共同的毛病2："><a href="#共同的毛病2：" class="headerlink" title="共同的毛病2："></a>共同的毛病2：</h4><p>如果在线程函数中调用退出函数，是会立即退出的。<br>也就是说连执行线程函数中，定义类的析构函数都来不及，就会直接退出线程返回，<br>如果那个类有析构有内存释放的话就糟糕了，会出现内存泄漏的。<br><strong>也就是说，最好不要用退出线程函数来退出线程，用return自然返回是最好的。</strong></p>
-<h4 id="内存释放："><a href="#内存释放：" class="headerlink" title="内存释放："></a>内存释放：</h4><ul>
-<li>内存释放这里也有个共同点； 创建线程后直接<code>CloseHandle</code>是可以的，这样的线程对象，在函数运行完了就自动释放（就算是_beginthread等有自释放代码的类型也同样适用）</li>
-</ul>
-<p><code>AfxBeginThread</code>会自动<code>CloseHandle</code>；相应<code>endthread</code>函数也有<code>CloseHandle</code>代码<br><code>_beginthread</code>会自动<code>CloseHandle</code>；相应<code>endthread</code>函数也有<code>CloseHandle</code>代码<br><code>_beginthreadex</code>必须手动<code>CloseHandle</code><br><code>CreateThread</code>必须手动<code>CloseHandle</code></p>
-<h4 id="比较："><a href="#比较：" class="headerlink" title="比较："></a>比较：</h4><p><code>AfxBeginThread</code>创建的线程比较庞大，一般的后台运行线程是没必要的<br><code>CreateThread</code>创建的线程无法使用CRT函数<br><code>_beginthread</code>创建的线程可以使用CRT函数，但引用官方的话来说：“使用 _beginthreadex 比 _beginthread 更为安全”；</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;div class=&quot;group-picture&quot;&gt;&lt;div class=&quot;group-picture-container&quot;&gt;&lt;div class=&quot;group-picture-row&quot;&gt;&lt;div class=&quot;group-picture-column&quot; style=&quot;widt
-    
-    </summary>
-    
-      <category term="Windows" scheme="https://xuecat.github.io/categories/Windows/"/>
-    
-    
-      <category term="c函数" scheme="https://xuecat.github.io/tags/c%E5%87%BD%E6%95%B0/"/>
-    
-      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
-    
-      <category term="多线程" scheme="https://xuecat.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>c#入门经典(1)197</title>
-    <link href="https://xuecat.github.io/2016/11/21/197/"/>
-    <id>https://xuecat.github.io/2016/11/21/197/</id>
-    <published>2016-11-21T13:39:27.000Z</published>
-    <updated>2017-02-21T14:49:33.820Z</updated>
-    
-    <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/r4.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
-<p>唉！！，es6正看着呢；去海外组了。。。。要补c#知识了</p>
-<h3 id="NET程序："><a href="#NET程序：" class="headerlink" title=".NET程序："></a>.NET程序：</h3><p>使用.NET兼容语言（如c#）编写程序 -&gt; 把代码编译为CIL，存储在程序集中（即VS干的事） <br><br>-&gt; 执行时，先使用JIT编译器将代码编译为本机代码 -&gt; 在托管的CLR环境下运行本机代码。</p>
-<h3 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h3><h4 id="变量类型："><a href="#变量类型：" class="headerlink" title="变量类型："></a>变量类型：</h4><p>字节数增多：sbyte(1) short(2) int(4) long(8)<br>不同的是：其它类型的<code>unsigned</code>前面加<code>u</code>就好，唯独<code>byte</code>是0到255</p>
-<p>转义字符(\”表示”)和字面量(100L 100F)都和c++差不多<br>多了个新功能</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">string</span> strTest = <span class="string">"wangqiu"</span>;</div><div class="line"><span class="built_in">string</span> strHEHE = $<span class="string">"&#123;strTest&#125; hehe"</span> + $<span class="string">" &#123;3+5&#125;de"</span>;<span class="comment">//这样是可以的哟，用法如同js的模板字符</span></div></pre></td></tr></table></figure>
-<p><strong>差点忘了说，c#中变量类型其实全是System的类，也就意味着基本变量类型本身就有很多成员函数可以使用</strong></p>
-<h4 id="typeof和GetType"><a href="#typeof和GetType" class="headerlink" title="typeof和GetType"></a>typeof和GetType</h4><p>c++的是typeid，记得mfc好像有个，忘了。</p>
-<p>都返回<code>System.Type</code>类型，一个是类函数一个是语言函数（参数是类名）。</p>
-<h4 id="switch语句"><a href="#switch语句" class="headerlink" title="switch语句"></a>switch语句</h4><p><code>switch</code>语句有点不同，多了个<code>goto case &lt;com&gt;:</code>，用来实现在这个case语句中跳转到其它case语句中</p>
-<h4 id="强制转换"><a href="#强制转换" class="headerlink" title="强制转换"></a>强制转换</h4><p>用法基本同；c#多了层保险，可以用<code>checked((type))</code>出现的崩溃来保证，高字节向低字节转换;也可以默认设置强制转换加check；在书67页。</p>
-<h4 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h4><p>用法和c++基本同；多了个指定类型，<code>enum Type : long</code>，这样指定枚举变量的类型。</p>
-<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span>[] myArray = &#123;<span class="number">4</span>, <span class="number">5</span>&#125;;<span class="comment">//很智能，可以自动创建数组类，这样就能使用很多成员函数了。</span></div><div class="line"><span class="keyword">int</span>[] myArray = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>] &#123;<span class="number">6</span>, <span class="number">7</span>&#125;;<span class="comment">//new int[number],不能new int;</span></div><div class="line"></div><div class="line"><span class="comment">//数组是引用类型，开辟的元素也在堆上</span></div><div class="line"><span class="keyword">int</span>[] myArray = <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>&#125;;</div><div class="line">var inlist = <span class="keyword">new</span> List&lt;<span class="keyword">int</span>&gt;() &#123; <span class="number">1</span>, <span class="number">2</span> &#125;;</div></pre></td></tr></table></figure>
-<p>数组的遍历可以用<code>for</code>也可以用<code>foreach(string f in fN)</code>;只是<code>foreach</code>里的f是只读属性，不能写。</p>
-<ul>
-<li>多元数组</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//几元数组就用几个`,`表示</span></div><div class="line"><span class="keyword">int</span>[,] h = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>, <span class="number">4</span>];</div><div class="line"><span class="keyword">int</span>[,] s = &#123;&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;, &#123;<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;, &#123;<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&#125;&#125;;<span class="comment">//但是这种赋值会改变，声明的几元</span></div><div class="line"><span class="comment">//foreach会一行一行遍历全部元素。</span></div></pre></td></tr></table></figure>
-<ul>
-<li>锯齿数组<br>这个更该是数组中的数组，一个行不一定固定个数</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> [][] d = &#123;</div><div class="line">    <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">1</span>&#125;,<span class="comment">//这行就一个</span></div><div class="line">    <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">1</span>, <span class="number">2</span>&#125;,<span class="comment">//这行俩个</span></div><div class="line">    <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>&#125;,</div><div class="line">    <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">7</span>, <span class="number">8</span>&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h4 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h4><p>数组是合并相同类型，元祖就是合并不同类型<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Tuple&lt;<span class="keyword">int</span>, <span class="keyword">double</span>&gt; tuple = Tuple.Create&lt;<span class="keyword">int</span> , <span class="keyword">double</span>&gt;(<span class="number">3</span>, <span class="number">3.3</span>);</div></pre></td></tr></table></figure></p>
-<p>暂时我认为这个东西没啥用，不如用结构体。看以后吧!</p>
-<h4 id="匿名类型"><a href="#匿名类型" class="headerlink" title="匿名类型"></a>匿名类型</h4><p><code>var</code>会自动转换到相应的类型，当然也可以访问相应的成员函数。</p>
-<h4 id="nameof"><a href="#nameof" class="headerlink" title="nameof"></a>nameof</h4><p>把变量名变成字符形式</p>
-<h4 id="as和is"><a href="#as和is" class="headerlink" title="as和is"></a>as和is</h4><p>is会做俩次检查，as会做一次检查，as效率会高点<br>as类似于强制转换，转换失败便返回null<br>as只能用于引用类型和装箱转换，所以值类型还是得用is。除此外as还有隐式转换（见类的隐式显示）<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">MyDrive bs = <span class="keyword">new</span> MyDrive();</div><div class="line">Program pro = bs as Program;</div><div class="line"><span class="keyword">if</span> (pro) &#123;&#125;<span class="comment">//这种写法大误，被c++惯坏了。</span></div><div class="line"><span class="keyword">if</span> (pro != null)<span class="comment">//才行。如果要上面写法成功的话就必须加个隐式转换的bool</span></div></pre></td></tr></table></figure></p>
-<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="参数调用顺序是从左向右"><a href="#参数调用顺序是从左向右" class="headerlink" title="参数调用顺序是从左向右"></a>参数调用顺序是从左向右</h4><h4 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h4><p>类中函数默认是private类型的，如果访问要public<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//数组参数</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Show</span>(<span class="params"><span class="keyword">int</span>[] intA</span>) </span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="comment">//引用参数</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Show</span>(<span class="params"><span class="keyword">ref</span> <span class="keyword">int</span> val</span>) </span>&#123;&#125;</div><div class="line">Show(<span class="keyword">ref</span> intA);<span class="comment">//它调用也比较特殊，还有就是intA必须要被赋过值</span></div><div class="line"></div><div class="line"><span class="comment">//输出参数</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Show</span>(<span class="params"><span class="keyword">out</span> <span class="keyword">int</span> valA</span>) </span>&#123;&#125;</div><div class="line">Show(<span class="keyword">out</span> intA)<span class="comment">//感觉它比引用都高级</span></div></pre></td></tr></table></figure></p>
-<p>函数可以重载，但是<code>out</code>和<code>ref</code>不能相同</p>
-<h4 id="lambda"><a href="#lambda" class="headerlink" title="lambda"></a>lambda</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">public</span> <span class="keyword">int</span> <span class="title">GetI</span><span class="params">()</span> </span>=&gt; <span class="number">1</span> + <span class="number">3</span>;</div><div class="line">Func&lt;<span class="built_in">string</span>, <span class="built_in">string</span> , <span class="keyword">int</span>&gt; hh = (<span class="comment">/*string */</span>x, <span class="comment">/*string */</span>y) =&gt; &#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h4 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h4><ol>
-<li>支持默认参数，同时不会在意默认参数位置（即不像c++那样默认参数必须放后面）</li>
-<li>支持无序传入，<code>SName(kk:1, hh:2)</code>这种形式传入是支持的，但是如果这样写就必须把所有参数写完。</li>
-</ol>
-<h4 id="c-的委托和事件"><a href="#c-的委托和事件" class="headerlink" title="c#的委托和事件"></a>c#的委托和事件</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">Run</span><span class="params">(<span class="keyword">int</span> p1, <span class="keyword">int</span> p2)</span> </span>&#123;&#125;</div><div class="line"><span class="function">delegate <span class="keyword">double</span> <span class="title">Process</span><span class="params">(<span class="keyword">int</span> p1, <span class="keyword">int</span> p2)</span></span>;</div><div class="line">Process tp1 = Run;</div><div class="line">Process tp2 = (<span class="keyword">int</span> p1, <span class="keyword">int</span> p2) =&gt; &#123;<span class="keyword">return</span> p1 + p2;&#125;;</div><div class="line">Process tp3 = <span class="keyword">new</span> Process(Run);<span class="comment">//标准建议这种写法，说是能明白干了什么</span></div><div class="line"></div><div class="line"><span class="function">delegate <span class="keyword">int</span> <span class="title">NumberChanger</span><span class="params">(<span class="keyword">int</span> n)</span></span>;</div><div class="line">NumberChanger nc1 = <span class="keyword">new</span> NumberChanger(AddNum);<span class="comment">//这样才对嘛，反正引用类型都是在堆里</span></div><div class="line">NumberChanger nc2 = <span class="keyword">new</span> NumberChanger(MultNum);<span class="comment">//</span></div><div class="line"></div><div class="line">NumberChanger[] has = <span class="keyword">new</span> NumberChanger[<span class="number">3</span>];<span class="comment">//代理数组</span></div></pre></td></tr></table></figure>
-<p>delegate 至少0个参数，至多32个参数，可以无返回值，也可以指定返回值类型<br>泛型Action至少0个参数，至多16个参数，无返回值<br>泛型Func至少0个参数，至多16个参数，根据返回值泛型返回。必须有返回值，不可void(它最后一个参数才表示返回)<br>泛型Predicate有且只有一个参数，返回值固定为bool</p>
-<p>后面的泛型较delegate的好处是，不用先声明再使用；可以直接使用。<br>它们都可以当参数传值。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Book</span><span class="params">()</span> </span>&#123; Console.WriteLine(<span class="string">"我是提供书籍的"</span>);&#125;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Book</span><span class="params">(<span class="built_in">string</span> BookName)</span> </span>&#123;&#125;</div><div class="line">Action BookAction = <span class="keyword">new</span> Action(Book);</div><div class="line">Action BookAction1 = <span class="keyword">new</span> Action&lt;<span class="built_in">string</span>&gt;(Book);</div><div class="line">BookAction();</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> Test&lt;T1, T2&gt;(Func&lt;T1, T2, <span class="keyword">int</span>&gt; func, T1 a, T2 b) &#123; <span class="keyword">return</span> func(a, b); &#125;</div><div class="line">Console.WriteLine(Test&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;(Fun,<span class="number">100</span>,<span class="number">200</span>));</div></pre></td></tr></table></figure>
-<h5 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h5><p>事件的实现严格需要代理的配合；关键字<code>event</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line">public class Mom //事件发布器</div><div class="line">&#123;</div><div class="line">    public event Action&lt;int&gt; Eat;//订阅函数模板，这个需要代理函数的支持。所以也可以用delegate等来代替</div><div class="line">    public void Cook()//发布函数</div><div class="line">    &#123; Eat(1); &#125;</div><div class="line">&#125;</div><div class="line">public class Dad//事件订阅器</div><div class="line">&#123;</div><div class="line">    public void DEat(int a)//订阅函数</div><div class="line">    &#123; Console.WriteLine(&quot;dad eat&quot;); &#125;</div><div class="line">&#125;</div><div class="line">public class Child//事件订阅器</div><div class="line">&#123;</div><div class="line">    public void CEat(int a)//订阅函数</div><div class="line">    &#123; Console.WriteLine(&quot;child eat&quot;); &#125;</div><div class="line">&#125;</div><div class="line">class Program</div><div class="line">&#123;</div><div class="line">    static void Main(string[] args)</div><div class="line">    &#123;</div><div class="line">        Mom mom = new Mom();</div><div class="line">        Dad dad = new Dad();</div><div class="line">        Child ch = new Child();</div><div class="line"></div><div class="line">        mom.Eat += dad.DEat;//开始订阅</div><div class="line">        mom.Eat += ch.CEat;</div><div class="line"></div><div class="line">        mom.Cook();//开始发布，这样就会执行dad的DEat和ch的CEat函数。</div><div class="line"></div><div class="line">        Console.ReadKey();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//然而当传入信息更复杂时，可以如下。事件进阶版</div><div class="line">public class Food : EventArgs</div><div class="line">&#123;</div><div class="line">    private string message;</div><div class="line">    public Food()</div><div class="line">    &#123; message = &quot;wq&quot;; &#125;</div><div class="line"></div><div class="line">    public Food(string ss)</div><div class="line">    &#123; message = ss; &#125;</div><div class="line">&#125;</div><div class="line">public class Mom</div><div class="line">&#123;</div><div class="line">    public event EventHandler&lt;Food&gt; Eat;</div><div class="line">    public void Cook()</div><div class="line">    &#123; Eat(this, new Food(&quot;hi&quot;)); &#125;</div><div class="line">&#125;</div><div class="line">public class Dad</div><div class="line">&#123;</div><div class="line">    public void DEat(object obj, Food fo)</div><div class="line">    &#123; Console.WriteLine(&quot;dad eat&quot;); &#125;</div><div class="line">&#125;</div><div class="line">public class Child</div><div class="line">&#123;</div><div class="line">    public void CEat(object obj, Food fo)</div><div class="line">    &#123; Console.WriteLine(&quot;child eat&quot;); &#125;</div><div class="line">&#125;</div><div class="line">class Program</div><div class="line">&#123;</div><div class="line">    static void Main(string[] args)</div><div class="line">    &#123;</div><div class="line">        Mom mom = new Mom();</div><div class="line">        Dad dad = new Dad();</div><div class="line">        Child ch = new Child();</div><div class="line"></div><div class="line">        mom.Eat += dad.DEat;</div><div class="line">        mom.Eat += ch.CEat;</div><div class="line"></div><div class="line">        mom.Cook();</div><div class="line"></div><div class="line">        Console.ReadKey();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><h4 id="格式化输出"><a href="#格式化输出" class="headerlink" title="格式化输出"></a>格式化输出</h4><ol>
-<li><p>带运算；<br><code>Console.WriteLine($&quot;{SName(1, 2)}&quot;)</code>;会运算了SName函数再输出；注意的是它和参数传入形式不能共存。</p>
-</li>
-<li><p>参数传入；<br><code>Console.WriteLine(&quot;{0}a{1}&quot;, 10.02, 121);</code>这里<code>0</code>表示后面第一个参数，随着参数增加，可以依次递增。<br>还有，它会完整输出参数的形式。不用担心是string、int、float，它全按参数形式输出。</p>
-</li>
-<li><p>格式符；<br>只记录几个简单的：<br>D 十进制、N数字格式、X十六进制、P百分数格式；<br><code>Console.WriteLine(String.Format(&quot;{0:N1}&quot;, 10))</code>这里{0:N1}表示第一个参数，按数字格式输出，小数点后留一位。<br>格式符后面的数字可增加，表示小数点后面的位数。但是格式符前面不能加数字，实在加要用占位符。</p>
-</li>
-<li><p>占位符</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">string</span>.Format(<span class="string">"&#123;0:0000.00&#125;"</span>, <span class="number">12394.039</span>) 结果为：<span class="number">12394.04</span></div><div class="line"><span class="built_in">string</span>.Format(<span class="string">"&#123;0:0000.00&#125;"</span>, <span class="number">194.039</span>) 结果为：<span class="number">0194.04</span></div><div class="line"><span class="built_in">string</span>.Format(<span class="string">"&#123;0:###.##&#125;"</span>, <span class="number">12394.039</span>) 结果为：<span class="number">12394.04</span></div><div class="line"><span class="built_in">string</span>.Format(<span class="string">"&#123;0:####.#&#125;"</span>, <span class="number">194.039</span>) 结果为：<span class="number">194</span></div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>零占位符：<br>如果格式化的值在格式字符串中出现“0”的位置有一个数字，则此数字被复制到结果字符串中。小数点前最左边的“0”的位置和小数点后最右边的“0”的位置确定总在结果字符串中出现的数字范围。<br>“00”说明符使得值被舍入到小数点前最近的数字，其中零位总被舍去。<br>数字占位符：<br>如果格式化的值在格式字符串中出现“#”的位置有一个数字，则此数字被复制到结果字符串中。否则，结果字符串中的此位置不存储任何值。<br>请注意，如果“0”不是有效数字，此说明符永不显示“0”字符，即使“0”是字符串中唯一的数字。如果“0”是所显示的数字中的有效数字，则显示“0”字符。<br>“##”格式字符串使得值被舍入到小数点前最近的数字，其中零总被舍去。</p>
-<p>但是占位符又不简单的是这些：<code>(&quot;{0:123##2.00}&quot;, 11)</code>输出：123112.00 <code>(&quot;{0:123##20.00}&quot;, 11)</code>输出：123121.00<br>看来实际用还得再测试下。</p>
-<h4 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h4><p>调试信息的输出，这个调试信息是输出一行，比c++方便多了。<br><code>Debug.WriteLine()</code>只能在debug模式下<br><code>Trace.WriteLine()</code>任何模式下<br><code>Debug.Assert()</code><br><code>Trace.Assert()</code></p>
-<p>也支持<code>try catch finally</code> finally必执行。</p>
-<h4 id="XML文档"><a href="#XML文档" class="headerlink" title="XML文档"></a>XML文档</h4><p>这个我觉得很有必要。c++一般都是doxygen语法来，c#却这么高级直接官方支持（官方的snippets简直丧心病狂，太好用了）。<br>另外官方建议用<code>Sandcastle</code>来生成相关阅读文档。</p>
-<p>值列举常用的，详细：<a href="http://www.cnblogs.com/mq0036/p/3544264.html" target="_blank" rel="external">http://www.cnblogs.com/mq0036/p/3544264.html</a><br>summary：永远描述类型<br>remarks：添加有关类型的信息，补充summary<br>param：参数描述<br>returns：返回值描述<br>value: 属性说明（官方示例是set、get的那些属性）<br>example：示例代码部分<br>c：文本标记为代码<br>code：多行指示为代码<br>exception：异常说明<br>see：seealso：用<code>&lt;see cref=&quot;member&quot;/&gt;</code></p>
-<h4 id="预编译"><a href="#预编译" class="headerlink" title="预编译"></a>预编译</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> #<span class="meta-keyword">undef</span> #<span class="meta-keyword">if</span> #<span class="meta-keyword">elif</span> #<span class="meta-keyword">else</span> #<span class="meta-keyword">endif</span> <span class="comment">//和c++相同</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">if</span> DEBUG </span></div><div class="line">    <span class="meta">#<span class="meta-keyword">warning</span> <span class="meta-string">"Don't"</span><span class="comment">//c#的警告和错误的预编译和c++不同</span></span></div><div class="line">    <span class="meta">#<span class="meta-keyword">error</span> <span class="meta-string">"Wrong"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"></div><div class="line"><span class="meta">#region #endregion<span class="comment">//折叠用</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span><span class="comment">//此指令和c++使用完全不同</span></span></div></pre></td></tr></table></figure>
-<h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><h4 id="this和base"><a href="#this和base" class="headerlink" title="this和base"></a>this和base</h4><h4 id="类的定义"><a href="#类的定义" class="headerlink" title="类的定义"></a>类的定义</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">internal <span class="keyword">class</span> My&#123;&#125;;<span class="comment">//此关键字修饰的类，只运行同一个程序集访问（即同一exe或dll）</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> My&#123;&#125;;<span class="comment">//运行其它程序集访问</span></div><div class="line"></div><div class="line"><span class="keyword">public</span> abstract <span class="keyword">class</span> M&#123;&#125;;<span class="comment">//也可以加private等，此修饰符是抽象类，只能继承，不能实例化</span></div><div class="line"><span class="keyword">public</span> sealed <span class="keyword">class</span> M&#123;&#125;;<span class="comment">//此修饰符不允许继承</span></div><div class="line"></div><div class="line"><span class="comment">//继承的时候要注意：编译器不允许派生类的可访性高于基类，即内部类继承公共类可以，公共类继承内部不行。</span></div><div class="line"><span class="comment">//以下不行：</span></div><div class="line">internal <span class="keyword">class</span> My&#123;&#125;</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> MD : My&#123;&#125;<span class="comment">//不行</span></div><div class="line"></div><div class="line"><span class="comment">//继承时不能有多个基类，c#只运行一个基类；但是可以加接口的</span></div><div class="line"><span class="keyword">class</span> My : MyBass, IMyInterface, IMy&#123;&#125; <span class="comment">//虽然只能一个基类，但是多个接口是可以的。注意接口必须在基类后面</span></div></pre></td></tr></table></figure>
-<h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><p>大量例子对属性的使用都是这样的，感觉这个属性有点多余。<br>属性支持访问控制：<code>get</code>和<code>set</code>支持使用：public、private、protected来控制访问。<br>属性支持重写：<code>abstract</code>、<code>virtual</code>、<code>override</code>这些可以联合使用<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> <span class="keyword">int</span> <span class="number">_</span>age;</div><div class="line"><span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">int</span> Age &#123;</div><div class="line">    get &#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">_</span>age;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">set</span> &#123;</div><div class="line">        <span class="number">_</span>age = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>自动属性<code>public double Height { get; set; }</code></p>
-<h4 id="构造函数和析构"><a href="#构造函数和析构" class="headerlink" title="构造函数和析构"></a>构造函数和析构</h4><p>基本和c++相同，允许重载、访问控制。<br>不同：</p>
-<ul>
-<li>执行顺序（MyDericed继承基类）；MyDericed myO = new MyDericed();1、执行System.Object.Object()构造函数；2、执行MyBaseClass.MyBaseClass构造函数；3、执行MyDericed构造函数</li>
-<li>委托不同；<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public class MyD: MyBass</div><div class="line">&#123;</div><div class="line">    public MyD() : this(5, 6)&#123;&#125;//委托给自身的另一个构造函数</div><div class="line">    public MyD(int i, int j) : base(i) &#123;&#125;//调用基类构造函数</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="对象初始化器"><a href="#对象初始化器" class="headerlink" title="对象初始化器"></a>对象初始化器</h4><p><code>HeClass hh = new HeClass(2) { _me = 3 };</code><br>HeClass有个成员_me；<br>这个功能简直装逼用，没啥实用。效率和调用构造函数一样；<br>而且成员还必须是public，不然没法访问。。。。</p>
-<p>##然后就是静态构造函数##<br>编写静态构造函数的一个原因是,类有一些静态字段或属性,需要在第一次使用类之前,从外部源中初始化这些静态字段和属性<br>由于并不确定它执行的时间，所以注意下此函数中对静态变量的赋值。</p>
-<h4 id="静态类"><a href="#静态类" class="headerlink" title="静态类"></a>静态类</h4><p>给类加个static只是告诉编译器，这个类的所有成员必须是<code>static</code>类型的，不然就报错</p>
-<h4 id="类和结构体区别"><a href="#类和结构体区别" class="headerlink" title="类和结构体区别"></a>类和结构体区别</h4><p>c#中类和结构体有个大大的区别， 类是引用类型，结构体是值类型。<br>也就是说：<br>直接的<code>=</code>操作对类来说是引用赋值（是浅拷贝过程）<br>直接的<code>=</code>操作对结构体来说是复制信息（是深拷贝）</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MyStru st = <span class="keyword">new</span> MyStru&#123; d=<span class="number">1</span>, a=<span class="number">2</span> &#125;;<span class="comment">//值类型还是在栈空间</span></div></pre></td></tr></table></figure>
-<h4 id="嵌套类"><a href="#嵌套类" class="headerlink" title="嵌套类"></a>嵌套类</h4><p>被嵌套在里面的类可以访问外部类的private成员，这和c++不同</p>
-<p>对于嵌套类则不能把类型定义为protectcd、private和protected internal,<br>因为这些修饰符对于包含在名称空间中的类型没有意义。因此这些修饰符只能应用于成员。<br><strong>但是</strong>,如果是嵌套类的话，这些修饰符就有了些意义。</p>
-<h4 id="其它定义字段"><a href="#其它定义字段" class="headerlink" title="其它定义字段"></a>其它定义字段</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> readonly <span class="keyword">int</span> MyInt = <span class="number">3</span>;<span class="comment">//表示这个字段只能在执行构造函数的过程中赋值，或由初始化赋值语句赋值。</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> MyInt;<span class="comment">//书上建议用const代替static，这样既避免出错也可以达到相同效果</span></div></pre></td></tr></table></figure>
-<p>c#的extern导入的是外部程序集，经常和DllImport联合使用。</p>
-<h4 id="继承使用"><a href="#继承使用" class="headerlink" title="继承使用"></a>继承使用</h4><p>c#的virtual、override、更是不同<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> MyClass &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">virtual</span>  <span class="keyword">void</span> <span class="title">ShowD</span><span class="params">()</span> </span>&#123;</div><div class="line">            Console.WriteLine(<span class="string">"My"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">class</span> YouClass : MyClass &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> override <span class="keyword">void</span> <span class="title">ShowD</span><span class="params">()</span> </span>&#123;</div><div class="line">            Console.WriteLine(<span class="string">"You"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">class</span> HeClass : YouClass &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> override <span class="keyword">void</span> <span class="title">ShowD</span><span class="params">()</span> </span>&#123;</div><div class="line">            Console.WriteLine(<span class="string">"He"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//可以看出，如果想要重写，必须用virtual、override的配合</span></div><div class="line">    <span class="comment">//如果是 override sealed void... 配合的话，重写就此结束；派生类不能再重写。</span></div></pre></td></tr></table></figure></p>
-<h4 id="partial部分关键字的使用"><a href="#partial部分关键字的使用" class="headerlink" title="partial部分关键字的使用"></a>partial部分关键字的使用</h4><p>partial关键字允许把类、结构或接口放在多个文件中，编译再变成一个类。<br>包括继承对象也会整合在一起（但是访问权限关键字不能整合）<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Big1.cs</span></div><div class="line">partial <span class="keyword">class</span> TheBig : IMyInter1</div><div class="line">&#123;</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line"><span class="comment">//Big2.cs</span></div><div class="line">partial <span class="keyword">class</span> TheBig : IMyInter2</div><div class="line">&#123;</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//编译后就是</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> TheBig :IMyInter1, IMyInter2 </div><div class="line">&#123;&#125;</div><div class="line"></div><div class="line"><span class="comment">//上面介绍了部分类，下面介绍部分方法</span></div><div class="line"><span class="keyword">public</span> partial <span class="keyword">class</span> MyClass</div><div class="line">&#123;</div><div class="line">    <span class="function">partial <span class="keyword">void</span> <span class="title">MyMethod</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> partial <span class="keyword">class</span> MyClass</div><div class="line">&#123;</div><div class="line">    <span class="function">partial <span class="keyword">void</span> <span class="title">MyMethod</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">//...</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//部分方法的出现是为了解决要使用其它部分类的方法时，避免访问不到。</span></div><div class="line"><span class="comment">//但是它有以下毛病：</span></div><div class="line"><span class="comment">//0、只能存在于partial的类中</span></div><div class="line"><span class="comment">//1、总是私有类型，且不能有返回值</span></div><div class="line"><span class="comment">//2、使用的任何参数不能是out参数。但ref参数是可以的</span></div><div class="line"><span class="comment">//3、不能使用virtual、abstract、overrride、new、sealed、extern这些修饰符</span></div></pre></td></tr></table></figure></p>
-<h4 id="浅拷贝和深拷贝"><a href="#浅拷贝和深拷贝" class="headerlink" title="浅拷贝和深拷贝"></a>浅拷贝和深拷贝</h4><p>浅拷贝由默认隐式转换和MemberwiseClone来完成不用说。<br>来看深拷贝代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> HeClass : ICloneable</div><div class="line">&#123;</div><div class="line">    HeClass(<span class="keyword">int</span> a)</div><div class="line">    &#123; <span class="number">_</span>me = a; &#125;</div><div class="line">    <span class="keyword">int</span> <span class="number">_</span>me;</div><div class="line">    <span class="function"><span class="keyword">public</span> object <span class="title">Clone</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        HeClass c = <span class="keyword">new</span> HeClass(<span class="number">_</span>me);</div><div class="line">        <span class="keyword">return</span> c;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//发现必须继承ICloneable，并重写其函数</span></div><div class="line"><span class="comment">//还要注意new的构造函数传值问题。</span></div></pre></td></tr></table></figure></p>
-<h4 id="重载符函数"><a href="#重载符函数" class="headerlink" title="重载符函数"></a>重载符函数</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> YouClass : MyClass &#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> YouClass <span class="keyword">operator</span> +(YouClass a) &#123;</div><div class="line">        YouClass yy = <span class="keyword">new</span> YouClass();</div><div class="line">        <span class="keyword">return</span> yy;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">ClassA a;</div><div class="line">classB b;</div><div class="line">ClassC c;</div><div class="line">c = a + b;</div><div class="line">像这样的参数就必须是(ClassA, classB)，更重要的和顺序有关。</div></pre></td></tr></table></figure>
-<p>如上操作符函数有这些要求：<br>必须是public<br>必须是static<br>返回值必须是原型</p>
-<p>一元运算符：+、-、！、~、++、–、true、false<br>二元：+、-、*、/、%、&amp;、|、^、&lt;&lt;、&gt;&gt;<br>比较：==、!=、&lt;、&gt;、&lt;=、&gt;=</p>
-<h4 id="隐式转换和显式转换"><a href="#隐式转换和显式转换" class="headerlink" title="隐式转换和显式转换"></a>隐式转换和显式转换</h4><p>对于引用类型来说，如下代码有误：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">MyDrive bs = <span class="keyword">new</span> MyDrive();</div><div class="line">Program pro = (Program)bs;<span class="comment">//1</span></div><div class="line">Program pro = bs;<span class="comment">//2</span></div><div class="line"></div><div class="line"><span class="comment">//如要成功，就需要支持隐式转换（2）和显式转换（1）</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> implicit <span class="keyword">operator</span> <span class="title">Program</span><span class="params">(MyDrive s)</span> </span></div><div class="line">&#123; <span class="keyword">return</span> null; &#125;<span class="comment">//隐式</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">explicit</span> <span class="keyword">operator</span> <span class="title">Program</span><span class="params">(MyDrive s)</span></span></div><div class="line">&#123; <span class="keyword">return</span> null;  &#125;<span class="comment">//显式</span></div><div class="line"></div><div class="line">向MyDrive类添加如上函数便可，</div><div class="line">但是注意；相同函数隐式和显式只能存在一个，不能共存。</div></pre></td></tr></table></figure></p>
-<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><h4 id="函数隐藏"><a href="#函数隐藏" class="headerlink" title="函数隐藏"></a>函数隐藏</h4><p>c#会像c++那样出现函数隐藏，但是它面对函数隐藏的时候会报警告的,如果要消除警告：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> MyDriver:</div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">new</span> <span class="keyword">int</span> <span class="title">ShowD</span><span class="params">()</span></span>&#123;&#125;<span class="comment">//加个new，这样做并不会改变执行时的代码调用；只是去掉编译的警告而已。</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h4 id="Object类"><a href="#Object类" class="headerlink" title="Object类"></a>Object类</h4><p>所有类都派生于<code>System.Object</code>，即使定义时没指定基类也会默认继承。</p>
-<h4 id="abstract和sealed"><a href="#abstract和sealed" class="headerlink" title="abstract和sealed"></a>abstract和sealed</h4><ul>
-<li><code>abstract</code>对类；修饰并不能阻止其函数的定义，也无法使函数默认变成可重写类型(函数依旧需要自己声明重写类型)；<br>它对类来说就只能是个说明是接口类的作用，实际作用并没有。</li>
-<li><code>abstract</code>对函数；此函数为虚函数，默认重写类型</li>
-<li><code>sealed</code>对类；这样表示此类不能被继承</li>
-<li><code>sealed</code>对函数；只能对可重写类型的函数才能使用（virtual abstract），表示此函数子类不能重写，常和<code>override</code>联合使用</li>
-</ul>
-<h4 id="拆箱和装箱"><a href="#拆箱和装箱" class="headerlink" title="拆箱和装箱"></a>拆箱和装箱</h4><p><strong>首先这俩个操作是隐式的</strong><br>所有值类型均隐式派生自System.ValueType：<br>结构体、数值、整形、字符（char）、浮点、bool、枚举、派生于System.Nullable<br>如<code>int i = new int()</code>等价于<code>int i = 0</code></p>
-<p>所有引用类型均隐式派生自System.object(包括它本身)：<br>数组：（派生于System.Array）数组的元素，不管是引用类型还是值类型，都存储在托管堆上；<br>类：class（派生于System.Object）；<br>接口：interface（接口不是一个“东西”，所以不存在派生于何处的问题。）；<br>委托：delegate（派生于System.Delegate）；<br>object：（System.Object的别名）；<br>字符串：string（System.String的别名）。</p>
-<p><em>今天测试了下，发现string却可以像值类型那样运作，搜索了下：</em><br><em>string最为显著的一个特点就是它具有恒定不变性：我们一旦创建了一个string，在managed heap 上为他分配了一块连续的内存空间，我们将不能以任何方式对这个string进行修改使之变长、变短、改变格式。</em><br><em>所有对这个string进行各项操作（比如调用ToUpper获得大写格式的string）而返回的string，实际上另一个重新创建的string，其本身并不会产生任何变化。 </em><br><em>每次改变值时都会建立一个新的string对象，变量会指向这个新的对象，而原来的还是指向原来的对象，所以不会改变。这也是string效率低下的原因。</em></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">object obj = <span class="number">1</span>;<span class="comment">//装箱</span></div><div class="line"><span class="keyword">int</span> value = (<span class="keyword">int</span>)obj;<span class="comment">//拆箱</span></div><div class="line"></div><div class="line"><span class="comment">//如上，c#中对值类型是放入栈中，对引用类型是放入堆中</span></div><div class="line"><span class="comment">//上面1是值，obj是引用。所以存在过程的转换</span></div><div class="line"><span class="comment">//这多余的转换会导致运行效率低下，所以请尽量避免。</span></div><div class="line"></div><div class="line"><span class="comment">//比如使用List&lt;obj&gt;来代替ArrayList;避免拆箱和装箱</span></div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;div class=&quot;group-picture&quot;&gt;&lt;div class=&quot;group-picture-container&quot;&gt;&lt;div class=&quot;group-picture-row&quot;&gt;&lt;div class=&quot;group-picture-column&quot; style=&quot;widt
-    
-    </summary>
-    
-      <category term="C#" scheme="https://xuecat.github.io/categories/C/"/>
-    
-    
-      <category term="编译器和VC" scheme="https://xuecat.github.io/tags/%E7%BC%96%E8%AF%91%E5%99%A8%E5%92%8CVC/"/>
-    
-      <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
