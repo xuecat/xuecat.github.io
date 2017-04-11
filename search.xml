@@ -41,6 +41,22 @@
 </li>
 <li><p><code>data-loading-text=&quot;Loading...&quot;</code> 这个我没写全，它展示的效果是点击后显示加载，鼠标禁止，加载完再恢复。</p>
 </li>
+<li><p><code>data-dismiss=&quot;alert&quot;</code> 这个用于页内嵌入提示框，由于提供各种可使用的格式 <code>alert-warning</code> <code>alert-success</code>。</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"myAlert"</span> <span class="attr">class</span>=<span class="string">"alert alert-success"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">class</span>=<span class="string">"close"</span> <span class="attr">data-dismiss</span>=<span class="string">"alert"</span>&gt;</span>&amp;times;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">strong</span>&gt;</span>成功！<span class="tag">&lt;/<span class="name">strong</span>&gt;</span>结果是成功的。</div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>点关闭也确实能(不能也可以加个ng-hide)，但是动画效果不知道咋实现</p>
+<ul>
+<li><p><code>data-loading-text</code>好是好就是没法配合angular使用，只能自己写.</p>
+</li>
+<li><p><code>data-toggle=&quot;collapse&quot;</code> 折叠显示内容</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"btn btn-primary"</span> <span class="attr">role</span>=<span class="string">"button"</span> <span class="attr">data-toggle</span>=<span class="string">"collapse"</span> <span class="attr">href</span>=<span class="string">"#collapseExample"</span> <span class="attr">aria-expanded</span>=<span class="string">"false"</span> <span class="attr">aria-controls</span>=<span class="string">"collapseExample"</span>&gt;</span></div><div class="line">  Link with href</div><div class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn btn-primary"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">data-toggle</span>=<span class="string">"collapse"</span> <span class="attr">data-target</span>=<span class="string">"#collapseExample"</span> <span class="attr">aria-expanded</span>=<span class="string">"false"</span> <span class="attr">aria-controls</span>=<span class="string">"collapseExample"</span>&gt;</span></div><div class="line">  Button with data-target</div><div class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"collapse"</span> <span class="attr">id</span>=<span class="string">"collapseExample"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"well"</span>&gt;</span></div><div class="line">    ...</div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>由于这俩个button链接的是一个折叠内容，点击展开，再点折叠。 里么href和data-target达到了相同效果，我想angular估计只能用data-target</p>
+<p>一般 aria-*是识别属性，但是这里<code>aria-expanded=&quot;true&quot;</code>会默认展开内容</p>
+<ul>
+<li><code>data-ride=&quot;carousel&quot;</code>这是个轮播控件来达到相册的效果，<code>.carousel-caption</code>添加标题显示</li>
 </ul>
 ]]></content>
     </entry>
@@ -59,7 +75,7 @@
       <title><![CDATA[AngularJS216]]></title>
       <url>https://xuecat.github.io/2017/02/23/216/</url>
       <content type="html"><![CDATA[<h2 id="Angular"><a href="#Angular" class="headerlink" title="Angular"></a>Angular</h2><h3 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h3><p>no-repeat是所有内置指令中优先级最高的。</p>
-<p><code>ng-app</code> 指定AngularJS脚步执行作用域<br><code>ng-model</code> 绑定html元素到数据<br><code>ng-init</code> 初始化数据<br><code>ng-if</code>从dom删除元素<br><code>ng-switch</code> 如同switch适用于多个例子，有ngSwitchCase ngSwitchDefault<br><code>ng-hide</code> 从dom隐藏元素<br><code>ng-options</code> 这个有点多，放下面单独列一项<br><code>ng-disabled</code> 绑定数据到html的disabled属性<br><code>ng-show</code> <code>ng-hide</code><br><code>ng-bind</code>  是指定数据，和<code></code>差不多<br><code>ng-model</code> 是双向绑定, 在<code>ng-repeat</code>中<code>ng-model</code>必须和<code>ng-change</code>连用<br><code>ng-class</code> 绑定css:</p>
+<p><code>ng-app</code> 指定AngularJS脚步执行作用域<br><code>ng-model</code> 绑定html元素到数据<br><code>ng-init</code> 初始化数据<br><code>ng-if</code>从dom删除元素<br><code>ng-switch</code> 如同switch适用于多个例子，有ngSwitchCase ngSwitchDefault<br><code>ng-hide</code> 从dom隐藏元素<br><code>ng-options</code> 这个有点多，放下面单独列一项<br><code>ng-disabled</code> 绑定数据到html的disabled属性<br><code>ng-show</code> <code>ng-hide</code><br><code>ng-bind</code>  是指定数据，和<code></code>差不多<br><code>ng-cloak</code> 加载时防止代码未加载完而发生的闪烁<br><code>ng-model</code> 是双向绑定, 在<code>ng-repeat</code>中<code>ng-model</code>必须和<code>ng-change</code>连用<br><code>ng-class</code> 绑定css:</p>
 <ol>
 <li>ng-class=”name” css类绑定变量name</li>
 <li>ng-class=”{true: ‘active’, false: ‘inactive’}[isActive]” 变量isActive为true时绑定active，为false时绑定inactive</li>
@@ -127,12 +143,29 @@
 </ul>
 <h3 id="查找dom"><a href="#查找dom" class="headerlink" title="查找dom"></a>查找dom</h3><p><code>jqLite</code>太难用了，返回的还是它的对象。算了。</p>
 <p>用这个，正好还可以找到属性对应的dom<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> dd = angular.element(<span class="built_in">document</span>.querySelector(<span class="string">'ul'</span>));</div><div class="line"><span class="keyword">var</span> dd = angular.element(<span class="built_in">document</span>.querySelector(<span class="string">'[id="ew"]'</span>));<span class="comment">//id="ew"的dom</span></div><div class="line"></div><div class="line"><span class="comment">//我才发现既然angular.element支持 css的选择器，那就可以用 `.modal-body input`这种css语法来选择呀。。。。。。晕！！太笨了。。</span></div></pre></td></tr></table></figure></p>
+<h3 id="this和-scope"><a href="#this和-scope" class="headerlink" title="this和$scope"></a>this和$scope</h3><p>今天想起对比下这俩个：</p>
+<ul>
+<li><p>用<code>$scope</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">dd</span>(<span class="params">$scope</span>) </span>&#123; $scope.test = <span class="string">"dd"</span>; &#125;</div><div class="line"></div><div class="line">&lt;div ng-controller=<span class="string">"dd"</span>&gt; &#123;&#123;test&#125;&#125; &lt;<span class="regexp">/div&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>用<code>this</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">dd</span>(<span class="params"></span>) </span>&#123; <span class="keyword">var</span> vm = <span class="keyword">this</span>; <span class="keyword">this</span>.test = <span class="string">"dd"</span> ;&#125;</div><div class="line"></div><div class="line">&lt;div ng-controller=<span class="string">"dd as vm"</span>&gt; &#123;&#123;vm.test&#125;&#125;&lt;<span class="regexp">/div&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>使用起来一个麻烦js文件，一个麻烦html文件，但效果无异。</p>
+<p><strong>但是区别在于</strong><br><code>$scope</code>可以访问到父类的<code>$scope</code>的属性和成员；但是当具有相同属性或成员时，<code>$scope</code>就拥有自己的空间，并不会覆盖。</p>
 <p><em>angular思想</em><br><strong>Angular分俩个块儿：配置块和运行块(它更多的在于思想)</strong></p>
 <p><strong>配置块</strong><br><code>angular.config</code> 这个会在配置块执行，然而上面的依赖注入只有<code>provider</code>才能在配置块被执行。<br>所以设计<code>provider</code>为初始化设置，<code>$get</code>返回一个对象，让所有注入</p>
 <p><code>factory</code>要返回一个对象，所以一般被设为仅仅需要的是一个方法和数据的集合且不需要处理复杂的逻辑的时候<br><code>service</code>当使用在功能控制比较多的service里面</p>
 <hr>
+<h3 id="provide-decorator"><a href="#provide-decorator" class="headerlink" title="provide.decorator"></a>provide.decorator</h3><p>这个功能用于向已有的服务里面添加新的功能</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Mail = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.receiver = <span class="string">''</span>;</div><div class="line">    <span class="keyword">this</span>.body = <span class="string">''</span>;</div><div class="line">    <span class="keyword">this</span>.cc = [];</div><div class="line">&#125;;</div><div class="line"></div><div class="line">Mail.prototype.setReceiver = <span class="function"><span class="keyword">function</span>(<span class="params">receiver</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.receiver = receiver;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">Mail.prototype.setBody = <span class="function"><span class="keyword">function</span>(<span class="params">body</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.body = body;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">angular.module(<span class="string">'A'</span>, []).service(<span class="string">'Mail'</span>, Mail);</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">angular.module(<span class="string">'B'</span>, [<span class="string">'A'</span>]).config(<span class="function"><span class="keyword">function</span>(<span class="params">$provide</span>) </span>&#123;</div><div class="line">    $provide.decorator(<span class="string">'Mail'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$delegate</span>) </span>&#123;</div><div class="line">        $delegate.addCC = <span class="function"><span class="keyword">function</span>(<span class="params">cc</span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>.cc.push(cc);</div><div class="line">        &#125;;</div><div class="line">        <span class="keyword">return</span> $delegate;</div><div class="line">    &#125;);</div><div class="line">&#125;)</div><div class="line">.controller(<span class="string">'TestCtrl'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope, Mail</span>) </span>&#123;</div><div class="line">    Mail.addCC(<span class="string">'jack'</span>);<span class="comment">//这些mail服务就多了个调用函数</span></div><div class="line">    <span class="built_in">console</span>.log(Mail);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="provider笔记"><a href="#provider笔记" class="headerlink" title="provider笔记"></a>provider笔记</h4><p>初始化必须<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">angular.module()</div><div class="line">.provider(<span class="string">'linkAll'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> l1 = <span class="string">''</span>;</div><div class="line">    <span class="keyword">var</span> l2 = <span class="string">''</span>;</div><div class="line"></div><div class="line">    <span class="keyword">this</span>.SetLinkTitle = <span class="function"><span class="keyword">function</span>(<span class="params">v</span>) </span>&#123;</div><div class="line">        l1 = v;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">this</span>.SetLinkUrl = <span class="function"><span class="keyword">function</span>(<span class="params">v</span>) </span>&#123;</div><div class="line">        l2 = v;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">this</span>.$get = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> &#123;</div><div class="line">            linkTitle: l1,</div><div class="line">            linkUrl: l2,</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在config对它访问和在控件对它访问是完全不一样的</span></div><div class="line">config ([<span class="string">'linkAllProvider'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">linkAllProvider</span>)</span>&#123; </div><div class="line">    linkAllProvider.SetLinkTitle(<span class="number">3</span>);</div><div class="line">    &#125;]);</div><div class="line"></div><div class="line">controller([<span class="string">'linkAll'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">linkAll</span>) </span>&#123;linkAll.linkTitle;&#125;])</div></pre></td></tr></table></figure>
 <h3 id="ocLazyLoad"><a href="#ocLazyLoad" class="headerlink" title="ocLazyLoad"></a>ocLazyLoad</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">$ocLazyLoadProvider.config(&#123;</div><div class="line">            debug: <span class="literal">true</span>, <span class="comment">//官方说这是为了oclazy向控制台输出信息</span></div><div class="line">            serie: <span class="literal">true</span>, <span class="comment">//当modules的多个模块文件全都互相依赖时，为了全部加载而在全局使用</span></div><div class="line">            modules: [&#123;</div><div class="line">                name: <span class="string">'kzts.modules.products.search'</span>,</div><div class="line">                files: [</div><div class="line">                    <span class="string">'/ts/modules/products/search/search.module.js'</span>,</div><div class="line">                    <span class="string">'/ts/modules/products/search/products-search.js'</span>,</div><div class="line">                    <span class="string">'/ts/modules/products/search/products-search-modal-controller.js'</span></div><div class="line">                ],</div><div class="line">                serie: <span class="literal">true</span> <span class="comment">//指定核心模块，当多个模块加载时，保证核心模块先被加载</span></div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">                ... <span class="comment">//这些格式如上</span></div><div class="line">            &#125; ]</div><div class="line">        &#125;);</div><div class="line"></div><div class="line"><span class="comment">//.....</span></div><div class="line">         resolve: &#123;</div><div class="line">                loadModule: [<span class="string">'$ocLazyLoad'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">$ocLazyLoad</span>) </span>&#123;</div><div class="line">                    <span class="keyword">return</span> $ocLazyLoad.load(<span class="string">'errorView'</span>);</div><div class="line">                &#125;]</div><div class="line">            &#125;</div></pre></td></tr></table></figure>
-<h3 id="UI-Router"><a href="#UI-Router" class="headerlink" title="UI-Router"></a>UI-Router</h3><p>跳转方式<br>$state.go()<br>ng-href<br>ui-sref</p>
+<h3 id="UI-Router"><a href="#UI-Router" class="headerlink" title="UI-Router"></a>UI-Router</h3><p>跳转方式<br>$state.go()<br>ng-href: 会<code>ng-href=&quot;/av/&quot;</code><br>ui-sref: 这个需要url那边配合 <a href="https://github.com/angular-ui/ui-router/wiki/URL-Routing#url-parameters" target="_blank" rel="external">https://github.com/angular-ui/ui-router/wiki/URL-Routing#url-parameters</a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">url: <span class="string">'/users/:id/details/&#123;type&#125;/&#123;repeat:[0-9]+&#125;?from&amp;to'</span></div><div class="line"></div><div class="line"><span class="comment">// Then you navigated your browser to:</span></div><div class="line"><span class="string">'/users/123/details//0'</span></div><div class="line"></div><div class="line"><span class="comment">// Your $stateParams object would be</span></div><div class="line">&#123; id:<span class="string">'123'</span>, type:<span class="string">''</span>, repeat:<span class="string">'0'</span> &#125;</div></pre></td></tr></table></figure></p>
+<p>href</p>
 <ul>
 <li><p>父子路由</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">.state(<span class="string">'blog'</span>, ...)</div><div class="line">.state(<span class="string">'blog.index'</span>, ...);</div><div class="line"><span class="comment">//通过名称中的一个`.` 来区分父子路由</span></div><div class="line"></div><div class="line">.state(<span class="string">'list'</span>, &#123;</div><div class="line">    parent: <span class="string">'contacts'</span>, <span class="comment">//指定父路由</span></div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">//子路由会继承父路由的依赖注入项</span></div><div class="line">resolve: &#123;rea:...&#125;</div><div class="line">resolve: &#123;reb:...&#125;</div><div class="line">conttroller: <span class="function"><span class="keyword">function</span>(<span class="params">rea, reb</span>) </span>&#123;...&#125;</div><div class="line"></div><div class="line"><span class="comment">//子路由会继承父路由的data属性，并可以重写</span></div><div class="line">$stateProvider.state(<span class="string">'parent'</span>, &#123;</div><div class="line">    data: &#123;...&#125;</div><div class="line">&#125;)</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Ctrl</span>(<span class="params">$state</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log($state.current.data.customData1) <span class="comment">// outputs 5;</span></div><div class="line">    <span class="built_in">console</span>.log($state.current.data.customData2) <span class="comment">// outputs "blue";</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -147,12 +180,20 @@
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">$stateProvider</div><div class="line">  .state(<span class="string">'report'</span>,&#123;</div><div class="line">    views: &#123;</div><div class="line">      <span class="string">'filters'</span>: &#123;</div><div class="line">        templateUrl: <span class="string">'report-filters.html'</span>,</div><div class="line">        controller: <span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>)</span>&#123; ... controller stuff just <span class="keyword">for</span> filters view ... &#125;</div><div class="line">      &#125;,</div><div class="line">      <span class="string">'tabledata'</span>: &#123;</div><div class="line">        templateUrl: <span class="string">'report-table.html'</span>,</div><div class="line">        controller: <span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>)</span>&#123; ... controller stuff just <span class="keyword">for</span> tabledata view ... &#125;</div><div class="line">      &#125;,</div><div class="line">      <span class="string">'graph'</span>: &#123;</div><div class="line">        templateUrl: <span class="string">'report-graph.html'</span>,</div><div class="line">        controller: <span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>)</span>&#123; ... controller stuff just <span class="keyword">for</span> graph view ... &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;)</div></pre></td></tr></table></figure>
 <p>多视图的命名允许使用相对和绝对<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- index.html (root unnamed template) --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">ng-app</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ui-view</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> <span class="comment">&lt;!-- contacts.html plugs in here --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ui-view</span>=<span class="string">"status"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- contacts.html --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>My Contacts<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ui-view</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ui-view</span>=<span class="string">"detail"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- contacts.detail.html --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Contacts Details<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ui-view</span>=<span class="string">"info"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">$stateProvider</div><div class="line">  .state(<span class="string">'contacts'</span>, &#123;</div><div class="line">    <span class="comment">// 根状态，对应的父模板则是index.html</span></div><div class="line">    <span class="comment">// 所以 contacts.html 将被加载到 index.html 中未命名的 ui-view 中</span></div><div class="line">    templateUrl: <span class="string">'contacts.html'</span>   </div><div class="line">  &#125;)</div><div class="line">  .state(<span class="string">'contacts.detail'</span>, &#123;</div><div class="line">    views: &#123;</div><div class="line">        <span class="comment">// 嵌套状态，对应的父模板是 contacts.html</span></div><div class="line"></div><div class="line">        <span class="comment">// 相对命名</span></div><div class="line">        <span class="comment">// contacts.html 中 &lt;div ui-view='detail'/&gt; 将对应下面</span></div><div class="line">        <span class="string">"detail"</span> : &#123; &#125;,   </div><div class="line">         </div><div class="line">        <span class="comment">// 相对命名</span></div><div class="line">        <span class="comment">// 对应 contacts.html 中的未命名 ui-view &lt;div ui-view/&gt;</span></div><div class="line">        <span class="string">""</span> : &#123; &#125;, </div><div class="line"></div><div class="line">        <span class="comment">// 绝对命名</span></div><div class="line">        <span class="comment">// 对应 contacts.detail.html 中 &lt;div ui-view='info'/&gt;</span></div><div class="line">        <span class="string">"info@contacts.detail"</span> : &#123; &#125;</div><div class="line"></div><div class="line">        <span class="comment">// 绝对命名</span></div><div class="line">        <span class="comment">// 对应 contacts.html 中 &lt;div ui-view='detail'/&gt;</span></div><div class="line">        <span class="string">"detail@contacts"</span> : &#123; &#125;</div><div class="line"></div><div class="line">        <span class="comment">// 绝对命名</span></div><div class="line">        <span class="comment">// 对应 contacts.html 中的未命名 ui-view &lt;div ui-view/&gt;</span></div><div class="line">        <span class="string">"@contacts"</span> : &#123; &#125;</div><div class="line"></div><div class="line">        <span class="comment">// 绝对命名</span></div><div class="line">        <span class="comment">// 对应 index.html 中 &lt;div ui-view='status'/&gt; </span></div><div class="line">        <span class="string">"status@"</span> : &#123; &#125;</div><div class="line"></div><div class="line">        <span class="comment">// 绝对命名</span></div><div class="line">        <span class="comment">// 对应 index.html 中 &lt;div ui-view/&gt;</span></div><div class="line">        <span class="string">"@"</span> : &#123; &#125; </div><div class="line">  &#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">$stateProvider</div><div class="line">  .state(<span class="string">'contacts'</span>, &#123;</div><div class="line">    <span class="comment">// 根状态，对应的父模板则是index.html</span></div><div class="line">    <span class="comment">// 所以 contacts.html 将被加载到 index.html 中未命名的 ui-view 中</span></div><div class="line">    templateUrl: <span class="string">'contacts.html'</span>   </div><div class="line">    data: &#123;custom: <span class="number">5</span>&#125;</div><div class="line">  &#125;)</div><div class="line">  .state(<span class="string">'contacts.detail'</span>, &#123;</div><div class="line">    views: &#123;</div><div class="line">        <span class="comment">// 嵌套状态，对应的父模板是 contacts.html</span></div><div class="line"></div><div class="line">        <span class="comment">// 相对命名</span></div><div class="line">        <span class="comment">// contacts.html 中 &lt;div ui-view='detail'/&gt; 将对应下面</span></div><div class="line">        <span class="string">"detail"</span> : &#123; &#125;,   </div><div class="line">         </div><div class="line">        <span class="comment">// 相对命名</span></div><div class="line">        <span class="comment">// 对应 contacts.html 中的未命名 ui-view &lt;div ui-view/&gt;</span></div><div class="line">        <span class="string">""</span> : &#123; &#125;, </div><div class="line"></div><div class="line">        <span class="comment">// 绝对命名</span></div><div class="line">        <span class="comment">// 对应 contacts.detail.html 中 &lt;div ui-view='info'/&gt;</span></div><div class="line">        <span class="string">"info@contacts.detail"</span> : &#123; &#125;</div><div class="line"></div><div class="line">        <span class="comment">// 绝对命名</span></div><div class="line">        <span class="comment">// 对应 contacts.html 中 &lt;div ui-view='detail'/&gt;</span></div><div class="line">        <span class="string">"detail@contacts"</span> : &#123; &#125;</div><div class="line"></div><div class="line">        <span class="comment">// 绝对命名</span></div><div class="line">        <span class="comment">// 对应 contacts.html 中的未命名 ui-view &lt;div ui-view/&gt;</span></div><div class="line">        <span class="string">"@contacts"</span> : &#123; &#125;</div><div class="line"></div><div class="line">        <span class="comment">// 绝对命名</span></div><div class="line">        <span class="comment">// 对应 index.html 中 &lt;div ui-view='status'/&gt; </span></div><div class="line">        <span class="string">"status@"</span> : &#123; &#125;</div><div class="line"></div><div class="line">        <span class="comment">// 绝对命名</span></div><div class="line">        <span class="comment">// 对应 index.html 中 &lt;div ui-view/&gt;</span></div><div class="line">        <span class="string">"@"</span> : &#123; &#125; </div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">function</span>(<span class="params">$state</span>) </span>&#123;</div><div class="line">      $state.current.data.custom;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
 <ul>
 <li>$urlRouterProvider</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$urlRouterProvider.when(<span class="string">''</span>, <span class="string">'/index'</span>);<span class="comment">// 把空路由重定向到 /index</span></div><div class="line">$urlRouterProvider.otherwise(<span class="string">'/index'</span>);<span class="comment">//重定向无效路由</span></div></pre></td></tr></table></figure>
-<p>最后给个api查询： <a href="https://github.com/angular-ui/ui-router/wiki/Quick-Reference" target="_blank" rel="external">https://github.com/angular-ui/ui-router/wiki/Quick-Reference</a></p>
+<h2 id="最后给个api查询-：-https-github-com-angular-ui-ui-router-wiki-Quick-Reference"><a href="#最后给个api查询-：-https-github-com-angular-ui-ui-router-wiki-Quick-Reference" class="headerlink" title="最后给个api查询 ##： https://github.com/angular-ui/ui-router/wiki/Quick-Reference"></a>最后给个api查询 ##： <a href="https://github.com/angular-ui/ui-router/wiki/Quick-Reference" target="_blank" rel="external">https://github.com/angular-ui/ui-router/wiki/Quick-Reference</a></h2><h4 id="多个视图"><a href="#多个视图" class="headerlink" title="多个视图"></a>多个视图</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--main.html--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./angular.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./angular-ui-router.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./App2.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">data-ng-app</span>=<span class="string">"myApp"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>多ui-view<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">ui-view</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">ui-view</span>=<span class="string">"chart"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">ui-view</span>=<span class="string">"data"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myApp = angular.module(<span class="string">"myApp"</span>, [<span class="string">"ui.router"</span>]);</div><div class="line">myApp.config(<span class="function"><span class="keyword">function</span> (<span class="params">$stateProvider, $urlRouterProvider</span>) </span>&#123;</div><div class="line">    $urlRouterProvider.when(<span class="string">""</span>, <span class="string">"/home"</span>);</div><div class="line">    $stateProvider.state(<span class="string">"home"</span>, &#123;</div><div class="line">            url: <span class="string">"/home"</span>,</div><div class="line">            views: &#123;</div><div class="line">                <span class="string">""</span>: &#123;</div><div class="line">                    template: <span class="string">"&lt;h1&gt;HELLO!&lt;/h1&gt;"</span></div><div class="line">                &#125;,</div><div class="line">                <span class="string">"chart"</span>: &#123;</div><div class="line">                    template: <span class="string">"chart"</span></div><div class="line">                &#125;,</div><div class="line">                <span class="string">"data"</span>: &#123;</div><div class="line">                    template: <span class="string">"data"</span></div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">        .state(<span class="string">"index"</span>, &#123;</div><div class="line">            url: <span class="string">"/index"</span>,</div><div class="line">            views: &#123;</div><div class="line">                <span class="string">""</span>: &#123;</div><div class="line">                    template: <span class="string">"&lt;h1&gt;HELLO!&lt;/h1&gt;"</span></div><div class="line">                &#125;,</div><div class="line">                <span class="string">"data"</span>: &#123;</div><div class="line">                    template: <span class="string">"data-index"</span></div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;)   </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="多层视图"><a href="#多层视图" class="headerlink" title="多层视图"></a>多层视图</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--main.html--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./angular.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./angular-ui-router.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./App.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">data-ng-app</span>=<span class="string">"myApp"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>AngularJS Home Page (Ui-router Demonstration)<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">ui-view</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// App.js</span></div><div class="line"><span class="keyword">var</span> myApp = angular.module(<span class="string">"myApp"</span>, [<span class="string">"ui.router"</span>]);</div><div class="line">myApp.config(<span class="function"><span class="keyword">function</span> (<span class="params">$stateProvider, $urlRouterProvider</span>) </span>&#123;</div><div class="line">     $urlRouterProvider.when(<span class="string">""</span>, <span class="string">"/PageTab"</span>); </div><div class="line">     $stateProvider</div><div class="line">        .state(<span class="string">"PageTab"</span>, &#123;       <span class="comment">//这个有个缺点，就是没有默认指定view的显示页。有俩种方法</span></div><div class="line">            url: <span class="string">"/PageTab"</span>,      <span class="comment">//1、 在PageTab里面加$state.transitionTo('PageTab.Page1');来显示指定显示页</span></div><div class="line">            templateUrl: <span class="string">"PageTab.html"</span><span class="comment">//2. 使用abstract,向父view添加abstract=true属性。但是要设置跳转页面when('', '/PageTab/Page1')，因为直接跳转到父页面是无法显示的。</span></div><div class="line">        &#125;)</div><div class="line">        .state(<span class="string">"PageTab.Page1"</span>, &#123;</div><div class="line">            url:<span class="string">"/Page1"</span>,</div><div class="line">            templateUrl: <span class="string">"Page1.html"</span></div><div class="line">        &#125;)</div><div class="line">        .state(<span class="string">"PageTab.Page2"</span>, &#123;</div><div class="line">            url:<span class="string">"/Page2"</span>,</div><div class="line">            templateUrl: <span class="string">"Page2.html"</span></div><div class="line">        &#125;)</div><div class="line">        .state(<span class="string">"PageTab.Page3"</span>, &#123;</div><div class="line">            url:<span class="string">"/Page3"</span>,</div><div class="line">            templateUrl: <span class="string">"Page3.html"</span></div><div class="line">        &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- PageTab.html --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">         <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">"width:100px"</span> <span class="attr">ui-sref</span>=<span class="string">".Page1"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">""</span>&gt;</span>Page-1<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">         <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">"width:100px"</span> <span class="attr">ui-sref</span>=<span class="string">".Page2"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">""</span>&gt;</span>Page-2<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">         <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">"width:100px"</span> <span class="attr">ui-sref</span>=<span class="string">".Page3"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">""</span>&gt;</span>Page-3<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">     <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">ui-view</span>/&gt;</span></div><div class="line">     <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- Page1.html --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">         <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Page 1 content goes here...<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">     <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- Page2.html --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">         <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Page 2 content goes here...<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">     <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- Page3.html --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">         <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Page 3 content goes here...<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">     <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="translate"><a href="#translate" class="headerlink" title="translate"></a>translate</h3><p>可以作过滤使用<br>可以作属性使用<br>还可以指定参数:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">VARBLE: <span class="string">'HI, &#123;name&#125;'</span> <span class="comment">//字典</span></div><div class="line"></div><div class="line">&lt;p translate=<span class="string">"VARBLE"</span> translate-values=<span class="string">"&#123;name:'wq'&#125;"</span> /&gt;<span class="comment">// HI, wq</span></div></pre></td></tr></table></figure></p>
+<p><code>translations</code>注册<br><code>preferredLanguage</code>选择默认语言。 等同<code>use</code><br><code>fallbackLanguage</code> 动态切换语言时，先fall再use就好了。</p>
+<p><code>useLocalStorage</code> 为了方便快速切换，提供storage来。localstorage依赖cookiestorage。</p>
+<p><code>useStaticFilesLoader</code> 使用静态文件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$translateProvider.useStaticFilesLoader(&#123;</div><div class="line">    files: [&#123;</div><div class="line">        prefix: <span class="string">'/locale/'</span>,</div><div class="line">        suffix: <span class="string">'tt.json'</span></div><div class="line">    &#125;, &#123;</div><div class="line">        prefix: <span class="string">'/absolute/path/to/locale-'</span>, <span class="comment">//locale-en locale-cn</span></div><div class="line">        suffix: <span class="string">'.json'</span></div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line">$translateProvider.preferredLanguage(<span class="string">'en'</span>);</div></pre></td></tr></table></figure></p>
 ]]></content>
     </entry>
     
@@ -315,7 +356,20 @@
 <p>如下代码就不会阻塞了。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> text = downloadSync(<span class="string">"http://example.com/file.txt"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">text</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(text);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 <h3 id="对异步循环使用递归"><a href="#对异步循环使用递归" class="headerlink" title="对异步循环使用递归"></a>对异步循环使用递归</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">download</span>(<span class="params">urls</span>) </span>&#123;</div><div class="line">    <span class="keyword">for</span> (...) &#123;</div><div class="line">        ...<span class="comment">//下载文件，异步代码</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>循环的代码会等待下载执行完成。用递归函数在时间循环的单独轮次中执行迭代。</p>
-<h3 id="js递归函数同步调用太多次会导致失败（承受力各不同，几百次以上）"><a href="#js递归函数同步调用太多次会导致失败（承受力各不同，几百次以上）" class="headerlink" title="js递归函数同步调用太多次会导致失败（承受力各不同，几百次以上）"></a>js递归函数同步调用太多次会导致失败（承受力各不同，几百次以上）</h3>]]></content>
+<h3 id="js递归函数同步调用太多次会导致失败（承受力各不同，几百次以上）"><a href="#js递归函数同步调用太多次会导致失败（承受力各不同，几百次以上）" class="headerlink" title="js递归函数同步调用太多次会导致失败（承受力各不同，几百次以上）"></a>js递归函数同步调用太多次会导致失败（承受力各不同，几百次以上）</h3><h3 id="私有公有静态属性的访问"><a href="#私有公有静态属性的访问" class="headerlink" title="私有公有静态属性的访问"></a>私有公有静态属性的访问</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">user</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> name = name;<span class="comment">//私有属性</span></div><div class="line">  <span class="keyword">this</span>.name = name; <span class="comment">//公有属性</span></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> name; &#125;<span class="comment">//私有方法</span></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getHName</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> name; &#125;<span class="comment">//私有方法</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">user.prototype.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="keyword">this</span>.name;&#125;<span class="comment">//公有方法</span></div><div class="line">user.name = <span class="string">'ss'</span>; <span class="comment">//静态属性</span></div><div class="line">user.sname = <span class="string">'ss'</span>; <span class="comment">//静态属性</span></div><div class="line">user.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="keyword">this</span>.name&#125;<span class="comment">//静态方法</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> ws = <span class="keyword">new</span> user(<span class="string">'cats'</span>);</div></pre></td></tr></table></figure>
+<ul>
+<li><p>调用公有方法、公有属性，必须先实例化对象。公有方法不能调用私有方法和静态方法。<br>(即：ws.sname 不可以 user.sanme可以; )</p>
+</li>
+<li><p>静态方法和静态属性无需示例化可访问 (user.name可以)</p>
+</li>
+<li>私有方法和属性外部无法访问 (user.getHName() 不可以 user().getHName() 不可以)</li>
+</ul>
+<h3 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'cat'</span>);&#125;</div><div class="line">getName();<span class="comment">//cat</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'dog'</span>); &#125;</div><div class="line">getName();<span class="comment">//dog</span></div></pre></td></tr></table></figure>
+<ul>
+<li>js解释器会把声明提升到作用域（函数作用域）的最前面（即使写代码时放在最后也会被提升）</li>
+</ul>
+<h3 id="new的优先级"><a href="#new的优先级" class="headerlink" title="new的优先级"></a>new的优先级</h3><p>用上面现成的代码做例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> user.getName();</div><div class="line"><span class="comment">//由于点运算优先级大于new无参数列表 这个就可视为 new (user.getName)();</span></div><div class="line"><span class="comment">//这下就成了将getName作为了构造函数来创建对象</span></div><div class="line"></div><div class="line"><span class="keyword">new</span> user().getName();</div><div class="line"><span class="comment">//new有参数列表和点运算同级，所以可视为 (new user()).getName();</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">&#125;</div><div class="line">foo.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="number">3</span>);&#125;</div><div class="line">foo.prototype.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;<span class="built_in">console</span>.log(<span class="number">4</span>);&#125;</div><div class="line"><span class="keyword">new</span> foo.getName();<span class="comment">//3</span></div><div class="line"><span class="keyword">new</span> foo().getName();<span class="comment">//4</span></div></pre></td></tr></table></figure>]]></content>
     </entry>
     
     <entry>
@@ -2279,6 +2333,17 @@ objectRef[&quot;testNumber&quot;] = 5;//这俩句是一样的
     </entry>
     
     <entry>
+      <title><![CDATA[Electron学习(164)]]></title>
+      <url>https://xuecat.github.io/2016/02/27/164/</url>
+      <content type="html"><![CDATA[<h1 id="process-platform"><a href="#process-platform" class="headerlink" title="process.platform"></a>process.platform</h1><p>The variable to use would be process.platform</p>
+<p>On Mac the variable returns darwin. On Windows, it returns win32 (even on 64 bit).</p>
+<p>Possible values are: ‘darwin’, ‘freebsd’, ‘linux’, ‘sunos’ or ‘win32’</p>
+<p>I just set this at the top of my jakeFile:</p>
+<p>var isWin = /^win/.test(process.platform);</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[React Native CSS(162)]]></title>
       <url>https://xuecat.github.io/2016/02/27/162/</url>
       <content type="html"><![CDATA[<h2 id="flex属性"><a href="#flex属性" class="headerlink" title="flex属性"></a>flex属性</h2><p>就是说，所有带flex属性的子容器，flex值相加得到一个总数，该容器占父容器的比重就是这个容器flex值除以总flex值</p>
@@ -2298,17 +2363,6 @@ objectRef[&quot;testNumber&quot;] = 5;//这俩句是一样的
 <p>分析原因是找不到this吧，因为回调函数传了几次，this该搞乱了吧。</p>
 <p>问题解决：extrafun:this.addFileMessage.bind(this)</p>
 <p>传值得时候就绑定this，这样就不会乱了！！！！！！！！</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Electron学习(164)]]></title>
-      <url>https://xuecat.github.io/2016/02/27/164/</url>
-      <content type="html"><![CDATA[<h1 id="process-platform"><a href="#process-platform" class="headerlink" title="process.platform"></a>process.platform</h1><p>The variable to use would be process.platform</p>
-<p>On Mac the variable returns darwin. On Windows, it returns win32 (even on 64 bit).</p>
-<p>Possible values are: ‘darwin’, ‘freebsd’, ‘linux’, ‘sunos’ or ‘win32’</p>
-<p>I just set this at the top of my jakeFile:</p>
-<p>var isWin = /^win/.test(process.platform);</p>
 ]]></content>
     </entry>
     
@@ -2359,6 +2413,21 @@ distributionUrl=gradle-2.4-all.zip
     </entry>
     
     <entry>
+      <title><![CDATA[python 等问题解决(155)]]></title>
+      <url>https://xuecat.github.io/2016/01/14/155/</url>
+      <content type="html"><![CDATA[<p>python安装某些模块的时候，老是出错（当然错误是Unicode和ascii字符的问题）</p>
+<p><strong>1、安装模块字符错误</strong><br><br>在python的Lib\site-packages文件夹下新建一个sitecustomize.py，内容为：</p>
+<pre><code> # encoding=utf8  
+import sys  
+
+reload(sys)  
+sys.setdefaultencoding(&apos;utf8&apos;)
+</code></pre><p>此时重启python解释器，可以解决了。</p>
+<p><strong>pip的国内源</strong><br><br>这里，我只说下指令，其它百度吧。感觉这个华中科大的源最快；<br><br>pip install ** -i <a href="http://pypi.mirrors.ustc.edu.cn/simple" target="_blank" rel="external">http://pypi.mirrors.ustc.edu.cn/simple</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[调试技巧(154)]]></title>
       <url>https://xuecat.github.io/2016/01/14/154/</url>
       <content type="html"><![CDATA[<p>  自从在153文章的认识后，自己要好好熟悉下那个工具<br></p>
@@ -2391,21 +2460,6 @@ distributionUrl=gradle-2.4-all.zip
 <p>::OutputDebugString(_T(“debug information!”));</p>
 </blockquote>
 </blockquote>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[python 等问题解决(155)]]></title>
-      <url>https://xuecat.github.io/2016/01/14/155/</url>
-      <content type="html"><![CDATA[<p>python安装某些模块的时候，老是出错（当然错误是Unicode和ascii字符的问题）</p>
-<p><strong>1、安装模块字符错误</strong><br><br>在python的Lib\site-packages文件夹下新建一个sitecustomize.py，内容为：</p>
-<pre><code> # encoding=utf8  
-import sys  
-
-reload(sys)  
-sys.setdefaultencoding(&apos;utf8&apos;)
-</code></pre><p>此时重启python解释器，可以解决了。</p>
-<p><strong>pip的国内源</strong><br><br>这里，我只说下指令，其它百度吧。感觉这个华中科大的源最快；<br><br>pip install ** -i <a href="http://pypi.mirrors.ustc.edu.cn/simple" target="_blank" rel="external">http://pypi.mirrors.ustc.edu.cn/simple</a></p>
 ]]></content>
     </entry>
     
@@ -2455,12 +2509,6 @@ sys.setdefaultencoding(&apos;utf8&apos;)
     </entry>
     
     <entry>
-      <title><![CDATA[函数学习]]></title>
-      <url>https://xuecat.github.io/2015/11/26/150/</url>
-      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>弄个函数学习++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function">BOOL WINAPI <span class="title">PostThreadMessage</span><span class="params">(<span class="number">_</span>In_ DWORD idThread,<span class="number">_</span>In_ UINT Msg,<span class="number">_</span>In_ WPARAM wParam,<span class="number">_</span>In_ LPARAM lParam)</span></span>;</div><div class="line"><span class="comment">//向指定线程ID，发送消息，高低字节参数。</span></div><div class="line"></div><div class="line"><span class="comment">//嘿嘿，线程可以完全像消息机制；</span></div><div class="line"><span class="function">DWORD <span class="title">ThreadProc</span><span class="params">(LPVOID lParam)</span></span></div><div class="line">&#123;</div><div class="line">               MSG msg;</div><div class="line">               <span class="keyword">while</span>(GetMessage(&amp;msg,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>))</div><div class="line">               &#123;</div><div class="line">                       <span class="keyword">if</span>(msg.message == TALK_MESSAGE)</div><div class="line">                       &#123;</div><div class="line">                               MessageBox(<span class="literal">NULL</span>,<span class="string">L"Hi"</span>,<span class="string">L"Worker Thread"</span>,MB_OK);</div><div class="line">                       &#125;</div><div class="line">                       DispatchMessage(&amp;msg);<span class="comment">//下发消息，好像线程没有消息注册窗口。</span></div><div class="line">               &#125;</div><div class="line">               MessageBox(<span class="literal">NULL</span>,<span class="string">L"Thread will close by pressing OK"</span>,<span class="string">L"From Worker Thread"</span>,MB_OK);</div><div class="line">               AfxGetApp()-&gt;m_pMainWnd-&gt;PostMessageW(TALK_MESSAGE+<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>);</div><div class="line">               <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[文章笔记（大部分来源于CSDN）(149)]]></title>
       <url>https://xuecat.github.io/2015/11/26/149/</url>
       <content type="html"><![CDATA[<p><strong>csdn文章一般都会放书签里面，但是多了就又记不住了，算了，开个页面吧：</strong></p>
@@ -2470,6 +2518,12 @@ sys.setdefaultencoding(&apos;utf8&apos;)
 <p>查了下，居然是google的东西，貌似浏览器和Android都用它，屌屌，，google大大的东东就是牛逼</p>
 <p>3、</p>
 ]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[函数学习]]></title>
+      <url>https://xuecat.github.io/2015/11/26/150/</url>
+      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>弄个函数学习++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function">BOOL WINAPI <span class="title">PostThreadMessage</span><span class="params">(<span class="number">_</span>In_ DWORD idThread,<span class="number">_</span>In_ UINT Msg,<span class="number">_</span>In_ WPARAM wParam,<span class="number">_</span>In_ LPARAM lParam)</span></span>;</div><div class="line"><span class="comment">//向指定线程ID，发送消息，高低字节参数。</span></div><div class="line"></div><div class="line"><span class="comment">//嘿嘿，线程可以完全像消息机制；</span></div><div class="line"><span class="function">DWORD <span class="title">ThreadProc</span><span class="params">(LPVOID lParam)</span></span></div><div class="line">&#123;</div><div class="line">               MSG msg;</div><div class="line">               <span class="keyword">while</span>(GetMessage(&amp;msg,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>))</div><div class="line">               &#123;</div><div class="line">                       <span class="keyword">if</span>(msg.message == TALK_MESSAGE)</div><div class="line">                       &#123;</div><div class="line">                               MessageBox(<span class="literal">NULL</span>,<span class="string">L"Hi"</span>,<span class="string">L"Worker Thread"</span>,MB_OK);</div><div class="line">                       &#125;</div><div class="line">                       DispatchMessage(&amp;msg);<span class="comment">//下发消息，好像线程没有消息注册窗口。</span></div><div class="line">               &#125;</div><div class="line">               MessageBox(<span class="literal">NULL</span>,<span class="string">L"Thread will close by pressing OK"</span>,<span class="string">L"From Worker Thread"</span>,MB_OK);</div><div class="line">               AfxGetApp()-&gt;m_pMainWnd-&gt;PostMessageW(TALK_MESSAGE+<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>);</div><div class="line">               <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>]]></content>
     </entry>
     
     <entry>
@@ -2966,22 +3020,6 @@ HasPem d; HasPem p; d=p;//这个才是调用的赋值函数；
     </entry>
     
     <entry>
-      <title><![CDATA[编译后各个文件（123）]]></title>
-      <url>https://xuecat.github.io/2015/05/18/123/</url>
-      <content type="html"><![CDATA[<blockquote>
-<ul>
-<li><p>pdb这个是二进制代码和源代码映射文件。有了这个才能调试定位代码位置</p>
-</li>
-<li><p>dump是进程内存镜像文件。用windbg打开。程序崩溃时用windbg生成下dmp文件，然后分析内存的错，而定位代码</p>
-</li>
-<li><p>obj文件是目标文件，一般是程序编译后的二进制文件，在通过链接器和资源文件链接就成exe文件了。   </p>
-</li>
-</ul>
-</blockquote>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[release和debug详细（121）]]></title>
       <url>https://xuecat.github.io/2015/05/18/121/</url>
       <content type="html"><![CDATA[<p>这几天翻了下笔记本，有好多知识没同步上来，写起！</p>
@@ -3055,6 +3093,22 @@ HasPem d; HasPem p; d=p;//这个才是调用的赋值函数；
 </blockquote>
 <p><strong><em>最后说下俩个模式注意项</em></strong></p>
 <h4 id="网上说对windows的消息函数格式要严格要求（呵呵，-我没遇见过，反正一直都严格要求了）"><a href="#网上说对windows的消息函数格式要严格要求（呵呵，-我没遇见过，反正一直都严格要求了）" class="headerlink" title="网上说对windows的消息函数格式要严格要求（呵呵， 我没遇见过，反正一直都严格要求了）"></a>网上说对windows的消息函数格式要严格要求（呵呵， 我没遇见过，反正一直都严格要求了）<br></h4><h4 id="assert代码会忽略（遇见过）verify可以使用，但自己注意吧，我觉得这种宏。。"><a href="#assert代码会忽略（遇见过）verify可以使用，但自己注意吧，我觉得这种宏。。" class="headerlink" title="assert代码会忽略（遇见过）verify可以使用，但自己注意吧，我觉得这种宏。。"></a>assert代码会忽略（遇见过）verify可以使用，但自己注意吧，我觉得这种宏。。<br></h4><h3 id="未使用的变量会被去掉，网上有段这相关的代码，从代码的函数内存分配和入栈来想，确实会导致内存越界，结果跑的时候就是没变化感觉是坑，但还是注意吧。。-lt-gt"><a href="#未使用的变量会被去掉，网上有段这相关的代码，从代码的函数内存分配和入栈来想，确实会导致内存越界，结果跑的时候就是没变化感觉是坑，但还是注意吧。。-lt-gt" class="headerlink" title="未使用的变量会被去掉，网上有段这相关的代码，从代码的函数内存分配和入栈来想，确实会导致内存越界，结果跑的时候就是没变化感觉是坑，但还是注意吧。。&lt;&gt;"></a>未使用的变量会被去掉，网上有段这相关的代码，从代码的函数内存分配和入栈来想，确实会导致内存越界，结果跑的时候就是没变化感觉是坑，但还是注意吧。。&lt;&gt;</h3>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[编译后各个文件（123）]]></title>
+      <url>https://xuecat.github.io/2015/05/18/123/</url>
+      <content type="html"><![CDATA[<blockquote>
+<ul>
+<li><p>pdb这个是二进制代码和源代码映射文件。有了这个才能调试定位代码位置</p>
+</li>
+<li><p>dump是进程内存镜像文件。用windbg打开。程序崩溃时用windbg生成下dmp文件，然后分析内存的错，而定位代码</p>
+</li>
+<li><p>obj文件是目标文件，一般是程序编译后的二进制文件，在通过链接器和资源文件链接就成exe文件了。   </p>
+</li>
+</ul>
+</blockquote>
+]]></content>
     </entry>
     
     <entry>
@@ -3648,14 +3702,14 @@ return count;
     </entry>
     
     <entry>
-      <title><![CDATA[string发现(97)]]></title>
-      <url>https://xuecat.github.io/2015/01/01/97/</url>
-      <content type="html"><![CDATA[<p>  今天用string的时候，发现这几处。</p>
+      <title><![CDATA[字符内存越界(98)]]></title>
+      <url>https://xuecat.github.io/2015/01/01/98/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>第一个越界：     我用变长参数函数的时候<code>va_arg(t_args, char*)</code> 又把参数强制转换成int后发现，内存越界。</p>
 <blockquote>
-<ul>
-<li>append传入的是指针，它会一个一个遍历开辟入栈（所以会开辟内部空间吧指针字符串全部复制进去）  </li>
-<li>push_back是传入字符，只传入单个字符。</li>
-</ul>
+<p>分析原因：char<em>的内存界是char</em>指向的一个字节字符界。int<em>的内存界是int</em>指向的4个字节（32）字符界。    强制转换会根据类型偏移量进行数据转换，所以出现错误。</p>
+</blockquote>
+<p>第二个：我自己的失误，字符数组内存开辟小了（没有结尾的空字符），导致char*把后面的数据以前读了。</p>
 </blockquote>
 ]]></content>
     </entry>
@@ -3668,14 +3722,14 @@ return count;
     </entry>
     
     <entry>
-      <title><![CDATA[字符内存越界(98)]]></title>
-      <url>https://xuecat.github.io/2015/01/01/98/</url>
-      <content type="html"><![CDATA[<blockquote>
-<p>第一个越界：     我用变长参数函数的时候<code>va_arg(t_args, char*)</code> 又把参数强制转换成int后发现，内存越界。</p>
+      <title><![CDATA[string发现(97)]]></title>
+      <url>https://xuecat.github.io/2015/01/01/97/</url>
+      <content type="html"><![CDATA[<p>  今天用string的时候，发现这几处。</p>
 <blockquote>
-<p>分析原因：char<em>的内存界是char</em>指向的一个字节字符界。int<em>的内存界是int</em>指向的4个字节（32）字符界。    强制转换会根据类型偏移量进行数据转换，所以出现错误。</p>
-</blockquote>
-<p>第二个：我自己的失误，字符数组内存开辟小了（没有结尾的空字符），导致char*把后面的数据以前读了。</p>
+<ul>
+<li>append传入的是指针，它会一个一个遍历开辟入栈（所以会开辟内部空间吧指针字符串全部复制进去）  </li>
+<li>push_back是传入字符，只传入单个字符。</li>
+</ul>
 </blockquote>
 ]]></content>
     </entry>
@@ -3853,20 +3907,6 @@ dup获取结构体，要free。（它内部开辟）
     </entry>
     
     <entry>
-      <title><![CDATA[c++正则(85)]]></title>
-      <url>https://xuecat.github.io/2014/10/24/85/</url>
-      <content type="html"><![CDATA[<p>支持宽字符，（有w_函数）</p>
-<p>(“(\w+)(\.|_)?(\w*)@(\w+)(\.(\w+))+”);</p>
-<p> 首先注意‘()’表示将正则表达式分成子表达式，每个‘()’之间的内容表示一个子表达式；</p>
-<p>‘\’是一个转义字符，‘\’表示扔掉第二个‘\’的转义特性，‘\w+’表示匹配一个或多个单词，‘+’表示重复一次或者多次，因此第一个子表达式的意思就是匹配一个或者多个单词；</p>
-<p>接着看第二个子表达式，‘|’表示选择，出现‘.’或者‘<em>’，后面的‘?’表示该子表示出现一次或者零次，因此第二个子表示表示‘.’或‘</em>’出现不出现都匹配。</p>
-<p>第三个子表达式表示出现一个单词，‘*’表示任意个字符。</p>
-<p>(\d{1,3}):(\d{1,3}):(\d{1,3}):(\d{1,3})</p>
-<p>首先还是通过‘()’将这个串分成几个子表达式，其中\d表示匹配一个数字，{,}表示数字的个数，例如{1,3}可以理解为匹配一个小于1000的数字</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[C语言中的一些小知识(84)]]></title>
       <url>https://xuecat.github.io/2014/10/24/84/</url>
       <content type="html"><![CDATA[<pre><code>前面加0b表示二进制
@@ -3891,6 +3931,20 @@ dup获取结构体，要free。（它内部开辟）
 <p>float    4    3.4x10 38..3.4x10+38 (7 sf)     %f, %e, %g</p>
 <p>double    8    1.7x10 308..1.7x10+308 (15 sf)     %f, %e, %g</p>
 <p>long double    8 或以上    编译器相关     %Lf, %Le, %Lg</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[c++正则(85)]]></title>
+      <url>https://xuecat.github.io/2014/10/24/85/</url>
+      <content type="html"><![CDATA[<p>支持宽字符，（有w_函数）</p>
+<p>(“(\w+)(\.|_)?(\w*)@(\w+)(\.(\w+))+”);</p>
+<p> 首先注意‘()’表示将正则表达式分成子表达式，每个‘()’之间的内容表示一个子表达式；</p>
+<p>‘\’是一个转义字符，‘\’表示扔掉第二个‘\’的转义特性，‘\w+’表示匹配一个或多个单词，‘+’表示重复一次或者多次，因此第一个子表达式的意思就是匹配一个或者多个单词；</p>
+<p>接着看第二个子表达式，‘|’表示选择，出现‘.’或者‘<em>’，后面的‘?’表示该子表示出现一次或者零次，因此第二个子表示表示‘.’或‘</em>’出现不出现都匹配。</p>
+<p>第三个子表达式表示出现一个单词，‘*’表示任意个字符。</p>
+<p>(\d{1,3}):(\d{1,3}):(\d{1,3}):(\d{1,3})</p>
+<p>首先还是通过‘()’将这个串分成几个子表达式，其中\d表示匹配一个数字，{,}表示数字的个数，例如{1,3}可以理解为匹配一个小于1000的数字</p>
 ]]></content>
     </entry>
     
@@ -3951,17 +4005,6 @@ main() {}
     </entry>
     
     <entry>
-      <title><![CDATA[程序软件(77)]]></title>
-      <url>https://xuecat.github.io/2014/10/14/77/</url>
-      <content type="html"><![CDATA[<pre><code>//quicksilver mac下面的软件。
-//alfred mac下的软件
-//caffeine mac下的软件
-//eudic mac下的软件
-//Parallels Desktop mac下软件
-</code></pre>]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[王道]]></title>
       <url>https://xuecat.github.io/2014/10/14/79/</url>
       <content type="html"><![CDATA[<p><img src="/picture/f.jpg" alt=""></p>
@@ -3976,6 +4019,17 @@ main() {}
 <p>但是在Archer和Rider的质疑与嘲弄之下Saber怀疑了自己作为王的道路，兰斯洛斯对自己的仇恨，义子对自己的叛乱，国家的最终分崩离析使得Saber怀疑起自己的选择，变得迷茫起来（那时好萌啊…萌啊…萌）</p>
 <p><strong>其实王没有绝对正确的道路，绝对的正确本来就不存在于世上，真正应该做的是像Rider所说的那样（“如果我的决断以及我的臣子们导致了这样的结果，那么毁灭是必然的。我会哀悼，也会流泪，但我绝不后悔。”）</strong></p>
 ]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[程序软件(77)]]></title>
+      <url>https://xuecat.github.io/2014/10/14/77/</url>
+      <content type="html"><![CDATA[<pre><code>//quicksilver mac下面的软件。
+//alfred mac下的软件
+//caffeine mac下的软件
+//eudic mac下的软件
+//Parallels Desktop mac下软件
+</code></pre>]]></content>
     </entry>
     
     <entry>
@@ -4108,18 +4162,6 @@ int memicmp(const void *buf1, const void *buf2, size_t count);
     </entry>
     
     <entry>
-      <title><![CDATA[dulib里面的头文件包含(74)]]></title>
-      <url>https://xuecat.github.io/2014/10/01/74/</url>
-      <content type="html"><![CDATA[<p>他头文件用namespace包括。</p>
-<p>cpp文件也用namespace包括。</p>
-<p>cpp包含个stadx.h文件</p>
-<p>stadx.h文件包含duilib.h文件</p>
-<p>所有的东西写在duilib.h文件里面</p>
-<p>亮点在cpp文件包括，然后包含。导致头文件不用包含。</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[static作用(73)]]></title>
       <url>https://xuecat.github.io/2014/10/01/73/</url>
       <content type="html"><![CDATA[<p>static作用（修饰函数、局部变量、全局变量）</p>
@@ -4154,6 +4196,18 @@ while (line &gt;&gt; word) {
     </entry>
     
     <entry>
+      <title><![CDATA[dulib里面的头文件包含(74)]]></title>
+      <url>https://xuecat.github.io/2014/10/01/74/</url>
+      <content type="html"><![CDATA[<p>他头文件用namespace包括。</p>
+<p>cpp文件也用namespace包括。</p>
+<p>cpp包含个stadx.h文件</p>
+<p>stadx.h文件包含duilib.h文件</p>
+<p>所有的东西写在duilib.h文件里面</p>
+<p>亮点在cpp文件包括，然后包含。导致头文件不用包含。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[编程忠告(72)]]></title>
       <url>https://xuecat.github.io/2014/09/29/72/</url>
       <content type="html"><![CDATA[<p>对学习编程者的忠告：<br>多用小脑和手，少用大脑、眼睛和嘴，会更快地学会编程！</p>
@@ -4168,15 +4222,6 @@ while (line &gt;&gt; word) {
 <p>这样过一遍不就啥都明白了吗。</p>
 <p>对VC来说，所谓‘调试时’就是编译连接通过以后，按F10或F11键单步执行一步以后的时候，或者在某行按F9设了断点后按F5执行停在该断点处的时候。</p>
 <p>（Turbo C或Borland C用Turbo Debugger调试,Linux或Unix下用GDB调试时,看每句C对应的汇编并单步执行观察相应内存和寄存器变化。）</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[already defined in *.obj(70)]]></title>
-      <url>https://xuecat.github.io/2014/09/28/70/</url>
-      <content type="html"><![CDATA[<p>首先注意不能在.h头文件中定义全局变量，否则只要其他文件包括了该头文件，就会出现already defined in *.obj的错误。</p>
-<p>应该把全局变量放在.cpp文件中定义，然后在其他文件中用到该变量时用extern声明一下。</p>
-<p>即使在.h中定义全局变量，用extern可以避免。</p>
 ]]></content>
     </entry>
     
@@ -4196,6 +4241,15 @@ while (line &gt;&gt; word) {
 <li><p>在函数内判断 uID，来确定用户单击了哪项复选框，并作相应处理。</p>
 </li>
 </ol>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[already defined in *.obj(70)]]></title>
+      <url>https://xuecat.github.io/2014/09/28/70/</url>
+      <content type="html"><![CDATA[<p>首先注意不能在.h头文件中定义全局变量，否则只要其他文件包括了该头文件，就会出现already defined in *.obj的错误。</p>
+<p>应该把全局变量放在.cpp文件中定义，然后在其他文件中用到该变量时用extern声明一下。</p>
+<p>即使在.h中定义全局变量，用extern可以避免。</p>
 ]]></content>
     </entry>
     
@@ -4264,29 +4318,28 @@ while (line &gt;&gt; word) {
     </entry>
     
     <entry>
-      <title><![CDATA[指针内存长度和大小(64)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/64/</url>
-      <content type="html"><![CDATA[<p> 今天字符处理遇见这个问题：我new了一块内存，然后sizeof()；strlen()；都正常（一个返回4，一个返回分配大小）</p>
-<p>之后我用了ZeroMemory来分配，发现有异议了。<br>sizeof(); strlen(); 一个返回4，一个返回0；     原来用了这个函数会置空内存。</p>
+      <title><![CDATA[内存对齐偏移量(56)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/56/</url>
+      <content type="html"><![CDATA[<p> 编译器对变量存储的一个特殊处理。为了提高CPU的存储速度，编译器对一些变量的起始地址做了“对齐”处理</p>
+<p>。在默认情况下，规定各成员变量存放的起始地址相对于结构的起始地址的偏移量必须为该变量的类型所占用的字节数的倍数。<br>类型</p>
+<p>对齐方式（变量存放的起始地址相对于结构的起始地址的偏移量）</p>
+<p>Char 偏移量必须为sizeof(char)即1的倍数</p>
+<p>int 偏移量必须为sizeof(int)即4的倍数</p>
+<p>float 偏移量必须为sizeof(float)即4的倍数</p>
+<p>double 偏移量必须为sizeof(double)即8的倍数</p>
+<p>Short 偏移量必须为sizeof(short)即2的倍数</p>
 ]]></content>
     </entry>
     
     <entry>
-      <title><![CDATA[SIGPIPE信号(55)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/55/</url>
-      <content type="html"><![CDATA[<p>使用libevent编写websocket服务端时遇到了一个问题：</p>
-<p>浏览器与服务端建立连接后，若刷新或关闭浏览器窗口（未监听相应事件并处理），服务端无法得知连接断开，按理说，这种情况属于client异常终止，跟拔网线的情况类似。这种情况下，服务端不知情，仍保留此连接，仍按照既定逻辑向client写数据，写了两次后，服务端程序终止（多次测试，均是第2次后终止），不是崩溃，是异常终止，非常不解。</p>
-<p> ，得知是SIGPIPE信号导致程序终止。</p>
-<p>查了相关资料，大致明白：连接建立，若某一端关闭连接，而另一端仍然向它写数据，第一次写数据后会收到RST响应，此后再写数据，内核将向进程发出SIGPIPE信号，通知进程此连接已经断开。而SIGPIPE信号的默认处理是终止程序，导致上述问题的发生。</p>
-<p>为避免这种情况，可以选择忽略SIGPIPE信号，不执行任何动作。</p>
-<pre><code>#include &lt;signal.h&gt;
-//SIGPIPE ignore
-struct sigaction act;
-act.sa_handler = SIG_IGN;
-if (sigaction(SIGPIPE, &amp;act, NULL) == 0) {
-    LOG(&quot;SIGPIPE ignore&quot;);
-}
-</code></pre>]]></content>
+      <title><![CDATA[string和wstring(62)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/62/</url>
+      <content type="html"><![CDATA[<p>今天用string来find一个中文符号，首先返回符号位置正确。然后符号为界，截取字符串出现问题；</p>
+<p>分析原因：中文符号在string中是占用两个字节的。而string对所有的字符串是一个字符一个字节的</p>
+<p>，所以按位取时，夺取了一个字节，导致数据获取失败。</p>
+<p>用wstring进行存取，可以完全避免。</p>
+<p><strong>学到：或许第三方库和一些协议对unicode字符集支持不是很好，导致数据传输要使用ANSI字符串。<br>但程序之间的通信为了保证中文字符，必须使用unicode。     最多在数据传输时做一次编码转换！</strong></p>
+]]></content>
     </entry>
     
     <entry>
@@ -4308,56 +4361,6 @@ static_cast&lt;window*&gt;(this)-&gt;onResize(); //这是拿this当成window,没
 static_cast&lt;window&amp;&gt;(*this).onResize();//这个也是
 </code></pre><p>这两种可以执行到base class 部分，但是因为例子中是 virtual function，所以base class 部分的 vtable pointer 跟 derived class 的 vtable pointer 指向同一个virtual table，里面的 函数是一个，所以会递归调用</p>
 <p>而 如果用 window::onResize()，就应该是直接调用的base class  里面的 virtual function 。<br>应该是这样的</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[string和wstring(62)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/62/</url>
-      <content type="html"><![CDATA[<p>今天用string来find一个中文符号，首先返回符号位置正确。然后符号为界，截取字符串出现问题；</p>
-<p>分析原因：中文符号在string中是占用两个字节的。而string对所有的字符串是一个字符一个字节的</p>
-<p>，所以按位取时，夺取了一个字节，导致数据获取失败。</p>
-<p>用wstring进行存取，可以完全避免。</p>
-<p><strong>学到：或许第三方库和一些协议对unicode字符集支持不是很好，导致数据传输要使用ANSI字符串。<br>但程序之间的通信为了保证中文字符，必须使用unicode。     最多在数据传输时做一次编码转换！</strong></p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[杂项]]></title>
-      <url>https://xuecat.github.io/2014/09/20/61/</url>
-      <content type="html"><![CDATA[<p>   变长参数的纠正，绑定第一参数时，直接赋值貌似不成功。要绑定临近的参数才成功。(好像它是临近取值的)</p>
-<p><strong>我擦，居然用错绘图dc。onpaintdc和cclientdc，前者只能在onpaint函数用才有效，如果传入或者其他函数调用是无效的。后者随意用。</strong></p>
-<p>  <strong> 发现当设计后，封装的类有三个完成时必须要调试跑一边，不然后期有些许不合理的地方不能及时修改。</strong></p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[输出中文(66)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/66/</url>
-      <content type="html"><![CDATA[<pre><code> cout.imbue(locale(&quot;&quot;));
-char data[] = &quot;dfwe玩GIS股份&quot;;
-for (size_t i = 0; i &lt; strlen(data); i++)
-{
-    cout &lt;&lt; data[i] &lt;&lt; endl;
-}
-
-cout &lt;&lt; data;
-</code></pre><p>结果：第一个无法输出中文，第二个可以。</p>
-<p>分析：昨天已经讲了，今天写下只是写个例子。</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[内存对齐偏移量(56)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/56/</url>
-      <content type="html"><![CDATA[<p> 编译器对变量存储的一个特殊处理。为了提高CPU的存储速度，编译器对一些变量的起始地址做了“对齐”处理</p>
-<p>。在默认情况下，规定各成员变量存放的起始地址相对于结构的起始地址的偏移量必须为该变量的类型所占用的字节数的倍数。<br>类型</p>
-<p>对齐方式（变量存放的起始地址相对于结构的起始地址的偏移量）</p>
-<p>Char 偏移量必须为sizeof(char)即1的倍数</p>
-<p>int 偏移量必须为sizeof(int)即4的倍数</p>
-<p>float 偏移量必须为sizeof(float)即4的倍数</p>
-<p>double 偏移量必须为sizeof(double)即8的倍数</p>
-<p>Short 偏移量必须为sizeof(short)即2的倍数</p>
 ]]></content>
     </entry>
     
@@ -4386,10 +4389,83 @@ cout &lt;&lt; data;
     </entry>
     
     <entry>
+      <title><![CDATA[指针内存长度和大小(64)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/64/</url>
+      <content type="html"><![CDATA[<p> 今天字符处理遇见这个问题：我new了一块内存，然后sizeof()；strlen()；都正常（一个返回4，一个返回分配大小）</p>
+<p>之后我用了ZeroMemory来分配，发现有异议了。<br>sizeof(); strlen(); 一个返回4，一个返回0；     原来用了这个函数会置空内存。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[输出中文(66)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/66/</url>
+      <content type="html"><![CDATA[<pre><code> cout.imbue(locale(&quot;&quot;));
+char data[] = &quot;dfwe玩GIS股份&quot;;
+for (size_t i = 0; i &lt; strlen(data); i++)
+{
+    cout &lt;&lt; data[i] &lt;&lt; endl;
+}
+
+cout &lt;&lt; data;
+</code></pre><p>结果：第一个无法输出中文，第二个可以。</p>
+<p>分析：昨天已经讲了，今天写下只是写个例子。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[++和++ 入栈顺序(65)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/65/</url>
+      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>直接上代码++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">minuus</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">return</span> a-b;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> cc = <span class="number">4</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; minuus(cc++, cc++) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	</div><div class="line">	<span class="keyword">while</span> (cc--)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"a"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
+<p>vc6编译环境：</p>
+<p>minuus（cc, cc++）；while(–cc) 输出：4,4,0 aaaa</p>
+<p>minuus（++cc, ++cc）；while(–cc) 输出：6,5,0 aaaaa</p>
+<p>minuus（cc++, ++cc）；while(–cc) 输出：5,5,0 aaaaa</p>
+<p><strong>分析：首先vc6对参数入栈默认是从右到左的，然后入栈参数必定存在赋值临时参数(意思就是先拷贝了数据值再进行操作，不然第一个示例中：cc++确实执行了，却没有传入值)。</strong></p>
+<p>vs2012编译环境：</p>
+<p>minuus（cc, cc++）；while(–cc) 输出：5 4 1 5(和想象中的一样)</p>
+<p>minuus（++cc, ++cc）；while(–cc) 输出：6 6 0 6(不同了)</p>
+<p>minuus（cc++, ++cc）；while(–cc) 输出：5 6 -1 6(不同了)</p>
+<p>minuus（cc++, cc++）；while(–cc) 输出：5 4 1 6(不同)</p>
+<p>minuus(cc, ++cc) :5 5 0 5</p>
+<p>minuus(++cc, cc++) 6 4 2 6</p>
+<p>minuus(++cc, cc) 5 5 0 5</p>
+<p><strong>分析：首先它会对++c进行预先处理， 所以cc会自加，玩了后它才开始参数从右到左进行入栈处理。<br>有cc++就处理。</strong></p>
+<p>相比vc6对数据的自加进行了修改，但是对++c的处理并不是很好。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[设计流程(57)]]></title>
       <url>https://xuecat.github.io/2014/09/20/57/</url>
       <content type="html"><![CDATA[<p> 想出的设计流程：</p>
 <p> 先画出程序运行功能的基本流程-&gt;确定类的个数和作用-&gt;设计模式-&gt;按照先想好的类功能模块把设计模式搭建出来-&gt;最后按照功能流程图再写一遍。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[SIGPIPE信号(55)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/55/</url>
+      <content type="html"><![CDATA[<p>使用libevent编写websocket服务端时遇到了一个问题：</p>
+<p>浏览器与服务端建立连接后，若刷新或关闭浏览器窗口（未监听相应事件并处理），服务端无法得知连接断开，按理说，这种情况属于client异常终止，跟拔网线的情况类似。这种情况下，服务端不知情，仍保留此连接，仍按照既定逻辑向client写数据，写了两次后，服务端程序终止（多次测试，均是第2次后终止），不是崩溃，是异常终止，非常不解。</p>
+<p> ，得知是SIGPIPE信号导致程序终止。</p>
+<p>查了相关资料，大致明白：连接建立，若某一端关闭连接，而另一端仍然向它写数据，第一次写数据后会收到RST响应，此后再写数据，内核将向进程发出SIGPIPE信号，通知进程此连接已经断开。而SIGPIPE信号的默认处理是终止程序，导致上述问题的发生。</p>
+<p>为避免这种情况，可以选择忽略SIGPIPE信号，不执行任何动作。</p>
+<pre><code>#include &lt;signal.h&gt;
+//SIGPIPE ignore
+struct sigaction act;
+act.sa_handler = SIG_IGN;
+if (sigaction(SIGPIPE, &amp;act, NULL) == 0) {
+    LOG(&quot;SIGPIPE ignore&quot;);
+}
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[杂项]]></title>
+      <url>https://xuecat.github.io/2014/09/20/61/</url>
+      <content type="html"><![CDATA[<p>   变长参数的纠正，绑定第一参数时，直接赋值貌似不成功。要绑定临近的参数才成功。(好像它是临近取值的)</p>
+<p><strong>我擦，居然用错绘图dc。onpaintdc和cclientdc，前者只能在onpaint函数用才有效，如果传入或者其他函数调用是无效的。后者随意用。</strong></p>
+<p>  <strong> 发现当设计后，封装的类有三个完成时必须要调试跑一边，不然后期有些许不合理的地方不能及时修改。</strong></p>
 ]]></content>
     </entry>
     
@@ -4418,28 +4494,6 @@ SetLayeredWindowAttributes(RGB(255, 255, 255), 200, LWA_ALPHA | LWA_COLORKEY);
     </entry>
     
     <entry>
-      <title><![CDATA[++和++ 入栈顺序(65)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/65/</url>
-      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>直接上代码++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">minuus</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">return</span> a-b;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> cc = <span class="number">4</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; minuus(cc++, cc++) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	</div><div class="line">	<span class="keyword">while</span> (cc--)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"a"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
-<p>vc6编译环境：</p>
-<p>minuus（cc, cc++）；while(–cc) 输出：4,4,0 aaaa</p>
-<p>minuus（++cc, ++cc）；while(–cc) 输出：6,5,0 aaaaa</p>
-<p>minuus（cc++, ++cc）；while(–cc) 输出：5,5,0 aaaaa</p>
-<p><strong>分析：首先vc6对参数入栈默认是从右到左的，然后入栈参数必定存在赋值临时参数(意思就是先拷贝了数据值再进行操作，不然第一个示例中：cc++确实执行了，却没有传入值)。</strong></p>
-<p>vs2012编译环境：</p>
-<p>minuus（cc, cc++）；while(–cc) 输出：5 4 1 5(和想象中的一样)</p>
-<p>minuus（++cc, ++cc）；while(–cc) 输出：6 6 0 6(不同了)</p>
-<p>minuus（cc++, ++cc）；while(–cc) 输出：5 6 -1 6(不同了)</p>
-<p>minuus（cc++, cc++）；while(–cc) 输出：5 4 1 6(不同)</p>
-<p>minuus(cc, ++cc) :5 5 0 5</p>
-<p>minuus(++cc, cc++) 6 4 2 6</p>
-<p>minuus(++cc, cc) 5 5 0 5</p>
-<p><strong>分析：首先它会对++c进行预先处理， 所以cc会自加，玩了后它才开始参数从右到左进行入栈处理。<br>有cc++就处理。</strong></p>
-<p>相比vc6对数据的自加进行了修改，但是对++c的处理并不是很好。</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[duilib 动态tab(53)]]></title>
       <url>https://xuecat.github.io/2014/09/19/53/</url>
       <content type="html"><![CDATA[<p>尼玛的，差点哭了。弄了这么久，调试都没法。</p>
@@ -4459,18 +4513,18 @@ SetLayeredWindowAttributes(RGB(255, 255, 255), 200, LWA_ALPHA | LWA_COLORKEY);
     </entry>
     
     <entry>
+      <title><![CDATA[模板和虚函数(50)]]></title>
+      <url>https://xuecat.github.io/2014/09/17/50/</url>
+      <content type="html"><![CDATA[<p><strong>模板编程不允许虚函数的出现。为了使用基类函数，我们只能用转交函数</strong><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> SquareMatrixBase &#123;</div><div class="line"><span class="keyword">protected</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">invert</span><span class="params">(<span class="built_in">std</span>::<span class="keyword">size_t</span> matrixsize)</span></span>;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="built_in">std</span>::<span class="keyword">size_t</span> n&gt;</div><div class="line"><span class="keyword">class</span> SquareMatrix : <span class="keyword">private</span> SquareMatrixBase&lt;T&gt; &#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">using</span> SquareMatrixBase&lt;T&gt;::invert;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">invert</span><span class="params">()</span> </span>&#123;<span class="keyword">this</span>-&gt;invert(n);&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[勿忘初心(51)]]></title>
       <url>https://xuecat.github.io/2014/09/17/51/</url>
       <content type="html"><![CDATA[<p>  不忘初心，方得始终</p>
 <p>  这几天自己也有点想多了，因为本来就进入大三了，该考虑的也多了起来。<br>反而烦恼了自己。</p>
 <p>  写下日记，提醒自己，大三上的时间还是很充足的，不要被迷惑。做好自己！</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[模板和虚函数(50)]]></title>
-      <url>https://xuecat.github.io/2014/09/17/50/</url>
-      <content type="html"><![CDATA[<p><strong>模板编程不允许虚函数的出现。为了使用基类函数，我们只能用转交函数</strong><br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> SquareMatrixBase &#123;</div><div class="line"><span class="keyword">protected</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">invert</span><span class="params">(<span class="built_in">std</span>::<span class="keyword">size_t</span> matrixsize)</span></span>;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="built_in">std</span>::<span class="keyword">size_t</span> n&gt;</div><div class="line"><span class="keyword">class</span> SquareMatrix : <span class="keyword">private</span> SquareMatrixBase&lt;T&gt; &#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">using</span> SquareMatrixBase&lt;T&gt;::invert;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">invert</span><span class="params">()</span> </span>&#123;<span class="keyword">this</span>-&gt;invert(n);&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 ]]></content>
     </entry>
     
@@ -4571,12 +4625,6 @@ validateStudent(const Student&amp; s);一次不需要
     </entry>
     
     <entry>
-      <title><![CDATA[effectivec++ 设计接口正确使用(44)]]></title>
-      <url>https://xuecat.github.io/2014/09/10/44/</url>
-      <content type="html"><![CDATA[<figure class="highlight"><figcaption><span>看代码:++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class Date &#123;</div><div class="line">public:</div><div class="line">	Date(int moth, int day, int year);</div><div class="line">&#125;</div><div class="line">//存在的问题，由于都是int，调用会出现顺序错误。</div><div class="line">修改</div><div class="line">struct Day &#123;explicit Day(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line">struct Month &#123;explicit Month(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line">struct Year &#123;explicit Year(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line"></div><div class="line">class Date &#123;</div><div class="line">public:</div><div class="line">	Date(const Month&amp; m, const Day&amp; d, const Year&amp; y);</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[effective c++数组指针销毁(43)]]></title>
       <url>https://xuecat.github.io/2014/09/10/43/</url>
       <content type="html"><![CDATA[<p>遇见：</p>
@@ -4585,6 +4633,12 @@ validateStudent(const Student&amp; s);一次不需要
 用delete p；会出现内存错误。
 所以对于数组指针，拒绝使用typedef（typdedef string ADD[4];） 避免销毁异常。
 </code></pre>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[effectivec++ 设计接口正确使用(44)]]></title>
+      <url>https://xuecat.github.io/2014/09/10/44/</url>
+      <content type="html"><![CDATA[<figure class="highlight"><figcaption><span>看代码:++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class Date &#123;</div><div class="line">public:</div><div class="line">	Date(int moth, int day, int year);</div><div class="line">&#125;</div><div class="line">//存在的问题，由于都是int，调用会出现顺序错误。</div><div class="line">修改</div><div class="line">struct Day &#123;explicit Day(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line">struct Month &#123;explicit Month(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line">struct Year &#123;explicit Year(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line"></div><div class="line">class Date &#123;</div><div class="line">public:</div><div class="line">	Date(const Month&amp; m, const Day&amp; d, const Year&amp; y);</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
     </entry>
     
     <entry>
@@ -4662,6 +4716,15 @@ long double f; //12字节
     </entry>
     
     <entry>
+      <title><![CDATA[函数指针获取成员函数地址（包括虚函数）]]></title>
+      <url>https://xuecat.github.io/2014/09/03/32/</url>
+      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Base</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">"Enter Base::func()\n"</span>); &#125;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">virtual_func</span><span class="params">()</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">"Enter Base::virtual_func()\n"</span>); &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">class</span> Derived : <span class="keyword">public</span> Base</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">"Enter Derived::func()\n"</span>); &#125;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">virtual_func</span><span class="params">()</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">"Enter Derived::virtual_func()\n"</span>); &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(Base::*p_base_func)</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></div><div class="line">&#123; </div><div class="line">	Derived d;</div><div class="line">	Base b;</div><div class="line">	Base *pb = &amp;d;</div><div class="line"></div><div class="line">	p_base_func pbf = &amp;Base::func;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"-- Call via pointer to normal function of base\n"</span>);</div><div class="line">	(pb-&gt;*pbf)();</div><div class="line">	(d.*pbf)();</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="comment">//cout &lt;&lt; (pb-&gt;*pbf) &lt;&lt; endl;</span></div><div class="line"></div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	pbf = &amp;Base::virtual_func;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"-- Call via pointer to virtual function of base\n"</span>);</div><div class="line">	(pb-&gt;*pbf)();</div><div class="line">	(d.*pbf)();</div><div class="line">	<span class="comment">//cout &lt;&lt; (pb-&gt;*pbf) &lt;&lt; endl;</span></div><div class="line"></div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 注释部分会发生编译器内部错误。我也不知道为什么？</p>
+<p>看代码，为成员函数添加一个引用（支持虚函数）。<br>然后利用对象调用函数。<br>貌似，只能利用对象才能成功。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[more effective c++为智能指针添加计数(36)]]></title>
       <url>https://xuecat.github.io/2014/09/03/36/</url>
       <content type="html"><![CDATA[<p>作者使用结构体完成这一功能。为使用字符串添加引用计数。</p>
@@ -4677,15 +4740,6 @@ long double f; //12字节
       <url>https://xuecat.github.io/2014/09/03/33/</url>
       <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>先看一段代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">	<span class="function"><span class="keyword">typedef</span> <span class="title">int</span><span class="params">(*outhead)</span><span class="params">(<span class="keyword">int</span> a)</span></span>;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">a</span><span class="params">(<span class="keyword">int</span> d)</span> </span>&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"this is A"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; d &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		<span class="keyword">return</span> d;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span>* <span class="title">cou</span><span class="params">(<span class="keyword">int</span>* a, outhead d)</span> </span>&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; d(*a);</div><div class="line">		<span class="keyword">return</span> a;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span> </span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">int</span> aa = <span class="number">2</span>;</div><div class="line">		cou(&amp;aa, a);</div><div class="line">		system(<span class="string">"pause"</span>);</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line"><span class="comment">//输出 2\n this is a\n 2\n</span></div></pre></td></tr></table></figure>
 <p>分析：<br>先定义outthead函数指针为int的别名。 (只对静态和全局有效）)<br>我可以规定一种类型封装很多个全局函数，用一个指针函数，参数是函数指针，然后调用就好了。</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[函数指针获取成员函数地址（包括虚函数）]]></title>
-      <url>https://xuecat.github.io/2014/09/03/32/</url>
-      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Base</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">"Enter Base::func()\n"</span>); &#125;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">virtual_func</span><span class="params">()</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">"Enter Base::virtual_func()\n"</span>); &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">class</span> Derived : <span class="keyword">public</span> Base</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">"Enter Derived::func()\n"</span>); &#125;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">virtual_func</span><span class="params">()</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">"Enter Derived::virtual_func()\n"</span>); &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(Base::*p_base_func)</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></div><div class="line">&#123; </div><div class="line">	Derived d;</div><div class="line">	Base b;</div><div class="line">	Base *pb = &amp;d;</div><div class="line"></div><div class="line">	p_base_func pbf = &amp;Base::func;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"-- Call via pointer to normal function of base\n"</span>);</div><div class="line">	(pb-&gt;*pbf)();</div><div class="line">	(d.*pbf)();</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="comment">//cout &lt;&lt; (pb-&gt;*pbf) &lt;&lt; endl;</span></div><div class="line"></div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	pbf = &amp;Base::virtual_func;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"-- Call via pointer to virtual function of base\n"</span>);</div><div class="line">	(pb-&gt;*pbf)();</div><div class="line">	(d.*pbf)();</div><div class="line">	<span class="comment">//cout &lt;&lt; (pb-&gt;*pbf) &lt;&lt; endl;</span></div><div class="line"></div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p> 注释部分会发生编译器内部错误。我也不知道为什么？</p>
-<p>看代码，为成员函数添加一个引用（支持虚函数）。<br>然后利用对象调用函数。<br>貌似，只能利用对象才能成功。</p>
 ]]></content>
     </entry>
     
@@ -4735,6 +4789,12 @@ If (ptn)
     </entry>
     
     <entry>
+      <title><![CDATA[more effective c++智能指针(28)]]></title>
+      <url>https://xuecat.github.io/2014/08/29/29/</url>
+      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>智能指针了：构造、赋值、析构:++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">class</span> <span class="built_in">auto_ptr</span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="built_in">auto_ptr</span>(T* ptr = <span class="number">0</span>) : pointee(ptr) &#123;&#125;</div><div class="line">	<span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs); <span class="comment">//复制</span></div><div class="line">	<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; operate= (<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs);</div><div class="line">	~<span class="built_in">auto_ptr</span>() &#123;<span class="keyword">delete</span> pointee;&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	T* pointee;</div><div class="line">	<span class="comment">/* data */</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//可以看出，使用时用f</span></div><div class="line"><span class="comment">//auto_ptr&lt;TreeNode&gt; ptnq(new TreeNode);便可以了。</span></div><div class="line"><span class="comment">///</span></div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;T&gt;:::<span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs)</div><div class="line">&#123;</div><div class="line">	pointee = rhs.pointee;</div><div class="line">	rhs.pointee = <span class="number">0</span>;<span class="comment">//因为实现的是auto，被复制后拒绝前一个变量访问</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;T&gt;&amp; <span class="built_in">auto_ptr</span>&lt;T&gt;::operate= (<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span> (<span class="keyword">this</span> == &amp;rhs)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> *<span class="keyword">this</span>; <span class="comment">//这个赋值函数处理的很好，以后赋值函数添加上</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">delete</span> pointee;</div><div class="line">	。。。。</div><div class="line">	。。。。</div><div class="line">	<span class="keyword">return</span> *<span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure> ]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[mfc windows 程序设计（线程）]]></title>
       <url>https://xuecat.github.io/2014/08/29/28/</url>
       <content type="html"><![CDATA[<p>线程分：ui线程和工作线程</p>
@@ -4770,12 +4830,6 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
 
 信号量：不说了，经常用。
 </code></pre>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[more effective c++智能指针(28)]]></title>
-      <url>https://xuecat.github.io/2014/08/29/29/</url>
-      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>智能指针了：构造、赋值、析构:++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">class</span> <span class="built_in">auto_ptr</span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="built_in">auto_ptr</span>(T* ptr = <span class="number">0</span>) : pointee(ptr) &#123;&#125;</div><div class="line">	<span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs); <span class="comment">//复制</span></div><div class="line">	<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; operate= (<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs);</div><div class="line">	~<span class="built_in">auto_ptr</span>() &#123;<span class="keyword">delete</span> pointee;&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	T* pointee;</div><div class="line">	<span class="comment">/* data */</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//可以看出，使用时用f</span></div><div class="line"><span class="comment">//auto_ptr&lt;TreeNode&gt; ptnq(new TreeNode);便可以了。</span></div><div class="line"><span class="comment">///</span></div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;T&gt;:::<span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs)</div><div class="line">&#123;</div><div class="line">	pointee = rhs.pointee;</div><div class="line">	rhs.pointee = <span class="number">0</span>;<span class="comment">//因为实现的是auto，被复制后拒绝前一个变量访问</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;T&gt;&amp; <span class="built_in">auto_ptr</span>&lt;T&gt;::operate= (<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span> (<span class="keyword">this</span> == &amp;rhs)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> *<span class="keyword">this</span>; <span class="comment">//这个赋值函数处理的很好，以后赋值函数添加上</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">delete</span> pointee;</div><div class="line">	。。。。</div><div class="line">	。。。。</div><div class="line">	<span class="keyword">return</span> *<span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure> ]]></content>
     </entry>
     
     <entry>
@@ -4825,15 +4879,6 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
     </entry>
     
     <entry>
-      <title><![CDATA[窗口风格（22）]]></title>
-      <url>https://xuecat.github.io/2014/08/26/22/</url>
-      <content type="html"><![CDATA[<p>首先，对WS_EX_LAYERED  /WS_EX_TRANSPARENT(这个前面讲过)<br>对子窗口无效。</p>
-<p>如不设置WS_CHILD就从屏幕坐标开始计算。<br>只要是子窗口就不能设置WS_POPUP</p>
-<p>所以WS_POPUP窗口都具有CLIPDRENW属性（记得貌似还有vscroll似的）。</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[more effective c++对象产生于head（23）]]></title>
       <url>https://xuecat.github.io/2014/08/26/23/</url>
       <content type="html"><![CDATA[<p>作者安排了一个基类和派生类的调用方式</p>
@@ -4842,6 +4887,15 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
 </code></pre><p>2、基类析构函数他说要限制为protected，我不懂。<br>我想应该是让外部调用必须使用destroy来销毁对象吧！</p>
  <figure class="highlight c"><figcaption><span>来看下调用和派生++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> UPNumber </div><div class="line">	&#123;</div><div class="line"> <span class="keyword">public</span>:</div><div class="line"> 	UPNumber(arguments);</div><div class="line"> <span class="keyword">protected</span>:</div><div class="line"> 	~UPNumber();</div><div class="line"> </div><div class="line"> 	<span class="comment">/* data */</span></div><div class="line"> &#125;;</div><div class="line"></div><div class="line"> <span class="keyword">class</span> Asset</div><div class="line"> &#123;</div><div class="line"> <span class="keyword">public</span>:</div><div class="line"> 	Asset(arguments);</div><div class="line"> 	~Asset();</div><div class="line"></div><div class="line"> <span class="keyword">private</span>:</div><div class="line"> 	UPNumber* value;</div><div class="line"> </div><div class="line"> 	<span class="comment">/* data */</span></div><div class="line"> &#125;;</div><div class="line"></div><div class="line"> Asset::Asset(arguments)</div><div class="line"> 	: value(<span class="keyword">new</span> UPNumber(arguments)) &#123;</div><div class="line"> 		...</div><div class="line"> 	&#125;</div><div class="line"> Asset::~Asset()</div><div class="line"> &#123;</div><div class="line"> 	value-&gt;destroy();</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
 <p>派生类产生基类数据于头，设置基类数据对象来调用函数。<br>析构使用基类自释放性！</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[窗口风格（22）]]></title>
+      <url>https://xuecat.github.io/2014/08/26/22/</url>
+      <content type="html"><![CDATA[<p>首先，对WS_EX_LAYERED  /WS_EX_TRANSPARENT(这个前面讲过)<br>对子窗口无效。</p>
+<p>如不设置WS_CHILD就从屏幕坐标开始计算。<br>只要是子窗口就不能设置WS_POPUP</p>
+<p>所以WS_POPUP窗口都具有CLIPDRENW属性（记得貌似还有vscroll似的）。</p>
 ]]></content>
     </entry>
     

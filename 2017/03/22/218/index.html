@@ -97,7 +97,7 @@ ui-bootstrapbootstrap的TPLS版本里面有所有组件的html代码.angular最�
 http://v3.bootcss.com/components/http://getbootstrap.com/javascript/#modals-examples
 ui-bootstrapbootstrap的TPLS版本里面有所有组件的html代码.angular最好用这个.然后对于angular使用的是ui-boo">
 <meta property="og:image" content="https://xuecat.github.io/picture/218.jpg">
-<meta property="og:updated_time" content="2017-03-22T15:56:28.483Z">
+<meta property="og:updated_time" content="2017-03-25T07:39:26.399Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Bootstrap(218)">
 <meta name="twitter:description" content="bootstrap语法太丰富了，完全可以把很多js代码去掉。所以记录下来
@@ -375,6 +375,22 @@ ui-bootstrapbootstrap的TPLS版本里面有所有组件的html代码.angular最�
 </li>
 <li><p><code>data-loading-text=&quot;Loading...&quot;</code> 这个我没写全，它展示的效果是点击后显示加载，鼠标禁止，加载完再恢复。</p>
 </li>
+<li><p><code>data-dismiss=&quot;alert&quot;</code> 这个用于页内嵌入提示框，由于提供各种可使用的格式 <code>alert-warning</code> <code>alert-success</code>。</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"myAlert"</span> <span class="attr">class</span>=<span class="string">"alert alert-success"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">class</span>=<span class="string">"close"</span> <span class="attr">data-dismiss</span>=<span class="string">"alert"</span>&gt;</span>&amp;times;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">strong</span>&gt;</span>成功！<span class="tag">&lt;/<span class="name">strong</span>&gt;</span>结果是成功的。</div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>点关闭也确实能(不能也可以加个ng-hide)，但是动画效果不知道咋实现</p>
+<ul>
+<li><p><code>data-loading-text</code>好是好就是没法配合angular使用，只能自己写.</p>
+</li>
+<li><p><code>data-toggle=&quot;collapse&quot;</code> 折叠显示内容</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"btn btn-primary"</span> <span class="attr">role</span>=<span class="string">"button"</span> <span class="attr">data-toggle</span>=<span class="string">"collapse"</span> <span class="attr">href</span>=<span class="string">"#collapseExample"</span> <span class="attr">aria-expanded</span>=<span class="string">"false"</span> <span class="attr">aria-controls</span>=<span class="string">"collapseExample"</span>&gt;</span></div><div class="line">  Link with href</div><div class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn btn-primary"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">data-toggle</span>=<span class="string">"collapse"</span> <span class="attr">data-target</span>=<span class="string">"#collapseExample"</span> <span class="attr">aria-expanded</span>=<span class="string">"false"</span> <span class="attr">aria-controls</span>=<span class="string">"collapseExample"</span>&gt;</span></div><div class="line">  Button with data-target</div><div class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"collapse"</span> <span class="attr">id</span>=<span class="string">"collapseExample"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"well"</span>&gt;</span></div><div class="line">    ...</div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>由于这俩个button链接的是一个折叠内容，点击展开，再点折叠。 里么href和data-target达到了相同效果，我想angular估计只能用data-target</p>
+<p>一般 aria-*是识别属性，但是这里<code>aria-expanded=&quot;true&quot;</code>会默认展开内容</p>
+<ul>
+<li><code>data-ride=&quot;carousel&quot;</code>这是个轮播控件来达到相册的效果，<code>.carousel-caption</code>添加标题显示</li>
 </ul>
 
       
