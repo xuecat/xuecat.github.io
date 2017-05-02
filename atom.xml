@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2017-03-22T14:49:33.713Z</updated>
+  <updated>2017-05-02T16:41:52.261Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -14,6 +14,71 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>WebApi(221)</title>
+    <link href="https://xuecat.github.io/2017/04/19/221/"/>
+    <id>https://xuecat.github.io/2017/04/19/221/</id>
+    <published>2017-04-19T14:36:36.000Z</published>
+    <updated>2017-05-02T16:41:52.261Z</updated>
+    
+    <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/221.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
+<p>webvideo本地枚举文件太恶心了，算了写个服务器来读吧，顺便把avi和rmvb解包写了.</p>
+<h3 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h3><ul>
+<li>这里的Controller继承于ApiController,</li>
+<li>IE和Firefox发送了不同的Accept报头,导致返回的数据可以是JSON，也可以是XML（感觉太强大了，这都做好了。客户端请求的“application/json”中的Accept报头）</li>
+</ul>
+<p>路由：<code>/api/{controller}/{id}</code> 在<code>id = RouteParameter.Optional</code>情况下<br>controller匹配控制器名<br>{id} 匹配名称为id的方法参数（即函数的参数名叫id）</p>
+<p><code>/api/products</code> <code>products</code>匹配名为ProductsController的控制器。该请求是一个GET请求，因此框架在ProductsController上查找一个名称以<code>GET…</code>开头的方法。</p>
+<p>进一步地，这个URI不包含可选的{id}片段，因此，框架查找的是一个不带参数的方法。于是，ProductsController::GetAllProducts满足所有这些需求</p>
+<p><strong>同理</strong> 如果是个<code>POST``Put</code>请求，会去找<code>POST``Put</code>开头的方法 以及<code>Delete</code></p>
+<p><code>/api/products/1</code> 找到参数名叫id的函数，并把这个传入。<br><strong>同理</strong> <code>/api/products/abc</code>就不行，因为只有GetProductById有个叫id的参数，但是是int，无法转换为string</p>
+<p><strong>Post</strong><br>js和c#的完美兼容，直接互相传对象，完全可以解析<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">var</span> response = Request.CreateResponse&lt;Product&gt;(HttpStatusCode.Created, item); </div><div class="line"><span class="built_in">string</span> uri = Url.<span class="keyword">Link</span>(<span class="string">"DefaultApi"</span>, <span class="literal">new</span> &#123; id = item.Id &#125;); <span class="comment">//当服务器创建一个资源时，它应当在响应的Location报头中包含新资源的URI。</span></div><div class="line">response.Headers.Location = <span class="literal">new</span> Uri(uri);</div></pre></td></tr></table></figure></p>
+<h3 id="WebapiClient"><a href="#WebapiClient" class="headerlink" title="WebapiClient"></a>WebapiClient</h3><p>添加库，用<code>HttpClient</code>设置base uri，设置请求报头。<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">HttpResponseMessage response = client.GetAsync(<span class="string">"api/products"</span>).Result;  <span class="comment">// Blocking call（阻塞调用）! </span></div><div class="line"><span class="keyword">if</span> (response.IsSuccessStatusCode) </div><div class="line">&#123; </div><div class="line">    <span class="comment">// Parse the response body. Blocking!</span></div><div class="line">    <span class="comment">// 解析响应体。阻塞！</span></div><div class="line">    <span class="keyword">var</span> products = response.Content.ReadAsAsync&lt;IEnumerable&lt;Product&gt;&gt;().Result; </div><div class="line">    <span class="keyword">foreach</span> (<span class="keyword">var</span> p <span class="keyword">in</span> products) </div><div class="line">    &#123; </div><div class="line">        Console.WriteLine(<span class="string">"&#123;0&#125;\t&#123;1&#125;;\t&#123;2&#125;"</span>, p.Name, p.Price, p.Category); </div><div class="line">    &#125; </div><div class="line">&#125; </div><div class="line"></div><div class="line"><span class="comment">//异步和阻塞注意</span></div><div class="line"><span class="comment">//自动构造结构数据很智能：比如Product有个属性和服务器的不对应，那那个属性将不被赋值，只赋值对应的属性</span></div><div class="line"></div><div class="line">---</div><div class="line"><span class="comment">//post的时候</span></div><div class="line"><span class="comment">// 创建JSON格式化器。</span></div><div class="line">MediaTypeFormatter jsonFormatter = <span class="keyword">new</span> JsonMediaTypeFormatter(); </div><div class="line"></div><div class="line"><span class="comment">// Use the JSON formatter to create the content of the request body.</span></div><div class="line"><span class="comment">// 使用JSON格式化器创建请求体内容。</span></div><div class="line">HttpContent content = <span class="keyword">new</span> ObjectContent&lt;Product&gt;(product, jsonFormatter); </div><div class="line"></div><div class="line"><span class="comment">// Send the request.</span></div><div class="line"><span class="comment">// 发送请求。</span></div><div class="line"><span class="keyword">var</span> resp = client.PostAsync(<span class="string">"api/products"</span>, content).Result;</div><div class="line"><span class="comment">//或者client.PostAsJsonAsync("api/products", gizmo).Result;</span></div></pre></td></tr></table></figure></p>
+<p>上面讲了<code>client.GetAsync(&quot;api/products&quot;).Result</code> 是阻塞函数，并不会把控制返回给调用者，这导致一直阻塞（ui线程阻塞）。<br>给出2个解决方法：</p>
+<ol>
+<li><p><code>async</code>和<code>await</code></p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">async</span> <span class="keyword">void</span> <span class="title">GetProducts</span>(<span class="params"><span class="keyword">object</span> sender, RoutedEventArgs e</span>) </span></div><div class="line">&#123; </div><div class="line">    <span class="keyword">try</span> </div><div class="line">    &#123; </div><div class="line">        btnGetProducts.IsEnabled = <span class="literal">false</span>; </div><div class="line"></div><div class="line">        <span class="keyword">var</span> response = <span class="keyword">await</span> client.GetAsync(<span class="string">"api/products"</span>); </div><div class="line">        response.EnsureSuccessStatusCode(); <span class="comment">// Throw on error code（有错误码时报出异常）.</span></div><div class="line"></div><div class="line">        <span class="keyword">var</span> products = <span class="keyword">await</span> response.Content.ReadAsAsync&lt;IEnumerable&lt;Product&gt;&gt;(); </div><div class="line">        _products.CopyFrom(products); </div><div class="line"></div><div class="line">    &#125; </div><div class="line">    <span class="keyword">catch</span> (Newtonsoft.Json.JsonException jEx) </div><div class="line">    &#123; </div><div class="line">        <span class="comment">// This exception indicates a problem deserializing the request body.</span></div><div class="line">        <span class="comment">// 这个异常指明了一个解序列化请求体的问题。</span></div><div class="line">        MessageBox.Show(jEx.Message); </div><div class="line">    &#125; </div><div class="line">    <span class="keyword">catch</span> (HttpRequestException ex) </div><div class="line">    &#123; </div><div class="line">        MessageBox.Show(ex.Message); </div><div class="line">    &#125; </div><div class="line">    <span class="keyword">finally</span> </div><div class="line">    &#123; </div><div class="line">        btnGetProducts.IsEnabled = <span class="literal">true</span>; </div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装<code>Async Targeting Pack</code> </p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">client.GetAsync(<span class="string">"api/products/2"</span>).ContinueWith((t) =&gt; </div><div class="line">    &#123; </div><div class="line">        if (t.IsFaulted) </div><div class="line">        &#123; </div><div class="line">            MessageBox.<span class="keyword">Show(t.Exception.Message); </span></div><div class="line">            <span class="keyword">btnGetProducts.IsEnabled </span>= true<span class="comment">; </span></div><div class="line">        &#125; </div><div class="line">        else </div><div class="line">        &#123; </div><div class="line">            var response = t.Result<span class="comment">; </span></div><div class="line">            if (response.IsSuccessStatusCode) </div><div class="line">            &#123; </div><div class="line">                response.Content.ReadAsAsync&lt;IEnumerable&lt;Product&gt;&gt;(). </div><div class="line">                    ContinueWith(<span class="built_in">t2</span> =&gt; </div><div class="line">                        &#123; </div><div class="line">                            if (<span class="built_in">t2</span>.IsFaulted) </div><div class="line">                            &#123; </div><div class="line">                                MessageBox.<span class="keyword">Show(t2.Exception.Message); </span></div><div class="line">                                <span class="keyword">btnGetProducts.IsEnabled </span>= true<span class="comment">; </span></div><div class="line">                            &#125; </div><div class="line">                            else </div><div class="line">                            &#123; </div><div class="line">                                var products = <span class="built_in">t2</span>.Result<span class="comment">; </span></div><div class="line">                                _products.CopyFrom(products)<span class="comment">; </span></div><div class="line">                                <span class="keyword">btnGetProducts.IsEnabled </span>= true<span class="comment">; </span></div><div class="line">                            &#125; </div><div class="line">                        &#125;, TaskScheduler.FromCurrentSynchronizationContext())<span class="comment">; </span></div><div class="line">            &#125; </div><div class="line">        &#125; </div><div class="line">    &#125;, TaskScheduler.FromCurrentSynchronizationContext())<span class="comment">;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="HttpClient消息处理器"><a href="#HttpClient消息处理器" class="headerlink" title="HttpClient消息处理器"></a>HttpClient消息处理器</h3><p>通过这个我可以把自定义的头处理掉</p>
+<h3 id="路由变异"><a href="#路由变异" class="headerlink" title="路由变异"></a>路由变异</h3><p><code>id = RouteParameter.Optional</code>情况下</p>
+<p>当路由为 <code>api/{controller}/{action}/{id}</code> 时，<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ProductsController</span> : <span class="title">ApiController</span> </div><div class="line">&#123; </div><div class="line">    [HttpGet] <span class="comment">//需要显式的指定映射</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">string</span> <span class="title">Details</span>(<span class="params"><span class="keyword">int</span> id</span>)</span>; <span class="comment">//api/products/details/1</span></div><div class="line"></div><div class="line">    [HttpPost] </div><div class="line">    [ActionName(<span class="string">"Thumbnail"</span>)] <span class="comment">//覆盖动作，这样就转到api/products/thumbnail/id</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">AddThumbnailImage</span>(<span class="params"><span class="keyword">int</span> id</span>)</span>; </div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//除此外还有个： [NonAction]属性可以修饰动作，这样框架就不会映射到那个函数</span></div><div class="line"><span class="comment">//[AcceptVerbs("GET", "HEAD")] 允许此方法对get和head的http方法（put/delete等同理）</span></div></pre></td></tr></table></figure></p>
+<p>###　异常处理<br>总而言之（exception和error都用最好）：<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> message = <span class="keyword">string</span>.Format(<span class="string">"Product with id = 0 not found"</span>);</div><div class="line"><span class="keyword">throw</span> <span class="keyword">new</span> HttpResponseException(</div><div class="line">    Request.CreateErrorResponse(HttpStatusCode.NotFound, message));</div></pre></td></tr></table></figure></p>
+<h3 id="自定义消息过滤"><a href="#自定义消息过滤" class="headerlink" title="自定义消息过滤"></a>自定义消息过滤</h3><p>这个要继承<code>DelegatingHandler</code>,服务器在config.MessageHandlers加，客户端在HttpClient加。</p>
+<p>唯一的注意http头的加法，客户端随便加，服务器一般如此<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">return</span> <span class="selector-tag">base</span><span class="selector-class">.SendAsync</span>(request, cancellationToken)</div><div class="line"><span class="selector-class">.ContinueWith</span>( (task) =&gt; &#123;</div><div class="line">    HttpResponseMessage response = task<span class="selector-class">.Result</span>;</div><div class="line">    response<span class="selector-class">.Headers</span><span class="selector-class">.Add</span>(_header, <span class="string">"Server"</span>);</div><div class="line">    return response;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h3 id="Post数据"><a href="#Post数据" class="headerlink" title="Post数据"></a>Post数据</h3><p>有俩种，复合类型和简单类型</p>
+<ul>
+<li>复合类型(传和接受都是自定义的结构体)</li>
+</ul>
+<p>服务器对对这类型没啥要求，传入参数是自定义类或结构体就好。</p>
+<p>客户端代码必须传<code>application/json</code>格式数据(我用postman测试了下，选raw，传json字符串可以的)</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">string <span class="attr">seri</span> = JsonConvert.SerializeObject(</div><div class="line">                new Product &#123; <span class="attr">Id</span> = <span class="number">1</span>, <span class="attr">Name</span> = <span class="string">"Tomato Soup"</span>, <span class="attr">Category</span> = <span class="string">"Groceries"</span> &#125;);</div><div class="line">HttpResponseMessage <span class="attr">response</span> = client.PostAsync(</div><div class="line">    <span class="string">"api/products/PostPro1/"</span></div><div class="line">    , new StringContent(seri, </div><div class="line">    Encoding.Unicode, <span class="string">"application/json"</span>)).Result;</div></pre></td></tr></table></figure>
+<ul>
+<li>简单类型(服务器接收的是string int这种类型)</li>
+</ul>
+<p>服务器要求用<code>[FromBody]</code>修饰参数</p>
+<p>客户端要求发送<code>=value</code>的数据（代码和测试真心发俩种数据）</p>
+<p>客户端代码,不知道为何必须用<code>{ &quot;&quot;: [&quot;update one&quot;, &quot;update two&quot;, &quot;update three&quot;] }</code>格式数据 且<code>x-www-form-urlencoded</code>它才认同</p>
+<p>ajax只需要传上面的格式就好了<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">var</span> conte = <span class="keyword">new</span> FormUrlEncodedContent(</div><div class="line">    <span class="keyword">new</span>[]</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">new</span> KeyValuePair&lt;<span class="keyword">string</span>, <span class="keyword">string</span>&gt;(<span class="string">""</span>, <span class="string">"login"</span>)</div><div class="line">    &#125;</div><div class="line">    );</div><div class="line">HttpResponseMessage response = client.PostAsync(</div><div class="line">    <span class="string">"api/products/PostPro1/"</span></div><div class="line">    , conte).Result;</div></pre></td></tr></table></figure></p>
+<p>然而我用<code>postman</code>选<code>raw</code>，传<code>=rety</code>就可以传入<code>rety</code>字符进去。<br><strong>angular的js没试过，放以后把</strong></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;div class=&quot;group-picture&quot;&gt;&lt;div class=&quot;group-picture-container&quot;&gt;&lt;div class=&quot;group-picture-row&quot;&gt;&lt;div class=&quot;group-picture-column&quot; style=&quot;widt
+    
+    </summary>
+    
+      <category term="C#" scheme="https://xuecat.github.io/categories/C/"/>
+    
+    
+      <category term="Asp.Net" scheme="https://xuecat.github.io/tags/Asp-Net/"/>
+    
+  </entry>
   
   <entry>
     <title>Html5(219)</title>
@@ -145,7 +210,7 @@
     <link href="https://xuecat.github.io/2017/02/23/216/"/>
     <id>https://xuecat.github.io/2017/02/23/216/</id>
     <published>2017-02-23T12:56:17.000Z</published>
-    <updated>2017-04-11T15:20:47.132Z</updated>
+    <updated>2017-04-18T14:07:28.073Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Angular"><a href="#Angular" class="headerlink" title="Angular"></a>Angular</h2><h3 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h3><p>no-repeat是所有内置指令中优先级最高的。</p>
 <p><code>ng-app</code> 指定AngularJS脚步执行作用域<br><code>ng-model</code> 绑定html元素到数据<br><code>ng-init</code> 初始化数据<br><code>ng-if</code>从dom删除元素<br><code>ng-switch</code> 如同switch适用于多个例子，有ngSwitchCase ngSwitchDefault<br><code>ng-hide</code> 从dom隐藏元素<br><code>ng-options</code> 这个有点多，放下面单独列一项<br><code>ng-disabled</code> 绑定数据到html的disabled属性<br><code>ng-show</code> <code>ng-hide</code><br><code>ng-bind</code>  是指定数据，和<code></code>差不多<br><code>ng-cloak</code> 加载时防止代码未加载完而发生的闪烁<br><code>ng-model</code> 是双向绑定, 在<code>ng-repeat</code>中<code>ng-model</code>必须和<code>ng-change</code>连用<br><code>ng-class</code> 绑定css:</p>
@@ -161,6 +226,7 @@
 <p><code>angular.module(name,[requires],[configfn])</code> 一个参数是获取，一个以上是创建。</p>
 <p>先用<code>ng-app</code>指定模块名，再用<code>angular.module</code>创建对应angular的模型。模型是当前元素拥有的作用域。<br>再用<code>ng-controller</code>指定控制名，再用<code>模型名.controller</code>创建对应angular的控制器。控制器是当前元素的控制器<br>最后用<code>$scope</code>来添加要控制的属性</p>
 <p>每个模型有个<code>$rootScope</code>是根，是各个controller中scope的桥梁。</p>
+<h3 id="angular-extend"><a href="#angular-extend" class="headerlink" title="angular.extend"></a>angular.extend</h3><p>对象第一层拷贝，如果第一层有属性则引用属性，返回结果<br><code>angular.extend(a, b, c) //依次将c和b的第一层属性拷贝给a，如果有属性则引用拷贝过去，返回a</code></p>
 <h3 id="module"><a href="#module" class="headerlink" title="module"></a>module</h3><p><code>angular.module(&#39;phonecatApp&#39;, [&#39;phoneList&#39;]);</code> 这个表示<code>phonecatApp</code>是依赖<code>phoneList</code>的；可以引用里面的服务和组件等。<br>但是有个问题就是，在<code>html</code>它会被定义到后面的<code>DOM</code>元素覆盖。</p>
 <h3 id="错误认识"><a href="#错误认识" class="headerlink" title="错误认识"></a>错误认识</h3><p><code>ng-repeat</code>和<code>ng-controller</code>不能放到同一元素(这个纠结了好久)，如果放都要用奇淫技巧。</p>
 <h3 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;lastName|lowercase&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span>//小写转换</div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;lastName|uppercase&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span>//大写转换</div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;lastName|currency&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span> //数字格式化为货币格式</div><div class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">ng-repeat</span>=<span class="string">"x in names | orderBy:'country'"</span> /&gt;</span>//x是结构体有country属性。先按国家排序，再遍历 (angular-phonecat step-6就有个很好的例子，它按照选择来排序)</div><div class="line"></div><div class="line">#### 自定义过滤</div><div class="line">$scope.myfilter = function(item) &#123;return bool&#125;; //这个过滤必须返回bool类型，来表示此元素是否要被过滤掉。更注意的是它只能配合filter</div><div class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">ng-repeat</span>=<span class="string">"x in names | filter:myfilter"</span> /&gt;</span> //自定义函数过滤</div><div class="line"></div><div class="line">////////此外当想用此来传俩个参数时有个问题</div><div class="line">1.4版本的只能如此</div><div class="line">$scope.myfilter = function(a) &#123;</div><div class="line">    return function(x) &#123; return a==x;&#125;;//这里参数x很关键，返回的必须是`repeat`里面的循环变量,执行时才能访问到它,达到俩个数的效果</div><div class="line">&#125;</div><div class="line"></div><div class="line">1.6版本是支持多个参数的</div><div class="line">直接filter:myfilter(a, b);</div><div class="line">///////</div><div class="line"></div><div class="line">myApp.filter('replace', function() &#123;</div><div class="line">    return function(input, n1, n2) &#123; return datas;&#125;//这个过滤中则必须返回整个的数据。更注意它只能用于指令时，必须返回多个才行。</div><div class="line">&#125;);</div><div class="line">Result: &#123;&#123; yourinput | replace:3:'b' &#125;&#125;</div></pre></td></tr></table></figure>
@@ -174,6 +240,8 @@
 <h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><p>router的url：<a href="https://github.com/angular-ui/ui-router/wiki/URL-routing" target="_blank" rel="external">https://github.com/angular-ui/ui-router/wiki/URL-routing</a></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">url: <span class="string">"/contacts/:contactId"</span></div><div class="line">$stateParams.contactId = <span class="number">42</span>;</div></pre></td></tr></table></figure>
 <hr>
+<h3 id="module-run"><a href="#module-run" class="headerlink" title="module.run"></a>module.run</h3><p>config执行后就run，然后才是后面的</p>
+<p>run可以直接注入config和provided，和controller差不多</p>
 <h3 id="resource"><a href="#resource" class="headerlink" title="resource"></a>resource</h3><p>它封装了http，使的webapi连续等。<br>/:resource_id.:format 遇见<code>.</code>它会默认跳过,如:<code>/:resid/:fo.json</code></p>
 <ul>
 <li>第一个参数是url</li>
@@ -429,9 +497,9 @@
       <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
     
     
-      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
-    
       <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
     
   </entry>
   
@@ -598,32 +666,6 @@
       <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
     
       <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ASP.NET和wcf学习209</title>
-    <link href="https://xuecat.github.io/2017/01/17/209/"/>
-    <id>https://xuecat.github.io/2017/01/17/209/</id>
-    <published>2017-01-17T14:58:11.000Z</published>
-    <updated>2017-02-21T14:49:40.254Z</updated>
-    
-    <content type="html"><![CDATA[<p>###　ASP.NET Razor<br>书中也只是用一章来介绍它，vs有相关模板的建立！！<br>它和html连用，全名<code>cshtml</code></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;###　ASP.NET Razor&lt;br&gt;书中也只是用一章来介绍它，vs有相关模板的建立！！&lt;br&gt;它和html连用，全名&lt;code&gt;cshtml&lt;/code&gt;&lt;/p&gt;
-
-    
-    </summary>
-    
-      <category term="C#" scheme="https://xuecat.github.io/categories/C/"/>
-    
-    
-      <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="前端" scheme="https://xuecat.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
