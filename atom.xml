@@ -226,9 +226,10 @@
     <link href="https://xuecat.github.io/2017/02/23/216/"/>
     <id>https://xuecat.github.io/2017/02/23/216/</id>
     <published>2017-02-23T12:56:17.000Z</published>
-    <updated>2017-04-18T14:07:28.073Z</updated>
+    <updated>2017-05-22T14:09:05.650Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="Angular"><a href="#Angular" class="headerlink" title="Angular"></a>Angular</h2><h3 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h3><p>no-repeat是所有内置指令中优先级最高的。</p>
+    <content type="html"><![CDATA[<h2 id="Angular"><a href="#Angular" class="headerlink" title="Angular"></a>Angular</h2><p>provider的关系 <a href="https://segmentfault.com/a/1190000003096933" target="_blank" rel="external">https://segmentfault.com/a/1190000003096933</a></p>
+<h3 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h3><p>no-repeat是所有内置指令中优先级最高的。</p>
 <p><code>ng-app</code> 指定AngularJS脚步执行作用域<br><code>ng-model</code> 绑定html元素到数据<br><code>ng-init</code> 初始化数据<br><code>ng-if</code>从dom删除元素<br><code>ng-switch</code> 如同switch适用于多个例子，有ngSwitchCase ngSwitchDefault<br><code>ng-hide</code> 从dom隐藏元素<br><code>ng-options</code> 这个有点多，放下面单独列一项<br><code>ng-disabled</code> 绑定数据到html的disabled属性<br><code>ng-show</code> <code>ng-hide</code><br><code>ng-bind</code>  是指定数据，和<code></code>差不多<br><code>ng-cloak</code> 加载时防止代码未加载完而发生的闪烁<br><code>ng-model</code> 是双向绑定, 在<code>ng-repeat</code>中<code>ng-model</code>必须和<code>ng-change</code>连用<br><code>ng-class</code> 绑定css:</p>
 <ol>
 <li>ng-class=”name” css类绑定变量name</li>
@@ -355,7 +356,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Angular&quot;&gt;&lt;a href=&quot;#Angular&quot; class=&quot;headerlink&quot; title=&quot;Angular&quot;&gt;&lt;/a&gt;Angular&lt;/h2&gt;&lt;h3 id=&quot;基本指令&quot;&gt;&lt;a href=&quot;#基本指令&quot; class=&quot;headerlink&quot; titl
+      &lt;h2 id=&quot;Angular&quot;&gt;&lt;a href=&quot;#Angular&quot; class=&quot;headerlink&quot; title=&quot;Angular&quot;&gt;&lt;/a&gt;Angular&lt;/h2&gt;&lt;p&gt;provider的关系 &lt;a href=&quot;https://segmentfault.com/a/11
     
     </summary>
     
@@ -1010,7 +1011,7 @@
     <link href="https://xuecat.github.io/2016/12/01/200/"/>
     <id>https://xuecat.github.io/2016/12/01/200/</id>
     <published>2016-12-01T13:05:20.000Z</published>
-    <updated>2017-05-06T10:37:52.798Z</updated>
+    <updated>2017-05-22T14:12:48.218Z</updated>
     
     <content type="html"><![CDATA[<p>64位寻址到16EB （1EB=1000TB）x64控制寻址范围16TB</p>
 <p>ps: 退出指令 <code>q</code> 就好了。</p>
@@ -1020,7 +1021,7 @@
 <ol>
 <li>拖拽到windbg，lm查看模块状态</li>
 <li>查看时间戳(lmt)，找到对应pdb，设置pdb路径</li>
-<li>重新加载pdb(.reload)，运行分析命令(!analyze -v)<br>一般崩溃会有exception，就查找这个字符串，就可以找到对应执行函数。(~N 切换到N号线程，主线程是0号)<br>主线程没有就切换到其它线程查找(~*e kb)</li>
+<li>重新加载pdb(.reload)，运行分析命令(!analyze -v)<br>一般崩溃会有exception，就查找这个字符串，就可以找到对应执行函数。(~N 切换到N号线程，主线程是0号)<br>主线程没有就切换到其它线程查找(~<em>e kb， 建议使用`~</em>kb` 这样会列出线程号和更多信息)</li>
 </ol>
 <p><strong>x32</strong>:<br>基本相同，但是当32位程序运行在64位系统的时候，产生的dump</p>
 <ol>
@@ -1029,8 +1030,10 @@
 <li>然后才再像上面那样调试</li>
 </ol>
 <hr>
+<h3 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h3><p>kb后产生的地址<br>依次是：ebp地址 返回地址 参数地址<br>参数地址默认是三个，但是无对应参数时显示的参数地址是随机的。只能根据函数参数来看地址</p>
 <h3 id="指令tips"><a href="#指令tips" class="headerlink" title="指令tips"></a>指令tips</h3><p>bp 在<code>.unload</code>会消失 bu则不会，bu当模块变化时会自动偏移，bp不会<br>bl 罗列断点<br>bc 清除断点(跟bl上面的编号)<br>p (f10)<br>t (f11)<br>lm sm //按文件名排序<br>lm vm {module name}//查看模块详细信息，ocx加载老是没有完整模块名，只有通过这个来查看<br>lmv 罗列模块详细信息<br>lmf 罗列模块image path(终于找到了，这个指令，上次那个加载错误路径的模块，下次就可以用这个指令来解决了)</p>
 <p>!sym noisy 符合老是加载不上时，用这个开启模式；这样加载符号过程就会罗列详细信息</p>
+<p>有一个数组我知道地址<br>dq 0x2721aae0 把数组展现出来<br>dt 2721aaf0  et_commonctrl::tag_ETControlData来查看第二个数组信息</p>
 <h3 id="符号tips"><a href="#符号tips" class="headerlink" title="符号tips"></a>符号tips</h3><p>今天又测试了下，指定符号、源、exe后，lm居然没找到对应符号。。。</p>
 <p>只好强制加载了。<br><strong>后来发现居然要多个后缀才行</strong>：<br><code>.reload /i simpledoc1.exe</code>这样才行。。。</p>
 <p><strong>lm会全部显示，太多了，如果只想显示能加载符号的模块的话用：</strong><code>lml</code>就可以了</p>
