@@ -284,8 +284,8 @@
             
               
                 
-                <a class="post-title-link" href="/2014/09/20/64/" itemprop="url">
-                  指针内存长度和大小(64)
+                <a class="post-title-link" href="/2014/09/20/56/" itemprop="url">
+                  内存对齐偏移量(56)
                 </a>
               
             
@@ -312,8 +312,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
                   </a>
                 </span>
 
@@ -347,13 +347,14 @@
       
         
           
-           今天字符处理遇见这个问题：我new了一块内存，然后sizeof()；strlen()；都正常（一个返回4，一个返回分配大小）
-之后我用了ZeroMemory来分配，发现有异议了。sizeof(); strlen(); 一个返回4，一个返回0；     原来用了这个函数会置空内存。
-
-          
+           编译器对变量存储的一个特殊处理。为了提高CPU的存储速度，编译器对一些变量的起始地址做了“对齐”处理
+。在默认情况下，规定各成员变量存放的起始地址相对于结构的起始地址的偏移量必须为该变量的类型所占用的字节数的倍数。类型
+对齐方式（变量存放的起始地址相对于结构的起始地址的偏移量）
+Char 偏移量必
+          ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/20/64/#more" rel="contents">
+            <a class="btn" href="/2014/09/20/56/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -473,126 +474,6 @@
 
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/09/20/55/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/20/58/" itemprop="url">
-                  变长参数(58)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-20T03:31:58+08:00" content="2014-09-20">
-              2014-09-20
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          可变长函数：
-  函数多参数情况下，可变长函数虽然设置“…”   //一定要“…”之前的那个参数 va_start，来避免异常抛出。（实践）
-
-          
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/20/58/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -768,6 +649,246 @@ void CallPrintfText(void
             
               
                 
+                <a class="post-title-link" href="/2014/09/20/64/" itemprop="url">
+                  指针内存长度和大小(64)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-09-20T03:31:58+08:00" content="2014-09-20">
+              2014-09-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+           今天字符处理遇见这个问题：我new了一块内存，然后sizeof()；strlen()；都正常（一个返回4，一个返回分配大小）
+之后我用了ZeroMemory来分配，发现有异议了。sizeof(); strlen(); 一个返回4，一个返回0；     原来用了这个函数会置空内存。
+
+          
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/20/64/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/09/20/58/" itemprop="url">
+                  变长参数(58)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-09-20T03:31:58+08:00" content="2014-09-20">
+              2014-09-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          可变长函数：
+  函数多参数情况下，可变长函数虽然设置“…”   //一定要“…”之前的那个参数 va_start，来避免异常抛出。（实践）
+
+          
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/20/58/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2014/09/20/57/" itemprop="url">
                   设计流程(57)
                 </a>
@@ -832,7 +953,7 @@ void CallPrintfText(void
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/m.png" rel="gallery_cj76brvou00ft98cxmguhmivp"
+                 href="/picture/m.png" rel="gallery_cj98nh11200g85ks9aaar423z"
                  itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/m.png" itemprop="contentUrl"/>
               </a>
@@ -1328,7 +1449,7 @@ remove今天死活识别不了，添加#include 后可以使用。
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/e.jpg" rel="gallery_cj76brvm700ey98cxlotzaym3"
+                 href="/picture/e.jpg" rel="gallery_cj98nh10s00fo5ks9gzglk3qz"
                  itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/e.jpg" itemprop="contentUrl"/>
               </a>
@@ -1351,129 +1472,6 @@ remove今天死活识别不了，添加#include 后可以使用。
 
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/09/17/51/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/15/49/" itemprop="url">
-                  non-virtual和virtual函数(49)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-15T03:31:58+08:00" content="2014-09-15">
-              2014-09-15
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          首先，普通函数的派生会出现遮掩情况：
-如；基类有多个重载函数（fun）。派生类只要定义一个（fun）；
-所有的基类函数（fun（int）、fun（double）等）不能使用。
-当然可以通过using::Base::fun()来解决。
-（编译器智能使用父子关系类的fun函数）
-遮掩不仅会阻止派生类内部
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/15/49/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1548,7 +1546,7 @@ remove今天死活识别不了，添加#include 后可以使用。
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">215</span>
+              <span class="site-state-item-count">216</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

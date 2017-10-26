@@ -89,7 +89,7 @@
 <meta name="description" content="git checkout哪个分支，就是哪个分支的代码。（用vs打开发现）
 git pull会把冲突代码直接放入冲突文件中，需要自己修改。
 本地删除文件，想git也删除跟踪用git rm 文件名。如果文件多了，git add -A自动全部更新。
-修改了未commit： git reset –hard (git checkout .) [git clean -xdf](单个文件：git checkou">
+修改了未commit： git reset --hard (git checkout .) [git clean -xdf](单个文件：git checko">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git发现(100)">
 <meta property="og:url" content="https://xuecat.github.io/2015/01/06/100/index.html">
@@ -97,14 +97,14 @@ git pull会把冲突代码直接放入冲突文件中，需要自己修改。
 <meta property="og:description" content="git checkout哪个分支，就是哪个分支的代码。（用vs打开发现）
 git pull会把冲突代码直接放入冲突文件中，需要自己修改。
 本地删除文件，想git也删除跟踪用git rm 文件名。如果文件多了，git add -A自动全部更新。
-修改了未commit： git reset –hard (git checkout .) [git clean -xdf](单个文件：git checkou">
-<meta property="og:updated_time" content="2017-05-15T11:03:04.945Z">
+修改了未commit： git reset --hard (git checkout .) [git clean -xdf](单个文件：git checko">
+<meta property="og:updated_time" content="2017-09-07T15:35:44.775Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git发现(100)">
 <meta name="twitter:description" content="git checkout哪个分支，就是哪个分支的代码。（用vs打开发现）
 git pull会把冲突代码直接放入冲突文件中，需要自己修改。
 本地删除文件，想git也删除跟踪用git rm 文件名。如果文件多了，git add -A自动全部更新。
-修改了未commit： git reset –hard (git checkout .) [git clean -xdf](单个文件：git checkou">
+修改了未commit： git reset --hard (git checkout .) [git clean -xdf](单个文件：git checko">
 
 
 
@@ -353,16 +353,17 @@ git pull会把冲突代码直接放入冲突文件中，需要自己修改。
         <p>git checkout哪个分支，就是哪个分支的代码。（用vs打开发现）</p>
 <p>git pull会把冲突代码直接放入冲突文件中，需要自己修改。</p>
 <p>本地删除文件，想git也删除跟踪用git rm 文件名。如果文件多了，git add -A自动全部更新。</p>
-<p>修改了未commit： git reset –hard (git checkout .) [git clean -xdf]<br>(单个文件：git checkout – &lt;文件名&gt;)<br>撤销git add(即保留本地修改): git reset . (单个文件撤销 git rm –cached <added_file_to_undo>)</added_file_to_undo></p>
-<p>修改了commit: git reset –hard <commit_id><br>(单个文件：git reset HEAD &lt;文件名&gt;)<br>撤销git commit但是保留本地修改： git reset commit_id </commit_id></p>
+<p>修改了未commit： <code>git reset --hard</code> (git checkout .) [git clean -xdf]<br>(单个文件：<code>git checkout -- &lt;文件名&gt;</code>)<br>撤销git add(即保留本地修改): git reset . (单个文件撤销 <code>git rm --cached &lt;added_file_to_undo&gt;</code>)</p>
+<p>修改了commit: <code>git reset --hard</code> <commit_id><br>(单个文件：git reset HEAD &lt;文件名&gt;)<br>撤销git commit但是保留本地修改： git reset commit_id </commit_id></p>
 <p>修改了未提交： git diff &lt;文件名&gt; 查看具体修改<br>修改了已经提交： git show <hash> 查看具体修改</hash></p>
 <p>revert是用于push提交后的 </p>
-<p>git branch -va 可以罗列远程分支</p>
+<p><code>git branch -va</code> 可以罗列远程分支</p>
+<p>放弃修改直接回复：<br>今天改了点文件，但是一直<code>reset</code>不回去，好像是没有add的没有记录。气死了最后用<code>git checkout .</code>抛弃所有修改，直接返回。</p>
 <hr>
 <p>git删除文件<br>今天手动删除了很多文件，又新建了。然后才想起该用<code>git rm</code>，然而现在在一个一个弄好麻烦，又想保留现在修改。<br>发现<code>git add --all</code>或<code>git add -A</code>可以解决。</p>
 <hr>
-<p>放弃本地修改，使用远程库内容更新<br>git fetch –all  //下载远程的库的内容<br>git reset –hard origin/master  </p>
-<p>git stash 本地修改保存起来<br>git stash list 查看保存信息<br>git pull 更新远程内容<br>git stash pop {缓存名}<br>解决冲突后走提交流程</p>
+<p>放弃本地修改，使用远程库内容更新<br><code>git fetch --all</code>  //下载远程的库的内容<br><code>git reset --hard origin/master</code> </p>
+<p><code>git stash</code>本地修改保存起来<br><code>git stash list</code> 查看保存信息<br><code>git pull</code> 更新远程内容<br><code>git stash pop</code> {缓存名}<br>解决冲突后走提交流程</p>
 
       
     </div>
@@ -472,7 +473,7 @@ git pull会把冲突代码直接放入冲突文件中，需要自己修改。
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">215</span>
+              <span class="site-state-item-count">216</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
