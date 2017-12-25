@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2017-12-18T13:07:25.713Z</updated>
+  <updated>2017-12-25T15:31:56.112Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -16,11 +16,40 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>c++11左右值</title>
+    <title>react插件(228)</title>
+    <link href="https://xuecat.github.io/2017/12/25/228/"/>
+    <id>https://xuecat.github.io/2017/12/25/228/</id>
+    <published>2017-12-25T15:02:02.000Z</published>
+    <updated>2017-12-25T15:31:56.112Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="react-thunk"><a href="#react-thunk" class="headerlink" title="react-thunk"></a>react-thunk</h3><p> 我一开始觉得把<code>props.dispatch</code>当参数传总会异步的，但是当多个时就会分不清。</p>
+<ol>
+<li>只有<code>store</code>的<code>dispatch</code>后面才能跟<code>then</code>，其它都不能</li>
+<li><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">tt</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">dis</span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> tt = dis(addTodo(<span class="string">'wangqiu'</span>));<span class="comment">//函数出入的参数就是dispatch，所以以次来异步发action</span></div><div class="line">    <span class="keyword">return</span> dis(toggleTodo(tt));</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">   &lt;TodoList</div><div class="line">          todos=&#123;visibleTodos&#125;</div><div class="line">          onTodoClick=&#123;index =&gt;</div><div class="line">            &#123;dispatch(test(index))&#125;<span class="comment">//普遍做法如此，给dispatch传个函数进去</span></div><div class="line">          &#125; /&gt;</div></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;react-thunk&quot;&gt;&lt;a href=&quot;#react-thunk&quot; class=&quot;headerlink&quot; title=&quot;react-thunk&quot;&gt;&lt;/a&gt;react-thunk&lt;/h3&gt;&lt;p&gt; 我一开始觉得把&lt;code&gt;props.dispatch&lt;/code
+    
+    </summary>
+    
+      <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
+    
+    
+      <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
+    
+      <category term="react" scheme="https://xuecat.github.io/tags/react/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>c++11左右值 (226)</title>
     <link href="https://xuecat.github.io/2017/12/18/226/"/>
     <id>https://xuecat.github.io/2017/12/18/226/</id>
     <published>2017-12-18T12:15:38.000Z</published>
-    <updated>2017-12-18T13:07:25.713Z</updated>
+    <updated>2017-12-20T15:09:39.470Z</updated>
     
     <content type="html"><![CDATA[<h3 id="C-左右值"><a href="#C-左右值" class="headerlink" title="C++左右值"></a>C++左右值</h3><p> 左值指即能出现等号左边，也能出现在右边的变量（通常指有变量名的值）<br> 右值值只能出现等号右边的值（通常指无变量名的值，函数返回和表达式，常量——不跟对象关联的常量）<br> c++11在上面右值多个将亡值<br><code>move</code>右转左 <code>forward</code>左转右</p>
  <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function">MyClass <span class="title">fun</span> <span class="params">()</span> </span>&#123;MyClass <span class="keyword">return</span> s;&#125;</div><div class="line">MyClass s= fun();</div><div class="line">MyClass&amp; s = fun();</div><div class="line">MyClass&amp;&amp; s = fun();<span class="comment">//这三个全是调用移动构造函数</span></div></pre></td></tr></table></figure>]]></content>
@@ -41,11 +70,11 @@
   </entry>
   
   <entry>
-    <title>JS继承</title>
+    <title>JS继承和函数式编程的curry等(227)</title>
     <link href="https://xuecat.github.io/2017/12/18/227/"/>
     <id>https://xuecat.github.io/2017/12/18/227/</id>
     <published>2017-12-18T12:15:38.000Z</published>
-    <updated>2017-12-18T13:14:56.336Z</updated>
+    <updated>2017-12-25T15:10:03.840Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/picture/227.jpg" alt=""></p>
 <h3 id="es5-6种继承"><a href="#es5-6种继承" class="headerlink" title="es5 6种继承"></a>es5 6种继承</h3><p><strong>来自原型对象的引用属性是所有实例共享的</strong></p>
@@ -70,6 +99,13 @@
 </li>
 </ul>
 <h3 id="es6继承"><a href="#es6继承" class="headerlink" title="es6继承"></a>es6继承</h3><p>上面的<code>寄生组合继承</code>同，多个<code>static</code>定义静态属性</p>
+<h3 id="Curry"><a href="#Curry" class="headerlink" title="Curry"></a>Curry</h3><p> 这个概念是存储传入参数，够了才执行函数<br> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> fun = a=&gt; b=&gt; c=&gt; &#123;<span class="keyword">return</span> a+b+c&#125;<span class="comment">//注意return</span></div><div class="line"><span class="keyword">let</span> fun1 = fun(<span class="number">1</span>)<span class="comment">//存储函数</span></div><div class="line"><span class="keyword">let</span> fun2 = fun1(<span class="number">2</span>);</div><div class="line"><span class="keyword">let</span> fun3 = fun2(<span class="number">3</span>);<span class="comment">//6</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> fun1 = fun(<span class="number">1</span>)(<span class="number">2</span>)(<span class="number">3</span>)<span class="comment">//6, 参数多了会报错</span></div></pre></td></tr></table></figure></p>
+<h3 id="compose"><a href="#compose" class="headerlink" title="compose"></a>compose</h3><p>  这个es6并没有实现，但是很多库有这个函数<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> greeting = (firstName, lastName) =&gt; <span class="string">'hello, '</span> + firstName + <span class="string">' '</span> + lastName</div><div class="line"><span class="keyword">var</span> toUpper = str =&gt; str.toUpperCase()</div><div class="line"><span class="keyword">var</span> fn = compose(toUpper, greeting)</div><div class="line"><span class="built_in">console</span>.log(fn(<span class="string">'jack'</span>, <span class="string">'smith'</span>))</div><div class="line"><span class="comment">// ‘HELLO，JACK SMITH’</span></div></pre></td></tr></table></figure></p>
+<ul>
+<li>compose的参数是函数，返回的也是一个函数</li>
+<li>因为除了第一个函数的接受参数，其他函数的接受参数都是上一个函数的返回值，所以初始函数的参数是多元的，而其他函数的接受值是一元的</li>
+<li>compsoe函数可以接受任意的参数，所有的参数都是函数，且执行方向是自右向左的，初始函数一定放到参数的最右面</li>
+</ul>
 ]]></content>
     
     <summary type="html">
@@ -82,9 +118,9 @@
       <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
     
     
-      <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+      <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
     
-      <category term="js语法" scheme="https://xuecat.github.io/tags/js%E8%AF%AD%E6%B3%95/"/>
+      <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -751,7 +787,7 @@
     <link href="https://xuecat.github.io/2017/02/11/211/"/>
     <id>https://xuecat.github.io/2017/02/11/211/</id>
     <published>2017-02-11T07:15:38.000Z</published>
-    <updated>2017-11-30T14:04:56.568Z</updated>
+    <updated>2017-12-20T15:09:25.410Z</updated>
     
     <content type="html"><![CDATA[<h2 id="js的值类型和引用类型"><a href="#js的值类型和引用类型" class="headerlink" title="js的值类型和引用类型"></a>js的值类型和引用类型</h2><p>值类型：数值、布尔、null、undefined<br>引用类型：对象、数组、函数</p>
 <h3 id="js的值类型和引用类型-1"><a href="#js的值类型和引用类型-1" class="headerlink" title="js的值类型和引用类型"></a>js的值类型和引用类型</h3><p>值类型：数值、布尔、null、undefined<br>引用类型：对象、数组、函数</p>
@@ -880,9 +916,9 @@
       <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
     
     
-      <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+      <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
     
-      <category term="js语法" scheme="https://xuecat.github.io/tags/js%E8%AF%AD%E6%B3%95/"/>
+      <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -981,37 +1017,6 @@
       <category term="mfc" scheme="https://xuecat.github.io/tags/mfc/"/>
     
       <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Gen2项目学习(205)</title>
-    <link href="https://xuecat.github.io/2016/12/15/205/"/>
-    <id>https://xuecat.github.io/2016/12/15/205/</id>
-    <published>2016-12-15T12:51:59.000Z</published>
-    <updated>2017-11-13T13:17:25.874Z</updated>
-    
-    <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 50%;"><img src="/picture/u1.jpg" alt=""></div><div class="group-picture-column" style="width: 50%;"><img src="/picture/u2.jpg" alt=""></div></div><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/u3.jpg" alt=""></div></div></div></div>
-<h4 id="LoggingDBService"><a href="#LoggingDBService" class="headerlink" title="LoggingDBService"></a>LoggingDBService</h4><p>212失联后，为了配置这个服务，也是伤神死了。</p>
-<p>1、服务是否正确。启动LoggingDBService，在网页上输入相应网址访问；再看看<code>asmx</code>访问是否成功，成功的话就表示服务是好的。</p>
-<p>2、数据库配置是否正确。进入数据库，对比相应数据库名、用户名、和密码。</p>
-<p>3、本地<code>webService.ini</code>是配置正确。要注意的是里面的ip地址必须是c类ip；回环ip和localhost之类的是不行的。</p>
-<h3 id="logging的webservice"><a href="#logging的webservice" class="headerlink" title="logging的webservice"></a>logging的webservice</h3><p>他们用的是<code>asp.net webservice</code>工程。vs10以后，就全是<code>wcf</code>了。<br>如果要强制建，可以<code>空asp</code>再建个<code>web服务程序</code></p>
-<p>类继承<code>MarshalByRefObject, IRegisteredObject</code>后，再访问<code>asmx</code>文件。就达到了服务程序，随winform程序启动的假象。<br>实际就是iis服务器。<br>不然就自己配置到iis服务器。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;div class=&quot;group-picture&quot;&gt;&lt;div class=&quot;group-picture-container&quot;&gt;&lt;div class=&quot;group-picture-row&quot;&gt;&lt;div class=&quot;group-picture-column&quot; style=&quot;widt
-    
-    </summary>
-    
-      <category term="配置" scheme="https://xuecat.github.io/categories/%E9%85%8D%E7%BD%AE/"/>
-    
-    
-      <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
-    
-      <category term="sobey项目" scheme="https://xuecat.github.io/tags/sobey%E9%A1%B9%E7%9B%AE/"/>
     
   </entry>
   

@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="学习看书笔记,js语法," />
+  <meta name="keywords" content="JS,学习看书笔记," />
 
 
 
@@ -92,7 +92,7 @@
 简单链
  1234567Sub.prototype = new Super();//共享原型对象，arr是引用类型var sub1 =">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS继承">
+<meta property="og:title" content="JS继承和函数式编程的curry等(227)">
 <meta property="og:url" content="https://xuecat.github.io/2017/12/18/227/index.html">
 <meta property="og:site_name" content="XueCat">
 <meta property="og:description" content="es5 6种继承来自原型对象的引用属性是所有实例共享的
@@ -101,9 +101,9 @@
 简单链
  1234567Sub.prototype = new Super();//共享原型对象，arr是引用类型var sub1 =">
 <meta property="og:image" content="https://xuecat.github.io/picture/227.jpg">
-<meta property="og:updated_time" content="2017-12-18T13:14:56.336Z">
+<meta property="og:updated_time" content="2017-12-25T15:10:03.840Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JS继承">
+<meta name="twitter:title" content="JS继承和函数式编程的curry等(227)">
 <meta name="twitter:description" content="es5 6种继承来自原型对象的引用属性是所有实例共享的
  12345function Super() &amp;#123;    this.val = 1;    this.arr = [1];&amp;#125;function Sub() &amp;#123;...&amp;#125;
 
@@ -133,7 +133,7 @@
   <link rel="canonical" href="https://xuecat.github.io/2017/12/18/227/"/>
 
 
-  <title> JS继承 | XueCat </title>
+  <title> JS继承和函数式编程的curry等(227) | XueCat </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -296,7 +296,7 @@
             
             
               
-                JS继承
+                JS继承和函数式编程的curry等(227)
               
             
           </h1>
@@ -378,6 +378,13 @@
 </li>
 </ul>
 <h3 id="es6继承"><a href="#es6继承" class="headerlink" title="es6继承"></a>es6继承</h3><p>上面的<code>寄生组合继承</code>同，多个<code>static</code>定义静态属性</p>
+<h3 id="Curry"><a href="#Curry" class="headerlink" title="Curry"></a>Curry</h3><p> 这个概念是存储传入参数，够了才执行函数<br> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> fun = a=&gt; b=&gt; c=&gt; &#123;<span class="keyword">return</span> a+b+c&#125;<span class="comment">//注意return</span></div><div class="line"><span class="keyword">let</span> fun1 = fun(<span class="number">1</span>)<span class="comment">//存储函数</span></div><div class="line"><span class="keyword">let</span> fun2 = fun1(<span class="number">2</span>);</div><div class="line"><span class="keyword">let</span> fun3 = fun2(<span class="number">3</span>);<span class="comment">//6</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> fun1 = fun(<span class="number">1</span>)(<span class="number">2</span>)(<span class="number">3</span>)<span class="comment">//6, 参数多了会报错</span></div></pre></td></tr></table></figure></p>
+<h3 id="compose"><a href="#compose" class="headerlink" title="compose"></a>compose</h3><p>  这个es6并没有实现，但是很多库有这个函数<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> greeting = (firstName, lastName) =&gt; <span class="string">'hello, '</span> + firstName + <span class="string">' '</span> + lastName</div><div class="line"><span class="keyword">var</span> toUpper = str =&gt; str.toUpperCase()</div><div class="line"><span class="keyword">var</span> fn = compose(toUpper, greeting)</div><div class="line"><span class="built_in">console</span>.log(fn(<span class="string">'jack'</span>, <span class="string">'smith'</span>))</div><div class="line"><span class="comment">// ‘HELLO，JACK SMITH’</span></div></pre></td></tr></table></figure></p>
+<ul>
+<li>compose的参数是函数，返回的也是一个函数</li>
+<li>因为除了第一个函数的接受参数，其他函数的接受参数都是上一个函数的返回值，所以初始函数的参数是多元的，而其他函数的接受值是一元的</li>
+<li>compsoe函数可以接受任意的参数，所有的参数都是函数，且执行方向是自右向左的，初始函数一定放到参数的最右面</li>
+</ul>
 
       
     </div>
@@ -400,9 +407,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习看书笔记/" rel="tag">#学习看书笔记</a>
+            <a href="/tags/JS/" rel="tag">#JS</a>
           
-            <a href="/tags/js语法/" rel="tag">#js语法</a>
+            <a href="/tags/学习看书笔记/" rel="tag">#学习看书笔记</a>
           
         </div>
       
@@ -419,8 +426,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/18/226/" rel="prev" title="c++11左右值">
-                c++11左右值 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/18/226/" rel="prev" title="c++11左右值 (226)">
+                c++11左右值 (226) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -489,7 +496,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">218</span>
+              <span class="site-state-item-count">219</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -506,7 +513,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -599,7 +606,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#es5-6种继承"><span class="nav-number">1.</span> <span class="nav-text">es5 6种继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#es6继承"><span class="nav-number">2.</span> <span class="nav-text">es6继承</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#es5-6种继承"><span class="nav-number">1.</span> <span class="nav-text">es5 6种继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#es6继承"><span class="nav-number">2.</span> <span class="nav-text">es6继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Curry"><span class="nav-number">3.</span> <span class="nav-text">Curry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#compose"><span class="nav-number">4.</span> <span class="nav-text">compose</span></a></li></ol></div>
             
           </div>
         </section>
