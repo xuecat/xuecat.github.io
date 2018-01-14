@@ -284,8 +284,8 @@
             
               
                 
-                <a class="post-title-link" href="/2014/10/01/74/" itemprop="url">
-                  dulib里面的头文件包含(74)
+                <a class="post-title-link" href="/2014/10/01/73/" itemprop="url">
+                  static作用(73)
                 </a>
               
             
@@ -312,8 +312,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/第三方库/" itemprop="url" rel="index">
-                    <span itemprop="name">第三方库</span>
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
                   </a>
                 </span>
 
@@ -347,17 +347,14 @@
       
         
           
-          他头文件用namespace包括。
-cpp文件也用namespace包括。
-cpp包含个stadx.h文件
-stadx.h文件包含duilib.h文件
-所有的东西写在duilib.h文件里面
-亮点在cpp文件包括，然后包含。导致头文件不用包含。
-
-          
+          static作用（修饰函数、局部变量、全局变量）
+当我们同时编译多个文件时，所有未加static前缀的全局变量和函数都具有全局可见性
+如果加了static，就会对其它源文件隐藏。例如在a和msg的定义前加上static，main.c就看不到它们了。
+利用这一特性可以在不同的文件中定义同名函数和同名变
+          ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/10/01/74/#more" rel="contents">
+            <a class="btn" href="/2014/10/01/73/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -472,7 +469,7 @@ stadx.h文件包含duilib.h文件
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/o.jpg" rel="gallery_cjbmd2x0y00hjeks9l5q9yl0j"
+                 href="/picture/o.jpg" rel="gallery_cjcetiv0u00mi2ss9wzx0xj33"
                  itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/o.jpg" itemprop="contentUrl"/>
               </a>
@@ -1151,8 +1148,8 @@ stadx.h文件包含duilib.h文件
             
               
                 
-                <a class="post-title-link" href="/2014/09/20/62/" itemprop="url">
-                  string和wstring(62)
+                <a class="post-title-link" href="/2014/09/20/59/" itemprop="url">
+                  强制转换临时和原对象(虚函数测试)(59)
                 </a>
               
             
@@ -1214,15 +1211,132 @@ stadx.h文件包含duilib.h文件
       
         
           
-          今天用string来find一个中文符号，首先返回符号位置正确。然后符号为界，截取字符串出现问题；
-分析原因：中文符号在string中是占用两个字节的。而string对所有的字符串是一个字符一个字节的
-，所以按位取时，夺取了一个字节，导致数据获取失败。
-用wstring进行存取，可以完全避免。
-学到
+          这是个很坑的地方,大多数想法,转换嘛,
+我把static_cast&lt;A&gt;(B)不就是把B转成A吗? 错! :
+static_cast&lt;window*&gt;(this)-&gt;onResize(); //这是拿this当成window,没问题
+static_cast&lt;win
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/20/62/#more" rel="contents">
+            <a class="btn" href="/2014/09/20/59/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/09/20/65/" itemprop="url">
+                  ++和++ 入栈顺序(65)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-09-20T03:31:58+08:00" content="2014-09-20">
+              2014-09-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          直接上代码++123456789101112131415161718192021int minuus(int a, int b)&#123;	cout &lt;&lt; a &lt;&lt; endl;	cout &lt;&lt; b &lt;&lt; endl;	return a-b;&#125;
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/20/65/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1345,150 +1459,6 @@ for (size_t i = 0; i &lt; strlen(data); i++)
 
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/09/20/66/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/20/61/" itemprop="url">
-                  杂项
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-20T03:31:58+08:00" content="2014-09-20">
-              2014-09-20
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-        <div class="post-gallery" itemscope itemtype="//schema.org/ImageGallery">
-          
-          
-            <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox"
-                 href="/picture/w.jpg" rel="gallery_cjbmd2x0k00goeks907xee97g"
-                 itemscope itemtype="//schema.org/ImageObject" itemprop="url">
-                <img src="/picture/w.jpg" itemprop="contentUrl"/>
-              </a>
-            
-          
-            
-              <a class="post-gallery-img fancybox"
-                 href="/picture/s.jpg" rel="gallery_cjbmd2x0k00goeks907xee97g"
-                 itemscope itemtype="//schema.org/ImageObject" itemprop="url">
-                <img src="/picture/s.jpg" itemprop="contentUrl"/>
-              </a>
-            
-          
-
-          
-          </div>
-        </div>
-      
-
-      
-        
-          
-             变长参数的纠正，绑定第一参数时，直接赋值貌似不成功。要绑定临近的参数才成功。(好像它是临近取值的)
-我擦，居然用错绘图dc。onpaintdc和cclientdc，前者只能在onpaint函数用才有效，如果传入或者其他函数调用是无效的。后者随意用。
-   发现当设计后，封装的类有三个完成时必须
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/20/61/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1681,7 +1651,7 @@ for (size_t i = 0; i &lt; strlen(data); i++)
         <div class="copyright" >
   
   &copy;  2013 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

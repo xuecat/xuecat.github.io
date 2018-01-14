@@ -98,7 +98,7 @@
 
 只有store的dispatch后面才能跟then，其它都不能
 1234567891011 function test(tt) &amp;#123;  return function(dis) &amp;#123;    let tt = dis(addTodo(&apos;wangqiu&apos;));//函数出入的">
-<meta property="og:updated_time" content="2017-12-25T15:31:56.112Z">
+<meta property="og:updated_time" content="2017-12-27T14:12:55.361Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react插件(228)">
 <meta name="twitter:description" content="react-thunk 我一开始觉得把props.dispatch当参数传总会异步的，但是当多个时就会分不清。
@@ -353,8 +353,10 @@
         <h3 id="react-thunk"><a href="#react-thunk" class="headerlink" title="react-thunk"></a>react-thunk</h3><p> 我一开始觉得把<code>props.dispatch</code>当参数传总会异步的，但是当多个时就会分不清。</p>
 <ol>
 <li>只有<code>store</code>的<code>dispatch</code>后面才能跟<code>then</code>，其它都不能</li>
-<li><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">tt</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">dis</span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> tt = dis(addTodo(<span class="string">'wangqiu'</span>));<span class="comment">//函数出入的参数就是dispatch，所以以次来异步发action</span></div><div class="line">    <span class="keyword">return</span> dis(toggleTodo(tt));</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">   &lt;TodoList</div><div class="line">          todos=&#123;visibleTodos&#125;</div><div class="line">          onTodoClick=&#123;index =&gt;</div><div class="line">            &#123;dispatch(test(index))&#125;<span class="comment">//普遍做法如此，给dispatch传个函数进去</span></div><div class="line">          &#125; /&gt;</div></pre></td></tr></table></figure></li>
+<li><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">tt</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">dis</span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> tt = dis(addTodo(<span class="string">'wangqiu'</span>));<span class="comment">//函数出入的参数就是dispatch，所以以次来异步发action</span></div><div class="line">    <span class="keyword">return</span> dis(toggleTodo(tt));</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">   &lt;TodoList</div><div class="line">          todos=&#123;visibleTodos&#125;</div><div class="line">          onTodoClick=&#123;index =&gt;</div><div class="line">            &#123;dispatch(test(index))&#125;<span class="comment">//普遍做法如此，给dispatch传个函数进去</span></div><div class="line">          &#125; /&gt;</div></pre></td></tr></table></figure>
+</li>
 </ol>
+<h3 id="immutable"><a href="#immutable" class="headerlink" title="immutable"></a>immutable</h3><p> <code>https://www.w3cplus.com/javascript/immutable-js.html</code></p>
 
       
     </div>
@@ -572,7 +574,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#react-thunk"><span class="nav-number">1.</span> <span class="nav-text">react-thunk</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#react-thunk"><span class="nav-number">1.</span> <span class="nav-text">react-thunk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#immutable"><span class="nav-number">2.</span> <span class="nav-text">immutable</span></a></li></ol></div>
             
           </div>
         </section>
@@ -591,7 +593,7 @@
         <div class="copyright" >
   
   &copy;  2013 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

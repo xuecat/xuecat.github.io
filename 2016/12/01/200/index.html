@@ -98,7 +98,7 @@ dump：https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7
 ps: 退出指令 q 就好了。
 dump：https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump
 如果只想程序运行时的内存dump，直接从资源管理器；进程tab页上，选中程">
-<meta property="og:updated_time" content="2017-11-21T13:37:52.154Z">
+<meta property="og:updated_time" content="2018-01-14T13:29:53.524Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="windbg调试(200)">
 <meta name="twitter:description" content="64位寻址到16EB （1EB=1000TB）x64控制寻址范围16TB
@@ -367,6 +367,25 @@ dump：https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7
 <li>然后才再像上面那样调试</li>
 </ol>
 <hr>
+<h3 id="源码条件语句"><a href="#源码条件语句" class="headerlink" title="源码条件语句"></a>源码条件语句</h3><h4 id="int类型的断点"><a href="#int类型的断点" class="headerlink" title="int类型的断点"></a>int类型的断点</h4> <figure class="highlight dos"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bp `WindbgStudyDlg.cpp:<span class="number">198</span>` ".<span class="keyword">if</span> (poi(as)==<span class="number">3</span>)&#123;.<span class="built_in">echo</span> heheok&#125; .<span class="keyword">else</span> &#123;.<span class="built_in">echo</span> MyVar Acceptable; gc&#125;"</div></pre></td></tr></table></figure>
+<p>  官方只给了<code>bp</code>的例子，感觉确实只有它能条件断</p>
+<ol>
+<li>必须用<code>poi</code>指定变量(这里我有个变量<code>as</code>,用这个指令才能指定它)</li>
+<li>.echo 输出</li>
+<li><code>gc</code>即<code>Go from Conditional Breakpoint</code>,从断点处继续执行</li>
+<li><p>第二个<code>echo</code>会自动输出变量名</p>
+<h4 id="字符类型的断点"><a href="#字符类型的断点" class="headerlink" title="字符类型的断点"></a>字符类型的断点</h4><figure class="highlight xquery"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">as</span> /mu $&#123;/v:mystr&#125; @@( MyNest-&gt;Nestin.Buffer );</div><div class="line">.block &#123; r $t0 = $spat( <span class="string">"$&#123;mystr&#125;"</span>, <span class="string">"*11"</span> ); &#125;</div><div class="line">.<span class="keyword">if</span>( @$t0 != <span class="number">1</span> ) &#123; gc &#125; ;</div></pre></td></tr></table></figure>
+<ul>
+<li>使用: <code>bp mytest!mytest::ttfun &quot;$$&lt;d:\\commands.txt&quot;</code></li>
+<li>我试了很多遍,函数内部真心没找到指令,大多网上的和官网的都是指定函数参数,也就是说我要专门把监视字符放入一个函数的参数里面才行,不然完全没法断下来。</li>
+</ul>
+<ol>
+<li><code>MyNest-&gt;Nestin.Buffer</code>是自己指定字符串,必须是字符指针,类就自己获取或指定到指针里面</li>
+<li><code>*11</code> 匹配内容</li>
+<li>上面的是文件格式,不用文件记得把<code>&quot;</code>变<code>\&quot;</code></li>
+</ol>
+</li>
+</ol>
 <h3 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h3><p>kb后产生的地址<br>依次是：ebp地址 返回地址 参数地址<br>参数地址默认是三个，但是无对应参数时显示的参数地址是随机的。只能根据函数参数来看地址</p>
 <h3 id="指令tips"><a href="#指令tips" class="headerlink" title="指令tips"></a>指令tips</h3><p>bp 在<code>.unload</code>会消失 bu则不会，bu当模块变化时会自动偏移，bp不会<br>bl 罗列断点<br>bc 清除断点(跟bl上面的编号)<br>p (f10)<br>t (f11)<br>lm sm //按文件名排序<br>lm vm {module name}//查看模块详细信息，ocx加载老是没有完整模块名，只有通过这个来查看<br>lmv 罗列模块详细信息<br>lmf 罗列模块image path(终于找到了，这个指令，上次那个加载错误路径的模块，下次就可以用这个指令来解决了)</p>
 <p>!sym noisy 符合老是加载不上时，用这个开启模式；这样加载符号过程就会罗列详细信息</p>
@@ -653,7 +672,7 @@ dump：https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#地址"><span class="nav-number">1.</span> <span class="nav-text">地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令tips"><span class="nav-number">2.</span> <span class="nav-text">指令tips</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#符号tips"><span class="nav-number">3.</span> <span class="nav-text">符号tips</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#栈破坏第一个例子"><span class="nav-number">4.</span> <span class="nav-text">栈破坏第一个例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#断点"><span class="nav-number">5.</span> <span class="nav-text">断点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#k命令"><span class="nav-number">6.</span> <span class="nav-text">k命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存溢出"><span class="nav-number">7.</span> <span class="nav-text">内存溢出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#约定不一致"><span class="nav-number">8.</span> <span class="nav-text">约定不一致</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动错误"><span class="nav-number">9.</span> <span class="nav-text">自动错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆错误-使用未初始化状态"><span class="nav-number">10.</span> <span class="nav-text">堆错误-使用未初始化状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆错误-堆句柄不匹配"><span class="nav-number">11.</span> <span class="nav-text">堆错误-堆句柄不匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁情况"><span class="nav-number">12.</span> <span class="nav-text">死锁情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#锁中产生异常"><span class="nav-number">13.</span> <span class="nav-text">锁中产生异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程结束"><span class="nav-number">14.</span> <span class="nav-text">线程结束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DllMain的死锁问题"><span class="nav-number">15.</span> <span class="nav-text">DllMain的死锁问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#临界区的判断"><span class="nav-number">16.</span> <span class="nav-text">临界区的判断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#64位"><span class="nav-number">17.</span> <span class="nav-text">64位</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#源码条件语句"><span class="nav-number">1.</span> <span class="nav-text">源码条件语句</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#int类型的断点"><span class="nav-number">1.1.</span> <span class="nav-text">int类型的断点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符类型的断点"><span class="nav-number">1.2.</span> <span class="nav-text">字符类型的断点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地址"><span class="nav-number">2.</span> <span class="nav-text">地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令tips"><span class="nav-number">3.</span> <span class="nav-text">指令tips</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#符号tips"><span class="nav-number">4.</span> <span class="nav-text">符号tips</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#栈破坏第一个例子"><span class="nav-number">5.</span> <span class="nav-text">栈破坏第一个例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#断点"><span class="nav-number">6.</span> <span class="nav-text">断点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#k命令"><span class="nav-number">7.</span> <span class="nav-text">k命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存溢出"><span class="nav-number">8.</span> <span class="nav-text">内存溢出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#约定不一致"><span class="nav-number">9.</span> <span class="nav-text">约定不一致</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动错误"><span class="nav-number">10.</span> <span class="nav-text">自动错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆错误-使用未初始化状态"><span class="nav-number">11.</span> <span class="nav-text">堆错误-使用未初始化状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆错误-堆句柄不匹配"><span class="nav-number">12.</span> <span class="nav-text">堆错误-堆句柄不匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁情况"><span class="nav-number">13.</span> <span class="nav-text">死锁情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#锁中产生异常"><span class="nav-number">14.</span> <span class="nav-text">锁中产生异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程结束"><span class="nav-number">15.</span> <span class="nav-text">线程结束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DllMain的死锁问题"><span class="nav-number">16.</span> <span class="nav-text">DllMain的死锁问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#临界区的判断"><span class="nav-number">17.</span> <span class="nav-text">临界区的判断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#64位"><span class="nav-number">18.</span> <span class="nav-text">64位</span></a></li></ol></div>
             
           </div>
         </section>
@@ -672,7 +691,7 @@ dump：https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7
         <div class="copyright" >
   
   &copy;  2013 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
