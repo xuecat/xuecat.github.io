@@ -86,29 +86,35 @@
 
 
 
-<meta name="description" content="es5 6种继承来自原型对象的引用属性是所有实例共享的
- 12345function Super() &amp;#123;    this.val = 1;    this.arr = [1];&amp;#125;function Sub() &amp;#123;...&amp;#125;
+<meta name="description" content="原型链
+每个函数对象有个一个prototype(显式原型),指向constructor;但constructor.prototype指向本身.
+实例只有__proto__(隐式原型)
+所有实例需要共享的属性和方法,都可放在prototype;不需要则放在构造函数中
+实例的__proto__指向构造该对象的构造函数的原型即**.prototype
 
-简单链
- 1234567Sub.prototype = new Super();//共享原型对象，arr是引用类型var sub1 =">
+es5 6种继承来自原型对象的引用属性是所有实例">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS继承和函数式编程的curry等(227)">
 <meta property="og:url" content="https://xuecat.github.io/2017/12/18/227/index.html">
 <meta property="og:site_name" content="XueCat">
-<meta property="og:description" content="es5 6种继承来自原型对象的引用属性是所有实例共享的
- 12345function Super() &amp;#123;    this.val = 1;    this.arr = [1];&amp;#125;function Sub() &amp;#123;...&amp;#125;
+<meta property="og:description" content="原型链
+每个函数对象有个一个prototype(显式原型),指向constructor;但constructor.prototype指向本身.
+实例只有__proto__(隐式原型)
+所有实例需要共享的属性和方法,都可放在prototype;不需要则放在构造函数中
+实例的__proto__指向构造该对象的构造函数的原型即**.prototype
 
-简单链
- 1234567Sub.prototype = new Super();//共享原型对象，arr是引用类型var sub1 =">
+es5 6种继承来自原型对象的引用属性是所有实例">
 <meta property="og:image" content="https://xuecat.github.io/picture/227.jpg">
-<meta property="og:updated_time" content="2017-12-25T15:10:03.840Z">
+<meta property="og:updated_time" content="2018-01-25T12:52:54.209Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS继承和函数式编程的curry等(227)">
-<meta name="twitter:description" content="es5 6种继承来自原型对象的引用属性是所有实例共享的
- 12345function Super() &amp;#123;    this.val = 1;    this.arr = [1];&amp;#125;function Sub() &amp;#123;...&amp;#125;
+<meta name="twitter:description" content="原型链
+每个函数对象有个一个prototype(显式原型),指向constructor;但constructor.prototype指向本身.
+实例只有__proto__(隐式原型)
+所有实例需要共享的属性和方法,都可放在prototype;不需要则放在构造函数中
+实例的__proto__指向构造该对象的构造函数的原型即**.prototype
 
-简单链
- 1234567Sub.prototype = new Super();//共享原型对象，arr是引用类型var sub1 =">
+es5 6种继承来自原型对象的引用属性是所有实例">
 <meta name="twitter:image" content="https://xuecat.github.io/picture/227.jpg">
 
 
@@ -356,6 +362,12 @@
 
       
         <p><img src="/picture/227.jpg" alt=""></p>
+<h3 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h3><ul>
+<li>每个函数对象有个一个<code>prototype</code>(显式原型),指向<code>constructor</code>;但<code>constructor.prototype</code>指向本身.</li>
+<li>实例只有<code>__proto__</code>(隐式原型)</li>
+<li>所有实例需要共享的属性和方法,都可放在<code>prototype</code>;不需要则放在构造函数中</li>
+<li>实例的<code>__proto__</code>指向构造该对象的构造函数的原型即<code>**.prototype</code></li>
+</ul>
 <h3 id="es5-6种继承"><a href="#es5-6种继承" class="headerlink" title="es5 6种继承"></a>es5 6种继承</h3><p><strong>来自原型对象的引用属性是所有实例共享的</strong></p>
  <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Super</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.val = <span class="number">1</span>;</div><div class="line">    <span class="keyword">this</span>.arr = [<span class="number">1</span>];</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Sub</span>(<span class="params"></span>) </span>&#123;...&#125;</div></pre></td></tr></table></figure>
 <ul>
@@ -418,16 +430,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/26/225/" rel="next" title="c++函数指针模板又一次说明(225)">
-                <i class="fa fa-chevron-left"></i> c++函数指针模板又一次说明(225)
+              <a href="/2017/12/18/226/" rel="next" title="c++11左右值 (226)">
+                <i class="fa fa-chevron-left"></i> c++11左右值 (226)
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/18/226/" rel="prev" title="c++11左右值 (226)">
-                c++11左右值 (226) <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/25/228/" rel="prev" title="react插件(228)">
+                react插件(228) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -496,7 +508,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">219</span>
+              <span class="site-state-item-count">220</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -606,7 +618,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#es5-6种继承"><span class="nav-number">1.</span> <span class="nav-text">es5 6种继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#es6继承"><span class="nav-number">2.</span> <span class="nav-text">es6继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Curry"><span class="nav-number">3.</span> <span class="nav-text">Curry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#compose"><span class="nav-number">4.</span> <span class="nav-text">compose</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#原型链"><span class="nav-number">1.</span> <span class="nav-text">原型链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#es5-6种继承"><span class="nav-number">2.</span> <span class="nav-text">es5 6种继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#es6继承"><span class="nav-number">3.</span> <span class="nav-text">es6继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Curry"><span class="nav-number">4.</span> <span class="nav-text">Curry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#compose"><span class="nav-number">5.</span> <span class="nav-text">compose</span></a></li></ol></div>
             
           </div>
         </section>

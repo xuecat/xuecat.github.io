@@ -98,7 +98,7 @@
 
 只有store的dispatch后面才能跟then，其它都不能
 1234567891011 function test(tt) &amp;#123;  return function(dis) &amp;#123;    let tt = dis(addTodo(&apos;wangqiu&apos;));//函数出入的">
-<meta property="og:updated_time" content="2017-12-27T14:12:55.361Z">
+<meta property="og:updated_time" content="2018-01-25T12:52:55.326Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react插件(228)">
 <meta name="twitter:description" content="react-thunk 我一开始觉得把props.dispatch当参数传总会异步的，但是当多个时就会分不清。
@@ -357,6 +357,10 @@
 </li>
 </ol>
 <h3 id="immutable"><a href="#immutable" class="headerlink" title="immutable"></a>immutable</h3><p> <code>https://www.w3cplus.com/javascript/immutable-js.html</code></p>
+<h3 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h3><p> 最近看<code>react-redux</code>,<br> <code>connect</code>中的参数有<code>mapStateToProps</code>和<code>mapDispatchToProps</code>,剩下俩个不说,<br> 他们第二个参数<code>ownProps</code>,指的是当前组件的属性<br> 它指的是<code>mapStateToProps</code>之外的属性(即通过xml属性传递的属性),state转prop后自己是能访问到的。</p>
+<h4 id="redux-actions"><a href="#redux-actions" class="headerlink" title="redux-actions"></a>redux-actions</h4><p> createAction<br> 以前:<br> <code>const startAction = () =&gt; ({type:START})</code><br> 使用:<br> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;createAction&#125; <span class="keyword">from</span> <span class="string">'redux-actions'</span>;</div><div class="line"><span class="keyword">const</span> startAction = createAction(START);</div></pre></td></tr></table></figure></p>
+<p> handleactions<br> 以前:<br> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params">state=defaultState, action</span>) </span>&#123;</div><div class="line">    <span class="keyword">switch</span>(action.type) &#123;</div><div class="line">        <span class="keyword">case</span> START : &#123;<span class="keyword">return</span> &#123;...state, runStatus:<span class="literal">true</span>&#125;&#125;;<span class="comment">//es6的解构太方便了，会直接覆盖</span></div><div class="line">        <span class="keyword">case</span> STOP: &#123;<span class="keyword">return</span> &#123;...state, runStatus:<span class="literal">false</span>&#125;&#125;;<span class="comment">//同名属性覆盖</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p> 使用:<br> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;handleActions&#125; <span class="keyword">from</span> <span class="string">'redux-actions'</span>;</div><div class="line"><span class="keyword">const</span> time = handleActions(&#123;</div><div class="line">    START:(state, action) =&gt; (&#123;...state, runStatus:<span class="literal">true</span>&#125;),</div><div class="line">    STOP:(state, action) =&gt; (&#123;...state, runStatus:<span class="literal">false</span>&#125;),</div><div class="line">&#125;, defaultState);</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -390,13 +394,17 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/18/226/" rel="next" title="c++11左右值 (226)">
-                <i class="fa fa-chevron-left"></i> c++11左右值 (226)
+              <a href="/2017/12/18/227/" rel="next" title="JS继承和函数式编程的curry等(227)">
+                <i class="fa fa-chevron-left"></i> JS继承和函数式编程的curry等(227)
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/25/229/" rel="prev" title="JS札记——网上看的装逼写法(229)">
+                JS札记——网上看的装逼写法(229) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -464,7 +472,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">219</span>
+              <span class="site-state-item-count">220</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -574,7 +582,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#react-thunk"><span class="nav-number">1.</span> <span class="nav-text">react-thunk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#immutable"><span class="nav-number">2.</span> <span class="nav-text">immutable</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#react-thunk"><span class="nav-number">1.</span> <span class="nav-text">react-thunk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#immutable"><span class="nav-number">2.</span> <span class="nav-text">immutable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redux"><span class="nav-number">3.</span> <span class="nav-text">Redux</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#redux-actions"><span class="nav-number">3.1.</span> <span class="nav-text">redux-actions</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
