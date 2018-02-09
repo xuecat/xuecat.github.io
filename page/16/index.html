@@ -121,6 +121,34 @@
   <title> XueCat </title>
 </head>
 
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    left: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: 0px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/z16.model.json", 0.5);});
+})();
+</script>
+
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
   
@@ -284,6 +312,129 @@
             
               
                 
+                <a class="post-title-link" href="/2014/10/01/78/" itemprop="url">
+                  字符截取替换(78)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-10-01T03:31:58+08:00" content="2014-10-01">
+              2014-10-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/配置/" itemprop="url" rel="index">
+                    <span itemprop="name">配置</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          //    &apos;;&apos;字符为界
+size_t pos = 0, found = 0;
+while (found != wstring::npos)
+{
+    found = m_strData.find(L&quot;;&quot;, pos);
+    m_strLineData
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/10/01/78/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2014/10/01/73/" itemprop="url">
                   static作用(73)
                 </a>
@@ -405,130 +556,6 @@
             
               
                 
-                <a class="post-title-link" href="/2014/10/01/74/" itemprop="url">
-                  dulib里面的头文件包含(74)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-10-01T03:31:58+08:00" content="2014-10-01">
-              2014-10-01
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/第三方库/" itemprop="url" rel="index">
-                    <span itemprop="name">第三方库</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          他头文件用namespace包括。
-cpp文件也用namespace包括。
-cpp包含个stadx.h文件
-stadx.h文件包含duilib.h文件
-所有的东西写在duilib.h文件里面
-亮点在cpp文件包括，然后包含。导致头文件不用包含。
-
-          
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/10/01/74/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2014/09/29/72/" itemprop="url">
                   编程忠告(72)
                 </a>
@@ -593,7 +620,7 @@ stadx.h文件包含duilib.h文件
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/o.jpg" rel="gallery_cjd1pukn900hxpws9gy6mvc7i"
+                 href="/picture/o.jpg" rel="gallery_cjdfjrwk900i908s9pyhveuwt"
                  itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/o.jpg" itemprop="contentUrl"/>
               </a>
@@ -1272,131 +1299,6 @@ stadx.h文件包含duilib.h文件
             
               
                 
-                <a class="post-title-link" href="/2014/09/20/60/" itemprop="url">
-                  回调函数(60)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-20T03:31:58+08:00" content="2014-09-20">
-              2014-09-20
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          回调函数类型：
-void PrintfText(char* s) 
-{
-    printf(s);
-}
-//定义实现带参回调函数的”调用函数”
-这里注意第一个void代表回调的数返回值，第二个char*代表的回调的函数的参数，就像写下它的参数一样。
-void CallPrintfText(void
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/20/60/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2014/09/20/66/" itemprop="url">
                   输出中文(66)
                 </a>
@@ -1469,6 +1371,124 @@ for (size_t i = 0; i &lt; strlen(data); i++)
 
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/09/20/66/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/09/20/65/" itemprop="url">
+                  ++和++ 入栈顺序(65)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-09-20T03:31:58+08:00" content="2014-09-20">
+              2014-09-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          直接上代码++123456789101112131415161718192021int minuus(int a, int b)&#123;	cout &lt;&lt; a &lt;&lt; endl;	cout &lt;&lt; b &lt;&lt; endl;	return a-b;&#125;
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/20/65/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1897,9 +1917,9 @@ for (size_t i = 0; i &lt; strlen(data); i++)
   
 
   <script type="text/javascript" src="/js/src/particle.js"></script>
-  <script type="text/javascript" src="/js/src/chuncai.js"></script>
-  <script type="text/javascript">
-        $.chuncai();
-  </script>
+  //<script type="text/javascript" src="/js/src/chuncai.js"></script>
+  //<script type="text/javascript">
+  //      $.chuncai();
+  //</script>
 </body>
 </html>

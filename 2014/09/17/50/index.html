@@ -122,6 +122,34 @@
   <title> 模板和虚函数(50) | XueCat </title>
 </head>
 
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    left: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: 0px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/z16.model.json", 0.5);});
+})();
+</script>
+
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
   
@@ -373,16 +401,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/09/17/51/" rel="next" title="勿忘初心(51)">
-                <i class="fa fa-chevron-left"></i> 勿忘初心(51)
+              <a href="/2014/09/15/49/" rel="next" title="non-virtual和virtual函数(49)">
+                <i class="fa fa-chevron-left"></i> non-virtual和virtual函数(49)
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2014/09/18/52/" rel="prev" title="duilib错误(52)">
-                duilib错误(52) <i class="fa fa-chevron-right"></i>
+              <a href="/2014/09/17/51/" rel="prev" title="勿忘初心(51)">
+                勿忘初心(51) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -820,9 +848,9 @@
   
 
   <script type="text/javascript" src="/js/src/particle.js"></script>
-  <script type="text/javascript" src="/js/src/chuncai.js"></script>
-  <script type="text/javascript">
-        $.chuncai();
-  </script>
+  //<script type="text/javascript" src="/js/src/chuncai.js"></script>
+  //<script type="text/javascript">
+  //      $.chuncai();
+  //</script>
 </body>
 </html>

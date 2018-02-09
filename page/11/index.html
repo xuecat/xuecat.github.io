@@ -121,6 +121,34 @@
   <title> XueCat </title>
 </head>
 
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    left: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: 0px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/z16.model.json", 0.5);});
+})();
+</script>
+
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
   
@@ -420,130 +448,6 @@ PKCS7
             
               
                 
-                <a class="post-title-link" href="/2015/05/18/123/" itemprop="url">
-                  编译后各个文件（123）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-05-18T03:33:58+08:00" content="2015-05-18">
-              2015-05-18
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          
-
-pdb这个是二进制代码和源代码映射文件。有了这个才能调试定位代码位置
-
-dump是进程内存镜像文件。用windbg打开。程序崩溃时用windbg生成下dmp文件，然后分析内存的错，而定位代码
-
-obj文件是目标文件，一般是程序编译后的二进制文件，在通过链接器和资源文件链接就成exe文件了。   
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/18/123/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2015/05/18/121/" itemprop="url">
                   release和debug详细（121）
                 </a>
@@ -638,6 +542,130 @@ c语言运行库（不讲了）
 
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/05/18/121/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/05/18/123/" itemprop="url">
+                  编译后各个文件（123）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-05-18T03:33:58+08:00" content="2015-05-18">
+              2015-05-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          
+
+pdb这个是二进制代码和源代码映射文件。有了这个才能调试定位代码位置
+
+dump是进程内存镜像文件。用windbg打开。程序崩溃时用windbg生成下dmp文件，然后分析内存的错，而定位代码
+
+obj文件是目标文件，一般是程序编译后的二进制文件，在通过链接器和资源文件链接就成exe文件了。   
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/05/18/123/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1924,9 +1952,9 @@ int main(int argc, char* argv[])
   
 
   <script type="text/javascript" src="/js/src/particle.js"></script>
-  <script type="text/javascript" src="/js/src/chuncai.js"></script>
-  <script type="text/javascript">
-        $.chuncai();
-  </script>
+  //<script type="text/javascript" src="/js/src/chuncai.js"></script>
+  //<script type="text/javascript">
+  //      $.chuncai();
+  //</script>
 </body>
 </html>

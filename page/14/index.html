@@ -121,6 +121,34 @@
   <title> XueCat </title>
 </head>
 
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    left: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: 0px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/z16.model.json", 0.5);});
+})();
+</script>
+
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
   
@@ -1365,8 +1393,8 @@ su - git :切换到git管理用户
             
               
                 
-                <a class="post-title-link" href="/2014/10/24/84/" itemprop="url">
-                  C语言中的一些小知识(84)
+                <a class="post-title-link" href="/2014/10/24/85/" itemprop="url">
+                  c++正则(85)
                 </a>
               
             
@@ -1393,8 +1421,8 @@ su - git :切换到git管理用户
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
                   </a>
                 </span>
 
@@ -1428,17 +1456,14 @@ su - git :切换到git管理用户
       
         
           
-          前面加0b表示二进制
-　　加0x表示十六进制
-　　数字前加0表示八进制
-　　‘ ‘ //ASCII值是63
-　　‘\077’ //是8进制表示’ ‘，0可以省略，因为C,C++规定不允许使用斜杠加10进制数来表示字符
-　　‘\0x3F’ //是16进制表示’ ‘
-　　关键字    位长(字节)   
+          支持宽字符，（有w_函数）
+(“(\w+)(\.|_)?(\w*)@(\w+)(\.(\w+))+”);
+ 首先注意‘()’表示将正则表达式分成子表达式，每个‘()’之间的内容表示一个子表达式；
+‘\’是一个转义字符，‘\’表示扔掉第二个‘\’的转义特性，‘\w+’表示匹配一个或多个单词，‘+’表示
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/10/24/84/#more" rel="contents">
+            <a class="btn" href="/2014/10/24/85/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1867,9 +1892,9 @@ su - git :切换到git管理用户
   
 
   <script type="text/javascript" src="/js/src/particle.js"></script>
-  <script type="text/javascript" src="/js/src/chuncai.js"></script>
-  <script type="text/javascript">
-        $.chuncai();
-  </script>
+  //<script type="text/javascript" src="/js/src/chuncai.js"></script>
+  //<script type="text/javascript">
+  //      $.chuncai();
+  //</script>
 </body>
 </html>

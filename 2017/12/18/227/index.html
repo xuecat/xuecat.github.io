@@ -105,7 +105,7 @@ es5 6种继承来自原型对象的引用属性是所有实例">
 
 es5 6种继承来自原型对象的引用属性是所有实例">
 <meta property="og:image" content="https://xuecat.github.io/picture/227.jpg">
-<meta property="og:updated_time" content="2018-01-25T12:52:54.209Z">
+<meta property="og:updated_time" content="2018-01-30T14:18:53.538Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS继承和函数式编程的curry等(227)">
 <meta name="twitter:description" content="原型链
@@ -141,6 +141,34 @@ es5 6种继承来自原型对象的引用属性是所有实例">
 
   <title> JS继承和函数式编程的curry等(227) | XueCat </title>
 </head>
+
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    left: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: 0px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/z16.model.json", 0.5);});
+})();
+</script>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
@@ -373,6 +401,27 @@ es5 6种继承来自原型对象的引用属性是所有实例">
 <ul>
 <li><p>简单链</p>
  <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Sub.prototype = <span class="keyword">new</span> Super();<span class="comment">//共享原型对象，arr是引用类型</span></div><div class="line"><span class="keyword">var</span> sub1 = <span class="keyword">new</span> Sub();</div><div class="line"><span class="keyword">var</span> sub2 = <span class="keyword">new</span> Sub();</div><div class="line"></div><div class="line"><span class="comment">//1.无法构造函数传参</span></div><div class="line">sub1.val = <span class="number">2</span>;<span class="comment">//不会影响sub2</span></div><div class="line">sub1.arr.push(<span class="number">2</span>);<span class="comment">//会影响sub2</span></div></pre></td></tr></table></figure>
+<p> <strong>补充</strong><br>  对继承的简单链原理补充<br>我一直在想那样的影响为何有,今天想通了,来做点笔记</p>
+<p><strong>补充:</strong> <br></p>
+<ul>
+<li>call: 替换上下文,可以想象成替换<code>this</code></li>
+<li>new:<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj  = &#123;&#125;;</div><div class="line">obj.__proto__ = Base.prototype;</div><div class="line">Base.call(obj);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在<code>call</code>替换后，它还会再调用一遍<code>Base</code>函数,保证有成员变量</p>
+<p><strong>过程分析:</strong><br></p>
+<ul>
+<li>第一行的<code>new Super</code>直接导致<code>Sub.prototype</code>拥有了<code>val</code>和<code>arr</code></li>
+<li>二三行的<code>new Sub</code>只是将<code>__proto__</code>指向了<code>Sub.prototype</code></li>
+</ul>
+<p>所以使用<code>sub.val</code> <code>sub.arr</code>却也只是访问<code>Sub.prototype</code>上面的东西而已</p>
+<p>如此说来,大家都访问一个东西却为何<code>val</code>不影响呢?<br><br>因为在第6行里是个创建而不是修改</p>
+<p>第六行是对<code>sub1</code>创建一个私有属性并赋值<br>第七行是访问<code>sub1</code>的<code>arr</code>,然而没有从原型链上拿去了</p>
+<ul>
+<li>简单链很好,就怕某地出错,记住它们是访问一个</li>
+<li>借用构造函数这个太浪费了不考虑</li>
+<li>new的数量不是很多倒是可以用用组合继承</li>
+</ul>
 </li>
 <li><p>借用构造函数</p>
  <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Super</span>(<span class="params">val</span>) </span>&#123;...&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Sub</span>(<span class="params">val</span>) </span>&#123;</div><div class="line">    Super.call(<span class="keyword">this</span>, val); <span class="comment">//1.子类互不影响 2.但是复制了父类实例属性导致内存增加 3.call不会复制原型链</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> sub1 = <span class="keyword">new</span> Sub();</div></pre></td></tr></table></figure>
@@ -877,9 +926,9 @@ es5 6种继承来自原型对象的引用属性是所有实例">
   
 
   <script type="text/javascript" src="/js/src/particle.js"></script>
-  <script type="text/javascript" src="/js/src/chuncai.js"></script>
-  <script type="text/javascript">
-        $.chuncai();
-  </script>
+  //<script type="text/javascript" src="/js/src/chuncai.js"></script>
+  //<script type="text/javascript">
+  //      $.chuncai();
+  //</script>
 </body>
 </html>

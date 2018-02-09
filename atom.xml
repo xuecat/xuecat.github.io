@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2018-01-25T12:57:59.380Z</updated>
+  <updated>2018-01-30T14:20:00.815Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://xuecat.github.io/2018/01/25/229/"/>
     <id>https://xuecat.github.io/2018/01/25/229/</id>
     <published>2018-01-25T12:54:28.000Z</published>
-    <updated>2018-01-25T12:57:59.380Z</updated>
+    <updated>2018-01-30T14:20:00.815Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/picture/229.jpg" alt=""></p>
 <h3 id="JS札记"><a href="#JS札记" class="headerlink" title="JS札记"></a>JS札记</h3><p> 数字取整:<br> <code>~~</code> 其实这是个按位非的运算符做了俩次<br> <code>2.33|0</code><br> <code>2.33&gt;&gt;0</code></p>
@@ -31,6 +31,13 @@
 <p> 指定长度填充:<br> 以前就在想了，赶紧笔记: <code>let aa = Array(6).fill(8)</code> 长度6,填充8</p>
 <p> 短路表达式:<br> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = b&amp;&amp;<span class="number">1</span>; <span class="keyword">if</span> (b) a=<span class="number">1</span>; <span class="keyword">else</span> a=b;</div><div class="line"><span class="keyword">var</span> a = b||<span class="number">1</span>; <span class="keyword">if</span> (b) a=b; <span class="keyword">else</span> a=<span class="number">1</span>;</div></pre></td></tr></table></figure></p>
 <p> 高逼格创建函数:<br> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> f = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">'a'</span>, <span class="string">'a++; return a+1;'</span>);</div><div class="line">f(<span class="number">1</span>)<span class="comment">//3</span></div><div class="line"><span class="comment">//函数字符化</span></div></pre></td></tr></table></figure></p>
+<p> 立即执行函数:<br> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;...&#125;)();</div><div class="line">!<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;...&#125;();</div><div class="line">~<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;...&#125;();</div><div class="line">-<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;...&#125;();</div><div class="line">+<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;...&#125;();</div></pre></td></tr></table></figure></p>
+<h3 id="浏览器安全"><a href="#浏览器安全" class="headerlink" title="浏览器安全"></a>浏览器安全</h3><ol>
+<li>xss安全，对url和内容做过滤，防止嵌入js执行代码</li>
+<li>csp, 通过服务器应答头或者html的<code>META</code>标签,限制请求源</li>
+</ol>
+<h3 id="浏览器Console命令"><a href="#浏览器Console命令" class="headerlink" title="浏览器Console命令"></a>浏览器Console命令</h3> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log();</div><div class="line"><span class="built_in">console</span>.dir();<span class="comment">//显示一个对象所有属性和方法</span></div><div class="line"><span class="built_in">console</span>.dirxml();<span class="comment">//显示网页某节点所包含的html/xml</span></div><div class="line"><span class="built_in">console</span>.assert();<span class="comment">//弹框</span></div><div class="line"><span class="built_in">console</span>.trace();<span class="comment">//附带显示行数</span></div><div class="line"><span class="built_in">console</span>.time();<span class="built_in">console</span>.timeEnd();用来显示代码运行时间</div></pre></td></tr></table></figure>
+<h3 id="浏览器其它"><a href="#浏览器其它" class="headerlink" title="浏览器其它"></a>浏览器其它</h3><p> 浏览器能设置条件语句断点<br> 左边可以直接启动手机模式,这样就能看手机状态下的浏览情况</p>
 ]]></content>
     
     <summary type="html">
@@ -89,7 +96,7 @@
     <link href="https://xuecat.github.io/2017/12/18/227/"/>
     <id>https://xuecat.github.io/2017/12/18/227/</id>
     <published>2017-12-18T12:15:38.000Z</published>
-    <updated>2018-01-25T12:52:54.209Z</updated>
+    <updated>2018-01-30T14:18:53.538Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/picture/227.jpg" alt=""></p>
 <h3 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h3><ul>
@@ -103,6 +110,27 @@
 <ul>
 <li><p>简单链</p>
  <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Sub.prototype = <span class="keyword">new</span> Super();<span class="comment">//共享原型对象，arr是引用类型</span></div><div class="line"><span class="keyword">var</span> sub1 = <span class="keyword">new</span> Sub();</div><div class="line"><span class="keyword">var</span> sub2 = <span class="keyword">new</span> Sub();</div><div class="line"></div><div class="line"><span class="comment">//1.无法构造函数传参</span></div><div class="line">sub1.val = <span class="number">2</span>;<span class="comment">//不会影响sub2</span></div><div class="line">sub1.arr.push(<span class="number">2</span>);<span class="comment">//会影响sub2</span></div></pre></td></tr></table></figure>
+<p> <strong>补充</strong><br>  对继承的简单链原理补充<br>我一直在想那样的影响为何有,今天想通了,来做点笔记</p>
+<p><strong>补充:</strong> <br></p>
+<ul>
+<li>call: 替换上下文,可以想象成替换<code>this</code></li>
+<li>new:<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj  = &#123;&#125;;</div><div class="line">obj.__proto__ = Base.prototype;</div><div class="line">Base.call(obj);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在<code>call</code>替换后，它还会再调用一遍<code>Base</code>函数,保证有成员变量</p>
+<p><strong>过程分析:</strong><br></p>
+<ul>
+<li>第一行的<code>new Super</code>直接导致<code>Sub.prototype</code>拥有了<code>val</code>和<code>arr</code></li>
+<li>二三行的<code>new Sub</code>只是将<code>__proto__</code>指向了<code>Sub.prototype</code></li>
+</ul>
+<p>所以使用<code>sub.val</code> <code>sub.arr</code>却也只是访问<code>Sub.prototype</code>上面的东西而已</p>
+<p>如此说来,大家都访问一个东西却为何<code>val</code>不影响呢?<br><br>因为在第6行里是个创建而不是修改</p>
+<p>第六行是对<code>sub1</code>创建一个私有属性并赋值<br>第七行是访问<code>sub1</code>的<code>arr</code>,然而没有从原型链上拿去了</p>
+<ul>
+<li>简单链很好,就怕某地出错,记住它们是访问一个</li>
+<li>借用构造函数这个太浪费了不考虑</li>
+<li>new的数量不是很多倒是可以用用组合继承</li>
+</ul>
 </li>
 <li><p>借用构造函数</p>
  <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Super</span>(<span class="params">val</span>) </span>&#123;...&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Sub</span>(<span class="params">val</span>) </span>&#123;</div><div class="line">    Super.call(<span class="keyword">this</span>, val); <span class="comment">//1.子类互不影响 2.但是复制了父类实例属性导致内存增加 3.call不会复制原型链</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> sub1 = <span class="keyword">new</span> Sub();</div></pre></td></tr></table></figure>

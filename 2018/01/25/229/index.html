@@ -97,7 +97,7 @@
  字符转数字: var a =&amp;#39;1&amp;#39;; +a; 它用隐式转换来的
  类型判断: 1234typeof d == &quot;string&quot;function Person() &amp;#123;&amp;#125;d instanceof Person;//判断constructor.prototype">
 <meta property="og:image" content="https://xuecat.github.io/picture/229.jpg">
-<meta property="og:updated_time" content="2018-01-25T12:57:59.380Z">
+<meta property="og:updated_time" content="2018-01-30T14:20:00.815Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS札记——网上看的装逼写法(229)">
 <meta name="twitter:description" content="JS札记 数字取整: ~~ 其实这是个按位非的运算符做了俩次 2.33|0 2.33&amp;gt;&amp;gt;0
@@ -129,6 +129,34 @@
 
   <title> JS札记——网上看的装逼写法(229) | XueCat </title>
 </head>
+
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    left: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: 0px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/z16.model.json", 0.5);});
+})();
+</script>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
@@ -358,6 +386,13 @@
 <p> 指定长度填充:<br> 以前就在想了，赶紧笔记: <code>let aa = Array(6).fill(8)</code> 长度6,填充8</p>
 <p> 短路表达式:<br> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = b&amp;&amp;<span class="number">1</span>; <span class="keyword">if</span> (b) a=<span class="number">1</span>; <span class="keyword">else</span> a=b;</div><div class="line"><span class="keyword">var</span> a = b||<span class="number">1</span>; <span class="keyword">if</span> (b) a=b; <span class="keyword">else</span> a=<span class="number">1</span>;</div></pre></td></tr></table></figure></p>
 <p> 高逼格创建函数:<br> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> f = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">'a'</span>, <span class="string">'a++; return a+1;'</span>);</div><div class="line">f(<span class="number">1</span>)<span class="comment">//3</span></div><div class="line"><span class="comment">//函数字符化</span></div></pre></td></tr></table></figure></p>
+<p> 立即执行函数:<br> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;...&#125;)();</div><div class="line">!<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;...&#125;();</div><div class="line">~<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;...&#125;();</div><div class="line">-<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;...&#125;();</div><div class="line">+<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;...&#125;();</div></pre></td></tr></table></figure></p>
+<h3 id="浏览器安全"><a href="#浏览器安全" class="headerlink" title="浏览器安全"></a>浏览器安全</h3><ol>
+<li>xss安全，对url和内容做过滤，防止嵌入js执行代码</li>
+<li>csp, 通过服务器应答头或者html的<code>META</code>标签,限制请求源</li>
+</ol>
+<h3 id="浏览器Console命令"><a href="#浏览器Console命令" class="headerlink" title="浏览器Console命令"></a>浏览器Console命令</h3> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log();</div><div class="line"><span class="built_in">console</span>.dir();<span class="comment">//显示一个对象所有属性和方法</span></div><div class="line"><span class="built_in">console</span>.dirxml();<span class="comment">//显示网页某节点所包含的html/xml</span></div><div class="line"><span class="built_in">console</span>.assert();<span class="comment">//弹框</span></div><div class="line"><span class="built_in">console</span>.trace();<span class="comment">//附带显示行数</span></div><div class="line"><span class="built_in">console</span>.time();<span class="built_in">console</span>.timeEnd();用来显示代码运行时间</div></pre></td></tr></table></figure>
+<h3 id="浏览器其它"><a href="#浏览器其它" class="headerlink" title="浏览器其它"></a>浏览器其它</h3><p> 浏览器能设置条件语句断点<br> 左边可以直接启动手机模式,这样就能看手机状态下的浏览情况</p>
 
       
     </div>
@@ -575,7 +610,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JS札记"><span class="nav-number">1.</span> <span class="nav-text">JS札记</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JS札记"><span class="nav-number">1.</span> <span class="nav-text">JS札记</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器安全"><span class="nav-number">2.</span> <span class="nav-text">浏览器安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器Console命令"><span class="nav-number">3.</span> <span class="nav-text">浏览器Console命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器其它"><span class="nav-number">4.</span> <span class="nav-text">浏览器其它</span></a></li></ol></div>
             
           </div>
         </section>
@@ -834,9 +869,9 @@
   
 
   <script type="text/javascript" src="/js/src/particle.js"></script>
-  <script type="text/javascript" src="/js/src/chuncai.js"></script>
-  <script type="text/javascript">
-        $.chuncai();
-  </script>
+  //<script type="text/javascript" src="/js/src/chuncai.js"></script>
+  //<script type="text/javascript">
+  //      $.chuncai();
+  //</script>
 </body>
 </html>
