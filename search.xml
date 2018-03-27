@@ -183,7 +183,7 @@
 <figure class="highlight autoit"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">var someuser = &#123; </div><div class="line">    name: <span class="string">'byvoid'</span>, </div><div class="line">    <span class="function"><span class="keyword">func</span>: <span class="title">function</span><span class="params">()</span> &#123;</span></div><div class="line">        console.<span class="built_in">log</span>(this.name)<span class="comment">; </span></div><div class="line">    &#125;</div><div class="line">&#125;<span class="comment">; </span></div><div class="line">var foo = &#123; </div><div class="line">    name: <span class="string">'foobar'</span></div><div class="line">&#125;<span class="comment">;</span></div><div class="line"> </div><div class="line">someuser.<span class="keyword">func</span>()<span class="comment">; // 输出 byvoid (被调用函数func的上下文是someuser)</span></div><div class="line"> </div><div class="line">foo.<span class="keyword">func</span> = someuser.<span class="keyword">func</span><span class="comment">; </span></div><div class="line">foo.<span class="keyword">func</span>()<span class="comment">; // 输出 foobar (被调用函数func的上下文是foo)</span></div><div class="line"> </div><div class="line">name = <span class="string">'global'</span><span class="comment">;</span></div><div class="line"><span class="function"><span class="keyword">func</span> = <span class="title">someuser</span>.<span class="title">func</span>; </span></div><div class="line"><span class="function"><span class="keyword">func</span><span class="params">()</span>; // 输出 <span class="title">global</span> <span class="params">(被调用函数fuc的上下文是全局)</span></span></div></pre></td></tr></table></figure>
 <h3 id="箭头函数的this"><a href="#箭头函数的this" class="headerlink" title="箭头函数的this"></a>箭头函数的this</h3><p>lamda不同，它是在哪被定义，this的上下文就是被定义的地方<br>就算是嵌套箭头，也没有this上下文，默认最外层的上下文</p>
 <p>由于没有自己的this，所以bind call等函数也无效 </p>
-<p>##　原型<br>js对象分俩种：普通对象和函数对象<br>函数对象： 函数的定义，匿名函数的赋值<br>普通对象：数组，结构体，new function()</p>
+<h2 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h2><p>js对象分俩种：普通对象和函数对象<br>函数对象： 函数的定义，匿名函数的赋值<br>普通对象：数组，结构体，new function()</p>
 <p>一个函数对象可以访问到<code>prototype</code> <code>__proto__</code><br>普通对象只能访问到<code>__proto__</code></p>
 <p><code>__proto__</code>指向构造函数的<code>prototype</code>,这形成了原型链(也是es5的继承，属性的访问当prototype没有就会通过<code>__proto__</code>去上级寻找)<br>所以函数对象的<code>__proto__</code>指向的是原型的<code>prototype</code></p>
 <p><code>prototype</code>的来源: 1.原型的继承 2.自定义的赋值</p>
@@ -1929,203 +1929,6 @@ var btnOk2=document.createElement(&quot;&lt;input type=&apos;button&apos; value=
     </entry>
     
     <entry>
-      <title><![CDATA[俺のこい(219)]]></title>
-      <url>https://xuecat.github.io/2016/08/22/219/</url>
-      <content type="html"><![CDATA[<p><img src="/picture/219.jpg" alt=""></p>
-<p>我喜欢上了一个女孩，我想记录下所有的感受。</p>
-<h2 id="2017-12-01"><a href="#2017-12-01" class="headerlink" title="2017/12/01"></a>2017/12/01</h2><pre><code>明明第一次见都完全无所谓，明明完全没感觉的。我也不知道什么时候，为啥改变了！！！！
-我该怎么做呢？
-</code></pre><h2 id="2017-12-06"><a href="#2017-12-06" class="headerlink" title="2017/12/06"></a>2017/12/06</h2><pre><code>呐，我感觉我脑袋有点坏了。
-不敢正视你，不敢靠你太近，
-天气好想到你，天气坏也想到你，遇见好看的电影不知觉的便想到你一起看的情景；
-买到好玩的游戏也想着安利给你和你一起玩，然后你沉迷其中的场景；
-想和你多说话，多看你笑，站在旁边感受你的存在。
-</code></pre><h2 id="2017-1-11"><a href="#2017-1-11" class="headerlink" title="2017/1/11"></a>2017/1/11</h2><pre><code>呢！！！！
-我有个问题想问下你
-我有个朋友，朋友；他最近很困扰。
-内心明明很空洞，却又像被某个人占据了一般;吃饭的时候会想，睡觉的时候会想，特别是一个人的时候愈发不能控制这种快要溢出来的感情。
-我想这应该就是喜欢上了某人的感觉吧！！
-对方是他的同事，是个美人，那么漂亮的人不知道有没有男朋友呢？不，应该已经有了吧！！
-身感煎熬，却怯于表达；这份心意被接受还是被拒绝，又该如何面对同事的关系。
-我想这便他所困扰的了吧！
-</code></pre><h2 id="2018-2-11"><a href="#2018-2-11" class="headerlink" title="2018/2/11"></a>2018/2/11</h2><pre><code>任小姐已经很久都没和我说话了，我开始如此劝服自己：
-
-都说爱情始于外貌，陷入才华，终于人品。
-一直以来，我没有收到任何姑娘的爱意，传达的爱意也无一例外的全被拒绝。
-你以为这么多年单身只是因为不想找吗？
-长得丑，是没有开始的。
-</code></pre><h2 id="2018-2-28"><a href="#2018-2-28" class="headerlink" title="2018/2/28"></a>2018/2/28</h2><pre><code>思绪开始越来越频繁那了
-不知不觉中已经特别在意任小姐的事情了。
-想看到你的脸，想和你聊更多的天，想一直待在旁边。
-回家的路上能说上一句话就心动不已，一个人的时候想的全是任小姐。
-这种感情就想快要灌满内心溢出来一样的难受。
-干脆就索性好好的传递心意。
-
-我想起《上邪》的句子
-吾愿与君相知长命无绝衰
-山无岭
-江水为竭
-冬雷震震
-夏雨雪
-乃敢与君绝
-</code></pre><h2 id="2018-3-1"><a href="#2018-3-1" class="headerlink" title="2018/3/1"></a>2018/3/1</h2><pre><code>我对自己的要求很低：我活在世上，无非想要明白些道理，遇见些有趣的事。倘能如我愿，我的一生就算成功的。
-</code></pre><h2 id="2018-3-3"><a href="#2018-3-3" class="headerlink" title="2018/3/3"></a>2018/3/3</h2><pre><code>今天父母让我去高新区看套房，问我喜不喜欢，好买给我。
-可是我害怕，超害怕啊！！那么大的房子，我一个住我好害怕，以后要是叫个人都没有理我咋办；
-想到这里已是满心悲怆；害怕孤独的我，达州买的房我至今也不敢去住。
-任小姐！！！！！！！我能和你孤单并行吗？
-</code></pre><h2 id="2018-3-5"><a href="#2018-3-5" class="headerlink" title="2018/3/5"></a>2018/3/5</h2><pre><code>我喜欢任小姐，像夏天里疯狂蔓延的藤蔓一样，在心里盘踞着。
-回过头来，已经被包围的密不透风，已经什么都无所谓了，工作也好！房子也好！生活也好！全部也好！！求求你们都拿走吧！！
-我只想。。。只想。。。只是想和她在一起！！！
-今生如果能做好这件事情，我一定无憾了！！！老年后我会躺在摇椅上骄傲说着自己最大的幸福就是遇见她。
-已经坏掉了啊！！！我！！！！
-喜欢一个人好沉重！！！好心痛！！
-</code></pre><h2 id="2018-3-6"><a href="#2018-3-6" class="headerlink" title="2018/3/6"></a>2018/3/6</h2><pre><code>任小姐和其他人说话我会在意，和其他人打闹欢笑，会隐隐さそつつむ
-可是这一切看到她的笑容后又被化解了。
-我想喜欢应该就是希望她幸福吧！！
-</code></pre><h2 id="2018-3-7"><a href="#2018-3-7" class="headerlink" title="2018/3/7"></a>2018/3/7</h2><pre><code>从hy那听说被请吃饭，我很开心，可是却没有下文，我很失落！！！
-我一定是个懦弱的人！！！！
-掌管姻缘的神明啊！！！能告诉我，我的恋情会有结果吗？
-好痛苦！！！！好想哭！！！
-这么大了，我第一次如此积虑一件事。
-
-记得每次父亲想磨练我时，我一定会先装作在努力做。
-然后抱着母亲故意悲伤的诉苦下。
-这时母亲必会帮我，事情也会被解决。
-唯独这件事我却不能！！！
-</code></pre><h2 id="208-3-8"><a href="#208-3-8" class="headerlink" title="208/3/8"></a>208/3/8</h2><pre><code>我喜欢她，真的好想传达这种感情。
-我怕突然这样会吓着她，让她压力大了。
-不知道为何，看到她痛苦我内心也会痛苦！！！
-
-我不知道任小姐的内心，也不知道任小姐的想法。
-害怕这份火热的内心会灼伤到她！！！
-害怕她会对我避而远之！！
-我也渴望被了解！！！人心便是这样啊！！
-</code></pre><h2 id="2018-3-9"><a href="#2018-3-9" class="headerlink" title="2018/3/9"></a>2018/3/9</h2><pre><code>今天早上的早读又荒废了，现在早读每次都会想到任小姐。
-这样的自己，厌恶！唾弃！憎恨！无以复加！！！
-索性把这颗心拿掉，那样我一定会毫无痛苦，一定会用心学习。
-好想快点逃离这里，远离这里！！或许人不在了就会淡忘吧。
-回家呆着也好，换工作也好。hy的外包做完我不能再呆了！！！
-</code></pre><h2 id="2018-3-10"><a href="#2018-3-10" class="headerlink" title="2018/3/10"></a>2018/3/10</h2><pre><code>我明明是个人，高傲的，独立特性的。明明是个在父母眼中引以为傲的人！！！
-现在的我不知羞耻的写下这些，就像条摇尾祈舍趴在地上的哈巴狗，我还真是龌龊，下贱。
-即使心里多么贬低自己，警示自己，还是死性不改的恢复过来！
-
-生而为人，对不起——《被嫌弃的松子一生》
-</code></pre><h2 id="2018-3-11"><a href="#2018-3-11" class="headerlink" title="2018/3/11"></a>2018/3/11</h2><pre><code>我又想起太宰治的《人间失格》，或许只有悲怆才能洗涤心灵吧。
-
-以前我并不相信书里的撕心裂肺，着转反侧，为什么一个人能用尽一生来忍受另一个人的不堪？
-然而现在的我却已经朝思暮想了！！愿意用尽一且！！！
-</code></pre><h2 id="2018-3-12"><a href="#2018-3-12" class="headerlink" title="2018/3/12"></a>2018/3/12</h2><pre><code>我希望有个如你一般的人
-如山间清爽的风
-如古城温暖的光
-从清晨到夜晚
-由山野到书房
-只要最后是你
-就好
-
-我像中了魔咒似的，已经无所谓了！！！
-我愿是这世上最卑微的，最低下的，最不起眼的；
-只愿能一直见到你。
-我能忍受这世上最痛苦的，最劳累的，最讽刺人的；
-只想留在你身边。
-</code></pre><h2 id="2018-3-13"><a href="#2018-3-13" class="headerlink" title="2018/3/13"></a>2018/3/13</h2><pre><code>拿出了12分的勇气邀请吃饭，还是被拒绝了。她要准备考试了！！！
-居然会有种她要是去了雅安，我也会跟随而去的想法！！！
-我一定是坏了！！破破烂烂的！
-</code></pre><hr>
-<pre><code>不能着急，不能慢！！！
-太过卑微反而不会珍惜！！
-我很想去把她闺蜜都了解完，但是要是她知道了一定会厌恶我。
-
-每天保证和她聊10句以上。
-等她考试完，再约。如果带闺蜜再好不过，加闺蜜联系方式！！
-</code></pre><h2 id="2018-3-14"><a href="#2018-3-14" class="headerlink" title="2018/3/14"></a>2018/3/14</h2><pre><code>我开始收集斗图，我以前一点都不喜欢这些。我怕和任小姐聊天尴尬，也开始收集这些了！！！！！
-撕下脸就撕下！！反正都坏了！！！哪怕破破烂烂！！
-
-和任小姐聊了12句，心里好开心！！！！
-
-晚上表叔家呆了，免不了被说，若真是他说的女孩请吃俩顿饭就行了话，我就不会如此了！！！
-或许成都至少3栋别墅的有钱人和我想的不一样。。。
-</code></pre><hr>
-<pre><code>我喜欢任小姐。
-可如果要我说个喜欢的理由，喜欢的时间；我也已经是忘却或者一开始就不知道了。
-
-或许一开始见面就已经埋下了种子，然后突然的有一天我全身的细胞都在对我说：快去追她，你不能没有她，你的今生只能是她。
-以前绝不会考虑的事开始考虑，鄙夷的做法开始效仿。
-不顾脸面的开始向各处请教。
-与其说这是爱情，还不如说它是魔咒！！！
-</code></pre><h2 id="2018-3-15"><a href="#2018-3-15" class="headerlink" title="2018/3/15"></a>2018/3/15</h2><pre><code>任小姐今天没来，我开始胡思乱想了；好怕她以后就不理我了。
-如果没有了任小姐，我一定会像没了心的行尸走肉，世间游荡！
-
-想起宫泽贤治的《银河铁道之夜》里面的&quot;天蝎之火&quot;:
-<figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">从前，在巴尔都拉原野，有一只小天蝎，专门吃小虫子什么的。一天，它遇上黄鼠狼，险些被吃掉。</div><div class="line">天蝎不顾一切地逃命，眼看就要被黄鼠狼抓住，后来它不小心掉进一口井里，怎么也爬不上来，眼看就要淹死的时候<span class="comment">;</span></div><div class="line">它开始祷告起来： ”啊我以前不知吞食了多少生命，今天怕被黄鼠狼捉住，却逃得那么狼狈。但终究还是落到了如此下场。</div><div class="line">啊，天哪，我已经没有救了。我为什么不乖乖地让黄鼠狼吃掉自己的肉体呢？它也会为此多活一日。上帝呀，请您洞察我的心境吧！</div><div class="line">不要让我这么白白地送命，为了使大家获得真正的幸福，就请用我的身体吧。 </div><div class="line">“说完，天蝎就看见自己的身体化作熊熊燃烧的火焰，照亮了四周的黑暗.</div></pre></td></tr></table></figure>
-
-如果天蝎之火是守护他人幸福的话，我一定会化身在她身边。
-</code></pre><hr>
-<pre><code>终于她中午来了，她拍脑袋想问题的动作好可爱！！！我都快化了！！
-</code></pre><h2 id="2018-3-16"><a href="#2018-3-16" class="headerlink" title="2018/3/16"></a>2018/3/16</h2><pre><code>写日记的频率越来越高了，我已经快抑制不住这份情感！！！
-明明这种情感以前被管理的好好的，现在不知最近为何像洪水决堤般，
-涌了出来！！呼吸都是急缓的！！
-
-现在甚至想记下她每天的表情，每天的话语，这样我读的时候就会回想起那个时刻的她！
-要是这样做的话我一定会被认为是变态吧！！！
-昨天晚上做梦又是她！！！！
-我还真是个不知羞耻的人！！！
-</code></pre><hr>
-<pre><code>我想和她聊天，面对她就会莫名的快乐。
-可是我又怕被她讨厌，
-怕打扰她。
-只敢中午的时候找时间和她聊。
-简单几句都会在心中掀起涟漪。
-</code></pre><h2 id="2018-3-17"><a href="#2018-3-17" class="headerlink" title="2018/3/17"></a>2018/3/17</h2><pre><code>我在最好的时候遇见你，是我的运气。
-我奋不顾身的扑向你，是我的青春。
-爱情是渴求回报的。
-这样的感情是扭曲的!!
-
-内心分裂成了俩派。
-一派想着：就算被当作抹布，在被用的破破烂烂后，丢弃到暗无光日的深渊里，还是依旧希望能在某天被她想起，那时抹布依旧会奋不顾身。
-一派想着：放弃吧！不值得；最多在接下的很多个夜晚，凭借眼泪入睡；坚持一下过去就好了。长痛不如短痛。
-
-现在天平中间的我，彷徨迷惘，怅然若失！！
-</code></pre><hr>
-<pre><code>今天把最喜欢的曲之一推荐给了她，然而还是没讨到好。不知道她喜欢什么类型的呢？
-晚上，我不小心进了她的qq留言。
-看到那些悲伤的语句，内心却莫名的撕裂般的痛。
-想着要是早点行动就好了之类的！！实在不忍心看见她孤单悲伤！！
-</code></pre><h2 id="2018-3-18"><a href="#2018-3-18" class="headerlink" title="2018/3/18"></a>2018/3/18</h2><pre><code>我已经开始嫉妒，开始独裁，开始愤怒，开始理所当然。
-这样的我感觉已经配不上任小姐了。
-她应该有自己的选择；不！！是必须有自己的选择！！
-我能做的只能是把我的全部展现出来了！！！
-剩下的是她的选择了！！
-
-翻出以前的歌听着，如梦初醒般!!(Das zweite Kapitel --やまだ豊)
-</code></pre><h2 id="2018-3-19"><a href="#2018-3-19" class="headerlink" title="2018/3/19"></a>2018/3/19</h2><pre><code>追任小姐好麻烦哦！和她聊天怕说错话，怕打扰她，她不回我，我担惊受怕，回了我，我又思前想后。
-如果是石器时代，敲晕人就能带回家的话；我定不会这么麻烦！！
-</code></pre><hr>
-<pre><code>喜欢任小姐的心情依旧没变，我是个不喜争斗的人，看见她身边环绕那么多男生，我有点怯意。
-：那么多男生，一定比我优秀多了，我或许不配她？
-如此想着，对她的追求像被浇了冷水一样，反而显得趑趄嗫嚅。
-现在盼着，至少把最后的计划做了，至少做完它吧！！我讨厌这个无趣的地方！
-
-人天生有趣，过去有趣，现在有趣，表面无趣，内心有趣。《红拂夜奔》——王小波
-</code></pre><h2 id="2018-3-20"><a href="#2018-3-20" class="headerlink" title="2018/3/20"></a>2018/3/20</h2><pre><code>今天实在太累了，回到家已经12点了。今天没给任小姐发图片。
-不知道她会不会生气，太晚了发又怕打扰她了。
-啊！！好纠结！！
-</code></pre><h2 id="2018-3-21"><a href="#2018-3-21" class="headerlink" title="2018/3/21"></a>2018/3/21</h2><pre><code>她已经开始不理睬我了，我想女孩子会讨厌纠缠不休的人。我一定是大大坏印象了！！
-羞愧的想钻地下去！！
-已经没有表白的勇气了！！
-第一次追女孩子就这么失败收场，还真是个可笑！！！
-</code></pre><hr>
-<pre><code>她在看书，努力的样子真的很好看！！！
-</code></pre><h2 id="2018-3-22"><a href="#2018-3-22" class="headerlink" title="2018/3/22"></a>2018/3/22</h2><pre><code>我已经很疲惫了，任小姐那里多半没戏了。
-现在我给自己定下下周的目标，完成就好！！！至少落场要做好！！
-</code></pre><h2 id="2018-3-23"><a href="#2018-3-23" class="headerlink" title="2018/3/23"></a>2018/3/23</h2><pre><code>ここに逃げたい、居場所がなく、も疲れちゃった。
-</code></pre><h2 id="2018-3-24"><a href="#2018-3-24" class="headerlink" title="2018/3/24"></a>2018/3/24</h2><pre><code>今天任小姐回家考试了，和她聊了一下，好开心！！！这是这几天最多的几句了！！
-</code></pre><h2 id="2018-3-25"><a href="#2018-3-25" class="headerlink" title="2018/3/25"></a>2018/3/25</h2><pre><code>今天和姑姑吃饭，听她说她和她男朋友都是聊了半年天才开始的，追女孩子不能着急。
-看来是我过分了。
-为了她应该忍耐吧！
-</code></pre>]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[STL算法函数(175)]]></title>
       <url>https://xuecat.github.io/2016/08/20/175/</url>
       <content type="html"><![CDATA[<h4 id="算法记录"><a href="#算法记录" class="headerlink" title="算法记录"></a>算法记录</h4><h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><table>
@@ -2983,21 +2786,6 @@ distributionUrl=gradle-2.4-all.zip
     </entry>
     
     <entry>
-      <title><![CDATA[python 等问题解决(155)]]></title>
-      <url>https://xuecat.github.io/2016/01/14/155/</url>
-      <content type="html"><![CDATA[<p>python安装某些模块的时候，老是出错（当然错误是Unicode和ascii字符的问题）</p>
-<p><strong>1、安装模块字符错误</strong><br><br>在python的Lib\site-packages文件夹下新建一个sitecustomize.py，内容为：</p>
-<pre><code> # encoding=utf8  
-import sys  
-
-reload(sys)  
-sys.setdefaultencoding(&apos;utf8&apos;)
-</code></pre><p>此时重启python解释器，可以解决了。</p>
-<p><strong>pip的国内源</strong><br><br>这里，我只说下指令，其它百度吧。感觉这个华中科大的源最快；<br><br>pip install ** -i <a href="http://pypi.mirrors.ustc.edu.cn/simple" target="_blank" rel="external">http://pypi.mirrors.ustc.edu.cn/simple</a></p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[调试技巧(154)]]></title>
       <url>https://xuecat.github.io/2016/01/14/154/</url>
       <content type="html"><![CDATA[<p>  自从在153文章的认识后，自己要好好熟悉下那个工具<br></p>
@@ -3030,6 +2818,21 @@ sys.setdefaultencoding(&apos;utf8&apos;)
 <p>::OutputDebugString(_T(“debug information!”));</p>
 </blockquote>
 </blockquote>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[python 等问题解决(155)]]></title>
+      <url>https://xuecat.github.io/2016/01/14/155/</url>
+      <content type="html"><![CDATA[<p>python安装某些模块的时候，老是出错（当然错误是Unicode和ascii字符的问题）</p>
+<p><strong>1、安装模块字符错误</strong><br><br>在python的Lib\site-packages文件夹下新建一个sitecustomize.py，内容为：</p>
+<pre><code> # encoding=utf8  
+import sys  
+
+reload(sys)  
+sys.setdefaultencoding(&apos;utf8&apos;)
+</code></pre><p>此时重启python解释器，可以解决了。</p>
+<p><strong>pip的国内源</strong><br><br>这里，我只说下指令，其它百度吧。感觉这个华中科大的源最快；<br><br>pip install ** -i <a href="http://pypi.mirrors.ustc.edu.cn/simple" target="_blank" rel="external">http://pypi.mirrors.ustc.edu.cn/simple</a></p>
 ]]></content>
     </entry>
     
@@ -3456,6 +3259,207 @@ HasPem d; HasPem p; d=p;//这个才是调用的赋值函数；
     </entry>
     
     <entry>
+      <title><![CDATA[俺のこい(219)]]></title>
+      <url>https://xuecat.github.io/2015/08/22/219/</url>
+      <content type="html"><![CDATA[<p><img src="/picture/219.jpg" alt=""></p>
+<p>我喜欢上了一个女孩，我想记录下所有的感受。</p>
+<h2 id="2017-12-01"><a href="#2017-12-01" class="headerlink" title="2017/12/01"></a>2017/12/01</h2><pre><code>明明第一次见都完全无所谓，明明完全没感觉的。我也不知道什么时候，为啥改变了！！！！
+我该怎么做呢？
+</code></pre><h2 id="2017-12-06"><a href="#2017-12-06" class="headerlink" title="2017/12/06"></a>2017/12/06</h2><pre><code>呐，我感觉我脑袋有点坏了。
+不敢正视你，不敢靠你太近，
+天气好想到你，天气坏也想到你，遇见好看的电影不知觉的便想到你一起看的情景；
+买到好玩的游戏也想着安利给你和你一起玩，然后你沉迷其中的场景；
+想和你多说话，多看你笑，站在旁边感受你的存在。
+</code></pre><h2 id="2017-1-11"><a href="#2017-1-11" class="headerlink" title="2017/1/11"></a>2017/1/11</h2><pre><code>呢！！！！
+我有个问题想问下你
+我有个朋友，朋友；他最近很困扰。
+内心明明很空洞，却又像被某个人占据了一般;吃饭的时候会想，睡觉的时候会想，特别是一个人的时候愈发不能控制这种快要溢出来的感情。
+我想这应该就是喜欢上了某人的感觉吧！！
+对方是他的同事，是个美人，那么漂亮的人不知道有没有男朋友呢？不，应该已经有了吧！！
+身感煎熬，却怯于表达；这份心意被接受还是被拒绝，又该如何面对同事的关系。
+我想这便他所困扰的了吧！
+</code></pre><h2 id="2018-2-11"><a href="#2018-2-11" class="headerlink" title="2018/2/11"></a>2018/2/11</h2><pre><code>任小姐已经很久都没和我说话了，我开始如此劝服自己：
+
+都说爱情始于外貌，陷入才华，终于人品。
+一直以来，我没有收到任何姑娘的爱意，传达的爱意也无一例外的全被拒绝。
+你以为这么多年单身只是因为不想找吗？
+长得丑，是没有开始的。
+</code></pre><h2 id="2018-2-28"><a href="#2018-2-28" class="headerlink" title="2018/2/28"></a>2018/2/28</h2><pre><code>思绪开始越来越频繁那了
+不知不觉中已经特别在意任小姐的事情了。
+想看到你的脸，想和你聊更多的天，想一直待在旁边。
+回家的路上能说上一句话就心动不已，一个人的时候想的全是任小姐。
+这种感情就想快要灌满内心溢出来一样的难受。
+干脆就索性好好的传递心意。
+
+我想起《上邪》的句子
+吾愿与君相知长命无绝衰
+山无岭
+江水为竭
+冬雷震震
+夏雨雪
+乃敢与君绝
+</code></pre><h2 id="2018-3-1"><a href="#2018-3-1" class="headerlink" title="2018/3/1"></a>2018/3/1</h2><pre><code>我对自己的要求很低：我活在世上，无非想要明白些道理，遇见些有趣的事。倘能如我愿，我的一生就算成功的。
+</code></pre><h2 id="2018-3-3"><a href="#2018-3-3" class="headerlink" title="2018/3/3"></a>2018/3/3</h2><pre><code>今天父母让我去高新区看套房，问我喜不喜欢，好买给我。
+可是我害怕，超害怕啊！！那么大的房子，我一个住我好害怕，以后要是叫个人都没有理我咋办；
+想到这里已是满心悲怆；害怕孤独的我，达州买的房我至今也不敢去住。
+任小姐！！！！！！！我能和你孤单并行吗？
+</code></pre><h2 id="2018-3-5"><a href="#2018-3-5" class="headerlink" title="2018/3/5"></a>2018/3/5</h2><pre><code>我喜欢任小姐，像夏天里疯狂蔓延的藤蔓一样，在心里盘踞着。
+回过头来，已经被包围的密不透风，已经什么都无所谓了，工作也好！房子也好！生活也好！全部也好！！求求你们都拿走吧！！
+我只想。。。只想。。。只是想和她在一起！！！
+今生如果能做好这件事情，我一定无憾了！！！老年后我会躺在摇椅上骄傲说着自己最大的幸福就是遇见她。
+已经坏掉了啊！！！我！！！！
+喜欢一个人好沉重！！！好心痛！！
+</code></pre><h2 id="2018-3-6"><a href="#2018-3-6" class="headerlink" title="2018/3/6"></a>2018/3/6</h2><pre><code>任小姐和其他人说话我会在意，和其他人打闹欢笑，会隐隐さそつつむ
+可是这一切看到她的笑容后又被化解了。
+我想喜欢应该就是希望她幸福吧！！
+</code></pre><h2 id="2018-3-7"><a href="#2018-3-7" class="headerlink" title="2018/3/7"></a>2018/3/7</h2><pre><code>从hy那听说被请吃饭，我很开心，可是却没有下文，我很失落！！！
+我一定是个懦弱的人！！！！
+掌管姻缘的神明啊！！！能告诉我，我的恋情会有结果吗？
+好痛苦！！！！好想哭！！！
+这么大了，我第一次如此积虑一件事。
+
+记得每次父亲想磨练我时，我一定会先装作在努力做。
+然后抱着母亲故意悲伤的诉苦下。
+这时母亲必会帮我，事情也会被解决。
+唯独这件事我却不能！！！
+</code></pre><h2 id="208-3-8"><a href="#208-3-8" class="headerlink" title="208/3/8"></a>208/3/8</h2><pre><code>我喜欢她，真的好想传达这种感情。
+我怕突然这样会吓着她，让她压力大了。
+不知道为何，看到她痛苦我内心也会痛苦！！！
+
+我不知道任小姐的内心，也不知道任小姐的想法。
+害怕这份火热的内心会灼伤到她！！！
+害怕她会对我避而远之！！
+我也渴望被了解！！！人心便是这样啊！！
+</code></pre><h2 id="2018-3-9"><a href="#2018-3-9" class="headerlink" title="2018/3/9"></a>2018/3/9</h2><pre><code>今天早上的早读又荒废了，现在早读每次都会想到任小姐。
+这样的自己，厌恶！唾弃！憎恨！无以复加！！！
+索性把这颗心拿掉，那样我一定会毫无痛苦，一定会用心学习。
+好想快点逃离这里，远离这里！！或许人不在了就会淡忘吧。
+回家呆着也好，换工作也好。hy的外包做完我不能再呆了！！！
+</code></pre><h2 id="2018-3-10"><a href="#2018-3-10" class="headerlink" title="2018/3/10"></a>2018/3/10</h2><pre><code>我明明是个人，高傲的，独立特性的。明明是个在父母眼中引以为傲的人！！！
+现在的我不知羞耻的写下这些，就像条摇尾祈舍趴在地上的哈巴狗，我还真是龌龊，下贱。
+即使心里多么贬低自己，警示自己，还是死性不改的恢复过来！
+
+生而为人，对不起——《被嫌弃的松子一生》
+</code></pre><h2 id="2018-3-11"><a href="#2018-3-11" class="headerlink" title="2018/3/11"></a>2018/3/11</h2><pre><code>我又想起太宰治的《人间失格》，或许只有悲怆才能洗涤心灵吧。
+
+以前我并不相信书里的撕心裂肺，着转反侧，为什么一个人能用尽一生来忍受另一个人的不堪？
+然而现在的我却已经朝思暮想了！！愿意用尽一且！！！
+</code></pre><h2 id="2018-3-12"><a href="#2018-3-12" class="headerlink" title="2018/3/12"></a>2018/3/12</h2><pre><code>我希望有个如你一般的人
+如山间清爽的风
+如古城温暖的光
+从清晨到夜晚
+由山野到书房
+只要最后是你
+就好
+
+我像中了魔咒似的，已经无所谓了！！！
+我愿是这世上最卑微的，最低下的，最不起眼的；
+只愿能一直见到你。
+我能忍受这世上最痛苦的，最劳累的，最讽刺人的；
+只想留在你身边。
+</code></pre><h2 id="2018-3-13"><a href="#2018-3-13" class="headerlink" title="2018/3/13"></a>2018/3/13</h2><pre><code>拿出了12分的勇气邀请吃饭，还是被拒绝了。她要准备考试了！！！
+居然会有种她要是去了雅安，我也会跟随而去的想法！！！
+我一定是坏了！！破破烂烂的！
+</code></pre><hr>
+<pre><code>不能着急，不能慢！！！
+太过卑微反而不会珍惜！！
+我很想去把她闺蜜都了解完，但是要是她知道了一定会厌恶我。
+
+每天保证和她聊10句以上。
+等她考试完，再约。如果带闺蜜再好不过，加闺蜜联系方式！！
+</code></pre><h2 id="2018-3-14"><a href="#2018-3-14" class="headerlink" title="2018/3/14"></a>2018/3/14</h2><pre><code>我开始收集斗图，我以前一点都不喜欢这些。我怕和任小姐聊天尴尬，也开始收集这些了！！！！！
+撕下脸就撕下！！反正都坏了！！！哪怕破破烂烂！！
+
+和任小姐聊了12句，心里好开心！！！！
+
+晚上表叔家呆了，免不了被说，若真是他说的女孩请吃俩顿饭就行了话，我就不会如此了！！！
+或许成都至少3栋别墅的有钱人和我想的不一样。。。
+</code></pre><hr>
+<pre><code>我喜欢任小姐。
+可如果要我说个喜欢的理由，喜欢的时间；我也已经是忘却或者一开始就不知道了。
+
+或许一开始见面就已经埋下了种子，然后突然的有一天我全身的细胞都在对我说：快去追她，你不能没有她，你的今生只能是她。
+以前绝不会考虑的事开始考虑，鄙夷的做法开始效仿。
+不顾脸面的开始向各处请教。
+与其说这是爱情，还不如说它是魔咒！！！
+</code></pre><h2 id="2018-3-15"><a href="#2018-3-15" class="headerlink" title="2018/3/15"></a>2018/3/15</h2><pre><code>任小姐今天没来，我开始胡思乱想了；好怕她以后就不理我了。
+如果没有了任小姐，我一定会像没了心的行尸走肉，世间游荡！
+
+想起宫泽贤治的《银河铁道之夜》里面的&quot;天蝎之火&quot;:
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">从前，在巴尔都拉原野，有一只小天蝎，专门吃小虫子什么的。一天，它遇上黄鼠狼，险些被吃掉。</div><div class="line">天蝎不顾一切地逃命，眼看就要被黄鼠狼抓住，后来它不小心掉进一口井里，怎么也爬不上来，眼看就要淹死的时候<span class="comment">;</span></div><div class="line">它开始祷告起来： ”啊我以前不知吞食了多少生命，今天怕被黄鼠狼捉住，却逃得那么狼狈。但终究还是落到了如此下场。</div><div class="line">啊，天哪，我已经没有救了。我为什么不乖乖地让黄鼠狼吃掉自己的肉体呢？它也会为此多活一日。上帝呀，请您洞察我的心境吧！</div><div class="line">不要让我这么白白地送命，为了使大家获得真正的幸福，就请用我的身体吧。 </div><div class="line">“说完，天蝎就看见自己的身体化作熊熊燃烧的火焰，照亮了四周的黑暗.</div></pre></td></tr></table></figure>
+
+如果天蝎之火是守护他人幸福的话，我一定会化身在她身边。
+</code></pre><hr>
+<pre><code>终于她中午来了，她拍脑袋想问题的动作好可爱！！！我都快化了！！
+</code></pre><h2 id="2018-3-16"><a href="#2018-3-16" class="headerlink" title="2018/3/16"></a>2018/3/16</h2><pre><code>写日记的频率越来越高了，我已经快抑制不住这份情感！！！
+明明这种情感以前被管理的好好的，现在不知最近为何像洪水决堤般，
+涌了出来！！呼吸都是急缓的！！
+
+现在甚至想记下她每天的表情，每天的话语，这样我读的时候就会回想起那个时刻的她！
+要是这样做的话我一定会被认为是变态吧！！！
+昨天晚上做梦又是她！！！！
+我还真是个不知羞耻的人！！！
+</code></pre><hr>
+<pre><code>我想和她聊天，面对她就会莫名的快乐。
+可是我又怕被她讨厌，
+怕打扰她。
+只敢中午的时候找时间和她聊。
+简单几句都会在心中掀起涟漪。
+</code></pre><h2 id="2018-3-17"><a href="#2018-3-17" class="headerlink" title="2018/3/17"></a>2018/3/17</h2><pre><code>我在最好的时候遇见你，是我的运气。
+我奋不顾身的扑向你，是我的青春。
+爱情是渴求回报的。
+这样的感情是扭曲的!!
+
+内心分裂成了俩派。
+一派想着：就算被当作抹布，在被用的破破烂烂后，丢弃到暗无光日的深渊里，还是依旧希望能在某天被她想起，那时抹布依旧会奋不顾身。
+一派想着：放弃吧！不值得；最多在接下的很多个夜晚，凭借眼泪入睡；坚持一下过去就好了。长痛不如短痛。
+
+现在天平中间的我，彷徨迷惘，怅然若失！！
+</code></pre><hr>
+<pre><code>今天把最喜欢的曲之一推荐给了她，然而还是没讨到好。不知道她喜欢什么类型的呢？
+晚上，我不小心进了她的qq留言。
+看到那些悲伤的语句，内心却莫名的撕裂般的痛。
+想着要是早点行动就好了之类的！！实在不忍心看见她孤单悲伤！！
+</code></pre><h2 id="2018-3-18"><a href="#2018-3-18" class="headerlink" title="2018/3/18"></a>2018/3/18</h2><pre><code>我已经开始嫉妒，开始独裁，开始愤怒，开始理所当然。
+这样的我感觉已经配不上任小姐了。
+她应该有自己的选择；不！！是必须有自己的选择！！
+我能做的只能是把我的全部展现出来了！！！
+剩下的是她的选择了！！
+
+翻出以前的歌听着，如梦初醒般!!(Das zweite Kapitel --やまだ豊)
+</code></pre><h2 id="2018-3-19"><a href="#2018-3-19" class="headerlink" title="2018/3/19"></a>2018/3/19</h2><pre><code>追任小姐好麻烦哦！和她聊天怕说错话，怕打扰她，她不回我，我担惊受怕，回了我，我又思前想后。
+如果是石器时代，敲晕人就能带回家的话；我定不会这么麻烦！！
+</code></pre><hr>
+<pre><code>喜欢任小姐的心情依旧没变，我是个不喜争斗的人，看见她身边环绕那么多男生，我有点怯意。
+：那么多男生，一定比我优秀多了，我或许不配她？
+如此想着，对她的追求像被浇了冷水一样，反而显得趑趄嗫嚅。
+现在盼着，至少把最后的计划做了，至少做完它吧！！我讨厌这个无趣的地方！
+
+人天生有趣，过去有趣，现在有趣，表面无趣，内心有趣。《红拂夜奔》——王小波
+</code></pre><h2 id="2018-3-20"><a href="#2018-3-20" class="headerlink" title="2018/3/20"></a>2018/3/20</h2><pre><code>今天实在太累了，回到家已经12点了。今天没给任小姐发图片。
+不知道她会不会生气，太晚了发又怕打扰她了。
+啊！！好纠结！！
+</code></pre><h2 id="2018-3-21"><a href="#2018-3-21" class="headerlink" title="2018/3/21"></a>2018/3/21</h2><pre><code>她已经开始不理睬我了，我想女孩子会讨厌纠缠不休的人。我一定是大大坏印象了！！
+羞愧的想钻地下去！！
+已经没有表白的勇气了！！
+第一次追女孩子就这么失败收场，还真是个可笑！！！
+</code></pre><hr>
+<pre><code>她在看书，努力的样子真的很好看！！！
+</code></pre><h2 id="2018-3-22"><a href="#2018-3-22" class="headerlink" title="2018/3/22"></a>2018/3/22</h2><pre><code>我已经很疲惫了，任小姐那里多半没戏了。
+现在我给自己定下下周的目标，完成就好！！！至少落场要做好！！
+</code></pre><h2 id="2018-3-23"><a href="#2018-3-23" class="headerlink" title="2018/3/23"></a>2018/3/23</h2><pre><code>ここに逃げたい、居場所がなく、も疲れちゃった。
+</code></pre><h2 id="2018-3-24"><a href="#2018-3-24" class="headerlink" title="2018/3/24"></a>2018/3/24</h2><pre><code>今天任小姐回家考试了，和她聊了一下，好开心！！！这是这几天最多的几句了！！
+</code></pre><h2 id="2018-3-25"><a href="#2018-3-25" class="headerlink" title="2018/3/25"></a>2018/3/25</h2><pre><code>今天和姑姑吃饭，听她说她和她男朋友都是聊了半年天才开始的，追女孩子不能着急。
+看来是我着急了。
+为了她应该忍耐吧！
+</code></pre><h2 id="2018-3-26"><a href="#2018-3-26" class="headerlink" title="2018/3/26"></a>2018/3/26</h2><pre><code>现在面对她已经不知道说啥，想着打招呼都很尴尬。
+尬聊太浪费时间，主动联系却不知说啥。
+现在反倒没了之前的难以割舍。
+若是平时的话语就好！！！
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[取反进阶(130)]]></title>
       <url>https://xuecat.github.io/2015/08/04/130/</url>
       <content type="html"><![CDATA[<p>先看图：<br>    <img src="/picture/img/130.png" alt=""></p>
@@ -3560,6 +3564,52 @@ HasPem d; HasPem p; d=p;//这个才是调用的赋值函数；
     </entry>
     
     <entry>
+      <title><![CDATA[证书格式（122）]]></title>
+      <url>https://xuecat.github.io/2015/05/18/122/</url>
+      <content type="html"><![CDATA[<p><strong>X509</strong></p>
+<blockquote>
+<p>通用证书格式，国际标准</p>
+</blockquote>
+<p><strong>pem</strong></p>
+<blockquote>
+<p>一般用来当做数字认证机构（CA）<br>BASE64编码的ASCII码的文件</p>
+</blockquote>
+<p><strong>DER</strong></p>
+<blockquote>
+<p>二进制文件（网上说java适用），但windows上我也看到有，呵呵</p>
+</blockquote>
+<p><strong>CSR</strong></p>
+<blockquote>
+<p>证书请求文件</p>
+</blockquote>
+<p><strong>PKCS7</strong></p>
+<blockquote>
+<p>是个标准，存储认证证书，证书路径，证书链。实际编程中我发现证书签名验证等都是用它那个标准</p>
+</blockquote>
+<p><strong>PKCS12/PFX</strong></p>
+<blockquote>
+<p>加密二进制形式<br>服务器证书，中级证书和私钥</p>
+</blockquote>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[编译后各个文件（123）]]></title>
+      <url>https://xuecat.github.io/2015/05/18/123/</url>
+      <content type="html"><![CDATA[<blockquote>
+<ul>
+<li><p>pdb这个是二进制代码和源代码映射文件。有了这个才能调试定位代码位置</p>
+</li>
+<li><p>dump是进程内存镜像文件。用windbg打开。程序崩溃时用windbg生成下dmp文件，然后分析内存的错，而定位代码</p>
+</li>
+<li><p>obj文件是目标文件，一般是程序编译后的二进制文件，在通过链接器和资源文件链接就成exe文件了。   </p>
+</li>
+</ul>
+</blockquote>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[release和debug详细（121）]]></title>
       <url>https://xuecat.github.io/2015/05/18/121/</url>
       <content type="html"><![CDATA[<p>这几天翻了下笔记本，有好多知识没同步上来，写起！</p>
@@ -3633,52 +3683,6 @@ HasPem d; HasPem p; d=p;//这个才是调用的赋值函数；
 </blockquote>
 <p><strong><em>最后说下俩个模式注意项</em></strong></p>
 <h4 id="网上说对windows的消息函数格式要严格要求（呵呵，-我没遇见过，反正一直都严格要求了）"><a href="#网上说对windows的消息函数格式要严格要求（呵呵，-我没遇见过，反正一直都严格要求了）" class="headerlink" title="网上说对windows的消息函数格式要严格要求（呵呵， 我没遇见过，反正一直都严格要求了）"></a>网上说对windows的消息函数格式要严格要求（呵呵， 我没遇见过，反正一直都严格要求了）<br></h4><h4 id="assert代码会忽略（遇见过）verify可以使用，但自己注意吧，我觉得这种宏。。"><a href="#assert代码会忽略（遇见过）verify可以使用，但自己注意吧，我觉得这种宏。。" class="headerlink" title="assert代码会忽略（遇见过）verify可以使用，但自己注意吧，我觉得这种宏。。"></a>assert代码会忽略（遇见过）verify可以使用，但自己注意吧，我觉得这种宏。。<br></h4><h3 id="未使用的变量会被去掉，网上有段这相关的代码，从代码的函数内存分配和入栈来想，确实会导致内存越界，结果跑的时候就是没变化感觉是坑，但还是注意吧。。-lt-gt"><a href="#未使用的变量会被去掉，网上有段这相关的代码，从代码的函数内存分配和入栈来想，确实会导致内存越界，结果跑的时候就是没变化感觉是坑，但还是注意吧。。-lt-gt" class="headerlink" title="未使用的变量会被去掉，网上有段这相关的代码，从代码的函数内存分配和入栈来想，确实会导致内存越界，结果跑的时候就是没变化感觉是坑，但还是注意吧。。&lt;&gt;"></a>未使用的变量会被去掉，网上有段这相关的代码，从代码的函数内存分配和入栈来想，确实会导致内存越界，结果跑的时候就是没变化感觉是坑，但还是注意吧。。&lt;&gt;</h3>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[编译后各个文件（123）]]></title>
-      <url>https://xuecat.github.io/2015/05/18/123/</url>
-      <content type="html"><![CDATA[<blockquote>
-<ul>
-<li><p>pdb这个是二进制代码和源代码映射文件。有了这个才能调试定位代码位置</p>
-</li>
-<li><p>dump是进程内存镜像文件。用windbg打开。程序崩溃时用windbg生成下dmp文件，然后分析内存的错，而定位代码</p>
-</li>
-<li><p>obj文件是目标文件，一般是程序编译后的二进制文件，在通过链接器和资源文件链接就成exe文件了。   </p>
-</li>
-</ul>
-</blockquote>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[证书格式（122）]]></title>
-      <url>https://xuecat.github.io/2015/05/18/122/</url>
-      <content type="html"><![CDATA[<p><strong>X509</strong></p>
-<blockquote>
-<p>通用证书格式，国际标准</p>
-</blockquote>
-<p><strong>pem</strong></p>
-<blockquote>
-<p>一般用来当做数字认证机构（CA）<br>BASE64编码的ASCII码的文件</p>
-</blockquote>
-<p><strong>DER</strong></p>
-<blockquote>
-<p>二进制文件（网上说java适用），但windows上我也看到有，呵呵</p>
-</blockquote>
-<p><strong>CSR</strong></p>
-<blockquote>
-<p>证书请求文件</p>
-</blockquote>
-<p><strong>PKCS7</strong></p>
-<blockquote>
-<p>是个标准，存储认证证书，证书路径，证书链。实际编程中我发现证书签名验证等都是用它那个标准</p>
-</blockquote>
-<p><strong>PKCS12/PFX</strong></p>
-<blockquote>
-<p>加密二进制形式<br>服务器证书，中级证书和私钥</p>
-</blockquote>
-]]></content>
     </entry>
     
     <entry>
@@ -4278,13 +4282,6 @@ return count;
     </entry>
     
     <entry>
-      <title><![CDATA[项目(142)]]></title>
-      <url>https://xuecat.github.io/2015/01/01/142/</url>
-      <content type="html"><![CDATA[<p> <a href="http://www.epweike.com/soft/task/page2.html" target="_blank" rel="external">http://www.epweike.com/soft/task/page2.html</a></p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[string发现(97)]]></title>
       <url>https://xuecat.github.io/2015/01/01/97/</url>
       <content type="html"><![CDATA[<p>  今天用string的时候，发现这几处。</p>
@@ -4307,6 +4304,13 @@ return count;
 </blockquote>
 <p>第二个：我自己的失误，字符数组内存开辟小了（没有结尾的空字符），导致char*把后面的数据以前读了。</p>
 </blockquote>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[项目(142)]]></title>
+      <url>https://xuecat.github.io/2015/01/01/142/</url>
+      <content type="html"><![CDATA[<p> <a href="http://www.epweike.com/soft/task/page2.html" target="_blank" rel="external">http://www.epweike.com/soft/task/page2.html</a></p>
 ]]></content>
     </entry>
     
@@ -4525,16 +4529,6 @@ dup获取结构体，要free。（它内部开辟）
     </entry>
     
     <entry>
-      <title><![CDATA[演讲认识]]></title>
-      <url>https://xuecat.github.io/2014/10/23/82/</url>
-      <content type="html"><![CDATA[<p>   今天演讲，我自己认识到几个问题。</p>
-<p><strong>演讲的时候：</strong></p>
-<p>1、不能让别人觉是是在应付他（我简单的说几句，这些就不要来了）。</p>
-<p>2、用“大家都应该知道吧”这句来，给人感觉是应付一些问题（要从细小的东西讲出大的东西才是好的）</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[减少编译依赖2(83)]]></title>
       <url>https://xuecat.github.io/2014/10/23/83/</url>
       <content type="html"><![CDATA[<p>   今天看书，有这句：</p>
@@ -4547,6 +4541,16 @@ c demo();
 main() {}
 </code></pre><p>思想：头文件用class进行前置声明，比包含相关头文件，要依赖小。</p>
 <p>这个对.h文件的申明是没问题的，对.cpp文件的定义就必须要包含头文件了。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[演讲认识]]></title>
+      <url>https://xuecat.github.io/2014/10/23/82/</url>
+      <content type="html"><![CDATA[<p>   今天演讲，我自己认识到几个问题。</p>
+<p><strong>演讲的时候：</strong></p>
+<p>1、不能让别人觉是是在应付他（我简单的说几句，这些就不要来了）。</p>
+<p>2、用“大家都应该知道吧”这句来，给人感觉是应付一些问题（要从细小的东西讲出大的东西才是好的）</p>
 ]]></content>
     </entry>
     
@@ -4581,6 +4585,17 @@ main() {}
     </entry>
     
     <entry>
+      <title><![CDATA[程序软件(77)]]></title>
+      <url>https://xuecat.github.io/2014/10/14/77/</url>
+      <content type="html"><![CDATA[<pre><code>//quicksilver mac下面的软件。
+//alfred mac下的软件
+//caffeine mac下的软件
+//eudic mac下的软件
+//Parallels Desktop mac下软件
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[王道]]></title>
       <url>https://xuecat.github.io/2014/10/14/79/</url>
       <content type="html"><![CDATA[<p><img src="/picture/f.jpg" alt=""></p>
@@ -4595,17 +4610,6 @@ main() {}
 <p>但是在Archer和Rider的质疑与嘲弄之下Saber怀疑了自己作为王的道路，兰斯洛斯对自己的仇恨，义子对自己的叛乱，国家的最终分崩离析使得Saber怀疑起自己的选择，变得迷茫起来（那时好萌啊…萌啊…萌）</p>
 <p><strong>其实王没有绝对正确的道路，绝对的正确本来就不存在于世上，真正应该做的是像Rider所说的那样（“如果我的决断以及我的臣子们导致了这样的结果，那么毁灭是必然的。我会哀悼，也会流泪，但我绝不后悔。”）</strong></p>
 ]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[程序软件(77)]]></title>
-      <url>https://xuecat.github.io/2014/10/14/77/</url>
-      <content type="html"><![CDATA[<pre><code>//quicksilver mac下面的软件。
-//alfred mac下的软件
-//caffeine mac下的软件
-//eudic mac下的软件
-//Parallels Desktop mac下软件
-</code></pre>]]></content>
     </entry>
     
     <entry>
@@ -4762,16 +4766,6 @@ while (line &gt;&gt; word) {
     </entry>
     
     <entry>
-      <title><![CDATA[static作用(73)]]></title>
-      <url>https://xuecat.github.io/2014/10/01/73/</url>
-      <content type="html"><![CDATA[<p>static作用（修饰函数、局部变量、全局变量）</p>
-<p>当我们同时编译多个文件时，所有未加static前缀的全局变量和函数都具有全局可见性</p>
-<p>如果加了static，就会对其它源文件隐藏。例如在a和msg的定义前加上static，main.c就看不到它们了。</p>
-<p>利用这一特性可以在不同的文件中定义同名函数和同名变量，而不必担心命名冲突。Static可以用作函数和变量的前缀，对于函数来讲，static的作用仅限于隐藏，而对于变量，static还有下面两个作用。</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[dulib里面的头文件包含(74)]]></title>
       <url>https://xuecat.github.io/2014/10/01/74/</url>
       <content type="html"><![CDATA[<p>他头文件用namespace包括。</p>
@@ -4780,6 +4774,16 @@ while (line &gt;&gt; word) {
 <p>stadx.h文件包含duilib.h文件</p>
 <p>所有的东西写在duilib.h文件里面</p>
 <p>亮点在cpp文件包括，然后包含。导致头文件不用包含。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[static作用(73)]]></title>
+      <url>https://xuecat.github.io/2014/10/01/73/</url>
+      <content type="html"><![CDATA[<p>static作用（修饰函数、局部变量、全局变量）</p>
+<p>当我们同时编译多个文件时，所有未加static前缀的全局变量和函数都具有全局可见性</p>
+<p>如果加了static，就会对其它源文件隐藏。例如在a和msg的定义前加上static，main.c就看不到它们了。</p>
+<p>利用这一特性可以在不同的文件中定义同名函数和同名变量，而不必担心命名冲突。Static可以用作函数和变量的前缀，对于函数来讲，static的作用仅限于隐藏，而对于变量，static还有下面两个作用。</p>
 ]]></content>
     </entry>
     
@@ -4802,15 +4806,6 @@ while (line &gt;&gt; word) {
     </entry>
     
     <entry>
-      <title><![CDATA[already defined in *.obj(70)]]></title>
-      <url>https://xuecat.github.io/2014/09/28/70/</url>
-      <content type="html"><![CDATA[<p>首先注意不能在.h头文件中定义全局变量，否则只要其他文件包括了该头文件，就会出现already defined in *.obj的错误。</p>
-<p>应该把全局变量放在.cpp文件中定义，然后在其他文件中用到该变量时用extern声明一下。</p>
-<p>即使在.h中定义全局变量，用extern可以避免。</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[自定义消息，多个函数响应：宏(71)]]></title>
       <url>https://xuecat.github.io/2014/09/28/71/</url>
       <content type="html"><![CDATA[<p>ON_COMMAND 以及 ON_COMMAND_RANGE 是用于处理菜单项或工具栏按钮的命令消息的<br>对于复选框这样的控件，请使用ON_CONTROL_RANGE</p>
@@ -4826,6 +4821,15 @@ while (line &gt;&gt; word) {
 <li><p>在函数内判断 uID，来确定用户单击了哪项复选框，并作相应处理。</p>
 </li>
 </ol>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[already defined in *.obj(70)]]></title>
+      <url>https://xuecat.github.io/2014/09/28/70/</url>
+      <content type="html"><![CDATA[<p>首先注意不能在.h头文件中定义全局变量，否则只要其他文件包括了该头文件，就会出现already defined in *.obj的错误。</p>
+<p>应该把全局变量放在.cpp文件中定义，然后在其他文件中用到该变量时用extern声明一下。</p>
+<p>即使在.h中定义全局变量，用extern可以避免。</p>
 ]]></content>
     </entry>
     
@@ -4894,6 +4898,14 @@ while (line &gt;&gt; word) {
     </entry>
     
     <entry>
+      <title><![CDATA[变长参数(58)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/58/</url>
+      <content type="html"><![CDATA[<p>可变长函数：</p>
+<p>  函数多参数情况下，可变长函数虽然设置“…”   //一定要“…”之前的那个参数 va_start，来避免异常抛出。（实践）</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[输出中文(66)]]></title>
       <url>https://xuecat.github.io/2014/09/20/66/</url>
       <content type="html"><![CDATA[<pre><code> cout.imbue(locale(&quot;&quot;));
@@ -4906,6 +4918,36 @@ for (size_t i = 0; i &lt; strlen(data); i++)
 cout &lt;&lt; data;
 </code></pre><p>结果：第一个无法输出中文，第二个可以。</p>
 <p>分析：昨天已经讲了，今天写下只是写个例子。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[强制转换临时和原对象(虚函数测试)(59)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/59/</url>
+      <content type="html"><![CDATA[<p>这是个很坑的地方,大多数想法,转换嘛,</p>
+<pre><code>我把static_cast&lt;A&gt;(B)不就是把B转成A吗? 错! :
+static_cast&lt;window*&gt;(this)-&gt;onResize(); //这是拿this当成window,没问题
+static_cast&lt;window&amp;&gt;(*this).onResize();//这个也是
+
+static_cast&lt;window&gt;(*this).onResize();
+这个相当于:
+window temp=(*this);
+temp.onResize();
+</code></pre><p>我做了一下测试，你的临时对象的说法应该是对的，</p>
+<pre><code>static_cast&lt;window&gt;(*this).onresize();  确实无法执行到 对象的 base class 部分 
+
+static_cast&lt;window*&gt;(this)-&gt;onResize(); //这是拿this当成window,没问题
+static_cast&lt;window&amp;&gt;(*this).onResize();//这个也是
+</code></pre><p>这两种可以执行到base class 部分，但是因为例子中是 virtual function，所以base class 部分的 vtable pointer 跟 derived class 的 vtable pointer 指向同一个virtual table，里面的 函数是一个，所以会递归调用</p>
+<p>而 如果用 window::onResize()，就应该是直接调用的base class  里面的 virtual function 。<br>应该是这样的</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[指针内存长度和大小(64)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/64/</url>
+      <content type="html"><![CDATA[<p> 今天字符处理遇见这个问题：我new了一块内存，然后sizeof()；strlen()；都正常（一个返回4，一个返回分配大小）</p>
+<p>之后我用了ZeroMemory来分配，发现有异议了。<br>sizeof(); strlen(); 一个返回4，一个返回0；     原来用了这个函数会置空内存。</p>
 ]]></content>
     </entry>
     
@@ -4932,14 +4974,6 @@ cout &lt;&lt; data;
     </entry>
     
     <entry>
-      <title><![CDATA[指针内存长度和大小(64)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/64/</url>
-      <content type="html"><![CDATA[<p> 今天字符处理遇见这个问题：我new了一块内存，然后sizeof()；strlen()；都正常（一个返回4，一个返回分配大小）</p>
-<p>之后我用了ZeroMemory来分配，发现有异议了。<br>sizeof(); strlen(); 一个返回4，一个返回0；     原来用了这个函数会置空内存。</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[杂项]]></title>
       <url>https://xuecat.github.io/2014/09/20/61/</url>
       <content type="html"><![CDATA[<p>   变长参数的纠正，绑定第一参数时，直接赋值貌似不成功。要绑定临近的参数才成功。(好像它是临近取值的)</p>
@@ -4949,22 +4983,19 @@ cout &lt;&lt; data;
     </entry>
     
     <entry>
-      <title><![CDATA[string和wstring(62)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/62/</url>
-      <content type="html"><![CDATA[<p>今天用string来find一个中文符号，首先返回符号位置正确。然后符号为界，截取字符串出现问题；</p>
-<p>分析原因：中文符号在string中是占用两个字节的。而string对所有的字符串是一个字符一个字节的</p>
-<p>，所以按位取时，夺取了一个字节，导致数据获取失败。</p>
-<p>用wstring进行存取，可以完全避免。</p>
-<p><strong>学到：或许第三方库和一些协议对unicode字符集支持不是很好，导致数据传输要使用ANSI字符串。<br>但程序之间的通信为了保证中文字符，必须使用unicode。     最多在数据传输时做一次编码转换！</strong></p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[变长参数(58)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/58/</url>
-      <content type="html"><![CDATA[<p>可变长函数：</p>
-<p>  函数多参数情况下，可变长函数虽然设置“…”   //一定要“…”之前的那个参数 va_start，来避免异常抛出。（实践）</p>
-]]></content>
+      <title><![CDATA[多层窗口(54)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/54/</url>
+      <content type="html"><![CDATA[<p>总于过期了，把上面的东西搬过来</p>
+<p> 我已经被这个多层窗口弄晕了，快死了。<br>首先，要使用透明窗口函数：</p>
+<pre><code>SetLayeredWindowAttributes， updataLayeredWindowAttributes，
+//就必须设置窗口属性为WS_EX_LAYERED。
+//然后，这两个函数完全可以混合使用，
+</code></pre><p>  updataLayeredWindowAttributes会拦截wm_paint消息，窗口上的所有东西，重绘，必需自己处理。前一个函数则不会这样。</p>
+<p>WS_EX_TRANSPARENT这个属性，会让窗体透明，真正的透明，不响应任何消息的透明。就只能自己去处理画图的那种。</p>
+<p>窗体透明控件不透明：</p>
+<pre><code>this-&gt;SetBackgroundColor(RGB(255, 255, 255), TRUE);
+SetLayeredWindowAttributes(RGB(255, 255, 255), 200, LWA_ALPHA | LWA_COLORKEY);
+</code></pre>]]></content>
     </entry>
     
     <entry>
@@ -4992,50 +5023,6 @@ cout &lt;&lt; data;
     </entry>
     
     <entry>
-      <title><![CDATA[强制转换临时和原对象(虚函数测试)(59)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/59/</url>
-      <content type="html"><![CDATA[<p>这是个很坑的地方,大多数想法,转换嘛,</p>
-<pre><code>我把static_cast&lt;A&gt;(B)不就是把B转成A吗? 错! :
-static_cast&lt;window*&gt;(this)-&gt;onResize(); //这是拿this当成window,没问题
-static_cast&lt;window&amp;&gt;(*this).onResize();//这个也是
-
-static_cast&lt;window&gt;(*this).onResize();
-这个相当于:
-window temp=(*this);
-temp.onResize();
-</code></pre><p>我做了一下测试，你的临时对象的说法应该是对的，</p>
-<pre><code>static_cast&lt;window&gt;(*this).onresize();  确实无法执行到 对象的 base class 部分 
-
-static_cast&lt;window*&gt;(this)-&gt;onResize(); //这是拿this当成window,没问题
-static_cast&lt;window&amp;&gt;(*this).onResize();//这个也是
-</code></pre><p>这两种可以执行到base class 部分，但是因为例子中是 virtual function，所以base class 部分的 vtable pointer 跟 derived class 的 vtable pointer 指向同一个virtual table，里面的 函数是一个，所以会递归调用</p>
-<p>而 如果用 window::onResize()，就应该是直接调用的base class  里面的 virtual function 。<br>应该是这样的</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[设计流程(57)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/57/</url>
-      <content type="html"><![CDATA[<p> 想出的设计流程：</p>
-<p> 先画出程序运行功能的基本流程-&gt;确定类的个数和作用-&gt;设计模式-&gt;按照先想好的类功能模块把设计模式搭建出来-&gt;最后按照功能流程图再写一遍。</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[内存对齐偏移量(56)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/56/</url>
-      <content type="html"><![CDATA[<p> 编译器对变量存储的一个特殊处理。为了提高CPU的存储速度，编译器对一些变量的起始地址做了“对齐”处理</p>
-<p>。在默认情况下，规定各成员变量存放的起始地址相对于结构的起始地址的偏移量必须为该变量的类型所占用的字节数的倍数。<br>类型</p>
-<p>对齐方式（变量存放的起始地址相对于结构的起始地址的偏移量）</p>
-<p>Char 偏移量必须为sizeof(char)即1的倍数</p>
-<p>int 偏移量必须为sizeof(int)即4的倍数</p>
-<p>float 偏移量必须为sizeof(float)即4的倍数</p>
-<p>double 偏移量必须为sizeof(double)即8的倍数</p>
-<p>Short 偏移量必须为sizeof(short)即2的倍数</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[SIGPIPE信号(55)]]></title>
       <url>https://xuecat.github.io/2014/09/20/55/</url>
       <content type="html"><![CDATA[<p>使用libevent编写websocket服务端时遇到了一个问题：</p>
@@ -5054,19 +5041,36 @@ if (sigaction(SIGPIPE, &amp;act, NULL) == 0) {
     </entry>
     
     <entry>
-      <title><![CDATA[多层窗口(54)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/54/</url>
-      <content type="html"><![CDATA[<p>总于过期了，把上面的东西搬过来</p>
-<p> 我已经被这个多层窗口弄晕了，快死了。<br>首先，要使用透明窗口函数：</p>
-<pre><code>SetLayeredWindowAttributes， updataLayeredWindowAttributes，
-//就必须设置窗口属性为WS_EX_LAYERED。
-//然后，这两个函数完全可以混合使用，
-</code></pre><p>  updataLayeredWindowAttributes会拦截wm_paint消息，窗口上的所有东西，重绘，必需自己处理。前一个函数则不会这样。</p>
-<p>WS_EX_TRANSPARENT这个属性，会让窗体透明，真正的透明，不响应任何消息的透明。就只能自己去处理画图的那种。</p>
-<p>窗体透明控件不透明：</p>
-<pre><code>this-&gt;SetBackgroundColor(RGB(255, 255, 255), TRUE);
-SetLayeredWindowAttributes(RGB(255, 255, 255), 200, LWA_ALPHA | LWA_COLORKEY);
-</code></pre>]]></content>
+      <title><![CDATA[内存对齐偏移量(56)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/56/</url>
+      <content type="html"><![CDATA[<p> 编译器对变量存储的一个特殊处理。为了提高CPU的存储速度，编译器对一些变量的起始地址做了“对齐”处理</p>
+<p>。在默认情况下，规定各成员变量存放的起始地址相对于结构的起始地址的偏移量必须为该变量的类型所占用的字节数的倍数。<br>类型</p>
+<p>对齐方式（变量存放的起始地址相对于结构的起始地址的偏移量）</p>
+<p>Char 偏移量必须为sizeof(char)即1的倍数</p>
+<p>int 偏移量必须为sizeof(int)即4的倍数</p>
+<p>float 偏移量必须为sizeof(float)即4的倍数</p>
+<p>double 偏移量必须为sizeof(double)即8的倍数</p>
+<p>Short 偏移量必须为sizeof(short)即2的倍数</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[设计流程(57)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/57/</url>
+      <content type="html"><![CDATA[<p> 想出的设计流程：</p>
+<p> 先画出程序运行功能的基本流程-&gt;确定类的个数和作用-&gt;设计模式-&gt;按照先想好的类功能模块把设计模式搭建出来-&gt;最后按照功能流程图再写一遍。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[string和wstring(62)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/62/</url>
+      <content type="html"><![CDATA[<p>今天用string来find一个中文符号，首先返回符号位置正确。然后符号为界，截取字符串出现问题；</p>
+<p>分析原因：中文符号在string中是占用两个字节的。而string对所有的字符串是一个字符一个字节的</p>
+<p>，所以按位取时，夺取了一个字节，导致数据获取失败。</p>
+<p>用wstring进行存取，可以完全避免。</p>
+<p><strong>学到：或许第三方库和一些协议对unicode字符集支持不是很好，导致数据传输要使用ANSI字符串。<br>但程序之间的通信为了保证中文字符，必须使用unicode。     最多在数据传输时做一次编码转换！</strong></p>
+]]></content>
     </entry>
     
     <entry>
@@ -5174,6 +5178,17 @@ class A : public B {virtual void f();}
     </entry>
     
     <entry>
+      <title><![CDATA[返回对象(46)]]></title>
+      <url>https://xuecat.github.io/2014/09/11/46/</url>
+      <content type="html"><![CDATA[<p>作者对返回对象觉得：</p>
+<pre><code>1、拒绝用new 指针来返回引用对象（栈空间返回就省略了）。销毁问题
+2、拒绝用静态，全局空间来返回。多次调用问题。
+
+作者觉得该返回一个新的对象，调用构造函数。（具体情况而定，当是上一个栈空间的时候，返回也是很好的）
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[pass by reference to const replace pass by value(45)]]></title>
       <url>https://xuecat.github.io/2014/09/11/45/</url>
       <content type="html"><![CDATA[<p>当用类去传递的时候遇见这么一个编译消耗。</p>
@@ -5190,23 +5205,6 @@ validateStudent(const Student&amp; s);一次不需要
     </entry>
     
     <entry>
-      <title><![CDATA[返回对象(46)]]></title>
-      <url>https://xuecat.github.io/2014/09/11/46/</url>
-      <content type="html"><![CDATA[<p>作者对返回对象觉得：</p>
-<pre><code>1、拒绝用new 指针来返回引用对象（栈空间返回就省略了）。销毁问题
-2、拒绝用静态，全局空间来返回。多次调用问题。
-
-作者觉得该返回一个新的对象，调用构造函数。（具体情况而定，当是上一个栈空间的时候，返回也是很好的）
-</code></pre>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[effectivec++ 设计接口正确使用(44)]]></title>
-      <url>https://xuecat.github.io/2014/09/10/44/</url>
-      <content type="html"><![CDATA[<figure class="highlight"><figcaption><span>看代码:++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class Date &#123;</div><div class="line">public:</div><div class="line">	Date(int moth, int day, int year);</div><div class="line">&#125;</div><div class="line">//存在的问题，由于都是int，调用会出现顺序错误。</div><div class="line">修改</div><div class="line">struct Day &#123;explicit Day(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line">struct Month &#123;explicit Month(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line">struct Year &#123;explicit Year(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line"></div><div class="line">class Date &#123;</div><div class="line">public:</div><div class="line">	Date(const Month&amp; m, const Day&amp; d, const Year&amp; y);</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[effective c++数组指针销毁(43)]]></title>
       <url>https://xuecat.github.io/2014/09/10/43/</url>
       <content type="html"><![CDATA[<p>遇见：</p>
@@ -5215,6 +5213,12 @@ validateStudent(const Student&amp; s);一次不需要
 用delete p；会出现内存错误。
 所以对于数组指针，拒绝使用typedef（typdedef string ADD[4];） 避免销毁异常。
 </code></pre>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[effectivec++ 设计接口正确使用(44)]]></title>
+      <url>https://xuecat.github.io/2014/09/10/44/</url>
+      <content type="html"><![CDATA[<figure class="highlight"><figcaption><span>看代码:++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class Date &#123;</div><div class="line">public:</div><div class="line">	Date(int moth, int day, int year);</div><div class="line">&#125;</div><div class="line">//存在的问题，由于都是int，调用会出现顺序错误。</div><div class="line">修改</div><div class="line">struct Day &#123;explicit Day(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line">struct Month &#123;explicit Month(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line">struct Year &#123;explicit Year(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line"></div><div class="line">class Date &#123;</div><div class="line">public:</div><div class="line">	Date(const Month&amp; m, const Day&amp; d, const Year&amp; y);</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
     </entry>
     
     <entry>
@@ -5259,15 +5263,6 @@ long double f; //12字节
     </entry>
     
     <entry>
-      <title><![CDATA[static_cast dynamic_cast再进一步]]></title>
-      <url>https://xuecat.github.io/2014/09/05/39/</url>
-      <content type="html"><![CDATA[<p>string a = typeid(dynamic_cast<novebook*>(this)).name();</novebook*></p>
-<p>发现dynamic_cast确实能把父子类的类型做转换，但是<br>对于虚函数，还是无法，应该是内存覆盖了就无法修改了。</p>
-<p>只有<br>int selfprice = static_cast<novebook>(*this).GetPrice();<br>才能转换成临时变量，调用基类虚函数。</novebook></p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[more effective c++根据类型决定虚化(40)]]></title>
       <url>https://xuecat.github.io/2014/09/05/40/</url>
       <content type="html"><![CDATA[<p>第31条了，这一跳一下就解决了我最近的疑惑！</p>
@@ -5284,21 +5279,19 @@ long double f; //12字节
     </entry>
     
     <entry>
-      <title><![CDATA[内存对齐(31)]]></title>
-      <url>https://xuecat.github.io/2014/09/04/31/</url>
-      <content type="html"><![CDATA[<p>无论是类还是结构体，对于数据对其都遵循按照最高字节数，进行对齐。</p>
-<p>注意一点就是，当无数据时候是占一个字节，只有一个char时，也只占一个字节</p>
+      <title><![CDATA[static_cast dynamic_cast再进一步]]></title>
+      <url>https://xuecat.github.io/2014/09/05/39/</url>
+      <content type="html"><![CDATA[<p>string a = typeid(dynamic_cast<novebook*>(this)).name();</novebook*></p>
+<p>发现dynamic_cast确实能把父子类的类型做转换，但是<br>对于虚函数，还是无法，应该是内存覆盖了就无法修改了。</p>
+<p>只有<br>int selfprice = static_cast<novebook>(*this).GetPrice();<br>才能转换成临时变量，调用基类虚函数。</novebook></p>
 ]]></content>
     </entry>
     
     <entry>
-      <title><![CDATA[more effective c++为智能指针添加计数(36)]]></title>
-      <url>https://xuecat.github.io/2014/09/03/36/</url>
-      <content type="html"><![CDATA[<p>作者使用结构体完成这一功能。为使用字符串添加引用计数。</p>
-<figure class="highlight c"><figcaption><span>看代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Stringg &#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line"><span class="comment">//作者声明了一个结构体，来完成操作</span></div><div class="line"> 		 <span class="keyword">struct</span>  StringValue &#123;</div><div class="line">        	<span class="keyword">int</span> refCount;</div><div class="line">        	<span class="keyword">char</span>* data;</div><div class="line"></div><div class="line">        StringValue(<span class="keyword">const</span> <span class="keyword">char</span> * initValue);</div><div class="line">        ~StringValue();</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">String::StringValue::StringValue(<span class="keyword">const</span> <span class="keyword">char</span>* initValue)</div><div class="line">: refCont(<span class="number">1</span>)</div><div class="line">&#123;</div><div class="line">      data = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="built_in">strlen</span>(initValue) + <span class="number">1</span>];</div><div class="line">      <span class="built_in">strcpy</span>(data, initValue);</div><div class="line">&#125;</div><div class="line"></div><div class="line">String::StringVlue::~StrinValue()</div><div class="line">&#123;</div><div class="line">     <span class="keyword">delete</span> []data;</div><div class="line">&#125;</div><div class="line"></div><div class="line">String::String(<span class="keyword">const</span> <span class="keyword">char</span>* initValue)</div><div class="line"> 	: value(<span class="keyword">new</span> StringValue(initValue))</div><div class="line">&#123;\\它这里就创建对数据的跟踪&#125;</div><div class="line"></div><div class="line"><span class="comment">//对于赋值和复制函数，就先判断是否自己，</span></div><div class="line"><span class="comment">//是否--value-&gt;refCount==0;delete.++refcount.</span></div><div class="line"></div><div class="line">Stringg::~Stringg()</div><div class="line">&#123;<span class="keyword">if</span>(--value-&gt;refCount == <span class="number">0</span> ) <span class="keyword">delete</span> value;&#125;</div></pre></td></tr></table></figure>
-<p>最后：混蛋作者，最后还是封装了一个智能基类。<br>详细见199  </p>
-<p>分析：String需要StringValue模块来专门服务，相应功能String不管，只是知道初始化时构造它就好。然后String需要StringValue的一些结果，所以设计智能指针模块来访问数据，当然也可以修改数据。</p>
-<p>如此关系，可以记录下。</p>
+      <title><![CDATA[内存对齐(31)]]></title>
+      <url>https://xuecat.github.io/2014/09/04/31/</url>
+      <content type="html"><![CDATA[<p>无论是类还是结构体，对于数据对其都遵循按照最高字节数，进行对齐。</p>
+<p>注意一点就是，当无数据时候是占一个字节，只有一个char时，也只占一个字节</p>
 ]]></content>
     </entry>
     
@@ -5320,6 +5313,17 @@ long double f; //12字节
     </entry>
     
     <entry>
+      <title><![CDATA[more effective c++为智能指针添加计数(36)]]></title>
+      <url>https://xuecat.github.io/2014/09/03/36/</url>
+      <content type="html"><![CDATA[<p>作者使用结构体完成这一功能。为使用字符串添加引用计数。</p>
+<figure class="highlight c"><figcaption><span>看代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Stringg &#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line"><span class="comment">//作者声明了一个结构体，来完成操作</span></div><div class="line"> 		 <span class="keyword">struct</span>  StringValue &#123;</div><div class="line">        	<span class="keyword">int</span> refCount;</div><div class="line">        	<span class="keyword">char</span>* data;</div><div class="line"></div><div class="line">        StringValue(<span class="keyword">const</span> <span class="keyword">char</span> * initValue);</div><div class="line">        ~StringValue();</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">String::StringValue::StringValue(<span class="keyword">const</span> <span class="keyword">char</span>* initValue)</div><div class="line">: refCont(<span class="number">1</span>)</div><div class="line">&#123;</div><div class="line">      data = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="built_in">strlen</span>(initValue) + <span class="number">1</span>];</div><div class="line">      <span class="built_in">strcpy</span>(data, initValue);</div><div class="line">&#125;</div><div class="line"></div><div class="line">String::StringVlue::~StrinValue()</div><div class="line">&#123;</div><div class="line">     <span class="keyword">delete</span> []data;</div><div class="line">&#125;</div><div class="line"></div><div class="line">String::String(<span class="keyword">const</span> <span class="keyword">char</span>* initValue)</div><div class="line"> 	: value(<span class="keyword">new</span> StringValue(initValue))</div><div class="line">&#123;\\它这里就创建对数据的跟踪&#125;</div><div class="line"></div><div class="line"><span class="comment">//对于赋值和复制函数，就先判断是否自己，</span></div><div class="line"><span class="comment">//是否--value-&gt;refCount==0;delete.++refcount.</span></div><div class="line"></div><div class="line">Stringg::~Stringg()</div><div class="line">&#123;<span class="keyword">if</span>(--value-&gt;refCount == <span class="number">0</span> ) <span class="keyword">delete</span> value;&#125;</div></pre></td></tr></table></figure>
+<p>最后：混蛋作者，最后还是封装了一个智能基类。<br>详细见199  </p>
+<p>分析：String需要StringValue模块来专门服务，相应功能String不管，只是知道初始化时构造它就好。然后String需要StringValue的一些结果，所以设计智能指针模块来访问数据，当然也可以修改数据。</p>
+<p>如此关系，可以记录下。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[常量区进阶(34)]]></title>
       <url>https://xuecat.github.io/2014/09/02/34/</url>
       <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">char</span> *<span class="title">strA</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">   	<span class="keyword">char</span> str[]=<span class="string">"hello world"</span>;</div><div class="line">   	<span class="keyword">return</span> str;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">char</span> *<span class="title">strA</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">   	<span class="keyword">char</span> *str=<span class="string">"hello world"</span>;</div><div class="line">   	<span class="keyword">return</span> str;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -5332,15 +5336,6 @@ long double f; //12字节
       <title><![CDATA[more effective c++智能指针继承传递(35)]]></title>
       <url>https://xuecat.github.io/2014/09/02/35/</url>
       <content type="html"><![CDATA[<figure class="highlight"><figcaption><span>先看示例：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">class MusicProduct;</div><div class="line">class Cassette : public MusicProduct;</div><div class="line">class CD : public MusicProduct;</div><div class="line"></div><div class="line">void DisplayAndPlay(const SmartPtr&lt;MusicProduct&gt;&amp; pmp, int times)</div><div class="line">SmartPtr&lt;Cassette&gt; f(new );</div><div class="line">SmartPtr&lt;CD&gt; fd(new );</div><div class="line">DisplayAndPlay(f, 10)</div><div class="line">DisplayAndPlay(fd, 10);</div><div class="line">这样是无法通过的，</div><div class="line">解决方法是使用智能隐式转换。为SmartPtr添加转换函数</div><div class="line"></div><div class="line">templatee&lt;class newType&gt;</div><div class="line">operator SmartPtr&lt;newType&gt;()</div><div class="line">&#123;</div><div class="line">   	  return SmartPtr&lt;newType&gt;(pointee);</div><div class="line">&#125;</div><div class="line"></div><div class="line">分析：编译器总是会企图找到一种方式使成功。</div><div class="line">所以函数赋值时，它就会解析为：</div><div class="line"></div><div class="line">SmartPtr&lt;Cassette&gt;::operator SmartPtr&lt;MusicProduct&gt; () &#123;</div><div class="line">   	    return Smart&lt;MusicProduct&gt;(pointee);</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[libcurl源码学习(37)]]></title>
-      <url>https://xuecat.github.io/2014/09/01/37/</url>
-      <content type="html"><![CDATA[<p>libcurl：预编译头文件，就是放置工具的地方。<br>其它文件要使用工具直接#define一下就好了。</p>
-<p>把va_list当值传入。</p>
-<p>回调函数的使用typedf  获取函数指针。指针的指针，执行就好了。</p>
-]]></content>
     </entry>
     
     <entry>
@@ -5365,9 +5360,12 @@ If (ptn)
     </entry>
     
     <entry>
-      <title><![CDATA[more effective c++智能指针(28)]]></title>
-      <url>https://xuecat.github.io/2014/08/29/29/</url>
-      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>智能指针了：构造、赋值、析构:++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">class</span> <span class="built_in">auto_ptr</span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="built_in">auto_ptr</span>(T* ptr = <span class="number">0</span>) : pointee(ptr) &#123;&#125;</div><div class="line">	<span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs); <span class="comment">//复制</span></div><div class="line">	<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; operate= (<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs);</div><div class="line">	~<span class="built_in">auto_ptr</span>() &#123;<span class="keyword">delete</span> pointee;&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	T* pointee;</div><div class="line">	<span class="comment">/* data */</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//可以看出，使用时用f</span></div><div class="line"><span class="comment">//auto_ptr&lt;TreeNode&gt; ptnq(new TreeNode);便可以了。</span></div><div class="line"><span class="comment">///</span></div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;T&gt;:::<span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs)</div><div class="line">&#123;</div><div class="line">	pointee = rhs.pointee;</div><div class="line">	rhs.pointee = <span class="number">0</span>;<span class="comment">//因为实现的是auto，被复制后拒绝前一个变量访问</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;T&gt;&amp; <span class="built_in">auto_ptr</span>&lt;T&gt;::operate= (<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span> (<span class="keyword">this</span> == &amp;rhs)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> *<span class="keyword">this</span>; <span class="comment">//这个赋值函数处理的很好，以后赋值函数添加上</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">delete</span> pointee;</div><div class="line">	。。。。</div><div class="line">	。。。。</div><div class="line">	<span class="keyword">return</span> *<span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure> ]]></content>
+      <title><![CDATA[libcurl源码学习(37)]]></title>
+      <url>https://xuecat.github.io/2014/09/01/37/</url>
+      <content type="html"><![CDATA[<p>libcurl：预编译头文件，就是放置工具的地方。<br>其它文件要使用工具直接#define一下就好了。</p>
+<p>把va_list当值传入。</p>
+<p>回调函数的使用typedf  获取函数指针。指针的指针，执行就好了。</p>
+]]></content>
     </entry>
     
     <entry>
@@ -5378,6 +5376,12 @@ If (ptn)
 <p>发现：多个对象执行的时候，访问的却是同一个线程资源。</p>
 <p>分析原因：多线程函数是static或者全局函数，   函数的创建在静态或全局空间，与类的栈空间无关<br>所以访问的是同一个函数。</p>
 ]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[more effective c++智能指针(28)]]></title>
+      <url>https://xuecat.github.io/2014/08/29/29/</url>
+      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>智能指针了：构造、赋值、析构:++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">class</span> <span class="built_in">auto_ptr</span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="built_in">auto_ptr</span>(T* ptr = <span class="number">0</span>) : pointee(ptr) &#123;&#125;</div><div class="line">	<span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs); <span class="comment">//复制</span></div><div class="line">	<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; operate= (<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs);</div><div class="line">	~<span class="built_in">auto_ptr</span>() &#123;<span class="keyword">delete</span> pointee;&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	T* pointee;</div><div class="line">	<span class="comment">/* data */</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//可以看出，使用时用f</span></div><div class="line"><span class="comment">//auto_ptr&lt;TreeNode&gt; ptnq(new TreeNode);便可以了。</span></div><div class="line"><span class="comment">///</span></div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;T&gt;:::<span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs)</div><div class="line">&#123;</div><div class="line">	pointee = rhs.pointee;</div><div class="line">	rhs.pointee = <span class="number">0</span>;<span class="comment">//因为实现的是auto，被复制后拒绝前一个变量访问</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;T&gt;&amp; <span class="built_in">auto_ptr</span>&lt;T&gt;::operate= (<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span> (<span class="keyword">this</span> == &amp;rhs)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> *<span class="keyword">this</span>; <span class="comment">//这个赋值函数处理的很好，以后赋值函数添加上</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">delete</span> pointee;</div><div class="line">	。。。。</div><div class="line">	。。。。</div><div class="line">	<span class="keyword">return</span> *<span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure> ]]></content>
     </entry>
     
     <entry>
@@ -5455,6 +5459,15 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
     </entry>
     
     <entry>
+      <title><![CDATA[窗口风格（22）]]></title>
+      <url>https://xuecat.github.io/2014/08/26/22/</url>
+      <content type="html"><![CDATA[<p>首先，对WS_EX_LAYERED  /WS_EX_TRANSPARENT(这个前面讲过)<br>对子窗口无效。</p>
+<p>如不设置WS_CHILD就从屏幕坐标开始计算。<br>只要是子窗口就不能设置WS_POPUP</p>
+<p>所以WS_POPUP窗口都具有CLIPDRENW属性（记得貌似还有vscroll似的）。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[more effective c++对象产生于head（23）]]></title>
       <url>https://xuecat.github.io/2014/08/26/23/</url>
       <content type="html"><![CDATA[<p>作者安排了一个基类和派生类的调用方式</p>
@@ -5463,15 +5476,6 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
 </code></pre><p>2、基类析构函数他说要限制为protected，我不懂。<br>我想应该是让外部调用必须使用destroy来销毁对象吧！</p>
  <figure class="highlight c"><figcaption><span>来看下调用和派生++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> UPNumber </div><div class="line">	&#123;</div><div class="line"> <span class="keyword">public</span>:</div><div class="line"> 	UPNumber(arguments);</div><div class="line"> <span class="keyword">protected</span>:</div><div class="line"> 	~UPNumber();</div><div class="line"> </div><div class="line"> 	<span class="comment">/* data */</span></div><div class="line"> &#125;;</div><div class="line"></div><div class="line"> <span class="keyword">class</span> Asset</div><div class="line"> &#123;</div><div class="line"> <span class="keyword">public</span>:</div><div class="line"> 	Asset(arguments);</div><div class="line"> 	~Asset();</div><div class="line"></div><div class="line"> <span class="keyword">private</span>:</div><div class="line"> 	UPNumber* value;</div><div class="line"> </div><div class="line"> 	<span class="comment">/* data */</span></div><div class="line"> &#125;;</div><div class="line"></div><div class="line"> Asset::Asset(arguments)</div><div class="line"> 	: value(<span class="keyword">new</span> UPNumber(arguments)) &#123;</div><div class="line"> 		...</div><div class="line"> 	&#125;</div><div class="line"> Asset::~Asset()</div><div class="line"> &#123;</div><div class="line"> 	value-&gt;destroy();</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
 <p>派生类产生基类数据于头，设置基类数据对象来调用函数。<br>析构使用基类自释放性！</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[窗口风格（22）]]></title>
-      <url>https://xuecat.github.io/2014/08/26/22/</url>
-      <content type="html"><![CDATA[<p>首先，对WS_EX_LAYERED  /WS_EX_TRANSPARENT(这个前面讲过)<br>对子窗口无效。</p>
-<p>如不设置WS_CHILD就从屏幕坐标开始计算。<br>只要是子窗口就不能设置WS_POPUP</p>
-<p>所以WS_POPUP窗口都具有CLIPDRENW属性（记得貌似还有vscroll似的）。</p>
 ]]></content>
     </entry>
     

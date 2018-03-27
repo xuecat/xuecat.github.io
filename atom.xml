@@ -35,9 +35,9 @@
       <category term="C#" scheme="https://xuecat.github.io/categories/C/"/>
     
     
-      <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
-    
       <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
+    
+      <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
     
   </entry>
   
@@ -336,7 +336,7 @@
     <link href="https://xuecat.github.io/2017/06/06/222/"/>
     <id>https://xuecat.github.io/2017/06/06/222/</id>
     <published>2017-06-06T13:46:30.000Z</published>
-    <updated>2017-07-25T16:01:58.146Z</updated>
+    <updated>2018-03-26T04:25:15.414Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/picture/222.jpg" alt=""></p>
 <p>今天看一代码把以前的知识又忘了，现专门记下笔记</p>
@@ -346,7 +346,7 @@
 <figure class="highlight autoit"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">var someuser = &#123; </div><div class="line">    name: <span class="string">'byvoid'</span>, </div><div class="line">    <span class="function"><span class="keyword">func</span>: <span class="title">function</span><span class="params">()</span> &#123;</span></div><div class="line">        console.<span class="built_in">log</span>(this.name)<span class="comment">; </span></div><div class="line">    &#125;</div><div class="line">&#125;<span class="comment">; </span></div><div class="line">var foo = &#123; </div><div class="line">    name: <span class="string">'foobar'</span></div><div class="line">&#125;<span class="comment">;</span></div><div class="line"> </div><div class="line">someuser.<span class="keyword">func</span>()<span class="comment">; // 输出 byvoid (被调用函数func的上下文是someuser)</span></div><div class="line"> </div><div class="line">foo.<span class="keyword">func</span> = someuser.<span class="keyword">func</span><span class="comment">; </span></div><div class="line">foo.<span class="keyword">func</span>()<span class="comment">; // 输出 foobar (被调用函数func的上下文是foo)</span></div><div class="line"> </div><div class="line">name = <span class="string">'global'</span><span class="comment">;</span></div><div class="line"><span class="function"><span class="keyword">func</span> = <span class="title">someuser</span>.<span class="title">func</span>; </span></div><div class="line"><span class="function"><span class="keyword">func</span><span class="params">()</span>; // 输出 <span class="title">global</span> <span class="params">(被调用函数fuc的上下文是全局)</span></span></div></pre></td></tr></table></figure>
 <h3 id="箭头函数的this"><a href="#箭头函数的this" class="headerlink" title="箭头函数的this"></a>箭头函数的this</h3><p>lamda不同，它是在哪被定义，this的上下文就是被定义的地方<br>就算是嵌套箭头，也没有this上下文，默认最外层的上下文</p>
 <p>由于没有自己的this，所以bind call等函数也无效 </p>
-<p>##　原型<br>js对象分俩种：普通对象和函数对象<br>函数对象： 函数的定义，匿名函数的赋值<br>普通对象：数组，结构体，new function()</p>
+<h2 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h2><p>js对象分俩种：普通对象和函数对象<br>函数对象： 函数的定义，匿名函数的赋值<br>普通对象：数组，结构体，new function()</p>
 <p>一个函数对象可以访问到<code>prototype</code> <code>__proto__</code><br>普通对象只能访问到<code>__proto__</code></p>
 <p><code>__proto__</code>指向构造函数的<code>prototype</code>,这形成了原型链(也是es5的继承，属性的访问当prototype没有就会通过<code>__proto__</code>去上级寻找)<br>所以函数对象的<code>__proto__</code>指向的是原型的<code>prototype</code></p>
 <p><code>prototype</code>的来源: 1.原型的继承 2.自定义的赋值</p>
