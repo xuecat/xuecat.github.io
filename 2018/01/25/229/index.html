@@ -97,7 +97,7 @@
  字符转数字: var a =&amp;#39;1&amp;#39;; +a; 它用隐式转换来的
  类型判断: 1234typeof d == &quot;string&quot;function Person() &amp;#123;&amp;#125;d instanceof Person;//判断constructor.prototype">
 <meta property="og:image" content="https://xuecat.github.io/picture/229.jpg">
-<meta property="og:updated_time" content="2018-01-30T14:20:00.815Z">
+<meta property="og:updated_time" content="2018-04-09T13:02:14.193Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS札记——网上看的装逼写法(229)">
 <meta name="twitter:description" content="JS札记 数字取整: ~~ 其实这是个按位非的运算符做了俩次 2.33|0 2.33&amp;gt;&amp;gt;0
@@ -393,7 +393,39 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
 </ol>
 <h3 id="浏览器Console命令"><a href="#浏览器Console命令" class="headerlink" title="浏览器Console命令"></a>浏览器Console命令</h3> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log();</div><div class="line"><span class="built_in">console</span>.dir();<span class="comment">//显示一个对象所有属性和方法</span></div><div class="line"><span class="built_in">console</span>.dirxml();<span class="comment">//显示网页某节点所包含的html/xml</span></div><div class="line"><span class="built_in">console</span>.assert();<span class="comment">//弹框</span></div><div class="line"><span class="built_in">console</span>.trace();<span class="comment">//附带显示行数</span></div><div class="line"><span class="built_in">console</span>.time();<span class="built_in">console</span>.timeEnd();用来显示代码运行时间</div></pre></td></tr></table></figure>
 <h3 id="浏览器其它"><a href="#浏览器其它" class="headerlink" title="浏览器其它"></a>浏览器其它</h3><p> 浏览器能设置条件语句断点<br> 左边可以直接启动手机模式,这样就能看手机状态下的浏览情况</p>
-
+<h3 id="CSS黑魔法"><a href="#CSS黑魔法" class="headerlink" title="CSS黑魔法"></a>CSS黑魔法</h3><h3 id="浏览器缓存"><a href="#浏览器缓存" class="headerlink" title="浏览器缓存"></a>浏览器缓存</h3><p> 强缓存:</p>
+<ul>
+<li>当头的Cache-Control的max-age(最多有效时间)/s-maxage(代理最大有效时间) 被设置时, 用头的date和当前时间比对</li>
+<li><p>当无 头的cache-control只有头的expires时,则用expires和当前时间对比</p>
+<p>协商缓存:</p>
+</li>
+<li>头有last-modiied和etag,会向服务器请求是否失效,请求包加头if-modified-since和if-none-match.<br>服务器回应304浏览器就本地加载，否则重新发送数据</li>
+</ul>
+<h3 id="box-sizing"><a href="#box-sizing" class="headerlink" title="box-sizing"></a>box-sizing</h3><p> 这个属性来源于css3属性<br> 从里到外,margin-&gt;border-&gt;padding-&gt;content.</p>
+<ul>
+<li><p>content-box标准盒。height指content的高,width指content的宽</p>
+</li>
+<li><p>border-box怪异盒。height指content+padding+border的高,width指content+padding+border的高</p>
+</li>
+</ul>
+<p>网上说在网页的顶部加上 doctype 声明。假如不加 doctype 声明，那么各个浏览器会根据自己的行为去理解网页。</p>
+<h3 id="浏览器安全-1"><a href="#浏览器安全-1" class="headerlink" title="浏览器安全"></a>浏览器安全</h3><p> CSRF(跨站点请求伪造): 用户c打开网站a，未推出a之前，打开网站b。网站b发出请求要求访问网站a，来利用未销毁的cookie来达到攻击的目的</p>
+<p> 防范方法:</p>
+<ul>
+<li>验证http referer字段，这个字段表示http请求来源地址</li>
+<li>请求接口添加token验证</li>
+<li><p>http添加自定义属性</p>
+<p>XSS(跨站脚本攻击):调用web接口时，提交js代码进去，下次访问页面会执行js代码达到攻击</p>
+<p>防范方法:</p>
+</li>
+<li>输入数据编码处理(HTML Entity)</li>
+<li>输入数据过滤</li>
+<li>矫正</li>
+</ul>
+<h3 id="JS技巧"><a href="#JS技巧" class="headerlink" title="JS技巧"></a>JS技巧</h3><p><code>[]+{}</code> 非primitive type(即值类型)的<code>+</code>运算,对于数组和<code>object</code>,其实都是在调用<code>toString</code>方法.<br>数组<code>[]</code>的<code>toString</code>其实就是调用<code>.join()</code>方法.<br><code>Object</code>转<code>String</code>就是<code>[object Object]</code>(用<code>String({})</code>测试)</p>
+<p><code>[]+{}</code>相当于””+”[object Object]”<br><code>{}+[]</code> 会变成俩端<code>{}</code>和<code>+[]</code>,一个代码段一个执行语句,由于后面是空且被隐式转换了,所以结果是<code>0</code><br><code>{}+{}</code></p>
+<h3 id="JS有6个假值-false-null-undefined-0-“”-NaN"><a href="#JS有6个假值-false-null-undefined-0-“”-NaN" class="headerlink" title="JS有6个假值:false null undefined 0 “” NaN"></a>JS有6个假值:false null undefined 0 “” NaN</h3><p> <strong>但是它们之间并非都相等</strong><br> 以下是相等的:<br> <code>false==0</code><br> <code>false==&#39;&#39;</code><br> <code>null==undefined</code><br> <code>0==&#39;&#39;</code></p>
+<h3 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h3> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">//es5</span></div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">unique</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> res = [];</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = a.length; i &lt; len; i++) &#123;</div><div class="line">    <span class="keyword">var</span> item = a[i];</div><div class="line">    (res.indexOf(item) === <span class="number">-1</span>) &amp;&amp; res.push(item);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//es6</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">unique</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="built_in">Array</span>.from(<span class="keyword">new</span> <span class="built_in">Set</span>(a));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -614,7 +646,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JS札记"><span class="nav-number">1.</span> <span class="nav-text">JS札记</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器安全"><span class="nav-number">2.</span> <span class="nav-text">浏览器安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器Console命令"><span class="nav-number">3.</span> <span class="nav-text">浏览器Console命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器其它"><span class="nav-number">4.</span> <span class="nav-text">浏览器其它</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JS札记"><span class="nav-number">1.</span> <span class="nav-text">JS札记</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器安全"><span class="nav-number">2.</span> <span class="nav-text">浏览器安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器Console命令"><span class="nav-number">3.</span> <span class="nav-text">浏览器Console命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器其它"><span class="nav-number">4.</span> <span class="nav-text">浏览器其它</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS黑魔法"><span class="nav-number">5.</span> <span class="nav-text">CSS黑魔法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器缓存"><span class="nav-number">6.</span> <span class="nav-text">浏览器缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#box-sizing"><span class="nav-number">7.</span> <span class="nav-text">box-sizing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器安全-1"><span class="nav-number">8.</span> <span class="nav-text">浏览器安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS技巧"><span class="nav-number">9.</span> <span class="nav-text">JS技巧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS有6个假值-false-null-undefined-0-“”-NaN"><span class="nav-number">10.</span> <span class="nav-text">JS有6个假值:false null undefined 0 “” NaN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组去重"><span class="nav-number">11.</span> <span class="nav-text">数组去重</span></a></li></ol></div>
             
           </div>
         </section>
