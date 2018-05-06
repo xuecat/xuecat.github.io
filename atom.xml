@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2018-02-28T16:29:07.812Z</updated>
+  <updated>2018-05-06T04:21:10.090Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -14,6 +14,55 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数据库遇见的一个问题(232)</title>
+    <link href="https://xuecat.github.io/2018/05/06/232/"/>
+    <id>https://xuecat.github.io/2018/05/06/232/</id>
+    <published>2018-05-06T04:16:40.000Z</published>
+    <updated>2018-05-06T04:21:10.090Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天丹麦现场问题：<br>检索丹麦字符(长的像A,又不是A),出现英文A匹配和丹麦字符匹配。</p>
+<p>最后发现是mysql的like语句，后面用locate语句精确才没把英文检索出来。<br>查了很久google和官方,并未给解释为啥like的模糊匹配是如此，大多讲locate比like高效。<br>所以写下记录，以后请问！！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天丹麦现场问题：&lt;br&gt;检索丹麦字符(长的像A,又不是A),出现英文A匹配和丹麦字符匹配。&lt;/p&gt;
+&lt;p&gt;最后发现是mysql的like语句，后面用locate语句精确才没把英文检索出来。&lt;br&gt;查了很久google和官方,并未给解释为啥like的模糊匹配是如此，大多讲l
+    
+    </summary>
+    
+      <category term="数据库" scheme="https://xuecat.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="Mysql" scheme="https://xuecat.github.io/tags/Mysql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>c++记录(231)</title>
+    <link href="https://xuecat.github.io/2018/05/06/231/"/>
+    <id>https://xuecat.github.io/2018/05/06/231/</id>
+    <published>2018-05-06T04:03:21.000Z</published>
+    <updated>2018-05-06T04:16:25.540Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="数组检测"><a href="#数组检测" class="headerlink" title="数组检测"></a><strong><strong>数组检测</strong></strong></h2><pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">sizeof</span>(<span class="number">0</span>[t]);<span class="comment">//可以检测这个是数组还是类：对数组来说0[t] t[0]都是一样的。但是对类来说，这是个操作函数(一定要实现它的operator函数哦)</span></div></pre></td></tr></table></figure>
+</code></pre><h2 id="类完整性判断"><a href="#类完整性判断" class="headerlink" title="类完整性判断"></a><strong><strong>类完整性判断</strong></strong></h2><pre><code><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">   <span class="keyword">typedef</span> <span class="keyword">char</span> tt_f[<span class="keyword">sizeof</span>(f) ? <span class="number">1</span> : <span class="number">-1</span>];</div><div class="line">(<span class="keyword">void</span>)<span class="keyword">sizeof</span>(tt_f);</div><div class="line">   <span class="comment">//要注意sizeof的执行是编译期间执行的</span></div><div class="line">   <span class="comment">//所以当类不完整 sizof(f)为0; char[-1]就会编译错误</span></div></pre></td></tr></table></figure>
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;数组检测&quot;&gt;&lt;a href=&quot;#数组检测&quot; class=&quot;headerlink&quot; title=&quot;数组检测&quot;&gt;&lt;/a&gt;&lt;strong&gt;&lt;strong&gt;数组检测&lt;/strong&gt;&lt;/strong&gt;&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;&lt;figure class=&quot;highl
+    
+    </summary>
+    
+      <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
+    
+    
+      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
+    
+  </entry>
   
   <entry>
     <title>c#杂项笔记(230)</title>
@@ -46,7 +95,7 @@
     <link href="https://xuecat.github.io/2018/01/25/229/"/>
     <id>https://xuecat.github.io/2018/01/25/229/</id>
     <published>2018-01-25T12:54:28.000Z</published>
-    <updated>2018-04-09T13:02:14.193Z</updated>
+    <updated>2018-04-23T00:34:53.822Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/picture/229.jpg" alt=""></p>
 <h3 id="JS札记"><a href="#JS札记" class="headerlink" title="JS札记"></a>JS札记</h3><p> 数字取整:<br> <code>~~</code> 其实这是个按位非的运算符做了俩次<br> <code>2.33|0</code><br> <code>2.33&gt;&gt;0</code></p>
@@ -96,7 +145,25 @@
 <h3 id="JS技巧"><a href="#JS技巧" class="headerlink" title="JS技巧"></a>JS技巧</h3><p><code>[]+{}</code> 非primitive type(即值类型)的<code>+</code>运算,对于数组和<code>object</code>,其实都是在调用<code>toString</code>方法.<br>数组<code>[]</code>的<code>toString</code>其实就是调用<code>.join()</code>方法.<br><code>Object</code>转<code>String</code>就是<code>[object Object]</code>(用<code>String({})</code>测试)</p>
 <p><code>[]+{}</code>相当于””+”[object Object]”<br><code>{}+[]</code> 会变成俩端<code>{}</code>和<code>+[]</code>,一个代码段一个执行语句,由于后面是空且被隐式转换了,所以结果是<code>0</code><br><code>{}+{}</code></p>
 <h3 id="JS有6个假值-false-null-undefined-0-“”-NaN"><a href="#JS有6个假值-false-null-undefined-0-“”-NaN" class="headerlink" title="JS有6个假值:false null undefined 0 “” NaN"></a>JS有6个假值:false null undefined 0 “” NaN</h3><p> <strong>但是它们之间并非都相等</strong><br> 以下是相等的:<br> <code>false==0</code><br> <code>false==&#39;&#39;</code><br> <code>null==undefined</code><br> <code>0==&#39;&#39;</code></p>
-<h3 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h3> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">//es5</span></div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">unique</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> res = [];</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = a.length; i &lt; len; i++) &#123;</div><div class="line">    <span class="keyword">var</span> item = a[i];</div><div class="line">    (res.indexOf(item) === <span class="number">-1</span>) &amp;&amp; res.push(item);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//es6</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">unique</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="built_in">Array</span>.from(<span class="keyword">new</span> <span class="built_in">Set</span>(a));</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+<h3 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h3> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">//es5</span></div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">unique</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> res = [];</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = a.length; i &lt; len; i++) &#123;</div><div class="line">    <span class="keyword">var</span> item = a[i];</div><div class="line">    (res.indexOf(item) === <span class="number">-1</span>) &amp;&amp; res.push(item);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//es6</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">unique</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="built_in">Array</span>.from(<span class="keyword">new</span> <span class="built_in">Set</span>(a));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="浏览器渲染和服务器渲染"><a href="#浏览器渲染和服务器渲染" class="headerlink" title="浏览器渲染和服务器渲染"></a>浏览器渲染和服务器渲染</h3><p> 浏览器端渲染，指的是用js去生成html，前端做路由。举例：React, Vue等等前端框架。适合单页面应用程序。</p>
+<p> 服务器端渲染，指的是用后台语言通过一些模版引擎生成html。举例：PHP文件、JSP文件、Python的Flask配合Jinja引擎、Django框架、Java配合vm模版引擎、NodeJS配合Jade。适合多页面应用。</p>
+<p> <strong>浏览器渲染过程</strong><br> DOM Tree：浏览器将HTML解析成树形的数据结构。<br> CSS Rule Tree：浏览器将CSS解析成树形的数据结构。<br> Render Tree: DOM和CSSOM合并后生成Render Tree。<br> layout: 有了Render Tree，浏览器已经能知道网页中有哪些节点、各个节点的CSS定义以及他们的从属关系，从而去计算出每个节点在屏幕中的位置。<br> painting: 按照算出来的规则，通过显卡，把内容画到屏幕上</p>
+<p> 过程是异步的，下载多少内容，构建多少render树<br> （1）Reflow（回流）：浏览器要花时间去渲染，当它发现了某个部分发生了变化影响了布局，那就需要倒回去重新渲染(要尽量避免它:操作dom 元素尺寸变化 css属性变化)。<br> （2）Repaint（重绘）：如果只是改变了某个元素的背景颜色，文字颜色等，不影响元素周围或内部布局的属性，将只会引起浏览器的repaint，重画某一部分。 </p>
+<p> <strong>浏览器优化</strong><br> 减少refow/repaint：</p>
+<ul>
+<li>不要一条一条地修改 DOM 的样式。与其这样，还不如预先定义好 css 的 class，然后修改 DOM 的 className</li>
+<li>不要把 DOM 结点的属性值放在一个循环里当成循环里的变量</li>
+<li>为动画的 HTML 元件使用 fixed 或 absoult 的 position，那么修改他们的 CSS 是不会 reflow 的</li>
+<li><p>千万不要使用 table 布局。因为可能很小的一个小改动会造成整个 table 的重新布局</p>
+<p><strong>CSS优化</strong><br>CSS选择符是从右到左进行匹配的。从右到左！所以，#nav li 我们以为这是一条很简单的规则，秒秒钟就能匹配到想要的元素，但是，但是，但是，是从右往左匹配啊，所以，会去找所有的li，然后再去确定它的父元素是不是#nav</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">dom深度尽量浅</div><div class="line">减少inline javascript(<span class="keyword">script</span>嵌入那种)、css的数量</div><div class="line">不要为<span class="built_in">id</span>选择器指定类名或是标签，因为<span class="built_in">id</span>可以唯一确定一个元素</div><div class="line">避免后代选择符，尽量使用子选择符。原因：子元素匹配符的概率要大于后代元素匹配符。后代选择符;<span class="comment">#tp p&#123;&#125; 子选择符：#tp&gt;p&#123;&#125;</span></div><div class="line">避免使用通配符</div></pre></td></tr></table></figure>
+<p><strong>js的下载和执行会阻塞Dom树的构建</strong></p>
+</li>
+</ul>
+<h3 id="js数组"><a href="#js数组" class="headerlink" title="js数组"></a>js数组</h3> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> tt = [<span class="string">"22"</span>, <span class="string">"55"</span>, <span class="string">"88"</span>];</div><div class="line">tt[<span class="number">7</span>] = <span class="number">3</span>;</div><div class="line">t.length<span class="comment">//8 是不是很惊讶，然而t[6]是undefined</span></div></pre></td></tr></table></figure>
+<h3 id="js模块加载"><a href="#js模块加载" class="headerlink" title="js模块加载"></a>js模块加载</h3><p> commonjs:nodejs应用最多，它的require是同步的，运行时确定模块依赖关系，先加载整个模块，直接生产对象1<br> 再从对象上读取方法<br> amd:requirejs就实现了amd规范，异步，运行时加载<br> es6：编译时确定依赖关系，导出任意值</p>
+]]></content>
     
     <summary type="html">
     
@@ -146,31 +213,6 @@
       <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
     
       <category term="react" scheme="https://xuecat.github.io/tags/react/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>c++11左右值 (226)</title>
-    <link href="https://xuecat.github.io/2017/12/18/226/"/>
-    <id>https://xuecat.github.io/2017/12/18/226/</id>
-    <published>2017-12-18T12:15:38.000Z</published>
-    <updated>2017-12-20T15:09:39.470Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="C-左右值"><a href="#C-左右值" class="headerlink" title="C++左右值"></a>C++左右值</h3><p> 左值指即能出现等号左边，也能出现在右边的变量（通常指有变量名的值）<br> 右值值只能出现等号右边的值（通常指无变量名的值，函数返回和表达式，常量——不跟对象关联的常量）<br> c++11在上面右值多个将亡值<br><code>move</code>右转左 <code>forward</code>左转右</p>
- <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function">MyClass <span class="title">fun</span> <span class="params">()</span> </span>&#123;MyClass <span class="keyword">return</span> s;&#125;</div><div class="line">MyClass s= fun();</div><div class="line">MyClass&amp; s = fun();</div><div class="line">MyClass&amp;&amp; s = fun();<span class="comment">//这三个全是调用移动构造函数</span></div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;C-左右值&quot;&gt;&lt;a href=&quot;#C-左右值&quot; class=&quot;headerlink&quot; title=&quot;C++左右值&quot;&gt;&lt;/a&gt;C++左右值&lt;/h3&gt;&lt;p&gt; 左值指即能出现等号左边，也能出现在右边的变量（通常指有变量名的值）&lt;br&gt; 右值值只能出现等号右边的值（通常指
-    
-    </summary>
-    
-      <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
-    
-    
-      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
-    
-      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -254,6 +296,31 @@
       <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
     
       <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>c++11左右值 (226)</title>
+    <link href="https://xuecat.github.io/2017/12/18/226/"/>
+    <id>https://xuecat.github.io/2017/12/18/226/</id>
+    <published>2017-12-18T12:15:38.000Z</published>
+    <updated>2017-12-20T15:09:39.470Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="C-左右值"><a href="#C-左右值" class="headerlink" title="C++左右值"></a>C++左右值</h3><p> 左值指即能出现等号左边，也能出现在右边的变量（通常指有变量名的值）<br> 右值值只能出现等号右边的值（通常指无变量名的值，函数返回和表达式，常量——不跟对象关联的常量）<br> c++11在上面右值多个将亡值<br><code>move</code>右转左 <code>forward</code>左转右</p>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function">MyClass <span class="title">fun</span> <span class="params">()</span> </span>&#123;MyClass <span class="keyword">return</span> s;&#125;</div><div class="line">MyClass s= fun();</div><div class="line">MyClass&amp; s = fun();</div><div class="line">MyClass&amp;&amp; s = fun();<span class="comment">//这三个全是调用移动构造函数</span></div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;C-左右值&quot;&gt;&lt;a href=&quot;#C-左右值&quot; class=&quot;headerlink&quot; title=&quot;C++左右值&quot;&gt;&lt;/a&gt;C++左右值&lt;/h3&gt;&lt;p&gt; 左值指即能出现等号左边，也能出现在右边的变量（通常指有变量名的值）&lt;br&gt; 右值值只能出现等号右边的值（通常指
+    
+    </summary>
+    
+      <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
+    
+    
+      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
+    
+      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -1029,78 +1096,6 @@
       <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
     
       <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C#文件和其它(210)</title>
-    <link href="https://xuecat.github.io/2017/01/21/210/"/>
-    <id>https://xuecat.github.io/2017/01/21/210/</id>
-    <published>2017-01-21T08:36:46.000Z</published>
-    <updated>2017-11-13T13:16:58.066Z</updated>
-    
-    <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/210.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
-<h3 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h3><p>File和FileInfo<br>Directory和DirectoryInfo<br>如果执行单一调用使用静态类<br>如果执行一系列调用使用Info类</p>
-<p><code>new FileInfo(@&quot;C:\Log.txt&quot;)</code>使用<code>@</code>前缀表示字符按字面意义解释，没有的话就要用<code>\\</code>代替<code>\</code>了。</p>
-<p><code>FileStream</code>读写的是字节数组<br><code>StreamReader</code> <code>StreamWriter</code>读写的是字符数组<br>字符和数组的转换用<code>Decoder</code>和<code>Encoder</code></p>
-<h3 id="文本格式"><a href="#文本格式" class="headerlink" title="文本格式"></a>文本格式</h3><ol>
-<li><p>XPath 用于检索xml的节点。</p>
-</li>
-<li><p>创建xml的话，我绝对linq的XDocument要比XmlDocument好用多了。</p>
-</li>
-</ol>
-<h3 id="LINQ"><a href="#LINQ" class="headerlink" title="LINQ"></a>LINQ</h3><p>它的实现是基于<code>IEnumerable&lt;T&gt;</code>接口,所以下面俩句是等效的。<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span>[] name = &#123;<span class="string">"n1"</span>, <span class="string">"n2"</span>, <span class="string">"n3"</span>, <span class="string">"n4"</span> &#125;;</div><div class="line"><span class="keyword">var</span> dd = name.Where(n =&gt; n.StartsWith(<span class="string">"n"</span>));</div><div class="line"><span class="keyword">var</span> hh = <span class="keyword">from</span> n <span class="keyword">in</span> name <span class="keyword">where</span> n.StartsWith(<span class="string">"n"</span>) <span class="keyword">select</span> n;</div></pre></td></tr></table></figure></p>
-<h4 id="orderby"><a href="#orderby" class="headerlink" title="orderby"></a>orderby</h4><p>暂时就个字母，其它排列再看看吧<br><code>var hh = from n in name where n.StartsWith(&quot;n&quot;) orderby n select n;</code>升序排列结果<br><code>var hh = from n in name where n.StartsWith(&quot;n&quot;) orderby n descending select n;</code>降序排列结果</p>
-<h5 id="多级排序，并返回新建立的对象。"><a href="#多级排序，并返回新建立的对象。" class="headerlink" title="多级排序，并返回新建立的对象。"></a>多级排序，并返回新建立的对象。</h5><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> queryResults = from <span class="built_in">c</span> <span class="keyword">in</span> customers</div><div class="line"> orderby <span class="built_in">c</span>.<span class="type">Region</span>, <span class="built_in">c</span>.<span class="type">Country</span> descending, <span class="built_in">c</span>.<span class="type">City</span></div><div class="line"> select new &#123; <span class="built_in">c</span>.<span class="type">ID</span>, <span class="built_in">c</span>.<span class="type">Region</span>, <span class="built_in">c</span>.<span class="type">Country</span>, <span class="built_in">c</span>.<span class="type">City</span> &#125;;</div></pre></td></tr></table></figure>
-<h4 id="查找不重复"><a href="#查找不重复" class="headerlink" title="查找不重复"></a>查找不重复</h4><p>会按照Region属性选出所有，Distinct来排除重复。<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> <span class="keyword">qu</span> = name.Select(c =&gt; c.Region).<span class="keyword">Distinct</span>();</div><div class="line"><span class="keyword">var</span> <span class="keyword">qu</span> = (from c <span class="keyword">in</span> name select c.Region).<span class="keyword">Distinct</span>();</div></pre></td></tr></table></figure></p>
-<h4 id="分组查询"><a href="#分组查询" class="headerlink" title="分组查询"></a>分组查询</h4><p>书上的例子是，按照国家来比较销量<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">var</span> q =</div><div class="line"> from c <span class="keyword">in</span> customers</div><div class="line"> <span class="keyword">group</span> c <span class="keyword">by</span> c.Region <span class="keyword">into</span> cg</div><div class="line"> <span class="keyword">select</span> <span class="literal">new</span> &#123; TotalSaleds = cg.<span class="keyword">Sum</span>(c =&gt; c.Sales), Region = cg.Key&#125;</div><div class="line"></div><div class="line"> <span class="comment">//第二句by后面指定重组使用的Key，再重新组合成cg（即后面cg.Key）</span></div><div class="line"> <span class="comment">//第三句</span></div></pre></td></tr></table></figure></p>
-<h4 id="join查询"><a href="#join查询" class="headerlink" title="join查询"></a>join查询</h4><p>书上的例子是把客户列表(customers)和订单列表(orders)中，id相同的找出重组合<br><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> q =</div><div class="line"> <span class="keyword">from</span> c <span class="keyword">in</span> customers</div><div class="line"> <span class="keyword">join</span> o <span class="keyword">in</span> orders <span class="keyword">on</span> c.ID <span class="keyword">equals</span> o.ID</div><div class="line"> <span class="keyword">select</span> <span class="keyword">new</span> <span class="comment">&#123;c.ID, c.City&#125;</span>;</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;div class=&quot;group-picture&quot;&gt;&lt;div class=&quot;group-picture-container&quot;&gt;&lt;div class=&quot;group-picture-row&quot;&gt;&lt;div class=&quot;group-picture-column&quot; style=&quot;widt
-    
-    </summary>
-    
-      <category term="C#" scheme="https://xuecat.github.io/categories/C/"/>
-    
-    
-      <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
-    
-      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
-    
-      <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Windows编译器对异常的处理(207)</title>
-    <link href="https://xuecat.github.io/2017/01/12/207/"/>
-    <id>https://xuecat.github.io/2017/01/12/207/</id>
-    <published>2017-01-12T13:51:01.000Z</published>
-    <updated>2017-11-13T13:17:08.151Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/picture/207.jpg" alt=""></p>
-<p>c/c++ 配置属性 代码生成 启用c++异常</p>
-<p>2013版本讲解要详细点：<br><a href="https://msdn.microsoft.com/zh-cn/library/1deeycx5(v=vs.120).aspx" target="_blank" rel="external">https://msdn.microsoft.com/zh-cn/library/1deeycx5(v=vs.120).aspx</a></p>
-<p>编译器会对异常捕获进行优化。</p>
-<p>使用<code>/EHs</code> <code>EHsc</code> catch(…) 是不会捕获异步结构化异常、访问冲突和 System.Exception 异常。只会捕获c++异常<br>当必须要捕获这些异常时，就只能用 <strong>try, </strong>except 和 __finally 语法</p>
-<p>使用<code>/EHa</code> catch(…)会捕获所有的异常。<br>但是引用官方的话<code>指定 /EHa 并尝试使用 catch(...) 处理所有异常可能很危险。 在大多数情况下，异步异常是不可恢复的，因而被认为是致命的。 捕获它们并继续可能导致进程损坏并使 Bug 难以发现和修复。</code></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;/picture/207.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;c/c++ 配置属性 代码生成 启用c++异常&lt;/p&gt;
-&lt;p&gt;2013版本讲解要详细点：&lt;br&gt;&lt;a href=&quot;https://msdn.microsoft.com/zh-cn/libr
-    
-    </summary>
-    
-      <category term="Windows" scheme="https://xuecat.github.io/categories/Windows/"/>
-    
-    
-      <category term="编译器和VC" scheme="https://xuecat.github.io/tags/%E7%BC%96%E8%AF%91%E5%99%A8%E5%92%8CVC/"/>
     
   </entry>
   

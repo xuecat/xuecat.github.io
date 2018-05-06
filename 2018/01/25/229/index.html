@@ -97,7 +97,7 @@
  字符转数字: var a =&amp;#39;1&amp;#39;; +a; 它用隐式转换来的
  类型判断: 1234typeof d == &quot;string&quot;function Person() &amp;#123;&amp;#125;d instanceof Person;//判断constructor.prototype">
 <meta property="og:image" content="https://xuecat.github.io/picture/229.jpg">
-<meta property="og:updated_time" content="2018-04-09T13:02:14.193Z">
+<meta property="og:updated_time" content="2018-04-23T00:34:53.822Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS札记——网上看的装逼写法(229)">
 <meta name="twitter:description" content="JS札记 数字取整: ~~ 其实这是个按位非的运算符做了俩次 2.33|0 2.33&amp;gt;&amp;gt;0
@@ -426,6 +426,24 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
 <p><code>[]+{}</code>相当于””+”[object Object]”<br><code>{}+[]</code> 会变成俩端<code>{}</code>和<code>+[]</code>,一个代码段一个执行语句,由于后面是空且被隐式转换了,所以结果是<code>0</code><br><code>{}+{}</code></p>
 <h3 id="JS有6个假值-false-null-undefined-0-“”-NaN"><a href="#JS有6个假值-false-null-undefined-0-“”-NaN" class="headerlink" title="JS有6个假值:false null undefined 0 “” NaN"></a>JS有6个假值:false null undefined 0 “” NaN</h3><p> <strong>但是它们之间并非都相等</strong><br> 以下是相等的:<br> <code>false==0</code><br> <code>false==&#39;&#39;</code><br> <code>null==undefined</code><br> <code>0==&#39;&#39;</code></p>
 <h3 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h3> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">//es5</span></div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">unique</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> res = [];</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = a.length; i &lt; len; i++) &#123;</div><div class="line">    <span class="keyword">var</span> item = a[i];</div><div class="line">    (res.indexOf(item) === <span class="number">-1</span>) &amp;&amp; res.push(item);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//es6</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">unique</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="built_in">Array</span>.from(<span class="keyword">new</span> <span class="built_in">Set</span>(a));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="浏览器渲染和服务器渲染"><a href="#浏览器渲染和服务器渲染" class="headerlink" title="浏览器渲染和服务器渲染"></a>浏览器渲染和服务器渲染</h3><p> 浏览器端渲染，指的是用js去生成html，前端做路由。举例：React, Vue等等前端框架。适合单页面应用程序。</p>
+<p> 服务器端渲染，指的是用后台语言通过一些模版引擎生成html。举例：PHP文件、JSP文件、Python的Flask配合Jinja引擎、Django框架、Java配合vm模版引擎、NodeJS配合Jade。适合多页面应用。</p>
+<p> <strong>浏览器渲染过程</strong><br> DOM Tree：浏览器将HTML解析成树形的数据结构。<br> CSS Rule Tree：浏览器将CSS解析成树形的数据结构。<br> Render Tree: DOM和CSSOM合并后生成Render Tree。<br> layout: 有了Render Tree，浏览器已经能知道网页中有哪些节点、各个节点的CSS定义以及他们的从属关系，从而去计算出每个节点在屏幕中的位置。<br> painting: 按照算出来的规则，通过显卡，把内容画到屏幕上</p>
+<p> 过程是异步的，下载多少内容，构建多少render树<br> （1）Reflow（回流）：浏览器要花时间去渲染，当它发现了某个部分发生了变化影响了布局，那就需要倒回去重新渲染(要尽量避免它:操作dom 元素尺寸变化 css属性变化)。<br> （2）Repaint（重绘）：如果只是改变了某个元素的背景颜色，文字颜色等，不影响元素周围或内部布局的属性，将只会引起浏览器的repaint，重画某一部分。 </p>
+<p> <strong>浏览器优化</strong><br> 减少refow/repaint：</p>
+<ul>
+<li>不要一条一条地修改 DOM 的样式。与其这样，还不如预先定义好 css 的 class，然后修改 DOM 的 className</li>
+<li>不要把 DOM 结点的属性值放在一个循环里当成循环里的变量</li>
+<li>为动画的 HTML 元件使用 fixed 或 absoult 的 position，那么修改他们的 CSS 是不会 reflow 的</li>
+<li><p>千万不要使用 table 布局。因为可能很小的一个小改动会造成整个 table 的重新布局</p>
+<p><strong>CSS优化</strong><br>CSS选择符是从右到左进行匹配的。从右到左！所以，#nav li 我们以为这是一条很简单的规则，秒秒钟就能匹配到想要的元素，但是，但是，但是，是从右往左匹配啊，所以，会去找所有的li，然后再去确定它的父元素是不是#nav</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">dom深度尽量浅</div><div class="line">减少inline javascript(<span class="keyword">script</span>嵌入那种)、css的数量</div><div class="line">不要为<span class="built_in">id</span>选择器指定类名或是标签，因为<span class="built_in">id</span>可以唯一确定一个元素</div><div class="line">避免后代选择符，尽量使用子选择符。原因：子元素匹配符的概率要大于后代元素匹配符。后代选择符;<span class="comment">#tp p&#123;&#125; 子选择符：#tp&gt;p&#123;&#125;</span></div><div class="line">避免使用通配符</div></pre></td></tr></table></figure>
+<p><strong>js的下载和执行会阻塞Dom树的构建</strong></p>
+</li>
+</ul>
+<h3 id="js数组"><a href="#js数组" class="headerlink" title="js数组"></a>js数组</h3> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> tt = [<span class="string">"22"</span>, <span class="string">"55"</span>, <span class="string">"88"</span>];</div><div class="line">tt[<span class="number">7</span>] = <span class="number">3</span>;</div><div class="line">t.length<span class="comment">//8 是不是很惊讶，然而t[6]是undefined</span></div></pre></td></tr></table></figure>
+<h3 id="js模块加载"><a href="#js模块加载" class="headerlink" title="js模块加载"></a>js模块加载</h3><p> commonjs:nodejs应用最多，它的require是同步的，运行时确定模块依赖关系，先加载整个模块，直接生产对象1<br> 再从对象上读取方法<br> amd:requirejs就实现了amd规范，异步，运行时加载<br> es6：编译时确定依赖关系，导出任意值</p>
+
       
     </div>
 
@@ -536,7 +554,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">221</span>
+              <span class="site-state-item-count">222</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -544,7 +562,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -553,7 +571,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -646,7 +664,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JS札记"><span class="nav-number">1.</span> <span class="nav-text">JS札记</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器安全"><span class="nav-number">2.</span> <span class="nav-text">浏览器安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器Console命令"><span class="nav-number">3.</span> <span class="nav-text">浏览器Console命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器其它"><span class="nav-number">4.</span> <span class="nav-text">浏览器其它</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS黑魔法"><span class="nav-number">5.</span> <span class="nav-text">CSS黑魔法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器缓存"><span class="nav-number">6.</span> <span class="nav-text">浏览器缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#box-sizing"><span class="nav-number">7.</span> <span class="nav-text">box-sizing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器安全-1"><span class="nav-number">8.</span> <span class="nav-text">浏览器安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS技巧"><span class="nav-number">9.</span> <span class="nav-text">JS技巧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS有6个假值-false-null-undefined-0-“”-NaN"><span class="nav-number">10.</span> <span class="nav-text">JS有6个假值:false null undefined 0 “” NaN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组去重"><span class="nav-number">11.</span> <span class="nav-text">数组去重</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JS札记"><span class="nav-number">1.</span> <span class="nav-text">JS札记</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器安全"><span class="nav-number">2.</span> <span class="nav-text">浏览器安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器Console命令"><span class="nav-number">3.</span> <span class="nav-text">浏览器Console命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器其它"><span class="nav-number">4.</span> <span class="nav-text">浏览器其它</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS黑魔法"><span class="nav-number">5.</span> <span class="nav-text">CSS黑魔法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器缓存"><span class="nav-number">6.</span> <span class="nav-text">浏览器缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#box-sizing"><span class="nav-number">7.</span> <span class="nav-text">box-sizing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器安全-1"><span class="nav-number">8.</span> <span class="nav-text">浏览器安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS技巧"><span class="nav-number">9.</span> <span class="nav-text">JS技巧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS有6个假值-false-null-undefined-0-“”-NaN"><span class="nav-number">10.</span> <span class="nav-text">JS有6个假值:false null undefined 0 “” NaN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组去重"><span class="nav-number">11.</span> <span class="nav-text">数组去重</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器渲染和服务器渲染"><span class="nav-number">12.</span> <span class="nav-text">浏览器渲染和服务器渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js数组"><span class="nav-number">13.</span> <span class="nav-text">js数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js模块加载"><span class="nav-number">14.</span> <span class="nav-text">js模块加载</span></a></li></ol></div>
             
           </div>
         </section>
