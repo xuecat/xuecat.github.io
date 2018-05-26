@@ -98,7 +98,7 @@
 
 只有store的dispatch后面才能跟then，其它都不能
 1234567891011 function test(tt) &amp;#123;  return function(dis) &amp;#123;    let tt = dis(addTodo(&apos;wangqiu&apos;));//函数出入的">
-<meta property="og:updated_time" content="2018-01-25T12:52:55.326Z">
+<meta property="og:updated_time" content="2018-05-18T02:23:48.993Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react插件(228)">
 <meta name="twitter:description" content="react-thunk 我一开始觉得把props.dispatch当参数传总会异步的，但是当多个时就会分不清。
@@ -386,7 +386,9 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
 </ol>
 <h3 id="immutable"><a href="#immutable" class="headerlink" title="immutable"></a>immutable</h3><p> <code>https://www.w3cplus.com/javascript/immutable-js.html</code></p>
 <h3 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h3><p> 最近看<code>react-redux</code>,<br> <code>connect</code>中的参数有<code>mapStateToProps</code>和<code>mapDispatchToProps</code>,剩下俩个不说,<br> 他们第二个参数<code>ownProps</code>,指的是当前组件的属性<br> 它指的是<code>mapStateToProps</code>之外的属性(即通过xml属性传递的属性),state转prop后自己是能访问到的。</p>
-<h4 id="redux-actions"><a href="#redux-actions" class="headerlink" title="redux-actions"></a>redux-actions</h4><p> createAction<br> 以前:<br> <code>const startAction = () =&gt; ({type:START})</code><br> 使用:<br> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;createAction&#125; <span class="keyword">from</span> <span class="string">'redux-actions'</span>;</div><div class="line"><span class="keyword">const</span> startAction = createAction(START);</div></pre></td></tr></table></figure></p>
+<pre><code>connect的第二个参数,redux会给mapDispatchToProps传一个dispatch参数，拿到后可以自己做，它的返回值会被直接注入到组件的props里面。我喜欢直接返回dispatch
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> mapDispatchToProps = dispatch =&gt; &#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">            onTodoClick: id =&gt; &#123;</div><div class="line">            dispatch(toggleTodo(id))</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre><h4 id="redux-actions"><a href="#redux-actions" class="headerlink" title="redux-actions"></a>redux-actions</h4><p> createAction<br> 以前:<br> <code>const startAction = () =&gt; ({type:START})</code><br> 使用:<br> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;createAction&#125; <span class="keyword">from</span> <span class="string">'redux-actions'</span>;</div><div class="line"><span class="keyword">const</span> startAction = createAction(START);</div></pre></td></tr></table></figure></p>
 <p> handleactions<br> 以前:<br> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params">state=defaultState, action</span>) </span>&#123;</div><div class="line">    <span class="keyword">switch</span>(action.type) &#123;</div><div class="line">        <span class="keyword">case</span> START : &#123;<span class="keyword">return</span> &#123;...state, runStatus:<span class="literal">true</span>&#125;&#125;;<span class="comment">//es6的解构太方便了，会直接覆盖</span></div><div class="line">        <span class="keyword">case</span> STOP: &#123;<span class="keyword">return</span> &#123;...state, runStatus:<span class="literal">false</span>&#125;&#125;;<span class="comment">//同名属性覆盖</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p> 使用:<br> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;handleActions&#125; <span class="keyword">from</span> <span class="string">'redux-actions'</span>;</div><div class="line"><span class="keyword">const</span> time = handleActions(&#123;</div><div class="line">    START:(state, action) =&gt; (&#123;...state, runStatus:<span class="literal">true</span>&#125;),</div><div class="line">    STOP:(state, action) =&gt; (&#123;...state, runStatus:<span class="literal">false</span>&#125;),</div><div class="line">&#125;, defaultState);</div></pre></td></tr></table></figure></p>
 
@@ -500,7 +502,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">222</span>
+              <span class="site-state-item-count">223</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
