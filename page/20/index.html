@@ -312,8 +312,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
             
               
                 
-                <a class="post-title-link" href="/2014/09/05/40/" itemprop="url">
-                  more effective c++根据类型决定虚化(40)
+                <a class="post-title-link" href="/2014/09/05/39/" itemprop="url">
+                  static_cast dynamic_cast再进一步
                 </a>
               
             
@@ -340,8 +340,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/书籍/" itemprop="url" rel="index">
-                    <span itemprop="name">书籍</span>
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
                   </a>
                 </span>
 
@@ -375,16 +375,13 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
       
         
           
-          第31条了，这一跳一下就解决了我最近的疑惑！
-先看游戏规则:
-1、有的类型，宇宙飞船、太空站、小行星、
-2、他们互相碰撞，任意两两进行碰撞。
-3、具有主被动性！且不同的主被动，不同的类型进行碰撞，产生的结果也不一样。
-分析，需要运行时动态识别，所包含的对象，所以设计c++RTTI计数。（过程代码不列
+          string a = typeid(dynamic_cast(this)).name();
+发现dynamic_cast确实能把父子类的类型做转换，但是对于虚函数，还是无法，应该是内存覆盖了就无法修改了。
+只有int selfprice = static_cast(*this).GetPrice()
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/05/40/#more" rel="contents">
+            <a class="btn" href="/2014/09/05/39/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -555,124 +552,6 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
             
               
                 
-                <a class="post-title-link" href="/2014/09/03/33/" itemprop="url">
-                  指针函数与函数指针(33)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-03T03:31:58+08:00" content="2014-09-03">
-              2014-09-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          先看一段代码：++123456789101112131415161718192021	typedef int(*outhead)(int a);		int a(int d) &#123;		cout &lt;&lt; "this is A" &lt;&lt; endl;		cout &lt;&lt;
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/03/33/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2014/09/03/36/" itemprop="url">
                   more effective c++为智能指针添加计数(36)
                 </a>
@@ -792,6 +671,124 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
             
               
                 
+                <a class="post-title-link" href="/2014/09/03/33/" itemprop="url">
+                  指针函数与函数指针(33)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-09-03T03:31:58+08:00" content="2014-09-03">
+              2014-09-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          先看一段代码：++123456789101112131415161718192021	typedef int(*outhead)(int a);		int a(int d) &#123;		cout &lt;&lt; "this is A" &lt;&lt; endl;		cout &lt;&lt;
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/03/33/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2014/09/03/32/" itemprop="url">
                   函数指针获取成员函数地址（包括虚函数）
                 </a>
@@ -860,124 +857,6 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
 
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/09/03/32/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/02/35/" itemprop="url">
-                  more effective c++智能指针继承传递(35)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-02T03:31:58+08:00" content="2014-09-02">
-              2014-09-02
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/书籍/" itemprop="url" rel="index">
-                    <span itemprop="name">书籍</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          先看示例：++123456789101112131415161718192021222324class MusicProduct;class Cassette : public MusicProduct;class CD : public MusicProduct;void DisplayAndPl
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/02/35/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1147,8 +1026,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
             
               
                 
-                <a class="post-title-link" href="/2014/09/01/37/" itemprop="url">
-                  libcurl源码学习(37)
+                <a class="post-title-link" href="/2014/09/02/35/" itemprop="url">
+                  more effective c++智能指针继承传递(35)
                 </a>
               
             
@@ -1161,8 +1040,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-01T03:31:58+08:00" content="2014-09-01">
-              2014-09-01
+            <time itemprop="dateCreated" datetime="2014-09-02T03:31:58+08:00" content="2014-09-02">
+              2014-09-02
             </time>
           </span>
 
@@ -1175,8 +1054,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/第三方库/" itemprop="url" rel="index">
-                    <span itemprop="name">第三方库</span>
+                  <a href="/categories/书籍/" itemprop="url" rel="index">
+                    <span itemprop="name">书籍</span>
                   </a>
                 </span>
 
@@ -1206,34 +1085,15 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
 
       
       
-        <div class="post-gallery" itemscope itemtype="//schema.org/ImageGallery">
-          
-          
-            <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox"
-                 href="/picture/o.jpg" rel="gallery_cjiigx95w00f91cs9k4rb6rc6"
-                 itemscope itemtype="//schema.org/ImageObject" itemprop="url">
-                <img src="/picture/o.jpg" itemprop="contentUrl"/>
-              </a>
-            
-          
-
-          
-          </div>
-        </div>
-      
 
       
         
           
-          libcurl：预编译头文件，就是放置工具的地方。其它文件要使用工具直接#define一下就好了。
-把va_list当值传入。
-回调函数的使用typedf  获取函数指针。指针的指针，执行就好了。
-
-          
+          先看示例：++123456789101112131415161718192021222324class MusicProduct;class Cassette : public MusicProduct;class CD : public MusicProduct;void DisplayAndPl
+          ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/01/37/#more" rel="contents">
+            <a class="btn" href="/2014/09/02/35/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1402,8 +1262,145 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
             
               
                 
-                <a class="post-title-link" href="/2014/08/29/28/" itemprop="url">
-                  mfc windows 程序设计（线程）
+                <a class="post-title-link" href="/2014/09/01/37/" itemprop="url">
+                  libcurl源码学习(37)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-09-01T03:31:58+08:00" content="2014-09-01">
+              2014-09-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/第三方库/" itemprop="url" rel="index">
+                    <span itemprop="name">第三方库</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="//schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="/picture/o.jpg" rel="gallery_cjiih752i00fcw0s9lb7jrkbu"
+                 itemscope itemtype="//schema.org/ImageObject" itemprop="url">
+                <img src="/picture/o.jpg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        
+          
+          libcurl：预编译头文件，就是放置工具的地方。其它文件要使用工具直接#define一下就好了。
+把va_list当值传入。
+回调函数的使用typedf  获取函数指针。指针的指针，执行就好了。
+
+          
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/01/37/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/08/29/29/" itemprop="url">
+                  more effective c++智能指针(28)
                 </a>
               
             
@@ -1465,17 +1462,11 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
       
         
           
-          线程分：ui线程和工作线程
-概念：
-  在Windows中，UI控件也被视为一个“Window”，它也拥有自己的“窗体过程”，因此，它也可以同窗体一样，具备处理消息的能力。
-
-由此我们可以知道UI线程所完成的大致工作就是：
-
-UI线程启动一个消息循环，每次从本线程所对应的消息队列中取出一条消息，然后
+          智能指针了：构造、赋值、析构:++1234567891011121314151617181920212223242526272829303132333435363738template &lt;class T&gt;class auto_ptr&#123;public:	auto_ptr(T* pt
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/08/29/28/#more" rel="contents">
+            <a class="btn" href="/2014/08/29/29/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
