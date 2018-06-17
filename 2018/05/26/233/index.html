@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="XueCat">
 <meta property="og:description" content="Curiously Recurring Template Prattern即人们称的静态多态由于c++的多态不能将基类的虚函数定义为模板函数，所以出现的它
 1234567891011121314151617181920212223242526272829303132333435363738394041424344template&amp;lt;typename T&amp;gt;class BaseClass&amp;#">
-<meta property="og:updated_time" content="2018-05-26T13:12:48.909Z">
+<meta property="og:updated_time" content="2018-06-17T06:25:24.194Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c++CRTP和typename与class的区别233">
 <meta name="twitter:description" content="Curiously Recurring Template Prattern即人们称的静态多态由于c++的多态不能将基类的虚函数定义为模板函数，所以出现的它
@@ -375,8 +375,10 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
         <p><code>Curiously Recurring Template Prattern</code>即人们称的静态多态<br>由于c++的多态不能将基类的虚函数定义为模板函数，所以出现的它</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> BaseClass</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="keyword">template</span>&lt;<span class="keyword">typename</span> D&gt;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Func</span><span class="params">(D t)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">static_cast</span>&lt;T&amp;&gt;(*<span class="keyword">this</span>).funcImpl(t);</div><div class="line">	&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">funcImpl</span><span class="params">(T f)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Base class"</span> &lt;&lt; f &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">class</span> Base : <span class="keyword">public</span> BaseClass&lt;Base&gt;</div><div class="line">&#123;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">class</span> Derive : <span class="keyword">public</span> BaseClass&lt;Derive&gt;</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">funcImpl</span><span class="params">(T f)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Derive class"</span> &lt;&lt; f &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">	BaseClass&lt;Derive&gt; der;</div><div class="line">	der.Func(<span class="number">2</span>);<span class="comment">//base 2</span></div><div class="line"></div><div class="line">	BaseClass&lt;Base&gt; bas;</div><div class="line">	bas.Func(<span class="number">4</span>);<span class="comment">//derive 4</span></div><div class="line"></div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>如此，多态就能使用模板函数了</p>
+<hr>
 <p><strong>怕是最近js写多了，这个都忘了，羞愧啊！！</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">class</span> MyClass&#123;</div><div class="line">    <span class="keyword">typename</span> T::SubType * ptr;</div><div class="line">    ...</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 <p>在这里，typename指出SubType是class T中定义的一个类别，因此ptr是一个指向T::SubType型别的指针。如果没有关键字typename，SubType会被当成一个static成员，于是<br>T::SubType * ptr<br>会被解释为型别T内的数值SubType与ptr的乘积。</p>
+<hr>
 
       
     </div>
@@ -415,6 +417,10 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/17/234/" rel="prev" title="stl的swap和(234)">
+                stl的swap和(234) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -482,7 +488,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">223</span>
+              <span class="site-state-item-count">225</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -490,7 +496,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

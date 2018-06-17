@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2018-05-26T13:12:48.909Z</updated>
+  <updated>2018-06-17T06:30:30.813Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -16,17 +16,83 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>js forin顺序(235)</title>
+    <link href="https://xuecat.github.io/2018/06/17/235/"/>
+    <id>https://xuecat.github.io/2018/06/17/235/</id>
+    <published>2018-06-17T06:21:10.000Z</published>
+    <updated>2018-06-17T06:30:30.813Z</updated>
+    
+    <content type="html"><![CDATA[<pre><code>![](/picture/235.jpg)
+
+平时根本没时间写着，只好全缓存，周末更新上来，唉！！
+得找个时间再去看下markdown语法了，排版真特么丑。
+</code></pre><p>装逼封装了excel读写的js，forin排序居然用到了，笔记下：<br>    js for in顺序，不会按照定义顺序输出；好像浏览器没按以前标准了;<br>    它处理方式是先把当中的非负整数键提出来，排序好输出，然后将剩下的定义时的顺序输出。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;pre&gt;&lt;code&gt;![](/picture/235.jpg)
+
+平时根本没时间写着，只好全缓存，周末更新上来，唉！！
+得找个时间再去看下markdown语法了，排版真特么丑。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;装逼封装了excel读写的js，forin排序居然用到了，笔记下：&lt;
+    
+    </summary>
+    
+      <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
+    
+    
+      <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>stl的swap和(234)</title>
+    <link href="https://xuecat.github.io/2018/06/17/234/"/>
+    <id>https://xuecat.github.io/2018/06/17/234/</id>
+    <published>2018-06-17T06:02:20.000Z</published>
+    <updated>2018-06-17T06:21:55.678Z</updated>
+    
+    <content type="html"><![CDATA[<pre><code>![](/picture/234.jpg)
+
+去p站下图片越来越少了
+</code></pre><h3 id="string和vector"><a href="#string和vector" class="headerlink" title="string和vector"></a>string和vector</h3><p>它们都是线性结构，只不过是堆而已。<br>它们都有reserve的概念，所以导致它们的预定义内存</p>
+<p>释放内存的方法就是都是用<code>swap</code>, <code>string().swap(s)</code></p>
+<p>swap交换技巧实现内存释放思想：vector()使用vector的默认构造函数建立临时vector对象，再在该临时对象上调用swap成员，swap调用之后对象myvector占用的空间就等于一个默认构造的对象的大小，临时对象就具有原来对象v的大小，而该临时对象随即就会被析构，从而其占用的空间也被释放。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;pre&gt;&lt;code&gt;![](/picture/234.jpg)
+
+去p站下图片越来越少了
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;string和vector&quot;&gt;&lt;a href=&quot;#string和vector&quot; class=&quot;headerlink&quot; title=&quot;string和
+    
+    </summary>
+    
+      <category term="STL" scheme="https://xuecat.github.io/categories/STL/"/>
+    
+    
+      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
+    
+      <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
+    
+  </entry>
+  
+  <entry>
     <title>c++CRTP和typename与class的区别233</title>
     <link href="https://xuecat.github.io/2018/05/26/233/"/>
     <id>https://xuecat.github.io/2018/05/26/233/</id>
     <published>2018-05-26T08:38:00.000Z</published>
-    <updated>2018-05-26T13:12:48.909Z</updated>
+    <updated>2018-06-17T06:25:24.194Z</updated>
     
     <content type="html"><![CDATA[<p><code>Curiously Recurring Template Prattern</code>即人们称的静态多态<br>由于c++的多态不能将基类的虚函数定义为模板函数，所以出现的它</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> BaseClass</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="keyword">template</span>&lt;<span class="keyword">typename</span> D&gt;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Func</span><span class="params">(D t)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">static_cast</span>&lt;T&amp;&gt;(*<span class="keyword">this</span>).funcImpl(t);</div><div class="line">	&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">funcImpl</span><span class="params">(T f)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Base class"</span> &lt;&lt; f &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">class</span> Base : <span class="keyword">public</span> BaseClass&lt;Base&gt;</div><div class="line">&#123;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">class</span> Derive : <span class="keyword">public</span> BaseClass&lt;Derive&gt;</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">funcImpl</span><span class="params">(T f)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Derive class"</span> &lt;&lt; f &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">	BaseClass&lt;Derive&gt; der;</div><div class="line">	der.Func(<span class="number">2</span>);<span class="comment">//base 2</span></div><div class="line"></div><div class="line">	BaseClass&lt;Base&gt; bas;</div><div class="line">	bas.Func(<span class="number">4</span>);<span class="comment">//derive 4</span></div><div class="line"></div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>如此，多态就能使用模板函数了</p>
+<hr>
 <p><strong>怕是最近js写多了，这个都忘了，羞愧啊！！</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">class</span> MyClass&#123;</div><div class="line">    <span class="keyword">typename</span> T::SubType * ptr;</div><div class="line">    ...</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 <p>在这里，typename指出SubType是class T中定义的一个类别，因此ptr是一个指向T::SubType型别的指针。如果没有关键字typename，SubType会被当成一个static成员，于是<br>T::SubType * ptr<br>会被解释为型别T内的数值SubType与ptr的乘积。</p>
+<hr>
 ]]></content>
     
     <summary type="html">
@@ -112,9 +178,9 @@
       <category term="C#" scheme="https://xuecat.github.io/categories/C/"/>
     
     
-      <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
-    
       <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
+    
+      <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
     
   </entry>
   
@@ -247,6 +313,31 @@
   </entry>
   
   <entry>
+    <title>c++11左右值 (226)</title>
+    <link href="https://xuecat.github.io/2017/12/18/226/"/>
+    <id>https://xuecat.github.io/2017/12/18/226/</id>
+    <published>2017-12-18T12:15:38.000Z</published>
+    <updated>2017-12-20T15:09:39.470Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="C-左右值"><a href="#C-左右值" class="headerlink" title="C++左右值"></a>C++左右值</h3><p> 左值指即能出现等号左边，也能出现在右边的变量（通常指有变量名的值）<br> 右值值只能出现等号右边的值（通常指无变量名的值，函数返回和表达式，常量——不跟对象关联的常量）<br> c++11在上面右值多个将亡值<br><code>move</code>右转左 <code>forward</code>左转右</p>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function">MyClass <span class="title">fun</span> <span class="params">()</span> </span>&#123;MyClass <span class="keyword">return</span> s;&#125;</div><div class="line">MyClass s= fun();</div><div class="line">MyClass&amp; s = fun();</div><div class="line">MyClass&amp;&amp; s = fun();<span class="comment">//这三个全是调用移动构造函数</span></div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;C-左右值&quot;&gt;&lt;a href=&quot;#C-左右值&quot; class=&quot;headerlink&quot; title=&quot;C++左右值&quot;&gt;&lt;/a&gt;C++左右值&lt;/h3&gt;&lt;p&gt; 左值指即能出现等号左边，也能出现在右边的变量（通常指有变量名的值）&lt;br&gt; 右值值只能出现等号右边的值（通常指
+    
+    </summary>
+    
+      <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
+    
+    
+      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
+    
+      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JS继承和函数式编程的curry等(227)</title>
     <link href="https://xuecat.github.io/2017/12/18/227/"/>
     <id>https://xuecat.github.io/2017/12/18/227/</id>
@@ -326,31 +417,6 @@
       <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
     
       <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>c++11左右值 (226)</title>
-    <link href="https://xuecat.github.io/2017/12/18/226/"/>
-    <id>https://xuecat.github.io/2017/12/18/226/</id>
-    <published>2017-12-18T12:15:38.000Z</published>
-    <updated>2017-12-20T15:09:39.470Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="C-左右值"><a href="#C-左右值" class="headerlink" title="C++左右值"></a>C++左右值</h3><p> 左值指即能出现等号左边，也能出现在右边的变量（通常指有变量名的值）<br> 右值值只能出现等号右边的值（通常指无变量名的值，函数返回和表达式，常量——不跟对象关联的常量）<br> c++11在上面右值多个将亡值<br><code>move</code>右转左 <code>forward</code>左转右</p>
- <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function">MyClass <span class="title">fun</span> <span class="params">()</span> </span>&#123;MyClass <span class="keyword">return</span> s;&#125;</div><div class="line">MyClass s= fun();</div><div class="line">MyClass&amp; s = fun();</div><div class="line">MyClass&amp;&amp; s = fun();<span class="comment">//这三个全是调用移动构造函数</span></div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;C-左右值&quot;&gt;&lt;a href=&quot;#C-左右值&quot; class=&quot;headerlink&quot; title=&quot;C++左右值&quot;&gt;&lt;/a&gt;C++左右值&lt;/h3&gt;&lt;p&gt; 左值指即能出现等号左边，也能出现在右边的变量（通常指有变量名的值）&lt;br&gt; 右值值只能出现等号右边的值（通常指
-    
-    </summary>
-    
-      <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
-    
-    
-      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
-    
-      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -914,78 +980,6 @@
       <category term="前端" scheme="https://xuecat.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
       <category term="css" scheme="https://xuecat.github.io/tags/css/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>DockPanelSuite213</title>
-    <link href="https://xuecat.github.io/2017/02/16/213/"/>
-    <id>https://xuecat.github.io/2017/02/16/213/</id>
-    <published>2017-02-16T15:05:38.000Z</published>
-    <updated>2017-03-22T14:46:02.856Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/picture/213.jpg" alt=""></p>
-<p>深读了后，不得不说太佩服作者了。</p>
-<p>1、 MainForm去掉SetSplashScreen函数，去掉开始的登录显示。</p>
-<p>2、 Measures.cs 这里修改拖拽的最小边界</p>
-<p>3、 DockPanel.DockDragHandler.cs里的DockIndicator就是拖拽显示的小坐标<br>这里面的TestDrop函数处理拖拽过程中小坐标的停靠，以及拖拽过程的阴影。<br>RefreshChanges处理是否显示停靠阴影。</p>
-<p>4、 结构<br>panel是整个的大框架，里面由dockwindow构成；<br>dockwindow有6种：停靠，中间的docment，上，下，左，右。<br>dockwindow由dockpane构成，表示分布的窗口。</p>
-<p>最后dockcontent整合所有的事件及pane被继承下去。</p>
-<p>5、 <strong>一开始的就可以设置。</strong> 我调试了很久，发现这个程序有另外个模式，把所有的DockAreas加上docment（即保证dockcontent.cs的DockAreas的set那）<br>这样中间那块就会被panel填充，就可以支持全布局了。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;/picture/213.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;深读了后，不得不说太佩服作者了。&lt;/p&gt;
-&lt;p&gt;1、 MainForm去掉SetSplashScreen函数，去掉开始的登录显示。&lt;/p&gt;
-&lt;p&gt;2、 Measures.cs 这里修改拖拽
-    
-    </summary>
-    
-      <category term="C#" scheme="https://xuecat.github.io/categories/C/"/>
-    
-    
-      <category term="dockpane" scheme="https://xuecat.github.io/tags/dockpane/"/>
-    
-      <category term="winform" scheme="https://xuecat.github.io/tags/winform/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>c++日常(212)</title>
-    <link href="https://xuecat.github.io/2017/02/11/212/"/>
-    <id>https://xuecat.github.io/2017/02/11/212/</id>
-    <published>2017-02-11T07:22:46.000Z</published>
-    <updated>2018-01-25T12:54:09.932Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="for循环写法"><a href="#for循环写法" class="headerlink" title="for循环写法"></a>for循环写法</h3> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i : &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>&#125;)</div><div class="line">&#123; &#125;</div></pre></td></tr></table></figure>
-<p> 常数级的循环只能这样写了，感觉还好吧。</p>
- <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> p[<span class="number">5</span>];</div><div class="line"><span class="function"><span class="keyword">for</span> <span class="title">each</span><span class="params">(<span class="keyword">int</span> i in p)</span></span></div></pre></td></tr></table></figure>
-<p> 这个常数级的循环真心没法优雅，留着以后再试试吧。</p>
-<h3 id="指针数组"><a href="#指针数组" class="headerlink" title="指针数组"></a>指针数组</h3> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> pa = <span class="number">4</span>;</div><div class="line"><span class="keyword">int</span> *p[<span class="number">3</span>] = &#123;<span class="number">0</span>&#125;;</div><div class="line">p[<span class="number">0</span>] = &amp;pa;</div><div class="line"><span class="keyword">int</span> **pp[<span class="number">4</span>] = &#123;<span class="number">0</span>&#125;;</div><div class="line">pp[<span class="number">0</span>] = &amp;p[<span class="number">0</span>];</div></pre></td></tr></table></figure>
-<p> 这是数组，不是指针</p>
-<h3 id="RVO和NRVO"><a href="#RVO和NRVO" class="headerlink" title="RVO和NRVO"></a>RVO和NRVO</h3><p>Return Value Optimization 返回值优化<br>Named Return Value Optimization 命名返回值优化</p>
- <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> BigObject</div><div class="line">&#123;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function">BigObject <span class="title">foo</span><span class="params">()</span> </span></div><div class="line">&#123;</div><div class="line">   <span class="keyword">return</span> BigObject(); <span class="comment">// RVO </span></div><div class="line">   <span class="comment">//以前看effective的时候讲了这里要产生临时变量</span></div><div class="line">   <span class="comment">//然后再执行拷贝函数</span></div><div class="line">   <span class="comment">//现在编译器智能了，它会优化这一段，自动去掉临时变量，只会走一次构造函数 </span></div><div class="line">   <span class="comment">//即 BigObject tt = fOO(); 这个过程只会调用一次构造函数(vs2015 release debug都只走一次)</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function">BigObject <span class="title">bar</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">  BigObject localObj;</div><div class="line">  <span class="keyword">return</span> localObj; <span class="comment">// NRVO</span></div><div class="line">  <span class="comment">//同上，以前的技术只支持匿名变量的优化，现在高档了，支持实名变量的优化</span></div><div class="line">  <span class="comment">//即 BigObject tt = bar(); vs2015 release 下只走一次构造函数，debug下 走一次构造函数，走一次拷贝函数</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="变长参数传递"><a href="#变长参数传递" class="headerlink" title="变长参数传递"></a>变长参数传递</h3><p>  一开始我想用<code>va_list</code>，但是感觉一点都不酷就google了下.<br>  让我惊讶的是vs15支持三点运算符(和js不同，它的符号放后面)</p>
-  <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... arg&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">funa</span><span class="params">(T t, arg... ars)</span></span></div><div class="line">&#123;</div><div class="line">fuu(ars...);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">fuu</span><span class="params">(<span class="keyword">int</span> t, ...)</span><span class="comment">//牛逼，自动解构，这里</span></span></div><div class="line">&#123;</div><div class="line">va_list <span class="built_in">list</span>;</div><div class="line">va_start(<span class="built_in">list</span>, t);</div><div class="line"><span class="keyword">int</span> arg = va_arg(<span class="built_in">list</span>, <span class="keyword">int</span>);<span class="comment">//这里是3 funa抢一个， t抢一个</span></div><div class="line"> va_end(<span class="built_in">list</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">funa(<span class="number">1</span>, <span class="number">2</span>, ,<span class="number">3</span> , <span class="string">"afdf"</span>);</div></pre></td></tr></table></figure>
-<h3 id="c-11-decltype"><a href="#c-11-decltype" class="headerlink" title="c++11 decltype"></a>c++11 decltype</h3><p>  动态类型:<br>  <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> ci = <span class="number">3</span>， &amp;cj=ci;</div><div class="line"><span class="keyword">decltype</span>(ci) d;<span class="comment">//这是个int</span></div><div class="line"><span class="keyword">decltype</span>(cj) f = d;<span class="comment">//这是个int&amp;,必须初始化</span></div></pre></td></tr></table></figure></p>
-<p>  他的动态类型已经可以和<code>auto</code>媲美了。但有点意思的是它对括号敏感<br>  <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> a = <span class="number">2</span>, f = <span class="number">3</span>;</div><div class="line"><span class="keyword">decltype</span>((a)) b = f; <span class="comment">//b是int&amp;类型</span></div><div class="line"><span class="keyword">decltype</span>(((a))) d = f;<span class="comment">//d也是int&amp;类型</span></div></pre></td></tr></table></figure></p>
-<p>  <code>decltype(func())</code>并不会执行<code>func</code>函数,只是要它返回类型推导</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;for循环写法&quot;&gt;&lt;a href=&quot;#for循环写法&quot; class=&quot;headerlink&quot; title=&quot;for循环写法&quot;&gt;&lt;/a&gt;for循环写法&lt;/h3&gt; &lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;
-    
-    </summary>
-    
-      <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
-    
-    
-      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
-    
-      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
