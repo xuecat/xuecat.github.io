@@ -312,8 +312,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
             
               
                 
-                <a class="post-title-link" href="/2015/01/01/97/" itemprop="url">
-                  string发现(97)
+                <a class="post-title-link" href="/2015/01/01/98/" itemprop="url">
+                  字符内存越界(98)
                 </a>
               
             
@@ -375,18 +375,14 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
       
         
           
-            今天用string的时候，发现这几处。
-
-
-append传入的是指针，它会一个一个遍历开辟入栈（所以会开辟内部空间吧指针字符串全部复制进去）  
-push_back是传入字符，只传入单个字符。
-
-
-
           
+第一个越界：     我用变长参数函数的时候va_arg(t_args, char*) 又把参数强制转换成int后发现，内存越界。
+
+分析原因：char的内存界是char指向的一个字节字符界。int的内存界是int指向的4个字节（32）字符界。    强制转换会根据类型偏移量进行数据转换，所以出现
+          ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/01/01/97/#more" rel="contents">
+            <a class="btn" href="/2015/01/01/98/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -501,7 +497,7 @@ push_back是传入字符，只传入单个字符。
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/x.png" rel="gallery_cjiigcfez004sf8s9r9tr6ivx"
+                 href="/picture/x.png" rel="gallery_cjiigorcg004d3ks91y916gjk"
                  itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/x.png" itemprop="contentUrl"/>
               </a>
@@ -572,8 +568,8 @@ push_back是传入字符，只传入单个字符。
             
               
                 
-                <a class="post-title-link" href="/2015/01/01/98/" itemprop="url">
-                  字符内存越界(98)
+                <a class="post-title-link" href="/2015/01/01/97/" itemprop="url">
+                  string发现(97)
                 </a>
               
             
@@ -635,14 +631,18 @@ push_back是传入字符，只传入单个字符。
       
         
           
-          
-第一个越界：     我用变长参数函数的时候va_arg(t_args, char*) 又把参数强制转换成int后发现，内存越界。
+            今天用string的时候，发现这几处。
 
-分析原因：char的内存界是char指向的一个字节字符界。int的内存界是int指向的4个字节（32）字符界。    强制转换会根据类型偏移量进行数据转换，所以出现
-          ...
+
+append传入的是指针，它会一个一个遍历开辟入栈（所以会开辟内部空间吧指针字符串全部复制进去）  
+push_back是传入字符，只传入单个字符。
+
+
+
+          
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/01/01/98/#more" rel="contents">
+            <a class="btn" href="/2015/01/01/97/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>

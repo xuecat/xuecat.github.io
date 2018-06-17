@@ -312,8 +312,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
             
               
                 
-                <a class="post-title-link" href="/2014/09/20/65/" itemprop="url">
-                  ++和++ 入栈顺序(65)
+                <a class="post-title-link" href="/2014/09/20/58/" itemprop="url">
+                  变长参数(58)
                 </a>
               
             
@@ -375,11 +375,134 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
       
         
           
-          直接上代码++123456789101112131415161718192021int minuus(int a, int b)&#123;	cout &lt;&lt; a &lt;&lt; endl;	cout &lt;&lt; b &lt;&lt; endl;	return a-b;&#125;
+          可变长函数：
+  函数多参数情况下，可变长函数虽然设置“…”   //一定要“…”之前的那个参数 va_start，来避免异常抛出。（实践）
+
+          
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/20/58/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/09/20/59/" itemprop="url">
+                  强制转换临时和原对象(虚函数测试)(59)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-09-20T03:31:58+08:00" content="2014-09-20">
+              2014-09-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          这是个很坑的地方,大多数想法,转换嘛,
+我把static_cast&lt;A&gt;(B)不就是把B转成A吗? 错! :
+static_cast&lt;window*&gt;(this)-&gt;onResize(); //这是拿this当成window,没问题
+static_cast&lt;win
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/20/65/#more" rel="contents">
+            <a class="btn" href="/2014/09/20/59/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -494,7 +617,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/m.png" rel="gallery_cjiigcflh00gzf8s9rsvibm6j"
+                 href="/picture/m.png" rel="gallery_cjiigorqc00h73ks9gxyt4csv"
                  itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/m.png" itemprop="contentUrl"/>
               </a>
@@ -566,8 +689,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
             
               
                 
-                <a class="post-title-link" href="/2014/09/20/60/" itemprop="url">
-                  回调函数(60)
+                <a class="post-title-link" href="/2014/09/20/54/" itemprop="url">
+                  多层窗口(54)
                 </a>
               
             
@@ -594,8 +717,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
+                  <a href="/categories/Windows/" itemprop="url" rel="index">
+                    <span itemprop="name">Windows</span>
                   </a>
                 </span>
 
@@ -629,139 +752,15 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
       
         
           
-          回调函数类型：
-void PrintfText(char* s) 
-{
-    printf(s);
-}
-//定义实现带参回调函数的”调用函数”
-这里注意第一个void代表回调的数返回值，第二个char*代表的回调的函数的参数，就像写下它的参数一样。
-void CallPrintfText(void
+          总于过期了，把上面的东西搬过来
+ 我已经被这个多层窗口弄晕了，快死了。首先，要使用透明窗口函数：
+SetLayeredWindowAttributes， updataLayeredWindowAttributes，
+//就必须设置窗口属性为WS_EX_LAYERED。
+//然后，这两个函数完全可以混
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/20/60/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/20/56/" itemprop="url">
-                  内存对齐偏移量(56)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-20T03:31:58+08:00" content="2014-09-20">
-              2014-09-20
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-           编译器对变量存储的一个特殊处理。为了提高CPU的存储速度，编译器对一些变量的起始地址做了“对齐”处理
-。在默认情况下，规定各成员变量存放的起始地址相对于结构的起始地址的偏移量必须为该变量的类型所占用的字节数的倍数。类型
-对齐方式（变量存放的起始地址相对于结构的起始地址的偏移量）
-Char 偏移量必
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/20/56/#more" rel="contents">
+            <a class="btn" href="/2014/09/20/54/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1173,143 +1172,6 @@ remove今天死活识别不了，添加#include 后可以使用。
             
               
                 
-                <a class="post-title-link" href="/2014/09/17/51/" itemprop="url">
-                  勿忘初心(51)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-17T03:31:58+08:00" content="2014-09-17">
-              2014-09-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/生活/" itemprop="url" rel="index">
-                    <span itemprop="name">生活</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-        <div class="post-gallery" itemscope itemtype="//schema.org/ImageGallery">
-          
-          
-            <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox"
-                 href="/picture/e.jpg" rel="gallery_cjiigcfla00glf8s9mgdhby6p"
-                 itemscope itemtype="//schema.org/ImageObject" itemprop="url">
-                <img src="/picture/e.jpg" itemprop="contentUrl"/>
-              </a>
-            
-          
-
-          
-          </div>
-        </div>
-      
-
-      
-        
-          
-            不忘初心，方得始终
-  这几天自己也有点想多了，因为本来就进入大三了，该考虑的也多了起来。反而烦恼了自己。
-  写下日记，提醒自己，大三上的时间还是很充足的，不要被迷惑。做好自己！
-
-          
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/17/51/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2014/09/17/50/" itemprop="url">
                   模板和虚函数(50)
                 </a>
@@ -1378,6 +1240,143 @@ remove今天死活识别不了，添加#include 后可以使用。
 
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/09/17/50/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/09/17/51/" itemprop="url">
+                  勿忘初心(51)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-09-17T03:31:58+08:00" content="2014-09-17">
+              2014-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/生活/" itemprop="url" rel="index">
+                    <span itemprop="name">生活</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="//schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="/picture/e.jpg" rel="gallery_cjiigorq000gt3ks95ehcdwck"
+                 itemscope itemtype="//schema.org/ImageObject" itemprop="url">
+                <img src="/picture/e.jpg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        
+          
+            不忘初心，方得始终
+  这几天自己也有点想多了，因为本来就进入大三了，该考虑的也多了起来。反而烦恼了自己。
+  写下日记，提醒自己，大三上的时间还是很充足的，不要被迷惑。做好自己！
+
+          
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/17/51/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
