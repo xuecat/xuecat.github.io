@@ -87,18 +87,27 @@
 
 
 <meta name="description" content="async await 同步函数执行到async时会同步执行,当在async里遇见await时，会跳出async函数到外部继续执行。 await执行完了后再执行async里面await之后的代码
- async函数由于返回的是task类型，注意属性有同步类型">
+ async函数由于返回的是task类型，注意属性有同步类型
+
+函数参数不能有out ref，必须返回Task
+不应混合使用同步和异步代码，异步最好始终异步123456789101112131415161">
 <meta property="og:type" content="article">
 <meta property="og:title" content="c#杂项笔记(230)">
 <meta property="og:url" content="https://xuecat.github.io/2018/02/28/230/index.html">
 <meta property="og:site_name" content="XueCat">
 <meta property="og:description" content="async await 同步函数执行到async时会同步执行,当在async里遇见await时，会跳出async函数到外部继续执行。 await执行完了后再执行async里面await之后的代码
- async函数由于返回的是task类型，注意属性有同步类型">
-<meta property="og:updated_time" content="2018-02-28T16:29:07.812Z">
+ async函数由于返回的是task类型，注意属性有同步类型
+
+函数参数不能有out ref，必须返回Task
+不应混合使用同步和异步代码，异步最好始终异步123456789101112131415161">
+<meta property="og:updated_time" content="2018-07-02T16:31:02.422Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c#杂项笔记(230)">
 <meta name="twitter:description" content="async await 同步函数执行到async时会同步执行,当在async里遇见await时，会跳出async函数到外部继续执行。 await执行完了后再执行async里面await之后的代码
- async函数由于返回的是task类型，注意属性有同步类型">
+ async函数由于返回的是task类型，注意属性有同步类型
+
+函数参数不能有out ref，必须返回Task
+不应混合使用同步和异步代码，异步最好始终异步123456789101112131415161">
 
 
 
@@ -374,6 +383,19 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
       
         <h3 id="async-await"><a href="#async-await" class="headerlink" title="async await"></a>async await</h3><p> 同步函数执行到async时会同步执行,当在async里遇见await时，会跳出async函数到外部继续执行。<br> await执行完了后再执行async里面await之后的代码</p>
 <p> async函数由于返回的是task类型，注意属性有同步类型</p>
+<ol>
+<li>函数参数不能有out ref，必须返回Task<ol>
+<li>不应混合使用同步和异步代码，异步最好始终异步<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public static class DeadlockDemo</div><div class="line">&#123;</div><div class="line">    private static async Task DelayAsync()</div><div class="line">    &#123;</div><div class="line">        await Task.Delay(1000);</div><div class="line">    &#125;</div><div class="line">    // This method causes a deadlock when called in a GUI or ASP.NET context.</div><div class="line">    public static void Test()</div><div class="line">    &#123;</div><div class="line">        //开始延迟函数</div><div class="line">        var delayTask = DelayAsync();</div><div class="line">        // 等待延迟完成</div><div class="line">        delayTask.Wait();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">//test方法在gui和aps.net会出现死锁，控制台不会</div><div class="line">//这种死锁的根本原因是 await 处理上下文的方式</div><div class="line">//默认情况下，当等待未完成的 Task 时，会捕获当前“上下文”，在 Task 完成时使用该上下文恢复方法的执行</div><div class="line">//GUI 和 ASP.NET 应用程序具有 SynchronizationContext，它每次仅允许一个代码区块运行。 </div><div class="line">//当 await 完成时，它会尝试在捕获的上下文中执行 async 方法的剩余部分。 </div><div class="line">//但是该上下文已含有一个线程，该线程在（同步）等待 async 方法完成。它们相互等待对方，从而导致死锁。</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<ol>
+<li><p>await不像Task.Run()，它并不会创建线程来执行，只会移交权限来继续执行。</p>
+</li>
+<li><p>我一开始想这玩意，不创建新线程咋个优化呢。后面他们说会挂起执行其它函数，这样并发的时候就能很好处理，不会卡住。</p>
+</li>
+</ol>
 
       
     </div>
@@ -485,7 +507,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">225</span>
+              <span class="site-state-item-count">227</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

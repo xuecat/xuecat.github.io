@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2018-06-17T06:46:47.867Z</updated>
+  <updated>2018-07-03T16:55:43.055Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -14,6 +14,54 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>さしぶりのせいかつ日記(237)</title>
+    <link href="https://xuecat.github.io/2018/07/04/237/"/>
+    <id>https://xuecat.github.io/2018/07/04/237/</id>
+    <published>2018-07-03T16:06:56.000Z</published>
+    <updated>2018-07-03T16:55:43.055Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/picture/237.png" alt=""></p>
+<p>ついに、reactのプロジェクトおわりました、少しごめなことあるですけれど。</p>
+<p>も、次の仕事用意してる</p>
+<p>Amazon cloud synchronization</p>
+<p>ああ！！メチや　メチや、難しいです；頭もだめちや</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/picture/237.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;ついに、reactのプロジェクトおわりました、少しごめなことあるですけれど。&lt;/p&gt;
+&lt;p&gt;も、次の仕事用意してる&lt;/p&gt;
+&lt;p&gt;Amazon cloud synchronization&lt;
+    
+    </summary>
+    
+      <category term="生活" scheme="https://xuecat.github.io/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>decimal类型(236)</title>
+    <link href="https://xuecat.github.io/2018/06/30/236/"/>
+    <id>https://xuecat.github.io/2018/06/30/236/</id>
+    <published>2018-06-30T07:59:25.000Z</published>
+    <updated>2018-06-30T11:51:21.733Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="数据库" scheme="https://xuecat.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
   
   <entry>
     <title>js forin顺序(235)</title>
@@ -157,10 +205,23 @@
     <link href="https://xuecat.github.io/2018/02/28/230/"/>
     <id>https://xuecat.github.io/2018/02/28/230/</id>
     <published>2018-02-28T15:34:14.000Z</published>
-    <updated>2018-02-28T16:29:07.812Z</updated>
+    <updated>2018-07-02T16:31:02.422Z</updated>
     
     <content type="html"><![CDATA[<h3 id="async-await"><a href="#async-await" class="headerlink" title="async await"></a>async await</h3><p> 同步函数执行到async时会同步执行,当在async里遇见await时，会跳出async函数到外部继续执行。<br> await执行完了后再执行async里面await之后的代码</p>
 <p> async函数由于返回的是task类型，注意属性有同步类型</p>
+<ol>
+<li>函数参数不能有out ref，必须返回Task<ol>
+<li>不应混合使用同步和异步代码，异步最好始终异步<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public static class DeadlockDemo</div><div class="line">&#123;</div><div class="line">    private static async Task DelayAsync()</div><div class="line">    &#123;</div><div class="line">        await Task.Delay(1000);</div><div class="line">    &#125;</div><div class="line">    // This method causes a deadlock when called in a GUI or ASP.NET context.</div><div class="line">    public static void Test()</div><div class="line">    &#123;</div><div class="line">        //开始延迟函数</div><div class="line">        var delayTask = DelayAsync();</div><div class="line">        // 等待延迟完成</div><div class="line">        delayTask.Wait();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">//test方法在gui和aps.net会出现死锁，控制台不会</div><div class="line">//这种死锁的根本原因是 await 处理上下文的方式</div><div class="line">//默认情况下，当等待未完成的 Task 时，会捕获当前“上下文”，在 Task 完成时使用该上下文恢复方法的执行</div><div class="line">//GUI 和 ASP.NET 应用程序具有 SynchronizationContext，它每次仅允许一个代码区块运行。 </div><div class="line">//当 await 完成时，它会尝试在捕获的上下文中执行 async 方法的剩余部分。 </div><div class="line">//但是该上下文已含有一个线程，该线程在（同步）等待 async 方法完成。它们相互等待对方，从而导致死锁。</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<ol>
+<li><p>await不像Task.Run()，它并不会创建线程来执行，只会移交权限来继续执行。</p>
+</li>
+<li><p>我一开始想这玩意，不创建新线程咋个优化呢。后面他们说会挂起执行其它函数，这样并发的时候就能很好处理，不会卡住。</p>
+</li>
+</ol>
 ]]></content>
     
     <summary type="html">
@@ -888,92 +949,6 @@
       <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
       <category term="angularjs" scheme="https://xuecat.github.io/tags/angularjs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>jquery215</title>
-    <link href="https://xuecat.github.io/2017/02/21/215/"/>
-    <id>https://xuecat.github.io/2017/02/21/215/</id>
-    <published>2017-02-21T14:50:18.000Z</published>
-    <updated>2017-02-21T14:51:34.527Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="jquery"><a href="#jquery" class="headerlink" title="jquery"></a>jquery</h3><p>其它不说，hide和show的参数有个speed，可以动画执行显示。<br>toggle来切换元素显示和隐藏,和上面一样也有个speed。</p>
-<h3 id="特效"><a href="#特效" class="headerlink" title="特效"></a>特效</h3><p>可以加特效：<br>fade类型的函数是淡入淡出（有透明度）<br>slide类型的函数是滑入滑出<br>animate类型函数。可以设height:’toggle’ (默认情况下，所有的 HTML 元素有一个静态的位置，且是不可移动的。 如果需要改变为，我们需要将元素的 position 属性设置为 relative, fixed, 或 absolute!)</p>
-<h3 id="方法链"><a href="#方法链" class="headerlink" title="方法链"></a>方法链</h3><p>jquery方法链<code>$(&quot;#p1&quot;).css(&quot;color&quot;, &quot;red&quot;).slideUp(200).slideDown(&#39;fast&#39;);</code></p>
-<h3 id="dom属性获取和设置"><a href="#dom属性获取和设置" class="headerlink" title="dom属性获取和设置"></a>dom属性获取和设置</h3><p>dom获取和设置。<br>text()设置和获取文本，获取会自动连接子文本、<br>html()设置和获取的文本包括html、<br>val()设置和获取value属性值、<br>attr()设置和获取属性对应值，感觉这个可以替换val</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"button"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    $(<span class="string">"#runoob"</span>).attr(&#123;</div><div class="line">        <span class="string">"href"</span> : <span class="string">"http://www.runoob.com/jquery"</span>,</div><div class="line">        <span class="string">"title"</span> : <span class="string">"jQuery 教程"</span></div><div class="line">    &#125;);</div><div class="line">    $(<span class="string">"#runoob"</span>).attr(<span class="string">"href"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">i,origValue</span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> origValue + <span class="string">"/jquery"</span>; </div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h3 id="添加新元素"><a href="#添加新元素" class="headerlink" title="添加新元素"></a>添加新元素</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">appendText</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">var</span> txt1=<span class="string">"&lt;p&gt;文本。&lt;/p&gt;"</span>;              <span class="comment">// 使用 HTML 标签创建文本</span></div><div class="line">    <span class="keyword">var</span> txt2=$(<span class="string">"&lt;p&gt;&lt;/p&gt;"</span>).text(<span class="string">"文本。"</span>);  <span class="comment">// 使用 jQuery 创建文本</span></div><div class="line">    <span class="keyword">var</span> txt3=<span class="built_in">document</span>.createElement(<span class="string">"p"</span>);</div><div class="line">    txt3.innerHTML=<span class="string">"文本。"</span>;               <span class="comment">// 使用 DOM 创建文本 text with DOM</span></div><div class="line">    $(<span class="string">"body"</span>).append(txt1,txt2,txt3);        <span class="comment">// 追加新元素</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h3><p>remove()删除包括本身,接收参数css选择器<br>empty()删除不包括本身,接收参数css选择器</p>
-<h3 id="css类设置"><a href="#css类设置" class="headerlink" title="css类设置"></a>css类设置</h3><p>addClass() 添加<br>removeClass()<br>toggleClass() 添加和删除切换<br>css() 设置和返回css <code>css({&quot;background-color&quot;:&quot;yellow&quot;,&quot;font-size&quot;:&quot;200%&quot;});</code></p>
-<p>这里css好像只能用类<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"h1,h2,p"</span>).addClass(<span class="string">"blue"</span>);</div><div class="line">.blue</div><div class="line">&#123; ... &#125;</div></pre></td></tr></table></figure></p>
-<h3 id="尺寸"><a href="#尺寸" class="headerlink" title="尺寸"></a>尺寸</h3><p>outerWidth(true) //包括margin及全部<br>outerWidth()     //不包括margin,包括border及剩下<br>innerWidth()     //不包括border,包括padding及剩下<br>width()          //只包括element<br>高度类似。</p>
-<h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h3><p>返回数组元素的函数都允许参数返回指定.<br>parent(); 单个元素<br>parents();数组元素,允许参数返回指定<code>parents(&quot;.hehe&quot;)</code><br>parentsUntil(); 数组元素, 返回介于俩个给定元素之间的所有祖先元素，如<code>parentsUntil(&quot;div&quot;);</code><br>children() 数组元素,允许参数返回指定<code>children(&quot;.hehe&quot;)</code><br>find(…) 单个元素,从后代元素寻找,包含自己<br>siblings(); 数组元素,返回被选元素的所有同胞元素，允许参数返回指定<br>next(); 单个元素,返回被选元素下一个同胞元素<br>nextAll(); 数组元素,返回接下来所有同胞元素<br>nextUntil(); 数组元素,返回参数指定元素之间所有接下来的同胞元素<code>nextUntil(&quot;h6&quot;)</code></p>
-<p>first(); 返回被选元素第一个元素<br>last(); 返回被选元素最后一个元素<br>eq(); <code>eq(0)</code>就是第一个 <code>eq(1)</code>第二个<br>filter(); 再次过滤 <code>$(&quot;p&quot;).filter(&quot;.url&quot;);</code><br>not(); <code>$(&quot;p&quot;).not(&quot;.url&quot;);</code></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;jquery&quot;&gt;&lt;a href=&quot;#jquery&quot; class=&quot;headerlink&quot; title=&quot;jquery&quot;&gt;&lt;/a&gt;jquery&lt;/h3&gt;&lt;p&gt;其它不说，hide和show的参数有个speed，可以动画执行显示。&lt;br&gt;toggle来切换元素显示和隐藏
-    
-    </summary>
-    
-      <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
-    
-    
-      <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="前端" scheme="https://xuecat.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>css笔记214</title>
-    <link href="https://xuecat.github.io/2017/02/18/214/"/>
-    <id>https://xuecat.github.io/2017/02/18/214/</id>
-    <published>2017-02-18T06:49:37.000Z</published>
-    <updated>2017-03-02T12:26:03.205Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="很多css属性，在IE8之前必须声明-lt-DOCTYPE-gt"><a href="#很多css属性，在IE8之前必须声明-lt-DOCTYPE-gt" class="headerlink" title="很多css属性，在IE8之前必须声明&lt;!DOCTYPE&gt;"></a>很多css属性，在IE8之前必须声明&lt;!DOCTYPE&gt;</h3><h3 id="css选择器构成"><a href="#css选择器构成" class="headerlink" title="css选择器构成"></a>css选择器构成</h3><p>css具有层叠特性，后面属性会掩盖前面属性</p>
-<p>css构成：<br>选择器 {属性:值; 属性:值}</p>
-<p>属性选择器: html的属性 h1/p 之类</p>
-<p>id选择器：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#paral</div><div class="line">&#123;</div><div class="line">    text-align:center;</div><div class="line">    color:red;</div><div class="line">&#125;</div><div class="line"></div><div class="line">&lt;p id="paral"&gt;hello&lt;/p&gt;</div></pre></td></tr></table></figure></p>
-<p>class选择器(类名第一个字符不能使用数字):<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">.center </div><div class="line">&#123;</div><div class="line">    text-align:center;</div><div class="line">&#125;</div><div class="line">&lt;p class="center"&gt;标题&lt;/p&gt;</div><div class="line"></div><div class="line">p.center/*它还有个嵌套选择器与它长得很像，但完全不同。下面有讲*/</div><div class="line">&#123;</div><div class="line">    text-align:center;</div><div class="line">&#125;</div><div class="line">&lt;p class="center"&gt;这个要居中（且不能缺少class属性）&lt;/p&gt;</div><div class="line">&lt;h1 class="center"&gt;这个不居中&lt;/h1&gt;</div></pre></td></tr></table></figure></p>
-<p><code>:</code>选择器:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-pseudo">:link</span> &#123;<span class="attribute">color</span>:red; <span class="attribute">text-decoration</span>:...&#125;     <span class="comment">/*所有未被访问的链接，一般用于&lt;a/&gt; 但也可用于其他dom，如: &lt;p/&gt;*/</span></div><div class="line"><span class="selector-pseudo">:visited</span>  <span class="comment">/*所有已被访问链接，同上*/</span></div><div class="line"><span class="selector-pseudo">:active</span>     <span class="comment">/*活动链接，同上*/</span></div><div class="line"><span class="selector-pseudo">:hover</span>     <span class="comment">/**/</span></div><div class="line"><span class="selector-pseudo">:focus</span>     <span class="comment">/**/</span></div></pre></td></tr></table></figure></p>
-<p>其它选择器：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">/*后代选择器*/</div><div class="line">a p /*a子元素下的p*/</div><div class="line">&#123;</div><div class="line">    color: green;</div><div class="line">&#125;</div><div class="line">ul li /*ul子元素下的li*/</div><div class="line">&#123;</div><div class="line">    background-repeat: no-repeat;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/*分组选择器*/</div><div class="line">h1, h2, p</div><div class="line">&#123;...&#125;</div><div class="line"></div><div class="line">table, th, td</div><div class="line">&#123;</div><div class="line">    border: 1px solid black;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/*嵌套选择器*/</div><div class="line">.marked</div><div class="line">&#123; background-color: red; &#125;</div><div class="line">.marked p</div><div class="line">&#123; color: white; &#125;</div><div class="line"></div><div class="line">&lt;div class="marked"&gt;&lt;p&gt;ddd&lt;/p&gt;&lt;/div&gt;/*class为marked的元素，其子元素为p的会得到此css属性*/</div><div class="line"></div><div class="line">/*子元素选择器*/</div><div class="line">div&gt;p</div><div class="line">&#123; background-color: yellow; &#125; /*它会严格按照div&gt;p的层次顺序来找元素*/</div><div class="line"></div><div class="line">/*相邻兄弟选择器*/</div><div class="line">div+p+p</div><div class="line">&#123; background-color: yellow; &#125; /*它只会让div第二个相邻p元素的style改变*/</div><div class="line"></div><div class="line">/*普通相邻兄弟选择器*/</div><div class="line">div~p</div><div class="line">&#123; background-color: yellow; &#125; /*上面的选择器只能选择一个，这个会把所有具有此关系的元素选上*/</div><div class="line"></div><div class="line">/*属性选择器*/</div><div class="line">[title]</div><div class="line">&#123; color: blue; &#125; /*选择具有title属性的元素*/</div><div class="line"></div><div class="line">[title=runoob]</div><div class="line">&#123; color: blue; &#125; /*选择title属性的值为runoob的元素*/</div><div class="line"></div><div class="line">[title~=hello]</div><div class="line">&#123; color: blue; &#125; /*选择title属性的值包含有hello单词的元素,即hello有空格隔开就算包含*/</div><div class="line"></div><div class="line">[title|=hello]</div><div class="line">&#123; color: blue; &#125; /*选择title属性的值包含有hello的元素,只要有hello出现就行*/</div></pre></td></tr></table></figure></p>
-<h3 id="插入样式表"><a href="#插入样式表" class="headerlink" title="插入样式表"></a>插入样式表</h3><p>外部插入样式表：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"mystyle.css"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>内部插入样式表：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></div><div class="line"><span class="selector-tag">hr</span> &#123;<span class="attribute">color</span>:sienna;&#125;</div><div class="line"><span class="selector-tag">p</span> &#123;<span class="attribute">margin-left</span>:<span class="number">20px</span>;&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>内联样式：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"color:sienna;margin-left:20px"</span>&gt;</span>this is<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>多重样式：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">h3</span></div><div class="line">&#123;</div><div class="line">    <span class="attribute">color</span>:red;</div><div class="line">    <span class="attribute">text-align</span>:left;</div><div class="line">    <span class="attribute">font-size</span>:<span class="number">8pt</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">h3</span></div><div class="line">&#123;</div><div class="line">    <span class="attribute">text-align</span>:right;</div><div class="line">    <span class="attribute">font-size</span>:<span class="number">20pt</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>它们将会重叠成一个。</p>
-<p>层叠次序：</p>
-<p>内联样式 &gt; 内部样式 &gt; 外部样式 &gt; 浏览器缺省设置<br>这些层叠会继续替换和补充。</p>
-<p>###　属性<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">background-repeat: no-repeat|repeat-x|repeat-y;/*背景图片重复平铺的方向*/</div><div class="line">text-decoration: overline|line-through|underline;/*文字的横线位置(上方，中，下方)*/</div><div class="line">text-transform: uppercase|lowercase|capitalize;/*文字转换(大写，小写，首字母大写)*/</div><div class="line">text-indent: *px;/*文本第一行的缩进*/</div><div class="line">font-size: *em;/*为避免ie无法调整文本问题，使用em单位代替*/</div><div class="line">a: link &#123;color:#FF0000;text-decoration:underline;&#125;</div><div class="line">list-style-type: circle|square|upper-roman|lower-alpha;/*列表标题 无序和有序*/</div><div class="line">border: 25px solid green;</div><div class="line">border-style: dotted|dashed|solid|double|groove|ridge|inset|outset;/*电线框、虚线框、实线、俩个边界、3d沟(有四个重载函数：上、右、下、左；上、左右、下；上下、左右；四边)*/</div><div class="line">margin: /*重载：上、右、下、左；上、左右、下；上下、左右；四边;;auto中心对齐*/</div><div class="line">Padding: /*同上*/</div><div class="line">display: inline|block; /*只需要宽度，不强制换行；占用全部宽高，前后换行*/</div><div class="line">position: fixed|relative|absolute /*相对浏览器窗口；相对自己的定位；相对父元素的定位。配合z-index来重叠*/</div></pre></td></tr></table></figure></p>
-<h3 id="盒子"><a href="#盒子" class="headerlink" title="盒子"></a>盒子</h3><p>从外到内： Margin  Border  Padding  Content</p>
-<h3 id="隐藏元素"><a href="#隐藏元素" class="headerlink" title="隐藏元素"></a>隐藏元素</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">display</span>: <span class="selector-tag">none</span>;<span class="comment">/*隐藏某个元素，且元素不会占用任何空间*/</span></div><div class="line"><span class="selector-tag">visibility</span>: <span class="selector-tag">hidden</span>;<span class="comment">/*隐藏元素，但是隐藏的元素任占用与未隐藏前一样的空间*/</span></div></pre></td></tr></table></figure>
-<h3 id="伪类"><a href="#伪类" class="headerlink" title="伪类"></a>伪类</h3><p>这个也是个选择器<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">p:first-child /*这个会指定到第一个p元素*/</div><div class="line">&#123; color: blue; &#125;</div><div class="line">p &gt; i:first-child /*第一个为p的子元素的i*/</div><div class="line">&#123; color: blue; &#125;</div><div class="line">&lt;p&gt;I am a &lt;i&gt;zhege&lt;/i&gt; man. I am a &lt;i&gt;strong&lt;/i&gt; man.&lt;/p&gt;</div><div class="line">&lt;p&gt;I am a &lt;i&gt;zhege&lt;/i&gt; man. I am a &lt;i&gt;strong&lt;/i&gt; man.&lt;/p&gt;</div></pre></td></tr></table></figure></p>
-<h3 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.button </div><div class="line">&#123;</div><div class="line">    background-color: #4caf50;</div><div class="line">&#125;</div><div class="line">.button2</div><div class="line">&#123;</div><div class="line">    color: white;</div><div class="line">&#125;</div><div class="line">&lt;button class="button button2" /&gt; /*这样就具有俩个属性了*/</div></pre></td></tr></table></figure>
-<h3 id="下拉菜单"><a href="#下拉菜单" class="headerlink" title="下拉菜单"></a>下拉菜单</h3><p>这儿类名字限定了，必须如此。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.dropdown</span> &#123;&#125; <span class="comment">/* 容器 &lt;div&gt; - 需要定位下拉内容 */</span></div><div class="line"><span class="selector-class">.dropbtn</span> &#123;&#125; <span class="comment">/* 下拉按钮样式 */</span></div><div class="line"><span class="selector-class">.dropdown-content</span> &#123;&#125; <span class="comment">/* 下拉内容 (默认隐藏) */</span></div><div class="line"></div><div class="line"><span class="comment">/* 下拉菜单的链接 */</span></div><div class="line"><span class="selector-class">.dropdown-content</span> <span class="selector-tag">a</span> &#123;</div><div class="line">    <span class="attribute">color</span>: black;</div><div class="line">    <span class="attribute">padding</span>: <span class="number">12px</span> <span class="number">16px</span>;</div><div class="line">    <span class="attribute">text-decoration</span>: none;</div><div class="line">    <span class="attribute">display</span>: block;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 鼠标移上去后修改下拉菜单链接颜色 */</span></div><div class="line"><span class="selector-class">.dropdown-content</span> <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span> &#123;<span class="attribute">background-color</span>: <span class="number">#f1f1f1</span>&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 在鼠标移上去后显示下拉菜单 */</span></div><div class="line"><span class="selector-class">.dropdown</span><span class="selector-pseudo">:hover</span> <span class="selector-class">.dropdown-content</span> &#123;</div><div class="line">    <span class="attribute">display</span>: block;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 当下拉内容显示后修改下拉按钮的背景颜色 */</span></div><div class="line"><span class="selector-class">.dropdown</span><span class="selector-pseudo">:hover</span> <span class="selector-class">.dropbtn</span> &#123;</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#3e8e41</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><p>设置透明:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">img</span> &#123; <span class="attribute">opacity</span>: <span class="number">0.4</span>; <span class="attribute">filter</span>: <span class="built_in">alpha</span>(opcity=1)&#125; <span class="comment">/*一般是0.0-1.0,越小越透明。ie8和早期版本是0-100,越小越透明*/</span></div></pre></td></tr></table></figure></p>
-<p>拼合:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">img</span><span class="selector-class">.home</span> </div><div class="line">&#123;</div><div class="line">    <span class="attribute">width</span>: <span class="number">46px</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">44px</span>;<span class="comment">/*上面是指定显示图片的高宽*/</span></div><div class="line">    <span class="attribute">background</span>: <span class="built_in">url</span>(...) <span class="number">0</span> <span class="number">0</span>;<span class="comment">/*指定显示图片的路径和位置left top*/</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="图片廊"><a href="#图片廊" class="headerlink" title="图片廊"></a>图片廊</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"responsive"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"img"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">href</span>=<span class="string">"img_fjords.jpg"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"http://www.runoob.com/wp-content/uploads/2016/04/img_fjords.jpg"</span> <span class="attr">alt</span>=<span class="string">"Trolltunga Norway"</span> <span class="attr">width</span>=<span class="string">"300"</span> <span class="attr">height</span>=<span class="string">"200"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"desc"</span>&gt;</span>这里添加图片文本描述<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="css3"><a href="#css3" class="headerlink" title="css3"></a>css3</h2><h3 id="边框"><a href="#边框" class="headerlink" title="边框"></a>边框</h3><p>圆角: border-radius<br>阴影：border-shadow<br>图片: border-image<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#round</span></div><div class="line">&#123;</div><div class="line">	<span class="attribute">-webkit-border-image</span>:<span class="built_in">url</span>(border.png) <span class="number">30</span> <span class="number">30</span> round; <span class="comment">/* Safari 5 and older */</span></div><div class="line">	<span class="attribute">-o-border-image</span>:<span class="built_in">url</span>(border.png) <span class="number">30</span> <span class="number">30</span> round; <span class="comment">/* Opera */</span></div><div class="line">	<span class="attribute">border-image</span>:<span class="built_in">url</span>(border.png) <span class="number">30</span> <span class="number">30</span> round;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;很多css属性，在IE8之前必须声明-lt-DOCTYPE-gt&quot;&gt;&lt;a href=&quot;#很多css属性，在IE8之前必须声明-lt-DOCTYPE-gt&quot; class=&quot;headerlink&quot; title=&quot;很多css属性，在IE8之前必须声明&amp;lt;!DOCTY
-    
-    </summary>
-    
-      <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
-    
-    
-      <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="前端" scheme="https://xuecat.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
-      <category term="css" scheme="https://xuecat.github.io/tags/css/"/>
     
   </entry>
   
