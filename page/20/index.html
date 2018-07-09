@@ -430,8 +430,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
             
               
                 
-                <a class="post-title-link" href="/2014/09/05/40/" itemprop="url">
-                  more effective c++根据类型决定虚化(40)
+                <a class="post-title-link" href="/2014/09/05/39/" itemprop="url">
+                  static_cast dynamic_cast再进一步
                 </a>
               
             
@@ -458,8 +458,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/书籍/" itemprop="url" rel="index">
-                    <span itemprop="name">书籍</span>
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
                   </a>
                 </span>
 
@@ -493,16 +493,13 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
       
         
           
-          第31条了，这一跳一下就解决了我最近的疑惑！
-先看游戏规则:
-1、有的类型，宇宙飞船、太空站、小行星、
-2、他们互相碰撞，任意两两进行碰撞。
-3、具有主被动性！且不同的主被动，不同的类型进行碰撞，产生的结果也不一样。
-分析，需要运行时动态识别，所包含的对象，所以设计c++RTTI计数。（过程代码不列
+          string a = typeid(dynamic_cast(this)).name();
+发现dynamic_cast确实能把父子类的类型做转换，但是对于虚函数，还是无法，应该是内存覆盖了就无法修改了。
+只有int selfprice = static_cast(*this).GetPrice()
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/05/40/#more" rel="contents">
+            <a class="btn" href="/2014/09/05/39/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -674,8 +671,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
             
               
                 
-                <a class="post-title-link" href="/2014/09/05/39/" itemprop="url">
-                  static_cast dynamic_cast再进一步
+                <a class="post-title-link" href="/2014/09/05/40/" itemprop="url">
+                  more effective c++根据类型决定虚化(40)
                 </a>
               
             
@@ -702,8 +699,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
+                  <a href="/categories/书籍/" itemprop="url" rel="index">
+                    <span itemprop="name">书籍</span>
                   </a>
                 </span>
 
@@ -737,13 +734,16 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
       
         
           
-          string a = typeid(dynamic_cast(this)).name();
-发现dynamic_cast确实能把父子类的类型做转换，但是对于虚函数，还是无法，应该是内存覆盖了就无法修改了。
-只有int selfprice = static_cast(*this).GetPrice()
+          第31条了，这一跳一下就解决了我最近的疑惑！
+先看游戏规则:
+1、有的类型，宇宙飞船、太空站、小行星、
+2、他们互相碰撞，任意两两进行碰撞。
+3、具有主被动性！且不同的主被动，不同的类型进行碰撞，产生的结果也不一样。
+分析，需要运行时动态识别，所包含的对象，所以设计c++RTTI计数。（过程代码不列
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/05/39/#more" rel="contents">
+            <a class="btn" href="/2014/09/05/40/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -914,8 +914,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
             
               
                 
-                <a class="post-title-link" href="/2014/09/03/36/" itemprop="url">
-                  more effective c++为智能指针添加计数(36)
+                <a class="post-title-link" href="/2014/09/03/33/" itemprop="url">
+                  指针函数与函数指针(33)
                 </a>
               
             
@@ -942,8 +942,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/书籍/" itemprop="url" rel="index">
-                    <span itemprop="name">书籍</span>
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
                   </a>
                 </span>
 
@@ -977,12 +977,11 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
       
         
           
-          作者使用结构体完成这一功能。为使用字符串添加引用计数。
-看代码：++123456789101112131415161718192021222324252627282930313233class Stringg &#123;private://作者声明了一个结构体，来完成操作 		 struct  S
+          先看一段代码：++123456789101112131415161718192021	typedef int(*outhead)(int a);		int a(int d) &#123;		cout &lt;&lt; "this is A" &lt;&lt; endl;		cout &lt;&lt;
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/03/36/#more" rel="contents">
+            <a class="btn" href="/2014/09/03/33/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1151,8 +1150,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
             
               
                 
-                <a class="post-title-link" href="/2014/09/03/33/" itemprop="url">
-                  指针函数与函数指针(33)
+                <a class="post-title-link" href="/2014/09/03/36/" itemprop="url">
+                  more effective c++为智能指针添加计数(36)
                 </a>
               
             
@@ -1179,8 +1178,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
+                  <a href="/categories/书籍/" itemprop="url" rel="index">
+                    <span itemprop="name">书籍</span>
                   </a>
                 </span>
 
@@ -1214,11 +1213,12 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
       
         
           
-          先看一段代码：++123456789101112131415161718192021	typedef int(*outhead)(int a);		int a(int d) &#123;		cout &lt;&lt; "this is A" &lt;&lt; endl;		cout &lt;&lt;
+          作者使用结构体完成这一功能。为使用字符串添加引用计数。
+看代码：++123456789101112131415161718192021222324252627282930313233class Stringg &#123;private://作者声明了一个结构体，来完成操作 		 struct  S
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/03/33/#more" rel="contents">
+            <a class="btn" href="/2014/09/03/36/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
