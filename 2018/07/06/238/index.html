@@ -106,7 +106,7 @@ grain 可以看作是一个单例进程，队列只有一个，会排队修改�
 客户端一开始就会连接一个服务即silo.(GrainClient.Initialize)
 
 StreamProvider">
-<meta property="og:updated_time" content="2018-07-09T14:11:47.210Z">
+<meta property="og:updated_time" content="2018-07-10T16:00:54.411Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="orleans(238)">
 <meta name="twitter:description" content="这个亚马逊云素材同步代码是我至今最大坡度的代码第一次有种想早点下班好回去恶补知识的感觉,可惜又不得不加班完成任务。
@@ -401,7 +401,12 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
 </li>
 </ol>
 <ol>
-<li>Orleans.Immutable 这个是由于和grain的方法调用传参是一次深拷贝<br>grain之间通信，silo之间通信也是深拷贝。<br>为了避免，所以用这个来控制，避免深拷贝。</li>
+<li><p>Orleans.Immutable 这个是由于和grain的方法调用传参是一次深拷贝<br>grain之间通信，silo之间通信也是深拷贝。<br>为了避免，所以用这个来控制，避免深拷贝。</p>
+</li>
+<li><p>Orleans永远不会在执行Task的中途创造另一个Task,所以要求程序代码在执行Task的中途,不要开辟多线程.不然会报错或者会破坏单线程机制.如果真的有需要创造额外的task.</p>
+</li>
+<li><p><code>StatelessWorker</code>的<code>grain</code>，状态无关类型；可以在集群的多个silo里,每一个silo都创造一个相同标识的Grain。 针对此类grain的请求,都只在第一个接受到请求的silo里执行。 Orleans会在所有此类grain忙的时候,自动增加一个</p>
+</li>
 </ol>
 
       
@@ -441,6 +446,10 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/13/239/" rel="prev" title="mysql检索(239)">
+                mysql检索(239) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -508,7 +517,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">228</span>
+              <span class="site-state-item-count">229</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
