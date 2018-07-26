@@ -312,8 +312,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
             
               
                 
-                <a class="post-title-link" href="/2014/10/01/74/" itemprop="url">
-                  dulib里面的头文件包含(74)
+                <a class="post-title-link" href="/2014/10/01/73/" itemprop="url">
+                  static作用(73)
                 </a>
               
             
@@ -340,8 +340,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/第三方库/" itemprop="url" rel="index">
-                    <span itemprop="name">第三方库</span>
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
                   </a>
                 </span>
 
@@ -375,17 +375,14 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
       
         
           
-          他头文件用namespace包括。
-cpp文件也用namespace包括。
-cpp包含个stadx.h文件
-stadx.h文件包含duilib.h文件
-所有的东西写在duilib.h文件里面
-亮点在cpp文件包括，然后包含。导致头文件不用包含。
-
-          
+          static作用（修饰函数、局部变量、全局变量）
+当我们同时编译多个文件时，所有未加static前缀的全局变量和函数都具有全局可见性
+如果加了static，就会对其它源文件隐藏。例如在a和msg的定义前加上static，main.c就看不到它们了。
+利用这一特性可以在不同的文件中定义同名函数和同名变
+          ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/10/01/74/#more" rel="contents">
+            <a class="btn" href="/2014/10/01/73/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -500,7 +497,7 @@ stadx.h文件包含duilib.h文件
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/o.jpg" rel="gallery_cjjislxxw00iot4s9ldm9c1va"
+                 href="/picture/o.jpg" rel="gallery_cjk2o886w00n7pks98q1m51vb"
                  itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/o.jpg" itemprop="contentUrl"/>
               </a>
@@ -526,127 +523,6 @@ stadx.h文件包含duilib.h文件
 
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/09/29/72/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/28/70/" itemprop="url">
-                  already defined in *.obj(70)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-28T03:31:58+08:00" content="2014-09-28">
-              2014-09-28
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          首先注意不能在.h头文件中定义全局变量，否则只要其他文件包括了该头文件，就会出现already defined in *.obj的错误。
-应该把全局变量放在.cpp文件中定义，然后在其他文件中用到该变量时用extern声明一下。
-即使在.h中定义全局变量，用extern可以避免。
-
-          
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/28/70/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -769,6 +645,127 @@ stadx.h文件包含duilib.h文件
 
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/09/28/71/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/09/28/70/" itemprop="url">
+                  already defined in *.obj(70)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-09-28T03:31:58+08:00" content="2014-09-28">
+              2014-09-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          首先注意不能在.h头文件中定义全局变量，否则只要其他文件包括了该头文件，就会出现already defined in *.obj的错误。
+应该把全局变量放在.cpp文件中定义，然后在其他文件中用到该变量时用extern声明一下。
+即使在.h中定义全局变量，用extern可以避免。
+
+          
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/28/70/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1417,8 +1414,8 @@ stadx.h文件包含duilib.h文件
             
               
                 
-                <a class="post-title-link" href="/2014/09/20/59/" itemprop="url">
-                  强制转换临时和原对象(虚函数测试)(59)
+                <a class="post-title-link" href="/2014/09/20/62/" itemprop="url">
+                  string和wstring(62)
                 </a>
               
             
@@ -1480,14 +1477,15 @@ stadx.h文件包含duilib.h文件
       
         
           
-          这是个很坑的地方,大多数想法,转换嘛,
-我把static_cast&lt;A&gt;(B)不就是把B转成A吗? 错! :
-static_cast&lt;window*&gt;(this)-&gt;onResize(); //这是拿this当成window,没问题
-static_cast&lt;win
+          今天用string来find一个中文符号，首先返回符号位置正确。然后符号为界，截取字符串出现问题；
+分析原因：中文符号在string中是占用两个字节的。而string对所有的字符串是一个字符一个字节的
+，所以按位取时，夺取了一个字节，导致数据获取失败。
+用wstring进行存取，可以完全避免。
+学到
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/20/59/#more" rel="contents">
+            <a class="btn" href="/2014/09/20/62/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
