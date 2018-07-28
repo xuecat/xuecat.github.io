@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2018-07-12T16:53:29.982Z</updated>
+  <updated>2018-07-28T09:16:01.303Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -14,6 +14,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>stl排序(240)</title>
+    <link href="https://xuecat.github.io/2018/07/28/240/"/>
+    <id>https://xuecat.github.io/2018/07/28/240/</id>
+    <published>2018-07-28T08:09:45.000Z</published>
+    <updated>2018-07-28T09:16:01.303Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">以前有笔记，但忘了放哪了，再做一次吧</blockquote>
+
+<p><img src="/picture/240.jpg" alt=""></p>
+<ul>
+<li>stable_sort</li>
+<li>partial_sort</li>
+<li>nth_element</li>
+<li>partition和stable_partition</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">func</span><span class="params">(<span class="keyword">const</span> w&amp; l, <span class="keyword">const</span> w&amp; r)</span> </span>&#123;...&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">ifunc</span><span class="params">(<span class="keyword">const</span> w&amp; c)</span> </span>&#123;...&#125;</div></pre></td></tr></table></figure>
+<h4 id="partial-sort"><a href="#partial-sort" class="headerlink" title="partial_sort"></a>partial_sort</h4><pre><code>只排一部分：`partial_sort(w.begin(),w.beging()+20,w.end(),func)`只对前20个元素排
+</code></pre><h4 id="nth-element"><a href="#nth-element" class="headerlink" title="nth_element"></a>nth_element</h4><pre><code>只分界:`nth_element(w.begin(),w.beging()+20,w.end(),func)`
+将最后的20个元素放前面，但它不会像前面那个函数，这个函数不会排序，只是单纯放前面
+</code></pre><h4 id="partition"><a href="#partition" class="headerlink" title="partition"></a>partition</h4><pre><code>前面俩个只会比较元素，当判断元素属性时呢
+`partition(w.begin(), w.end(), ifunc)`功能类似`partial_sort`但比较函数不同
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;以前有笔记，但忘了放哪了，再做一次吧&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/picture/240.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;stable_sort&lt;/li&gt;
+
+    
+    </summary>
+    
+      <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
+    
+    
+      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
+    
+      <category term="stl" scheme="https://xuecat.github.io/tags/stl/"/>
+    
+  </entry>
   
   <entry>
     <title>mysql检索(239)</title>
@@ -311,9 +355,9 @@
       <category term="C#" scheme="https://xuecat.github.io/categories/C/"/>
     
     
-      <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
-    
       <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
+    
+      <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
     
   </entry>
   
@@ -446,31 +490,6 @@
   </entry>
   
   <entry>
-    <title>c++11左右值 (226)</title>
-    <link href="https://xuecat.github.io/2017/12/18/226/"/>
-    <id>https://xuecat.github.io/2017/12/18/226/</id>
-    <published>2017-12-18T12:15:38.000Z</published>
-    <updated>2017-12-20T15:09:39.470Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="C-左右值"><a href="#C-左右值" class="headerlink" title="C++左右值"></a>C++左右值</h3><p> 左值指即能出现等号左边，也能出现在右边的变量（通常指有变量名的值）<br> 右值值只能出现等号右边的值（通常指无变量名的值，函数返回和表达式，常量——不跟对象关联的常量）<br> c++11在上面右值多个将亡值<br><code>move</code>右转左 <code>forward</code>左转右</p>
- <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function">MyClass <span class="title">fun</span> <span class="params">()</span> </span>&#123;MyClass <span class="keyword">return</span> s;&#125;</div><div class="line">MyClass s= fun();</div><div class="line">MyClass&amp; s = fun();</div><div class="line">MyClass&amp;&amp; s = fun();<span class="comment">//这三个全是调用移动构造函数</span></div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;C-左右值&quot;&gt;&lt;a href=&quot;#C-左右值&quot; class=&quot;headerlink&quot; title=&quot;C++左右值&quot;&gt;&lt;/a&gt;C++左右值&lt;/h3&gt;&lt;p&gt; 左值指即能出现等号左边，也能出现在右边的变量（通常指有变量名的值）&lt;br&gt; 右值值只能出现等号右边的值（通常指
-    
-    </summary>
-    
-      <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
-    
-    
-      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
-    
-      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
     <title>JS继承和函数式编程的curry等(227)</title>
     <link href="https://xuecat.github.io/2017/12/18/227/"/>
     <id>https://xuecat.github.io/2017/12/18/227/</id>
@@ -550,6 +569,31 @@
       <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
     
       <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>c++11左右值 (226)</title>
+    <link href="https://xuecat.github.io/2017/12/18/226/"/>
+    <id>https://xuecat.github.io/2017/12/18/226/</id>
+    <published>2017-12-18T12:15:38.000Z</published>
+    <updated>2017-12-20T15:09:39.470Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="C-左右值"><a href="#C-左右值" class="headerlink" title="C++左右值"></a>C++左右值</h3><p> 左值指即能出现等号左边，也能出现在右边的变量（通常指有变量名的值）<br> 右值值只能出现等号右边的值（通常指无变量名的值，函数返回和表达式，常量——不跟对象关联的常量）<br> c++11在上面右值多个将亡值<br><code>move</code>右转左 <code>forward</code>左转右</p>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function">MyClass <span class="title">fun</span> <span class="params">()</span> </span>&#123;MyClass <span class="keyword">return</span> s;&#125;</div><div class="line">MyClass s= fun();</div><div class="line">MyClass&amp; s = fun();</div><div class="line">MyClass&amp;&amp; s = fun();<span class="comment">//这三个全是调用移动构造函数</span></div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;C-左右值&quot;&gt;&lt;a href=&quot;#C-左右值&quot; class=&quot;headerlink&quot; title=&quot;C++左右值&quot;&gt;&lt;/a&gt;C++左右值&lt;/h3&gt;&lt;p&gt; 左值指即能出现等号左边，也能出现在右边的变量（通常指有变量名的值）&lt;br&gt; 右值值只能出现等号右边的值（通常指
+    
+    </summary>
+    
+      <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
+    
+    
+      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
+    
+      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -775,78 +819,6 @@
     
     
       <category term="Asp.Net" scheme="https://xuecat.github.io/tags/Asp-Net/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Bootstrap(218)</title>
-    <link href="https://xuecat.github.io/2017/03/22/218/"/>
-    <id>https://xuecat.github.io/2017/03/22/218/</id>
-    <published>2017-03-22T13:56:53.000Z</published>
-    <updated>2017-05-22T15:58:18.580Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/picture/218.jpg" alt=""></p>
-<p>bootstrap语法太丰富了，完全可以把很多js代码去掉。所以记录下来</p>
-<p><a href="http://v3.bootcss.com/components/" target="_blank" rel="external">http://v3.bootcss.com/components/</a><br><a href="http://getbootstrap.com/javascript/#modals-examples" target="_blank" rel="external">http://getbootstrap.com/javascript/#modals-examples</a></p>
-<h3 id="ui-bootstrap"><a href="#ui-bootstrap" class="headerlink" title="ui-bootstrap"></a>ui-bootstrap</h3><p>bootstrap的TPLS版本里面有所有组件的html代码.angular最好用这个.<br>然后对于angular使用的是ui-boostrap，这个只是定义了控件，还是要去bootstrap官网去下载bootstrap的源码来。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>它主要是自己的<code>data</code>语法太多了:</p>
-<ul>
-<li><p><code>data-dismiss=&quot;modal&quot;</code> 如果在<code>modal</code>弹窗加上，那么点击则会关闭弹窗</p>
-</li>
-<li><p><code>data-toggle=&quot;modal&quot; data-target=&quot;.bs-example-modal-lg&quot;</code>  这样点击按钮就会弹出<code>modal</code>窗口，由于<code>data-target</code>具有css的选择器功能(<code>#id</code>也可以)，所以选择的是class为bs-exampl-modal-lg的元素。</p>
-<p>  如：<code>&lt;div class=&quot;modal fade bs-example-modal-sm&quot; tabindex=&quot;-1&quot;&gt;</code> <strong>加上fade类有淡入淡出的特效</strong></p>
-</li>
-<li><p><code>data-whatever=&quot;&quot;</code> 当一堆按钮要使用同一个模态框时，用这个来传入分别的数据。然而对angular来说完全没必要，毕竟数据绑定了。</p>
-</li>
-<li><p><code>data-toggle=&quot;dropdown&quot;</code> angular感觉用处不大没细看</p>
-</li>
-<li><p><code>data-spy=&quot;scroll&quot; data-target=&quot;#navbar-example&quot;</code> 滚动时顺便修改选项</p>
-</li>
-<li><p><code>data-toggle=&quot;tab&quot;</code> </p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;a href="#ejb" tabindex="-1" data-toggle="tab"&gt;//tab项</div><div class="line">&lt;/a&gt;</div><div class="line"></div><div class="line">&lt;div class="tab-pane fade" id="ios"&gt;...&lt;/div&gt;//tab内容</div></pre></td></tr></table></figure>
-</li>
-<li><p><code>data-toggle=&quot;tooltip&quot; data-placement=&quot;right&quot; title=&quot;Tooltip on right&quot;</code> //表示右边显示tooltip，可以左上下</p>
-</li>
-<li><p><code>data-container=&quot;body&quot; data-toggle=&quot;popover&quot; data-placement=&quot;left&quot; data-content=&quot;Vivamus sagittis lacus vel augue laoreet rutrum faucibus.&quot;</code> 点击弹出带指定箭头的属性窗口，点击再消失； 多个title=”…”的话弹出窗口会多个标题显示。</p>
-</li>
-<li><p><code>data-loading-text=&quot;Loading...&quot;</code> 这个我没写全，它展示的效果是点击后显示加载，鼠标禁止，加载完再恢复。</p>
-</li>
-<li><p><code>data-dismiss=&quot;alert&quot;</code> 这个用于页内嵌入提示框，由于提供各种可使用的格式 <code>alert-warning</code> <code>alert-success</code>。</p>
-</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"myAlert"</span> <span class="attr">class</span>=<span class="string">"alert alert-success"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">class</span>=<span class="string">"close"</span> <span class="attr">data-dismiss</span>=<span class="string">"alert"</span>&gt;</span>&amp;times;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">strong</span>&gt;</span>成功！<span class="tag">&lt;/<span class="name">strong</span>&gt;</span>结果是成功的。</div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>点关闭也确实能(不能也可以加个ng-hide)，但是动画效果不知道咋实现</p>
-<ul>
-<li><p><code>data-loading-text</code>好是好就是没法配合angular使用，只能自己写.</p>
-</li>
-<li><p><code>data-toggle=&quot;collapse&quot;</code> 折叠显示内容</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"btn btn-primary"</span> <span class="attr">role</span>=<span class="string">"button"</span> <span class="attr">data-toggle</span>=<span class="string">"collapse"</span> <span class="attr">href</span>=<span class="string">"#collapseExample"</span> <span class="attr">aria-expanded</span>=<span class="string">"false"</span> <span class="attr">aria-controls</span>=<span class="string">"collapseExample"</span>&gt;</span></div><div class="line">  Link with href</div><div class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn btn-primary"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">data-toggle</span>=<span class="string">"collapse"</span> <span class="attr">data-target</span>=<span class="string">"#collapseExample"</span> <span class="attr">aria-expanded</span>=<span class="string">"false"</span> <span class="attr">aria-controls</span>=<span class="string">"collapseExample"</span>&gt;</span></div><div class="line">  Button with data-target</div><div class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"collapse"</span> <span class="attr">id</span>=<span class="string">"collapseExample"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"well"</span>&gt;</span></div><div class="line">    ...</div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>由于这俩个button链接的是一个折叠内容，点击展开，再点折叠。 里么href和data-target达到了相同效果，我想angular估计只能用data-target</p>
-<p>一般 aria-*是识别属性，但是这里<code>aria-expanded=&quot;true&quot;</code>会默认展开内容</p>
-<ul>
-<li><code>data-ride=&quot;carousel&quot;</code>这是个轮播控件来达到相册的效果，<code>.carousel-caption</code>添加标题显示</li>
-</ul>
-<h3 id="响应式"><a href="#响应式" class="headerlink" title="响应式"></a>响应式</h3><p>12网格式<br><code>.col-xs-*</code> Extra small devices (<768px) `.col-sm-*`="" small="" devices="" tabllets(="">=768px)<br><code>.col-md-*</code> Medium devices(&gt;=922px)<br><code>.col-lg-*</code> Large devices(&gt;=1200px)</768px)></p>
-<p><code>*-offset-*</code>表示偏移</p>
-<p>强制换行用<code>&lt;div class=&quot;row&quot;&gt;</code> 这样即使内部元素也会强制换行</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;/picture/218.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;bootstrap语法太丰富了，完全可以把很多js代码去掉。所以记录下来&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://v3.bootcss.com/components/&quot; target
-    
-    </summary>
-    
-      <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
-    
-    
-      <category term="前端" scheme="https://xuecat.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
-      <category term="bootstrap" scheme="https://xuecat.github.io/tags/bootstrap/"/>
     
   </entry>
   
