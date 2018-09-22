@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2018-08-19T10:22:13.521Z</updated>
+  <updated>2018-09-22T17:46:44.403Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -14,6 +14,144 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mysql(245)</title>
+    <link href="https://xuecat.github.io/2018/09/23/245/"/>
+    <id>https://xuecat.github.io/2018/09/23/245/</id>
+    <published>2018-09-22T17:39:53.000Z</published>
+    <updated>2018-09-22T17:46:44.403Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li><p>约束</p>
+<ul>
+<li>非空约束(not null)</li>
+<li>唯一性约束(unique)</li>
+<li>主键约束(primary key) PK</li>
+<li>外键约束(foreign key) FK</li>
+<li>检查约束(目前MySQL不支持、Oracle支持)</li>
+</ul>
+</li>
+<li><p>非空约束</p>
+<ul>
+<li><code>name varchar(32) not null</code></li>
+</ul>
+</li>
+<li><p>唯一约束 (表之间插入相同值会报错)</p>
+<ul>
+<li><code>email varchar(128) unique</code></li>
+<li><code>email varchar(128), unique(name,email)</code></li>
+<li><code>constraint t_user_email_unique unique(email)</code>给约束表起名,方便以后删除</li>
+</ul>
+</li>
+<li><p>主键约束</p>
+<ul>
+<li><code>id int(10) primary key</code> 单一列级</li>
+<li><code>constraint t_user_id_pk primary key(id)</code> 单一表级</li>
+<li><code>primary key(id,name)</code> 符合表级</li>
+<li>主键自增 <figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function">reate table <span class="title">t_user</span>(<span class="params"></span></span></div><div class="line"> id <span class="keyword">int</span>(<span class="number">10</span>) primary key auto_increment,</div><div class="line"> name <span class="title">varchar</span>(<span class="params"><span class="number">32</span></span>) not <span class="literal">null</span></div><div class="line"> );</div><div class="line"></div><div class="line"><span class="function">insert <span class="keyword">into</span> <span class="title">t_user</span>(<span class="params">name</span>) <span class="title">values</span>(<span class="params"><span class="string">'jay'</span></span>)</span>;</div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t_user</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>外键约束</p>
+</li>
+</ul>
+<ul>
+<li><code>FOREIGN KEY (Id_P) REFERENCES Persons(Id_P)</code></li>
+</ul>
+<h4 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h4><p><code>字段建立索引可以大大提升查询速度</code></p>
+<ul>
+<li><p>普通索引</p>
+<ul>
+<li><code>CREATE INDEX indexName ON mytable(username(length))</code></li>
+<li><code>CREATE TABLE mytable( ID INT NOT NULL, username VARCHAR(16) NOT NULL, INDEX [indexName] (username(length)) )</code></li>
+</ul>
+</li>
+<li><p>唯一索引<br>  它必须唯一,但允许有空值</p>
+<ul>
+<li><code>CREATE UNIQUE INDEX indexName ON mytable(username(length))</code></li>
+<li><code>CREATE TABLE mytable( ID INT NOT NULL, username VARCHAR(16) NOT NULL, UNIQUE [indexName] (username(length)) )</code></li>
+</ul>
+</li>
+<li><p>主键索引<br>  唯一且不允许空</p>
+<ul>
+<li><code>CREATE TABLE mytable( ID INT NOT NULL, username VARCHAR(16) NOT NULL, PRIMARY KEY(ID) );</code></li>
+</ul>
+</li>
+<li><p>组合索引</p>
+<ul>
+<li><code>ALTER TABLE mytable ADD INDEX name_city_age (name(10),city,age);</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>varchar最好在1024以内,虽然它能支持到6553;其它用blob和text来代替</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;&lt;p&gt;约束&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;非空约束(not null)&lt;/li&gt;
+&lt;li&gt;唯一性约束(unique)&lt;/li&gt;
+&lt;li&gt;主键约束(primary key) PK&lt;/li&gt;
+&lt;li&gt;外键约束(foreign key) FK&lt;/li&gt;
+&lt;li&gt;检查约束(
+    
+    </summary>
+    
+      <category term="数据库" scheme="https://xuecat.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="Mysql" scheme="https://xuecat.github.io/tags/Mysql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Xsum问题(243)</title>
+    <link href="https://xuecat.github.io/2018/09/04/243/"/>
+    <id>https://xuecat.github.io/2018/09/04/243/</id>
+    <published>2018-09-04T14:40:16.000Z</published>
+    <updated>2018-09-22T17:40:09.652Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="xsum问题"><a href="#xsum问题" class="headerlink" title="xsum问题"></a>xsum问题</h3><ul>
+<li><p>2sum</p>
+<ul>
+<li>先对数据进行排序，如果用STL的sort快排，时间复杂度为O(nlogn)，然后设置两个指针，一个初始化为数组的头，一个初始化在数组的尾，然后两边向中间扫描，如果当前两个指针指向的数的和正好是target，那么就保存当前数对 (防止重复就跳过相同值)</li>
+</ul>
+</li>
+<li><p>3sum</p>
+<ul>
+<li>依次对数组中得每一个元素num[i]找和为target-num[i]的连个数，这样问题又回到了2Sum上</li>
+</ul>
+</li>
+<li><p>4sum</p>
+<ul>
+<li>d</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;xsum问题&quot;&gt;&lt;a href=&quot;#xsum问题&quot; class=&quot;headerlink&quot; title=&quot;xsum问题&quot;&gt;&lt;/a&gt;xsum问题&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;2sum&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;先对数据进行排序，如果用STL的sort快排，时间复杂
+    
+    </summary>
+    
+      <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
+    
+    
+      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
+    
+      <category term="stl" scheme="https://xuecat.github.io/tags/stl/"/>
+    
+      <category term="算法" scheme="https://xuecat.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>permutation(242)</title>
@@ -369,10 +507,12 @@
     <link href="https://xuecat.github.io/2018/05/06/231/"/>
     <id>https://xuecat.github.io/2018/05/06/231/</id>
     <published>2018-05-06T04:03:21.000Z</published>
-    <updated>2018-05-06T04:16:25.540Z</updated>
+    <updated>2018-09-22T17:57:18.177Z</updated>
     
     <content type="html"><![CDATA[<h2 id="数组检测"><a href="#数组检测" class="headerlink" title="数组检测"></a><strong><strong>数组检测</strong></strong></h2><pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">sizeof</span>(<span class="number">0</span>[t]);<span class="comment">//可以检测这个是数组还是类：对数组来说0[t] t[0]都是一样的。但是对类来说，这是个操作函数(一定要实现它的operator函数哦)</span></div></pre></td></tr></table></figure>
 </code></pre><h2 id="类完整性判断"><a href="#类完整性判断" class="headerlink" title="类完整性判断"></a><strong><strong>类完整性判断</strong></strong></h2><pre><code><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">   <span class="keyword">typedef</span> <span class="keyword">char</span> tt_f[<span class="keyword">sizeof</span>(f) ? <span class="number">1</span> : <span class="number">-1</span>];</div><div class="line">(<span class="keyword">void</span>)<span class="keyword">sizeof</span>(tt_f);</div><div class="line">   <span class="comment">//要注意sizeof的执行是编译期间执行的</span></div><div class="line">   <span class="comment">//所以当类不完整 sizof(f)为0; char[-1]就会编译错误</span></div></pre></td></tr></table></figure>
+</code></pre><p><strong><strong>循环删除</strong></strong><br>循环删除由于存在访问异常的情况,<br>有一种方法，即解决访问问题，又能删除想要的。</p>
+<h2 id="所以尾部删除好点"><a href="#所以尾部删除好点" class="headerlink" title="所以尾部删除好点"></a>所以尾部删除好点</h2><pre><code><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">for (<span class="name">int</span> i = f.Count - <span class="number">1</span><span class="comment">; i &gt;= 0; i--)</span></div><div class="line">&#123;</div><div class="line">    if (<span class="name">f</span>[i] &gt; <span class="number">5</span>)</div><div class="line">    &#123;</div><div class="line">        f.RemoveAt(<span class="name">i</span>)<span class="comment">;</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </code></pre>]]></content>
     
     <summary type="html">
@@ -556,6 +696,31 @@
   </entry>
   
   <entry>
+    <title>c++11左右值 (226)</title>
+    <link href="https://xuecat.github.io/2017/12/18/226/"/>
+    <id>https://xuecat.github.io/2017/12/18/226/</id>
+    <published>2017-12-18T12:15:38.000Z</published>
+    <updated>2017-12-20T15:09:39.470Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="C-左右值"><a href="#C-左右值" class="headerlink" title="C++左右值"></a>C++左右值</h3><p> 左值指即能出现等号左边，也能出现在右边的变量（通常指有变量名的值）<br> 右值值只能出现等号右边的值（通常指无变量名的值，函数返回和表达式，常量——不跟对象关联的常量）<br> c++11在上面右值多个将亡值<br><code>move</code>右转左 <code>forward</code>左转右</p>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function">MyClass <span class="title">fun</span> <span class="params">()</span> </span>&#123;MyClass <span class="keyword">return</span> s;&#125;</div><div class="line">MyClass s= fun();</div><div class="line">MyClass&amp; s = fun();</div><div class="line">MyClass&amp;&amp; s = fun();<span class="comment">//这三个全是调用移动构造函数</span></div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;C-左右值&quot;&gt;&lt;a href=&quot;#C-左右值&quot; class=&quot;headerlink&quot; title=&quot;C++左右值&quot;&gt;&lt;/a&gt;C++左右值&lt;/h3&gt;&lt;p&gt; 左值指即能出现等号左边，也能出现在右边的变量（通常指有变量名的值）&lt;br&gt; 右值值只能出现等号右边的值（通常指
+    
+    </summary>
+    
+      <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
+    
+    
+      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
+    
+      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JS继承和函数式编程的curry等(227)</title>
     <link href="https://xuecat.github.io/2017/12/18/227/"/>
     <id>https://xuecat.github.io/2017/12/18/227/</id>
@@ -639,31 +804,6 @@
   </entry>
   
   <entry>
-    <title>c++11左右值 (226)</title>
-    <link href="https://xuecat.github.io/2017/12/18/226/"/>
-    <id>https://xuecat.github.io/2017/12/18/226/</id>
-    <published>2017-12-18T12:15:38.000Z</published>
-    <updated>2017-12-20T15:09:39.470Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="C-左右值"><a href="#C-左右值" class="headerlink" title="C++左右值"></a>C++左右值</h3><p> 左值指即能出现等号左边，也能出现在右边的变量（通常指有变量名的值）<br> 右值值只能出现等号右边的值（通常指无变量名的值，函数返回和表达式，常量——不跟对象关联的常量）<br> c++11在上面右值多个将亡值<br><code>move</code>右转左 <code>forward</code>左转右</p>
- <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function">MyClass <span class="title">fun</span> <span class="params">()</span> </span>&#123;MyClass <span class="keyword">return</span> s;&#125;</div><div class="line">MyClass s= fun();</div><div class="line">MyClass&amp; s = fun();</div><div class="line">MyClass&amp;&amp; s = fun();<span class="comment">//这三个全是调用移动构造函数</span></div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;C-左右值&quot;&gt;&lt;a href=&quot;#C-左右值&quot; class=&quot;headerlink&quot; title=&quot;C++左右值&quot;&gt;&lt;/a&gt;C++左右值&lt;/h3&gt;&lt;p&gt; 左值指即能出现等号左边，也能出现在右边的变量（通常指有变量名的值）&lt;br&gt; 右值值只能出现等号右边的值（通常指
-    
-    </summary>
-    
-      <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
-    
-    
-      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
-    
-      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
     <title>c++函数指针模板又一次说明(225)</title>
     <link href="https://xuecat.github.io/2017/10/26/225/"/>
     <id>https://xuecat.github.io/2017/10/26/225/</id>
@@ -691,81 +831,6 @@
       <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
     
       <category term="指针" scheme="https://xuecat.github.io/tags/%E6%8C%87%E9%92%88/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>React再次学习(224)</title>
-    <link href="https://xuecat.github.io/2017/08/29/224/"/>
-    <id>https://xuecat.github.io/2017/08/29/224/</id>
-    <published>2017-08-29T13:45:08.000Z</published>
-    <updated>2017-11-13T13:15:58.535Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/picture/224.jpg" alt=""></p>
-<h3 id="ref的使用"><a href="#ref的使用" class="headerlink" title="ref的使用"></a>ref的使用</h3><p>这是react对<code>render</code>中元素提供的一个属性，专门用来标志<code>mount</code>后的元素<br>这个回调属性会在组件安装后立即执行。</p>
-<h4 id="ref字符"><a href="#ref字符" class="headerlink" title="ref字符"></a>ref字符</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">ref</span>=<span class="string">"theInput"</span>/&gt;</span> //通过这个属性来对一个dom设置标志符</div></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">React.findDOMNode(<span class="keyword">this</span>.refs.theInput).focus();<span class="comment">//再通过这个方法来达到访问实体化dom的效果</span></div></pre></td></tr></table></figure>
-<h4 id="ref函数"><a href="#ref函数" class="headerlink" title="ref函数"></a>ref函数</h4><p>当它作为函数时，默认参数就是一个dom的对象<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">   <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">TextInput</span> <span class="attr">ref</span>=<span class="string">&#123;(c)</span> =&gt;</span> this._input = c&#125; /&gt;;//由于安装后立即执行，能得到对象</span></div><div class="line">&#125;,</div><div class="line">componentDidMount: function() &#123;</div><div class="line">   this._input.focus();//对对象操作</div><div class="line">&#125;,</div></pre></td></tr></table></figure></p>
-<h3 id="bind和this"><a href="#bind和this" class="headerlink" title="bind和this"></a>bind和this</h3><p> 官方文档中react用bind很多;<br> 但看他们喜欢在构造函数如此： this.handleToggleClick = this.handleToggleClick.bind(this)</p>
-<p> 我喜欢用箭头函数(es6特性，this指向定义处)直接调用</p>
-<h3 id="JSX嵌入"><a href="#JSX嵌入" class="headerlink" title="JSX嵌入"></a>JSX嵌入</h3>  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">//jsx嵌入任何表达式</div><div class="line">&lt;div&gt;</div><div class="line">  &lt;h1&gt;Hello!&lt;/h1&gt;</div><div class="line">  &#123;unreadMessages.length &gt; 0 &amp;&amp;</div><div class="line">    &lt;h2&gt;</div><div class="line">      You have &#123;unreadMessages.length&#125; unread messages.</div><div class="line">    &lt;/h2&gt;</div><div class="line">  &#125;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">//三目运算符</div><div class="line">&lt;div&gt;</div><div class="line">  The user is &lt;b&gt;&#123;isLoggedIn ? 'currently' : 'not'&#125;&lt;/b&gt; logged in.</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<h4 id="动态组件"><a href="#动态组件" class="headerlink" title="动态组件"></a>动态组件</h4>  <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> components = &#123;</div><div class="line">  photo: PhotoStory,</div><div class="line">  video: VideoStory</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Story</span>(<span class="params">props</span>) </span>&#123;</div><div class="line">  <span class="comment">// Correct! JSX type can be a capitalized variable.</span></div><div class="line">  <span class="keyword">const</span> SpecificStory = components[props.storyType];</div><div class="line">  <span class="keyword">return</span> &lt;SpecificStory story=&#123;props.story&#125; /&gt;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//默认值</div><div class="line">&lt;MyTextBox autocomplete /&gt;//它会默认传true的，但是官方建议不要这么写</div><div class="line"></div><div class="line">//利用es6的解构</div><div class="line">function App1() &#123;</div><div class="line">  return &lt;Greeting firstName="Ben" lastName="Hector" /&gt;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function App2() &#123;</div><div class="line">  const props = &#123;firstName: 'Ben', lastName: 'Hector'&#125;;</div><div class="line">  return &lt;Greeting &#123;...props&#125; /&gt;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="html不接受字符"><a href="#html不接受字符" class="headerlink" title="html不接受字符"></a>html不接受字符</h4>  <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//有以下俩种方式解决</span></div><div class="line">&lt;MyComponent message=<span class="string">"&amp;lt;3"</span> /&gt;</div><div class="line"></div><div class="line">&lt;MyComponent message=&#123;'&lt;3'&#125; /&gt;</div></pre></td></tr></table></figure>
-<h4 id="jsx插入函数"><a href="#jsx插入函数" class="headerlink" title="jsx插入函数"></a>jsx插入函数</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//这种用法太牛逼了，虽然不多见</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Repeat</span>(<span class="params">props</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> items = [];</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; props.numTimes; i++) &#123;</div><div class="line">    items.push(props.children(i));<span class="comment">//这里直接调用父类定义的函数，一个一个执行添加</span></div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;items&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">ListOfTenThings</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> (</div><div class="line">    <span class="xml"><span class="tag">&lt;<span class="name">Repeat</span> <span class="attr">numTimes</span>=<span class="string">&#123;10&#125;</span>&gt;</span></span></div><div class="line">      &#123;(index) =&gt; <span class="tag">&lt;<span class="name">div</span> <span class="attr">key</span>=<span class="string">&#123;index&#125;</span>&gt;</span>This is item &#123;index&#125; in the list<span class="tag">&lt;/<span class="name">div</span>&gt;</span>&#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">Repeat</span>&gt;</span></div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="react-map组件时"><a href="#react-map组件时" class="headerlink" title="react map组件时"></a>react map组件时</h3><ul>
-<li>一个元素的key最好是这个元素在<strong>列表</strong>中拥有的一个独一无二的字符串(所以不同数组列表可以用相同key)</li>
-<li>元素的key只有在它和它的兄弟节点对比时才有意义(换句话说必须在map函数里面的组件里)</li>
-<li>key只对react可见，要用其值，请将作为属性再加个传入</li>
-</ul>
-<h3 id="计算属性名"><a href="#计算属性名" class="headerlink" title="计算属性名"></a>计算属性名</h3> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//多了个name属性，来对应绑定属性</span></div><div class="line"><span class="comment">//通过</span></div><div class="line"><span class="keyword">this</span>.setState(&#123;[name]: value&#125;);</div><div class="line"><span class="comment">//等同于如下</span></div><div class="line"><span class="keyword">var</span> partState = &#123;&#125;;</div><div class="line">partState[name] = value;</div><div class="line"><span class="keyword">this</span>.setState(partState);</div></pre></td></tr></table></figure>
-<h3 id="控制多个元素"><a href="#控制多个元素" class="headerlink" title="控制多个元素"></a>控制多个元素</h3><p> 这个是看了官方的例子，感觉太好用了，笔记下来</p>
- <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Reservation</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(props) &#123;</div><div class="line">    <span class="keyword">super</span>(props);</div><div class="line">    <span class="keyword">this</span>.state = &#123;</div><div class="line">      isGoing: <span class="literal">true</span>,</div><div class="line">      numberOfGuests: <span class="number">2</span></div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="keyword">this</span>.handleInputChange = <span class="keyword">this</span>.handleInputChange.bind(<span class="keyword">this</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  handleInputChange(event) &#123;</div><div class="line">    <span class="keyword">const</span> target = event.target;</div><div class="line">    <span class="keyword">const</span> value = target.type === <span class="string">'checkbox'</span> ? target.checked : target.value;</div><div class="line">    <span class="keyword">const</span> name = target.name;</div><div class="line"></div><div class="line">    <span class="keyword">this</span>.setState(&#123;</div><div class="line">      [name]: value</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      &lt;form&gt;</div><div class="line">        &lt;label&gt;</div><div class="line">          Is going:</div><div class="line">          &lt;input</div><div class="line">            name="isGoing"</div><div class="line">            type="checkbox"</div><div class="line">            checked=&#123;this.state.isGoing&#125;</div><div class="line">            onChange=&#123;this.handleInputChange&#125; /&gt;</div><div class="line">        &lt;/label&gt;</div><div class="line">        &lt;br /&gt;</div><div class="line">        &lt;label&gt;</div><div class="line">          Number of guests:</div><div class="line">          &lt;input</div><div class="line">            name="numberOfGuests"</div><div class="line">            type="number"</div><div class="line">            value=&#123;this.state.numberOfGuests&#125;</div><div class="line">            onChange=&#123;this.handleInputChange&#125; /&gt;</div><div class="line">        &lt;/label&gt;</div><div class="line">      &lt;/form&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="ref用于子组件"><a href="#ref用于子组件" class="headerlink" title="ref用于子组件"></a>ref用于子组件</h3> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">CustomTextInput</span>(<span class="params">props</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> (</div><div class="line">    &lt;div&gt;</div><div class="line">      &lt;input ref=&#123;props.inputRef&#125; /&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  );</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Parent extends React.Component &#123;</div><div class="line">  render() &#123;</div><div class="line">    return (</div><div class="line">      &lt;CustomTextInput</div><div class="line">        inputRef=&#123;el =&gt; this.inputElement = el&#125;</div><div class="line">      /&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="突变数据"><a href="#突变数据" class="headerlink" title="突变数据"></a>突变数据</h3><p> 通过<code>shouldComponentUpdate</code>来判断是否渲染组件，有个<code>React.PureComponent</code>可提供继承，它默认填写了<code>shouldComponentUpdate</code>函数，但是里面只是一些浅比较(对像就算被添加属性,对象的地址还是没变,导致比较为true);<br> 深层数据则不行。<br> 所以官方建议是<code>Immutable</code>来配合使用</p>
-<h3 id="老式的创建类和es6创建类"><a href="#老式的创建类和es6创建类" class="headerlink" title="老式的创建类和es6创建类"></a>老式的创建类和es6创建类</h3><p> <a href="https://reactjs.org/docs/react-without-es6.html" target="_blank" rel="external">https://reactjs.org/docs/react-without-es6.html</a></p>
-<h3 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h3><p> 这个特性在官方网站上被说明为不建议使用.<br> 优点:<br>  跨越组件层次传递，这简直太好了，不用像<code>props</code>那样一个一个传，直接跨代传都可以<br> 缺点:<br>  这也是官方举例，当state或者setState 被调用,getChildContext也会被调用,生成新的context;<br>  但<code>shouldComponentUpdate</code>返回的 false 会 block 住 context，导致没有更新</p>
-<p>  另外context相当一个全局变量，难以追溯修改源.</p>
-<p> 虽然官方不建议用，但看网上建议把它当个全局固定值用，避免修改来躲避状态更新失败.</p>
-<h3 id="protals"><a href="#protals" class="headerlink" title="protals"></a>protals</h3><p> 当组件需要”跳出”容器(对话框,提示框,<code>overflow:hidden</code> <code>z-index</code>等),此时使用此属性</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;/picture/224.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;ref的使用&quot;&gt;&lt;a href=&quot;#ref的使用&quot; class=&quot;headerlink&quot; title=&quot;ref的使用&quot;&gt;&lt;/a&gt;ref的使用&lt;/h3&gt;&lt;p&gt;这是react对&lt;co
-    
-    </summary>
-    
-      <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
-    
-    
-      <category term="react" scheme="https://xuecat.github.io/tags/react/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>js的数组(223)</title>
-    <link href="https://xuecat.github.io/2017/07/17/223/"/>
-    <id>https://xuecat.github.io/2017/07/17/223/</id>
-    <published>2017-07-17T15:44:03.000Z</published>
-    <updated>2017-11-13T13:16:05.746Z</updated>
-    
-    <content type="html"><![CDATA[<p>Javascript中的数组对象是一种伪数组的”Array-like”对象，“它把数组的下标转变成字符串，用其作为属性”。<br>声明一个数组：<br>var arr=[1,2,3];<br>然后使用“负索引”<br>arr[-0.5]=100;<br>实际上arr.length值仍然是3，不过arr得到一个键值对为-0.5:100的属性，虽然不能使用小数点取这个属性和值，但方括号是可以用的 arr[-0.5]或arr[‘-0.5’]都可以得到100</p>
-<p><code>负数和字符并不影响长度</code><br>数组对象其实是一个特殊对象，他拥有普通对象的全部特性，所以不止负索引，小数索引，连字符串索引都是可以的，只是用这些索引向数组添加属性时，数组的length不会增加罢了，而只有当索引是正整数或其对应数字串时，length才会增加，仅此而已。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Javascript中的数组对象是一种伪数组的”Array-like”对象，“它把数组的下标转变成字符串，用其作为属性”。&lt;br&gt;声明一个数组：&lt;br&gt;var arr=[1,2,3];&lt;br&gt;然后使用“负索引”&lt;br&gt;arr[-0.5]=100;&lt;br&gt;实际上arr.len
-    
-    </summary>
-    
-      <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
-    
-    
-      <category term="函数和结构" scheme="https://xuecat.github.io/tags/%E5%87%BD%E6%95%B0%E5%92%8C%E7%BB%93%E6%9E%84/"/>
-    
-      <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
     
   </entry>
   

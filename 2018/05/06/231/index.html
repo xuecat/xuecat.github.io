@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="XueCat">
 <meta property="og:description" content="数组检测1sizeof(0[t]);//可以检测这个是数组还是类：对数组来说0[t] t[0]都是一样的。但是对类来说，这是个操作函数(一定要实现它的operator函数哦)
 类完整性判断1234   typedef char tt_f[sizeof(f) ? 1 : -1];(void)sizeof(tt_f);   //要注意sizeof的执行是编译期间执行的   //所以当类不完整 sizo">
-<meta property="og:updated_time" content="2018-05-06T04:16:25.540Z">
+<meta property="og:updated_time" content="2018-09-22T17:57:18.177Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c++记录(231)">
 <meta name="twitter:description" content="数组检测1sizeof(0[t]);//可以检测这个是数组还是类：对数组来说0[t] t[0]都是一样的。但是对类来说，这是个操作函数(一定要实现它的operator函数哦)
@@ -374,6 +374,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
       
         <h2 id="数组检测"><a href="#数组检测" class="headerlink" title="数组检测"></a><strong><strong>数组检测</strong></strong></h2><pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">sizeof</span>(<span class="number">0</span>[t]);<span class="comment">//可以检测这个是数组还是类：对数组来说0[t] t[0]都是一样的。但是对类来说，这是个操作函数(一定要实现它的operator函数哦)</span></div></pre></td></tr></table></figure>
 </code></pre><h2 id="类完整性判断"><a href="#类完整性判断" class="headerlink" title="类完整性判断"></a><strong><strong>类完整性判断</strong></strong></h2><pre><code><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">   <span class="keyword">typedef</span> <span class="keyword">char</span> tt_f[<span class="keyword">sizeof</span>(f) ? <span class="number">1</span> : <span class="number">-1</span>];</div><div class="line">(<span class="keyword">void</span>)<span class="keyword">sizeof</span>(tt_f);</div><div class="line">   <span class="comment">//要注意sizeof的执行是编译期间执行的</span></div><div class="line">   <span class="comment">//所以当类不完整 sizof(f)为0; char[-1]就会编译错误</span></div></pre></td></tr></table></figure>
+</code></pre><p><strong><strong>循环删除</strong></strong><br>循环删除由于存在访问异常的情况,<br>有一种方法，即解决访问问题，又能删除想要的。</p>
+<h2 id="所以尾部删除好点"><a href="#所以尾部删除好点" class="headerlink" title="所以尾部删除好点"></a>所以尾部删除好点</h2><pre><code><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">for (<span class="name">int</span> i = f.Count - <span class="number">1</span><span class="comment">; i &gt;= 0; i--)</span></div><div class="line">&#123;</div><div class="line">    if (<span class="name">f</span>[i] &gt; <span class="number">5</span>)</div><div class="line">    &#123;</div><div class="line">        f.RemoveAt(<span class="name">i</span>)<span class="comment">;</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </code></pre>
       
     </div>
@@ -483,7 +485,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">232</span>
+              <span class="site-state-item-count">234</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -593,7 +595,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数组检测"><span class="nav-number">1.</span> <span class="nav-text">数组检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类完整性判断"><span class="nav-number">2.</span> <span class="nav-text">类完整性判断</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数组检测"><span class="nav-number">1.</span> <span class="nav-text">数组检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类完整性判断"><span class="nav-number">2.</span> <span class="nav-text">类完整性判断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#所以尾部删除好点"><span class="nav-number">3.</span> <span class="nav-text">所以尾部删除好点</span></a></li></ol></div>
             
           </div>
         </section>
