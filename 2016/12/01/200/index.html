@@ -98,7 +98,7 @@ dump：https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7
 ps: 退出指令 q 就好了。
 dump：https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump
 如果只想程序运行时的内存dump，直接从资源管理器；进程tab页上，选中程">
-<meta property="og:updated_time" content="2018-08-18T08:46:06.778Z">
+<meta property="og:updated_time" content="2019-04-21T12:05:35.707Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="windbg调试(200)">
 <meta name="twitter:description" content="64位寻址到16EB （1EB=1000TB）x64控制寻址范围16TB
@@ -388,6 +388,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
 <li>查看时间戳(lmt, 我自己喜欢<code>lmt sm</code>)，找到对应pdb，设置pdb路径</li>
 <li>重新加载pdb(.reload)，运行分析命令(!analyze -v)<br>一般崩溃会有exception，就查找这个字符串，就可以找到对应执行函数。(~N 切换到N号线程，主线程是0号)<br>主线程没有就切换到其它线程查找(<code>~*e kb</code>， 建议使用<code>~* kb</code> 这样会列出线程号和更多信息)</li>
 </ol>
+<p><strong>需要确认指令(需要实践)</strong>:<br>托管代码，由托管器管理内存等，c++ clr工程就是。c#就是托管代码<br><figure class="highlight erlang-repl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">!dumpheap  显示托管堆的信息</div><div class="line">!dumpheap -stat 检查当前所有托管类型的统计信息</div><div class="line">!dumpheap -type Person –stat 在堆中查找指定类型（person）对象，注意大小写敏感</div><div class="line">!clrstack  显示调用栈</div><div class="line">!clrstack -p 显示调用栈，同时显示参数</div><div class="line">!clrstack 只显示托管代码，而kb只显示非托管代码</div><div class="line">!dumpobj(!do)  显示一个对象的内容</div><div class="line">!dumparray(!da)  显示数组</div><div class="line">!DumpStackObjects(!dso) 当前线程对象分配过程</div></pre></td></tr></table></figure></p>
+<p><strong>找到hang住线程</strong>:<br><figure class="highlight erlang-repl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">!threads</div><div class="line">~* e!clrstack</div><div class="line">!syncblk</div></pre></td></tr></table></figure></p>
 <p><strong>x32</strong>:<br>基本相同，但是当32位程序运行在64位系统的时候，产生的dump</p>
 <ol>
 <li>先加载64位的扩展(.load wow64exts)</li>
@@ -593,7 +595,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">236</span>
+              <span class="site-state-item-count">237</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -601,7 +603,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
