@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2019-10-28T15:33:30.154Z</updated>
+  <updated>2019-12-11T15:46:02.681Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -14,6 +14,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>for(;;)和while(true)(250)</title>
+    <link href="https://xuecat.github.io/2019/12/11/250/"/>
+    <id>https://xuecat.github.io/2019/12/11/250/</id>
+    <published>2019-12-11T15:39:46.000Z</published>
+    <updated>2019-12-11T15:46:02.681Z</updated>
+    
+    <content type="html"><![CDATA[<p>比较结果<br><figure class="highlight subunit"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">while(1)</div><div class="line"></div><div class="line">mov eax,1</div><div class="line"><span class="keyword">test </span>eax,eax</div><div class="line">je foo<span class="string">+23</span>h</div><div class="line">jmp foo<span class="string">+18</span>h</div><div class="line"></div><div class="line"></div><div class="line">for(;;)</div><div class="line"></div><div class="line">jmp foo<span class="string">+23</span>h</div></pre></td></tr></table></figure></p>
+<p>总结:for (;;):1.指令少2.不占用寄存器3.没有判断跳转,并不是不能跳出</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;比较结果&lt;br&gt;&lt;figure class=&quot;highlight subunit&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class
+    
+    </summary>
+    
+      <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
+    
+    
+      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
+    
+  </entry>
   
   <entry>
     <title>服务器记录(249)</title>
@@ -706,100 +730,9 @@
       <category term="C#" scheme="https://xuecat.github.io/categories/C/"/>
     
     
-      <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
-    
       <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
     
-  </entry>
-  
-  <entry>
-    <title>JS札记——网上看的装逼写法(229)</title>
-    <link href="https://xuecat.github.io/2018/01/25/229/"/>
-    <id>https://xuecat.github.io/2018/01/25/229/</id>
-    <published>2018-01-25T12:54:28.000Z</published>
-    <updated>2018-04-23T00:34:53.823Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/picture/229.jpg" alt=""></p>
-<h3 id="JS札记"><a href="#JS札记" class="headerlink" title="JS札记"></a>JS札记</h3><p> 数字取整:<br> <code>~~</code> 其实这是个按位非的运算符做了俩次<br> <code>2.33|0</code><br> <code>2.33&gt;&gt;0</code></p>
-<p> 字符转数字:<br> <code>var a =&#39;1&#39;; +a;</code> 它用隐式转换来的</p>
-<p> 类型判断:<br> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typeof</span> d == <span class="string">"string"</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line">d <span class="keyword">instanceof</span> Person;<span class="comment">//判断constructor.prototype是否存在于要检测对象的原型链上. 所以对number string boolean无效</span></div></pre></td></tr></table></figure></p>
-<p> parseInt范围:<br> <code>parseInt(0.0000008)</code>//这个结果是8, 小数点后7位出错<br> <code>parseInt(10000000000023291)</code>//20位出错</p>
-<p> 数组去重:<br> <code>[...new Set([1, &quot;1&quot;, 2, 1, 1, 3])]</code></p>
-<p> 指定长度填充:<br> 以前就在想了，赶紧笔记: <code>let aa = Array(6).fill(8)</code> 长度6,填充8</p>
-<p> 短路表达式:<br> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = b&amp;&amp;<span class="number">1</span>; <span class="keyword">if</span> (b) a=<span class="number">1</span>; <span class="keyword">else</span> a=b;</div><div class="line"><span class="keyword">var</span> a = b||<span class="number">1</span>; <span class="keyword">if</span> (b) a=b; <span class="keyword">else</span> a=<span class="number">1</span>;</div></pre></td></tr></table></figure></p>
-<p> 高逼格创建函数:<br> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> f = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">'a'</span>, <span class="string">'a++; return a+1;'</span>);</div><div class="line">f(<span class="number">1</span>)<span class="comment">//3</span></div><div class="line"><span class="comment">//函数字符化</span></div></pre></td></tr></table></figure></p>
-<p> 立即执行函数:<br> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;...&#125;)();</div><div class="line">!<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;...&#125;();</div><div class="line">~<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;...&#125;();</div><div class="line">-<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;...&#125;();</div><div class="line">+<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;...&#125;();</div></pre></td></tr></table></figure></p>
-<h3 id="浏览器安全"><a href="#浏览器安全" class="headerlink" title="浏览器安全"></a>浏览器安全</h3><ol>
-<li>xss安全，对url和内容做过滤，防止嵌入js执行代码</li>
-<li>csp, 通过服务器应答头或者html的<code>META</code>标签,限制请求源</li>
-</ol>
-<h3 id="浏览器Console命令"><a href="#浏览器Console命令" class="headerlink" title="浏览器Console命令"></a>浏览器Console命令</h3> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log();</div><div class="line"><span class="built_in">console</span>.dir();<span class="comment">//显示一个对象所有属性和方法</span></div><div class="line"><span class="built_in">console</span>.dirxml();<span class="comment">//显示网页某节点所包含的html/xml</span></div><div class="line"><span class="built_in">console</span>.assert();<span class="comment">//弹框</span></div><div class="line"><span class="built_in">console</span>.trace();<span class="comment">//附带显示行数</span></div><div class="line"><span class="built_in">console</span>.time();<span class="built_in">console</span>.timeEnd();用来显示代码运行时间</div></pre></td></tr></table></figure>
-<h3 id="浏览器其它"><a href="#浏览器其它" class="headerlink" title="浏览器其它"></a>浏览器其它</h3><p> 浏览器能设置条件语句断点<br> 左边可以直接启动手机模式,这样就能看手机状态下的浏览情况</p>
-<h3 id="CSS黑魔法"><a href="#CSS黑魔法" class="headerlink" title="CSS黑魔法"></a>CSS黑魔法</h3><h3 id="浏览器缓存"><a href="#浏览器缓存" class="headerlink" title="浏览器缓存"></a>浏览器缓存</h3><p> 强缓存:</p>
-<ul>
-<li>当头的Cache-Control的max-age(最多有效时间)/s-maxage(代理最大有效时间) 被设置时, 用头的date和当前时间比对</li>
-<li><p>当无 头的cache-control只有头的expires时,则用expires和当前时间对比</p>
-<p>协商缓存:</p>
-</li>
-<li>头有last-modiied和etag,会向服务器请求是否失效,请求包加头if-modified-since和if-none-match.<br>服务器回应304浏览器就本地加载，否则重新发送数据</li>
-</ul>
-<h3 id="box-sizing"><a href="#box-sizing" class="headerlink" title="box-sizing"></a>box-sizing</h3><p> 这个属性来源于css3属性<br> 从里到外,margin-&gt;border-&gt;padding-&gt;content.</p>
-<ul>
-<li><p>content-box标准盒。height指content的高,width指content的宽</p>
-</li>
-<li><p>border-box怪异盒。height指content+padding+border的高,width指content+padding+border的高</p>
-</li>
-</ul>
-<p>网上说在网页的顶部加上 doctype 声明。假如不加 doctype 声明，那么各个浏览器会根据自己的行为去理解网页。</p>
-<h3 id="浏览器安全-1"><a href="#浏览器安全-1" class="headerlink" title="浏览器安全"></a>浏览器安全</h3><p> CSRF(跨站点请求伪造): 用户c打开网站a，未推出a之前，打开网站b。网站b发出请求要求访问网站a，来利用未销毁的cookie来达到攻击的目的</p>
-<p> 防范方法:</p>
-<ul>
-<li>验证http referer字段，这个字段表示http请求来源地址</li>
-<li>请求接口添加token验证</li>
-<li><p>http添加自定义属性</p>
-<p>XSS(跨站脚本攻击):调用web接口时，提交js代码进去，下次访问页面会执行js代码达到攻击</p>
-<p>防范方法:</p>
-</li>
-<li>输入数据编码处理(HTML Entity)</li>
-<li>输入数据过滤</li>
-<li>矫正</li>
-</ul>
-<h3 id="JS技巧"><a href="#JS技巧" class="headerlink" title="JS技巧"></a>JS技巧</h3><p><code>[]+{}</code> 非primitive type(即值类型)的<code>+</code>运算,对于数组和<code>object</code>,其实都是在调用<code>toString</code>方法.<br>数组<code>[]</code>的<code>toString</code>其实就是调用<code>.join()</code>方法.<br><code>Object</code>转<code>String</code>就是<code>[object Object]</code>(用<code>String({})</code>测试)</p>
-<p><code>[]+{}</code>相当于””+”[object Object]”<br><code>{}+[]</code> 会变成俩端<code>{}</code>和<code>+[]</code>,一个代码段一个执行语句,由于后面是空且被隐式转换了,所以结果是<code>0</code><br><code>{}+{}</code></p>
-<h3 id="JS有6个假值-false-null-undefined-0-“”-NaN"><a href="#JS有6个假值-false-null-undefined-0-“”-NaN" class="headerlink" title="JS有6个假值:false null undefined 0 “” NaN"></a>JS有6个假值:false null undefined 0 “” NaN</h3><p> <strong>但是它们之间并非都相等</strong><br> 以下是相等的:<br> <code>false==0</code><br> <code>false==&#39;&#39;</code><br> <code>null==undefined</code><br> <code>0==&#39;&#39;</code></p>
-<h3 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h3> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">//es5</span></div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">unique</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> res = [];</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = a.length; i &lt; len; i++) &#123;</div><div class="line">    <span class="keyword">var</span> item = a[i];</div><div class="line">    (res.indexOf(item) === <span class="number">-1</span>) &amp;&amp; res.push(item);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//es6</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">unique</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="built_in">Array</span>.from(<span class="keyword">new</span> <span class="built_in">Set</span>(a));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="浏览器渲染和服务器渲染"><a href="#浏览器渲染和服务器渲染" class="headerlink" title="浏览器渲染和服务器渲染"></a>浏览器渲染和服务器渲染</h3><p> 浏览器端渲染，指的是用js去生成html，前端做路由。举例：React, Vue等等前端框架。适合单页面应用程序。</p>
-<p> 服务器端渲染，指的是用后台语言通过一些模版引擎生成html。举例：PHP文件、JSP文件、Python的Flask配合Jinja引擎、Django框架、Java配合vm模版引擎、NodeJS配合Jade。适合多页面应用。</p>
-<p> <strong>浏览器渲染过程</strong><br> DOM Tree：浏览器将HTML解析成树形的数据结构。<br> CSS Rule Tree：浏览器将CSS解析成树形的数据结构。<br> Render Tree: DOM和CSSOM合并后生成Render Tree。<br> layout: 有了Render Tree，浏览器已经能知道网页中有哪些节点、各个节点的CSS定义以及他们的从属关系，从而去计算出每个节点在屏幕中的位置。<br> painting: 按照算出来的规则，通过显卡，把内容画到屏幕上</p>
-<p> 过程是异步的，下载多少内容，构建多少render树<br> （1）Reflow（回流）：浏览器要花时间去渲染，当它发现了某个部分发生了变化影响了布局，那就需要倒回去重新渲染(要尽量避免它:操作dom 元素尺寸变化 css属性变化)。<br> （2）Repaint（重绘）：如果只是改变了某个元素的背景颜色，文字颜色等，不影响元素周围或内部布局的属性，将只会引起浏览器的repaint，重画某一部分。 </p>
-<p> <strong>浏览器优化</strong><br> 减少refow/repaint：</p>
-<ul>
-<li>不要一条一条地修改 DOM 的样式。与其这样，还不如预先定义好 css 的 class，然后修改 DOM 的 className</li>
-<li>不要把 DOM 结点的属性值放在一个循环里当成循环里的变量</li>
-<li>为动画的 HTML 元件使用 fixed 或 absoult 的 position，那么修改他们的 CSS 是不会 reflow 的</li>
-<li><p>千万不要使用 table 布局。因为可能很小的一个小改动会造成整个 table 的重新布局</p>
-<p><strong>CSS优化</strong><br>CSS选择符是从右到左进行匹配的。从右到左！所以，#nav li 我们以为这是一条很简单的规则，秒秒钟就能匹配到想要的元素，但是，但是，但是，是从右往左匹配啊，所以，会去找所有的li，然后再去确定它的父元素是不是#nav</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">dom深度尽量浅</div><div class="line">减少inline javascript(<span class="keyword">script</span>嵌入那种)、css的数量</div><div class="line">不要为<span class="built_in">id</span>选择器指定类名或是标签，因为<span class="built_in">id</span>可以唯一确定一个元素</div><div class="line">避免后代选择符，尽量使用子选择符。原因：子元素匹配符的概率要大于后代元素匹配符。后代选择符;<span class="comment">#tp p&#123;&#125; 子选择符：#tp&gt;p&#123;&#125;</span></div><div class="line">避免使用通配符</div></pre></td></tr></table></figure>
-<p><strong>js的下载和执行会阻塞Dom树的构建</strong></p>
-</li>
-</ul>
-<h3 id="js数组"><a href="#js数组" class="headerlink" title="js数组"></a>js数组</h3> <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> tt = [<span class="string">"22"</span>, <span class="string">"55"</span>, <span class="string">"88"</span>];</div><div class="line">tt[<span class="number">7</span>] = <span class="number">3</span>;</div><div class="line">t.length<span class="comment">//8 是不是很惊讶，然而t[6]是undefined</span></div></pre></td></tr></table></figure>
-<h3 id="js模块加载"><a href="#js模块加载" class="headerlink" title="js模块加载"></a>js模块加载</h3><p> commonjs:nodejs应用最多，它的require是同步的，运行时确定模块依赖关系，先加载整个模块，直接生产对象1<br> 再从对象上读取方法<br> amd:requirejs就实现了amd规范，异步，运行时加载<br> es6：编译时确定依赖关系，导出任意值</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;/picture/229.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;JS札记&quot;&gt;&lt;a href=&quot;#JS札记&quot; class=&quot;headerlink&quot; title=&quot;JS札记&quot;&gt;&lt;/a&gt;JS札记&lt;/h3&gt;&lt;p&gt; 数字取整:&lt;br&gt; &lt;code&gt;~~
-    
-    </summary>
-    
-      <category term="CSS &amp; JS" scheme="https://xuecat.github.io/categories/CSS-JS/"/>
-    
-    
-      <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
-    
-      <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+      <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
     
   </entry>
   

@@ -312,6 +312,128 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
             
               
                 
+                <a class="post-title-link" href="/2014/09/09/42/" itemprop="url">
+                  取非符和内存对齐进阶(42)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-09-09T03:31:58+08:00" content="2014-09-09">
+              2014-09-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          先看取非符：
+a=0=(00000000);  ~a=(11111111)=-1
+a=1=(00000001);  ~a=(11111110)=-2
+a=2=(00000010);  ~a=(11111101)=-3
+而计算机里是用补码来存储的，因此111...11101是补码，对应的有符号数是-3
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/09/42/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2014/09/06/41/" itemprop="url">
                   more effective c++非尾端类设计抽象类(41)
                 </a>
@@ -430,8 +552,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
             
               
                 
-                <a class="post-title-link" href="/2014/09/05/40/" itemprop="url">
-                  more effective c++根据类型决定虚化(40)
+                <a class="post-title-link" href="/2014/09/05/39/" itemprop="url">
+                  static_cast dynamic_cast再进一步
                 </a>
               
             
@@ -458,8 +580,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/书籍/" itemprop="url" rel="index">
-                    <span itemprop="name">书籍</span>
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
                   </a>
                 </span>
 
@@ -493,16 +615,13 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
       
         
           
-          第31条了，这一跳一下就解决了我最近的疑惑！
-先看游戏规则:
-1、有的类型，宇宙飞船、太空站、小行星、
-2、他们互相碰撞，任意两两进行碰撞。
-3、具有主被动性！且不同的主被动，不同的类型进行碰撞，产生的结果也不一样。
-分析，需要运行时动态识别，所包含的对象，所以设计c++RTTI计数。（过程代码不列
+          string a = typeid(dynamic_cast(this)).name();
+发现dynamic_cast确实能把父子类的类型做转换，但是对于虚函数，还是无法，应该是内存覆盖了就无法修改了。
+只有int selfprice = static_cast(*this).GetPrice()
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/05/40/#more" rel="contents">
+            <a class="btn" href="/2014/09/05/39/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -674,8 +793,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
             
               
                 
-                <a class="post-title-link" href="/2014/09/05/39/" itemprop="url">
-                  static_cast dynamic_cast再进一步
+                <a class="post-title-link" href="/2014/09/05/40/" itemprop="url">
+                  more effective c++根据类型决定虚化(40)
                 </a>
               
             
@@ -702,8 +821,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
+                  <a href="/categories/书籍/" itemprop="url" rel="index">
+                    <span itemprop="name">书籍</span>
                   </a>
                 </span>
 
@@ -737,13 +856,16 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
       
         
           
-          string a = typeid(dynamic_cast(this)).name();
-发现dynamic_cast确实能把父子类的类型做转换，但是对于虚函数，还是无法，应该是内存覆盖了就无法修改了。
-只有int selfprice = static_cast(*this).GetPrice()
+          第31条了，这一跳一下就解决了我最近的疑惑！
+先看游戏规则:
+1、有的类型，宇宙飞船、太空站、小行星、
+2、他们互相碰撞，任意两两进行碰撞。
+3、具有主被动性！且不同的主被动，不同的类型进行碰撞，产生的结果也不一样。
+分析，需要运行时动态识别，所包含的对象，所以设计c++RTTI计数。（过程代码不列
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/05/39/#more" rel="contents">
+            <a class="btn" href="/2014/09/05/40/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1269,125 +1391,6 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
             
               
                 
-                <a class="post-title-link" href="/2014/09/02/34/" itemprop="url">
-                  常量区进阶(34)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-02T03:31:58+08:00" content="2014-09-02">
-              2014-09-02
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          ++12345678910char *strA()&#123;   	char str[]="hello world";   	return str;&#125;char *strA()&#123;   	char *str="hello world";   	return str;&#125;
-首
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/02/34/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2014/09/02/35/" itemprop="url">
                   more effective c++智能指针继承传递(35)
                 </a>
@@ -1530,7 +1533,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">238</span>
+              <span class="site-state-item-count">239</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
