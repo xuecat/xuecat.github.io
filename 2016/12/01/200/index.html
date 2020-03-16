@@ -98,7 +98,7 @@ dump：https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7
 ps: 退出指令 q 就好了。
 dump：https://social.technet.microsoft.com/Forums/scriptcenter/zh-CN/e79d38d9-7360-41e5-8288-24f978877755/dump
 如果只想程序运行时的内存dump，直接从资源管理器；进程tab页上，选中程">
-<meta property="og:updated_time" content="2019-04-21T12:05:35.707Z">
+<meta property="og:updated_time" content="2020-03-16T14:45:26.634Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="windbg调试(200)">
 <meta name="twitter:description" content="64位寻址到16EB （1EB=1000TB）x64控制寻址范围16TB
@@ -454,7 +454,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
 <p>eax 的值是baadfood 填充模式时分配成功但没初始化。释放填充是feeefeee</p>
 <h3 id="堆错误-堆句柄不匹配"><a href="#堆错误-堆句柄不匹配" class="headerlink" title="堆错误-堆句柄不匹配"></a>堆错误-堆句柄不匹配</h3><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">hSmallHeap = GetProcessHeap();<span class="comment">//默认堆</span></div><div class="line">hLargeHeap = HeapCreate(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);<span class="comment">//私有堆</span></div><div class="line"></div><div class="line">_DPH_BLOCK_INFORMATION有个Heap会辨识堆句柄，以此来判断堆句柄是否匹配。</div></pre></td></tr></table></figure>
 <p>去找结构体，自己声明，还要自己定义（因为它定义了才会有符号，才能找到自己声明的那个结构体）</p>
-<h3 id="死锁情况"><a href="#死锁情况" class="headerlink" title="死锁情况"></a>死锁情况</h3><p><code>~*kb</code> 显示真进线程信息很有用 (<code>~*</code>切线程)</p>
+<h3 id="死锁情况"><a href="#死锁情况" class="headerlink" title="死锁情况"></a>死锁情况</h3><p><code>~*e kb</code> 显示真进线程信息很有用 (<code>~* s</code>切线程 <code>切进程要加s</code>)</p>
 <p>先看它们第一行信息，Unfrozen表示它们都在运行。<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="number">0</span>  <span class="string">Id:</span> <span class="number">2384.</span>f68 <span class="string">Suspend:</span> <span class="number">1</span> <span class="string">Teb:</span> <span class="number">7</span>efdd000 Unfrozen<span class="comment">//主进程</span></div><div class="line"><span class="number">1</span>  <span class="string">Id:</span> <span class="number">2384.14</span>f4 <span class="string">Suspend:</span> <span class="number">1</span> <span class="string">Teb:</span> <span class="number">7</span>efda000 Unfrozen<span class="comment">//子线程</span></div><div class="line"><span class="comment">//这个id很有用，特别是小数点后面的数字代表EBP。</span></div><div class="line"><span class="comment">//后面的OwningThread上的值就是此数字。</span></div></pre></td></tr></table></figure></p>
 <p>从堆栈看，俩个线程都在<code>NtWaitForSingleObject</code>结束。找到执行函数<code>RtlEnterCriticalSection</code>的参数<br>在分别<code>!cs 00d9a138</code> <code>!cs 00d9a150</code>(这个命令由于涉及到了内核对象，必须去服务器那边下符号)<br>发现这俩个临界区都锁住了，<code>LOCKED LockCount = 0x1 WaiterWoken = No</code>；<br>而它们的<code>OwningThread</code>则正好分别是彼此，说明是互相锁住了。</p>
 <h3 id="锁中产生异常"><a href="#锁中产生异常" class="headerlink" title="锁中产生异常"></a>锁中产生异常</h3><p>临界区的<code>OwningThread</code>会被分配给一个找不到ID的地址（Windows异常模块接管），会导致接下来不会释放临界区。<br>且问题栈会有：<code>DbgBreakPoint DbgUiRemoteBreakin</code></p>
@@ -595,7 +595,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">239</span>
+              <span class="site-state-item-count">240</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -612,7 +612,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -724,7 +724,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
         <div class="copyright" >
   
   &copy;  2013 - 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

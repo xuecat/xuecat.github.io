@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2019-12-11T15:46:02.681Z</updated>
+  <updated>2020-02-02T14:50:56.869Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -14,6 +14,59 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Orleans新记录(251)</title>
+    <link href="https://xuecat.github.io/2020/02/02/251/"/>
+    <id>https://xuecat.github.io/2020/02/02/251/</id>
+    <published>2020-02-02T04:31:32.000Z</published>
+    <updated>2020-02-02T14:50:56.869Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong><em>Grain Identity</em></strong></p>
+<ul>
+<li>获取key有多样的（继承多样：<code>IGrainWithIntegerKey</code>）</li>
+</ul>
+<p><strong><em>Timers and Reminders</em></strong></p>
+<ul>
+<li><p><strong><em>Observers</em></strong></p>
+</li>
+<li>服务端<code>ObserverSubscriptionManager&lt;&gt;</code> <code>IGrainObserver</code>保持订阅列表，调相应接口来进行通知对应订阅</li>
+<li>客户端<code>CreateObjectReference</code> <code>Subscribe</code>向服务器订阅</li>
+</ul>
+<p><strong><em>Reentrancy</em></strong></p>
+<ul>
+<li>grain类用<code>[Reentrant]</code>能完全异步，外部调它的方法顺序全是乱的。</li>
+<li><code>[AlwaysInterleave]</code>单个方法异步</li>
+<li>如果没有异步要注意方法里面出现<code>GetGrain</code>导致的<code>grain</code>之间互相调用会死锁</li>
+<li>服务端可以写个属性来进行动态异步交错(感觉没啥用呢)</li>
+</ul>
+<p><strong><em>RequestContext</em></strong></p>
+<ul>
+<li>客户端<code>RequestContext.Set</code>，服务端<code>RequestContext.Get</code>它将与Orleans请求一起流向接收谷物;应用程序元数据不会随响应一起流回</li>
+</ul>
+<p><strong><em>Reentrancy</em></strong></p>
+<p><strong><em>Reentrancy</em></strong></p>
+<p><strong><em>Reentrancy</em></strong></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;&lt;em&gt;Grain Identity&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;获取key有多样的（继承多样：&lt;code&gt;IGrainWithIntegerKey&lt;/code&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Timers 
+    
+    </summary>
+    
+      <category term="C#" scheme="https://xuecat.github.io/categories/C/"/>
+    
+    
+      <category term="分布式" scheme="https://xuecat.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+      <category term="Orleans" scheme="https://xuecat.github.io/tags/Orleans/"/>
+    
+  </entry>
   
   <entry>
     <title>for(;;)和while(true)(250)</title>
@@ -694,45 +747,6 @@
     
     
       <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>c#杂项笔记(230)</title>
-    <link href="https://xuecat.github.io/2018/02/28/230/"/>
-    <id>https://xuecat.github.io/2018/02/28/230/</id>
-    <published>2018-02-28T15:34:14.000Z</published>
-    <updated>2018-07-02T16:31:02.423Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="async-await"><a href="#async-await" class="headerlink" title="async await"></a>async await</h3><p> 同步函数执行到async时会同步执行,当在async里遇见await时，会跳出async函数到外部继续执行。<br> await执行完了后再执行async里面await之后的代码</p>
-<p> async函数由于返回的是task类型，注意属性有同步类型</p>
-<ol>
-<li>函数参数不能有out ref，必须返回Task<ol>
-<li>不应混合使用同步和异步代码，异步最好始终异步<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public static class DeadlockDemo</div><div class="line">&#123;</div><div class="line">    private static async Task DelayAsync()</div><div class="line">    &#123;</div><div class="line">        await Task.Delay(1000);</div><div class="line">    &#125;</div><div class="line">    // This method causes a deadlock when called in a GUI or ASP.NET context.</div><div class="line">    public static void Test()</div><div class="line">    &#123;</div><div class="line">        //开始延迟函数</div><div class="line">        var delayTask = DelayAsync();</div><div class="line">        // 等待延迟完成</div><div class="line">        delayTask.Wait();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">//test方法在gui和aps.net会出现死锁，控制台不会</div><div class="line">//这种死锁的根本原因是 await 处理上下文的方式</div><div class="line">//默认情况下，当等待未完成的 Task 时，会捕获当前“上下文”，在 Task 完成时使用该上下文恢复方法的执行</div><div class="line">//GUI 和 ASP.NET 应用程序具有 SynchronizationContext，它每次仅允许一个代码区块运行。 </div><div class="line">//当 await 完成时，它会尝试在捕获的上下文中执行 async 方法的剩余部分。 </div><div class="line">//但是该上下文已含有一个线程，该线程在（同步）等待 async 方法完成。它们相互等待对方，从而导致死锁。</div></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-</ol>
-<ol>
-<li><p>await不像Task.Run()，它并不会创建线程来执行，只会移交权限来继续执行。</p>
-</li>
-<li><p>我一开始想这玩意，不创建新线程咋个优化呢。后面他们说会挂起执行其它函数，这样并发的时候就能很好处理，不会卡住。</p>
-</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;async-await&quot;&gt;&lt;a href=&quot;#async-await&quot; class=&quot;headerlink&quot; title=&quot;async await&quot;&gt;&lt;/a&gt;async await&lt;/h3&gt;&lt;p&gt; 同步函数执行到async时会同步执行,当在async里遇见awai
-    
-    </summary>
-    
-      <category term="C#" scheme="https://xuecat.github.io/categories/C/"/>
-    
-    
-      <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
-    
-      <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
     
   </entry>
   
