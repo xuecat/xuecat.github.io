@@ -110,7 +110,7 @@ Observers
 
 服务端ObserverSubscriptionManager&amp;lt;&amp;gt; IGrainObserver保持订阅列表，调相应接口来进行通知对应订阅
 客户端CreateObjectReference Subscribe向服务器">
-<meta property="og:updated_time" content="2020-03-29T02:42:17.907Z">
+<meta property="og:updated_time" content="2020-06-25T01:50:02.254Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Orleans新记录(251)">
 <meta name="twitter:description" content="Grain Identity
@@ -418,9 +418,27 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
 <ul>
 <li>客户端<code>RequestContext.Set</code>，服务端<code>RequestContext.Get</code>它将与Orleans请求一起流向接收谷物;<br>应用程序元数据不会随响应一起流回<br>应用场景：请求从客户端到服务器跟踪流程用</li>
 </ul>
-<p><strong><em>JournaledGrain</em></strong></p>
-<p><strong><em>Reentrancy</em></strong></p>
-<p><strong><em>Reentrancy</em></strong></p>
+<p><strong><em>JournaledGrain</em></strong><br>这个很有用，<code>event</code>和<code>state</code>绑定，通过事件更新状态，注意读写状态</p>
+<p><strong><em>外部的任务和grain</em></strong><br>1） await，Task.Factory.StartNew，Task.ContinuewWith，Task.WhenAny，Task.WhenAll，Task.Delay都遵循当前的任务计划。这意味着以默认方式使用它们，无需传递不同的TaskScheduler，它们会在grain上下文中执行。</p>
+<p>2）Task.Factory.FromAsync的Task.Run和endMethod委托，都不遵循当前的任务调度程序。它们都使用TaskScheduler.Default调度程序，即.NET线程池任务调度程序。</p>
+<p><strong><em>拦截器</em></strong><br>1) 客户端调用<code>grain</code>用呼出，可以向<code>RequestContext</code>添加认证的东西<br>2} 服务端<code>grain</code>配置呼入,检查每个调用请求</p>
+<p><strong><em>GrainServices</em></strong><br>GrainService是一种特殊的grain；它没有身份标识，并且在每个silo中运行，从silo的启动到关闭。</p>
+<ul>
+<li>如果可能，使GrainService可重入，以获得更好的性能</li>
+<li>GrainService无法写入Orleans流，因为它不能在grain任务调度程序中工作</li>
+</ul>
+<p>有点像数据服务的代理，其他grain注入这个来访问数据啥的</p>
+<p><strong><em>无状态grain</em></strong></p>
+<ul>
+<li>对无状态工作器grain的请求总是在本地执行，身份标识是 0或Guid.Empty</li>
+</ul>
+<p><strong><em>事务</em></strong><br>需要配合存储使用</p>
+<p><strong><em>启动任务</em></strong><br>在许多情况下，一旦silo可用，就需要自动执行某些任务。启动任务提供此功能。</p>
+<p>一些用例包括但不限于：</p>
+<ul>
+<li>启动后台计时器，以执行周期性的”家务”式的任务</li>
+<li>使用从外部的后备存储下载的数据，预加载一些缓存的grain</li>
+</ul>
 
       
     </div>
