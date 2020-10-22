@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2020-05-06T14:35:00.749Z</updated>
+  <updated>2020-10-22T14:53:36.715Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -14,6 +14,41 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>c#语法糖253</title>
+    <link href="https://xuecat.github.io/2020/10/22/253/"/>
+    <id>https://xuecat.github.io/2020/10/22/253/</id>
+    <published>2020-10-22T14:13:33.000Z</published>
+    <updated>2020-10-22T14:53:36.715Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://help.semmle.com/wiki/display/CSHARP/Abstract+class+only+declares+common+constants" target="_blank" rel="external">原文章地址</a></p>
+<pre><code>![](/picture/253_11.jpg)
+</code></pre><ol>
+<li>abstract类最好用来声明公共<code>const</code>变量</li>
+</ol>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> <span class="title">Bad</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">MathConstants</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">double</span> Pi = <span class="number">3.14</span>;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="keyword">class</span> <span class="title">Circle</span> : <span class="title">MathConstants</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">double</span> radius;</div><div class="line"> </div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">Area</span>(<span class="params"></span>) </span>=&gt; Math.Pow(radius, <span class="number">2</span>) * Pi;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li><code>ReadOnlyCollection</code>替换<code>Array</code>的<code>readonly</code></li>
+</ol>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//错误</span></div><div class="line"><span class="keyword">class</span> <span class="title">Bad</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">string</span>[] Foo = &#123; <span class="string">"hello"</span>, <span class="string">"world"</span> &#125;;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></div><div class="line">    &#123;</div><div class="line">        Foo[<span class="number">0</span>] = <span class="string">"goodbye"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//对的</span></div><div class="line"><span class="keyword">class</span> <span class="title">Good</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">readonly</span> ReadOnlyCollection&lt;<span class="keyword">string</span>&gt; Foo</div><div class="line">        = <span class="keyword">new</span> ReadOnlyCollection&lt;<span class="keyword">string</span>&gt;(<span class="keyword">new</span> <span class="keyword">string</span>[] &#123; <span class="string">"hello"</span>, <span class="string">"world"</span> &#125;);</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></div><div class="line">    &#123;</div><div class="line"> </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li><code>Assembly</code>的代码</li>
+</ol>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AssemblyPathInjectionHandler</span> : <span class="title">IHttpHandler</span> &#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ProcessRequest</span>(<span class="params">HttpContext ctx</span>) </span>&#123;</div><div class="line">    <span class="keyword">string</span> configType = ctx.Request.QueryString[<span class="string">"configType"</span>];</div><div class="line"> </div><div class="line">    <span class="keyword">if</span> (configType.equals(<span class="string">"configType1"</span>) || configType.equals(<span class="string">"configType2"</span>)) &#123;</div><div class="line">      <span class="comment">// GOOD: Loaded assembly is one of the two known safe options</span></div><div class="line">      <span class="keyword">var</span> safeAssembly = Assembly.LoadFile(<span class="string">@"C:\SafeLibraries\"</span> + configType + <span class="string">".dll"</span>);</div><div class="line"> </div><div class="line">      <span class="comment">// Code execution is limited to one of two known and vetted assemblies</span></div><div class="line">      MethodInfo m = safeAssembly.GetType(<span class="string">"Config"</span>).GetMethod(<span class="string">"GetCustomPath"</span>);</div><div class="line">      Object customPath = m.Invoke(<span class="literal">null</span>, <span class="literal">null</span>);</div><div class="line">      <span class="comment">// ...</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://help.semmle.com/wiki/display/CSHARP/Abstract+class+only+declares+common+constants&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;原文章地址&lt;
+    
+    </summary>
+    
+      <category term="C#" scheme="https://xuecat.github.io/categories/C/"/>
+    
+    
+      <category term="学习看书笔记" scheme="https://xuecat.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%9C%8B%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>EF Core Linq(252)</title>
@@ -758,31 +793,6 @@
     
     
       <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据库遇见的一个问题(232)</title>
-    <link href="https://xuecat.github.io/2018/05/06/232/"/>
-    <id>https://xuecat.github.io/2018/05/06/232/</id>
-    <published>2018-05-06T04:16:40.000Z</published>
-    <updated>2018-05-06T04:21:10.090Z</updated>
-    
-    <content type="html"><![CDATA[<p>今天丹麦现场问题：<br>检索丹麦字符(长的像A,又不是A),出现英文A匹配和丹麦字符匹配。</p>
-<p>最后发现是mysql的like语句，后面用locate语句精确才没把英文检索出来。<br>查了很久google和官方,并未给解释为啥like的模糊匹配是如此，大多讲locate比like高效。<br>所以写下记录，以后请问！！</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天丹麦现场问题：&lt;br&gt;检索丹麦字符(长的像A,又不是A),出现英文A匹配和丹麦字符匹配。&lt;/p&gt;
-&lt;p&gt;最后发现是mysql的like语句，后面用locate语句精确才没把英文检索出来。&lt;br&gt;查了很久google和官方,并未给解释为啥like的模糊匹配是如此，大多讲l
-    
-    </summary>
-    
-      <category term="数据库" scheme="https://xuecat.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-    
-      <category term="Mysql" scheme="https://xuecat.github.io/tags/Mysql/"/>
     
   </entry>
   
