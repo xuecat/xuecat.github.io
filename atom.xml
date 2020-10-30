@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2020-10-22T14:53:36.715Z</updated>
+  <updated>2020-10-28T14:56:44.568Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://xuecat.github.io/2020/10/22/253/"/>
     <id>https://xuecat.github.io/2020/10/22/253/</id>
     <published>2020-10-22T14:13:33.000Z</published>
-    <updated>2020-10-22T14:53:36.715Z</updated>
+    <updated>2020-10-28T14:56:44.568Z</updated>
     
     <content type="html"><![CDATA[<p><a href="https://help.semmle.com/wiki/display/CSHARP/Abstract+class+only+declares+common+constants" target="_blank" rel="external">原文章地址</a></p>
 <pre><code>![](/picture/253_11.jpg)
@@ -35,7 +35,61 @@
 <ol>
 <li><code>Assembly</code>的代码</li>
 </ol>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AssemblyPathInjectionHandler</span> : <span class="title">IHttpHandler</span> &#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ProcessRequest</span>(<span class="params">HttpContext ctx</span>) </span>&#123;</div><div class="line">    <span class="keyword">string</span> configType = ctx.Request.QueryString[<span class="string">"configType"</span>];</div><div class="line"> </div><div class="line">    <span class="keyword">if</span> (configType.equals(<span class="string">"configType1"</span>) || configType.equals(<span class="string">"configType2"</span>)) &#123;</div><div class="line">      <span class="comment">// GOOD: Loaded assembly is one of the two known safe options</span></div><div class="line">      <span class="keyword">var</span> safeAssembly = Assembly.LoadFile(<span class="string">@"C:\SafeLibraries\"</span> + configType + <span class="string">".dll"</span>);</div><div class="line"> </div><div class="line">      <span class="comment">// Code execution is limited to one of two known and vetted assemblies</span></div><div class="line">      MethodInfo m = safeAssembly.GetType(<span class="string">"Config"</span>).GetMethod(<span class="string">"GetCustomPath"</span>);</div><div class="line">      Object customPath = m.Invoke(<span class="literal">null</span>, <span class="literal">null</span>);</div><div class="line">      <span class="comment">// ...</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AssemblyPathInjectionHandler</span> : <span class="title">IHttpHandler</span> &#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ProcessRequest</span>(<span class="params">HttpContext ctx</span>) </span>&#123;</div><div class="line">    <span class="keyword">string</span> configType = ctx.Request.QueryString[<span class="string">"configType"</span>];</div><div class="line"> </div><div class="line">    <span class="keyword">if</span> (configType.equals(<span class="string">"configType1"</span>) || configType.equals(<span class="string">"configType2"</span>)) &#123;</div><div class="line">      <span class="comment">// GOOD: Loaded assembly is one of the two known safe options</span></div><div class="line">      <span class="keyword">var</span> safeAssembly = Assembly.LoadFile(<span class="string">@"C:\SafeLibraries\"</span> + configType + <span class="string">".dll"</span>);</div><div class="line"> </div><div class="line">      <span class="comment">// Code execution is limited to one of two known and vetted assemblies</span></div><div class="line">      MethodInfo m = safeAssembly.GetType(<span class="string">"Config"</span>).GetMethod(<span class="string">"GetCustomPath"</span>);</div><div class="line">      Object customPath = m.Invoke(<span class="literal">null</span>, <span class="literal">null</span>);</div><div class="line">      <span class="comment">// ...</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li><p>Cyclomatic Complexity(圈复杂度)</p>
+</li>
+<li><p><code>dynamic</code> 弱语言的东西类似js的结构体，和模板搭配很好用</p>
+</li>
+<li><p><code>Obsolete</code></p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[<span class="name">Obsolete</span>(<span class="string">"该方法已被弃用，请使用NewMethod代替"</span>)]</div><div class="line">static void OldMethod()</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>abstract</code>属性可以通过继承覆盖<br>···<br>public abstract class Shape<br>{<br> private string name;</p>
+<p> public Shape(string s)<br> {</p>
+<pre><code>// calling the set accessor of the Id property.
+Id = s;
+</code></pre><p> }<br> public string Id<br> {</p>
+<pre><code>get
+{
+    return name;
+}
+
+set
+{
+    name = value;
+}
+</code></pre><p> }</p>
+<p> // Area is a read-only property - only a get accessor is needed:<br> public abstract double Area<br> {</p>
+<pre><code>get;
+</code></pre><p> }</p>
+<p> public override string ToString()<br> {</p>
+<pre><code>return $&quot;{Id} Area = {Area:F2}&quot;;
+</code></pre><p> }<br>}<br>public class Square : Shape<br>{<br> private int side;</p>
+<p> public Square(int side, string id)</p>
+<pre><code>: base(id)
+</code></pre><p> {</p>
+<pre><code>this.side = side;
+</code></pre><p> }</p>
+<p> public override double Area<br> {</p>
+<pre><code>get
+{
+    // Given the side, return the area of a square:
+    return side * side;
+}
+</code></pre><p> }<br>}</p>
+</li>
+</ol>
+<p>···</p>
+<ol>
+<li><p><code>is</code>的规则</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">interface</span> <span class="title">Animal</span> &#123; &#125;</div><div class="line"><span class="keyword">class</span> <span class="title">Cat</span> : <span class="title">Animal</span> &#123; &#125;</div><div class="line"><span class="keyword">class</span> <span class="title">Dog</span> : <span class="title">Animal</span> &#123; &#125;</div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></div><div class="line">&#123;</div><div class="line">    List&lt;Animal&gt; animals = <span class="keyword">new</span> List&lt;Animal&gt; &#123; <span class="keyword">new</span> Cat(), <span class="keyword">new</span> Dog() &#125;;</div><div class="line">    <span class="keyword">foreach</span> (Animal a <span class="keyword">in</span> animals)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (a <span class="keyword">is</span> Cat)</div><div class="line">            Console.WriteLine(<span class="string">"Miaow!"</span>);</div><div class="line">        <span class="keyword">if</span> (a <span class="keyword">is</span> Dog)</div><div class="line">            Console.WriteLine(<span class="string">"Woof!"</span>);</div><div class="line">        <span class="keyword">if</span> (a <span class="keyword">is</span> Animal)</div><div class="line">            Console.WriteLine(<span class="string">"Animal!"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    Console.ReadLine();</div><div class="line">    Console.ReadKey();</div><div class="line">&#125;<span class="comment">// Miaow Animal Woof Animal</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>引用用类型,值类型比较</p>
+</li>
+</ol>
+<p>引用类型:<br><code>ReferenceEquals(null, x)</code>比较是否是指向同一内存<br>虚函数<code>Equals</code></p>
+<p>值类型:<br><code>==</code>运算符比较</p>
+]]></content>
     
     <summary type="html">
     
