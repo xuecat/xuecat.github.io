@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2020-10-28T14:56:44.568Z</updated>
+  <updated>2020-11-02T14:48:55.083Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -16,15 +16,40 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>jenkins配置(254)</title>
+    <link href="https://xuecat.github.io/2020/11/02/254/"/>
+    <id>https://xuecat.github.io/2020/11/02/254/</id>
+    <published>2020-11-02T14:30:42.000Z</published>
+    <updated>2020-11-02T14:48:55.083Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">name=ingestdbsvr</div><div class="line"><span class="keyword">version</span>=1.8.5</div><div class="line">time=$(date +%Y%<span class="keyword">m</span>%<span class="keyword">d</span>%<span class="keyword">H</span>)</div><div class="line">images=<span class="variable">$&#123;name&#125;</span>:<span class="variable">$&#123;version&#125;</span>.<span class="variable">$&#123;time&#125;</span>.<span class="variable">$&#123;BUILD_NUMBER&#125;</span></div><div class="line">tarname=<span class="variable">$&#123;images&#125;</span>.tar</div><div class="line">pushurl=172.16.128.170:5000/<span class="variable">$&#123;images&#125;</span></div><div class="line">date +%<span class="keyword">H</span>:%<span class="keyword">M</span>:%<span class="built_in">S</span></div><div class="line">dotnet build -c Release  IngestDB.sln</div><div class="line"><span class="keyword">cd</span> IngestDB </div><div class="line">dotnet publish -c Release -o ../publish</div><div class="line"><span class="keyword">cd</span> ..</div><div class="line">cp BinU/netcoreapp2.1/IngestDB.dll -r publish/</div><div class="line">cp BinU/netcoreapp2.1/IngestDBCore.dll -r publish/</div><div class="line"></div><div class="line">cp BinU/netcoreapp2.1/<span class="keyword">Plugin</span>/IngestMatrixPlugin.dll -r publish/<span class="keyword">Plugin</span>/</div><div class="line">cp BinU/netcoreapp2.1/<span class="keyword">Plugin</span>/IngestDeviceInterfacePlugin.dll -r publish/<span class="keyword">Plugin</span>/</div><div class="line">cp BinU/netcoreapp2.1/<span class="keyword">Plugin</span>/IngestGlobalInterfacePlugin.dll -r publish/<span class="keyword">Plugin</span>/</div><div class="line">cp BinU/netcoreapp2.1/<span class="keyword">Plugin</span>/IngestTaskInterfacePlugin.dll -r publish/<span class="keyword">Plugin</span>/</div><div class="line">cp BinU/netcoreapp2.1/<span class="keyword">Plugin</span>/IngestTaskPlugin.dll -r publish/<span class="keyword">Plugin</span>/</div><div class="line">cp BinU/netcoreapp2.1/<span class="keyword">Plugin</span>/IngestDevicePlugin.dll -r publish/<span class="keyword">Plugin</span>/</div><div class="line">cp BinU/netcoreapp2.1/<span class="keyword">Plugin</span>/MSVNotifyPlugin.dll -r publish/<span class="keyword">Plugin</span>/</div><div class="line">cp BinU/netcoreapp2.1/<span class="keyword">Plugin</span>/IngestGlobalPlugin.dll -r publish/<span class="keyword">Plugin</span>/</div><div class="line">cp BinU/netcoreapp2.1/<span class="keyword">Plugin</span>/KafKaNotifyPlugin.dll -r publish/<span class="keyword">Plugin</span>/</div><div class="line">cp BinU/netcoreapp2.1/<span class="keyword">Plugin</span>/UdpNotifyPlugin.dll -r publish/<span class="keyword">Plugin</span>/</div><div class="line"></div><div class="line">#docker images | grep 'ingestdbsvr' | awk '&#123;<span class="keyword">print</span> <span class="variable">$3&#125;</span>' | xargs docker rmi</div><div class="line">chmod -Rf 777 publish</div><div class="line">docker build -t <span class="variable">$images</span> .</div><div class="line">docker tag <span class="variable">$images</span> <span class="variable">$pushurl</span></div><div class="line">docker push <span class="variable">$pushurl</span></div><div class="line"></div><div class="line">time=$(date +%Y%<span class="keyword">m</span>%<span class="keyword">d</span>%<span class="keyword">H</span>)</div><div class="line">appname=ingestdbsvr</div><div class="line"><span class="keyword">version</span>=1.8.5.<span class="variable">$&#123;time&#125;</span>.<span class="variable">$&#123;BUILD_NUMBER&#125;</span></div><div class="line">images=<span class="variable">$&#123;appname&#125;</span>:<span class="variable">$&#123;version&#125;</span></div><div class="line">Oldtag=`docker images|grep <span class="variable">$&#123;appname&#125;</span>|awk '&#123;<span class="keyword">print</span> <span class="variable">$2&#125;</span>'|<span class="keyword">sort</span> -r|awk 'NR==1&#123;<span class="keyword">print</span>&#125;'`</div><div class="line">container=`docker ps -a|grep <span class="variable">$&#123;appname&#125;</span>|awk '&#123;<span class="keyword">print</span> <span class="variable">$1&#125;</span>'|<span class="keyword">sort</span> -r|awk 'NR==1&#123;<span class="keyword">print</span>&#125;'`</div><div class="line">echo  <span class="variable">$&#123;appname&#125;</span>-<span class="variable">$&#123;Oldtag&#125;</span></div><div class="line">echo <span class="variable">$&#123;appname&#125;</span>-<span class="variable">$&#123;version&#125;</span></div><div class="line">echo <span class="variable">$&#123;appname&#125;</span>:<span class="variable">$&#123;container&#125;</span></div><div class="line">docker stop <span class="variable">$&#123;container&#125;</span></div><div class="line">docker <span class="keyword">rm</span> -f <span class="variable">$&#123;container&#125;</span></div><div class="line"><span class="keyword">mkdir</span> /sobeyhive/<span class="keyword">app</span>/<span class="variable">$&#123;appname&#125;</span>-<span class="variable">$&#123;version&#125;</span></div><div class="line">cp -rp /sobeyhive/<span class="keyword">app</span>/<span class="variable">$&#123;appname&#125;</span>-notchange/<span class="keyword">run</span>.<span class="keyword">sh</span> /sobeyhive/<span class="keyword">app</span>/<span class="variable">$&#123;appname&#125;</span>-<span class="variable">$&#123;version&#125;</span>/</div><div class="line"><span class="keyword">rm</span> -fr  /sobeyhive/<span class="keyword">app</span>/<span class="variable">$&#123;appname&#125;</span>-<span class="variable">$&#123;Oldtag&#125;</span> </div><div class="line"><span class="keyword">cd</span> /RunScript/ </div><div class="line"><span class="keyword">sh</span> ingestdbsvrsrg.<span class="keyword">sh</span>  <span class="variable">$&#123;version&#125;</span></div><div class="line"><span class="keyword">sleep</span> 5</div><div class="line"></div><div class="line">scp -r  /other/sobeyhive/<span class="keyword">app</span>/ingestmsgsvr-1.6.0/ingestmsgsvr<span class="comment">/* root@172.16.128.117:/other/jenkins/workspace/IngestMsgSvr-Integration-SRG1.8.5/publish/   </span></div><div class="line"> </div><div class="line">sleep 1</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;figure class=&quot;highlight stata&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/di
+    
+    </summary>
+    
+      <category term="配置" scheme="https://xuecat.github.io/categories/%E9%85%8D%E7%BD%AE/"/>
+    
+    
+      <category term="工具" scheme="https://xuecat.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
+    
+  </entry>
+  
+  <entry>
     <title>c#语法糖253</title>
     <link href="https://xuecat.github.io/2020/10/22/253/"/>
     <id>https://xuecat.github.io/2020/10/22/253/</id>
     <published>2020-10-22T14:13:33.000Z</published>
-    <updated>2020-10-28T14:56:44.568Z</updated>
+    <updated>2020-11-03T15:04:29.110Z</updated>
     
     <content type="html"><![CDATA[<p><a href="https://help.semmle.com/wiki/display/CSHARP/Abstract+class+only+declares+common+constants" target="_blank" rel="external">原文章地址</a></p>
-<pre><code>![](/picture/253_11.jpg)
-</code></pre><ol>
+<p><img src="/picture/253_11.jpg" alt=""></p>
+<ol>
 <li>abstract类最好用来声明公共<code>const</code>变量</li>
 </ol>
 <figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> <span class="title">Bad</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">MathConstants</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">double</span> Pi = <span class="number">3.14</span>;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="keyword">class</span> <span class="title">Circle</span> : <span class="title">MathConstants</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">double</span> radius;</div><div class="line"> </div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">Area</span>(<span class="params"></span>) </span>=&gt; Math.Pow(radius, <span class="number">2</span>) * Pi;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -817,36 +842,6 @@ set
       <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
     
       <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>c++CRTP和typename与class的区别233</title>
-    <link href="https://xuecat.github.io/2018/05/26/233/"/>
-    <id>https://xuecat.github.io/2018/05/26/233/</id>
-    <published>2018-05-26T08:38:00.000Z</published>
-    <updated>2018-06-17T06:25:24.194Z</updated>
-    
-    <content type="html"><![CDATA[<p><code>Curiously Recurring Template Prattern</code>即人们称的静态多态<br>由于c++的多态不能将基类的虚函数定义为模板函数，所以出现的它</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> BaseClass</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="keyword">template</span>&lt;<span class="keyword">typename</span> D&gt;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Func</span><span class="params">(D t)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">static_cast</span>&lt;T&amp;&gt;(*<span class="keyword">this</span>).funcImpl(t);</div><div class="line">	&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">funcImpl</span><span class="params">(T f)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Base class"</span> &lt;&lt; f &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">class</span> Base : <span class="keyword">public</span> BaseClass&lt;Base&gt;</div><div class="line">&#123;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">class</span> Derive : <span class="keyword">public</span> BaseClass&lt;Derive&gt;</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">funcImpl</span><span class="params">(T f)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Derive class"</span> &lt;&lt; f &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">	BaseClass&lt;Derive&gt; der;</div><div class="line">	der.Func(<span class="number">2</span>);<span class="comment">//base 2</span></div><div class="line"></div><div class="line">	BaseClass&lt;Base&gt; bas;</div><div class="line">	bas.Func(<span class="number">4</span>);<span class="comment">//derive 4</span></div><div class="line"></div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如此，多态就能使用模板函数了</p>
-<hr>
-<p><strong>怕是最近js写多了，这个都忘了，羞愧啊！！</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">class</span> MyClass&#123;</div><div class="line">    <span class="keyword">typename</span> T::SubType * ptr;</div><div class="line">    ...</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>在这里，typename指出SubType是class T中定义的一个类别，因此ptr是一个指向T::SubType型别的指针。如果没有关键字typename，SubType会被当成一个static成员，于是<br>T::SubType * ptr<br>会被解释为型别T内的数值SubType与ptr的乘积。</p>
-<hr>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;code&gt;Curiously Recurring Template Prattern&lt;/code&gt;即人们称的静态多态&lt;br&gt;由于c++的多态不能将基类的虚函数定义为模板函数，所以出现的它&lt;/p&gt;
-&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;
-    
-    </summary>
-    
-      <category term="语言" scheme="https://xuecat.github.io/categories/%E8%AF%AD%E8%A8%80/"/>
-    
-    
-      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
     
   </entry>
   

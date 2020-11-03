@@ -312,8 +312,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
             
               
                 
-                <a class="post-title-link" href="/2014/09/20/57/" itemprop="url">
-                  设计流程(57)
+                <a class="post-title-link" href="/2014/09/20/64/" itemprop="url">
+                  指针内存长度和大小(64)
                 </a>
               
             
@@ -371,33 +371,17 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
 
       
       
-        <div class="post-gallery" itemscope itemtype="//schema.org/ImageGallery">
-          
-          
-            <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox"
-                 href="/picture/m.png" rel="gallery_ckgw9cj0p00mc3cs9c48a4cnf"
-                 itemscope itemtype="//schema.org/ImageObject" itemprop="url">
-                <img src="/picture/m.png" itemprop="contentUrl"/>
-              </a>
-            
-          
-
-          
-          </div>
-        </div>
-      
 
       
         
           
-           想出的设计流程：
- 先画出程序运行功能的基本流程-&gt;确定类的个数和作用-&gt;设计模式-&gt;按照先想好的类功能模块把设计模式搭建出来-&gt;最后按照功能流程图再写一遍。
+           今天字符处理遇见这个问题：我new了一块内存，然后sizeof()；strlen()；都正常（一个返回4，一个返回分配大小）
+之后我用了ZeroMemory来分配，发现有异议了。sizeof(); strlen(); 一个返回4，一个返回0；     原来用了这个函数会置空内存。
 
           
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/20/57/#more" rel="contents">
+            <a class="btn" href="/2014/09/20/64/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -448,8 +432,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
             
               
                 
-                <a class="post-title-link" href="/2014/09/20/59/" itemprop="url">
-                  强制转换临时和原对象(虚函数测试)(59)
+                <a class="post-title-link" href="/2014/09/20/62/" itemprop="url">
+                  string和wstring(62)
                 </a>
               
             
@@ -511,14 +495,135 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
       
         
           
-          这是个很坑的地方,大多数想法,转换嘛,
-我把static_cast&lt;A&gt;(B)不就是把B转成A吗? 错! :
-static_cast&lt;window*&gt;(this)-&gt;onResize(); //这是拿this当成window,没问题
-static_cast&lt;win
+          今天用string来find一个中文符号，首先返回符号位置正确。然后符号为界，截取字符串出现问题；
+分析原因：中文符号在string中是占用两个字节的。而string对所有的字符串是一个字符一个字节的
+，所以按位取时，夺取了一个字节，导致数据获取失败。
+用wstring进行存取，可以完全避免。
+学到
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/20/59/#more" rel="contents">
+            <a class="btn" href="/2014/09/20/62/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/09/20/58/" itemprop="url">
+                  变长参数(58)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-09-20T03:31:58+08:00" content="2014-09-20">
+              2014-09-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          可变长函数：
+  函数多参数情况下，可变长函数虽然设置“…”   //一定要“…”之前的那个参数 va_start，来避免异常抛出。（实践）
+
+          
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/20/58/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -811,6 +916,143 @@ remove今天死活识别不了，添加#include 后可以使用。
             
               
                 
+                <a class="post-title-link" href="/2014/09/17/51/" itemprop="url">
+                  勿忘初心(51)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-09-17T03:31:58+08:00" content="2014-09-17">
+              2014-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/生活/" itemprop="url" rel="index">
+                    <span itemprop="name">生活</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="//schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="/picture/e.jpg" rel="gallery_ckh24071w00he3ws9ksrxcp1a"
+                 itemscope itemtype="//schema.org/ImageObject" itemprop="url">
+                <img src="/picture/e.jpg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        
+          
+            不忘初心，方得始终
+  这几天自己也有点想多了，因为本来就进入大三了，该考虑的也多了起来。反而烦恼了自己。
+  写下日记，提醒自己，大三上的时间还是很充足的，不要被迷惑。做好自己！
+
+          
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/17/51/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2014/09/17/50/" itemprop="url">
                   模板和虚函数(50)
                 </a>
@@ -879,143 +1121,6 @@ remove今天死活识别不了，添加#include 后可以使用。
 
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/09/17/50/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/17/51/" itemprop="url">
-                  勿忘初心(51)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-17T03:31:58+08:00" content="2014-09-17">
-              2014-09-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/生活/" itemprop="url" rel="index">
-                    <span itemprop="name">生活</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-        <div class="post-gallery" itemscope itemtype="//schema.org/ImageGallery">
-          
-          
-            <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox"
-                 href="/picture/e.jpg" rel="gallery_ckgw9cj0c00lq3cs972zomtgp"
-                 itemscope itemtype="//schema.org/ImageObject" itemprop="url">
-                <img src="/picture/e.jpg" itemprop="contentUrl"/>
-              </a>
-            
-          
-
-          
-          </div>
-        </div>
-      
-
-      
-        
-          
-            不忘初心，方得始终
-  这几天自己也有点想多了，因为本来就进入大三了，该考虑的也多了起来。反而烦恼了自己。
-  写下日记，提醒自己，大三上的时间还是很充足的，不要被迷惑。做好自己！
-
-          
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/17/51/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1253,7 +1358,7 @@ remove今天死活识别不了，添加#include 后可以使用。
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/picture/p.jpg" rel="gallery_ckgw9cj0500lh3cs9t52btnec"
+                 href="/picture/p.jpg" rel="gallery_ckh24071q00h43ws9qnmckvr0"
                  itemscope itemtype="//schema.org/ImageObject" itemprop="url">
                 <img src="/picture/p.jpg" itemprop="contentUrl"/>
               </a>
@@ -1429,128 +1534,6 @@ remove今天死活识别不了，添加#include 后可以使用。
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/11/45/" itemprop="url">
-                  pass by reference to const replace pass by value(45)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-11T03:31:58+08:00" content="2014-09-11">
-              2014-09-11
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          当用类去传递的时候遇见这么一个编译消耗。
-Class Person {std::string str1, std::string str2;};
-Class Student : public Person {std::string str1, std::string str2;};
-
-//函数 va
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/11/45/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1596,7 +1579,7 @@ Class Student : public Person {std::string str1, std::string str2;};
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">242</span>
+              <span class="site-state-item-count">243</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
