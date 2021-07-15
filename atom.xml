@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xuecat.github.io/"/>
-  <updated>2020-11-02T14:48:55.083Z</updated>
+  <updated>2021-07-15T13:52:24.447Z</updated>
   <id>https://xuecat.github.io/</id>
   
   <author>
@@ -14,6 +14,71 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>学习(255)</title>
+    <link href="https://xuecat.github.io/2021/07/15/255/"/>
+    <id>https://xuecat.github.io/2021/07/15/255/</id>
+    <published>2021-07-15T11:27:38.000Z</published>
+    <updated>2021-07-15T13:52:24.447Z</updated>
+    
+    <content type="html"><![CDATA[<p>索引类型：</p>
+<pre><code>普通索引：最基本的索引，没有任何限制
+
+唯一索引：与&quot;普通索引&quot;类似，不同的就是：索引列的值必须唯一，但允许有空值。
+
+主键索引：它 是一种特殊的唯一索引，不允许有空值。 
+
+全文索引：仅可用于 MyISAM 表，针对较大的数据，生成全文索引很耗时好空间。
+
+组合索引：为了更多的提高mysql效率可建立组合索引，遵循”最左前缀“原则。
+</code></pre><p>索引结构： B-tree索引 哈希索引 全文索引</p>
+<p>不要使用索引情况：</p>
+<pre><code>区分度不是很大的字段
+频繁更新的字段
+字符串类型的字段 或者 文本类型的字段
+不在where列中出现的索引
+</code></pre><p>索引失效：</p>
+<pre><code>* 查询列中有函数计算     
+* 查询列中有模糊查询，&quot;%cloum&quot;,&quot;%cloum%&quot;,可以使用&quot;cloum%&quot; 代替。实在用这个索引,新增一列（使用`LOCATE` `POSITION`函数也可以加索引），存储该字段的反转。比如原字段是abcd，取反存储为dcba，查询%bcd改成查dcb%
+* 如果查询条件中有or, 索引会失效，除非所有条件都加上索引
+* 使用不等于(!= 或者 &lt;&gt;)
+* is null 或者 is not null
+* 字符串不加引号，会导致索引失效
+* 没有最左原则
+</code></pre><ol>
+<li><p><code>最左前缀</code> </p>
+<p><code>explain</code> type为all表示全文扫描。type为ref，表示使用非唯一索引扫描或唯一索引扫描</p>
+</li>
+</ol>
+<ul>
+<li>只有复合索引才会有所谓的左和右之分</li>
+<li>查询从索引的最左前列开始并且不跳过索引中的列,通俗易懂的来说就是:带头大哥不能死、中间兄弟不能断</li>
+</ul>
+<p><img src="/picture/255.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;索引类型：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;普通索引：最基本的索引，没有任何限制
+
+唯一索引：与&amp;quot;普通索引&amp;quot;类似，不同的就是：索引列的值必须唯一，但允许有空值。
+
+主键索引：它 是一种特殊的唯一索引，不允许有空值。 
+
+全文索引：仅可用于 MyISAM 表
+    
+    </summary>
+    
+      <category term="面试" scheme="https://xuecat.github.io/categories/%E9%9D%A2%E8%AF%95/"/>
+    
+    
+      <category term="工具" scheme="https://xuecat.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="杂项" scheme="https://xuecat.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
+    
+  </entry>
   
   <entry>
     <title>jenkins配置(254)</title>
@@ -45,12 +110,11 @@
     <link href="https://xuecat.github.io/2020/10/22/253/"/>
     <id>https://xuecat.github.io/2020/10/22/253/</id>
     <published>2020-10-22T14:13:33.000Z</published>
-    <updated>2020-11-03T15:04:29.110Z</updated>
+    <updated>2020-11-03T15:27:26.820Z</updated>
     
     <content type="html"><![CDATA[<p><a href="https://help.semmle.com/wiki/display/CSHARP/Abstract+class+only+declares+common+constants" target="_blank" rel="external">原文章地址</a></p>
-<p><img src="/picture/253_11.jpg" alt=""></p>
-<ol>
-<li>abstract类最好用来声明公共<code>const</code>变量</li>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="/picture/253_11.jpg" alt=""></h2><ol>
+<li><code>abstract</code>类最好用来声明公共<code>const</code>变量</li>
 </ol>
 <figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> <span class="title">Bad</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">MathConstants</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">double</span> Pi = <span class="number">3.14</span>;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="keyword">class</span> <span class="title">Circle</span> : <span class="title">MathConstants</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">double</span> radius;</div><div class="line"> </div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">Area</span>(<span class="params"></span>) </span>=&gt; Math.Pow(radius, <span class="number">2</span>) * Pi;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <ol>
@@ -114,6 +178,9 @@ set
 </ol>
 <p>引用类型:<br><code>ReferenceEquals(null, x)</code>比较是否是指向同一内存<br>虚函数<code>Equals</code></p>
 <p>值类型:<br><code>==</code>运算符比较</p>
+<ol>
+<li>双重检查<code>lock</code></li>
+</ol>
 ]]></content>
     
     <summary type="html">
@@ -812,36 +879,6 @@ set
     
     
       <category term="JS" scheme="https://xuecat.github.io/tags/JS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>stl的swap和(234)</title>
-    <link href="https://xuecat.github.io/2018/06/17/234/"/>
-    <id>https://xuecat.github.io/2018/06/17/234/</id>
-    <published>2018-06-17T06:02:20.000Z</published>
-    <updated>2018-06-17T06:46:39.548Z</updated>
-    
-    <content type="html"><![CDATA[<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/picture/234.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
-<pre><code>去p站下图片越来越少了
-</code></pre><h3 id="string和vector"><a href="#string和vector" class="headerlink" title="string和vector"></a>string和vector</h3><p>它们都是线性结构，只不过是堆而已。<br>它们都有reserve的概念，所以导致它们的预定义内存</p>
-<p>释放内存的方法就是都是用<code>swap</code>, <code>string().swap(s)</code></p>
-<p><code>swap</code>交换技巧实现内存释放思想：</p>
-<p><strong><em><code>vector()</code>使用<code>vector</code>的默认构造函数建立临时<code>vector</code>对象，再在该临对象上调用<code>swap</code>成员，<code>swap</code>调用之后对象<code>myvector</code>占用的空间就等于一个默认构造的对象的大小，临时对象就具有原来对象v的大小，而该临时对象随即就会被析构，从而其占用的空间也被释放。</em></strong></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;div class=&quot;group-picture&quot;&gt;&lt;div class=&quot;group-picture-container&quot;&gt;&lt;div class=&quot;group-picture-row&quot;&gt;&lt;div class=&quot;group-picture-column&quot; style=&quot;widt
-    
-    </summary>
-    
-      <category term="STL" scheme="https://xuecat.github.io/categories/STL/"/>
-    
-    
-      <category term="c++" scheme="https://xuecat.github.io/tags/c/"/>
-    
-      <category term="代码编写" scheme="https://xuecat.github.io/tags/%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99/"/>
     
   </entry>
   
