@@ -312,8 +312,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
             
               
                 
-                <a class="post-title-link" href="/2014/09/05/38/" itemprop="url">
-                  非成员函数(38)
+                <a class="post-title-link" href="/2014/09/05/39/" itemprop="url">
+                  static_cast dynamic_cast再进一步
                 </a>
               
             
@@ -375,14 +375,13 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
       
         
           
-          more effective c++作者在封装全局函数时，对当前有效的所有全局函数都使用了“匿名空间”
-函数的定义和声明都要在匿名空间才能被识别。
-多个namespace，是没问题的，会在一个匿名空间。
-
-          
+          string a = typeid(dynamic_cast(this)).name();
+发现dynamic_cast确实能把父子类的类型做转换，但是对于虚函数，还是无法，应该是内存覆盖了就无法修改了。
+只有int selfprice = static_cast(*this).GetPrice()
+          ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/05/38/#more" rel="contents">
+            <a class="btn" href="/2014/09/05/39/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -553,8 +552,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
             
               
                 
-                <a class="post-title-link" href="/2014/09/03/32/" itemprop="url">
-                  函数指针获取成员函数地址（包括虚函数）
+                <a class="post-title-link" href="/2014/09/03/36/" itemprop="url">
+                  more effective c++为智能指针添加计数(36)
                 </a>
               
             
@@ -581,8 +580,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
+                  <a href="/categories/书籍/" itemprop="url" rel="index">
+                    <span itemprop="name">书籍</span>
                   </a>
                 </span>
 
@@ -616,11 +615,12 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
       
         
           
-          ++123456789101112131415161718192021222324252627282930313233343536373839class Base&#123;public:	void func() &#123; printf("Enter Base::func()\n"); &#12
+          作者使用结构体完成这一功能。为使用字符串添加引用计数。
+看代码：++123456789101112131415161718192021222324252627282930313233class Stringg &#123;private://作者声明了一个结构体，来完成操作 		 struct  S
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/03/32/#more" rel="contents">
+            <a class="btn" href="/2014/09/03/36/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -789,8 +789,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
             
               
                 
-                <a class="post-title-link" href="/2014/09/03/36/" itemprop="url">
-                  more effective c++为智能指针添加计数(36)
+                <a class="post-title-link" href="/2014/09/03/32/" itemprop="url">
+                  函数指针获取成员函数地址（包括虚函数）
                 </a>
               
             
@@ -817,8 +817,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/书籍/" itemprop="url" rel="index">
-                    <span itemprop="name">书籍</span>
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
                   </a>
                 </span>
 
@@ -852,12 +852,11 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
       
         
           
-          作者使用结构体完成这一功能。为使用字符串添加引用计数。
-看代码：++123456789101112131415161718192021222324252627282930313233class Stringg &#123;private://作者声明了一个结构体，来完成操作 		 struct  S
+          ++123456789101112131415161718192021222324252627282930313233343536373839class Base&#123;public:	void func() &#123; printf("Enter Base::func()\n"); &#12
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/03/36/#more" rel="contents">
+            <a class="btn" href="/2014/09/03/32/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1145,6 +1144,143 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
             
               
                 
+                <a class="post-title-link" href="/2014/09/01/37/" itemprop="url">
+                  libcurl源码学习(37)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-09-01T03:31:58+08:00" content="2014-09-01">
+              2014-09-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/第三方库/" itemprop="url" rel="index">
+                    <span itemprop="name">第三方库</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="//schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="/picture/o.jpg" rel="gallery_ckrp0nljn00g5kos9lnzib4s7"
+                 itemscope itemtype="//schema.org/ImageObject" itemprop="url">
+                <img src="/picture/o.jpg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        
+          
+          libcurl：预编译头文件，就是放置工具的地方。其它文件要使用工具直接#define一下就好了。
+把va_list当值传入。
+回调函数的使用typedf  获取函数指针。指针的指针，执行就好了。
+
+          
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/01/37/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2014/09/01/30/" itemprop="url">
                   More effective c++解引操作符及指针(30)
                 </a>
@@ -1213,143 +1349,6 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
 
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/09/01/30/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/01/37/" itemprop="url">
-                  libcurl源码学习(37)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-01T03:31:58+08:00" content="2014-09-01">
-              2014-09-01
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/第三方库/" itemprop="url" rel="index">
-                    <span itemprop="name">第三方库</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-        <div class="post-gallery" itemscope itemtype="//schema.org/ImageGallery">
-          
-          
-            <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox"
-                 href="/picture/o.jpg" rel="gallery_ckroy8qcl00fyp8s9bkshhlkx"
-                 itemscope itemtype="//schema.org/ImageObject" itemprop="url">
-                <img src="/picture/o.jpg" itemprop="contentUrl"/>
-              </a>
-            
-          
-
-          
-          </div>
-        </div>
-      
-
-      
-        
-          
-          libcurl：预编译头文件，就是放置工具的地方。其它文件要使用工具直接#define一下就好了。
-把va_list当值传入。
-回调函数的使用typedf  获取函数指针。指针的指针，执行就好了。
-
-          
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/01/37/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>

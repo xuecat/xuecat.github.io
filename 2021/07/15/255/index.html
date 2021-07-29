@@ -113,7 +113,7 @@
 组合索引：为了更多的提高mysql效率可建立组合索引，遵循”最左前缀“原则。
 索引结构： B-tree索引">
 <meta property="og:image" content="https://xuecat.github.io/picture/255.png">
-<meta property="og:updated_time" content="2021-07-29T13:24:58.151Z">
+<meta property="og:updated_time" content="2021-07-29T14:32:33.121Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习(255)">
 <meta name="twitter:description" content="索引类型：
@@ -425,6 +425,16 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
 * is null 或者 is not null
 * 字符串不加引号，会导致索引失效
 * 没有最左原则
+</code></pre><p>索引和锁：</p>
+<pre><code>加锁的过程要分有索引和无索引两种情况，比如下面这条语句
+update user set age=11 where id = 1
+
+id 是这张表的主键，是有索引的情况，那么 MySQL 直接就在索引数中找到了这行数据，然后干净利落的加上行锁就可以了。
+
+而下面这条语句
+update user set age=11 where age=10
+
+表中并没有为 age 字段设置索引，所以， MySQL 无法直接定位到这行数据。那怎么办呢，当然也不是加表锁了。MySQL 会为这张表中所有行加行锁，没错，是所有行。但是呢，在加上行锁后，MySQL 会进行一遍过滤，发现不满足的行就释放锁，最终只留下符合条件的行。虽然最终只为符合条件的行加了锁，但是这一锁一释放的过程对性能也是影响极大的。
 </code></pre><ol>
 <li><p><code>最左前缀</code> </p>
 <p><code>explain</code> type为all表示全文扫描。type为ref，表示使用非唯一索引扫描或唯一索引扫描</p>
@@ -451,13 +461,18 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
 <li>读提交(read committed)</li>
 <li>可重复读(repeatable read)</li>
 <li><p>串行化(serializable)</p>
-<p>一.  读未提交是不加锁的，连<code>脏读(数据可能回滚)</code>都无法解决。</p>
+<p>一. 读未提交是不加锁的，连<code>脏读(数据可能回滚)</code>都无法解决。</p>
 <p>二. 读提交就是事务只能读到其他事务调用 commit 命令之后的数据，能解决<code>脏读</code>，不能解决<code>可重复读(事务中修改条件数据)</code>,<code>幻读(事务中加减条件数据)</code>。</p>
+<p>三. 可重复读(mysql默认读)是指，事务不会读到其他事务对已有数据的修改，及时其他事务已提交，也就是说，事务开始时读到的已有数据是什么，在事务提交前的任意时刻，这些数据的值都是一样的。 解决了<code>可重复读</code>，实际也解决了<code>幻读</code>。</p>
+<p>解决方法是：</p>
 </li>
+<li>版本快照解决<code>可重复读</code>,事务开始的读叫<code>当前读</code>，事务中用<code>快照读</code>。</li>
+<li>间隙锁解决<code>幻读</code>，通过索引锁范围,保证添加删除新的会等待</li>
 </ol>
 </li>
 </ol>
-
+<pre><code>四. 串行化是4种事务隔离级别中隔离效果最好的，解决了脏读、可重复读、幻读的问题，但是效果最差，它将事务的执行变为顺序执行，与其他三个隔离级别相比，它就相当于单线程，后一个事务的执行必须等待前一个事务结束
+</code></pre>
       
     </div>
 
