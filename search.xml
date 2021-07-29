@@ -4,6 +4,24 @@
   
     
     <entry>
+      <title><![CDATA[kafka/依赖注入(256)]]></title>
+      <url>https://xuecat.github.io/2021/07/29/256/</url>
+      <content type="html"><![CDATA[<ol>
+<li><p><code>kafka</code></p>
+<p> <img src="/picture/2551.png" alt=""></p>
+<p> 对于一个group而言，消费者的数量不应该多余分区的数量，因为在一个group中，每个分区至多只能绑定到一个消费者上，即一个消费者可以消费多个分区，一个分区只能给一个消费者消费</p>
+<p> 因此，若一个group中的消费者数量大于分区数量的话，多余的消费者将不会收到任何消息</p>
+</li>
+<li><p>依赖注入</p>
+<p> Scoped方式是每个请求时创建一个新的实例，但Transient是每个请求中调用每个服务都会创建一个新的实例，在一次请求中，如果在Singleton中还使用Scoped的话，Scoped和Singleton的意义是一样的（比如我这次请求的时候正常Scoped产生的值是1，我在其它服务中使用的值都将是1，但是在Singleton中保存的值还是0，这样就会产生歧义），但如果Singleton中使用Transient的话只针对当前服务中是唯一的，调用其它服务的时候Transient还是会创建新的实例，因此在其它服务中就不会有其它问题（简单来讲就是默认我在Singleton中调用Transient时我就默认产生的值就为0，反正我每次请求都会产生新的值，无所谓是0还是1，还是2了），虽然没有报错但我们还是要避免这样使用。</p>
+</li>
+<li><p>浮点数无损定点化</p>
+</li>
+</ol>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[学习(255)]]></title>
       <url>https://xuecat.github.io/2021/07/15/255/</url>
       <content type="html"><![CDATA[<p>索引类型：</p>
@@ -40,6 +58,28 @@
 <li>查询从索引的最左前列开始并且不跳过索引中的列,通俗易懂的来说就是:带头大哥不能死、中间兄弟不能断</li>
 </ul>
 <p><img src="/picture/255.png" alt=""></p>
+<ol>
+<li><p><code>TRIGGER</code>触发器</p>
+<p> DELIMITER $$<br> CREATE<br> TRIGGER <code>jony_keer</code>.<code>ins_account</code> AFTER INSERT<br> ON <code>jony_keer</code>.<code>t_account</code><br> FOR EACH ROW BEGIN<br> INSERT INTO <code>t_user</code>(<code>userid</code>,<code>cellphone</code>,<code>account_psd</code>)  VALUES  (new.<code>account_id</code>,new.<code>cellphone</code>,new.<code>account_psd</code>);<br> END$$<br> DELIMITER ;</p>
+<p> mysql解释器根据‘；’来结束读取命令执行命令，在多个‘；’号时，解释器不知到在哪一句结束读取命令执行命令，而delimiter的作用是，将sql结束读取命令并执行命令的标志，替换成delimiter后的标志（在本文是‘//’），这样只有当‘//’出现之后，mysql解释器才会执行这段语句。</p>
+</li>
+<li><p>存储过程和函数</p>
+<p> 主要区别就是函数必须有返回值（return），并且函数的参数只有IN类型而存储过程有IN、OUT、INOUT这三种类型。</p>
+</li>
+<li><p><strong><em>MySQL 事务都是指在 InnoDB 引擎下，MyISAM 引擎是不支持事务的</em></strong></p>
+<p> 事务具有: 原子性 一致性 隔离性 持久性, 随便一个<code>update</code>都能是个事务</p>
+<p> <code>select @@tx_isolation;</code>来查当前数据的隔离级别</p>
+<ol>
+<li>读未提交(read uncommitted)</li>
+<li>读提交(read committed)</li>
+<li>可重复读(repeatable read)</li>
+<li><p>串行化(serializable)</p>
+<p>一.  读未提交是不加锁的，连<code>脏读(数据可能回滚)</code>都无法解决。</p>
+<p>二. 读提交就是事务只能读到其他事务调用 commit 命令之后的数据，能解决<code>脏读</code>，不能解决<code>可重复读(事务中修改条件数据)</code>,<code>幻读(事务中加减条件数据)</code>。</p>
+</li>
+</ol>
+</li>
+</ol>
 ]]></content>
     </entry>
     
@@ -216,8 +256,7 @@ set
 </blockquote>
 </li>
 </ol>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">GitHubClient</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> HttpClient Client &#123; <span class="keyword">get</span>; <span class="keyword">private</span> <span class="keyword">set</span>; &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">GitHubClient</span>(<span class="params">HttpClient httpClient</span>)</span></div><div class="line">    &#123;</div><div class="line">        httpClient.BaseAddress = <span class="keyword">new</span> Uri(<span class="string">"https://api.github.com/"</span>);</div><div class="line">        httpClient.DefaultRequestHeaders.Add(<span class="string">"Accept"</span>, <span class="string">"application/vnd.github.v3+json"</span>);</div><div class="line">        httpClient.DefaultRequestHeaders.Add(<span class="string">"User-Agent"</span>, <span class="string">"HttpClientFactory-Sample"</span>);</div><div class="line">        Client = httpClient;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task&lt;<span class="keyword">string</span>&gt; <span class="title">GetData</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">await</span> _client.GetStringAsync(<span class="string">"/"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">services.AddHttpClient&lt;GitHubClient&gt;();</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ValuesController</span> : <span class="title">BaseController</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">readonly</span> GitHubClient _gitHubClient;;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ValuesController</span>(<span class="params">GitHubClient gitHubClient</span>)</span></div><div class="line">    &#123;</div><div class="line">        _gitHubClient = gitHubClient;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    [HttpGet]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task&lt;ActionResult&gt; <span class="title">Get</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">string</span> result = <span class="keyword">await</span> _gitHubClient.GetData();</div><div class="line">        <span class="keyword">return</span> Ok(result);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>我的做法是使用全局static来控制。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div><div class="line">384</div><div class="line">385</div><div class="line">386</div><div class="line">387</div><div class="line">388</div><div class="line">389</div><div class="line">390</div><div class="line">391</div><div class="line">392</div><div class="line">393</div><div class="line">394</div><div class="line">395</div><div class="line">396</div><div class="line">397</div><div class="line">398</div><div class="line">399</div><div class="line">400</div><div class="line">401</div><div class="line">402</div><div class="line">403</div><div class="line">404</div><div class="line">405</div><div class="line">406</div><div class="line">407</div><div class="line">408</div><div class="line">409</div><div class="line">410</div><div class="line">411</div><div class="line">412</div><div class="line">413</div><div class="line">414</div><div class="line">415</div><div class="line">416</div><div class="line">417</div><div class="line">418</div><div class="line">419</div><div class="line">420</div><div class="line">421</div><div class="line">422</div><div class="line">423</div><div class="line">424</div><div class="line">425</div><div class="line">426</div><div class="line">427</div><div class="line">428</div><div class="line">429</div><div class="line">430</div><div class="line">431</div><div class="line">432</div><div class="line">433</div><div class="line">434</div><div class="line">435</div><div class="line">436</div><div class="line">437</div><div class="line">438</div><div class="line">439</div><div class="line">440</div><div class="line">441</div><div class="line">442</div><div class="line">443</div><div class="line">444</div><div class="line">445</div><div class="line">446</div><div class="line">447</div><div class="line">448</div><div class="line">449</div><div class="line">450</div><div class="line">451</div><div class="line">452</div><div class="line">453</div><div class="line">454</div><div class="line">455</div><div class="line">456</div><div class="line">457</div><div class="line">458</div><div class="line">459</div><div class="line">460</div><div class="line">461</div><div class="line">462</div><div class="line">463</div><div class="line">464</div><div class="line">465</div><div class="line">466</div><div class="line">467</div><div class="line">468</div><div class="line">469</div><div class="line">470</div><div class="line">471</div><div class="line">472</div><div class="line">473</div><div class="line">474</div><div class="line">475</div><div class="line">476</div><div class="line">477</div><div class="line">478</div><div class="line">479</div><div class="line">480</div><div class="line">481</div><div class="line">482</div><div class="line">483</div><div class="line">484</div><div class="line">485</div><div class="line">486</div><div class="line">487</div><div class="line">488</div><div class="line">489</div><div class="line">490</div><div class="line">491</div><div class="line">492</div><div class="line">493</div><div class="line">494</div><div class="line">495</div><div class="line">496</div><div class="line">497</div><div class="line">498</div><div class="line">499</div><div class="line">500</div><div class="line">501</div><div class="line">502</div><div class="line">503</div><div class="line">504</div><div class="line">505</div><div class="line">506</div><div class="line">507</div><div class="line">508</div><div class="line">509</div><div class="line">510</div><div class="line">511</div><div class="line">512</div><div class="line">513</div><div class="line">514</div><div class="line">515</div><div class="line">516</div><div class="line">517</div><div class="line">518</div><div class="line">519</div><div class="line">520</div><div class="line">521</div><div class="line">522</div><div class="line">523</div><div class="line">524</div><div class="line">525</div><div class="line">526</div><div class="line">527</div><div class="line">528</div><div class="line">529</div><div class="line">530</div><div class="line">531</div><div class="line">532</div><div class="line">533</div><div class="line">534</div><div class="line">535</div><div class="line">536</div><div class="line">537</div><div class="line">538</div><div class="line">539</div><div class="line">540</div><div class="line">541</div><div class="line">542</div><div class="line">543</div><div class="line">544</div><div class="line">545</div><div class="line">546</div><div class="line">547</div><div class="line">548</div><div class="line">549</div><div class="line">550</div><div class="line">551</div><div class="line">552</div><div class="line">553</div><div class="line">554</div><div class="line">555</div><div class="line">556</div><div class="line">557</div><div class="line">558</div><div class="line">559</div><div class="line">560</div><div class="line">561</div><div class="line">562</div><div class="line">563</div><div class="line">564</div><div class="line">565</div><div class="line">566</div><div class="line">567</div><div class="line">568</div><div class="line">569</div><div class="line">570</div><div class="line">571</div><div class="line">572</div><div class="line">573</div><div class="line">574</div><div class="line">575</div><div class="line">576</div><div class="line">577</div><div class="line">578</div><div class="line">579</div><div class="line">580</div><div class="line">581</div><div class="line">582</div><div class="line">583</div><div class="line">584</div><div class="line">585</div><div class="line">586</div><div class="line">587</div><div class="line">588</div><div class="line">589</div><div class="line">590</div><div class="line">591</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> RestClient : IDisposable</div><div class="line">   &#123;</div><div class="line">       <span class="keyword">private</span> readonly ILogger Logger = LoggerManager.GetLogger(<span class="string">"ApiClient"</span>);</div><div class="line"></div><div class="line">       <span class="keyword">private</span> HttpClient _httpClient = <span class="literal">null</span>;</div><div class="line">       <span class="keyword">const</span> <span class="built_in">string</span> TASKAPI20 = <span class="string">"api/v2/task"</span>;</div><div class="line">       <span class="keyword">const</span> <span class="built_in">string</span> TASKAPI30 = <span class="string">"api/v3/task"</span>;</div><div class="line">       <span class="keyword">const</span> <span class="built_in">string</span> MATRIXAPI20 = <span class="string">"api/v2/matrix"</span>;</div><div class="line">       <span class="keyword">const</span> <span class="built_in">string</span> USERAPI20 = <span class="string">"api/v2/user"</span>;</div><div class="line">       <span class="keyword">const</span> <span class="built_in">string</span> DEVICEAPI30 = <span class="string">"api/v3/device"</span>;</div><div class="line">       <span class="keyword">const</span> <span class="built_in">string</span> DEVICEAPI20 = <span class="string">"api/v2/device"</span>;</div><div class="line"></div><div class="line">       <span class="keyword">private</span> <span class="built_in">string</span> IngestDbUrl &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">private</span> <span class="built_in">string</span> CmServerUrl &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line"></div><div class="line">       <span class="keyword">private</span> bool _disposed;</div><div class="line">       <span class="keyword">public</span> RestClient(HttpClient httpClient, <span class="built_in">string</span> ingesturl, <span class="built_in">string</span> cmurl)</div><div class="line">       &#123;</div><div class="line">           _disposed = <span class="literal">false</span>;</div><div class="line">           _httpClient = httpClient != <span class="literal">null</span>? httpClient : <span class="keyword">new</span> HttpClient();</div><div class="line">           _httpClient.DefaultRequestHeaders.Connection.Clear();</div><div class="line">           _httpClient.DefaultRequestHeaders.ConnectionClose = <span class="literal">false</span>;</div><div class="line">           _httpClient.Timeout = TimeSpan.FromSeconds(<span class="number">15</span>);</div><div class="line">           _httpClient.DefaultRequestHeaders.Accept.Add(<span class="keyword">new</span> MediaTypeWithQualityHeaderValue(<span class="string">"application/json"</span>));</div><div class="line">           _httpClient.DefaultRequestHeaders.Add(<span class="string">"sobeyhive-http-system"</span>, <span class="string">"INGESTSERVER"</span>);</div><div class="line">           _httpClient.DefaultRequestHeaders.Add(<span class="string">"sobeyhive-http-site"</span>, <span class="string">"S1"</span>);</div><div class="line">           _httpClient.DefaultRequestHeaders.Add(<span class="string">"sobeyhive-http-tool"</span>, <span class="string">"INGESTSERVER"</span>);</div><div class="line">           IngestDbUrl = ingesturl;</div><div class="line">           CmServerUrl = cmurl;</div><div class="line">           </div><div class="line">       &#125;</div><div class="line">       <span class="keyword">public</span> <span class="built_in">void</span> Dispose()</div><div class="line">       &#123;</div><div class="line">           Dispose(<span class="literal">true</span>);</div><div class="line">           GC.SuppressFinalize(<span class="keyword">this</span>);</div><div class="line">       &#125;</div><div class="line"></div><div class="line">       ~RestClient()</div><div class="line">       &#123;</div><div class="line">           <span class="comment">//必须为false</span></div><div class="line">           Dispose(<span class="literal">false</span>);</div><div class="line">       &#125;</div><div class="line"></div><div class="line">       <span class="keyword">protected</span> virtual <span class="built_in">void</span> Dispose(bool disposing)</div><div class="line">       &#123;</div><div class="line">           <span class="keyword">if</span> (_disposed) <span class="keyword">return</span>;</div><div class="line">           <span class="keyword">if</span> (disposing)</div><div class="line">           &#123;</div><div class="line"></div><div class="line">           &#125;</div><div class="line">           <span class="keyword">if</span> (_httpClient != <span class="literal">null</span>)</div><div class="line">           &#123;</div><div class="line">               _httpClient.Dispose();</div><div class="line">               _httpClient = <span class="literal">null</span>;</div><div class="line">           &#125;</div><div class="line">           _disposed = <span class="literal">true</span>;</div><div class="line">       &#125;</div><div class="line"></div><div class="line">       <span class="keyword">public</span> Dictionary&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; GetTokenHeader(<span class="built_in">string</span> usertoken)</div><div class="line">       &#123;</div><div class="line">           <span class="keyword">return</span> <span class="keyword">new</span> Dictionary&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;() &#123; </div><div class="line">               &#123;<span class="string">"sobeyhive-http-token"</span>, usertoken &#125;</div><div class="line">           &#125;;</div><div class="line">       &#125;</div><div class="line"></div><div class="line">       <span class="keyword">public</span> Dictionary&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; GetCodeHeader(<span class="built_in">string</span> usertoken)</div><div class="line">       &#123;</div><div class="line">           <span class="keyword">return</span> <span class="keyword">new</span> Dictionary&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;() &#123;</div><div class="line">               &#123;<span class="string">"sobeyhive-http-secret"</span>, RSAHelper.RSAstr()&#125;,</div><div class="line">               &#123;<span class="string">"current-user-code"</span>, usertoken &#125;</div><div class="line">           &#125;;</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">public</span> Dictionary&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; GetIngestHeader()</div><div class="line">       &#123;</div><div class="line">           <span class="keyword">return</span> <span class="keyword">new</span> Dictionary&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;() &#123;</div><div class="line">               &#123;<span class="string">"sobeyhive-ingest-signature"</span>, Base64SQL.ToBase64String($<span class="string">"ingest_server;&#123;DateTime.Now&#125;"</span>)&#125;,</div><div class="line">           &#125;;</div><div class="line">       &#125;</div><div class="line"></div><div class="line">       <span class="keyword">public</span> async Task&lt;TResponse&gt; PostAsync&lt;TResponse&gt;(<span class="built_in">string</span> url, object body, <span class="built_in">string</span> method = <span class="string">"POST"</span>, NameValueCollection queryString = <span class="literal">null</span>, int timeout = <span class="number">60</span>)</div><div class="line">           where TResponse : <span class="keyword">class</span>, <span class="keyword">new</span>()</div><div class="line">       &#123;</div><div class="line">           TResponse response = <span class="literal">null</span>;</div><div class="line">           <span class="keyword">try</span></div><div class="line">           &#123;</div><div class="line">               <span class="built_in">string</span> json = JsonHelper.ToJson(body);</div><div class="line">               HttpClient client = _httpClient;</div><div class="line">               <span class="keyword">if</span> (queryString == <span class="literal">null</span>)</div><div class="line">               &#123;</div><div class="line">                   queryString = <span class="keyword">new</span> NameValueCollection();</div><div class="line">               &#125;</div><div class="line">               <span class="keyword">if</span> (<span class="built_in">String</span>.IsNullOrEmpty(method))</div><div class="line">               &#123;</div><div class="line">                   method = <span class="string">"POST"</span>;</div><div class="line">               &#125;</div><div class="line">               url = CreateUrl(url, queryString);</div><div class="line">               <span class="comment">//Logger.Debug("请求：&#123;0&#125; &#123;1&#125;", method, url);</span></div><div class="line">               byte[] strData = Encoding.UTF8.GetBytes(json);</div><div class="line">               MemoryStream ms = <span class="keyword">new</span> MemoryStream(strData);</div><div class="line">               using (StreamContent sc = <span class="keyword">new</span> StreamContent(ms))</div><div class="line">               &#123;</div><div class="line">                   sc.Headers.ContentType = <span class="keyword">new</span> MediaTypeWithQualityHeaderValue(<span class="string">"application/json"</span>);</div><div class="line"></div><div class="line">                   <span class="comment">//foreach (var item in _httpClient.DefaultRequestHeaders)</span></div><div class="line">                   <span class="comment">//&#123;</span></div><div class="line">                   <span class="comment">//    Logger.Error("header :  " + item.Key + ":" + item.Value.FirstOrDefault());</span></div><div class="line">                   <span class="comment">//    foreach(var test in item.Value)</span></div><div class="line">                   <span class="comment">//    &#123;</span></div><div class="line">                   <span class="comment">//        Logger.Error("test :  " + test);</span></div><div class="line">                   <span class="comment">//    &#125;</span></div><div class="line">                   <span class="comment">//&#125;</span></div><div class="line"></div><div class="line">                   <span class="keyword">var</span> res = await client.PostAsync(url, sc).ConfigureAwait(<span class="literal">true</span>);</div><div class="line">                   byte[] rData = await res.Content.ReadAsByteArrayAsync().ConfigureAwait(<span class="literal">true</span>);</div><div class="line">                   <span class="built_in">string</span> rJson = Encoding.UTF8.GetString(rData);</div><div class="line">                   Logger.Info(<span class="string">"url body response：\r\n&#123;0&#125; &#123;1&#125; &#123;2&#125;"</span>, url, json, rJson);</div><div class="line">                   response = JsonHelper.ToObject&lt;TResponse&gt;(rJson);</div><div class="line">                   <span class="keyword">return</span> response;</div><div class="line">               &#125;</div><div class="line">                  </div><div class="line">           &#125;</div><div class="line">           <span class="keyword">catch</span> (System.Exception e)</div><div class="line">           &#123;</div><div class="line">               TResponse r = <span class="keyword">new</span> TResponse();</div><div class="line">               Logger.Error(<span class="string">"请求异常：\r\n&#123;0&#125; &#123;1&#125;"</span>, e.ToString(), url);</div><div class="line">               <span class="keyword">throw</span>;</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line"></div><div class="line">       <span class="keyword">public</span> async Task&lt;<span class="built_in">string</span>&gt; PostAsync(<span class="built_in">string</span> url, <span class="built_in">string</span> body, <span class="built_in">string</span> method = <span class="string">"POST"</span>, NameValueCollection queryString = <span class="literal">null</span>, int timeout = <span class="number">60</span>)</div><div class="line">       &#123;</div><div class="line">           <span class="built_in">string</span> response = <span class="literal">null</span>;</div><div class="line">           <span class="keyword">try</span></div><div class="line">           &#123;</div><div class="line">               <span class="built_in">string</span> json = body;</div><div class="line">               HttpClient client = _httpClient;</div><div class="line">               <span class="keyword">if</span> (queryString == <span class="literal">null</span>)</div><div class="line">               &#123;</div><div class="line">                   queryString = <span class="keyword">new</span> NameValueCollection();</div><div class="line">               &#125;</div><div class="line">               <span class="keyword">if</span> (<span class="built_in">String</span>.IsNullOrEmpty(method))</div><div class="line">               &#123;</div><div class="line">                   method = <span class="string">"POST"</span>;</div><div class="line">               &#125;</div><div class="line">               url = CreateUrl(url, queryString);</div><div class="line">               <span class="comment">//Logger.Debug("请求：&#123;0&#125; &#123;1&#125;", method, url);</span></div><div class="line">               byte[] strData = Encoding.UTF8.GetBytes(json);</div><div class="line">               MemoryStream ms = <span class="keyword">new</span> MemoryStream(strData);</div><div class="line">               using (StreamContent sc = <span class="keyword">new</span> StreamContent(ms))</div><div class="line">               &#123;</div><div class="line">                   sc.Headers.ContentType = <span class="keyword">new</span> MediaTypeWithQualityHeaderValue(<span class="string">"application/json"</span>);</div><div class="line">                   <span class="keyword">var</span> res = await client.PostAsync(url, sc).ConfigureAwait(<span class="literal">true</span>);</div><div class="line">                   <span class="keyword">if</span> (res.Content == <span class="literal">null</span> || res.Content.Headers.ContentLength == <span class="number">0</span>)</div><div class="line">                   &#123;</div><div class="line">                       response = <span class="string">""</span>;</div><div class="line">                   &#125;</div><div class="line">                   <span class="keyword">else</span></div><div class="line">                   &#123;</div><div class="line">                       byte[] rData = await res.Content.ReadAsByteArrayAsync().ConfigureAwait(<span class="literal">true</span>);</div><div class="line">                       <span class="built_in">string</span> rJson = Encoding.UTF8.GetString(rData);</div><div class="line">                       <span class="comment">//Logger.Debug("应答：\r\n&#123;0&#125;", rJson);</span></div><div class="line">                       response = rJson;</div><div class="line">                   &#125;</div><div class="line">               &#125;</div><div class="line">                   </div><div class="line">           &#125;</div><div class="line">           <span class="keyword">catch</span> (System.Exception e)</div><div class="line">           &#123;</div><div class="line">               response = <span class="string">"ERROR"</span>;</div><div class="line">               Logger.Error(<span class="string">"请求异常：\r\n&#123;0&#125; &#123;1&#125;"</span>, e.ToString(), url);</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">return</span> response;</div><div class="line">       &#125;</div><div class="line"></div><div class="line">       <span class="keyword">public</span> async Task&lt;TResponse&gt; PutAsync&lt;TResponse&gt;(<span class="built_in">string</span> url, object body, Dictionary&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; header, NameValueCollection queryString = <span class="literal">null</span>)</div><div class="line">       &#123;</div><div class="line">           TResponse response = <span class="keyword">default</span>(TResponse);</div><div class="line">           <span class="keyword">try</span></div><div class="line">           &#123;</div><div class="line">               <span class="built_in">string</span> json = JsonHelper.ToJson(body);</div><div class="line">               HttpClient client = _httpClient;</div><div class="line">               <span class="keyword">if</span> (queryString == <span class="literal">null</span>)</div><div class="line">               &#123;</div><div class="line">                   queryString = <span class="keyword">new</span> NameValueCollection();</div><div class="line">               &#125;</div><div class="line"></div><div class="line">               url = CreateUrl(url, queryString);</div><div class="line">               <span class="comment">//Logger.Debug("请求：&#123;0&#125; &#123;1&#125;", method, url);</span></div><div class="line">               byte[] strData = Encoding.UTF8.GetBytes(json);</div><div class="line">               MemoryStream ms = <span class="keyword">new</span> MemoryStream(strData);</div><div class="line">               using (StreamContent sc = <span class="keyword">new</span> StreamContent(ms))</div><div class="line">               &#123;</div><div class="line">                   sc.Headers.ContentType = <span class="keyword">new</span> MediaTypeWithQualityHeaderValue(<span class="string">"application/json"</span>);</div><div class="line">                   <span class="keyword">if</span> (header != <span class="literal">null</span>)</div><div class="line">                   &#123;</div><div class="line">                       foreach (<span class="keyword">var</span> item <span class="keyword">in</span> header)</div><div class="line">                       &#123;</div><div class="line">                           sc.Headers.Add(item.Key, item.Value);</div><div class="line">                       &#125;</div><div class="line">                   &#125;</div><div class="line"></div><div class="line">                   <span class="keyword">var</span> res = await client.PutAsync(url, sc).ConfigureAwait(<span class="literal">true</span>);</div><div class="line">                   byte[] rData = await res.Content.ReadAsByteArrayAsync().ConfigureAwait(<span class="literal">true</span>);</div><div class="line">                   <span class="built_in">string</span> rJson = Encoding.UTF8.GetString(rData);</div><div class="line">                   <span class="comment">//Logger.Debug("应答：\r\n&#123;0&#125;", rJson);</span></div><div class="line">                   response = JsonHelper.ToObject&lt;TResponse&gt;(rJson);</div><div class="line">                   <span class="keyword">return</span> response;</div><div class="line">               &#125;</div><div class="line"></div><div class="line">           &#125;</div><div class="line">           <span class="keyword">catch</span> (System.Exception e)</div><div class="line">           &#123;</div><div class="line">               Logger.Error(<span class="string">"请求异常：\r\n&#123;0&#125; &#123;1&#125;"</span>, e.ToString(), url);</div><div class="line">               <span class="keyword">throw</span>;</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line"></div><div class="line">       <span class="keyword">public</span> async Task&lt;TResponse&gt; DeleteAsync&lt;TResponse&gt;(<span class="built_in">string</span> url, Dictionary&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; header, NameValueCollection queryString = <span class="literal">null</span>)</div><div class="line">           where TResponse : <span class="keyword">class</span>, <span class="keyword">new</span>()</div><div class="line">       &#123;</div><div class="line">           TResponse response = <span class="keyword">default</span>(TResponse);</div><div class="line">           <span class="keyword">try</span></div><div class="line">           &#123;</div><div class="line">               HttpClient client = _httpClient;</div><div class="line">               <span class="keyword">if</span> (queryString == <span class="literal">null</span>)</div><div class="line">               &#123;</div><div class="line">                   queryString = <span class="keyword">new</span> NameValueCollection();</div><div class="line">               &#125;</div><div class="line"></div><div class="line">               url = CreateUrl(url, queryString);</div><div class="line">               <span class="comment">//Logger.Debug("请求：&#123;0&#125; &#123;1&#125;", method, url);</span></div><div class="line"></div><div class="line">               using (<span class="keyword">var</span> requestMessage = <span class="keyword">new</span> HttpRequestMessage(HttpMethod.Delete, url))</div><div class="line">               &#123;</div><div class="line">                   <span class="keyword">if</span> (header != <span class="literal">null</span>)</div><div class="line">                   &#123;</div><div class="line">                       foreach (<span class="keyword">var</span> item <span class="keyword">in</span> header)</div><div class="line">                       &#123;</div><div class="line">                           requestMessage.Headers.Add(item.Key, item.Value);</div><div class="line">                       &#125;</div><div class="line">                   &#125;</div><div class="line">                   <span class="keyword">var</span> backinfo = await client.SendAsync(requestMessage).ConfigureAwait(<span class="literal">true</span>);</div><div class="line">                   <span class="keyword">var</span> rJson = await backinfo.Content.ReadAsStringAsync().ConfigureAwait(<span class="literal">true</span>);</div><div class="line">                   Logger.Info(<span class="string">"url response：\r\n&#123;0&#125; &#123;1&#125;"</span>, url, rJson);</div><div class="line">                   response = JsonHelper.ToObject&lt;TResponse&gt;(rJson);</div><div class="line">               &#125;</div><div class="line"></div><div class="line">           &#125;</div><div class="line">           <span class="keyword">catch</span> (System.Exception e)</div><div class="line">           &#123;</div><div class="line">               TResponse r = <span class="keyword">new</span> TResponse();</div><div class="line">               Logger.Error(<span class="string">"请求异常：\r\n&#123;0&#125;"</span>, e.ToString(), url);</div><div class="line">               <span class="keyword">return</span> r;</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">return</span> response;</div><div class="line">       &#125;</div><div class="line"></div><div class="line">       <span class="keyword">public</span> async Task&lt;TResponse&gt; GetAsync&lt;TResponse&gt;(<span class="built_in">string</span> url, NameValueCollection queryString, Dictionary&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; header)</div><div class="line">                   where TResponse : <span class="keyword">class</span>, <span class="keyword">new</span>()</div><div class="line">       &#123;</div><div class="line">           TResponse response = <span class="literal">null</span>;</div><div class="line">           <span class="keyword">try</span></div><div class="line">           &#123;</div><div class="line">               HttpClient client = _httpClient;</div><div class="line">               <span class="keyword">if</span> (queryString != <span class="literal">null</span>)</div><div class="line">               &#123;</div><div class="line">                   url = CreateUrl(url, queryString);</div><div class="line">               &#125;</div><div class="line">               </div><div class="line">               <span class="comment">//Logger.Debug("请求：&#123;0&#125; &#123;1&#125;", "GET", url);</span></div><div class="line">               using (<span class="keyword">var</span> requestMessage = <span class="keyword">new</span> HttpRequestMessage(HttpMethod.Get, url))</div><div class="line">               &#123;</div><div class="line">                   <span class="keyword">if</span> (header != <span class="literal">null</span>)</div><div class="line">                   &#123;</div><div class="line">                       foreach (<span class="keyword">var</span> item <span class="keyword">in</span> header)</div><div class="line">                       &#123;</div><div class="line">                           requestMessage.Headers.Add(item.Key, item.Value);</div><div class="line">                       &#125;</div><div class="line">                   &#125;</div><div class="line">                   <span class="keyword">var</span> backinfo = await client.SendAsync(requestMessage).ConfigureAwait(<span class="literal">true</span>);</div><div class="line">                   <span class="keyword">var</span> rJson = await backinfo.Content.ReadAsStringAsync().ConfigureAwait(<span class="literal">true</span>);</div><div class="line">                   Logger.Info(<span class="string">"url response：\r\n&#123;0&#125; &#123;1&#125;"</span>, url, rJson);</div><div class="line">                   response = JsonHelper.ToObject&lt;TResponse&gt;(rJson);</div><div class="line">               &#125;</div><div class="line">               </div><div class="line">           &#125;</div><div class="line">           <span class="keyword">catch</span> (System.Exception e)</div><div class="line">           &#123;</div><div class="line">               TResponse r = <span class="keyword">new</span> TResponse();</div><div class="line">               Logger.Error(<span class="string">"请求异常：\r\n&#123;0&#125; &#123;1&#125;"</span>, e.ToString(), url);</div><div class="line">               <span class="keyword">return</span> r;</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">return</span> response;</div><div class="line">       &#125;</div><div class="line"></div><div class="line">       <span class="comment">//public async Task&lt;TResponse&gt; GetAsync&lt;TResponse&gt;(string url, NameValueCollection queryString)</span></div><div class="line">       <span class="comment">//            where TResponse : class, new()</span></div><div class="line">       <span class="comment">//&#123;</span></div><div class="line">       <span class="comment">//    TResponse response = null;</span></div><div class="line">       <span class="comment">//    try</span></div><div class="line">       <span class="comment">//    &#123;</span></div><div class="line">       <span class="comment">//        HttpClient client = _httpClient;</span></div><div class="line">       <span class="comment">//        if (queryString != null)</span></div><div class="line">       <span class="comment">//        &#123;</span></div><div class="line">       <span class="comment">//            url = CreateUrl(url, queryString);</span></div><div class="line">       <span class="comment">//        &#125;</span></div><div class="line">       <span class="comment">//        </span></div><div class="line">       <span class="comment">//        //Logger.Debug("请求：&#123;0&#125; &#123;1&#125;", "GET", url);</span></div><div class="line">       <span class="comment">//        byte[] rData = await client.GetByteArrayAsync(url).ConfigureAwait(true);</span></div><div class="line">       <span class="comment">//        string rJson = Encoding.UTF8.GetString(rData);</span></div><div class="line">       <span class="comment">//        Logger.Info("url response：\r\n&#123;0&#125; &#123;1&#125;", url, rJson);</span></div><div class="line">       <span class="comment">//        response = JsonHelper.ToObject&lt;TResponse&gt;(rJson);</span></div><div class="line">       <span class="comment">//    &#125;</span></div><div class="line">       <span class="comment">//    catch (System.Exception )</span></div><div class="line">       <span class="comment">//    &#123;</span></div><div class="line">       <span class="comment">//        TResponse r = new TResponse();</span></div><div class="line">       <span class="comment">//        //Logger.Error("请求异常：\r\n&#123;0&#125;", e.ToString());</span></div><div class="line">       <span class="comment">//        return r;</span></div><div class="line">       <span class="comment">//    &#125;</span></div><div class="line">       <span class="comment">//    return response;</span></div><div class="line">       <span class="comment">//&#125;</span></div><div class="line">       <span class="keyword">public</span> async Task&lt;TResponse&gt; PostAsync&lt;TResponse&gt;(<span class="built_in">string</span> url, object body, Dictionary&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; header, <span class="built_in">string</span> method = <span class="literal">null</span>, NameValueCollection queryString = <span class="literal">null</span>)</div><div class="line">       &#123;</div><div class="line">           TResponse response = <span class="keyword">default</span>(TResponse);</div><div class="line">           <span class="keyword">try</span></div><div class="line">           &#123;</div><div class="line">               <span class="built_in">string</span> json = JsonHelper.ToJson(body);</div><div class="line">               HttpClient client = _httpClient;</div><div class="line">               <span class="keyword">if</span> (queryString == <span class="literal">null</span>)</div><div class="line">               &#123;</div><div class="line">                   queryString = <span class="keyword">new</span> NameValueCollection();</div><div class="line">               &#125;</div><div class="line"></div><div class="line">               url = CreateUrl(url, queryString);</div><div class="line">               <span class="keyword">if</span> (<span class="built_in">String</span>.IsNullOrEmpty(method))</div><div class="line">               &#123;</div><div class="line">                   method = <span class="string">"POST"</span>;</div><div class="line">               &#125;</div><div class="line">               <span class="comment">//Logger.Debug("请求：&#123;0&#125; &#123;1&#125;", method, url);</span></div><div class="line">               byte[] strData = Encoding.UTF8.GetBytes(json);</div><div class="line">               MemoryStream ms = <span class="keyword">new</span> MemoryStream(strData);</div><div class="line">               using (StreamContent sc = <span class="keyword">new</span> StreamContent(ms))</div><div class="line">               &#123;</div><div class="line">                   sc.Headers.ContentType = <span class="keyword">new</span> MediaTypeWithQualityHeaderValue(<span class="string">"application/json"</span>);</div><div class="line">                   <span class="keyword">if</span> (header != <span class="literal">null</span>)</div><div class="line">                   &#123;</div><div class="line">                       foreach (<span class="keyword">var</span> item <span class="keyword">in</span> header)</div><div class="line">                       &#123;</div><div class="line">                           sc.Headers.Add(item.Key, item.Value);</div><div class="line">                       &#125;</div><div class="line">                   &#125;</div><div class="line">                   </div><div class="line">                   <span class="keyword">var</span> res = await client.PostAsync(url, sc).ConfigureAwait(<span class="literal">true</span>);</div><div class="line">                   byte[] rData = await res.Content.ReadAsByteArrayAsync().ConfigureAwait(<span class="literal">true</span>);</div><div class="line">                   <span class="built_in">string</span> rJson = Encoding.UTF8.GetString(rData);</div><div class="line">                   <span class="comment">//Logger.Debug("应答：\r\n&#123;0&#125;", rJson);</span></div><div class="line">                   response = JsonHelper.ToObject&lt;TResponse&gt;(rJson);</div><div class="line">                   <span class="keyword">return</span> response;</div><div class="line">               &#125;</div><div class="line">                   </div><div class="line">           &#125;</div><div class="line">           <span class="keyword">catch</span> (System.Exception )</div><div class="line">           &#123;</div><div class="line">               <span class="comment">//Logger.Error("请求异常：\r\n&#123;0&#125;", e.ToString());</span></div><div class="line">               <span class="keyword">throw</span>;</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line"></div><div class="line">       <span class="comment">//public async Task&lt;string&gt; PostAsync(string url, object body, string method, NameValueCollection queryString)</span></div><div class="line">       <span class="comment">//&#123;</span></div><div class="line">       <span class="comment">//    string response = null;</span></div><div class="line">       <span class="comment">//    try</span></div><div class="line">       <span class="comment">//    &#123;</span></div><div class="line">       <span class="comment">//        string json = JsonHelper.ToJson(body);</span></div><div class="line">       <span class="comment">//        HttpClient client = _httpClient;</span></div><div class="line">       <span class="comment">//        if (queryString == null)</span></div><div class="line">       <span class="comment">//        &#123;</span></div><div class="line">       <span class="comment">//            queryString = new NameValueCollection();</span></div><div class="line">       <span class="comment">//        &#125;</span></div><div class="line"></div><div class="line">       <span class="comment">//        url = CreateUrl(url, queryString);</span></div><div class="line">       <span class="comment">//        if (String.IsNullOrEmpty(method))</span></div><div class="line">       <span class="comment">//        &#123;</span></div><div class="line">       <span class="comment">//            method = "POST";</span></div><div class="line">       <span class="comment">//        &#125;</span></div><div class="line">       <span class="comment">//        //Logger.Debug("请求：&#123;0&#125; &#123;1&#125;", method, url);</span></div><div class="line">       <span class="comment">//        byte[] strData = Encoding.UTF8.GetBytes(json);</span></div><div class="line">       <span class="comment">//        MemoryStream ms = new MemoryStream(strData);</span></div><div class="line">       <span class="comment">//        using (StreamContent sc = new StreamContent(ms))</span></div><div class="line">       <span class="comment">//        &#123;</span></div><div class="line">       <span class="comment">//            sc.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json");</span></div><div class="line">       <span class="comment">//            var res = await client.PostAsync(url, sc).ConfigureAwait(true);</span></div><div class="line">       <span class="comment">//            byte[] rData = await res.Content.ReadAsByteArrayAsync().ConfigureAwait(true);</span></div><div class="line">       <span class="comment">//            string rJson = Encoding.UTF8.GetString(rData);</span></div><div class="line">       <span class="comment">//            //Logger.Debug("应答：\r\n&#123;0&#125;", rJson);</span></div><div class="line">       <span class="comment">//            response = rJson;</span></div><div class="line">       <span class="comment">//            return response;</span></div><div class="line">       <span class="comment">//        &#125;</span></div><div class="line">                   </div><div class="line">       <span class="comment">//    &#125;</span></div><div class="line">       <span class="comment">//    catch (System.Exception )</span></div><div class="line">       <span class="comment">//    &#123;</span></div><div class="line">       <span class="comment">//        //Logger.Error("请求异常：\r\n&#123;0&#125;", e.ToString());</span></div><div class="line">       <span class="comment">//        throw;</span></div><div class="line">       <span class="comment">//    &#125;</span></div><div class="line">       <span class="comment">//&#125;</span></div><div class="line"></div><div class="line">       <span class="keyword">public</span> async Task&lt;TResult&gt; PostWithTokenAsync&lt;TResult&gt;(<span class="built_in">string</span> url, object body, <span class="built_in">string</span> token, <span class="built_in">string</span> userId = <span class="literal">null</span>, <span class="built_in">string</span> method = <span class="string">"Post"</span>)</div><div class="line">       &#123;</div><div class="line">           <span class="comment">//Stopwatch sw = new Stopwatch();</span></div><div class="line">           <span class="comment">//sw.Start();</span></div><div class="line"></div><div class="line">           <span class="built_in">string</span> apiUrl = $<span class="string">"&#123;url&#125;"</span>;</div><div class="line">           HttpMethod hm = <span class="keyword">new</span> HttpMethod(method);</div><div class="line"></div><div class="line">           using (<span class="keyword">var</span> request = <span class="keyword">new</span> HttpRequestMessage(hm, apiUrl))</div><div class="line">           &#123;</div><div class="line">               <span class="keyword">if</span> (!<span class="built_in">String</span>.IsNullOrEmpty(token))</div><div class="line">               &#123;</div><div class="line">                   request.Headers.Authorization = <span class="keyword">new</span> AuthenticationHeaderValue(<span class="string">"Bearer"</span>, token);</div><div class="line"></div><div class="line">               &#125;</div><div class="line">               <span class="keyword">if</span> (!<span class="built_in">String</span>.IsNullOrEmpty(userId))</div><div class="line">               &#123;</div><div class="line">                   request.Headers.Add(<span class="string">"User"</span>, userId);</div><div class="line">               &#125;</div><div class="line"></div><div class="line">               <span class="built_in">string</span> json = <span class="string">""</span>;</div><div class="line">               <span class="keyword">if</span> (body != <span class="literal">null</span>)</div><div class="line">               &#123;</div><div class="line">                   json = Newtonsoft.Json.JsonConvert.SerializeObject(body);</div><div class="line">               &#125;</div><div class="line">               request.Content = <span class="keyword">new</span> StringContent(json);</div><div class="line">               request.Content.Headers.ContentType = <span class="keyword">new</span> MediaTypeWithQualityHeaderValue(<span class="string">"application/json"</span>);</div><div class="line"></div><div class="line">               <span class="keyword">var</span> response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseContentRead).ConfigureAwait(<span class="literal">true</span>);</div><div class="line">               <span class="keyword">if</span> (response.StatusCode == System.Net.HttpStatusCode.Unauthorized ||</div><div class="line">                   response.StatusCode == System.Net.HttpStatusCode.Forbidden)</div><div class="line">               &#123;</div><div class="line">                   <span class="keyword">throw</span> <span class="keyword">new</span> UnauthorizedAccessException(<span class="string">"验证失败"</span>);</div><div class="line">               &#125;</div><div class="line">               <span class="keyword">try</span></div><div class="line">               &#123;</div><div class="line">                   response.EnsureSuccessStatusCode();</div><div class="line">                   <span class="built_in">string</span> str = await response.Content.ReadAsStringAsync().ConfigureAwait(<span class="literal">true</span>);</div><div class="line"></div><div class="line">                   <span class="comment">//sw.Stop();</span></div><div class="line">                   <span class="comment">//if (sw.ElapsedMilliseconds &gt;= 1000)</span></div><div class="line">                   <span class="comment">//&#123;</span></div><div class="line">                   <span class="comment">//slowLogger.Warn("请求时间超过一秒：POST &#123;0&#125; &#123;1&#125;", apiUrl, sw.ElapsedMilliseconds);</span></div><div class="line">                   <span class="comment">//&#125;</span></div><div class="line"></div><div class="line">                   <span class="keyword">return</span> Newtonsoft.Json.JsonConvert.DeserializeObject&lt;TResult&gt;(str);</div><div class="line">               &#125;</div><div class="line">               <span class="keyword">catch</span> (Exception )</div><div class="line">               &#123;</div><div class="line">                   <span class="comment">//logger.Error("Post 失败：&#123;0&#125;\r\n&#123;1&#125;", url, e.ToString());</span></div><div class="line">                   <span class="built_in">string</span> str = await response.Content.ReadAsStringAsync().ConfigureAwait(<span class="literal">true</span>);</div><div class="line">                   <span class="comment">//logger.Error(str);</span></div><div class="line">                   <span class="keyword">throw</span>;</div><div class="line">               &#125;</div><div class="line">           &#125;</div><div class="line">               </div><div class="line">       &#125;</div><div class="line"></div><div class="line">       <span class="keyword">public</span> async Task&lt;TResult&gt; SubmitFormAsync&lt;TResult&gt;(<span class="built_in">string</span> url, Dictionary&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; formData, <span class="built_in">string</span> method = <span class="string">"Post"</span>)</div><div class="line">       &#123;</div><div class="line">           HttpMethod hm = <span class="keyword">new</span> HttpMethod(method);</div><div class="line">           using (<span class="keyword">var</span> request = <span class="keyword">new</span> HttpRequestMessage(hm, url))</div><div class="line">           &#123;</div><div class="line">               request.Content = <span class="keyword">new</span> FormUrlEncodedContent(formData);</div><div class="line">               <span class="keyword">var</span> response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseContentRead).ConfigureAwait(<span class="literal">true</span>);</div><div class="line">               <span class="keyword">if</span> (response.StatusCode == System.Net.HttpStatusCode.Unauthorized ||</div><div class="line">                   response.StatusCode == System.Net.HttpStatusCode.Forbidden)</div><div class="line">               &#123;</div><div class="line">                   <span class="keyword">throw</span> <span class="keyword">new</span> UnauthorizedAccessException(<span class="string">"验证失败"</span>);</div><div class="line">               &#125;</div><div class="line">               response.EnsureSuccessStatusCode();</div><div class="line">               <span class="built_in">string</span> str = await response.Content.ReadAsStringAsync().ConfigureAwait(<span class="literal">true</span>);</div><div class="line">               <span class="keyword">return</span> Newtonsoft.Json.JsonConvert.DeserializeObject&lt;TResult&gt;(str);</div><div class="line">           &#125;</div><div class="line">               </div><div class="line">       &#125;</div><div class="line"></div><div class="line"></div><div class="line">       <span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">string</span> CreateUrl(<span class="built_in">string</span> url, NameValueCollection qs)</div><div class="line">       &#123;</div><div class="line">           <span class="keyword">if</span> (qs != <span class="literal">null</span> &amp;&amp; qs.Count &gt; <span class="number">0</span>)</div><div class="line">           &#123;</div><div class="line">               StringBuilder sb = <span class="keyword">new</span> StringBuilder();</div><div class="line">               List&lt;<span class="built_in">string</span>&gt; kl = qs.AllKeys.ToList();</div><div class="line">               foreach (<span class="built_in">string</span> k <span class="keyword">in</span> kl)</div><div class="line">               &#123;</div><div class="line">                   <span class="keyword">if</span> (sb.Length &gt; <span class="number">0</span>)</div><div class="line">                   &#123;</div><div class="line">                       sb.Append(<span class="string">"&amp;"</span>);</div><div class="line">                   &#125;</div><div class="line">                   sb.Append(k).Append(<span class="string">"="</span>);</div><div class="line">                   <span class="keyword">if</span> (!<span class="built_in">String</span>.IsNullOrEmpty(qs[k]))</div><div class="line">                   &#123;</div><div class="line"></div><div class="line">                       sb.Append(System.Net.WebUtility.UrlEncode(qs[k]));</div><div class="line">                   &#125;</div><div class="line">               &#125;</div><div class="line"></div><div class="line">               <span class="keyword">if</span> (url != <span class="literal">null</span>)</div><div class="line">               &#123;</div><div class="line">                   <span class="keyword">if</span> (url.Contains(<span class="string">"?"</span>))</div><div class="line">                   &#123;</div><div class="line">                       url = url + <span class="string">"&amp;"</span> + sb.ToString();</div><div class="line">                   &#125;</div><div class="line">                   <span class="keyword">else</span></div><div class="line">                   &#123;</div><div class="line">                       url = url + <span class="string">"?"</span> + sb.ToString();</div><div class="line">                   &#125;</div><div class="line">               &#125;</div><div class="line">               </div><div class="line">           &#125;</div><div class="line"></div><div class="line">           <span class="keyword">return</span> url;</div><div class="line"></div><div class="line">       &#125;</div><div class="line"></div><div class="line">       #region Global</div><div class="line">       <span class="keyword">public</span> async Task&lt;List&lt;UserLoginInfo&gt;&gt; GetAllUserLoginInfosAsync()</div><div class="line">       &#123;</div><div class="line">           <span class="keyword">var</span> back = await AutoRetry.RunAsync&lt;ResponseMessage&lt;List&lt;UserLoginInfo&gt;&gt;&gt;(() =&gt;</div><div class="line">           &#123;</div><div class="line">               <span class="keyword">return</span> GetAsync&lt;ResponseMessage&lt;List&lt;UserLoginInfo&gt;&gt;&gt;(</div><div class="line">                   $<span class="string">"&#123;IngestDbUrl&#125;/&#123;USERAPI20&#125;/userlogininfo/all"</span>, <span class="literal">null</span>, GetIngestHeader()</div><div class="line">                   );</div><div class="line">           &#125;).ConfigureAwait(<span class="literal">true</span>);</div><div class="line"></div><div class="line">           <span class="keyword">if</span> (back != <span class="literal">null</span>)</div><div class="line">           &#123;</div><div class="line">               <span class="keyword">return</span> back.Ext;</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">       &#125;</div><div class="line">       #endregion</div><div class="line"></div><div class="line">       #region Task</div><div class="line"></div><div class="line">       <span class="keyword">public</span> async Task&lt;TaskSource&gt; GetTaskSourceByTaskIdAsync(int taskid)</div><div class="line">       &#123;</div><div class="line">           <span class="keyword">var</span> back = await AutoRetry.RunAsync&lt;ResponseMessage&lt;TaskSource&gt;&gt;(() =&gt;</div><div class="line">           &#123;</div><div class="line">               <span class="keyword">return</span> GetAsync&lt;ResponseMessage&lt;TaskSource&gt;&gt;(</div><div class="line">                   $<span class="string">"&#123;IngestDbUrl&#125;/&#123;TASKAPI20&#125;/tasksource/&#123;taskid&#125;"</span>,</div><div class="line">                   <span class="literal">null</span>, GetIngestHeader());</div><div class="line">           &#125;).ConfigureAwait(<span class="literal">true</span>);</div><div class="line"></div><div class="line">           <span class="keyword">if</span> (back != <span class="literal">null</span>)</div><div class="line">           &#123;</div><div class="line">               <span class="keyword">return</span> back.Ext;</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">return</span> TaskSource.emUnknowTask;</div><div class="line">       &#125;</div><div class="line"></div><div class="line">       <span class="keyword">public</span> async Task&lt;DispatchTask&gt; GetTaskDBAsync(int taskid)</div><div class="line">       &#123;</div><div class="line">           <span class="keyword">var</span> back = await GetAsync&lt;ResponseMessage&lt;DispatchTask&gt;&gt;(</div><div class="line">                   $<span class="string">"&#123;IngestDbUrl&#125;/&#123;TASKAPI30&#125;/db/&#123;taskid&#125;"</span>, <span class="literal">null</span>, GetIngestHeader()</div><div class="line">                   ).ConfigureAwait(<span class="literal">true</span>);</div><div class="line"></div><div class="line">           <span class="keyword">if</span> (back != <span class="literal">null</span>)</div><div class="line">           &#123;</div><div class="line">               <span class="keyword">return</span> back.Ext;</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">       &#125;</div><div class="line"></div><div class="line">       <span class="keyword">public</span> async Task&lt;TaskContent&gt; ReScheduleTaskChannelAsync(int oldtaskid)</div><div class="line">       &#123;</div><div class="line">           <span class="keyword">var</span> back = await AutoRetry.RunAsync&lt;ResponseMessage&lt;TaskContent&gt;&gt;(() =&gt;</div><div class="line">           &#123;</div><div class="line"></div><div class="line">               <span class="keyword">return</span> PutAsync&lt;ResponseMessage&lt;TaskContent&gt;&gt;(</div><div class="line">                   $<span class="string">"&#123;IngestDbUrl&#125;/&#123;TASKAPI30&#125;/reschedule/channel/&#123;oldtaskid&#125;"</span>, <span class="literal">null</span>,</div><div class="line">                   GetIngestHeader());</div><div class="line">           &#125;).ConfigureAwait(<span class="literal">true</span>);</div><div class="line"></div><div class="line">           <span class="keyword">if</span> (back != <span class="literal">null</span> &amp;&amp; back.IsSuccess())</div><div class="line">           &#123;</div><div class="line">               <span class="keyword">return</span> back.Ext;</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">       &#125;</div><div class="line">       #endregion</div><div class="line">     </div><div class="line">   &#125;</div></pre></td></tr></table></figure>
 <ol>
 <li><p>在异步方法中，不要使用 Thread.Sleep；在同步方法中，不要使用Task.Delay ，否则可能出现线程死锁，结果难出来。</p>
 </li>
@@ -640,6 +679,13 @@ set
     </entry>
     
     <entry>
+      <title><![CDATA[c++11左右值 (226)]]></title>
+      <url>https://xuecat.github.io/2017/12/18/226/</url>
+      <content type="html"><![CDATA[<h3 id="C-左右值"><a href="#C-左右值" class="headerlink" title="C++左右值"></a>C++左右值</h3><p> 左值指即能出现等号左边，也能出现在右边的变量（通常指有变量名的值）<br> 右值值只能出现等号右边的值（通常指无变量名的值，函数返回和表达式，常量——不跟对象关联的常量）<br> c++11在上面右值多个将亡值<br><code>move</code>右转左 <code>forward</code>左转右</p>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function">MyClass <span class="title">fun</span> <span class="params">()</span> </span>&#123;MyClass <span class="keyword">return</span> s;&#125;</div><div class="line">MyClass s= fun();</div><div class="line">MyClass&amp; s = fun();</div><div class="line">MyClass&amp;&amp; s = fun();<span class="comment">//这三个全是调用移动构造函数</span></div></pre></td></tr></table></figure>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[JS继承和函数式编程的curry等(227)]]></title>
       <url>https://xuecat.github.io/2017/12/18/227/</url>
       <content type="html"><![CDATA[<p><img src="/picture/227.jpg" alt=""></p>
@@ -700,13 +746,6 @@ set
 <li>compsoe函数可以接受任意的参数，所有的参数都是函数，且执行方向是自右向左的，初始函数一定放到参数的最右面</li>
 </ul>
 ]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[c++11左右值 (226)]]></title>
-      <url>https://xuecat.github.io/2017/12/18/226/</url>
-      <content type="html"><![CDATA[<h3 id="C-左右值"><a href="#C-左右值" class="headerlink" title="C++左右值"></a>C++左右值</h3><p> 左值指即能出现等号左边，也能出现在右边的变量（通常指有变量名的值）<br> 右值值只能出现等号右边的值（通常指无变量名的值，函数返回和表达式，常量——不跟对象关联的常量）<br> c++11在上面右值多个将亡值<br><code>move</code>右转左 <code>forward</code>左转右</p>
- <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function">MyClass <span class="title">fun</span> <span class="params">()</span> </span>&#123;MyClass <span class="keyword">return</span> s;&#125;</div><div class="line">MyClass s= fun();</div><div class="line">MyClass&amp; s = fun();</div><div class="line">MyClass&amp;&amp; s = fun();<span class="comment">//这三个全是调用移动构造函数</span></div></pre></td></tr></table></figure>]]></content>
     </entry>
     
     <entry>
@@ -2972,6 +3011,35 @@ var btnOk2=document.createElement(&quot;&lt;input type=&apos;button&apos; value=
     </entry>
     
     <entry>
+      <title><![CDATA[STL函数学习(173)]]></title>
+      <url>https://xuecat.github.io/2016/08/10/173/</url>
+      <content type="html"><![CDATA[<h2 id="更多函数讲解在175，这里只放置大众，让人注意的函数。"><a href="#更多函数讲解在175，这里只放置大众，让人注意的函数。" class="headerlink" title="更多函数讲解在175，这里只放置大众，让人注意的函数。"></a>更多函数讲解在175，这里只放置大众，让人注意的函数。</h2><h4 id="std-enable-if"><a href="#std-enable-if" class="headerlink" title="std::enable_if"></a>std::enable_if</h4><p>源代码：</p>
+<pre><code>template&lt;class _Ty&gt;
+struct enable_if&lt;true, _Ty&gt;
+{    // type is _Ty for _Test
+typedef _Ty type;
+};
+</code></pre><p>其实它和static_assert一样，都是为了编译期间检查。常用使用在函数前，表面上给个函数返回值，但之前要进行判断。</p>
+<h4 id="std-find"><a href="#std-find" class="headerlink" title="std::find"></a>std::find</h4><p>find第三个参数是value，如果要找自定义的类，只有重载函数</p>
+<pre><code>template &lt;typename T&gt;
+bool operator !=(const MyClass&lt;T&gt;&amp; item, T n)
+{return ;}
+</code></pre><h4 id="traits编程法"><a href="#traits编程法" class="headerlink" title="traits编程法"></a>traits编程法</h4><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">	<span class="number">1</span>：<span class="keyword">template</span> &lt;<span class="keyword">class</span> numT&gt;</div><div class="line">   <span class="number">2</span>: <span class="keyword">struct</span> float_traits &#123; &#125;;</div><div class="line">   <span class="number">3</span>:  </div><div class="line">   <span class="number">4</span>: <span class="keyword">struct</span> float_traits&lt;<span class="keyword">float</span>&gt; &#123;</div><div class="line">   <span class="number">5</span>:     <span class="keyword">typedef</span> <span class="keyword">float</span> float_type;</div><div class="line">   <span class="number">6</span>:     <span class="keyword">enum</span> &#123; max_exponent = FLT_MAX_EXP &#125;;</div><div class="line">   <span class="number">7</span>:     <span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> float_type <span class="title">epsilon</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> FLT_EPSILON; &#125;</div><div class="line">   <span class="number">8</span>:     ...</div><div class="line">   <span class="number">9</span>: &#125;;</div><div class="line">  <span class="number">10</span>:  </div><div class="line">  <span class="number">11</span>: <span class="keyword">struct</span> float_traits&lt;<span class="keyword">double</span>&gt; &#123;</div><div class="line">  <span class="number">12</span>:     <span class="keyword">typedef</span> <span class="keyword">double</span> float_type;</div><div class="line">  <span class="number">13</span>:     <span class="keyword">enum</span> &#123; max_exponent = DBL_MAX_EXP &#125;;</div><div class="line">  <span class="number">14</span>:     <span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> float_type <span class="title">epsilon</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> DBL_EPSILON; &#125;</div><div class="line">  <span class="number">15</span>:     ...</div><div class="line">  <span class="number">16</span>: &#125;;</div><div class="line">现在不管啥类型，模板的使用者都可以无差别使用max_exponent了。比如这儿有个矩阵类模板：</div><div class="line"></div><div class="line">   <span class="number">1</span>: <span class="keyword">template</span> &lt;<span class="keyword">class</span> numT&gt;</div><div class="line">   <span class="number">2</span>: <span class="keyword">class</span> matrix &#123;</div><div class="line">   <span class="number">3</span>:     <span class="keyword">public</span>:</div><div class="line">   <span class="number">4</span>:       <span class="keyword">typedef</span> numT num_type;</div><div class="line">   <span class="number">5</span>:       <span class="keyword">typedef</span> float_traits&lt;num_type&gt; traits_type;</div><div class="line">   <span class="number">6</span>:       <span class="function"><span class="keyword">inline</span> num_type <span class="title">epsilon</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> traits_type::epsilon(); &#125;</div><div class="line">   <span class="number">7</span>:       ...</div><div class="line">   <span class="number">8</span>: &#125;;</div></pre></td></tr></table></figure>
+<h4 id="typename"><a href="#typename" class="headerlink" title="typename"></a>typename</h4><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="number">_</span>InputIter, <span class="keyword">class</span> <span class="number">_</span>Tp&gt;</div><div class="line"><span class="keyword">typename</span> iterator_traits&lt;<span class="number">_</span>InputIter&gt;::<span class="function">difference_type</span></div><div class="line"><span class="title">count</span><span class="params">(<span class="number">_</span>InputIter <span class="number">__f</span>irst, <span class="number">_</span>InputIter <span class="number">__l</span>ast, <span class="keyword">const</span> <span class="number">_</span>Tp&amp; <span class="number">__</span>value)</span> &#123;</div><div class="line">  <span class="number">__</span>STL_REQUIRES(<span class="number">_</span>InputIter, <span class="number">_</span>InputIterator);</div><div class="line">  <span class="number">__</span>STL_REQUIRES(<span class="keyword">typename</span> iterator_traits&lt;<span class="number">_</span>InputIter&gt;::value_type,</div><div class="line">                 <span class="number">_</span>EqualityComparable);</div><div class="line">  <span class="number">__</span>STL_REQUIRES(<span class="number">_</span>Tp, <span class="number">_</span>EqualityComparable);</div><div class="line">  <span class="keyword">typename</span> iterator_traits&lt;<span class="number">_</span>InputIter&gt;::difference_type <span class="number">__</span>n = <span class="number">0</span>;</div><div class="line">  <span class="keyword">for</span> ( ; <span class="number">__f</span>irst != <span class="number">__l</span>ast; ++<span class="number">__f</span>irst)</div><div class="line">    <span class="keyword">if</span> (*<span class="number">__f</span>irst == <span class="number">__</span>value)</div><div class="line">      ++<span class="number">__</span>n;</div><div class="line">  <span class="keyword">return</span> <span class="number">__</span>n;</div><div class="line">&#125;</div><div class="line"><span class="comment">//1、用在模板中，来声明是类型</span></div><div class="line"><span class="comment">//2、用在类型声明，表示下面的是个类型。不然typename T::iterator *iter就会被解析为俩数相乘。</span></div><div class="line"></div></pre></td></tr></table></figure>
+<h4 id="std-bind"><a href="#std-bind" class="headerlink" title="std::bind"></a>std::bind</h4><p>这个函数是必须和function一起讲的，但是多个绑定情况就有点特殊，先列出来：</p>
+<figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">TestFunc</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">char</span> c, <span class="keyword">float</span> f)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; c &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; f &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> a;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">auto</span> bindFunc1 = bind(TestFunc, <span class="built_in">std</span>::placeholders::<span class="number">_1</span>, <span class="string">'A'</span>, <span class="number">100.1</span>);</div><div class="line">    bindFunc1(<span class="number">10</span>);</div><div class="line"></div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"=================================\n"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">auto</span> bindFunc2 = bind(TestFunc, <span class="built_in">std</span>::placeholders::<span class="number">_2</span>, <span class="built_in">std</span>::placeholders::<span class="number">_1</span>, <span class="number">100.1</span>);</div><div class="line">    bindFunc2(<span class="string">'B'</span>, <span class="number">10</span>);</div><div class="line"></div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"=================================\n"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">auto</span> bindFunc3 = bind(TestFunc, <span class="built_in">std</span>::placeholders::<span class="number">_2</span>, <span class="built_in">std</span>::placeholders::<span class="number">_1</span>, <span class="built_in">std</span>::placeholders::<span class="number">_3</span>);</div><div class="line">    bindFunc3(<span class="string">'C'</span>, <span class="number">30</span>, <span class="number">100.1</span>);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;<span class="comment">//绑定第几个placeholders就按照参数顺序输入第几个。</span></div><div class="line"></div></pre></td></tr></table></figure>
+<h4 id="std-function"><a href="#std-function" class="headerlink" title="std::function"></a>std::function</h4><p>看到这个函数（表明是函数其实是对象），我只想说叼到没朋友！！！！！！<br><br>代码伺候：</p>
+<figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">std</span>::function&lt; <span class="keyword">int</span>(<span class="keyword">int</span>)&gt; Functional;</div><div class="line"></div><div class="line"><span class="comment">// 普通函数</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">TestFunc</span><span class="params">(<span class="keyword">int</span> a)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> a;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Lambda表达式</span></div><div class="line"><span class="keyword">auto</span> lambda = [](<span class="keyword">int</span> a)-&gt;<span class="keyword">int</span>&#123; <span class="keyword">return</span> a; &#125;;</div><div class="line"></div><div class="line"><span class="comment">// 仿函数(functor)</span></div><div class="line"><span class="keyword">class</span> Functor</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">int</span> a)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> a;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 1.类成员函数</span></div><div class="line"><span class="comment">// 2.类静态函数</span></div><div class="line"><span class="keyword">class</span> TestClass</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">int</span> <span class="title">VirtualMember</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123; <span class="keyword">return</span> a; &#125;</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">ClassMember</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123; <span class="keyword">return</span> a; &#125;</div><div class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">StaticMember</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123; <span class="keyword">return</span> a; &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//多态</span></div><div class="line"><span class="keyword">class</span> DemoClass : <span class="keyword">public</span> TestClass &#123;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">int</span> <span class="title">VirtualMember</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123; <span class="keyword">return</span> a + <span class="number">1</span>; &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">// 普通函数</span></div><div class="line">    Functional = TestFunc;</div><div class="line">    <span class="keyword">int</span> result = Functional(<span class="number">10</span>);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"普通函数："</span>&lt;&lt; result &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">    <span class="comment">// Lambda表达式</span></div><div class="line">    Functional = lambda;</div><div class="line">    result = Functional(<span class="number">20</span>);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Lambda表达式："</span>&lt;&lt; result &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">    <span class="comment">// 仿函数</span></div><div class="line">    Functor testFunctor;</div><div class="line">    Functional = testFunctor;</div><div class="line">    result = Functional(<span class="number">30</span>);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"仿函数："</span>&lt;&lt; result &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">    <span class="comment">// 类成员函数</span></div><div class="line">    TestClass testObj;</div><div class="line">    Functional = <span class="built_in">std</span>::bind(&amp;TestClass::ClassMember, testObj, <span class="built_in">std</span>::placeholders::<span class="number">_1</span>);</div><div class="line">    result = Functional(<span class="number">40</span>);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"类成员函数："</span>&lt;&lt; result &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">    <span class="comment">// 类静态函数</span></div><div class="line">    Functional = TestClass::StaticMember;</div><div class="line">    result = Functional(<span class="number">50</span>);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"类静态函数："</span>&lt;&lt; result &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">	<span class="comment">//多态</span></div><div class="line">	TestClass* p = <span class="keyword">new</span> DemoClass;</div><div class="line">	Functional = <span class="built_in">std</span>::bind(&amp;TestClass::VirtualMember, p, <span class="number">2</span>);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt;Functional(<span class="number">5</span>);<span class="comment">//3</span></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//又一个灵活用法</span></div><div class="line"><span class="built_in">map</span>&lt;<span class="keyword">char</span>, function&lt;<span class="keyword">int</span>(<span class="keyword">int</span>, <span class="keyword">int</span>)&gt;&gt; binops = </div><div class="line">&#123;</div><div class="line">	&#123; <span class="string">'+'</span>, add &#125;,</div><div class="line">	&#123; <span class="string">'-'</span>, minus&lt;<span class="keyword">int</span>&gt;() &#125;,</div><div class="line">	&#123; <span class="string">'*'</span>, [](<span class="keyword">int</span> i, <span class="keyword">int</span> j)&#123;<span class="keyword">return</span> i - j; &#125; &#125;,</div><div class="line">	&#123; <span class="string">'/'</span>, divide() &#125;,</div><div class="line">	&#123; <span class="string">'%'</span>, mod &#125;,</div><div class="line">&#125;;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; binops[<span class="string">'+'</span>](<span class="number">10</span>, <span class="number">5</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; binops[<span class="string">'-'</span>](<span class="number">10</span>, <span class="number">5</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; binops[<span class="string">'*'</span>](<span class="number">10</span>, <span class="number">5</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; binops[<span class="string">'/'</span>](<span class="number">10</span>, <span class="number">5</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; binops[<span class="string">'%'</span>](<span class="number">10</span>, <span class="number">5</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div></pre></td></tr></table></figure>
+<h4 id="reserve、resize、capacity、size"><a href="#reserve、resize、capacity、size" class="headerlink" title="reserve、resize、capacity、size"></a>reserve、resize、capacity、size</h4><blockquote>
+<p>内容就不讲了，一一对应的！！！点下就好，vector和string都是一样的，只增长，2*n。</p>
+</blockquote>
+<h4 id="unary-function-一元函数，binary-function-二元函数"><a href="#unary-function-一元函数，binary-function-二元函数" class="headerlink" title="unary_function 一元函数，binary_function 二元函数"></a>unary_function 一元函数，binary_function 二元函数</h4><blockquote>
+<p>binder2nd和函数适配器是必须要他们的<br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> t&gt;</div><div class="line"><span class="keyword">struct</span> negate : <span class="keyword">public</span> unary_function&lt;t, t&gt; &#123;</div><div class="line">	<span class="function">t <span class="title">operator</span><span class="params">()</span> <span class="params">(<span class="keyword">const</span> t&amp; x)</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> -x;&#125;<span class="comment">//此const是必须的</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> t&gt;</div><div class="line"><span class="keyword">struct</span> plus : <span class="keyword">public</span> binary_funcion&lt;t, t, t&gt; &#123;</div><div class="line">	<span class="function">t <span class="title">operator</span><span class="params">()</span> <span class="params">(constt t&amp; x, <span class="keyword">const</span> t&amp; y)</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> x + y;&#125;<span class="comment">//此const是必须的</span></div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure></p>
+</blockquote>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[STL源码剖析(172)]]></title>
       <url>https://xuecat.github.io/2016/08/10/172/</url>
       <content type="html"><![CDATA[<blockquote>
@@ -3060,35 +3128,6 @@ hash&lt;char&gt; d;//is char
 </li>
 </ul>
 <h4 id="9、组合序列"><a href="#9、组合序列" class="headerlink" title="9、组合序列"></a>9、组合序列</h4><p>vector分别push: {a, b, c}; 那“abc”就是它的组合序列<br><br>当根据less-than(<code>less&lt;T&gt;()</code>)的字典排序后，它的下一序列便是：acb、bac、bca<br>如175的next<code>_permutation和prev_permutation</code>；</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[STL函数学习(173)]]></title>
-      <url>https://xuecat.github.io/2016/08/10/173/</url>
-      <content type="html"><![CDATA[<h2 id="更多函数讲解在175，这里只放置大众，让人注意的函数。"><a href="#更多函数讲解在175，这里只放置大众，让人注意的函数。" class="headerlink" title="更多函数讲解在175，这里只放置大众，让人注意的函数。"></a>更多函数讲解在175，这里只放置大众，让人注意的函数。</h2><h4 id="std-enable-if"><a href="#std-enable-if" class="headerlink" title="std::enable_if"></a>std::enable_if</h4><p>源代码：</p>
-<pre><code>template&lt;class _Ty&gt;
-struct enable_if&lt;true, _Ty&gt;
-{    // type is _Ty for _Test
-typedef _Ty type;
-};
-</code></pre><p>其实它和static_assert一样，都是为了编译期间检查。常用使用在函数前，表面上给个函数返回值，但之前要进行判断。</p>
-<h4 id="std-find"><a href="#std-find" class="headerlink" title="std::find"></a>std::find</h4><p>find第三个参数是value，如果要找自定义的类，只有重载函数</p>
-<pre><code>template &lt;typename T&gt;
-bool operator !=(const MyClass&lt;T&gt;&amp; item, T n)
-{return ;}
-</code></pre><h4 id="traits编程法"><a href="#traits编程法" class="headerlink" title="traits编程法"></a>traits编程法</h4><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">	<span class="number">1</span>：<span class="keyword">template</span> &lt;<span class="keyword">class</span> numT&gt;</div><div class="line">   <span class="number">2</span>: <span class="keyword">struct</span> float_traits &#123; &#125;;</div><div class="line">   <span class="number">3</span>:  </div><div class="line">   <span class="number">4</span>: <span class="keyword">struct</span> float_traits&lt;<span class="keyword">float</span>&gt; &#123;</div><div class="line">   <span class="number">5</span>:     <span class="keyword">typedef</span> <span class="keyword">float</span> float_type;</div><div class="line">   <span class="number">6</span>:     <span class="keyword">enum</span> &#123; max_exponent = FLT_MAX_EXP &#125;;</div><div class="line">   <span class="number">7</span>:     <span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> float_type <span class="title">epsilon</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> FLT_EPSILON; &#125;</div><div class="line">   <span class="number">8</span>:     ...</div><div class="line">   <span class="number">9</span>: &#125;;</div><div class="line">  <span class="number">10</span>:  </div><div class="line">  <span class="number">11</span>: <span class="keyword">struct</span> float_traits&lt;<span class="keyword">double</span>&gt; &#123;</div><div class="line">  <span class="number">12</span>:     <span class="keyword">typedef</span> <span class="keyword">double</span> float_type;</div><div class="line">  <span class="number">13</span>:     <span class="keyword">enum</span> &#123; max_exponent = DBL_MAX_EXP &#125;;</div><div class="line">  <span class="number">14</span>:     <span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> float_type <span class="title">epsilon</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> DBL_EPSILON; &#125;</div><div class="line">  <span class="number">15</span>:     ...</div><div class="line">  <span class="number">16</span>: &#125;;</div><div class="line">现在不管啥类型，模板的使用者都可以无差别使用max_exponent了。比如这儿有个矩阵类模板：</div><div class="line"></div><div class="line">   <span class="number">1</span>: <span class="keyword">template</span> &lt;<span class="keyword">class</span> numT&gt;</div><div class="line">   <span class="number">2</span>: <span class="keyword">class</span> matrix &#123;</div><div class="line">   <span class="number">3</span>:     <span class="keyword">public</span>:</div><div class="line">   <span class="number">4</span>:       <span class="keyword">typedef</span> numT num_type;</div><div class="line">   <span class="number">5</span>:       <span class="keyword">typedef</span> float_traits&lt;num_type&gt; traits_type;</div><div class="line">   <span class="number">6</span>:       <span class="function"><span class="keyword">inline</span> num_type <span class="title">epsilon</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> traits_type::epsilon(); &#125;</div><div class="line">   <span class="number">7</span>:       ...</div><div class="line">   <span class="number">8</span>: &#125;;</div></pre></td></tr></table></figure>
-<h4 id="typename"><a href="#typename" class="headerlink" title="typename"></a>typename</h4><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="number">_</span>InputIter, <span class="keyword">class</span> <span class="number">_</span>Tp&gt;</div><div class="line"><span class="keyword">typename</span> iterator_traits&lt;<span class="number">_</span>InputIter&gt;::<span class="function">difference_type</span></div><div class="line"><span class="title">count</span><span class="params">(<span class="number">_</span>InputIter <span class="number">__f</span>irst, <span class="number">_</span>InputIter <span class="number">__l</span>ast, <span class="keyword">const</span> <span class="number">_</span>Tp&amp; <span class="number">__</span>value)</span> &#123;</div><div class="line">  <span class="number">__</span>STL_REQUIRES(<span class="number">_</span>InputIter, <span class="number">_</span>InputIterator);</div><div class="line">  <span class="number">__</span>STL_REQUIRES(<span class="keyword">typename</span> iterator_traits&lt;<span class="number">_</span>InputIter&gt;::value_type,</div><div class="line">                 <span class="number">_</span>EqualityComparable);</div><div class="line">  <span class="number">__</span>STL_REQUIRES(<span class="number">_</span>Tp, <span class="number">_</span>EqualityComparable);</div><div class="line">  <span class="keyword">typename</span> iterator_traits&lt;<span class="number">_</span>InputIter&gt;::difference_type <span class="number">__</span>n = <span class="number">0</span>;</div><div class="line">  <span class="keyword">for</span> ( ; <span class="number">__f</span>irst != <span class="number">__l</span>ast; ++<span class="number">__f</span>irst)</div><div class="line">    <span class="keyword">if</span> (*<span class="number">__f</span>irst == <span class="number">__</span>value)</div><div class="line">      ++<span class="number">__</span>n;</div><div class="line">  <span class="keyword">return</span> <span class="number">__</span>n;</div><div class="line">&#125;</div><div class="line"><span class="comment">//1、用在模板中，来声明是类型</span></div><div class="line"><span class="comment">//2、用在类型声明，表示下面的是个类型。不然typename T::iterator *iter就会被解析为俩数相乘。</span></div><div class="line"></div></pre></td></tr></table></figure>
-<h4 id="std-bind"><a href="#std-bind" class="headerlink" title="std::bind"></a>std::bind</h4><p>这个函数是必须和function一起讲的，但是多个绑定情况就有点特殊，先列出来：</p>
-<figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">TestFunc</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">char</span> c, <span class="keyword">float</span> f)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; c &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; f &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> a;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">auto</span> bindFunc1 = bind(TestFunc, <span class="built_in">std</span>::placeholders::<span class="number">_1</span>, <span class="string">'A'</span>, <span class="number">100.1</span>);</div><div class="line">    bindFunc1(<span class="number">10</span>);</div><div class="line"></div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"=================================\n"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">auto</span> bindFunc2 = bind(TestFunc, <span class="built_in">std</span>::placeholders::<span class="number">_2</span>, <span class="built_in">std</span>::placeholders::<span class="number">_1</span>, <span class="number">100.1</span>);</div><div class="line">    bindFunc2(<span class="string">'B'</span>, <span class="number">10</span>);</div><div class="line"></div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"=================================\n"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">auto</span> bindFunc3 = bind(TestFunc, <span class="built_in">std</span>::placeholders::<span class="number">_2</span>, <span class="built_in">std</span>::placeholders::<span class="number">_1</span>, <span class="built_in">std</span>::placeholders::<span class="number">_3</span>);</div><div class="line">    bindFunc3(<span class="string">'C'</span>, <span class="number">30</span>, <span class="number">100.1</span>);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;<span class="comment">//绑定第几个placeholders就按照参数顺序输入第几个。</span></div><div class="line"></div></pre></td></tr></table></figure>
-<h4 id="std-function"><a href="#std-function" class="headerlink" title="std::function"></a>std::function</h4><p>看到这个函数（表明是函数其实是对象），我只想说叼到没朋友！！！！！！<br><br>代码伺候：</p>
-<figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">std</span>::function&lt; <span class="keyword">int</span>(<span class="keyword">int</span>)&gt; Functional;</div><div class="line"></div><div class="line"><span class="comment">// 普通函数</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">TestFunc</span><span class="params">(<span class="keyword">int</span> a)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> a;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Lambda表达式</span></div><div class="line"><span class="keyword">auto</span> lambda = [](<span class="keyword">int</span> a)-&gt;<span class="keyword">int</span>&#123; <span class="keyword">return</span> a; &#125;;</div><div class="line"></div><div class="line"><span class="comment">// 仿函数(functor)</span></div><div class="line"><span class="keyword">class</span> Functor</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">int</span> a)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> a;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 1.类成员函数</span></div><div class="line"><span class="comment">// 2.类静态函数</span></div><div class="line"><span class="keyword">class</span> TestClass</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">int</span> <span class="title">VirtualMember</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123; <span class="keyword">return</span> a; &#125;</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">ClassMember</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123; <span class="keyword">return</span> a; &#125;</div><div class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">StaticMember</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123; <span class="keyword">return</span> a; &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//多态</span></div><div class="line"><span class="keyword">class</span> DemoClass : <span class="keyword">public</span> TestClass &#123;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">int</span> <span class="title">VirtualMember</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123; <span class="keyword">return</span> a + <span class="number">1</span>; &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">// 普通函数</span></div><div class="line">    Functional = TestFunc;</div><div class="line">    <span class="keyword">int</span> result = Functional(<span class="number">10</span>);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"普通函数："</span>&lt;&lt; result &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">    <span class="comment">// Lambda表达式</span></div><div class="line">    Functional = lambda;</div><div class="line">    result = Functional(<span class="number">20</span>);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Lambda表达式："</span>&lt;&lt; result &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">    <span class="comment">// 仿函数</span></div><div class="line">    Functor testFunctor;</div><div class="line">    Functional = testFunctor;</div><div class="line">    result = Functional(<span class="number">30</span>);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"仿函数："</span>&lt;&lt; result &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">    <span class="comment">// 类成员函数</span></div><div class="line">    TestClass testObj;</div><div class="line">    Functional = <span class="built_in">std</span>::bind(&amp;TestClass::ClassMember, testObj, <span class="built_in">std</span>::placeholders::<span class="number">_1</span>);</div><div class="line">    result = Functional(<span class="number">40</span>);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"类成员函数："</span>&lt;&lt; result &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">    <span class="comment">// 类静态函数</span></div><div class="line">    Functional = TestClass::StaticMember;</div><div class="line">    result = Functional(<span class="number">50</span>);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"类静态函数："</span>&lt;&lt; result &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">	<span class="comment">//多态</span></div><div class="line">	TestClass* p = <span class="keyword">new</span> DemoClass;</div><div class="line">	Functional = <span class="built_in">std</span>::bind(&amp;TestClass::VirtualMember, p, <span class="number">2</span>);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt;Functional(<span class="number">5</span>);<span class="comment">//3</span></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//又一个灵活用法</span></div><div class="line"><span class="built_in">map</span>&lt;<span class="keyword">char</span>, function&lt;<span class="keyword">int</span>(<span class="keyword">int</span>, <span class="keyword">int</span>)&gt;&gt; binops = </div><div class="line">&#123;</div><div class="line">	&#123; <span class="string">'+'</span>, add &#125;,</div><div class="line">	&#123; <span class="string">'-'</span>, minus&lt;<span class="keyword">int</span>&gt;() &#125;,</div><div class="line">	&#123; <span class="string">'*'</span>, [](<span class="keyword">int</span> i, <span class="keyword">int</span> j)&#123;<span class="keyword">return</span> i - j; &#125; &#125;,</div><div class="line">	&#123; <span class="string">'/'</span>, divide() &#125;,</div><div class="line">	&#123; <span class="string">'%'</span>, mod &#125;,</div><div class="line">&#125;;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; binops[<span class="string">'+'</span>](<span class="number">10</span>, <span class="number">5</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; binops[<span class="string">'-'</span>](<span class="number">10</span>, <span class="number">5</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; binops[<span class="string">'*'</span>](<span class="number">10</span>, <span class="number">5</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; binops[<span class="string">'/'</span>](<span class="number">10</span>, <span class="number">5</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; binops[<span class="string">'%'</span>](<span class="number">10</span>, <span class="number">5</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div></pre></td></tr></table></figure>
-<h4 id="reserve、resize、capacity、size"><a href="#reserve、resize、capacity、size" class="headerlink" title="reserve、resize、capacity、size"></a>reserve、resize、capacity、size</h4><blockquote>
-<p>内容就不讲了，一一对应的！！！点下就好，vector和string都是一样的，只增长，2*n。</p>
-</blockquote>
-<h4 id="unary-function-一元函数，binary-function-二元函数"><a href="#unary-function-一元函数，binary-function-二元函数" class="headerlink" title="unary_function 一元函数，binary_function 二元函数"></a>unary_function 一元函数，binary_function 二元函数</h4><blockquote>
-<p>binder2nd和函数适配器是必须要他们的<br><figure class="highlight c"><figcaption><span>++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> t&gt;</div><div class="line"><span class="keyword">struct</span> negate : <span class="keyword">public</span> unary_function&lt;t, t&gt; &#123;</div><div class="line">	<span class="function">t <span class="title">operator</span><span class="params">()</span> <span class="params">(<span class="keyword">const</span> t&amp; x)</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> -x;&#125;<span class="comment">//此const是必须的</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> t&gt;</div><div class="line"><span class="keyword">struct</span> plus : <span class="keyword">public</span> binary_funcion&lt;t, t, t&gt; &#123;</div><div class="line">	<span class="function">t <span class="title">operator</span><span class="params">()</span> <span class="params">(constt t&amp; x, <span class="keyword">const</span> t&amp; y)</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> x + y;&#125;<span class="comment">//此const是必须的</span></div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure></p>
-</blockquote>
 ]]></content>
     </entry>
     
@@ -3301,6 +3340,17 @@ objectRef[&quot;testNumber&quot;] = 5;//这俩句是一样的
     </entry>
     
     <entry>
+      <title><![CDATA[Electron学习(164)]]></title>
+      <url>https://xuecat.github.io/2016/02/27/164/</url>
+      <content type="html"><![CDATA[<h1 id="process-platform"><a href="#process-platform" class="headerlink" title="process.platform"></a>process.platform</h1><p>The variable to use would be process.platform</p>
+<p>On Mac the variable returns darwin. On Windows, it returns win32 (even on 64 bit).</p>
+<p>Possible values are: ‘darwin’, ‘freebsd’, ‘linux’, ‘sunos’ or ‘win32’</p>
+<p>I just set this at the top of my jakeFile:</p>
+<p>var isWin = /^win/.test(process.platform);</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[React Native CSS(162)]]></title>
       <url>https://xuecat.github.io/2016/02/27/162/</url>
       <content type="html"><![CDATA[<h2 id="flex属性"><a href="#flex属性" class="headerlink" title="flex属性"></a>flex属性</h2><p>就是说，所有带flex属性的子容器，flex值相加得到一个总数，该容器占父容器的比重就是这个容器flex值除以总flex值</p>
@@ -3320,17 +3370,6 @@ objectRef[&quot;testNumber&quot;] = 5;//这俩句是一样的
 <p>分析原因是找不到this吧，因为回调函数传了几次，this该搞乱了吧。</p>
 <p>问题解决：extrafun:this.addFileMessage.bind(this)</p>
 <p>传值得时候就绑定this，这样就不会乱了！！！！！！！！</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Electron学习(164)]]></title>
-      <url>https://xuecat.github.io/2016/02/27/164/</url>
-      <content type="html"><![CDATA[<h1 id="process-platform"><a href="#process-platform" class="headerlink" title="process.platform"></a>process.platform</h1><p>The variable to use would be process.platform</p>
-<p>On Mac the variable returns darwin. On Windows, it returns win32 (even on 64 bit).</p>
-<p>Possible values are: ‘darwin’, ‘freebsd’, ‘linux’, ‘sunos’ or ‘win32’</p>
-<p>I just set this at the top of my jakeFile:</p>
-<p>var isWin = /^win/.test(process.platform);</p>
 ]]></content>
     </entry>
     
@@ -3477,12 +3516,6 @@ sys.setdefaultencoding(&apos;utf8&apos;)
     </entry>
     
     <entry>
-      <title><![CDATA[函数学习]]></title>
-      <url>https://xuecat.github.io/2015/11/26/150/</url>
-      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>弄个函数学习++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function">BOOL WINAPI <span class="title">PostThreadMessage</span><span class="params">(<span class="number">_</span>In_ DWORD idThread,<span class="number">_</span>In_ UINT Msg,<span class="number">_</span>In_ WPARAM wParam,<span class="number">_</span>In_ LPARAM lParam)</span></span>;</div><div class="line"><span class="comment">//向指定线程ID，发送消息，高低字节参数。</span></div><div class="line"></div><div class="line"><span class="comment">//嘿嘿，线程可以完全像消息机制；</span></div><div class="line"><span class="function">DWORD <span class="title">ThreadProc</span><span class="params">(LPVOID lParam)</span></span></div><div class="line">&#123;</div><div class="line">               MSG msg;</div><div class="line">               <span class="keyword">while</span>(GetMessage(&amp;msg,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>))</div><div class="line">               &#123;</div><div class="line">                       <span class="keyword">if</span>(msg.message == TALK_MESSAGE)</div><div class="line">                       &#123;</div><div class="line">                               MessageBox(<span class="literal">NULL</span>,<span class="string">L"Hi"</span>,<span class="string">L"Worker Thread"</span>,MB_OK);</div><div class="line">                       &#125;</div><div class="line">                       DispatchMessage(&amp;msg);<span class="comment">//下发消息，好像线程没有消息注册窗口。</span></div><div class="line">               &#125;</div><div class="line">               MessageBox(<span class="literal">NULL</span>,<span class="string">L"Thread will close by pressing OK"</span>,<span class="string">L"From Worker Thread"</span>,MB_OK);</div><div class="line">               AfxGetApp()-&gt;m_pMainWnd-&gt;PostMessageW(TALK_MESSAGE+<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>);</div><div class="line">               <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[文章笔记（大部分来源于CSDN）(149)]]></title>
       <url>https://xuecat.github.io/2015/11/26/149/</url>
       <content type="html"><![CDATA[<p><strong>csdn文章一般都会放书签里面，但是多了就又记不住了，算了，开个页面吧：</strong></p>
@@ -3492,6 +3525,12 @@ sys.setdefaultencoding(&apos;utf8&apos;)
 <p>查了下，居然是google的东西，貌似浏览器和Android都用它，屌屌，，google大大的东东就是牛逼</p>
 <p>3、</p>
 ]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[函数学习]]></title>
+      <url>https://xuecat.github.io/2015/11/26/150/</url>
+      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>弄个函数学习++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function">BOOL WINAPI <span class="title">PostThreadMessage</span><span class="params">(<span class="number">_</span>In_ DWORD idThread,<span class="number">_</span>In_ UINT Msg,<span class="number">_</span>In_ WPARAM wParam,<span class="number">_</span>In_ LPARAM lParam)</span></span>;</div><div class="line"><span class="comment">//向指定线程ID，发送消息，高低字节参数。</span></div><div class="line"></div><div class="line"><span class="comment">//嘿嘿，线程可以完全像消息机制；</span></div><div class="line"><span class="function">DWORD <span class="title">ThreadProc</span><span class="params">(LPVOID lParam)</span></span></div><div class="line">&#123;</div><div class="line">               MSG msg;</div><div class="line">               <span class="keyword">while</span>(GetMessage(&amp;msg,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>))</div><div class="line">               &#123;</div><div class="line">                       <span class="keyword">if</span>(msg.message == TALK_MESSAGE)</div><div class="line">                       &#123;</div><div class="line">                               MessageBox(<span class="literal">NULL</span>,<span class="string">L"Hi"</span>,<span class="string">L"Worker Thread"</span>,MB_OK);</div><div class="line">                       &#125;</div><div class="line">                       DispatchMessage(&amp;msg);<span class="comment">//下发消息，好像线程没有消息注册窗口。</span></div><div class="line">               &#125;</div><div class="line">               MessageBox(<span class="literal">NULL</span>,<span class="string">L"Thread will close by pressing OK"</span>,<span class="string">L"From Worker Thread"</span>,MB_OK);</div><div class="line">               AfxGetApp()-&gt;m_pMainWnd-&gt;PostMessageW(TALK_MESSAGE+<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>);</div><div class="line">               <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>]]></content>
     </entry>
     
     <entry>
@@ -3958,17 +3997,31 @@ HasPem d; HasPem p; d=p;//这个才是调用的赋值函数；
     </entry>
     
     <entry>
-      <title><![CDATA[编译后各个文件（123）]]></title>
-      <url>https://xuecat.github.io/2015/05/18/123/</url>
-      <content type="html"><![CDATA[<blockquote>
-<ul>
-<li><p>pdb这个是二进制代码和源代码映射文件。有了这个才能调试定位代码位置</p>
-</li>
-<li><p>dump是进程内存镜像文件。用windbg打开。程序崩溃时用windbg生成下dmp文件，然后分析内存的错，而定位代码</p>
-</li>
-<li><p>obj文件是目标文件，一般是程序编译后的二进制文件，在通过链接器和资源文件链接就成exe文件了。   </p>
-</li>
-</ul>
+      <title><![CDATA[证书格式（122）]]></title>
+      <url>https://xuecat.github.io/2015/05/18/122/</url>
+      <content type="html"><![CDATA[<p><strong>X509</strong></p>
+<blockquote>
+<p>通用证书格式，国际标准</p>
+</blockquote>
+<p><strong>pem</strong></p>
+<blockquote>
+<p>一般用来当做数字认证机构（CA）<br>BASE64编码的ASCII码的文件</p>
+</blockquote>
+<p><strong>DER</strong></p>
+<blockquote>
+<p>二进制文件（网上说java适用），但windows上我也看到有，呵呵</p>
+</blockquote>
+<p><strong>CSR</strong></p>
+<blockquote>
+<p>证书请求文件</p>
+</blockquote>
+<p><strong>PKCS7</strong></p>
+<blockquote>
+<p>是个标准，存储认证证书，证书路径，证书链。实际编程中我发现证书签名验证等都是用它那个标准</p>
+</blockquote>
+<p><strong>PKCS12/PFX</strong></p>
+<blockquote>
+<p>加密二进制形式<br>服务器证书，中级证书和私钥</p>
 </blockquote>
 ]]></content>
     </entry>
@@ -4050,31 +4103,17 @@ HasPem d; HasPem p; d=p;//这个才是调用的赋值函数；
     </entry>
     
     <entry>
-      <title><![CDATA[证书格式（122）]]></title>
-      <url>https://xuecat.github.io/2015/05/18/122/</url>
-      <content type="html"><![CDATA[<p><strong>X509</strong></p>
-<blockquote>
-<p>通用证书格式，国际标准</p>
-</blockquote>
-<p><strong>pem</strong></p>
-<blockquote>
-<p>一般用来当做数字认证机构（CA）<br>BASE64编码的ASCII码的文件</p>
-</blockquote>
-<p><strong>DER</strong></p>
-<blockquote>
-<p>二进制文件（网上说java适用），但windows上我也看到有，呵呵</p>
-</blockquote>
-<p><strong>CSR</strong></p>
-<blockquote>
-<p>证书请求文件</p>
-</blockquote>
-<p><strong>PKCS7</strong></p>
-<blockquote>
-<p>是个标准，存储认证证书，证书路径，证书链。实际编程中我发现证书签名验证等都是用它那个标准</p>
-</blockquote>
-<p><strong>PKCS12/PFX</strong></p>
-<blockquote>
-<p>加密二进制形式<br>服务器证书，中级证书和私钥</p>
+      <title><![CDATA[编译后各个文件（123）]]></title>
+      <url>https://xuecat.github.io/2015/05/18/123/</url>
+      <content type="html"><![CDATA[<blockquote>
+<ul>
+<li><p>pdb这个是二进制代码和源代码映射文件。有了这个才能调试定位代码位置</p>
+</li>
+<li><p>dump是进程内存镜像文件。用windbg打开。程序崩溃时用windbg生成下dmp文件，然后分析内存的错，而定位代码</p>
+</li>
+<li><p>obj文件是目标文件，一般是程序编译后的二进制文件，在通过链接器和资源文件链接就成exe文件了。   </p>
+</li>
+</ul>
 </blockquote>
 ]]></content>
     </entry>
@@ -4685,19 +4724,6 @@ return count;
     </entry>
     
     <entry>
-      <title><![CDATA[字符内存越界(98)]]></title>
-      <url>https://xuecat.github.io/2015/01/01/98/</url>
-      <content type="html"><![CDATA[<blockquote>
-<p>第一个越界：     我用变长参数函数的时候<code>va_arg(t_args, char*)</code> 又把参数强制转换成int后发现，内存越界。</p>
-<blockquote>
-<p>分析原因：char<em>的内存界是char</em>指向的一个字节字符界。int<em>的内存界是int</em>指向的4个字节（32）字符界。    强制转换会根据类型偏移量进行数据转换，所以出现错误。</p>
-</blockquote>
-<p>第二个：我自己的失误，字符数组内存开辟小了（没有结尾的空字符），导致char*把后面的数据以前读了。</p>
-</blockquote>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[string发现(97)]]></title>
       <url>https://xuecat.github.io/2015/01/01/97/</url>
       <content type="html"><![CDATA[<p>  今天用string的时候，发现这几处。</p>
@@ -4706,6 +4732,19 @@ return count;
 <li>append传入的是指针，它会一个一个遍历开辟入栈（所以会开辟内部空间吧指针字符串全部复制进去）  </li>
 <li>push_back是传入字符，只传入单个字符。</li>
 </ul>
+</blockquote>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[字符内存越界(98)]]></title>
+      <url>https://xuecat.github.io/2015/01/01/98/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>第一个越界：     我用变长参数函数的时候<code>va_arg(t_args, char*)</code> 又把参数强制转换成int后发现，内存越界。</p>
+<blockquote>
+<p>分析原因：char<em>的内存界是char</em>指向的一个字节字符界。int<em>的内存界是int</em>指向的4个字节（32）字符界。    强制转换会根据类型偏移量进行数据转换，所以出现错误。</p>
+</blockquote>
+<p>第二个：我自己的失误，字符数组内存开辟小了（没有结尾的空字符），导致char*把后面的数据以前读了。</p>
 </blockquote>
 ]]></content>
     </entry>
@@ -4841,6 +4880,12 @@ dup获取结构体，要free。（它内部开辟）
     </entry>
     
     <entry>
+      <title><![CDATA[for循环习惯(87)]]></title>
+      <url>https://xuecat.github.io/2014/11/08/87/</url>
+      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>for循环也是有讲究的。看代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">bad：</div><div class="line"></div><div class="line">	var listData = document.getElementsByTagName(<span class="string">"li"</span>);</div><div class="line"></div><div class="line">	<span class="keyword">for</span>（var i = <span class="number">0</span>; i &lt; listData.length; i++)</div><div class="line">	</div><div class="line">	&#123;</div><div class="line">	</div><div class="line">	<span class="comment">//对listData进行操作</span></div><div class="line">	</div><div class="line">	&#125;</div><div class="line"></div><div class="line">good：</div><div class="line"></div><div class="line">	<span class="comment">//优化后的代码</span></div><div class="line">	</div><div class="line">	var listData = document.getElementByTagName(<span class="string">"li"</span>);</div><div class="line">	</div><div class="line">	<span class="keyword">for</span>（var i = <span class="number">0</span>, len = listData.length; i &lt; len; i++)</div><div class="line">	&#123;</div><div class="line">	</div><div class="line">	<span class="comment">//对listData进行操作</span></div><div class="line">	</div><div class="line">	&#125;</div><div class="line"></div></pre></td></tr></table></figure>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Linux指令学习(88)]]></title>
       <url>https://xuecat.github.io/2014/11/08/88/</url>
       <content type="html"><![CDATA[<p>apt-get purge 软件名</p>
@@ -4848,12 +4893,6 @@ dup获取结构体，要free。（它内部开辟）
 <p>安装程序最后别用root用户安装</p>
 <p>su - git :切换到git管理用户</p>
 ]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[for循环习惯(87)]]></title>
-      <url>https://xuecat.github.io/2014/11/08/87/</url>
-      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>for循环也是有讲究的。看代码：++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">bad：</div><div class="line"></div><div class="line">	var listData = document.getElementsByTagName(<span class="string">"li"</span>);</div><div class="line"></div><div class="line">	<span class="keyword">for</span>（var i = <span class="number">0</span>; i &lt; listData.length; i++)</div><div class="line">	</div><div class="line">	&#123;</div><div class="line">	</div><div class="line">	<span class="comment">//对listData进行操作</span></div><div class="line">	</div><div class="line">	&#125;</div><div class="line"></div><div class="line">good：</div><div class="line"></div><div class="line">	<span class="comment">//优化后的代码</span></div><div class="line">	</div><div class="line">	var listData = document.getElementByTagName(<span class="string">"li"</span>);</div><div class="line">	</div><div class="line">	<span class="keyword">for</span>（var i = <span class="number">0</span>, len = listData.length; i &lt; len; i++)</div><div class="line">	&#123;</div><div class="line">	</div><div class="line">	<span class="comment">//对listData进行操作</span></div><div class="line">	</div><div class="line">	&#125;</div><div class="line"></div></pre></td></tr></table></figure>]]></content>
     </entry>
     
     <entry>
@@ -4879,6 +4918,20 @@ dup获取结构体，要free。（它内部开辟）
 <p>附加： ldap.c:(.text+0x91): undefined reference to `ldap_url_parse’错误</p>
 <p>./configure –disable-ldap –disable-ldaps （同样也有shared错误） </p>
 <p>学习：以后第三方库，还是要多看下呀，人家都弄的很智能了。不需要我去困扰了！</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[c++正则(85)]]></title>
+      <url>https://xuecat.github.io/2014/10/24/85/</url>
+      <content type="html"><![CDATA[<p>支持宽字符，（有w_函数）</p>
+<p>(“(\w+)(\.|_)?(\w*)@(\w+)(\.(\w+))+”);</p>
+<p> 首先注意‘()’表示将正则表达式分成子表达式，每个‘()’之间的内容表示一个子表达式；</p>
+<p>‘\’是一个转义字符，‘\’表示扔掉第二个‘\’的转义特性，‘\w+’表示匹配一个或多个单词，‘+’表示重复一次或者多次，因此第一个子表达式的意思就是匹配一个或者多个单词；</p>
+<p>接着看第二个子表达式，‘|’表示选择，出现‘.’或者‘<em>’，后面的‘?’表示该子表示出现一次或者零次，因此第二个子表示表示‘.’或‘</em>’出现不出现都匹配。</p>
+<p>第三个子表达式表示出现一个单词，‘*’表示任意个字符。</p>
+<p>(\d{1,3}):(\d{1,3}):(\d{1,3}):(\d{1,3})</p>
+<p>首先还是通过‘()’将这个串分成几个子表达式，其中\d表示匹配一个数字，{,}表示数字的个数，例如{1,3}可以理解为匹配一个小于1000的数字</p>
 ]]></content>
     </entry>
     
@@ -4911,16 +4964,12 @@ dup获取结构体，要free。（它内部开辟）
     </entry>
     
     <entry>
-      <title><![CDATA[c++正则(85)]]></title>
-      <url>https://xuecat.github.io/2014/10/24/85/</url>
-      <content type="html"><![CDATA[<p>支持宽字符，（有w_函数）</p>
-<p>(“(\w+)(\.|_)?(\w*)@(\w+)(\.(\w+))+”);</p>
-<p> 首先注意‘()’表示将正则表达式分成子表达式，每个‘()’之间的内容表示一个子表达式；</p>
-<p>‘\’是一个转义字符，‘\’表示扔掉第二个‘\’的转义特性，‘\w+’表示匹配一个或多个单词，‘+’表示重复一次或者多次，因此第一个子表达式的意思就是匹配一个或者多个单词；</p>
-<p>接着看第二个子表达式，‘|’表示选择，出现‘.’或者‘<em>’，后面的‘?’表示该子表示出现一次或者零次，因此第二个子表示表示‘.’或‘</em>’出现不出现都匹配。</p>
-<p>第三个子表达式表示出现一个单词，‘*’表示任意个字符。</p>
-<p>(\d{1,3}):(\d{1,3}):(\d{1,3}):(\d{1,3})</p>
-<p>首先还是通过‘()’将这个串分成几个子表达式，其中\d表示匹配一个数字，{,}表示数字的个数，例如{1,3}可以理解为匹配一个小于1000的数字</p>
+      <title><![CDATA[演讲认识]]></title>
+      <url>https://xuecat.github.io/2014/10/23/82/</url>
+      <content type="html"><![CDATA[<p>   今天演讲，我自己认识到几个问题。</p>
+<p><strong>演讲的时候：</strong></p>
+<p>1、不能让别人觉是是在应付他（我简单的说几句，这些就不要来了）。</p>
+<p>2、用“大家都应该知道吧”这句来，给人感觉是应付一些问题（要从细小的东西讲出大的东西才是好的）</p>
 ]]></content>
     </entry>
     
@@ -4937,16 +4986,6 @@ c demo();
 main() {}
 </code></pre><p>思想：头文件用class进行前置声明，比包含相关头文件，要依赖小。</p>
 <p>这个对.h文件的申明是没问题的，对.cpp文件的定义就必须要包含头文件了。</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[演讲认识]]></title>
-      <url>https://xuecat.github.io/2014/10/23/82/</url>
-      <content type="html"><![CDATA[<p>   今天演讲，我自己认识到几个问题。</p>
-<p><strong>演讲的时候：</strong></p>
-<p>1、不能让别人觉是是在应付他（我简单的说几句，这些就不要来了）。</p>
-<p>2、用“大家都应该知道吧”这句来，给人感觉是应付一些问题（要从细小的东西讲出大的东西才是好的）</p>
 ]]></content>
     </entry>
     
@@ -5138,6 +5177,16 @@ int memicmp(const void *buf1, const void *buf2, size_t count);
     </entry>
     
     <entry>
+      <title><![CDATA[static作用(73)]]></title>
+      <url>https://xuecat.github.io/2014/10/01/73/</url>
+      <content type="html"><![CDATA[<p>static作用（修饰函数、局部变量、全局变量）</p>
+<p>当我们同时编译多个文件时，所有未加static前缀的全局变量和函数都具有全局可见性</p>
+<p>如果加了static，就会对其它源文件隐藏。例如在a和msg的定义前加上static，main.c就看不到它们了。</p>
+<p>利用这一特性可以在不同的文件中定义同名函数和同名变量，而不必担心命名冲突。Static可以用作函数和变量的前缀，对于函数来讲，static的作用仅限于隐藏，而对于变量，static还有下面两个作用。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[字符截取替换(78)]]></title>
       <url>https://xuecat.github.io/2014/10/01/78/</url>
       <content type="html"><![CDATA[<pre><code>//    &apos;;&apos;字符为界
@@ -5174,16 +5223,6 @@ while (line &gt;&gt; word) {
     </entry>
     
     <entry>
-      <title><![CDATA[static作用(73)]]></title>
-      <url>https://xuecat.github.io/2014/10/01/73/</url>
-      <content type="html"><![CDATA[<p>static作用（修饰函数、局部变量、全局变量）</p>
-<p>当我们同时编译多个文件时，所有未加static前缀的全局变量和函数都具有全局可见性</p>
-<p>如果加了static，就会对其它源文件隐藏。例如在a和msg的定义前加上static，main.c就看不到它们了。</p>
-<p>利用这一特性可以在不同的文件中定义同名函数和同名变量，而不必担心命名冲突。Static可以用作函数和变量的前缀，对于函数来讲，static的作用仅限于隐藏，而对于变量，static还有下面两个作用。</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[编程忠告(72)]]></title>
       <url>https://xuecat.github.io/2014/09/29/72/</url>
       <content type="html"><![CDATA[<p>对学习编程者的忠告：<br>多用小脑和手，少用大脑、眼睛和嘴，会更快地学会编程！</p>
@@ -5198,15 +5237,6 @@ while (line &gt;&gt; word) {
 <p>这样过一遍不就啥都明白了吗。</p>
 <p>对VC来说，所谓‘调试时’就是编译连接通过以后，按F10或F11键单步执行一步以后的时候，或者在某行按F9设了断点后按F5执行停在该断点处的时候。</p>
 <p>（Turbo C或Borland C用Turbo Debugger调试,Linux或Unix下用GDB调试时,看每句C对应的汇编并单步执行观察相应内存和寄存器变化。）</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[already defined in *.obj(70)]]></title>
-      <url>https://xuecat.github.io/2014/09/28/70/</url>
-      <content type="html"><![CDATA[<p>首先注意不能在.h头文件中定义全局变量，否则只要其他文件包括了该头文件，就会出现already defined in *.obj的错误。</p>
-<p>应该把全局变量放在.cpp文件中定义，然后在其他文件中用到该变量时用extern声明一下。</p>
-<p>即使在.h中定义全局变量，用extern可以避免。</p>
 ]]></content>
     </entry>
     
@@ -5226,6 +5256,15 @@ while (line &gt;&gt; word) {
 <li><p>在函数内判断 uID，来确定用户单击了哪项复选框，并作相应处理。</p>
 </li>
 </ol>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[already defined in *.obj(70)]]></title>
+      <url>https://xuecat.github.io/2014/09/28/70/</url>
+      <content type="html"><![CDATA[<p>首先注意不能在.h头文件中定义全局变量，否则只要其他文件包括了该头文件，就会出现already defined in *.obj的错误。</p>
+<p>应该把全局变量放在.cpp文件中定义，然后在其他文件中用到该变量时用extern声明一下。</p>
+<p>即使在.h中定义全局变量，用extern可以避免。</p>
 ]]></content>
     </entry>
     
@@ -5294,6 +5333,28 @@ while (line &gt;&gt; word) {
     </entry>
     
     <entry>
+      <title><![CDATA[强制转换临时和原对象(虚函数测试)(59)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/59/</url>
+      <content type="html"><![CDATA[<p>这是个很坑的地方,大多数想法,转换嘛,</p>
+<pre><code>我把static_cast&lt;A&gt;(B)不就是把B转成A吗? 错! :
+static_cast&lt;window*&gt;(this)-&gt;onResize(); //这是拿this当成window,没问题
+static_cast&lt;window&amp;&gt;(*this).onResize();//这个也是
+
+static_cast&lt;window&gt;(*this).onResize();
+这个相当于:
+window temp=(*this);
+temp.onResize();
+</code></pre><p>我做了一下测试，你的临时对象的说法应该是对的，</p>
+<pre><code>static_cast&lt;window&gt;(*this).onresize();  确实无法执行到 对象的 base class 部分 
+
+static_cast&lt;window*&gt;(this)-&gt;onResize(); //这是拿this当成window,没问题
+static_cast&lt;window&amp;&gt;(*this).onResize();//这个也是
+</code></pre><p>这两种可以执行到base class 部分，但是因为例子中是 virtual function，所以base class 部分的 vtable pointer 跟 derived class 的 vtable pointer 指向同一个virtual table，里面的 函数是一个，所以会递归调用</p>
+<p>而 如果用 window::onResize()，就应该是直接调用的base class  里面的 virtual function 。<br>应该是这样的</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[SIGPIPE信号(55)]]></title>
       <url>https://xuecat.github.io/2014/09/20/55/</url>
       <content type="html"><![CDATA[<p>使用libevent编写websocket服务端时遇到了一个问题：</p>
@@ -5309,6 +5370,58 @@ if (sigaction(SIGPIPE, &amp;act, NULL) == 0) {
     LOG(&quot;SIGPIPE ignore&quot;);
 }
 </code></pre>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[杂项]]></title>
+      <url>https://xuecat.github.io/2014/09/20/61/</url>
+      <content type="html"><![CDATA[<p>   变长参数的纠正，绑定第一参数时，直接赋值貌似不成功。要绑定临近的参数才成功。(好像它是临近取值的)</p>
+<p><strong>我擦，居然用错绘图dc。onpaintdc和cclientdc，前者只能在onpaint函数用才有效，如果传入或者其他函数调用是无效的。后者随意用。</strong></p>
+<p>  <strong> 发现当设计后，封装的类有三个完成时必须要调试跑一边，不然后期有些许不合理的地方不能及时修改。</strong></p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[string和wstring(62)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/62/</url>
+      <content type="html"><![CDATA[<p>今天用string来find一个中文符号，首先返回符号位置正确。然后符号为界，截取字符串出现问题；</p>
+<p>分析原因：中文符号在string中是占用两个字节的。而string对所有的字符串是一个字符一个字节的</p>
+<p>，所以按位取时，夺取了一个字节，导致数据获取失败。</p>
+<p>用wstring进行存取，可以完全避免。</p>
+<p><strong>学到：或许第三方库和一些协议对unicode字符集支持不是很好，导致数据传输要使用ANSI字符串。<br>但程序之间的通信为了保证中文字符，必须使用unicode。     最多在数据传输时做一次编码转换！</strong></p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[输出中文(66)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/66/</url>
+      <content type="html"><![CDATA[<pre><code> cout.imbue(locale(&quot;&quot;));
+char data[] = &quot;dfwe玩GIS股份&quot;;
+for (size_t i = 0; i &lt; strlen(data); i++)
+{
+    cout &lt;&lt; data[i] &lt;&lt; endl;
+}
+
+cout &lt;&lt; data;
+</code></pre><p>结果：第一个无法输出中文，第二个可以。</p>
+<p>分析：昨天已经讲了，今天写下只是写个例子。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[变长参数(58)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/58/</url>
+      <content type="html"><![CDATA[<p>可变长函数：</p>
+<p>  函数多参数情况下，可变长函数虽然设置“…”   //一定要“…”之前的那个参数 va_start，来避免异常抛出。（实践）</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[指针内存长度和大小(64)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/64/</url>
+      <content type="html"><![CDATA[<p> 今天字符处理遇见这个问题：我new了一块内存，然后sizeof()；strlen()；都正常（一个返回4，一个返回分配大小）</p>
+<p>之后我用了ZeroMemory来分配，发现有异议了。<br>sizeof(); strlen(); 一个返回4，一个返回0；     原来用了这个函数会置空内存。</p>
+]]></content>
     </entry>
     
     <entry>
@@ -5336,65 +5449,10 @@ if (sigaction(SIGPIPE, &amp;act, NULL) == 0) {
     </entry>
     
     <entry>
-      <title><![CDATA[多层窗口(54)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/54/</url>
-      <content type="html"><![CDATA[<p>总于过期了，把上面的东西搬过来</p>
-<p> 我已经被这个多层窗口弄晕了，快死了。<br>首先，要使用透明窗口函数：</p>
-<pre><code>SetLayeredWindowAttributes， updataLayeredWindowAttributes，
-//就必须设置窗口属性为WS_EX_LAYERED。
-//然后，这两个函数完全可以混合使用，
-</code></pre><p>  updataLayeredWindowAttributes会拦截wm_paint消息，窗口上的所有东西，重绘，必需自己处理。前一个函数则不会这样。</p>
-<p>WS_EX_TRANSPARENT这个属性，会让窗体透明，真正的透明，不响应任何消息的透明。就只能自己去处理画图的那种。</p>
-<p>窗体透明控件不透明：</p>
-<pre><code>this-&gt;SetBackgroundColor(RGB(255, 255, 255), TRUE);
-SetLayeredWindowAttributes(RGB(255, 255, 255), 200, LWA_ALPHA | LWA_COLORKEY);
-</code></pre>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[变长参数(58)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/58/</url>
-      <content type="html"><![CDATA[<p>可变长函数：</p>
-<p>  函数多参数情况下，可变长函数虽然设置“…”   //一定要“…”之前的那个参数 va_start，来避免异常抛出。（实践）</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[杂项]]></title>
-      <url>https://xuecat.github.io/2014/09/20/61/</url>
-      <content type="html"><![CDATA[<p>   变长参数的纠正，绑定第一参数时，直接赋值貌似不成功。要绑定临近的参数才成功。(好像它是临近取值的)</p>
-<p><strong>我擦，居然用错绘图dc。onpaintdc和cclientdc，前者只能在onpaint函数用才有效，如果传入或者其他函数调用是无效的。后者随意用。</strong></p>
-<p>  <strong> 发现当设计后，封装的类有三个完成时必须要调试跑一边，不然后期有些许不合理的地方不能及时修改。</strong></p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[设计流程(57)]]></title>
       <url>https://xuecat.github.io/2014/09/20/57/</url>
       <content type="html"><![CDATA[<p> 想出的设计流程：</p>
 <p> 先画出程序运行功能的基本流程-&gt;确定类的个数和作用-&gt;设计模式-&gt;按照先想好的类功能模块把设计模式搭建出来-&gt;最后按照功能流程图再写一遍。</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[指针内存长度和大小(64)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/64/</url>
-      <content type="html"><![CDATA[<p> 今天字符处理遇见这个问题：我new了一块内存，然后sizeof()；strlen()；都正常（一个返回4，一个返回分配大小）</p>
-<p>之后我用了ZeroMemory来分配，发现有异议了。<br>sizeof(); strlen(); 一个返回4，一个返回0；     原来用了这个函数会置空内存。</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[内存对齐偏移量(56)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/56/</url>
-      <content type="html"><![CDATA[<p> 编译器对变量存储的一个特殊处理。为了提高CPU的存储速度，编译器对一些变量的起始地址做了“对齐”处理</p>
-<p>。在默认情况下，规定各成员变量存放的起始地址相对于结构的起始地址的偏移量必须为该变量的类型所占用的字节数的倍数。<br>类型</p>
-<p>对齐方式（变量存放的起始地址相对于结构的起始地址的偏移量）</p>
-<p>Char 偏移量必须为sizeof(char)即1的倍数</p>
-<p>int 偏移量必须为sizeof(int)即4的倍数</p>
-<p>float 偏移量必须为sizeof(float)即4的倍数</p>
-<p>double 偏移量必须为sizeof(double)即8的倍数</p>
-<p>Short 偏移量必须为sizeof(short)即2的倍数</p>
 ]]></content>
     </entry>
     
@@ -5421,52 +5479,33 @@ SetLayeredWindowAttributes(RGB(255, 255, 255), 200, LWA_ALPHA | LWA_COLORKEY);
     </entry>
     
     <entry>
-      <title><![CDATA[string和wstring(62)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/62/</url>
-      <content type="html"><![CDATA[<p>今天用string来find一个中文符号，首先返回符号位置正确。然后符号为界，截取字符串出现问题；</p>
-<p>分析原因：中文符号在string中是占用两个字节的。而string对所有的字符串是一个字符一个字节的</p>
-<p>，所以按位取时，夺取了一个字节，导致数据获取失败。</p>
-<p>用wstring进行存取，可以完全避免。</p>
-<p><strong>学到：或许第三方库和一些协议对unicode字符集支持不是很好，导致数据传输要使用ANSI字符串。<br>但程序之间的通信为了保证中文字符，必须使用unicode。     最多在数据传输时做一次编码转换！</strong></p>
+      <title><![CDATA[内存对齐偏移量(56)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/56/</url>
+      <content type="html"><![CDATA[<p> 编译器对变量存储的一个特殊处理。为了提高CPU的存储速度，编译器对一些变量的起始地址做了“对齐”处理</p>
+<p>。在默认情况下，规定各成员变量存放的起始地址相对于结构的起始地址的偏移量必须为该变量的类型所占用的字节数的倍数。<br>类型</p>
+<p>对齐方式（变量存放的起始地址相对于结构的起始地址的偏移量）</p>
+<p>Char 偏移量必须为sizeof(char)即1的倍数</p>
+<p>int 偏移量必须为sizeof(int)即4的倍数</p>
+<p>float 偏移量必须为sizeof(float)即4的倍数</p>
+<p>double 偏移量必须为sizeof(double)即8的倍数</p>
+<p>Short 偏移量必须为sizeof(short)即2的倍数</p>
 ]]></content>
     </entry>
     
     <entry>
-      <title><![CDATA[强制转换临时和原对象(虚函数测试)(59)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/59/</url>
-      <content type="html"><![CDATA[<p>这是个很坑的地方,大多数想法,转换嘛,</p>
-<pre><code>我把static_cast&lt;A&gt;(B)不就是把B转成A吗? 错! :
-static_cast&lt;window*&gt;(this)-&gt;onResize(); //这是拿this当成window,没问题
-static_cast&lt;window&amp;&gt;(*this).onResize();//这个也是
-
-static_cast&lt;window&gt;(*this).onResize();
-这个相当于:
-window temp=(*this);
-temp.onResize();
-</code></pre><p>我做了一下测试，你的临时对象的说法应该是对的，</p>
-<pre><code>static_cast&lt;window&gt;(*this).onresize();  确实无法执行到 对象的 base class 部分 
-
-static_cast&lt;window*&gt;(this)-&gt;onResize(); //这是拿this当成window,没问题
-static_cast&lt;window&amp;&gt;(*this).onResize();//这个也是
-</code></pre><p>这两种可以执行到base class 部分，但是因为例子中是 virtual function，所以base class 部分的 vtable pointer 跟 derived class 的 vtable pointer 指向同一个virtual table，里面的 函数是一个，所以会递归调用</p>
-<p>而 如果用 window::onResize()，就应该是直接调用的base class  里面的 virtual function 。<br>应该是这样的</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[输出中文(66)]]></title>
-      <url>https://xuecat.github.io/2014/09/20/66/</url>
-      <content type="html"><![CDATA[<pre><code> cout.imbue(locale(&quot;&quot;));
-char data[] = &quot;dfwe玩GIS股份&quot;;
-for (size_t i = 0; i &lt; strlen(data); i++)
-{
-    cout &lt;&lt; data[i] &lt;&lt; endl;
-}
-
-cout &lt;&lt; data;
-</code></pre><p>结果：第一个无法输出中文，第二个可以。</p>
-<p>分析：昨天已经讲了，今天写下只是写个例子。</p>
-]]></content>
+      <title><![CDATA[多层窗口(54)]]></title>
+      <url>https://xuecat.github.io/2014/09/20/54/</url>
+      <content type="html"><![CDATA[<p>总于过期了，把上面的东西搬过来</p>
+<p> 我已经被这个多层窗口弄晕了，快死了。<br>首先，要使用透明窗口函数：</p>
+<pre><code>SetLayeredWindowAttributes， updataLayeredWindowAttributes，
+//就必须设置窗口属性为WS_EX_LAYERED。
+//然后，这两个函数完全可以混合使用，
+</code></pre><p>  updataLayeredWindowAttributes会拦截wm_paint消息，窗口上的所有东西，重绘，必需自己处理。前一个函数则不会这样。</p>
+<p>WS_EX_TRANSPARENT这个属性，会让窗体透明，真正的透明，不响应任何消息的透明。就只能自己去处理画图的那种。</p>
+<p>窗体透明控件不透明：</p>
+<pre><code>this-&gt;SetBackgroundColor(RGB(255, 255, 255), TRUE);
+SetLayeredWindowAttributes(RGB(255, 255, 255), 200, LWA_ALPHA | LWA_COLORKEY);
+</code></pre>]]></content>
     </entry>
     
     <entry>
@@ -5574,6 +5613,17 @@ class A : public B {virtual void f();}
     </entry>
     
     <entry>
+      <title><![CDATA[返回对象(46)]]></title>
+      <url>https://xuecat.github.io/2014/09/11/46/</url>
+      <content type="html"><![CDATA[<p>作者对返回对象觉得：</p>
+<pre><code>1、拒绝用new 指针来返回引用对象（栈空间返回就省略了）。销毁问题
+2、拒绝用静态，全局空间来返回。多次调用问题。
+
+作者觉得该返回一个新的对象，调用构造函数。（具体情况而定，当是上一个栈空间的时候，返回也是很好的）
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[pass by reference to const replace pass by value(45)]]></title>
       <url>https://xuecat.github.io/2014/09/11/45/</url>
       <content type="html"><![CDATA[<p>当用类去传递的时候遇见这么一个编译消耗。</p>
@@ -5590,14 +5640,9 @@ validateStudent(const Student&amp; s);一次不需要
     </entry>
     
     <entry>
-      <title><![CDATA[返回对象(46)]]></title>
-      <url>https://xuecat.github.io/2014/09/11/46/</url>
-      <content type="html"><![CDATA[<p>作者对返回对象觉得：</p>
-<pre><code>1、拒绝用new 指针来返回引用对象（栈空间返回就省略了）。销毁问题
-2、拒绝用静态，全局空间来返回。多次调用问题。
-
-作者觉得该返回一个新的对象，调用构造函数。（具体情况而定，当是上一个栈空间的时候，返回也是很好的）
-</code></pre>]]></content>
+      <title><![CDATA[effectivec++ 设计接口正确使用(44)]]></title>
+      <url>https://xuecat.github.io/2014/09/10/44/</url>
+      <content type="html"><![CDATA[<figure class="highlight"><figcaption><span>看代码:++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class Date &#123;</div><div class="line">public:</div><div class="line">	Date(int moth, int day, int year);</div><div class="line">&#125;</div><div class="line">//存在的问题，由于都是int，调用会出现顺序错误。</div><div class="line">修改</div><div class="line">struct Day &#123;explicit Day(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line">struct Month &#123;explicit Month(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line">struct Year &#123;explicit Year(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line"></div><div class="line">class Date &#123;</div><div class="line">public:</div><div class="line">	Date(const Month&amp; m, const Day&amp; d, const Year&amp; y);</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
     </entry>
     
     <entry>
@@ -5609,12 +5654,6 @@ validateStudent(const Student&amp; s);一次不需要
 用delete p；会出现内存错误。
 所以对于数组指针，拒绝使用typedef（typdedef string ADD[4];） 避免销毁异常。
 </code></pre>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[effectivec++ 设计接口正确使用(44)]]></title>
-      <url>https://xuecat.github.io/2014/09/10/44/</url>
-      <content type="html"><![CDATA[<figure class="highlight"><figcaption><span>看代码:++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class Date &#123;</div><div class="line">public:</div><div class="line">	Date(int moth, int day, int year);</div><div class="line">&#125;</div><div class="line">//存在的问题，由于都是int，调用会出现顺序错误。</div><div class="line">修改</div><div class="line">struct Day &#123;explicit Day(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line">struct Month &#123;explicit Month(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line">struct Year &#123;explicit Year(int d):val(d)&#123;&#125; int val;&#125;;</div><div class="line"></div><div class="line">class Date &#123;</div><div class="line">public:</div><div class="line">	Date(const Month&amp; m, const Day&amp; d, const Year&amp; y);</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
     </entry>
     
     <entry>
@@ -5735,15 +5774,6 @@ long double f; //12字节
     </entry>
     
     <entry>
-      <title><![CDATA[libcurl源码学习(37)]]></title>
-      <url>https://xuecat.github.io/2014/09/01/37/</url>
-      <content type="html"><![CDATA[<p>libcurl：预编译头文件，就是放置工具的地方。<br>其它文件要使用工具直接#define一下就好了。</p>
-<p>把va_list当值传入。</p>
-<p>回调函数的使用typedf  获取函数指针。指针的指针，执行就好了。</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[More effective c++解引操作符及指针(30)]]></title>
       <url>https://xuecat.github.io/2014/09/01/30/</url>
       <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>智能指针解引操作符:++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Template&lt;Class T&gt;</div><div class="line">T&amp;SmartPtr&lt;T&gt;::<span class="keyword">operator</span>*() <span class="keyword">const</span> &#123;</div><div class="line"> 	……….</div><div class="line">	 Return * pointee;</div><div class="line">&#125;</div><div class="line">DBPtr&lt;Tuple&gt;&amp;pt;</div><div class="line">Pt-&gt;dispalyEditDialog();</div></pre></td></tr></table></figure> 
@@ -5765,18 +5795,11 @@ If (ptn)
     </entry>
     
     <entry>
-      <title><![CDATA[more effective c++智能指针(28)]]></title>
-      <url>https://xuecat.github.io/2014/08/29/29/</url>
-      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>智能指针了：构造、赋值、析构:++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">class</span> <span class="built_in">auto_ptr</span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="built_in">auto_ptr</span>(T* ptr = <span class="number">0</span>) : pointee(ptr) &#123;&#125;</div><div class="line">	<span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs); <span class="comment">//复制</span></div><div class="line">	<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; operate= (<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs);</div><div class="line">	~<span class="built_in">auto_ptr</span>() &#123;<span class="keyword">delete</span> pointee;&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	T* pointee;</div><div class="line">	<span class="comment">/* data */</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//可以看出，使用时用f</span></div><div class="line"><span class="comment">//auto_ptr&lt;TreeNode&gt; ptnq(new TreeNode);便可以了。</span></div><div class="line"><span class="comment">///</span></div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;T&gt;:::<span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs)</div><div class="line">&#123;</div><div class="line">	pointee = rhs.pointee;</div><div class="line">	rhs.pointee = <span class="number">0</span>;<span class="comment">//因为实现的是auto，被复制后拒绝前一个变量访问</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;T&gt;&amp; <span class="built_in">auto_ptr</span>&lt;T&gt;::operate= (<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span> (<span class="keyword">this</span> == &amp;rhs)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> *<span class="keyword">this</span>; <span class="comment">//这个赋值函数处理的很好，以后赋值函数添加上</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">delete</span> pointee;</div><div class="line">	。。。。</div><div class="line">	。。。。</div><div class="line">	<span class="keyword">return</span> *<span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure> ]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[多个对象访问多线程资源]]></title>
-      <url>https://xuecat.github.io/2014/08/29/27/</url>
-      <content type="html"><![CDATA[<p>   我初始化多个对象，对象类里面有多线程代码。</p>
-<p>多线程设置信号量来限制访问线程个数。</p>
-<p>发现：多个对象执行的时候，访问的却是同一个线程资源。</p>
-<p>分析原因：多线程函数是static或者全局函数，   函数的创建在静态或全局空间，与类的栈空间无关<br>所以访问的是同一个函数。</p>
+      <title><![CDATA[libcurl源码学习(37)]]></title>
+      <url>https://xuecat.github.io/2014/09/01/37/</url>
+      <content type="html"><![CDATA[<p>libcurl：预编译头文件，就是放置工具的地方。<br>其它文件要使用工具直接#define一下就好了。</p>
+<p>把va_list当值传入。</p>
+<p>回调函数的使用typedf  获取函数指针。指针的指针，执行就好了。</p>
 ]]></content>
     </entry>
     
@@ -5819,6 +5842,22 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
     </entry>
     
     <entry>
+      <title><![CDATA[more effective c++智能指针(28)]]></title>
+      <url>https://xuecat.github.io/2014/08/29/29/</url>
+      <content type="html"><![CDATA[<figure class="highlight c"><figcaption><span>智能指针了：构造、赋值、析构:++</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">class</span> <span class="built_in">auto_ptr</span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="built_in">auto_ptr</span>(T* ptr = <span class="number">0</span>) : pointee(ptr) &#123;&#125;</div><div class="line">	<span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs); <span class="comment">//复制</span></div><div class="line">	<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; operate= (<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs);</div><div class="line">	~<span class="built_in">auto_ptr</span>() &#123;<span class="keyword">delete</span> pointee;&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	T* pointee;</div><div class="line">	<span class="comment">/* data */</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//可以看出，使用时用f</span></div><div class="line"><span class="comment">//auto_ptr&lt;TreeNode&gt; ptnq(new TreeNode);便可以了。</span></div><div class="line"><span class="comment">///</span></div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;T&gt;:::<span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs)</div><div class="line">&#123;</div><div class="line">	pointee = rhs.pointee;</div><div class="line">	rhs.pointee = <span class="number">0</span>;<span class="comment">//因为实现的是auto，被复制后拒绝前一个变量访问</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="built_in">auto_ptr</span>&lt;T&gt;&amp; <span class="built_in">auto_ptr</span>&lt;T&gt;::operate= (<span class="built_in">auto_ptr</span>&lt;T&gt;&amp; rhs)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span> (<span class="keyword">this</span> == &amp;rhs)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> *<span class="keyword">this</span>; <span class="comment">//这个赋值函数处理的很好，以后赋值函数添加上</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">delete</span> pointee;</div><div class="line">	。。。。</div><div class="line">	。。。。</div><div class="line">	<span class="keyword">return</span> *<span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure> ]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[多个对象访问多线程资源]]></title>
+      <url>https://xuecat.github.io/2014/08/29/27/</url>
+      <content type="html"><![CDATA[<p>   我初始化多个对象，对象类里面有多线程代码。</p>
+<p>多线程设置信号量来限制访问线程个数。</p>
+<p>发现：多个对象执行的时候，访问的却是同一个线程资源。</p>
+<p>分析原因：多线程函数是static或者全局函数，   函数的创建在静态或全局空间，与类的栈空间无关<br>所以访问的是同一个函数。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[言156]]></title>
       <url>https://xuecat.github.io/2014/08/28/156/</url>
       <content type="html"><![CDATA[<p>祸、天、延、五、生、六、绝、辅、弼<br><br>上二为五下二天<br><br>中变绝命自古然<br><br>上一为生初变祸<br><br>上下六煞全变延<br></p>
@@ -5834,16 +5873,6 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
     </entry>
     
     <entry>
-      <title><![CDATA[mousehover（25）]]></title>
-      <url>https://xuecat.github.io/2014/08/28/25/</url>
-      <content type="html"><![CDATA[<p>今天为程序添加mousehover函数，发现不能响应，很气人。</p>
-<p>要仔细去看下官方，翻看msdn：</p>
-<p>   msdn它只会在图像重绘地方响应<br>Posted to a window when the cursor hovers over the client area of the window for the period of time specified in a prior call to TrackMouseEvent.</p>
-<p>如果在onpaint函数使用cclientdc绘图的话，就会被判定非客户区。<br>所以，必须在onpaint里面用cpaintdc绘图，才会响应mousehover。</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[more effective c++限制对象个数(27)]]></title>
       <url>https://xuecat.github.io/2014/08/28/26/</url>
       <content type="html"><![CDATA[<p>这部分记住的有这几条：</p>
@@ -5851,6 +5880,16 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
 <p>onHeap函数内，onTheStack是个局部变量，所以它被置于stack内。当onHeap被调用，其stack frame 会被放在stack的顶端，由于此框架中stack系向低地址成长，所以onThestack的地址移动比其他任何一个stack变量更低。</p>
 <p>所以address比onthestack更低，它就一定位于heap中。</p>
 <p>此部分，作者为了让对象产生于heap中，向operate new添加东西标记。。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[mousehover（25）]]></title>
+      <url>https://xuecat.github.io/2014/08/28/25/</url>
+      <content type="html"><![CDATA[<p>今天为程序添加mousehover函数，发现不能响应，很气人。</p>
+<p>要仔细去看下官方，翻看msdn：</p>
+<p>   msdn它只会在图像重绘地方响应<br>Posted to a window when the cursor hovers over the client area of the window for the period of time specified in a prior call to TrackMouseEvent.</p>
+<p>如果在onpaint函数使用cclientdc绘图的话，就会被判定非客户区。<br>所以，必须在onpaint里面用cpaintdc绘图，才会响应mousehover。</p>
 ]]></content>
     </entry>
     
@@ -6008,14 +6047,6 @@ UI线程启动一个消息循环，每次从本线程所对应的消息队列中
     </entry>
     
     <entry>
-      <title><![CDATA[框架(15)]]></title>
-      <url>https://xuecat.github.io/2014/06/25/15/</url>
-      <content type="html"><![CDATA[<p>今天代码改写button了，感觉，对于框架的架构还是欠缺点。</p>
-<p> 才一开始的封装，当一个模块出现四个功能时，我就该单独封装类，不然<br>后期肯定会添加封装的，到时代码冗余就不好看了。</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[消息自定义（24）]]></title>
       <url>https://xuecat.github.io/2014/06/25/24/</url>
       <content type="html"><![CDATA[<p>严格要求：</p>
@@ -6024,6 +6055,14 @@ ON_MESSAGE(WM_RESULT,CDemo4View::DisplayResult)
 return 0;
 </code></pre><p>SetWindowPos会强制产生重绘，容易闪图。</p>
 <p>WM_ERASEBKGND以及WS_EX_TRANSPARENT虽然获取了父窗口dc，<br>来先绘制背景图，再绘制透明图实现的子窗口透明，<br>有闪图出现。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[框架(15)]]></title>
+      <url>https://xuecat.github.io/2014/06/25/15/</url>
+      <content type="html"><![CDATA[<p>今天代码改写button了，感觉，对于框架的架构还是欠缺点。</p>
+<p> 才一开始的封装，当一个模块出现四个功能时，我就该单独封装类，不然<br>后期肯定会添加封装的，到时代码冗余就不好看了。</p>
 ]]></content>
     </entry>
     

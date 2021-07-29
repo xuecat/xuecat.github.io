@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="工具,杂项," />
+  <meta name="keywords" content="学习看书笔记,Mysql," />
 
 
 
@@ -113,7 +113,7 @@
 组合索引：为了更多的提高mysql效率可建立组合索引，遵循”最左前缀“原则。
 索引结构： B-tree索引">
 <meta property="og:image" content="https://xuecat.github.io/picture/255.png">
-<meta property="og:updated_time" content="2021-07-15T13:52:24.447Z">
+<meta property="og:updated_time" content="2021-07-29T13:24:58.151Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习(255)">
 <meta name="twitter:description" content="索引类型：
@@ -368,8 +368,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/面试/" itemprop="url" rel="index">
-                    <span itemprop="name">面试</span>
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
                   </a>
                 </span>
 
@@ -435,6 +435,28 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
 <li>查询从索引的最左前列开始并且不跳过索引中的列,通俗易懂的来说就是:带头大哥不能死、中间兄弟不能断</li>
 </ul>
 <p><img src="/picture/255.png" alt=""></p>
+<ol>
+<li><p><code>TRIGGER</code>触发器</p>
+<p> DELIMITER $$<br> CREATE<br> TRIGGER <code>jony_keer</code>.<code>ins_account</code> AFTER INSERT<br> ON <code>jony_keer</code>.<code>t_account</code><br> FOR EACH ROW BEGIN<br> INSERT INTO <code>t_user</code>(<code>userid</code>,<code>cellphone</code>,<code>account_psd</code>)  VALUES  (new.<code>account_id</code>,new.<code>cellphone</code>,new.<code>account_psd</code>);<br> END$$<br> DELIMITER ;</p>
+<p> mysql解释器根据‘；’来结束读取命令执行命令，在多个‘；’号时，解释器不知到在哪一句结束读取命令执行命令，而delimiter的作用是，将sql结束读取命令并执行命令的标志，替换成delimiter后的标志（在本文是‘//’），这样只有当‘//’出现之后，mysql解释器才会执行这段语句。</p>
+</li>
+<li><p>存储过程和函数</p>
+<p> 主要区别就是函数必须有返回值（return），并且函数的参数只有IN类型而存储过程有IN、OUT、INOUT这三种类型。</p>
+</li>
+<li><p><strong><em>MySQL 事务都是指在 InnoDB 引擎下，MyISAM 引擎是不支持事务的</em></strong></p>
+<p> 事务具有: 原子性 一致性 隔离性 持久性, 随便一个<code>update</code>都能是个事务</p>
+<p> <code>select @@tx_isolation;</code>来查当前数据的隔离级别</p>
+<ol>
+<li>读未提交(read uncommitted)</li>
+<li>读提交(read committed)</li>
+<li>可重复读(repeatable read)</li>
+<li><p>串行化(serializable)</p>
+<p>一.  读未提交是不加锁的，连<code>脏读(数据可能回滚)</code>都无法解决。</p>
+<p>二. 读提交就是事务只能读到其他事务调用 commit 命令之后的数据，能解决<code>脏读</code>，不能解决<code>可重复读(事务中修改条件数据)</code>,<code>幻读(事务中加减条件数据)</code>。</p>
+</li>
+</ol>
+</li>
+</ol>
 
       
     </div>
@@ -457,9 +479,9 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
       
         <div class="post-tags">
           
-            <a href="/tags/工具/" rel="tag">#工具</a>
+            <a href="/tags/学习看书笔记/" rel="tag">#学习看书笔记</a>
           
-            <a href="/tags/杂项/" rel="tag">#杂项</a>
+            <a href="/tags/Mysql/" rel="tag">#Mysql</a>
           
         </div>
       
@@ -475,6 +497,10 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/07/29/256/" rel="prev" title="kafka/依赖注入(256)">
+                kafka/依赖注入(256) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -542,7 +568,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">244</span>
+              <span class="site-state-item-count">245</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -550,7 +576,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -559,7 +585,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-count">54</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
